@@ -6,7 +6,6 @@ CREATE TABLE IF NOT EXISTS `car_accounts` (
   `accountAccess` int(11) NOT NULL,
   `accountStatus` int(11) NOT NULL,
   `accountReason` varchar(100) NOT NULL,
-  `accountMoney` int(11) NOT NULL,
   `accountGold` int(11) NOT NULL,
   `accountOnBattle` int(11) NOT NULL,
   `accountLastAction` double NOT NULL,
@@ -15,76 +14,18 @@ CREATE TABLE IF NOT EXISTS `car_accounts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `car_battles_monster` (
-  `battleId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `battleAccountId` int(11) NOT NULL,
-  `battleAccountStep` int(11) NOT NULL,
-  `battleAccountDamage` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE IF NOT EXISTS `car_codes` (
-  `codeId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `codeName` date NOT NULL,
-  `codeBegins` date NOT NULL,
-  `codeFinish` date NOT NULL,
-  `codeAmount` int(11) NOT NULL,
-  `codeAmountRemaining` int(11) NOT NULL,
-  `codeType` int(11) NOT NULL
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE IF NOT EXISTS `car_codes_gift` (
-  `codeGiftId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `codeGiftCodeId` int(11) NOT NULL,
-  `codeGiftMoney` int(11) NOT NULL,
-  `codeGiftGold` int(11) NOT NULL,
-  `codeGiftcharacterLevel` int(11) NOT NULL,
-  `codeGiftcharacterSex` int(11) NOT NULL,
-  `codeGiftcharacterSize` double NOT NULL,
-  `codeGiftcharacterWeight` double NOT NULL,
-  `codeGiftcharacterMoral` double NOT NULL,
-  `codeGiftcharacterThirst` double NOT NULL,
-  `codeGiftcharacterHunger` double NOT NULL,
-  `codeGiftcharacterPee` double NOT NULL,
-  `codeGiftcharacterPooh` double NOT NULL,
-  `codeGiftcharacterThrowUp` double NOT NULL,
-  `codeGiftcharacterHygiene` double NOT NULL,
-  `codeGiftcharacterTired` double NOT NULL,
-  `codeGiftcharacterFun` double NOT NULL,
-  `codeGiftcharacterAffection` double NOT NULL,
-  `codeGiftcharacterHappiness` double NOT NULL,
-  `codeGiftcharacterKarma` double NOT NULL,
-  `codeGiftcharacterHp` int(11) NOT NULL,
-  `codeGiftcharacterMp` int(11) NOT NULL,
-  `codeGiftcharacterStrength` int(11) NOT NULL,
-  `codeGiftcharacterMagic` int(11) NOT NULL,
-  `codeGiftcharacterAgility` int(11) NOT NULL,
-  `codeGiftcharacterDefense` int(11) NOT NULL,
-  `codeGiftcharacterDefenseMagic` int(11) NOT NULL,
-  `codeGiftcharacterWisdom` int(11) NOT NULL,
-  `codeGiftEquipmentId` int(11) NOT NULL,
-  `codeGiftItemId` int(11) NOT NULL,
-  `codeGiftParchmentId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE IF NOT EXISTS `car_codes_used` (
-  `codeUsedId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `codeUsedCodeId` int(11) NOT NULL,
-  `codeUsedaccountId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE IF NOT EXISTS `car_news` 
-(
-  `newsId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `newsTitle` varchar(30) NOT NULL,
-  `newsMessage` text NOT NULL,
-  `newsAccountPseudo` varchar(15) NOT NULL,
-  `newsDate` date NOT NULL
+  `battleMonsterId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `battleMonsterAccountId` int(11) NOT NULL,
+  `battleMonsterMonsterId` int(11) NOT NULL,
+  `battleMonsterMonsterHp` int(11) NOT NULL,
+  `battleMonsterMonsterHpTotal` int(11) NOT NULL,
+  `battleMonsterMonsterMp` int(11) NOT NULL,
+  `battleMonsterMonsterMpTotal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `car_characters` (
   `characterId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `characterAccountID` int(11) NOT NULL,
-  `characterAccountName` varchar(30) NOT NULL,
-  `characterBirthDate` LONG NOT NULL,
   `characterName` varchar(30) NOT NULL,
   `characterLevel` int(11) NOT NULL,
   `characterSex` int(11) NOT NULL,
@@ -137,3 +78,91 @@ CREATE TABLE IF NOT EXISTS `car_characters` (
   `characterSkillPoints` int(11) NOT NULL,
   `characterEnable` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `car_codes` (
+  `codeId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `codeName` date NOT NULL,
+  `codeBegins` date NOT NULL,
+  `codeFinish` date NOT NULL,
+  `codeAmount` int(11) NOT NULL,
+  `codeAmountRemaining` int(11) NOT NULL,
+  `codeType` int(11) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `car_codes_gift` (
+  `codeGiftId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `codeGiftCodeId` int(11) NOT NULL,
+  `codeGiftMoney` int(11) NOT NULL,
+  `codeGiftGold` int(11) NOT NULL,
+  `codeGiftcharacterLevel` int(11) NOT NULL,
+  `codeGiftcharacterSex` int(11) NOT NULL,
+  `codeGiftcharacterSize` double NOT NULL,
+  `codeGiftcharacterWeight` double NOT NULL,
+  `codeGiftcharacterMoral` double NOT NULL,
+  `codeGiftcharacterThirst` double NOT NULL,
+  `codeGiftcharacterHunger` double NOT NULL,
+  `codeGiftcharacterPee` double NOT NULL,
+  `codeGiftcharacterPooh` double NOT NULL,
+  `codeGiftcharacterThrowUp` double NOT NULL,
+  `codeGiftcharacterHygiene` double NOT NULL,
+  `codeGiftcharacterTired` double NOT NULL,
+  `codeGiftcharacterFun` double NOT NULL,
+  `codeGiftcharacterAffection` double NOT NULL,
+  `codeGiftcharacterHappiness` double NOT NULL,
+  `codeGiftcharacterKarma` double NOT NULL,
+  `codeGiftcharacterHp` int(11) NOT NULL,
+  `codeGiftcharacterMp` int(11) NOT NULL,
+  `codeGiftcharacterStrength` int(11) NOT NULL,
+  `codeGiftcharacterMagic` int(11) NOT NULL,
+  `codeGiftcharacterAgility` int(11) NOT NULL,
+  `codeGiftcharacterDefense` int(11) NOT NULL,
+  `codeGiftcharacterDefenseMagic` int(11) NOT NULL,
+  `codeGiftcharacterWisdom` int(11) NOT NULL,
+  `codeGiftEquipmentId` int(11) NOT NULL,
+  `codeGiftItemId` int(11) NOT NULL,
+  `codeGiftParchmentId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `car_codes_used` (
+  `codeUsedId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `codeUsedCodeId` int(11) NOT NULL,
+  `codeUsedaccountId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `car_monsters` (
+  `monsterId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `monsterName` varchar(30) NOT NULL,
+  `monsterDescription` varchar(30) NOT NULL,
+  `monsterLevel` int(11) NOT NULL,
+  `monsterHp` int(11) NOT NULL,
+  `monsterMp` int(11) NOT NULL,
+  `monsterStrength` int(11) NOT NULL,
+  `monsterMagic` int(11) NOT NULL,
+  `monsterAgility` int(11) NOT NULL,
+  `monsterDefense` int(11) NOT NULL,
+  `monsterDefenseMagic` int(11) NOT NULL,
+  `monsterWisdom` int(11) NOT NULL,
+  `monsterExperience` int(11) NOT NULL,
+  `monsterGold` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `car_news` 
+(
+  `newsId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `newsTitle` varchar(30) NOT NULL,
+  `newsMessage` text NOT NULL,
+  `newsAccountPseudo` varchar(15) NOT NULL,
+  `newsDate` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `car_accounts` (`accountId`, `accountPseudo`, `accountPassword`, `accountEmail`, `accountAccess`, `accountStatus`, `accountReason`, `accountGold`, `accountOnBattle`, `accountLastAction`, `accountLastConnection`, `accountLastIp`) VALUES
+(1, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'admin@admin.com', 2, 0, 'None', 0, 0, 0, '2017-05-18 00:00:00', '127.0.0.1');
+
+INSERT INTO `car_characters` (`characterId`, `characterAccountID`, `characterName`, `characterLevel`, `characterSex`, `characterHpMin`, `characterHpMax`, `characterHpSkillPoints`, `characterHpParchment`, `characterHpEquipments`, `characterHpTotal`, `characterMpMin`, `characterMpMax`, `characterMpSkillPoints`, `characterMpParchment`, `characterMpEquipments`, `characterMpTotal`, `characterStrength`, `characterStrengthSkillPoints`, `characterStrengthParchment`, `characterStrengthEquipments`, `characterStrengthTotal`, `characterMagic`, `characterMagicSkillPoints`, `characterMagicParchment`, `characterMagicEquipments`, `characterMagicTotal`, `characterAgility`, `characterAgilitySkillPoints`, `characterAgilityParchment`, `characterAgilityEquipments`, `characterAgilityTotal`, `characterDefense`, `characterDefenseSkillPoints`, `characterDefenseParchment`, `characterDefenseEquipments`, `characterDefenseTotal`, `characterDefenseMagic`, `characterDefenseMagicSkillPoints`, `characterDefenseMagicParchment`, `characterDefenseMagicEquipments`, `characterDefenseMagicTotal`, `characterWisdom`, `characterWisdomSkillPoints`, `characterWisdomParchment`, `characterWisdomEquipments`, `characterWisdomTotal`, `characterDefeate`, `characterVictory`, `characterExperience`, `characterExperienceTotal`, `characterSkillPoints`, `characterEnable`) VALUES
+(1, 1, 'admin', 1, 1, 120, 120, 0, 0, 0, 120, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0);
+
+INSERT INTO `car_monsters` (`monsterId`, `monsterName`, `monsterDescription`, `monsterLevel`, `monsterHp`, `monsterMp`, `monsterStrength`, `monsterMagic`, `monsterAgility`, `monsterDefense`, `monsterDefenseMagic`, `monsterWisdom`, `monsterExperience`, `monsterGold`) VALUES
+(1, 'Plop', 'Petit monstre vert', 1, 10, 10, 1, 1, 1, 1, 1, 1, 10, 10);
+
+INSERT INTO `car_news` (`newsId`, `newsTitle`, `newsMessage`, `newsAccountPseudo`, `newsDate`) VALUES
+(1, 'Installation de Caranille', 'Félicitation Caranille est bien installé vous pouvez maintenant vous connecter avec les identifiants suivant\r\n\r\nIdentifiant: admin\r\nMot de passe: Admin\r\n\r\nATTENTION: à votre première connexion veuillez immédiatement changer le mot de passe de votre compte\r\n\r\nBon RPG Making', 'admin', '2017-05-18');
