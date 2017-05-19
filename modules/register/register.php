@@ -40,11 +40,6 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                 $ip = $_SERVER['REMOTE_ADDR'];
                 $timeStamp = strtotime("now");
 
-                //Variables pour la création d'un character
-                $characterNature = rand(0, 23);
-                $characterSize = rand(50, 150);
-                $characterWeight = rand(50, 150);
-
                 /*
                 Add account model
                 '', //accountId
@@ -54,10 +49,7 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                 '0', //accountAccess
                 '0', //accountStatus
                 '0', //accountReason
-                '0', //accountMoney
-                'no' //accountOnBattle
-                :accountTimeStamp, //accountLastAction
-                :accountDate, //accountLastConnection
+                :accountLastConnection, //accountLastConnection
                 :accountIp, //accountLastIp
                 :accountTimeStamp, //accountLastPaye
                 */
@@ -71,10 +63,7 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                 '0',
                 '0',
                 '0',
-                '0',
-                'no',
-                :accountTimeStamp,
-                :accountDate,
+                :accountLastConnection,
                 :accountIp,
                 :accountTimeStamp)");
 
@@ -82,7 +71,7 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                 'accountPseudo' => $accountPseudo,
                 'accountPassword' => $accountPassword,
                 'accountEmail' => $accountEmail,
-                'accountDate' => $date,
+                'accountLastConnection' => $date,
                 'accountIp' => $ip,
                 'accountTimeStamp' => $timeStamp]);
                 $addAccount->closeCursor();
@@ -154,6 +143,8 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                 '0', //characterExperience
                 '0', //characterExperienceTotal
                 '0', //characterSkillPoints
+                '0', //characterGold
+                '0', //characterOnBattle
                 '1' //characterEnable
                 */
 
@@ -202,6 +193,8 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                 '0',
                 '0',
                 '10',
+                '0',
+                '0',
                 '0',
                 '0',
                 '0',

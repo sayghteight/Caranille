@@ -1,3 +1,7 @@
+--
+-- Création de la structure de la base de donnée
+--
+
 CREATE TABLE IF NOT EXISTS `car_accounts` (
   `accountId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `accountPseudo` varchar(50) NOT NULL,
@@ -6,9 +10,6 @@ CREATE TABLE IF NOT EXISTS `car_accounts` (
   `accountAccess` int(11) NOT NULL,
   `accountStatus` int(11) NOT NULL,
   `accountReason` varchar(100) NOT NULL,
-  `accountGold` int(11) NOT NULL,
-  `accountOnBattle` int(11) NOT NULL,
-  `accountLastAction` double NOT NULL,
   `accountLastConnection` datetime NOT NULL,
   `accountLastIp` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -76,6 +77,8 @@ CREATE TABLE IF NOT EXISTS `car_characters` (
   `characterExperience` int(11) NOT NULL,
   `characterExperienceTotal` int(11) NOT NULL,
   `characterSkillPoints` int(11) NOT NULL,
+  `characterGold` int(11) NOT NULL,
+  `characterOnBattle` int(11) NOT NULL,
   `characterEnable` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -155,11 +158,15 @@ CREATE TABLE IF NOT EXISTS `car_news`
   `newsDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `car_accounts` (`accountId`, `accountPseudo`, `accountPassword`, `accountEmail`, `accountAccess`, `accountStatus`, `accountReason`, `accountGold`, `accountOnBattle`, `accountLastAction`, `accountLastConnection`, `accountLastIp`) VALUES
-(1, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'admin@admin.com', 2, 0, 'None', 0, 0, 0, '2017-05-18 00:00:00', '127.0.0.1');
+--
+-- Ajout des exemples dans la base de donnée
+--
 
-INSERT INTO `car_characters` (`characterId`, `characterAccountID`, `characterName`, `characterLevel`, `characterSex`, `characterHpMin`, `characterHpMax`, `characterHpSkillPoints`, `characterHpParchment`, `characterHpEquipments`, `characterHpTotal`, `characterMpMin`, `characterMpMax`, `characterMpSkillPoints`, `characterMpParchment`, `characterMpEquipments`, `characterMpTotal`, `characterStrength`, `characterStrengthSkillPoints`, `characterStrengthParchment`, `characterStrengthEquipments`, `characterStrengthTotal`, `characterMagic`, `characterMagicSkillPoints`, `characterMagicParchment`, `characterMagicEquipments`, `characterMagicTotal`, `characterAgility`, `characterAgilitySkillPoints`, `characterAgilityParchment`, `characterAgilityEquipments`, `characterAgilityTotal`, `characterDefense`, `characterDefenseSkillPoints`, `characterDefenseParchment`, `characterDefenseEquipments`, `characterDefenseTotal`, `characterDefenseMagic`, `characterDefenseMagicSkillPoints`, `characterDefenseMagicParchment`, `characterDefenseMagicEquipments`, `characterDefenseMagicTotal`, `characterWisdom`, `characterWisdomSkillPoints`, `characterWisdomParchment`, `characterWisdomEquipments`, `characterWisdomTotal`, `characterDefeate`, `characterVictory`, `characterExperience`, `characterExperienceTotal`, `characterSkillPoints`, `characterEnable`) VALUES
-(1, 1, 'admin', 1, 1, 120, 120, 0, 0, 0, 120, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0);
+INSERT INTO `car_accounts` (`accountId`, `accountPseudo`, `accountPassword`, `accountEmail`, `accountAccess`, `accountStatus`, `accountReason`, `accountLastConnection`, `accountLastIp`) VALUES
+(1, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'admin@admin.com', 2, 0, 'None', '2017-05-19 00:00:00', '127.0.0.1');
+
+INSERT INTO `car_characters` (`characterId`, `characterAccountID`, `characterName`, `characterLevel`, `characterSex`, `characterHpMin`, `characterHpMax`, `characterHpSkillPoints`, `characterHpParchment`, `characterHpEquipments`, `characterHpTotal`, `characterMpMin`, `characterMpMax`, `characterMpSkillPoints`, `characterMpParchment`, `characterMpEquipments`, `characterMpTotal`, `characterStrength`, `characterStrengthSkillPoints`, `characterStrengthParchment`, `characterStrengthEquipments`, `characterStrengthTotal`, `characterMagic`, `characterMagicSkillPoints`, `characterMagicParchment`, `characterMagicEquipments`, `characterMagicTotal`, `characterAgility`, `characterAgilitySkillPoints`, `characterAgilityParchment`, `characterAgilityEquipments`, `characterAgilityTotal`, `characterDefense`, `characterDefenseSkillPoints`, `characterDefenseParchment`, `characterDefenseEquipments`, `characterDefenseTotal`, `characterDefenseMagic`, `characterDefenseMagicSkillPoints`, `characterDefenseMagicParchment`, `characterDefenseMagicEquipments`, `characterDefenseMagicTotal`, `characterWisdom`, `characterWisdomSkillPoints`, `characterWisdomParchment`, `characterWisdomEquipments`, `characterWisdomTotal`, `characterDefeate`, `characterVictory`, `characterExperience`, `characterExperienceTotal`, `characterSkillPoints`, `characterGold`, `characterOnBattle`, `characterEnable`) VALUES
+(1, 1, 'Admin', 1, 1, 120, 120, 0, 0, 0, 120, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0);
 
 INSERT INTO `car_monsters` (`monsterId`, `monsterName`, `monsterDescription`, `monsterLevel`, `monsterHp`, `monsterMp`, `monsterStrength`, `monsterMagic`, `monsterAgility`, `monsterDefense`, `monsterDefenseMagic`, `monsterWisdom`, `monsterExperience`, `monsterGold`) VALUES
 (1, 'Plop', 'Petit monstre vert', 1, 10, 10, 1, 1, 1, 1, 1, 1, 10, 10);
