@@ -78,7 +78,15 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                 'accountIp' => $ip]);
                 $addAccount->closeCursor();
 
-                //Insertion du personnage dans la base de donnée
+                $addAccount->execute([
+                'accountPseudo' => $accountPseudo,
+                'accountPassword' => $accountPassword,
+                'accountEmail' => $accountEmail,
+                'accountLastConnection' => $date,
+                'accountIp' => $ip]);
+                $addAccount->closeCursor();
+
+                //Insertion du character dans la base de donnée
                 $accountIdQuery = $bdd->prepare("SELECT * FROM car_accounts 
                 WHERE accountPseudo = ?");
                 $accountIdQuery->execute([$accountPseudo]);
