@@ -47,10 +47,10 @@ if (isset($_SESSION['account']['id']))
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Personnage<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="../../modules/character/index.php">Fiche</a></li>
-                                <li><a href="../../modules/character/stats.php">Statistiques</a></li>
                                 <li><a href="../../modules/skillPoints/index.php">Points de compétences</a></li>
                             </ul>
                         </li>
+                        <li class="active"><a href="../../modules/inn/index.php">Auberge</a></li>
                         <?php
                     }
                     else

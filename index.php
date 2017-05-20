@@ -3,6 +3,6 @@ $config = 'kernel/config.php';
 $size = filesize($config);
 if ($size == 0) 
 {
-    header("Location: kernel/install.php");
+    header("Location: kernel/install/modules/step-1.php");
 }
 header("Location: modules/main/index.php");?>

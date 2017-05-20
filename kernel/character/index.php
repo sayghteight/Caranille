@@ -11,6 +11,7 @@ while ($character = $characterQuery->fetch())
 {
     $characterId = stripslashes($character['characterId']);
     $characterAccountId = stripslashes($character['characterAccountId']);
+    $characterRaceId = stripslashes($character['characterRaceId']);
     $characterName = stripslashes($character['characterName']);
     $characterLevel = stripslashes($character['characterLevel']);
     $characterSex = stripslashes($character['characterSex']);
@@ -57,4 +58,28 @@ while ($character = $characterQuery->fetch())
     $characterOnBattle = stripslashes($character['characterOnBattle']);
     $characterEnable = stripslashes($character['characterEnable']);
 }
+
+$racerQuery = $bdd->prepare("SELECT * FROM car_races 
+WHERE raceId = ?");
+$racerQuery->execute([$characterRaceId]);
+
+//On fait une boucle sur les résultats
+while ($race = $racerQuery->fetch())
+{
+    $characterRaceName = stripslashes($race['raceName']);
+}
+
+//Valeurs des statistiques qui seront ajoutée à la monté d'un niveau
+$levelBaseExperience = 5000;
+$hPByLevel = 10;
+$mPByLevel = 1;
+$strengthByLevel = 1;
+$magicByLevel = 1;
+$agilityByLevel = 1;
+$defenseByLevel = 1;
+$defenseMagicByLevel = 1;
+$wisdomByLevel = 0;
+$skillPointsByLevel = 4;
+$experienceLevel = $characterLevel * $levelBaseExperience;
+$experienceRemaining = $characterLevel * $levelBaseExperience - $characterExperience;
 ?>
