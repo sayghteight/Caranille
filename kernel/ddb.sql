@@ -26,7 +26,8 @@ CREATE TABLE IF NOT EXISTS `car_battles_monster` (
 
 CREATE TABLE IF NOT EXISTS `car_characters` (
   `characterId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `characterAccountID` int(11) NOT NULL,
+  `characterAccountId` int(11) NOT NULL,
+  `characterRaceId` int(11) NOT NULL,
   `characterName` varchar(30) NOT NULL,
   `characterLevel` int(11) NOT NULL,
   `characterSex` int(11) NOT NULL,
@@ -158,6 +159,21 @@ CREATE TABLE IF NOT EXISTS `car_news`
   `newsDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `car_races` 
+(
+  `raceId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `raceName` varchar(30) NOT NULL,
+  `raceDescription` text NOT NULL,
+  `raceHpBonus` int(11) NOT NULL,
+  `raceMpBonus` int(11) NOT NULL,
+  `raceStrengthBonus` int(11) NOT NULL,
+  `raceMagicBonus` int(11) NOT NULL,
+  `raceAgilityBonus` int(11) NOT NULL,
+  `raceDefenseBonus` int(11) NOT NULL,
+  `raceDefenseMagicBonus` int(11) NOT NULL,
+  `raceWidsomBonus` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Ajout des exemples dans la base de donnée
 --
@@ -165,11 +181,15 @@ CREATE TABLE IF NOT EXISTS `car_news`
 INSERT INTO `car_accounts` (`accountId`, `accountPseudo`, `accountPassword`, `accountEmail`, `accountAccess`, `accountStatus`, `accountReason`, `accountLastConnection`, `accountLastIp`) VALUES
 (1, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'admin@admin.com', 2, 0, 'None', '2017-05-19 00:00:00', '127.0.0.1');
 
-INSERT INTO `car_characters` (`characterId`, `characterAccountID`, `characterName`, `characterLevel`, `characterSex`, `characterHpMin`, `characterHpMax`, `characterHpSkillPoints`, `characterHpParchment`, `characterHpEquipments`, `characterHpTotal`, `characterMpMin`, `characterMpMax`, `characterMpSkillPoints`, `characterMpParchment`, `characterMpEquipments`, `characterMpTotal`, `characterStrength`, `characterStrengthSkillPoints`, `characterStrengthParchment`, `characterStrengthEquipments`, `characterStrengthTotal`, `characterMagic`, `characterMagicSkillPoints`, `characterMagicParchment`, `characterMagicEquipments`, `characterMagicTotal`, `characterAgility`, `characterAgilitySkillPoints`, `characterAgilityParchment`, `characterAgilityEquipments`, `characterAgilityTotal`, `characterDefense`, `characterDefenseSkillPoints`, `characterDefenseParchment`, `characterDefenseEquipments`, `characterDefenseTotal`, `characterDefenseMagic`, `characterDefenseMagicSkillPoints`, `characterDefenseMagicParchment`, `characterDefenseMagicEquipments`, `characterDefenseMagicTotal`, `characterWisdom`, `characterWisdomSkillPoints`, `characterWisdomParchment`, `characterWisdomEquipments`, `characterWisdomTotal`, `characterDefeate`, `characterVictory`, `characterExperience`, `characterExperienceTotal`, `characterSkillPoints`, `characterGold`, `characterOnBattle`, `characterEnable`) VALUES
-(1, 1, 'Admin', 1, 1, 120, 120, 0, 0, 0, 120, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0);
+INSERT INTO `car_characters` (`characterId`, `characterAccountID`, `characterRaceId`, `characterName`, `characterLevel`, `characterSex`, `characterHpMin`, `characterHpMax`, `characterHpSkillPoints`, `characterHpParchment`, `characterHpEquipments`, `characterHpTotal`, `characterMpMin`, `characterMpMax`, `characterMpSkillPoints`, `characterMpParchment`, `characterMpEquipments`, `characterMpTotal`, `characterStrength`, `characterStrengthSkillPoints`, `characterStrengthParchment`, `characterStrengthEquipments`, `characterStrengthTotal`, `characterMagic`, `characterMagicSkillPoints`, `characterMagicParchment`, `characterMagicEquipments`, `characterMagicTotal`, `characterAgility`, `characterAgilitySkillPoints`, `characterAgilityParchment`, `characterAgilityEquipments`, `characterAgilityTotal`, `characterDefense`, `characterDefenseSkillPoints`, `characterDefenseParchment`, `characterDefenseEquipments`, `characterDefenseTotal`, `characterDefenseMagic`, `characterDefenseMagicSkillPoints`, `characterDefenseMagicParchment`, `characterDefenseMagicEquipments`, `characterDefenseMagicTotal`, `characterWisdom`, `characterWisdomSkillPoints`, `characterWisdomParchment`, `characterWisdomEquipments`, `characterWisdomTotal`, `characterDefeate`, `characterVictory`, `characterExperience`, `characterExperienceTotal`, `characterSkillPoints`, `characterGold`, `characterOnBattle`, `characterEnable`) VALUES
+(1, 1, 1, 'Admin', 1, 1, 120, 120, 0, 0, 0, 120, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 10, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0);
 
 INSERT INTO `car_monsters` (`monsterId`, `monsterName`, `monsterDescription`, `monsterLevel`, `monsterHp`, `monsterMp`, `monsterStrength`, `monsterMagic`, `monsterAgility`, `monsterDefense`, `monsterDefenseMagic`, `monsterWisdom`, `monsterExperience`, `monsterGold`) VALUES
 (1, 'Plop', 'Petit monstre vert', 1, 10, 10, 1, 1, 1, 1, 1, 1, 10, 10);
 
 INSERT INTO `car_news` (`newsId`, `newsTitle`, `newsMessage`, `newsAccountPseudo`, `newsDate`) VALUES
-(1, 'Installation de Caranille', 'Félicitation Caranille est bien installé vous pouvez maintenant vous connecter avec les identifiants suivant\r\n\r\nIdentifiant: admin\r\nMot de passe: Admin\r\n\r\nATTENTION: à votre première connexion veuillez immédiatement changer le mot de passe de votre compte\r\n\r\nBon RPG Making', 'admin', '2017-05-18');
+(1, 'Installation de Caranille', 'Félicitation Caranille est bien installé vous pouvez maintenant vous connecter avec vos identifiants \r\n\r\nBon RPG Making', 'admin', '2017-05-18');
+
+INSERT INTO `car_races` (`raceId`, `raceName`, `raceDescription`, `raceHpBonus`, `raceMpBonus`, `raceStrengthBonus`, `raceMagicBonus`, `raceAgilityBonus`, `raceDefenseBonus`, `raceDefenseMagicBonus`, `raceWidsomBonus`) VALUES
+(1, 'Guerrier', 'Classe de personnage axé sur la force et les HP', 1, 0, 1, 0, 0, 0, 0, 0),
+(2, 'Mage', 'Classe de personnage axé sur la magie et les MP', 0, 1, 0, 1, 0, 0, 0, 0);
