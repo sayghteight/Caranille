@@ -1,5 +1,6 @@
 <?php
-require_once("../../html/header.php");
+require_once("../html/header.php");
+include("../../config.php");
 
 //Si tous les champs ont bien été rempli
 if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['accountPasswordConfirm']) && ($_POST['accountEmail']))
@@ -48,7 +49,7 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                 :accountPassword, //accountPassword
                 :accountEmail, //accountEmail
                 '0', //accountAccess
-                '0', //accountStatus
+                '2', //accountStatus
                 'None', //accountReason
                 :accountLastConnection, //accountLastConnection
                 :accountIp, //accountLastIp
@@ -61,7 +62,7 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                 :accountPassword,
                 :accountEmail,
                 '0',
-                '0',
+                '2',
                 'None',
                 :accountLastConnection,
                 :accountIp)");
@@ -212,7 +213,12 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
 
                 $addCharacter->closeCursor();
 
-                echo "Compte crée";
+                ?>
+                Installation terminée. Vous pouvez maintenant commencer à développer votre jeu !
+                <form method="POST" action="../../../index.php">
+                    <input type="submit" class="btn btn-default form-control" name="continuer" value="Continuer">
+                </form>
+            <?php
             }
             else
             {
@@ -237,4 +243,4 @@ else
     echo "Tous les champs n'ont pas été rempli";
 }
 
-require_once("../../html/footer.php"); ?>
+require_once("../html/footer.php"); ?>
