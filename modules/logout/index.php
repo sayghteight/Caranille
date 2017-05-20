@@ -4,6 +4,6 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 
 session_destroy();
 
-header("Location: $url/modules/character/index.php");
+header("Location: ../../index.php");
 
 require_once("../../html/footer.php"); ?>
