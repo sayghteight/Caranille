@@ -49,8 +49,9 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                 :accountPassword, //accountPassword
                 :accountEmail, //accountEmail
                 '0', //accountAccess
-                '2', //accountStatus
+                '0', //accountStatus
                 'None', //accountReason
+                :accountLastAction, //accountLastAction
                 :accountLastConnection, //accountLastConnection
                 :accountIp, //accountLastIp
                 */
@@ -61,11 +62,21 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                 :accountPseudo,
                 :accountPassword,
                 :accountEmail,
-                '0',
                 '2',
+                '0',
                 'None',
+                :accountLastAction,
                 :accountLastConnection,
                 :accountIp)");
+
+                $addAccount->execute([
+                'accountPseudo' => $accountPseudo,
+                'accountPassword' => $accountPassword,
+                'accountEmail' => $accountEmail,
+                'accountLastAction' => $date,
+                'accountLastConnection' => $date,
+                'accountIp' => $ip]);
+                $addAccount->closeCursor();
 
                 $addAccount->execute([
                 'accountPseudo' => $accountPseudo,

@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS `car_accounts` (
   `accountAccess` int(11) NOT NULL,
   `accountStatus` int(11) NOT NULL,
   `accountReason` varchar(100) NOT NULL,
+  `accountLastAction` datetime NOT NULL,
   `accountLastConnection` datetime NOT NULL,
   `accountLastIp` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

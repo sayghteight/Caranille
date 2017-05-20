@@ -50,6 +50,7 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                 '0', //accountAccess
                 '0', //accountStatus
                 'None', //accountReason
+                :accountLastAction, //accountLastAction
                 :accountLastConnection, //accountLastConnection
                 :accountIp, //accountLastIp
                 */
@@ -63,6 +64,7 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                 '0',
                 '0',
                 'None',
+                :accountLastAction,
                 :accountLastConnection,
                 :accountIp)");
 
@@ -70,6 +72,7 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                 'accountPseudo' => $accountPseudo,
                 'accountPassword' => $accountPassword,
                 'accountEmail' => $accountEmail,
+                'accountLastAction' => $date,
                 'accountLastConnection' => $date,
                 'accountIp' => $ip]);
                 $addAccount->closeCursor();
