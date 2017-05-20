@@ -4,7 +4,8 @@ session_start();
 require_once("../../kernel/config.php");
 if (isset($_SESSION['account']['id']))
 {
-
+    require_once("../../kernel/account/index.php");
+    require_once("../../kernel/character/index.php");
 }
 ?>
 <!DOCTYPE html>
