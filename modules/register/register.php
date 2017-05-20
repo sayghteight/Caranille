@@ -51,11 +51,10 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                 '0', //accountReason
                 :accountLastConnection, //accountLastConnection
                 :accountIp, //accountLastIp
-                :accountTimeStamp, //accountLastPaye
                 */
 
                 //Insertion du compte dans la base de donnée
-                $addAccount = $bdd->prepare("INSERT INTO mop_accounts VALUES(
+                $addAccount = $bdd->prepare("INSERT INTO car_accounts VALUES(
                 '',
                 :accountPseudo,
                 :accountPassword,
@@ -64,16 +63,14 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                 '0',
                 '0',
                 :accountLastConnection,
-                :accountIp,
-                :accountTimeStamp)");
+                :accountIp)");
 
                 $addAccount->execute([
                 'accountPseudo' => $accountPseudo,
                 'accountPassword' => $accountPassword,
                 'accountEmail' => $accountEmail,
                 'accountLastConnection' => $date,
-                'accountIp' => $ip,
-                'accountTimeStamp' => $timeStamp]);
+                'accountIp' => $ip]);
                 $addAccount->closeCursor();
 
                 //Insertion du character dans la base de donnée
@@ -90,9 +87,8 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                 /*
                 Add character model
                 '', //characterID
-                :id, //characteraccountID
-                :pseudo, //characteraccountName
-                :timeStamp, //characterBirthDate
+                :accountId, //characterAccountID
+                '0', //characterRaceID
                 :characterName, //characterName
                 '1', //characterLevel
                 :characterSex, //characterSex
@@ -150,9 +146,8 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
 
                 $addCharacter = $bdd->prepare("INSERT INTO car_characters VALUES(
                 '',
-                :id,
-                :pseudo,
-                :timeStamp,
+                :accountId,
+                '1',
                 :characterName,
                 '1',
                 :characterSex,
@@ -209,9 +204,7 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                 )");
 
                 $addCharacter->execute([
-                'id' => $id,
-                'pseudo' => $accountPseudo,
-                'timeStamp' => $timeStamp,
+                'accountId' => $id,
                 'characterName' => $characterName,
                 'characterSex' => $characterSex]);
 
