@@ -4,7 +4,10 @@ require_once("../../html/header.php");
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 ?>
 
-Bienvenue à l'auberge, ici vous allez pouvoir vous reposer pour 10 pièce d'or<hr>
+Bienvenue à l'auberge, ici vous allez pouvoir vous reposer pour 10 pièce d'or
+
+<hr>
+
 <form method="POST" action="sleep.php">
     <input type="submit" class="btn btn-default form-control" value="Se reposer">
 </form>

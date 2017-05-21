@@ -4,7 +4,11 @@ require_once("../../html/header.php");
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 ?>
 
-<?php echo $characterRaceName; ?><br />
+<?php echo $characterName; ?><br />
+Classe: <?php echo $characterRaceName; ?><br />
+
+<hr>
+
 Niveau: <?php echo $characterLevel; ?><br />
 HP: <?php echo "$characterHpMin/$characterHpTotal"; ?><br />
 MP: <?php echo "$characterMpMin/$characterMpTotal"; ?><br />
