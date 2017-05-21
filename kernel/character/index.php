@@ -59,6 +59,7 @@ while ($character = $characterQuery->fetch())
     $characterEnable = stripslashes($character['characterEnable']);
 }
 
+//On fait une recherche dans la base de donnée pour récupérer la race du personnage
 $racerQuery = $bdd->prepare("SELECT * FROM car_races 
 WHERE raceId = ?");
 $racerQuery->execute([$characterRaceId]);
@@ -67,18 +68,26 @@ $racerQuery->execute([$characterRaceId]);
 while ($race = $racerQuery->fetch())
 {
     $characterRaceName = stripslashes($race['raceName']);
+    $raceHpBonus = stripslashes($race['raceHpBonus']);
+    $raceMpBonus = stripslashes($race['raceMpBonus']);
+    $raceStrengthBonus = stripslashes($race['raceStrengthBonus']);
+    $raceMagicBonus = stripslashes($race['raceMagicBonus']);
+    $raceAgilityBonus = stripslashes($race['raceAgilityBonus']);
+    $raceDefenseBonus = stripslashes($race['raceDefenseBonus']);
+    $raceDefenseMagicBonus = stripslashes($race['raceDefenseMagicBonus']);
+    $raceWidsomBonus = stripslashes($race['raceWidsomBonus']);
 }
 
 //Valeurs des statistiques qui seront ajoutée à la monté d'un niveau
 $levelBaseExperience = 5000;
-$hPByLevel = 10;
-$mPByLevel = 1;
-$strengthByLevel = 1;
-$magicByLevel = 1;
-$agilityByLevel = 1;
-$defenseByLevel = 1;
-$defenseMagicByLevel = 1;
-$wisdomByLevel = 0;
+$hPByLevel = 10 + $raceHpBonus;
+$mPByLevel = 1 + $raceMpBonus;
+$strengthByLevel = 1 + $raceStrengthBonus;
+$magicByLevel = 1 + $raceMagicBonus;
+$agilityByLevel = 1 + $raceAgilityBonus;
+$defenseByLevel = 1 + $raceDefenseBonus;
+$defenseMagicByLevel = 1 + $raceDefenseMagicBonus;
+$wisdomByLevel = 1 + $raceWidsomBonus;
 $skillPointsByLevel = 4;
 $experienceLevel = $characterLevel * $levelBaseExperience;
 $experienceRemaining = $characterLevel * $levelBaseExperience - $characterExperience;
@@ -160,5 +169,4 @@ $updatecharacter->execute(array(
 'characterExperienceTotal' => $characterExperienceTotal, 
 'characterSkillPoints' => $characterSkillPoints, 
 'characterId' => $characterId));
-
 ?>
