@@ -22,7 +22,7 @@ include("../../config.php");
     </div>
     <div class="form-group row">
         <label for="raceList" class="col-2 col-form-label">Classe</label>
-        <select class="form-control" id="raceList" name="characterRace">
+        <select class="form-control" id="raceList" name="characterRaceId">
         <?php
         //On rempli le menu déroulant avec la liste des classes disponible
         $raceListQuery = $bdd->query("SELECT * FROM car_races");

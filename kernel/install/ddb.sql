@@ -4,6 +4,7 @@
 
 CREATE TABLE IF NOT EXISTS `car_accounts` (
   `accountId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  
   `accountPseudo` varchar(50) NOT NULL,
   `accountPassword` varchar(255) NOT NULL,
   `accountEmail` varchar(50) NOT NULL,
@@ -29,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `car_characters` (
   `characterId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `characterAccountId` int(11) NOT NULL,
   `characterRaceId` int(11) NOT NULL,
+  `characterPicture` varchar(50) NOT NULL,
   `characterName` varchar(30) NOT NULL,
   `characterLevel` int(11) NOT NULL,
   `characterSex` int(11) NOT NULL,
@@ -80,6 +82,8 @@ CREATE TABLE IF NOT EXISTS `car_characters` (
   `characterExperienceTotal` int(11) NOT NULL,
   `characterSkillPoints` int(11) NOT NULL,
   `characterGold` int(11) NOT NULL,
+  `characterTownId` int(11) NOT NULL,
+  `characterChapter` int(11) NOT NULL,
   `characterOnBattle` int(11) NOT NULL,
   `characterEnable` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -136,8 +140,9 @@ CREATE TABLE IF NOT EXISTS `car_codes_used` (
 
 CREATE TABLE IF NOT EXISTS `car_monsters` (
   `monsterId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `monsterPicture` varchar(50) NOT NULL,
   `monsterName` varchar(30) NOT NULL,
-  `monsterDescription` varchar(30) NOT NULL,
+  `monsterDescription` text NOT NULL,
   `monsterLevel` int(11) NOT NULL,
   `monsterHp` int(11) NOT NULL,
   `monsterMp` int(11) NOT NULL,
@@ -154,6 +159,7 @@ CREATE TABLE IF NOT EXISTS `car_monsters` (
 CREATE TABLE IF NOT EXISTS `car_news` 
 (
   `newsId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `newsPicture` varchar(50) NOT NULL,
   `newsTitle` varchar(30) NOT NULL,
   `newsMessage` text NOT NULL,
   `newsAccountPseudo` varchar(15) NOT NULL,
@@ -163,6 +169,7 @@ CREATE TABLE IF NOT EXISTS `car_news`
 CREATE TABLE IF NOT EXISTS `car_races` 
 (
   `raceId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `racePicture` varchar(50) NOT NULL,
   `raceName` varchar(30) NOT NULL,
   `raceDescription` text NOT NULL,
   `raceHpBonus` int(11) NOT NULL,
@@ -175,16 +182,26 @@ CREATE TABLE IF NOT EXISTS `car_races`
   `raceWidsomBonus` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `car_towns` 
+(
+  `townId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `townPicture` varchar(50) NOT NULL,
+  `townName` varchar(30) NOT NULL,
+  `townDescription` text NOT NULL,
+  `townPriceInn` int(10) NOT NULL,
+  `townChapter` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Ajout des exemples dans la base de donnée
 --
 
-INSERT INTO `car_monsters` (`monsterId`, `monsterName`, `monsterDescription`, `monsterLevel`, `monsterHp`, `monsterMp`, `monsterStrength`, `monsterMagic`, `monsterAgility`, `monsterDefense`, `monsterDefenseMagic`, `monsterWisdom`, `monsterExperience`, `monsterGold`) VALUES
-(1, 'Plop', 'Petit monstre vert', 1, 10, 10, 1, 1, 1, 1, 1, 1, 10, 10);
+INSERT INTO `car_monsters` (`monsterId`, `monsterPicture`, `monsterName`, `monsterDescription`, `monsterLevel`, `monsterHp`, `monsterMp`, `monsterStrength`, `monsterMagic`, `monsterAgility`, `monsterDefense`, `monsterDefenseMagic`, `monsterWisdom`, `monsterExperience`, `monsterGold`) VALUES
+(1, 'http://localhost/monster.png', 'Plop', 'Ce monstre se nourrit exclusivement de plante et de feuille tombé à même le sol.\r\n\r\nIl y a très longtemps celui-ci était jaune et est devenue vert de part son alimentation...\r\n\r\nMais si il est devenu vert de part son alimentation pourquoi était t\'il jaune ?', 1, 10, 10, 1, 1, 1, 1, 1, 1, 10, 10);
 
-INSERT INTO `car_news` (`newsId`, `newsTitle`, `newsMessage`, `newsAccountPseudo`, `newsDate`) VALUES
-(1, 'Installation de Caranille', 'Félicitation Caranille est bien installé vous pouvez maintenant vous connecter avec vos identifiants \r\n\r\nBon RPG Making', 'admin', '2017-05-18');
+INSERT INTO `car_news` (`newsId`, `newsPicture`, `newsTitle`, `newsMessage`, `newsAccountPseudo`, `newsDate`) VALUES
+(1, 'http://localhost/news.png', 'Installation de Caranille', 'Félicitation Caranille est bien installé vous pouvez maintenant vous connecter avec vos identifiants \r\n\r\nBon RPG Making', 'admin', '2017-05-18');
 
-INSERT INTO `car_races` (`raceId`, `raceName`, `raceDescription`, `raceHpBonus`, `raceMpBonus`, `raceStrengthBonus`, `raceMagicBonus`, `raceAgilityBonus`, `raceDefenseBonus`, `raceDefenseMagicBonus`, `raceWidsomBonus`) VALUES
-(1, 'Guerrier', 'Classe de personnage axé sur la force et les HP', 1, 0, 1, 0, 0, 0, 0, 0),
-(2, 'Mage', 'Classe de personnage axé sur la magie et les MP', 0, 1, 0, 1, 0, 0, 0, 0);
+INSERT INTO `car_races` (`raceId`, `racePicture`, `raceName`, `raceDescription`, `raceHpBonus`, `raceMpBonus`, `raceStrengthBonus`, `raceMagicBonus`, `raceAgilityBonus`, `raceDefenseBonus`, `raceDefenseMagicBonus`, `raceWidsomBonus`) VALUES
+(1, 'http://localhost/race.png', 'Guerrier', 'Classe de personnage axé sur la force et les HP', 1, 0, 1, 0, 0, 0, 0, 0),
+(2, 'http://localhost/race.png', 'Mage', 'Classe de personnage axé sur la magie et les MP', 0, 1, 0, 1, 0, 0, 0, 0);

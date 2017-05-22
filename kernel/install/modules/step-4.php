@@ -1,19 +1,19 @@
 <?php
 require_once("../html/header.php");
-require_once("../config.php");
+require_once("../../config.php");
 
 //Si tous les champs ont bien été rempli
 if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['accountPasswordConfirm']) && ($_POST['accountEmail']))
 {
     //On vérifi si la classe choisit est correct et que le select retourne bien un nombre
-    if(ctype_digit($_POST['characterRace']))
+    if(ctype_digit($_POST['characterRaceId']))
     {
         //On récupère les valeurs du formulaire dans une variable
         $accountPseudo = htmlspecialchars(addslashes($_POST['accountPseudo']));
         $accountPassword = sha1(htmlspecialchars(addslashes($_POST['accountPassword'])));
         $accountPasswordConfirm = sha1(htmlspecialchars(addslashes($_POST['accountPasswordConfirm'])));
         $accountEmail = htmlspecialchars(addslashes($_POST['accountEmail']));
-        $characterRace = htmlspecialchars(addslashes($_POST['characterRace']));
+        $characterRaceId = htmlspecialchars(addslashes($_POST['characterRaceId']));
         $characterSex = htmlspecialchars(addslashes($_POST['characterSex']));
         $characterName = htmlspecialchars(addslashes($_POST['characterName']));
 
@@ -43,7 +43,7 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                     //On fait une requête pour vérifier si le nom du personnage est déjà utilisé
                     $raceListQuery = $bdd->prepare('SELECT * FROM car_races 
                     WHERE raceId= ?');
-                    $raceListQuery->execute([$characterRace]);
+                    $raceListQuery->execute([$characterRaceId]);
                     $raceList = $raceListQuery->rowCount();
                     $raceListQuery->closeCursor();
 
@@ -107,6 +107,7 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         '', //characterID
                         :accountId, //characterAccountID
                         '0', //characterRaceID
+                        'http://localhost/character.png', //characterPicture
                         :characterName, //characterName
                         '1', //characterLevel
                         :characterSex, //characterSex
@@ -158,6 +159,8 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         '0', //characterExperienceTotal
                         '0', //characterSkillPoints
                         '0', //characterGold
+                        '0', //characterTownId
+                        '0', //characterChapter
                         '0', //characterOnBattle
                         '1' //characterEnable
                         */
@@ -165,7 +168,8 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         $addCharacter = $bdd->prepare("INSERT INTO car_characters VALUES(
                         '',
                         :accountId,
-                        :characterRace,
+                        :characterRaceId,
+                        'http://localhost/character.png',
                         :characterName,
                         '1',
                         :characterSex,
@@ -218,12 +222,14 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         '0',
                         '0',
                         '0',
+                        '0',
+                        '0',
                         '1'
                         )");
 
                         $addCharacter->execute([
                         'accountId' => $id,
-                        'characterRace' => $characterRace,
+                        'characterRaceId' => $characterRaceId,
                         'characterName' => $characterName,
                         'characterSex' => $characterSex]);
 
