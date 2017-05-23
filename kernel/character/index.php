@@ -55,6 +55,8 @@ while ($character = $characterQuery->fetch())
     $characterExperienceTotal = stripslashes($character['characterExperienceTotal']);
     $characterSkillPoints = stripslashes($character['characterSkillPoints']);
     $characterGold = stripslashes($character['characterGold']);
+    $characterTownId = stripslashes($character['characterTownId']);
+    $characterChapter = stripslashes($character['characterChapter']);
     $characterOnBattle = stripslashes($character['characterOnBattle']);
     $characterEnable = stripslashes($character['characterEnable']);
 }

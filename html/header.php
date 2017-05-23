@@ -6,6 +6,7 @@ if (isset($_SESSION['account']['id']))
 {
     require_once("../../kernel/account/index.php");
     require_once("../../kernel/character/index.php");
+    require_once("../../kernel/town/index.php");
 }
 ?>
 <!DOCTYPE html>
@@ -50,7 +51,23 @@ if (isset($_SESSION['account']['id']))
                                 <li><a href="../../modules/skillPoints/index.php">Points de compétences</a></li>
                             </ul>
                         </li>
-                        <li class="active"><a href="../../modules/inn/index.php">Auberge</a></li>
+                        <?php
+                        //Si characterTownId est supérieur ou égal à un le joueur est dans une ville. On met le raccourcit vers la ville
+                        if($characterTownId >= 1)
+                        {
+                            ?>
+                                <li><a href="../../modules/town/index.php">Retourner en ville</a></li>
+                            <?php
+                        }
+                        //Si characterTownId n'est pas supérieur ou égal à un le joueur est dans aucune ville. On met le raccourcit vers la carte du monde
+                        else
+                        {
+                            ?>
+                                <li><a href="../../modules/map/index.php">Carte du monde</a></li>
+                            <?php
+                        }
+                        ?>
+                        <li><a href="../../modules/inn/index.php">Auberge</a></li>
                         <?php
                     }
                     else
