@@ -9,7 +9,7 @@ if ($characterTownId == 0) { exit(header("Location: ../../modules/map/index.php"
 <img src="" alt="">
 <?php echo $townName; ?><br />
 <?php echo $townDescription; ?><br /><br />
-<a href="">Donjon</a><br>
+<a href="../../modules/dungeon/index.php">Donjon</a><br>
 <a href="">Mission(s)</a><br>
 <a href="">Boutique d'équipement(s)</a><br>
 <a href="">Boutique de magie(s)</a><br>

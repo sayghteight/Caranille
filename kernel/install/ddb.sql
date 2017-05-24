@@ -191,12 +191,22 @@ CREATE TABLE IF NOT EXISTS `car_towns`
   `townChapter` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `car_towns_monsters` 
+(
+  `townMonsterId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `townTownId` int(10) NOT NULL,
+  `townMonsterMonsterId` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Ajout des exemples dans la base de donnée
 --
 
 INSERT INTO `car_monsters` (`monsterId`, `monsterPicture`, `monsterName`, `monsterDescription`, `monsterLevel`, `monsterHp`, `monsterMp`, `monsterStrength`, `monsterMagic`, `monsterAgility`, `monsterDefense`, `monsterDefenseMagic`, `monsterWisdom`, `monsterExperience`, `monsterGold`) VALUES
 (1, 'http://localhost/monster.png', 'Plop', 'Ce monstre se nourrit exclusivement de plante et de feuille tombé à même le sol.\r\n\r\nIl y a très longtemps celui-ci était jaune et est devenue vert de part son alimentation...\r\n\r\nMais si il est devenu vert de part son alimentation pourquoi était t\'il jaune ?', 1, 10, 10, 1, 1, 1, 1, 1, 1, 10, 10);
+
+INSERT INTO `car_monsters` (`monsterId`, `monsterPicture`, `monsterName`, `monsterDescription`, `monsterLevel`, `monsterHp`, `monsterMp`, `monsterStrength`, `monsterMagic`, `monsterAgility`, `monsterDefense`, `monsterDefenseMagic`, `monsterWisdom`, `monsterExperience`, `monsterGold`) VALUES 
+(1, 'http://localhost/monster.png', 'Igle', 'Ce rapace est capable de voler à plus de 120km/h et peut distinguer du gibier à plus de 20 kilomètres', '2', '30', '1', '10', '1', '1', '1', '1', '1', '30', '30');
 
 INSERT INTO `car_news` (`newsId`, `newsPicture`, `newsTitle`, `newsMessage`, `newsAccountPseudo`, `newsDate`) VALUES
 (1, 'http://localhost/news.png', 'Installation de Caranille', 'Félicitation Caranille est bien installé vous pouvez maintenant vous connecter avec vos identifiants \r\n\r\nBon RPG Making', 'admin', '2017-05-18');
@@ -208,3 +218,7 @@ INSERT INTO `car_races` (`raceId`, `racePicture`, `raceName`, `raceDescription`,
 INSERT INTO `car_towns` (`townId`, `townPicture`, `townName`, `townDescription`, `townPriceInn`, `townChapter`) VALUES
 (1, 'http://localhost/town.png', 'Indicia', 'Petite ville côtière qui vie exclusivement du commerce de la pêche.', 10, 1),
 (2, 'http://localhost/town.png', 'Teran', 'Petite ville rural qui vie de l\'agriculture', 12, 2);
+
+INSERT INTO `car_towns_monsters` (`townMonsterId`, `townTownId`, `townMonsterMonsterId`) VALUES
+(1, 1, 1),
+(2, 2, 2);
