@@ -4,7 +4,6 @@
 
 CREATE TABLE IF NOT EXISTS `car_accounts` (
   `accountId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  
   `accountPseudo` varchar(50) NOT NULL,
   `accountPassword` varchar(255) NOT NULL,
   `accountEmail` varchar(50) NOT NULL,
