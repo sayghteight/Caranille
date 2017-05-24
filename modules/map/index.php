@@ -8,6 +8,7 @@ if ($characterTownId >= 1) { exit(header("Location: ../../modules/town/index.php
 ?>
 Bienvenue sur la carte du monde.<br />
 Ici vous allez pouvoir choisir la ville dans laquel vous rendre<br /><br />
+
 <?php
 $townListQuery = $bdd->prepare('SELECT * FROM car_towns
 WHERE townChapter <= ?');

@@ -1,7 +1,12 @@
 <?php require_once("../../html/header.php"); 
 //Si il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
+?>
 
+Bienvenue dans le donjon.<br />
+Ici vous allez pouvoir choisir le monstre de votre choix pour vous entrainer<br /><br />
+
+<?php
 //On fait une jointure entre les 3 tables car_monsters, car_towns, car_towns_monsters pour récupérer les monstres lié à la ville
 $monsterQueryList = $bdd->prepare("SELECT * FROM car_monsters, car_towns, car_towns_monsters
 WHERE townMonsterId = monsterId
