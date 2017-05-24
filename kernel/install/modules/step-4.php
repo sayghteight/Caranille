@@ -160,7 +160,7 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         '0', //characterSkillPoints
                         '0', //characterGold
                         '0', //characterTownId
-                        '0', //characterChapter
+                        '1', //characterChapter
                         '0', //characterOnBattle
                         '1' //characterEnable
                         */
@@ -222,7 +222,7 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         '0',
                         '0',
                         '0',
-                        '0',
+                        '1',
                         '0',
                         '1'
                         )");

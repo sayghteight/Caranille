@@ -33,7 +33,6 @@ if ($townList >= 1)
                     <option value="<?php echo $townId ?>"><?php echo $townName ?></option>
                 <?php
             }
-            $townListQuery->closeCursor();
             ?>
             </select>
         </div>
@@ -46,6 +45,7 @@ else
 {
     echo "Aucune ville disponible";
 }
+$townListQuery->closeCursor();
 ?>
 
 <?php require_once("../../html/footer.php"); ?>

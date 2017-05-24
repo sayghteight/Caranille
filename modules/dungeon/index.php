@@ -1,19 +1,16 @@
 <?php require_once("../../html/header.php"); 
 //Si il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
-?>
 
-<h4>Liste des monstres disponible</h4> 
-
-<?php
-//On fait une recherche de tous les comptes dans la base de donnée qui ont un Id différent du notre
-$monsterQueryList = $bdd->prepare("SELECT * FROM car_monsters, car_towns_monsters
-WHERE townMonsterId = townId
+//On fait une jointure entre les 3 tables car_monsters, car_towns, car_towns_monsters pour récupérer les monstres lié à la ville
+$monsterQueryList = $bdd->prepare("SELECT * FROM car_monsters, car_towns, car_towns_monsters
+WHERE townMonsterId = monsterId
+AND townTownId = townId
 AND townId = ?");
 $monsterQueryList->execute([$townId]);
 $monsterQuery = $monsterQueryList->rowCount();
 
-//On boucle la liste des résultats
+//Si plusieurs monstres ont été trouvé
 if ($monsterQuery > 0)
 {
     ?>
@@ -23,16 +20,15 @@ if ($monsterQuery > 0)
             <select class="form-control" id="townList" name="monsterId">
             <?php
             //On fait une boucle sur tous les résultats
-            while ($monsterList = $townListQuery->fetch())
+            while ($monsterList = $monsterQueryList->fetch())
             {
-                //on récupère les valeurs de chaque villes qu'on va ensuite mettre dans le menu déroulant
+                //on récupère les valeurs de chaque monstres qu'on va ensuite mettre dans le menu déroulant
                 $monsterId = stripslashes($monsterList['monsterId']); 
                 $monsterName = stripslashes($monsterList['monsterName']);
                 ?>
                     <option value="<?php echo $monsterId ?>"><?php echo $monsterName ?></option>
                 <?php
             }
-            $monsterQueryList->closeCursor();
             ?>
             </select>
         </div>
@@ -40,13 +36,13 @@ if ($monsterQuery > 0)
     </form>
     <?php
 }
+//Si il n'y a aucun monstre de disponible on prévient le joueur
 else
 {
     ?>
     Il n'y a aucun monstre de disponible.
     <?php
 }
-
 $monsterQueryList->closeCursor();
 
 require_once("../../html/footer.php"); ?>
