@@ -82,15 +82,15 @@ while ($race = $racerQuery->fetch())
 
 //Valeurs des statistiques qui seront ajoutée à la monté d'un niveau
 $levelBaseExperience = 5000;
-$hPByLevel = 10 + $raceHpBonus;
-$mPByLevel = 1 + $raceMpBonus;
-$strengthByLevel = 1 + $raceStrengthBonus;
-$magicByLevel = 1 + $raceMagicBonus;
-$agilityByLevel = 1 + $raceAgilityBonus;
-$defenseByLevel = 1 + $raceDefenseBonus;
-$defenseMagicByLevel = 1 + $raceDefenseMagicBonus;
-$wisdomByLevel = 1 + $raceWidsomBonus;
-$skillPointsByLevel = 4;
+$hPByLevel = $raceHpBonus;
+$mPByLevel = $raceMpBonus;
+$strengthByLevel = $raceStrengthBonus;
+$magicByLevel = $raceMagicBonus;
+$agilityByLevel = $raceAgilityBonus;
+$defenseByLevel = $raceDefenseBonus;
+$defenseMagicByLevel = $raceDefenseMagicBonus;
+$wisdomByLevel = $raceWidsomBonus;
+$skillPointsByLevel = 2;
 $experienceLevel = $characterLevel * $levelBaseExperience;
 $experienceRemaining = $characterLevel * $levelBaseExperience - $characterExperience;
 
