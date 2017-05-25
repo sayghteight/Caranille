@@ -242,11 +242,13 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
 
                         echo "Compte crée";
                     }
+                    //Si la classe choisie n'existe pas
                     else
                     {
                         echo "La classe choisit n'existe pas";
                     }
                 }
+                //Si le nom du personnage a déjà été utilisé
                 else
                 {
                     echo "Ce nom de personnage est déjà utilisé";
@@ -270,7 +272,7 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
          echo "La classe choisit est invalide";
     }
 }
-//Si tous les champs n'ont pas été rmepli
+//Si tous les champs n'ont pas été rempli
 else 
 {
     echo "Tous les champs n'ont pas été rempli";

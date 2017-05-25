@@ -30,7 +30,6 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']))
     {
         echo "Mauvais Pseudo/Mot de passe";
     }
-    //On ferme le flux de sortie de la base de donnée
     $verifyaccountLogin->closeCursor();
 }
 //Si tous les champs n'ont pas été rempli

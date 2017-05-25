@@ -10,7 +10,7 @@
             //On affiche le résultat en bas de la page
             echo "<center>Temps d'exécution de la page: {$pageLoadTime} seconds</center>";
         ?>
-        <script src="../../js/jquery-3.1.1.min.js"></script>
+        <script src="../../js/jquery-3.2.1.min.js"></script>
         <script src="../../js/bootstrap.min.js"></script>
     </body>
 </html>
