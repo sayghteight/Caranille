@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `car_accounts` (
 
 CREATE TABLE IF NOT EXISTS `car_battles_monsters` (
   `battleMonsterId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `battleMonsterAccountId` int(11) NOT NULL,
+  `battleMonsterCharacterId` int(11) NOT NULL,
   `battleMonsterMonsterId` int(11) NOT NULL,
   `battleMonsterMonsterHpRemaining` int(11) NOT NULL,
   `battleMonsterMonsterMpRemaining` int(11) NOT NULL

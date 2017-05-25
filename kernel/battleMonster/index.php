@@ -4,8 +4,8 @@ require_once("../../kernel/config.php");
 //On fait une requête pour vérifier si il y a un combat en cours
 $foundBattleQuery = $bdd->prepare("SELECT * FROM car_battles_monsters, car_monsters 
 WHERE battleMonsterMonsterId = monsterId
-AND battleMonsterAccountId = ?");
-$foundBattleQuery->execute([$accountId]);
+AND battleMonsterCharacterId = ?");
+$foundBattleQuery->execute([$characterId]);
 $foundBattleMonster = $foundBattleQuery->rowCount();
 
 //Si il y a un combat de trouvé

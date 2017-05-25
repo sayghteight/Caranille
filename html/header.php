@@ -1,12 +1,20 @@
 <?php
+////On récupère le temps Unix actuel une première fois
 $timeStart = microtime(true);
+//On démarre le module des sessions de PHP
 session_start();
+//On inclue le fichier de configuration qui contient les paramètre de connexion SQL ainsi que la création d'un objet $bdd pour les requêtes SQL
 require_once("../../kernel/config.php");
+//Si le joueur est connecté on va récupérer toutes les informations du joueur (Compte, Personnage, Combat en cours...)
 if (isset($_SESSION['account']['id']))
 {
+    //On récupère toutes les informations du compte
     require_once("../../kernel/account/index.php");
-    require_once("../../kernel/battleMonster/index.php");
+    //On récupère toutes les informations du personnage grâce au compte
     require_once("../../kernel/character/index.php");
+    //On vérifie si le personnage est actuellement dans un combat de monstre. Si c'est le cas on récupère toutes les informations du combat
+    require_once("../../kernel/battleMonster/index.php");
+    //On vérifie si le personnage est actuellement dans une ville. Si c'est le cas on récupère toutes les informations de la ville
     require_once("../../kernel/town/index.php");
 }
 ?>
@@ -42,6 +50,7 @@ if (isset($_SESSION['account']['id']))
                     <ul class="nav navbar-nav">
                     <li class="active"><a href="../../modules/main/index.php">Accueil</a></li>
                     <?php
+                    //Si le joueur est connecté on affiche le menu du jeu
                     if (isset($_SESSION['account']['id']))
                     {
                         ?>
@@ -71,6 +80,7 @@ if (isset($_SESSION['account']['id']))
                         <li><a href="../../modules/inn/index.php">Auberge</a></li>
                         <?php
                     }
+                    //Sinon on affiche rien
                     else
                     {
                         ?>
@@ -79,13 +89,14 @@ if (isset($_SESSION['account']['id']))
                     ?>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                    <?php
+                    <?php*//Si le joueur est connecté on lui donne la possibilité de se déconnecter
                     if (isset($_SESSION['account']['id']))
                     {
                         ?>
                             <li><a href="../../modules/logout/index.php">Déconnexion</a></li>
                         <?php
                     }
+                    //Sinon on propose au joueur de s'inscrire ou se connecter
                     else
                     {
                         ?>
