@@ -5,6 +5,7 @@ require_once("../../kernel/config.php");
 if (isset($_SESSION['account']['id']))
 {
     require_once("../../kernel/account/index.php");
+    require_once("../../kernel/battleMonster/index.php");
     require_once("../../kernel/character/index.php");
     require_once("../../kernel/town/index.php");
 }

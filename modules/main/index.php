@@ -11,15 +11,9 @@ if ($newsList > 0)
     while ($news = $newsListQuery->fetch()) 
     {
         ?>
-            <div class="panel panel-warning">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Information publiée le <?php echo stripslashes($news['newsDate']); ?> par <?php echo stripslashes($news['newsAccountPseudo']); ?></h3>
-                </div>
-                <div class="panel-body">
-                    <h4><?php echo stripslashes($news['newsTitle']); ?></h4>
-                    <?php echo stripslashes(nl2br($news['newsMessage'])); ?>
-                </div>
-            </div>
+        <h4><?php echo stripslashes($news['newsTitle']); ?> (Par <?php echo stripslashes($news['newsAccountPseudo']); ?> le <?php echo stripslashes($news['newsDate']); ?>)</h4>
+        <?php echo stripslashes(nl2br($news['newsMessage'])); ?>
+        <hr>
         <?php
     }
 }

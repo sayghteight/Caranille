@@ -15,14 +15,12 @@ CREATE TABLE IF NOT EXISTS `car_accounts` (
   `accountLastIp` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `car_battles_monster` (
+CREATE TABLE IF NOT EXISTS `car_battles_monsters` (
   `battleMonsterId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `battleMonsterAccountId` int(11) NOT NULL,
   `battleMonsterMonsterId` int(11) NOT NULL,
-  `battleMonsterMonsterHp` int(11) NOT NULL,
-  `battleMonsterMonsterHpTotal` int(11) NOT NULL,
-  `battleMonsterMonsterMp` int(11) NOT NULL,
-  `battleMonsterMonsterMpTotal` int(11) NOT NULL
+  `battleMonsterMonsterHpRemaining` int(11) NOT NULL,
+  `battleMonsterMonsterMpRemaining` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `car_characters` (
