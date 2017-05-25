@@ -25,6 +25,7 @@
     catch (PDOException \$e) 
     {
         echo 'An error as occurred, Cannot connect to the database. Error: '.\$e->getMessage();
+        exit();
     }
     ?>");
     fclose($openSql);
