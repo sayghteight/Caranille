@@ -89,7 +89,8 @@ if (isset($_SESSION['account']['id']))
                     ?>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                    <?php*//Si le joueur est connecté on lui donne la possibilité de se déconnecter
+                    <?php
+                    //Si le joueur est connecté on lui donne la possibilité de se déconnecter
                     if (isset($_SESSION['account']['id']))
                     {
                         ?>
