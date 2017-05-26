@@ -1,5 +1,11 @@
 <?php
 require_once("../../html/header.php");
+//Si il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
+if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
+//Si le joueur est déjà dans une ville on le redirige vers la ville
+if ($characterTownId >= 1) { exit(header("Location: ../../modules/town/index.php")); }
+//Si il y a actuellement un combat contre un monstre on redirige le joueur vers le module battleMonster
+if ($foundBattleMonster > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
 
 //Si tous les champs ont bien été rempli
 if (isset($_POST['townId']))
