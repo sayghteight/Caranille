@@ -23,8 +23,8 @@ if ($playerOneStep == 0 && $playerTwoStep == 0 || $playerOneStep == 0 && $player
             //Si le joueur numéro un a attaqué on met à jour ses dégats dans la base de donnée
             case 1:
                 $updateBattle = $bdd->prepare("UPDATE car_battles_arenas
-                SET battleArenaTrainerOneStep = '1',
-                battleArenaTrainerOneDamages = :totalDamagesPlayer
+                SET battleArenaCharacterOneStep = '1',
+                battleArenaCharacterOneDamages = :totalDamagesPlayer
                 WHERE battleArenaId = :battleArenaId");
                 $updateBattle->execute([
                 'totalDamagesPlayer' => $totalDamagesPlayer,
@@ -34,8 +34,8 @@ if ($playerOneStep == 0 && $playerTwoStep == 0 || $playerOneStep == 0 && $player
             //Si le joueur numéro deux a attaqué on met à jour ses dégats dans la base de donnée
             case 2:
                 $updateBattle = $bdd->prepare("UPDATE car_battles_arenas
-                SET battleArenaTrainerTwoStep = '1',
-                battleArenaTrainerTwoDamages = :totalDamagesPlayer
+                SET battleArenaCharacterTwoStep = '1',
+                battleArenaCharacterTwoDamages = :totalDamagesPlayer
                 WHERE battleArenaId = :battleArenaId");
                 $updateBattle->execute([
                 'totalDamagesPlayer' => $totalDamagesPlayer,

@@ -8,11 +8,11 @@ echo "Combat de $characterName contre $monsterName<br />";
 echo "HP de $characterName: $characterHpMin/$characterHpTotal";
 ?>
 
-<form method="POST" action="fight.php">
+<form method="POST" action="attack.php">
     <input type="submit" name="attack" class="btn btn-default form-control" value="Attaque physique"><br>
 </form>
     
-<form method="POST" action="fight.php">
+<form method="POST" action="magic.php">
     <input type="submit" name="magic" class="btn btn-default form-control" value="Attaque magique"><br>
 </form>
 
