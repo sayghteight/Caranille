@@ -30,34 +30,34 @@ if (isset($_POST['magic']))
     $characterMaxDefenseMagic = $characterDefenseMagicTotal * 1.1;
 
     //On calcule les dégats du joueur
-    $positiveDamagePlayer = mt_rand($characterMinMagic, $characterMaxMagic);
-    $negativeDamagePlayer = mt_rand($monsterMinDefenseMagic, $monsterMaxDefenseMagic);
-    $totalDamagePlayer = $positiveDamagePlayer - $negativeDamagePlayer;
+    $positiveDamagesPlayer = mt_rand($characterMinMagic, $characterMaxMagic);
+    $negativeDamagesPlayer = mt_rand($monsterMinDefenseMagic, $monsterMaxDefenseMagic);
+    $totalDamagesPlayer = $positiveDamagesPlayer - $negativeDamagesPlayer;
 
     //On calcule les dégats du monstre
-    $positiveDamageMonster = mt_rand($monsterMinStrength, $monsterMaxStrength);
-    $negativeDamageMonster = mt_rand($characterMinDefense, $characterMaxDefense);
-    $totalDamageMonster = $positiveDamageMonster - $negativeDamageMonster;
+    $positiveDamagesMonster = mt_rand($monsterMinStrength, $monsterMaxStrength);
+    $negativeDamagesMonster = mt_rand($characterMinDefense, $characterMaxDefense);
+    $totalDamagesMonster = $positiveDamagesMonster - $negativeDamagesMonster;
 
     //Si le joueur à fait des dégats négatif ont bloque à zéro pour ne pas soigner le monstre (Car moins et moins fait plus)
-    if ($totalDamagePlayer < 0)
+    if ($totalDamagesPlayer < 0)
     {
-        $totalDamagePlayer = 0;
+        $totalDamagesPlayer = 0;
     }
 
     //Si le monstre à fait des dégats négatif ont bloque à zéro pour ne pas soigner le personnage (Car moins et moins fait plus)
-    if ($totalDamageMonster < 1)
+    if ($totalDamagesMonster < 1)
     {
-        $totalDamageMonster = 0;
+        $totalDamagesMonster = 0;
     }
 
     //On affiche les résultats du tour
-    echo "$characterName à fait $totalDamagePlayer point(s) de dégat à $monsterName<br />";
-    echo "$monsterName à fait $totalDamageMonster point(s) de dégat à $characterName<br />";
+    echo "$characterName à fait $totalDamagesPlayer point(s) de dégat à $monsterName<br />";
+    echo "$monsterName à fait $totalDamagesMonster point(s) de dégat à $characterName<br />";
 
     //On met à jour la vie du joueur et du monstre
-    $battleMonsterHpRemaining = $battleMonsterHpRemaining - $totalDamagePlayer;
-    $characterHpMin = $characterHpMin - $totalDamageMonster;
+    $battleMonsterHpRemaining = $battleMonsterHpRemaining - $totalDamagesPlayer;
+    $characterHpMin = $characterHpMin - $totalDamagesMonster;
 
     //On met le personnage à jour dans la base de donnée
     $updateCharacter = $bdd->prepare("UPDATE car_characters
