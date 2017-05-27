@@ -14,7 +14,7 @@ if ($playerOneStep == 1 && $playerTwoStep == 1 || $playerOneStep == 1 && $player
 
             //On met les données du combat à jour pour le tour suivant
             $updateBattle = $bdd->prepare("UPDATE car_battles_arenas
-            SET battleArenaTrainerTwoStep = 2
+            SET battleArenaCharacterTwoStep = 2
             WHERE battleArenaId = :battleArenaId");
             $updateBattle->execute([
             'battleArenaId' => $battleArenaId]);
@@ -47,7 +47,7 @@ if ($playerOneStep == 1 && $playerTwoStep == 1 || $playerOneStep == 1 && $player
 
             //On met les données du combat à jour pour le tour suivant
             $updateBattle = $bdd->prepare("UPDATE car_battles_arenas
-            SET battleArenaTrainerOneStep = 2
+            SET battleArenaCharacterOneStep = 2
             WHERE battleArenaId = :battleArenaId");
             $updateBattle->execute([
             'battleArenaId' => $battleArenaId]);
@@ -65,12 +65,12 @@ if ($playerOneStep == 1 && $playerTwoStep == 1 || $playerOneStep == 1 && $player
 
             if ($hp <= 0)
             {
-                echo "$characterName est KO, la victoire revient à $opponentcharacterName";
+                echo "$characterName est KO, la victoire revient à $opponentCharacterName";
             }
 
             if ($OpponentHp <=0 )
             {
-                echo "$opponentcharacterName est KO, la victoire revient à $characterName";
+                echo "$opponentCharacterName est KO, la victoire revient à $characterName";
             }
             break;
     }

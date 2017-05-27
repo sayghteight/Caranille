@@ -8,7 +8,6 @@ if ($foundBattleArena > 0) { exit(header("Location: ../../modules/battleArena/in
 //Si il y a actuellement un combat contre un monstre on redirige le joueur vers le module battleMonster
 if ($foundBattleMonster > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
 
-
 //On fait une recherche de tous les comptes dans la base de donnée qui ont un Id différent du notre
 $opponentQueryList = $bdd->prepare("SELECT * FROM car_characters 
 WHERE characterId != ?");

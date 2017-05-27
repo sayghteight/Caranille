@@ -35,7 +35,7 @@ if ($playerOneStep == 0 && $playerTwoStep == 0 || $playerOneStep == 0 && $player
             case 2:
                 $updateBattle = $bdd->prepare("UPDATE car_battles_arenas
                 SET battleArenaCharacterTwoStep = '1',
-                battleArenaCharacterTwoStep = :totalDamagesPlayer
+                battleArenaCharacterTwoDamages = :totalDamagesPlayer
                 WHERE battleArenaId = :battleArenaId");
                 $updateBattle->execute([
                 'totalDamagesPlayer' => $totalDamagesPlayer,

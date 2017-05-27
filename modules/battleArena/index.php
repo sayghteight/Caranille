@@ -42,11 +42,11 @@ if ($playerOneStep == 0 && $playerTwoStep == 0 || $playerOneStep == 0 && $player
                 echo "Combat de $characterName contre $opponentCharacterName<br />";
                 echo "HP de $characterName: $characterHpMin/$characterHpTotal";
                 ?>
-                    <form method="POST" action="index.php">
+                    <form method="POST" action="attack.php">
                         <input type="submit" name="attack" class="btn btn-default form-control" value="Attaque physique"><br>
                     </form>
                         
-                    <form method="POST" action="index.php">
+                    <form method="POST" action="magic.php">
                         <input type="submit" name="magic" class="btn btn-default form-control" value="Attaque magique"><br>
                     </form>
                 <?php
