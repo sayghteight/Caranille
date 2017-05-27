@@ -16,17 +16,17 @@ CREATE TABLE IF NOT EXISTS `car_accounts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `car_battles_arenas` (
-  `battleId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `battleCharacterOneId` int(11) NOT NULL,
-  `battleCharacterOneStep` int(11) NOT NULL,
-  `battleCharacterOneDamage` int(11) NOT NULL,
-  `battleCharacterOneHp` int(11) NOT NULL,
-  `battleCharacterOneMp` int(11) NOT NULL,
-  `battleCharacterTwoId` int(11) NOT NULL,
-  `battleCharacterTwoStep` int(11) NOT NULL,
-  `battleCharacterTwoDamage` int(11) NOT NULL,
-  `battleCharacterTwoHp` int(11) NOT NULL,
-  `battleCharacterTwoMp` int(11) NOT NULL
+  `battleArenaId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `battleArenaCharacterOneId` int(11) NOT NULL,
+  `battleArenaCharacterOneStep` int(11) NOT NULL,
+  `battleArenaCharacterOneDamage` int(11) NOT NULL,
+  `battleArenaCharacterOneHp` int(11) NOT NULL,
+  `battleArenaCharacterOneMp` int(11) NOT NULL,
+  `battleArenaCharacterTwoId` int(11) NOT NULL,
+  `battleArenaCharacterTwoStep` int(11) NOT NULL,
+  `battleArenaCharacterTwoDamage` int(11) NOT NULL,
+  `battleArenaCharacterTwoHp` int(11) NOT NULL,
+  `battleArenaCharacterTwoMp` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `car_battles_monsters` (

@@ -16,7 +16,7 @@ if ($playerOneStep == 0 && $playerTwoStep == 0 || $playerOneStep == 0 && $player
             //Si le joueur numéro un n'a pas fait d'attaque ont affiche le formulaire
             if ($playerOneStep == 0)
             {
-                echo "Combat de $characterName contre $opponentcharacterName<br />";
+                echo "Combat de $characterName contre $opponentCharacterName<br />";
                 echo "HP de $characterName: $characterHpMin/$characterHpTotal";
                 ?>
                     <form method="POST" action="attack.php">
@@ -39,7 +39,7 @@ if ($playerOneStep == 0 && $playerTwoStep == 0 || $playerOneStep == 0 && $player
             //Si le joueur numéro deux n'a pas fait d'attaque ont affiche le formulaire
             if ($playerTwoStep == 0)
             {
-                echo "Combat de $characterName contre $opponentcharacterName<br />";
+                echo "Combat de $characterName contre $opponentCharacterName<br />";
                 echo "HP de $characterName: $characterHpMin/$characterHpTotal";
                 ?>
                     <form method="POST" action="index.php">
@@ -59,7 +59,7 @@ if ($playerOneStep == 0 && $playerTwoStep == 0 || $playerOneStep == 0 && $player
         break;
     }
     ?>
-        <form method="POST" action="index.php">
+        <form method="POST" action="escape.php">
             <input type="submit" name="escape" class="btn btn-default form-control" value="Abandonner le combat"><br />
         </form>
     <?php

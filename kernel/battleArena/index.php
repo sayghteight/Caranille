@@ -3,8 +3,8 @@ require_once("../../kernel/config.php");
 
 //On fait une requête pour vérifier si il y a un combat en cours
 $foundBattleQuery = $bdd->prepare("SELECT * FROM car_battles_arenas 
-WHERE battleCharacterOneId = ?
-OR battleCharacterTwoId = ?");
+WHERE battleArenaCharacterOneId = ?
+OR battleArenaCharacterTwoId = ?");
 $foundBattleQuery->execute([$characterId, $characterId]);
 $foundBattleArena = $foundBattleQuery->rowCount();
 
@@ -15,23 +15,23 @@ if ($foundBattleArena == 1)
     while ($foundBattle = $foundBattleQuery->fetch())
     {
         //On récupère les variables importante pour la gestion du combat
-        $battleId = $foundBattle['battleId'];
-        $damagesPlayerOne = $foundBattle['battleCharacterOneDamage'];
-        $damagesPlayerTwo = $foundBattle['battleCharacterTwoDamage'];
-        $playerOneStep = $foundBattle['battleCharacterOneStep'];
-        $playerTwoStep = $foundBattle['battleCharacterTwoStep'];
+        $battleArenaId = $foundBattle['battleArenaId'];
+        $damagesPlayerOne = $foundBattle['battleArenaCharacterOneDamage'];
+        $damagesPlayerTwo = $foundBattle['battleArenaCharacterTwoDamage'];
+        $playerOneStep = $foundBattle['battleArenaCharacterOneStep'];
+        $playerTwoStep = $foundBattle['battleArenaCharacterTwoStep'];
 
         //Si l'Id du dresseur est égale à battleCharacterOneId, nous sommes le joueurs 1
-        if ($foundBattle['battleCharacterOneId'] == $CharacterId)
+        if ($foundBattle['battleArenaCharacterOneId'] == $characterId)
         {
             $battlePlayer = 1;
-            $battleOpponent = $foundBattle['battleCharacterTwoId'];
+            $battleOpponent = $foundBattle['battleArenaCharacterTwoId'];
         }
         //Si l'Id du dresseur est égale à battleCharacterTwoId, nous sommes le joueurs 2
-        elseif ($foundBattle['battleCharacterTwoId'] == $CharacterId)
+        elseif ($foundBattle['battleArenaCharacterTwoId'] == $characterId)
         {
             $battlePlayer = 2;
-            $battleOpponent = $foundBattle['battleCharacterOneId'];
+            $battleOpponent = $foundBattle['battleArenaCharacterOneId'];
         }
     }
 
