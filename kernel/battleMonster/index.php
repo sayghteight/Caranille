@@ -11,20 +11,37 @@ $foundBattleMonster = $foundBattleQuery->rowCount();
 //Si il y a un combat de trouvé
 if ($foundBattleMonster == 1)
 {
-    //On boucle sur le résultat
+    //On récupères les informations du combat (Id du combat, Id du monstre, Hp et Mp restant au monstre)
     while ($foundBattle = $foundBattleQuery->fetch())
     {
         //On récupère les variables importante pour la gestion du combat
         $battleMonsterId = $foundBattle['battleMonsterId'];
-        $battleMonsterName = $foundBattle['monsterName'];
-        $battleMonsterDescription = $foundBattle['monsterDescription'];
-        $battleMonsterLevel = $foundBattle['monsterLevel'];
+        $battleMonsterMonsterId = $foundBattle['battleMonsterMonsterId'];
         $battleMonsterHpRemaining = $foundBattle['battleMonsterMonsterHpRemaining'];
-        $battleMonsterHpTotal = $foundBattle['monsterHp'];
         $battleMonsterMpRemaining = $foundBattle['battleMonsterMonsterMpRemaining'];
-        $battleMonsterMpTotal = $foundBattle['monsterMp'];
-        $battleMonsterExperience = $foundBattle['monsterExperience'];
-        $battleMonsterGold = $foundBattle['monsterGold'];
+    }
+
+    //On récupère toutes les informations du monstre que nous sommes en train de combattre
+    $foundMonsterQuery = $bdd->prepare("SELECT * FROM car_monsters 
+    WHERE monsterId = ?");
+    $foundMonsterQuery->execute([$battleMonsterMonsterId]);
+
+    //On boucle sur le résultat
+    while ($foundMonster = $foundMonsterQuery->fetch())
+    {
+        $monsterName = $foundMonster['monsterName'];
+        $monsterDescription = $foundMonster['monsterDescription'];
+        $monsterLevel = $foundMonster['monsterLevel'];
+        $monsterHp = $foundMonster['monsterHp'];
+        $monsterMp = $foundMonster['monsterMp'];
+        $monsterStrength = $foundMonster['monsterStrength'];
+        $monsterMagic = $foundMonster['monsterMagic'];
+        $monsterAgility = $foundMonster['monsterAgility'];
+        $monsterDefense = $foundMonster['monsterDefense'];
+        $monsterDefenseMagic = $foundMonster['monsterDefenseMagic'];
+        $monsterWisdom = $foundMonster['monsterWisdom'];
+        $monsterExperience = $foundMonster['monsterExperience'];
+        $monsterGold = $foundMonster['monsterGold'];
     }
 }
 ?>
