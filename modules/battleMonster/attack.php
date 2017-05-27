@@ -53,25 +53,11 @@ if (isset($_POST['attack']))
 
     //On affiche les résultats du tour
     echo "$characterName à fait $totalDamagePlayer point(s) de dégat à $monsterName<br />";
-    echo "$monsterName à fait $totalDamageMonster point(s) de dégat à $characterName<br />";
+    echo "$monsterName à fait $totalDamageMonster point(s) de dégat à $characterName<br /><br />";
 
     //On met à jour la vie du joueur et du monstre
     $battleMonsterHpRemaining = $battleMonsterHpRemaining - $totalDamagePlayer;
     $characterHpMin = $characterHpMin - $totalDamageMonster;
-
-    //Si le monstre a moins ou a zéro HP on redirige le joueur vers la page des récompenses
-    if ($battleMonsterHpRemaining <= 0)
-    {
-        header("Location: rewards.php");
-        exit();
-    }
-
-    //Si le joueur a moins ou a zéro HP on redirige le joueur vers la page des récompenses
-    if ($characterHpMin <= 0)
-    {
-       header("Location: rewards.php");
-       exit();
-    }
 
     //On met le personnage à jour dans la base de donnée
     $updateCharacter = $bdd->prepare("UPDATE car_characters
@@ -88,11 +74,36 @@ if (isset($_POST['attack']))
     $updateMonsterBattle->execute([
     'battleMonsterHpRemaining' => $battleMonsterHpRemaining,
     'battleMonsterId' => $battleMonsterId]);
-    ?>
+
+    //Si le monstre a moins ou a zéro HP on redirige le joueur vers la page des récompenses
+    if ($battleMonsterHpRemaining <= 0)
+    {
+        ?>
+        <form method="POST" action="rewards.php">
+            <input type="submit" name="escape" class="btn btn-default form-control" value="Continuer"><br />
+        </form>
+        <?php
+    }
+
+    //Si le joueur a moins ou a zéro HP on redirige le joueur vers la page des récompenses
+    if ($characterHpMin <= 0)
+    {
+        ?>
+        <form method="POST" action="rewards.php">
+            <input type="submit" name="escape" class="btn btn-default form-control" value="Continuer"><br />
+        </form>
+        <?php
+    }
+
+    //Si le monstre et le joueur ont plus de zéro HP on continue le combat
+    if ($battleMonsterHpRemaining > 0 && $characterHpMin > 0 )
+    {
+        ?>
         <form method="POST" action="index.php">
             <input type="submit" name="magic" class="btn btn-default form-control" value="Continuer"><br>
         </form>
-    <?php
+        <?php
+    }
 }
 else
 {

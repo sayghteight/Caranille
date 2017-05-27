@@ -9,21 +9,18 @@ if ($foundBattleMonster == 0) { exit(header("Location: ../../modules/dungeon/ind
 if ($battleMonsterHpRemaining <= 0)
 {
     //On prévient le joueur qu'il a remporté le combat
-    echo "$characterName remporte le combat<br /><br />";
+    echo "<p>$characterName remporte le combat !</p>";
     echo "Vous obtenez:<br />";
     echo "-$monsterExperience point(s) d'experience<br />";
     echo "-$monsterGold pièce(s) d'or<br />";
 
     //On donne les récompenses au personnage et on le met à jour dans la base de donnée
     $updateCharacter = $bdd->prepare("UPDATE car_characters
-    SET characterHpMin = :characterHpTotal,
-    characterMpMin = :characterMpTotal,
-    characterExperience = characterExperience + :monsterExperience,
+    SET characterExperience = characterExperience + :monsterExperience,
     characterExperienceTotal = characterExperienceTotal + :monsterExperience,
     characterGold = characterGold + :monsterGold
     WHERE characterId = :characterId");
     $updateCharacter->execute([
-    'characterHpMin' => $characterHpMin,
     'monsterExperience' => $monsterExperience,
     'monsterGold' => $monsterGold,
     'characterId' => $characterId]);
@@ -34,7 +31,7 @@ if ($battleMonsterHpRemaining <= 0)
     $DeleteBattle->execute(array('battleMonsterId' => $battleMonsterId));
     ?>
     <form method="POST" action="../../modules/dungeon/index.php">
-        <input type="submit" name="escape" class="btn btn-default form-control" value="Retourner au donjon"><br />
+        <input type="submit" name="escape" class="btn btn-default form-control" value="Continuer"><br />
     </form>
     <?php
 }
@@ -43,15 +40,14 @@ if ($battleMonsterHpRemaining <= 0)
 if ($characterHpMin <= 0)
 {
     //On prévient le joueur qu'il a perdu
-    echo "$monsterName remporte le combat<br /><br />";
+    echo "<p>$monsterName remporte le combat !</p>";
     
     //On soigne le personnage et ont le met à jour dans la base de donnée
     $updateCharacter = $bdd->prepare("UPDATE car_characters
-    SET characterHpMin = :characterHpTotal,
-    SET characterMpMin = :characterMpTotal,
+    SET characterHpMin = characterHpTotal,
+    SET characterMpMin = characterMpTotal,
     WHERE characterId = :characterId");
     $updateCharacter->execute([
-    'characterHpMin' => $characterHpMin,
     'characterId' => $characterId]);
 
     //On détruit le combat en cours
@@ -60,7 +56,7 @@ if ($characterHpMin <= 0)
     $DeleteBattle->execute(array('battleMonsterId' => $battleMonsterId));
     ?>
     <form method="POST" action="../../modules/dungeon/index.php">
-        <input type="submit" name="escape" class="btn btn-default form-control" value="Retourner au donjon"><br />
+        <input type="submit" name="escape" class="btn btn-default form-control" value="Continuer"><br />
     </form>
     <?php
 }
@@ -70,5 +66,4 @@ if ($battleMonsterHpRemaining > 0 && $characterHpMin > 0 )
 {
     header("Location: index.php");
 }
-
 require_once("../../html/footer.php"); ?>

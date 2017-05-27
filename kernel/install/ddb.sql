@@ -15,6 +15,20 @@ CREATE TABLE IF NOT EXISTS `car_accounts` (
   `accountLastIp` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `car_battles_arenas` (
+  `battleId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `battleCharacterOneId` int(11) NOT NULL,
+  `battleCharacterOneStep` int(11) NOT NULL,
+  `battleCharacterOneDamage` int(11) NOT NULL,
+  `battleCharacterOneHp` int(11) NOT NULL,
+  `battleCharacterOneMp` int(11) NOT NULL,
+  `battleCharacterTwoId` int(11) NOT NULL,
+  `battleCharacterTwoStep` int(11) NOT NULL,
+  `battleCharacterTwoDamage` int(11) NOT NULL,
+  `battleCharacterTwoHp` int(11) NOT NULL,
+  `battleCharacterTwoMp` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `car_battles_monsters` (
   `battleMonsterId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `battleMonsterCharacterId` int(11) NOT NULL,
@@ -22,6 +36,7 @@ CREATE TABLE IF NOT EXISTS `car_battles_monsters` (
   `battleMonsterMonsterHpRemaining` int(11) NOT NULL,
   `battleMonsterMonsterMpRemaining` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE IF NOT EXISTS `car_characters` (
   `characterId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
