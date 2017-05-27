@@ -232,12 +232,6 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         'characterName' => $characterName,
                         'characterSex' => $characterSex]);
 
-                        $addCharacter->execute([
-                        'accountId' => $id,
-                        'characterRace' => $characterRace,
-                        'characterName' => $characterName,
-                        'characterSex' => $characterSex]);
-
                         $addCharacter->closeCursor();
 
                         echo "Compte crée";

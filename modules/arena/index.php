@@ -7,33 +7,39 @@ if ($characterTownId == 0) { exit(header("Location: ../../modules/map/index.php"
 if ($foundBattleArena > 0) { exit(header("Location: ../../modules/battleArena/index.php")); }
 //Si il y a actuellement un combat contre un monstre on redirige le joueur vers le module battleMonster
 if ($foundBattleMonster > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
-?>
 
-<h4>Liste des joueurs à proximité de vous !</h4> 
 
-<?php
 //On fait une recherche de tous les comptes dans la base de donnée qui ont un Id différent du notre
-$opponentQueryList = $bdd->prepare("SELECT * FROM mop_characters 
+$opponentQueryList = $bdd->prepare("SELECT * FROM car_characters 
 WHERE characterId != ?");
 $opponentQueryList->execute([$characterId]);
-$opponentQuery = $monsterQueryList->rowCount();
+$opponentQuery = $opponentQueryList->rowCount();
 
 //Si plusieurs personnages ont été trouvé
 if ($opponentQuery > 0)
 {
-    //On boucle la liste des résultats
-    while ($opponent = $opponentQuery->fetch())
-    {
-        //On récupère les informations du compte
-        $characterId = $opponent['characterId'];
-        $characterPseudo = $opponent['characterPseudo'];
-        ?>
-        <form method="POST" action="arena.php">
-            <input class="form-control" type="hidden" name="opponentId" required value="<?php echo "$characterId"; ?>">
-            <input type="submit" name="Register" class="btn btn-success btn-lg" value="Défier">
-        </form>
-        <?php
-    }
+    ?>
+    <form method="POST" action="arena.php">
+        <div class="form-group row">
+            <label for="characterList" class="col-2 col-form-label">Liste des joueurs</label>
+            <select class="form-control" id="townList" name="battleCharacterId">
+            <?php
+            //On fait une boucle sur tous les résultats
+            while ($opponent = $opponentQueryList->fetch())
+            {
+                //on récupère les valeurs de chaque joueurs qu'on va ensuite mettre dans le menu déroulant
+                $characterId = stripslashes($opponent['characterId']); 
+                $characterName = stripslashes($opponent['characterName']);
+                ?>
+                    <option value="<?php echo $characterId ?>"><?php echo $characterName ?></option>
+                <?php
+            }
+            ?>
+            </select>
+        </div>
+        <center><input type="submit" name="enter" class="btn btn-default form-control" value="Lancer le combat"></center>
+    </form>
+    <?php
 }
 //Si aucun personnage n'a été trouvé
 else
