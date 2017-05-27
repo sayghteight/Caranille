@@ -7,7 +7,7 @@ if ($foundBattleArena == 0) { exit(header("Location: ../../modules/town/index.ph
 if ($playerOneStep == 2 && $playerTwoStep == 2 || $playerOneStep == 2 && $playerTwoStep == 0 || $playerOneStep == 0 && $playerTwoStep == 2)
 {
     //Si un des deux characters à sa vie à zéro (voir même les deux characters en même temps) on arrète le combat
-    if ($characterHpMin <= 0 || $opponentcharacterHpMin <= 0 || $characterHpMin <= 0 && $opponentcharacterHpMin <= 0)
+    if ($characterHpMin <= 0 || $opponentCharacterHpMin <= 0 || $characterHpMin <= 0 && $opponentCharacterHpMin <= 0)
     {
         //On supprime le combat en cours
         $DeleteBattle = $bdd->prepare("DELETE FROM car_battles_arenas 
@@ -18,10 +18,10 @@ if ($playerOneStep == 2 && $playerTwoStep == 2 || $playerOneStep == 2 && $player
     {
         //On met les données du combat à jour pour le tour suivant
         $updateBattle = $bdd->prepare("UPDATE car_battles_arenas
-        SET battleArenaTrainerOneStep = 0,
-        battleArenaTrainerOneDamages = 0,
-        battleArenaTrainerTwoStep = 0,
-        battleArenaTrainerTwoDamages = 0
+        SET battleArenaCharacterOneStep = 0,
+        battleArenaCharacterOneDamages = 0,
+        battleArenaCharacterTwoStep = 0,
+        battleArenaCharacterTwoDamages = 0
         WHERE battleArenaId = :battleArenaId");
         $updateBattle->execute([
         'battleArenaId' => $battleArenaId]);

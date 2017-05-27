@@ -9,8 +9,8 @@ if ($playerOneStep == 1 && $playerTwoStep == 1 || $playerOneStep == 1 && $player
     switch ($battlePlayer)
     {
         case 1:
-            echo "$characterName a infligé $damagesPlayerOne point(s) de dégats à $opponentcharacterName<br />";
-            echo "$opponentcharacterName a infligé $damagesPlayerTwo point(s) de dégats à $characterName<br /><br />";
+            echo "$characterName a infligé $damagesPlayerOne point(s) de dégats à $opponentCharacterName<br />";
+            echo "$opponentCharacterName a infligé $damagesPlayerTwo point(s) de dégats à $characterName<br /><br />";
 
             //On met les données du combat à jour pour le tour suivant
             $updateBattle = $bdd->prepare("UPDATE car_battles_arenas
@@ -28,22 +28,22 @@ if ($playerOneStep == 1 && $playerTwoStep == 1 || $playerOneStep == 1 && $player
             'characterId' => $characterId]);
 
             $hp = $characterHpMin - $damagesPlayerTwo; 
-            $OpponentHp = $opponentcharacterHpMin - $damagesPlayerOne;
+            $OpponentHp = $opponentCharacterHpMin - $damagesPlayerOne;
 
             if ($hp <= 0)
             {
-                echo "$characterName est KO, la victoire revient à $opponentcharacterName";
+                echo "$characterName est KO, la victoire revient à $opponentCharacterName";
             }
 
             if ($OpponentHp <=0 )
             {
-                echo "$opponentcharacterName est KO, la victoire revient à $characterName";
+                echo "$opponentCharacterName est KO, la victoire revient à $characterName";
             }         
             break;
 
         case 2:
-            echo "$characterName a infligé $damagesPlayerTwo point(s) de dégats à $opponentcharacterName<br />";
-            echo "$opponentcharacterName a infligé $damagesPlayerOne point(s) de dégats à $characterName<br /><br />";
+            echo "$characterName a infligé $damagesPlayerTwo point(s) de dégats à $opponentCharacterName<br />";
+            echo "$opponentCharacterName a infligé $damagesPlayerOne point(s) de dégats à $characterName<br /><br />";
 
             //On met les données du combat à jour pour le tour suivant
             $updateBattle = $bdd->prepare("UPDATE car_battles_arenas
@@ -61,7 +61,7 @@ if ($playerOneStep == 1 && $playerTwoStep == 1 || $playerOneStep == 1 && $player
             'characterId' => $characterId]);
 
             $hp = $characterHpMin - $damagesPlayerOne; 
-            $OpponentHp = $opponentcharacterHpMin - $damagesPlayerTwo;
+            $OpponentHp = $opponentCharacterHpMin - $damagesPlayerTwo;
 
             if ($hp <= 0)
             {

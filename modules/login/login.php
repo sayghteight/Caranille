@@ -9,20 +9,20 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']))
     $accountPassword = sha1(htmlspecialchars(addslashes($_POST['accountPassword'])));
 
     //On fait une requête pour vérifier si le pseudo et le mot de passe concorde bien
-    $verifyaccountLogin = $bdd->prepare("SELECT * FROM car_accounts 
+    $verifyAccountLogin = $bdd->prepare("SELECT * FROM car_accounts 
     WHERE accountPseudo = ?
     AND accountPassword = ?");
-    $verifyaccountLogin->execute([$accountPseudo, $accountPassword]);
-    $Result = $verifyaccountLogin->rowCount();
+    $verifyAccountLogin->execute([$accountPseudo, $accountPassword]);
+    $Result = $verifyAccountLogin->rowCount();
 
     //Si il y a un résultat de trouvé c'est que la combinaison pseudo/mot de passe est bonne
     if ($Result == 1)
     {
         //Dans ce cas on boucle pour récupérer le tableau retourné par la base de donnée pour faire la session account
-        while ($accountLogin = $verifyaccountLogin->fetch())
+        while ($accountLogin = $verifyAccountLogin->fetch())
         {
             $_SESSION['account']['id'] = stripslashes($accountLogin['accountId']);
-            header("Location: $url/modules/main/index.php");
+            header("Location: ../../index.php");
         }
     }
     //Si il n'y a aucun résultat de trouvé c'est que la combinaison pseudo/mot de passe est mauvaise
@@ -30,7 +30,7 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']))
     {
         echo "Mauvais Pseudo/Mot de passe";
     }
-    $verifyaccountLogin->closeCursor();
+    $verifyAccountLogin->closeCursor();
 }
 //Si tous les champs n'ont pas été rempli
 else
