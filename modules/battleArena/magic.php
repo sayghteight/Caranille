@@ -8,38 +8,38 @@ if ($playerOneStep == 0 && $playerTwoStep == 0 || $playerOneStep == 0 && $player
 { 
     if (isset($_POST['magic']))
     {
-        $positiveDamagePlayer = mt_rand($minMagic, $maxMagic);
-        $negativeDamagePlayer = mt_rand($opponentMinDefenseMagic, $opponentMaxDefenseMagic);
+        $positiveDamagesPlayer = mt_rand($minMagic, $maxMagic);
+        $negativeDamagesPlayer = mt_rand($opponentMinDefenseMagic, $opponentMaxDefenseMagic);
 
-        $totalDamagePlayer = $positiveDamagePlayer - $negativeDamagePlayer;
+        $totalDamagesPlayer = $positiveDamagesPlayer - $negativeDamagesPlayer;
 
-        if ($totalDamagePlayer <= 0)
+        if ($totalDamagesPlayer <= 0)
         {
-            $totalDamagePlayer = 0;
+            $totalDamagesPlayer = 0;
         }
 
         switch ($battlePlayer)
         {
             //Si le joueur numéro un a attaqué on met à jour ses dégats dans la base de donnée
             case 1:
-                $updateBattle = $bdd->prepare("UPDATE car_battles
-                SET battleTrainerOneStep = '1',
-                battleTrainerOneDamage = :totalDamagePlayer
-                WHERE battleId = :battleId");
+                $updateBattle = $bdd->prepare("UPDATE car_battles_arenas
+                SET battleArenaTrainerOneStep = '1',
+                battleArenaTrainerOneDamages = :totalDamagesPlayer
+                WHERE battleArenaId = :battleArenaId");
                 $updateBattle->execute([
-                'totalDamagePlayer' => $totalDamagePlayer,
-                'battleId' => $battleId]);
+                'totalDamagesPlayer' => $totalDamagesPlayer,
+                'battleArenaId' => $battleArenaId]);
                 break;
 
             //Si le joueur numéro deux a attaqué on met à jour ses dégats dans la base de donnée
             case 2:
-                $updateBattle = $bdd->prepare("UPDATE car_battles
-                SET battleTrainerTwoStep = '1',
-                battleTrainerTwoDamage = :totalDamagePlayer
-                WHERE battleId = :battleId");
+                $updateBattle = $bdd->prepare("UPDATE car_battles_arenas
+                SET battleArenaTrainerTwoStep = '1',
+                battleArenaTrainerTwoDamages = :totalDamagesPlayer
+                WHERE battleArenaId = :battleArenaId");
                 $updateBattle->execute([
-                'totalDamagePlayer' => $totalDamagePlayer,
-                'battleId' => $battleId]);
+                'totalDamagesPlayer' => $totalDamagesPlayer,
+                'battleArenaId' => $battleArenaId]);
                 break;
         }
     }

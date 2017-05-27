@@ -16,8 +16,8 @@ if ($foundBattleArena == 1)
     {
         //On récupère les variables importante pour la gestion du combat
         $battleArenaId = $foundBattle['battleArenaId'];
-        $damagesPlayerOne = $foundBattle['battleArenaCharacterOneDamage'];
-        $damagesPlayerTwo = $foundBattle['battleArenaCharacterTwoDamage'];
+        $damagesPlayerOne = $foundBattle['battleArenaCharacterOneDamages'];
+        $damagesPlayerTwo = $foundBattle['battleArenaCharacterTwoDamages'];
         $playerOneStep = $foundBattle['battleArenaCharacterOneStep'];
         $playerTwoStep = $foundBattle['battleArenaCharacterTwoStep'];
 

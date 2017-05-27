@@ -13,15 +13,15 @@ if ($playerOneStep == 1 && $playerTwoStep == 1 || $playerOneStep == 1 && $player
             echo "$opponentcharacterName a infligé $damagesPlayerTwo point(s) de dégats à $characterName<br /><br />";
 
             //On met les données du combat à jour pour le tour suivant
-            $updateBattle = $bdd->prepare("UPDATE car_battles
-            SET battleTrainerTwoStep = 2
-            WHERE battleId = :battleId");
+            $updateBattle = $bdd->prepare("UPDATE car_battles_arenas
+            SET battleArenaTrainerTwoStep = 2
+            WHERE battleArenaId = :battleArenaId");
             $updateBattle->execute([
-            'battleId' => $battleId]);
+            'battleArenaId' => $battleArenaId]);
 
             //On met les stats du character à jour
-            $updatecharacter = $bdd->prepare("UPDATE car_characters SET 
-            characterHpMin = characterHpMin - :damagesPlayerTwo
+            $updatecharacter = $bdd->prepare("UPDATE car_characters 
+            SET characterHpMin = characterHpMin - :damagesPlayerTwo
             WHERE characterId= :characterId");
             $updatecharacter->execute([
             'damagesPlayerTwo' => $damagesPlayerTwo,
@@ -46,15 +46,15 @@ if ($playerOneStep == 1 && $playerTwoStep == 1 || $playerOneStep == 1 && $player
             echo "$opponentcharacterName a infligé $damagesPlayerOne point(s) de dégats à $characterName<br /><br />";
 
             //On met les données du combat à jour pour le tour suivant
-            $updateBattle = $bdd->prepare("UPDATE car_battles
-            SET battleTrainerOneStep = 2
-            WHERE battleId = :battleId");
+            $updateBattle = $bdd->prepare("UPDATE car_battles_arenas
+            SET battleArenaTrainerOneStep = 2
+            WHERE battleArenaId = :battleArenaId");
             $updateBattle->execute([
-            'battleId' => $battleId]);
+            'battleArenaId' => $battleArenaId]);
 
             //On met les stats du character à jour
-            $updatecharacter = $bdd->prepare("UPDATE car_characters SET 
-            characterHpMin = characterHpMin - :damagesPlayerOne
+            $updatecharacter = $bdd->prepare("UPDATE car_characters 
+            SET characterHpMin = characterHpMin - :damagesPlayerOne
             WHERE characterId= :characterId");
             $updatecharacter->execute([
             'damagesPlayerOne' => $damagesPlayerOne,

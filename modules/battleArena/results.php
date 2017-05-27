@@ -10,21 +10,21 @@ if ($playerOneStep == 2 && $playerTwoStep == 2 || $playerOneStep == 2 && $player
     if ($characterHpMin <= 0 || $opponentcharacterHpMin <= 0 || $characterHpMin <= 0 && $opponentcharacterHpMin <= 0)
     {
         //On supprime le combat en cours
-        $DeleteBattle = $bdd->prepare("DELETE FROM car_battles 
-        WHERE battleId = :battleId");
-        $DeleteBattle->execute(array('battleId' => $battleId));
+        $DeleteBattle = $bdd->prepare("DELETE FROM car_battles_arenas 
+        WHERE battleArenaId = :battleArenaId");
+        $DeleteBattle->execute(array('battleArenaId' => $battleArenaId));
     }
     else
     {
         //On met les données du combat à jour pour le tour suivant
-        $updateBattle = $bdd->prepare("UPDATE car_battles
-        SET battleTrainerOneStep = 0,
-        battleTrainerOneDamage = 0,
-        battleTrainerTwoStep = 0,
-        battleTrainerTwoDamage = 0
-        WHERE battleId = :battleId");
+        $updateBattle = $bdd->prepare("UPDATE car_battles_arenas
+        SET battleArenaTrainerOneStep = 0,
+        battleArenaTrainerOneDamages = 0,
+        battleArenaTrainerTwoStep = 0,
+        battleArenaTrainerTwoDamages = 0
+        WHERE battleArenaId = :battleArenaId");
         $updateBattle->execute([
-        'battleId' => $battleId]);
+        'battleArenaId' => $battleArenaId]);
     }
     //On force le rafraichissement de la page
     echo "<meta http-equiv=\"refresh\" content=\"0\">";
