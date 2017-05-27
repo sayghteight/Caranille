@@ -59,6 +59,20 @@ if (isset($_POST['attack']))
     $battleMonsterHpRemaining = $battleMonsterHpRemaining - $totalDamagePlayer;
     $characterHpMin = $characterHpMin - $totalDamageMonster;
 
+    //Si le monstre a moins ou a zéro HP on redirige le joueur vers la page des récompenses
+    if ($battleMonsterHpRemaining <= 0)
+    {
+        header("Location: rewards.php");
+        exit();
+    }
+
+    //Si le joueur a moins ou a zéro HP on redirige le joueur vers la page des récompenses
+    if ($characterHpMin <= 0)
+    {
+       header("Location: rewards.php");
+       exit();
+    }
+
     //On met le personnage à jour dans la base de donnée
     $updateCharacter = $bdd->prepare("UPDATE car_characters
     SET characterHpMin = :characterHpMin
@@ -74,7 +88,6 @@ if (isset($_POST['attack']))
     $updateMonsterBattle->execute([
     'battleMonsterHpRemaining' => $battleMonsterHpRemaining,
     'battleMonsterId' => $battleMonsterId]);
-
     ?>
         <form method="POST" action="index.php">
             <input type="submit" name="magic" class="btn btn-default form-control" value="Continuer"><br>
