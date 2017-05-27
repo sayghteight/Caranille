@@ -5,7 +5,7 @@ require_once("../../kernel/config.php");
 $foundBattleQuery = $bdd->prepare("SELECT * FROM car_battles_arenas 
 WHERE battleCharacterOneId = ?
 OR battleCharacterTwoId = ?");
-$foundBattleQuery->execute([$CharacterId, $CharacterId]);
+$foundBattleQuery->execute([$characterId, $characterId]);
 $foundBattleArena = $foundBattleQuery->rowCount();
 
 //Si il y a un combat de trouvé

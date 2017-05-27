@@ -54,7 +54,6 @@ if (isset($_POST['battleCharacterId']))
 
         //On redirige l'utilisateur vers le module battleArena
         header("Location: ../../modules/battleArena/index.php");
-
     }
     //Si le joueur n'est pas disponible
     else
