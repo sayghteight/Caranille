@@ -42,19 +42,19 @@ if (isset($_POST['battleMonsterId']))
             }
 
             //Insertion du combat dans la base de donnée avec les données du monstre
-            $addBattmeMonster = $bdd->prepare("INSERT INTO car_battles_monsters VALUES(
+            $addBattleMonster = $bdd->prepare("INSERT INTO car_battles_monsters VALUES(
             '',
             :characterId,
             :monsterId,
             :monsterHp,
             :monsterMp)");
 
-            $addBattmeMonster->execute([
+            $addBattleMonster->execute([
             'characterId' => $characterId,
             'monsterId' => $monsterId,
             'monsterHp' => $monsterHp,
             'monsterMp' => $monsterMp]);
-            $addBattmeMonster->closeCursor();
+            $addBattleMonster->closeCursor();
 
             header("Location: ../../modules/battleMonster/index.php");
         }

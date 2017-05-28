@@ -9,18 +9,18 @@ if ($foundBattleArena > 0) { exit(header("Location: ../../modules/battleArena/in
 if ($foundBattleMonster > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
 
 //Si tous les champs ont bien été rempli
-if (isset($_POST['battleCharacterId']))
+if (isset($_POST['opponentCharacterId']))
 {
     //On vérifi si la monstre choisit est correct et que le select retourne bien un nombre
-    if(ctype_digit($_POST['battleCharacterId']))
+    if(ctype_digit($_POST['opponentCharacterId']))
     {
         //On récupère l'ID de la personne à défier
-        $battleCharacterId = htmlspecialchars(addslashes($_POST['battleCharacterId']));
+        $opponentCharacterId = htmlspecialchars(addslashes($_POST['opponentCharacterId']));
 
         //On recherche le personnage
         $opponentQuery = $bdd->prepare("SELECT * FROM car_characters 
         WHERE characterId = ?");
-        $opponentQuery->execute([$battleCharacterId]);
+        $opponentQuery->execute([$opponentCharacterId]);
 
         //On fait une boucle pour récupérer les résultats
         while ($opponent = $opponentQuery->fetch())
@@ -29,28 +29,20 @@ if (isset($_POST['battleCharacterId']))
             $opponentCharacterMp = stripslashes($opponent['characterMpTotal']);
         }
 
-        //On enregistre le combat dans la base de donnée
-        $addBattle = $bdd->prepare("INSERT INTO car_battles_arenas VALUES(
+        //Insertion du combat dans la base de donnée avec les données du monstre
+        $addBattleArena = $bdd->prepare("INSERT INTO car_battles_arenas VALUES(
         '',
         :characterId,
-        '0',
-        '0',
-        :characterHpTotal,
-        :characterMpTotal,
-        :opponentId,
-        '0',
-        '0',
+        :opponentCharacterId,
         :opponentCharacterHp,
         :opponentCharacterMp)");
 
-        $addBattle->execute([
+        $addBattleArena->execute([
         'characterId' => $characterId,
-        'characterHpTotal' => $characterHpTotal,
-        'characterMpTotal' => $characterMpTotal,
-        'opponentId' => $battleCharacterId,
-        'opponentCharacterHp' => $opponentCharacterHp,
+        'opponentCharacterId' => $opponentCharacterId,
+        'monstopponentCharacterHperHp' => $opponentCharacterHp,
         'opponentCharacterMp' => $opponentCharacterMp]);
-        $addBattle->closeCursor();
+        $addBattleArena->closeCursor();
 
         //On redirige l'utilisateur vers le module battleArena
         header("Location: ../../modules/battleArena/index.php");

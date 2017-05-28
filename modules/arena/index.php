@@ -21,7 +21,7 @@ if ($opponentQuery > 0)
     <form method="POST" action="arena.php">
         <div class="form-group row">
             <label for="characterList" class="col-2 col-form-label">Liste des joueurs</label>
-            <select class="form-control" id="townList" name="battleCharacterId">
+            <select class="form-control" id="townList" name="opponentCharacterId">
             <?php
             //On fait une boucle sur tous les résultats
             while ($opponent = $opponentQueryList->fetch())
