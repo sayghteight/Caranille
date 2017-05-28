@@ -34,8 +34,8 @@ if (isset($_POST['magic']))
     $negativeDamagesCharacter = mt_rand($opponentCharacterMinDefenseMagic, $opponentCharacterMaxDefenseMagic);
     $totalDamagesCharacter = $positiveDamagesCharacter - $negativeDamagesCharacter;
 
-    //Si le personnage adversaire à plus de puissance physique que magique il fera une attaque physique
-    if ($opponentCharacterStengthTotal > $opponentCharacterMagicTotal)
+    //Si le personnage adversaire à plus de puissance physique ou autant que de magique il fera une attaque physique
+    if ($opponentCharacterStrengthTotal >= $opponentCharacterMagicTotal)
     {
         //On calcule les dégats du personnage adverse
         $positiveDamagesOpponentCharacter = mt_rand($opponentCharacterMinStrength, $opponentCharacterMaxStrength);

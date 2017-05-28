@@ -34,8 +34,8 @@ if (isset($_POST['magic']))
     $negativeDamagesCharacter = mt_rand($monsterMinDefenseMagic, $monsterMaxDefenseMagic);
     $totalDamagesCharacter = $positiveDamagesCharacter - $negativeDamagesCharacter;
 
-    //Si le monstre à plus de puissance physique que magique il fera une attaque physique
-    if ($monsterStrength > $monsterMagic)
+    //Si le monstre à plus de puissance physique ou autant que de magique il fera une attaque physique
+    if ($monsterStrength >= $monsterMagic)
     {
         //On calcule les dégats du monstre
         $positiveDamagesMonster = mt_rand($monsterMinStrength, $monsterMaxStrength);
@@ -49,7 +49,7 @@ if (isset($_POST['magic']))
         //On calcule les dégats du monstre
         $positiveDamagesMonster = mt_rand($monsterMinMagic, $monsterMaxMagic);
         $negativeDamagesMonster = mt_rand($characterMinDefenseMagic, $characterMaxDefenseMagic);
-        $totalDamagesMonster = $positiveDamagesOpponentCharacter - $negativeDamagesOpponentCharacter;
+        $totalDamagesMonster = $positiveDamagesMonster - $negativeDamagesMonster;
     }
 
     //Si le joueur à fait des dégats négatif ont bloque à zéro pour ne pas soigner le monstre (Car moins et moins fait plus)
