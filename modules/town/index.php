@@ -15,12 +15,7 @@ if ($foundBattleMonster > 0) { exit(header("Location: ../../modules/battleMonste
 <?php echo $townDescription; ?><br /><br />
 <a href="../../modules/dungeon/index.php">Donjon</a><br>
 <a href="../../modules/arena/index.php">L'arène</a><br>
-<a href="">Mission(s)</a><br>
-<a href="">Boutique d'équipement(s)</a><br>
-<a href="">Boutique de magie(s)</a><br>
-<a href="">Boutique d'objet(s)</a><br>
-<a href="">Le temple</a><br>
-<a href="">L'auberge</a><hr>
+<a href="../../modules/inn/index.php">L'auberge</a><hr>
 <form method="POST" action="exitTown.php">
     <input type="submit" class="btn btn-default form-control" value="Quitter la ville">
 </form>

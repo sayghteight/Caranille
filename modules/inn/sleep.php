@@ -10,14 +10,15 @@ if ($foundBattleArena > 0) { exit(header("Location: ../../modules/battleArena/in
 if ($foundBattleMonster > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
 
 //Si le personnage a assez d'argent pour se soigner
-if ($characterGold >= 10) 
+if ($characterGold >= $townPriceInn) 
 {
     $updateAccount = $bdd->prepare('UPDATE car_characters
-    SET characterGold = characterGold - 10,
+    SET characterGold = characterGold - :townPriceInn,
     characterHpMin = characterHpTotal,
     characterMpMin = characterMpTotal
     WHERE characterId = :characterId');
     $updateAccount->execute([
+    'townPriceInn' => $townPriceInn,
     'characterId' => $characterId]);
     $updateAccount->closeCursor();
     ?>

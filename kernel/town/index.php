@@ -16,6 +16,7 @@ if ($characterTownId >= 1)
         $townPicture = stripslashes($town['townPicture']);
         $townName = stripslashes($town['townName']);
         $townDescription = stripslashes($town['townDescription']);
+        $townPriceInn = stripslashes($town['townPriceInn']);
     }
 }
 ?>

@@ -7,6 +7,8 @@ if ($foundBattleMonster == 0) { exit(header("Location: ../../modules/dungeon/ind
 echo "Combat de $characterName contre $monsterName<br />";
 echo "HP de $characterName: $characterHpMin/$characterHpTotal";
 ?>
+            
+<hr>
 
 <form method="POST" action="attack.php">
     <input type="submit" name="attack" class="btn btn-default form-control" value="Attaque physique"><br>

@@ -15,7 +15,7 @@ if ($foundBattleArena == 1)
     while ($foundBattle = $foundBattleQuery->fetch())
     {
         $battleArenaId = $foundBattle['battleArenaId'];
-        $battleArenaOpponentCharacterId = $foundBattle['battleArenaOpponentId'];
+        $battleArenaOpponentCharacterId = $foundBattle['battleArenaOpponentCharacterId'];
         $battleArenaOpponentCharacterHpRemaining = $foundBattle['battleArenaOpponentCharacterHpRemaining'];
         $battleArenaOpponentCharacterMpRemaining = $foundBattle['battleArenaOpponentCharacterMpRemaining'];
     }

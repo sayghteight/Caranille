@@ -29,7 +29,7 @@ if (isset($_POST['opponentCharacterId']))
             $opponentCharacterMp = stripslashes($opponent['characterMpTotal']);
         }
 
-        //Insertion du combat dans la base de donnée avec les données du monstre
+        //Insertion du combat dans la base de donnée avec les données du personnage adverse
         $addBattleArena = $bdd->prepare("INSERT INTO car_battles_arenas VALUES(
         '',
         :characterId,
@@ -40,8 +40,9 @@ if (isset($_POST['opponentCharacterId']))
         $addBattleArena->execute([
         'characterId' => $characterId,
         'opponentCharacterId' => $opponentCharacterId,
-        'monstopponentCharacterHperHp' => $opponentCharacterHp,
+        'opponentCharacterHp' => $opponentCharacterHp,
         'opponentCharacterMp' => $opponentCharacterMp]);
+
         $addBattleArena->closeCursor();
 
         //On redirige l'utilisateur vers le module battleArena

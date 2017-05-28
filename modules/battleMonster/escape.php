@@ -12,6 +12,9 @@ if (isset($_POST['escape']))
     ?>
     
     Vous avez fuit le combat !
+            
+    <hr>
+
     <form method="POST" action="../../index.php">
         <input type="submit" name="escape" class="btn btn-default form-control" value="Continuer"><br />
     </form>

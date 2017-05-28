@@ -79,7 +79,6 @@ if (isset($_SESSION['account']['id']))
                             <?php
                         }
                         ?>
-                        <li><a href="../../modules/inn/index.php">Auberge</a></li>
                         <?php
                     }
                     //Sinon on affiche rien

@@ -6,12 +6,16 @@ if ($foundBattleArena == 0) { exit(header("Location: ../../modules/arena/index.p
 
 if (isset($_POST['escape']))
 {
-    $DeleteBattle = $bdd->prepare("DELETE FROM car_battles_monsters 
-    WHERE battleMonsterId = :battleMonsterId");
-    $DeleteBattle->execute(array('battleMonsterId' => $battleMonsterId));
+    //On détruit le combat en cours
+    $DeleteBattle = $bdd->prepare("DELETE FROM car_battles_arenas 
+    WHERE battleArenaId = :battleArenaId");
+    $DeleteBattle->execute(array('battleArenaId' => $battleArenaId));
     ?>
     
     Vous avez fuit le combat !
+        
+    <hr>
+
     <form method="POST" action="../../index.php">
         <input type="submit" name="escape" class="btn btn-default form-control" value="Continuer"><br />
     </form>

@@ -10,7 +10,7 @@ if ($foundBattleArena > 0) { exit(header("Location: ../../modules/battleArena/in
 if ($foundBattleMonster > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
 ?>
 
-Bienvenue à l'auberge, ici vous allez pouvoir vous reposer pour 10 pièce d'or
+Bienvenue à l'auberge, ici vous allez pouvoir vous reposer pour <?php echo townPriceInn; ?> pièce(s) d'or
 
 <hr>
 
