@@ -30,9 +30,9 @@ if (isset($_POST['attack']))
     $characterMaxDefenseMagic = $characterDefenseMagicTotal * 1.1;
 
     //On calcule les dégats du joueur
-    $positiveDamagesPlayer = mt_rand($characterMinStrength, $characterMaxStrength);
-    $negativeDamagesPlayer = mt_rand($monsterMinDefense, $monsterMaxDefense);
-    $totalDamagesPlayer = $positiveDamagesPlayer - $negativeDamagesPlayer;
+    $positiveDamagesCharacter = mt_rand($characterMinStrength, $characterMaxStrength);
+    $negativeDamagesCharacter = mt_rand($monsterMinDefense, $monsterMaxDefense);
+    $totalDamagesCharacter = $positiveDamagesCharacter - $negativeDamagesCharacter;
 
     //On calcule les dégats du monstre
     $positiveDamagesMonster = mt_rand($monsterMinStrength, $monsterMaxStrength);
@@ -40,9 +40,9 @@ if (isset($_POST['attack']))
     $totalDamagesMonster = $positiveDamagesMonster - $negativeDamagesMonster;
 
     //Si le joueur à fait des dégats négatif ont bloque à zéro pour ne pas soigner le monstre (Car moins et moins fait plus)
-    if ($totalDamagesPlayer < 0)
+    if ($totalDamagesCharacter < 0)
     {
-        $totalDamagesPlayer = 0;
+        $totalDamagesCharacter = 0;
     }
 
     //Si le monstre à fait des dégats négatif ont bloque à zéro pour ne pas soigner le personnage (Car moins et moins fait plus)
@@ -52,11 +52,11 @@ if (isset($_POST['attack']))
     }
 
     //On affiche les résultats du tour
-    echo "$characterName à fait $totalDamagesPlayer point(s) de dégat à $monsterName<br />";
+    echo "$characterName à fait $totalDamagesCharacter point(s) de dégat à $monsterName<br />";
     echo "$monsterName à fait $totalDamagesMonster point(s) de dégat à $characterName<br /><br />";
 
     //On met à jour la vie du joueur et du monstre
-    $battleMonsterHpRemaining = $battleMonsterHpRemaining - $totalDamagesPlayer;
+    $battleMonsterHpRemaining = $battleMonsterHpRemaining - $totalDamagesCharacter;
     $characterHpMin = $characterHpMin - $totalDamagesMonster;
 
     //On met le personnage à jour dans la base de donnée

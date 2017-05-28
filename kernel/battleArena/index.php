@@ -2,10 +2,10 @@
 require_once("../../kernel/config.php");
 
 //On fait une requête pour vérifier si il y a un combat en cours
-$foundBattleQuery = $bdd->prepare("SELECT * FROM car_battles_arenas 
-WHERE battleArenaCharacterOneId = ?
-OR battleArenaCharacterTwoId = ?");
-$foundBattleQuery->execute([$characterId, $characterId]);
+$foundBattleQuery = $bdd->prepare("SELECT * FROM car_battles_arenas, car_characters 
+WHERE battleArenaCharacterId = characterId
+AND battleArenaCharacterId = ?");
+$foundBattleQuery->execute([$characterId]);
 $foundBattleArena = $foundBattleQuery->rowCount();
 
 //Si il y a un combat de trouvé
@@ -14,31 +14,16 @@ if ($foundBattleArena == 1)
     //On boucle sur le résultat
     while ($foundBattle = $foundBattleQuery->fetch())
     {
-        //On récupère les variables importante pour la gestion du combat
         $battleArenaId = $foundBattle['battleArenaId'];
-        $damagesPlayerOne = $foundBattle['battleArenaCharacterOneDamages'];
-        $damagesPlayerTwo = $foundBattle['battleArenaCharacterTwoDamages'];
-        $playerOneStep = $foundBattle['battleArenaCharacterOneStep'];
-        $playerTwoStep = $foundBattle['battleArenaCharacterTwoStep'];
-
-        //Si l'Id du dresseur est égale à battleCharacterOneId, nous sommes le joueurs 1
-        if ($foundBattle['battleArenaCharacterOneId'] == $characterId)
-        {
-            $battlePlayer = 1;
-            $battleOpponent = $foundBattle['battleArenaCharacterTwoId'];
-        }
-        //Si l'Id du dresseur est égale à battleCharacterTwoId, nous sommes le joueurs 2
-        elseif ($foundBattle['battleArenaCharacterTwoId'] == $characterId)
-        {
-            $battlePlayer = 2;
-            $battleOpponent = $foundBattle['battleArenaCharacterOneId'];
-        }
+        $battleArenaOpponentCharacterId = $foundBattle['battleArenaOpponentId'];
+        $battleArenaOpponentCharacterHpRemaining = $foundBattle['battleArenaOpponentCharacterHpRemaining'];
+        $battleArenaOpponentCharacterMpRemaining = $foundBattle['battleArenaOpponentCharacterMpRemaining'];
     }
 
     //On recherche le personnage à combattre dans la base de donnée avec son Id
     $opponentQuery = $bdd->prepare("SELECT * FROM car_characters 
     WHERE characterId = ?");
-    $opponentQuery->execute([$battleOpponent]);
+    $opponentQuery->execute([$battleArenaOpponentCharacterId]);
 
     //On fait une boucle pour récupérer les résultats
     while ($opponent = $opponentQuery->fetch())

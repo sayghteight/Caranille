@@ -1,48 +1,113 @@
 <?php require_once("../../html/header.php");
 //Si il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
-//Si il y a pas de combat contre un joueur on redirige le joueur vers la ville
-if ($foundBattleArena == 0) { exit(header("Location: ../../modules/town/index.php")); }
+//Si il y a pas de combat contre un personnage on redirige le joueur vers le module arena
+if ($foundBattleArena == 0) { exit(header("Location: ../../modules/arena/index.php")); }
 
-if ($playerOneStep == 0 && $playerTwoStep == 0 || $playerOneStep == 0 && $playerTwoStep == 1 || $playerOneStep == 1 && $playerTwoStep == 0)
-{ 
-    if (isset($_POST['magic']))
+if (isset($_POST['magic']))
+{
+    /*
+    VARIABLES GLOBALES
+    */
+    $characterMinStrength = $characterStrengthTotal / 1.1;
+    $characterMaxStrength = $characterStrengthTotal * 1.1;    
+    $characterMinMagic = $characterMagicTotal / 1.1;
+    $characterMaxMagic = $characterMagicTotal * 1.1;
+
+    $opponentCharacterMinStrength = $opponentCharacterStrengthTotal / 1.1;
+    $opponentCharacterMaxStrength = $opponentCharacterStrengthTotal * 1.1;    
+    $opponentCharacterMinMagic = $opponentCharacterMagicTotal / 1.1;
+    $opponentCharacterMaxMagic = $opponentCharacterMagicTotal * 1.1;
+
+    $opponentCharacterMinDefense = $opponentCharacterDefenseTotal / 1.1;
+    $opponentCharacterMaxDefense = $opponentCharacterDefenseTotal * 1.1;
+    $opponentCharacterMinDefenseMagic = $opponentCharacterDefenseMagicTotal / 1.1;
+    $opponentCharacterMaxDefenseMagic = $opponentCharacterDefenseMagicTotal * 1.1;
+
+    $characterMinDefense = $characterDefenseTotal / 1.1;
+    $characterMaxDefense = $characterDefenseTotal * 1.1;
+    $characterMinDefenseMagic = $characterDefenseMagicTotal / 1.1;
+    $characterMaxDefenseMagic = $characterDefenseMagicTotal * 1.1;
+
+    //On calcule les dégats du joueur
+    $positiveDamagesCharacter = mt_rand($characterMinMagic, $characterMaxMagic);
+    $negativeDamagesCharacter = mt_rand($opponentCharacterMinDefenseMagic, $opponentCharacterMaxDefenseMagic);
+    $totalDamagesCharacter = $positiveDamagesCharacter - $negativeDamagesCharacter;
+
+    //On calcule les dégats du personnage adverse
+    $positiveDamagesCharacter = mt_rand($opponentCharacterMinStrength, $opponentCharacterMaxStrength);
+    $negativeDamagesCharacter = mt_rand($characterMinDefense, $characterMaxDefense);
+    $totalDamagesOpponentCharacter = $positiveDamagesCharacter - $negativeDamagesCharacter;
+
+    //Si le joueur à fait des dégats négatif ont bloque à zéro pour ne pas soigner le monstre (Car moins et moins fait plus)
+    if ($totalDamagesCharacter < 0)
     {
-        $positiveDamagesPlayer = mt_rand($minMagic, $maxMagic);
-        $negativeDamagesPlayer = mt_rand($opponentMinDefenseMagic, $opponentMaxDefenseMagic);
-
-        $totalDamagesPlayer = $positiveDamagesPlayer - $negativeDamagesPlayer;
-
-        if ($totalDamagesPlayer <= 0)
-        {
-            $totalDamagesPlayer = 0;
-        }
-
-        switch ($battlePlayer)
-        {
-            //Si le joueur numéro un a attaqué on met à jour ses dégats dans la base de donnée
-            case 1:
-                $updateBattle = $bdd->prepare("UPDATE car_battles_arenas
-                SET battleArenaCharacterOneStep = '1',
-                battleArenaCharacterOneDamages = :totalDamagesPlayer
-                WHERE battleArenaId = :battleArenaId");
-                $updateBattle->execute([
-                'totalDamagesPlayer' => $totalDamagesPlayer,
-                'battleArenaId' => $battleArenaId]);
-                break;
-
-            //Si le joueur numéro deux a attaqué on met à jour ses dégats dans la base de donnée
-            case 2:
-                $updateBattle = $bdd->prepare("UPDATE car_battles_arenas
-                SET battleArenaCharacterTwoStep = '1',
-                battleArenaCharacterTwoDamages = :totalDamagesPlayer
-                WHERE battleArenaId = :battleArenaId");
-                $updateBattle->execute([
-                'totalDamagesPlayer' => $totalDamagesPlayer,
-                'battleArenaId' => $battleArenaId]);
-                break;
-        }
+        $totalDamagesCharacter = 0;
     }
+
+    //Si le monstre à fait des dégats négatif ont bloque à zéro pour ne pas soigner le personnage (Car moins et moins fait plus)
+    if ($totalDamagesMonster < 1)
+    {
+        $totalDamagesMonster = 0;
+    }
+
+    //On affiche les résultats du tour
+    echo "$characterName a fait $totalDamagesCharacter point(s) de dégat à $opponentCharacterName<br />";
+    echo "$opponentCharacterName a fait $totalDamagesOpponentCharacter point(s) de dégat à $characterName<br /><br />";
+
+    //On met à jour la vie du joueur et du monstre
+    $opponentCharacterHpMin = $opponentCharacterHpMin - $totalDamagesCharacter;
+    $characterHpMin = $characterHpMin - $totalDamagesOpponentCharacter;
+
+    //On met le personnage à jour dans la base de donnée
+    $updateCharacter = $bdd->prepare("UPDATE car_characters
+    SET characterHpMin = :characterHpMin
+    WHERE characterId = :characterId");
+    $updateCharacter->execute([
+    'characterHpMin' => $characterHpMin,
+    'characterId' => $characterId]);
+
+    //On met le monstre à jour dans la base de donnée
+    $updateCharacterBattle = $bdd->prepare("UPDATE car_battles_arenas
+    SET battleArenaOpponentCharacterHpRemaining = :opponentCharacterHpMin
+    WHERE battleCharacterId = :battleCharacterId");
+    $updateCharacterBattle->execute([
+    'opponentCharacterHpMin' => $opponentCharacterHpMin,
+    'battleCharacterId' => $battleCharacterId]);
+
+    //Si le monstre a moins ou a zéro HP on redirige le joueur vers la page des récompenses
+    if ($battleMonsterHpRemaining <= 0)
+    {
+        ?>
+        <form method="POST" action="rewards.php">
+            <input type="submit" name="escape" class="btn btn-default form-control" value="Continuer"><br />
+        </form>
+        <?php
+    }
+
+    //Si le joueur a moins ou a zéro HP on redirige le joueur vers la page des récompenses
+    if ($characterHpMin <= 0)
+    {
+        ?>
+        <form method="POST" action="rewards.php">
+            <input type="submit" name="escape" class="btn btn-default form-control" value="Continuer"><br />
+        </form>
+        <?php
+    }
+
+    //Si le monstre et le joueur ont plus de zéro HP on continue le combat
+    if ($battleMonsterHpRemaining > 0 && $characterHpMin > 0 )
+    {
+        ?>
+        <form method="POST" action="index.php">
+            <input type="submit" name="magic" class="btn btn-default form-control" value="Continuer"><br>
+        </form>
+        <?php
+    }
+}
+else
+{
+    echo "Erreur: Aucune attaque magique de lancée";
 }
 
 require_once("../../html/footer.php"); ?>

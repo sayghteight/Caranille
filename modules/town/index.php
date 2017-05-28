@@ -14,6 +14,7 @@ if ($foundBattleMonster > 0) { exit(header("Location: ../../modules/battleMonste
 <?php echo $townName; ?><br />
 <?php echo $townDescription; ?><br /><br />
 <a href="../../modules/dungeon/index.php">Donjon</a><br>
+<a href="../../modules/arena/index.php">L'arène</a><br>
 <a href="">Mission(s)</a><br>
 <a href="">Boutique d'équipement(s)</a><br>
 <a href="">Boutique de magie(s)</a><br>

@@ -1,36 +1,31 @@
 <?php require_once("../../html/header.php");
 //Si il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
-//Si il y a pas de combat contre un monstre on redirige le joueur vers le module dungeon
-if ($foundBattleMonster == 0) { exit(header("Location: ../../modules/dungeon/index.php")); }
+//Si il y a pas de combat contre un personnage on redirige le joueur vers le module arena
+if ($foundBattleArena == 0) { exit(header("Location: ../../modules/arena/index.php")); }
 
 
 //Si le monstre a moins ou a zéro HP
-if ($battleMonsterHpRemaining <= 0)
+if ($opponentCharacterHpMin <= 0)
 {
     //On prévient le joueur qu'il a remporté le combat
     echo "<p>$characterName remporte le combat !</p>";
     echo "Vous obtenez:<br />";
-    echo "-$monsterExperience point(s) d'experience<br />";
-    echo "-$monsterGold pièce(s) d'or<br />";
+    echo "-1 point de victoire<br />";
 
     //On donne les récompenses au personnage et on le met à jour dans la base de donnée
     $updateCharacter = $bdd->prepare("UPDATE car_characters
-    SET characterExperience = characterExperience + :monsterExperience,
-    characterExperienceTotal = characterExperienceTotal + :monsterExperience,
-    characterGold = characterGold + :monsterGold
+    SET characterVictory = characterVictory + 1
     WHERE characterId = :characterId");
     $updateCharacter->execute([
-    'monsterExperience' => $monsterExperience,
-    'monsterGold' => $monsterGold,
     'characterId' => $characterId]);
 
     //On détruit le combat en cours
-    $DeleteBattle = $bdd->prepare("DELETE FROM car_battles_monsters 
-    WHERE battleMonsterId = :battleMonsterId");
-    $DeleteBattle->execute(array('battleMonsterId' => $battleMonsterId));
+    $DeleteBattle = $bdd->prepare("DELETE FROM car_battles_arenas 
+    WHERE battleArenaId = :battleArenaId");
+    $DeleteBattle->execute(array('battleArenaId' => $battleArenaId));
     ?>
-    <form method="POST" action="../../modules/dungeon/index.php">
+    <form method="POST" action="../../modules/arena/index.php">
         <input type="submit" name="escape" class="btn btn-default form-control" value="Continuer"><br />
     </form>
     <?php
@@ -40,29 +35,30 @@ if ($battleMonsterHpRemaining <= 0)
 if ($characterHpMin <= 0)
 {
     //On prévient le joueur qu'il a perdu
-    echo "<p>$monsterName remporte le combat !</p>";
+    echo "<p>$opponentCharacterName remporte le combat !</p>";
     
     //On soigne le personnage et ont le met à jour dans la base de donnée
     $updateCharacter = $bdd->prepare("UPDATE car_characters
     SET characterHpMin = characterHpTotal,
-    characterMpMin = characterMpTotal
+    characterMpMin = characterMpTotal,
+    characterDefeate = characterDefeate + 1
     WHERE characterId = :characterId");
     $updateCharacter->execute([
     'characterId' => $characterId]);
 
     //On détruit le combat en cours
-    $DeleteBattle = $bdd->prepare("DELETE FROM car_battles_monsters 
-    WHERE battleMonsterId = :battleMonsterId");
-    $DeleteBattle->execute(array('battleMonsterId' => $battleMonsterId));
+    $DeleteBattle = $bdd->prepare("DELETE FROM car_battles_arenas 
+    WHERE battleArenaId = :battleArenaId");
+    $DeleteBattle->execute(array('battleArenaId' => $battleArenaId));
     ?>
-    <form method="POST" action="../../modules/dungeon/index.php">
+    <form method="POST" action="../../modules/arena/index.php">
         <input type="submit" name="escape" class="btn btn-default form-control" value="Continuer"><br />
     </form>
     <?php
 }
 
-//Si le monstre et le joueur ont plus de zéro HP le joueur n'a pas a être ici
-if ($battleMonsterHpRemaining > 0 && $characterHpMin > 0 )
+//Si le joueur adversaire et le joueur ont plus de zéro HP le joueur n'a pas a être ici
+if ($opponentCharacterHpMin > 0 && $characterHpMin > 0 )
 {
     header("Location: index.php");
 }
