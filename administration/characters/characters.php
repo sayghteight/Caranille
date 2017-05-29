@@ -10,25 +10,21 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 if (isset($_POST['manage']))
 {
     //On fait une recherche dans la base de donnée de tous les comptes
-    $accountListQuery = $bdd->query("SELECT * FROM car_accounts");
-    while ($accountList = $accountListQuery->fetch())
+    $characterListQuery = $bdd->query("SELECT * FROM car_characters");
+    while ($characterList = $characterListQuery->fetch())
     {
-        $adminAccountId = stripslashes($accountList['accountId']); ?>
-        <b>Pseudo</b>: <?= stripslashes($accountList['accountPseudo']) ?> 
+        $adminCharacterId = stripslashes($characterList['characterId']); ?>
+        <b>Nom du personnage</b>: <?= stripslashes($characterList['characterName']) ?> 
         <form method="POST" action="edit.php">
-            <input type="hidden" class="btn btn-default form-control" name="adminAccountId" value="<?= $adminAccountId ?>">
+            <input type="hidden" class="btn btn-default form-control" name="adminCharacterId" value="<?= $adminCharacterId ?>">
             <input type="submit" class="btn btn-default form-control" name="edit" value="Modifier">
         </form>
-        <form method="POST" action="delete.php">
-            <input type="hidden" class="btn btn-default form-control" name="adminAccountId" value="<?= $adminAccountId ?>">
-            <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer">
-        </form>
-  
+ 
         <hr>
             
         <?php
     }
-    $accountListQuery->closeCursor();
+    $characterListQuery->closeCursor();
 }
 //Si l'utilisateur n'a pas cliqué sur le bouton manage
 else

@@ -14,7 +14,7 @@ if (isset($_POST['edit']))
     //On fait une recherche dans la base de donnée de tous les comptes
     $accountListQuery = $bdd->prepare("SELECT * FROM car_accounts
     WHERE accountId = ?");
-    $accountListQuery->execute([$accountId]);
+    $accountListQuery->execute([$adminAccountId]);
     while ($accountList = $accountListQuery->fetch())
     {
         $adminAccountId = stripslashes($accountList['accountId']);
