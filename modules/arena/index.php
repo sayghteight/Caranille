@@ -41,7 +41,7 @@ if ($opponentQuery > 0)
     </form>
     <?php
 }
-//Si aucun personnage n'a été trouvé
+//Si aucun joueur n'a été trouvé
 else
 {
     ?>
