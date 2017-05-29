@@ -10,8 +10,9 @@ if ($foundBattleMonster > 0) { exit(header("Location: ../../modules/battleMonste
 
 //On fait une recherche de tous les comptes dans la base de donnée qui ont un Id différent du notre
 $opponentQueryList = $bdd->prepare("SELECT * FROM car_characters 
-WHERE characterId != ?");
-$opponentQueryList->execute([$characterId]);
+WHERE characterId != ?
+AND characterTownId = ?");
+$opponentQueryList->execute([$characterId, $townId]);
 $opponentQuery = $opponentQueryList->rowCount();
 
 //Si plusieurs personnages ont été trouvé
