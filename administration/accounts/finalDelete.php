@@ -11,11 +11,17 @@ if (isset($_POST['finalDelete']))
 {
     $adminAccountId = htmlspecialchars(addslashes($_POST['adminAccountId']));
 
-    //On fait une recherche dans la base de donnée de tous les comptes
+    //On supprime le compte de la base de donnée
     $accountDeleteQuery = $bdd->prepare("DELETE FROM car_accounts
     WHERE accountId = ?");
     $accountDeleteQuery->execute([$adminAccountId]);
     $accountDeleteQuery->closeCursor();
+
+    //On supprime aussi le personnage de la base de donnée
+    $characterDeleteQuery = $bdd->prepare("DELETE FROM car_characters
+    WHERE characterAccountId = ?");
+    $characterDeleteQuery->execute([$adminAccountId]);
+    $characterDeleteQuery->closeCursor();
     ?>
 
     Le compte a bien été supprimé

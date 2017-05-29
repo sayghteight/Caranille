@@ -11,8 +11,8 @@ Que souhaitez-vous faire ?
 
 <hr>
         
-<form method="POST" action="accounts.php">
-    <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer un compte"><br />
+<form method="POST" action="characters.php">
+    <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer un personnage"><br />
 </form>
 
 <?php require_once("../html/footer.php"); ?>
