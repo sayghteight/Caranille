@@ -94,6 +94,25 @@ if (isset($_SESSION['account']['id']))
                     //Si le joueur est connecté on lui donne la possibilité de se déconnecter
                     if (isset($_SESSION['account']['id']))
                     {
+                        switch ($accountAccess)
+                        {
+                            case 0:
+                            
+                            break;
+
+                            case 1:
+                            ?>
+                                <li><a href="#">Modération</a></li>
+                            <?php
+                            break;
+
+                            case 2:
+                            ?>
+                                <li><a href="#">Modération</a></li>
+                                <li><a href="../../administration/accounts/index.php">Administration</a></li>
+                            <?php
+                            break;
+                        }
                         ?>
                             <li><a href="../../modules/logout/index.php">Déconnexion</a></li>
                         <?php
