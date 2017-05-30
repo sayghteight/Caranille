@@ -11,21 +11,21 @@ if ($characterSkillPoints > 0)
 {
     //On met la stats à jour
     $updateCharacter = $bdd->prepare('UPDATE car_characters 
-    SET characterMpSkillPoints = characterMpSkillPoints + 1,
+    SET characterAgilitySkillPoints = characterAgilitySkillPoints + 1,
     characterSkillPoints = characterSkillPoints -1
     WHERE characterId = :characterId');
     $updateCharacter->execute(['characterId' => $characterId]);
     $updateCharacter->closeCursor();
 
     $updateCharacter = $bdd->prepare('UPDATE car_characters
-    SET characterHpTotal = characterHpMax + characterHpSkillPoints + characterHpParchment + characterHpEquipments,
-    characterMpTotal = characterMpMax + characterMpSkillPoints + characterMpParchment + characterMpEquipments,
-    characterStrengthTotal = characterStrength + characterStrengthSkillPoints + characterStrengthParchment + characterStrengthEquipments,
-    characterMagicTotal = characterMagic + characterMagicSkillPoints + characterMagicParchment + characterMagicEquipments,
-    characterAgilityTotal = characterAgility + characterAgilitySkillPoints + characterAgilityParchment + characterAgilityEquipments,
-    characterDefenseTotal = characterDefense + characterDefenseSkillPoints + characterDefenseParchment + characterDefenseEquipments,
-    characterDefenseMagicTotal = characterDefenseMagic + characterDefenseMagicSkillPoints + characterDefenseMagicParchment + characterDefenseMagicEquipments,
-    characterWisdomTotal = characterWisdom + characterWisdomSkillPoints + characterWisdomParchment + characterWisdomEquipments
+    SET characterHpTotal = characterHpMax + characterHpSkillPoints + characterHpBonus + characterHpEquipments,
+    characterMpTotal = characterMpMax + characterMpSkillPoints + characterMpBonus + characterMpEquipments,
+    characterStrengthTotal = characterStrength + characterStrengthSkillPoints + characterStrengthBonus + characterStrengthEquipments,
+    characterMagicTotal = characterMagic + characterMagicSkillPoints + characterMagicBonus + characterMagicEquipments,
+    characterAgilityTotal = characterAgility + characterAgilitySkillPoints + characterAgilityBonus + characterAgilityEquipments,
+    characterDefenseTotal = characterDefense + characterDefenseSkillPoints + characterDefenseBonus + characterDefenseEquipments,
+    characterDefenseMagicTotal = characterDefenseMagic + characterDefenseMagicSkillPoints + characterDefenseMagicBonus + characterDefenseMagicEquipments,
+    characterWisdomTotal = characterWisdom + characterWisdomSkillPoints + characterWisdomBonus + characterWisdomEquipments
     WHERE characterId = :characterId');
     $updateCharacter->execute(['characterId' => $characterId]);
     $updateCharacter->closeCursor();
