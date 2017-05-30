@@ -10,11 +10,13 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 if (isset($_POST['manage']))
 {
     //On fait une recherche dans la base de donnée de tous les comptes
-    $accountListQuery = $bdd->query("SELECT * FROM car_accounts");
+    $accountListQuery = $bdd->query("SELECT * FROM car_accounts, car_characters
+    WHERE accountId = characterAccountId");
     while ($accountList = $accountListQuery->fetch())
     {
         $adminAccountId = stripslashes($accountList['accountId']); ?>
-        <b>Pseudo</b>: <?= stripslashes($accountList['accountPseudo']) ?> 
+        <b>Pseudo</b>: <?= stripslashes($accountList['accountPseudo']) ?><br />
+        <b>Nom du personnage</b>: <?= stripslashes($accountList['characterName']) ?>
         <form method="POST" action="edit.php">
             <input type="hidden" class="btn btn-default form-control" name="adminAccountId" value="<?= $adminAccountId ?>">
             <input type="submit" class="btn btn-default form-control" name="edit" value="Modifier">
@@ -23,7 +25,7 @@ if (isset($_POST['manage']))
             <input type="hidden" class="btn btn-default form-control" name="adminAccountId" value="<?= $adminAccountId ?>">
             <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer">
         </form>
-  
+
         <hr>
             
         <?php
