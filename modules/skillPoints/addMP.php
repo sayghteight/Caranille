@@ -11,7 +11,7 @@ if ($characterSkillPoints > 0)
 {
     //On met la stats à jour
     $updateCharacter = $bdd->prepare('UPDATE car_characters 
-    SET characterAgilitySkillPoints = characterAgilitySkillPoints + 1,
+    SET characterMpSkillPoints = characterMpSkillPoints + 1,
     characterSkillPoints = characterSkillPoints -1
     WHERE characterId = :characterId');
     $updateCharacter->execute(['characterId' => $characterId]);

@@ -17,7 +17,7 @@
     </div>
         <div class="form-group row">
         <label for="example-text-input" class="col-2 col-form-label">Mot de passe</label>
-        <input class="form-control" type="text" name="databasePassword">
+        <input class="form-control" type="password" name="databasePassword">
     </div>
     <input type="submit" class="btn btn-default form-control" name="install" value="Continuer">
 </form>
