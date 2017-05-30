@@ -16,7 +16,7 @@ if (isset($_POST['manage']))
     {
         $adminAccountId = stripslashes($accountList['accountId']); ?>
         <b>Pseudo</b>: <?= stripslashes($accountList['accountPseudo']) ?><br />
-        <b>Nom du personnage</b>: <?= stripslashes($accountList['characterName']) ?>
+        <b>Personnage</b>: <?= stripslashes($accountList['characterName']) ?>
         <form method="POST" action="edit.php">
             <input type="hidden" class="btn btn-default form-control" name="adminAccountId" value="<?= $adminAccountId ?>">
             <input type="submit" class="btn btn-default form-control" name="edit" value="Modifier">
