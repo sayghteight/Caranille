@@ -16,6 +16,8 @@ if (isset($_SESSION['account']['id']))
     require_once("../../kernel/battleArena/index.php");
     //On vérifie si le personnage est actuellement dans un combat de monstre. Si c'est le cas on récupère toutes les informations du monstre
     require_once("../../kernel/battleMonster/index.php");
+    //On récupère toutes les informations des équipements équipé au personnage
+    require_once("../../kernel/equipment/index.php");
     //On vérifie si le personnage est actuellement dans une ville. Si c'est le cas on récupère toutes les informations de la ville
     require_once("../../kernel/town/index.php");
 }

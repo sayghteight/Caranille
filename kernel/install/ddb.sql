@@ -45,7 +45,6 @@ CREATE TABLE IF NOT EXISTS `car_battles_monsters` (
   `battleMonsterMonsterMpRemaining` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 CREATE TABLE IF NOT EXISTS `car_characters` (
   `characterId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `characterAccountId` int(11) NOT NULL,
@@ -179,7 +178,7 @@ CREATE TABLE IF NOT EXISTS `car_equipments`
   `equipmentSalePrice` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `car_Inventory_Equipments` 
+CREATE TABLE IF NOT EXISTS `car_inventory_equipments` 
 (
   `inventoryEquipmentId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `inventoryEquipmentCharacterId` int(5) NOT NULL,
@@ -252,6 +251,9 @@ CREATE TABLE IF NOT EXISTS `car_towns_monsters`
 --
 -- Ajout des exemples dans la base de donnée
 --
+
+INSERT INTO `car_equipments` (`equipmentID`, `equipmentRaceID`, `equipmentPicture`, `equipmentType`, `equipmentLevel`, `equipmentLevel_Required`, `equipmentName`, `equipmentDescription`, `equipmentHpEffect`, `equipmentMpEffect`, `equipmentStrengthEffect`, `equipmentMagicEffect`, `equipmentAgilityEffect`, `equipmentDefenseEffect`, `equipmentSagesseEffect`, `equipmentPurchasePrice`, `equipmentSalePrice`) VALUES 
+(1, '1', 'http://localhost/equipment.png', 'Weapon', '1', '1', 'Epée de cuivre', 'Cette épée de cuivre est parfaite pour débuter.', '0', '0', '10', '0', '0', '0', '0', '10', '5');
 
 INSERT INTO `car_monsters` (`monsterId`, `monsterPicture`, `monsterName`, `monsterDescription`, `monsterLevel`, `monsterHp`, `monsterMp`, `monsterStrength`, `monsterMagic`, `monsterAgility`, `monsterDefense`, `monsterDefenseMagic`, `monsterWisdom`, `monsterExperience`, `monsterGold`) VALUES
 (1, 'http://localhost/monster.png', 'Plop', 'Ce monstre se nourrit exclusivement de plante et de feuille tombé à même le sol.\r\n\r\nIl y a très longtemps celui-ci était jaune et est devenue vert de part son alimentation...\r\n\r\nMais si il est devenu vert de part son alimentation pourquoi était t\'il jaune ?', 1, 10, 10, 1, 1, 1, 1, 1, 1, 10, 10),
