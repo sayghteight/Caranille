@@ -106,11 +106,6 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         '', //characterId
                         :accountId, //characterAccountId
                         '1', //characterRaceId
-                        '1', //characterArmorId
-                        '1', //characterBootsId
-                        '1', //characterGlovesId
-                        '1', //characterHelmetId
-                        '1', //characterWeaponId
                         'http://localhost/character.png', //characterPicture
                         :characterName, //characterName
                         '1', //characterLevel
@@ -173,11 +168,6 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         '',
                         :accountId,
                         :characterRaceId,
-                        '1',
-                        '1',
-                        '1',
-                        '1',
-                        '1',
                         'http://localhost/character.png',
                         :characterName,
                         '1',
