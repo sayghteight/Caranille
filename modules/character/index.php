@@ -14,6 +14,11 @@ Classe: <?php echo $characterRaceName; ?><br />
 <hr>
 
 Niveau: <?php echo $characterLevel; ?><br />
+Armure: <?php echo $equipmentArmorName; ?><br />
+Bottes: <?php echo $equipmentBootsName; ?><br />
+Gants: <?php echo $equipmentGlovesName; ?><br />
+Casque: <?php echo $equipmentHelmetName; ?><br />
+Arme: <?php echo $equipmentWeaponName; ?><br />
 HP: <?php echo "$characterHpMin/$characterHpTotal"; ?><br />
 MP: <?php echo "$characterMpMin/$characterMpTotal"; ?><br />
 Force: <?php echo $characterStrengthTotal; ?><br />

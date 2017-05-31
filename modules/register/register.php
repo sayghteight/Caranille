@@ -4,7 +4,7 @@ require_once("../../html/header.php");
 //Si tous les champs ont bien été rempli
 if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['accountPasswordConfirm']) && ($_POST['accountEmail']))
 {
-    //On vérifi si la classe choisit est correct et que le select retourne bien un nombre
+    //On vérifie si la classe choisit est correct et que le select retourne bien un nombre
     if(ctype_digit($_POST['characterRaceId']))
     {
         //On récupère les valeurs du formulaire dans une variable

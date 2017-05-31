@@ -17,41 +17,52 @@ if (isset($_POST['opponentCharacterId']))
         //On récupère l'ID de la personne à défier
         $opponentCharacterId = htmlspecialchars(addslashes($_POST['opponentCharacterId']));
 
-        //On recherche le personnage
+        //On fait une requête pour vérifier si le personnage est bien disponible dans la ville du joueur
         $opponentQuery = $bdd->prepare("SELECT * FROM car_characters 
-        WHERE characterId = ?");
-        $opponentQuery->execute([$opponentCharacterId]);
+        WHERE characterId = ?
+        AND characterTownId = ?");
+        $opponentQuery->execute([$opponentCharacterId, $townId]);
+        $opponent = $opponentQuery->rowCount();
 
-        //On fait une boucle pour récupérer les résultats
-        while ($opponent = $opponentQuery->fetch())
+        //Si le personnages a été trouvé
+        if ($opponent == 1)
         {
-            $opponentCharacterHp = stripslashes($opponent['characterHpTotal']);
-            $opponentCharacterMp = stripslashes($opponent['characterMpTotal']);
+            //On recherche le personnage
+            while ($opponent = $opponentQuery->fetch())
+            {
+                $opponentCharacterHp = stripslashes($opponent['characterHpTotal']);
+                $opponentCharacterMp = stripslashes($opponent['characterMpTotal']);
+            }
+
+            //Insertion du combat dans la base de donnée avec les données du personnage adverse
+            $addBattleArena = $bdd->prepare("INSERT INTO car_battles_arenas VALUES(
+            '',
+            :characterId,
+            :opponentCharacterId,
+            :opponentCharacterHp,
+            :opponentCharacterMp)");
+
+            $addBattleArena->execute([
+            'characterId' => $characterId,
+            'opponentCharacterId' => $opponentCharacterId,
+            'opponentCharacterHp' => $opponentCharacterHp,
+            'opponentCharacterMp' => $opponentCharacterMp]);
+
+            $addBattleArena->closeCursor();
+
+            //On redirige l'utilisateur vers le module battleArena
+            header("Location: ../../modules/battleArena/index.php");
         }
-
-        //Insertion du combat dans la base de donnée avec les données du personnage adverse
-        $addBattleArena = $bdd->prepare("INSERT INTO car_battles_arenas VALUES(
-        '',
-        :characterId,
-        :opponentCharacterId,
-        :opponentCharacterHp,
-        :opponentCharacterMp)");
-
-        $addBattleArena->execute([
-        'characterId' => $characterId,
-        'opponentCharacterId' => $opponentCharacterId,
-        'opponentCharacterHp' => $opponentCharacterHp,
-        'opponentCharacterMp' => $opponentCharacterMp]);
-
-        $addBattleArena->closeCursor();
-
-        //On redirige l'utilisateur vers le module battleArena
-        header("Location: ../../modules/battleArena/index.php");
+        //Si le personnage n'est pas disponible
+        else
+        {
+            echo "Erreur: Personnage indisponible";
+        }
     }
-    //Si le joueur n'est pas disponible
+    //Si le personnage n'est pas un nombre
     else
     {
-        echo "Erreur: Monstre indisponible";
+        echo "Erreur: personnage invalide";
     }
 }
 

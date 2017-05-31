@@ -159,8 +159,8 @@ CREATE TABLE IF NOT EXISTS `car_codes_used` (
 
 CREATE TABLE IF NOT EXISTS `car_equipments` 
 (
-  `equipmentID` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `equipmentRaceID` int(11) NOT NULL,
+  `equipmentId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `equipmentRaceId` int(11) NOT NULL,
   `equipmentPicture` text NOT NULL,
   `equipmentType` varchar(30) NOT NULL,
   `equipmentLevel` int(11) NOT NULL,

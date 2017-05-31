@@ -9,182 +9,368 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 //Si l'utilisateur à cliqué sur le bouton edit
 if (isset($_POST['edit']))
 {
-    $adminAccountId = htmlspecialchars(addslashes($_POST['adminAccountId']));
-
-    //On fait une recherche dans la base de donnée du compte
-    $accountListQuery = $bdd->prepare("SELECT * FROM car_accounts, car_characters
-    WHERE accountId = characterAccountId
-    AND accountId = ?");
-    $accountListQuery->execute([$adminAccountId]);
-    while ($accountList = $accountListQuery->fetch())
+    //On vérifie si l'id du compte choisit est correct et que le select retourne bien un nombre
+    if(ctype_digit($_POST['adminAccountId']))
     {
-        //On récupère les informations du compte
-        $adminAccountId = stripslashes($accountList['accountId']);
-        $adminAccountPseudo = stripslashes($accountList['accountPseudo']);
-        $adminAccountEmail = stripslashes($accountList['accountEmail']);
-        $adminAccountAccess = stripslashes($accountList['accountAccess']);
+        //On récupère l'Id du formulaire précédent
+        $adminAccountId = htmlspecialchars(addslashes($_POST['adminAccountId']));
 
-        //On récupère les informations du personnage
-        $adminCharacterId = stripslashes($accountList['characterId']);
-        $adminCharacterAccountId = stripslashes($accountList['characterAccountId']);
-        $adminCharacterRaceId = stripslashes($accountList['characterRaceId']);
-        $adminCharacterName = stripslashes($accountList['characterName']);
-        $adminCharacterLevel = stripslashes($accountList['characterLevel']);
-        $adminCharacterSex = stripslashes($accountList['characterSex']);
-        $adminCharacterHpMin = stripslashes($accountList['characterHpMin']);
-        $adminCharacterHpMax = stripslashes($accountList['characterHpMax']);
-        $adminCharacterHpSkillPoints = stripslashes($accountList['characterHpSkillPoints']);
-        $adminCharacterHpBonus = stripslashes($accountList['characterHpBonus']);
-        $adminCharacterHpEquipments = stripslashes($accountList['characterHpEquipments']);
-        $adminCharacterHpTotal = stripslashes($accountList['characterHpTotal']);
-        $adminCharacterMpMin = stripslashes($accountList['characterMpMin']);
-        $adminCharacterMpMax = stripslashes($accountList['characterMpMax']);
-        $adminCharacterMpSkillPoints = stripslashes($accountList['characterMpSkillPoints']);
-        $adminCharacterMpBonus = stripslashes($accountList['characterMpBonus']);
-        $adminCharacterMpEquipments = stripslashes($accountList['characterMpEquipments']);
-        $adminCharacterMpTotal = stripslashes($accountList['characterMpTotal']);
-        $adminCharacterStrength = stripslashes($accountList['characterStrength']);
-        $adminCharacterStrengthSkillPoints = stripslashes($accountList['characterStrengthSkillPoints']);
-        $adminCharacterStrengthBonus = stripslashes($accountList['characterStrengthBonus']);
-        $adminCharacterStrengthEquipments = stripslashes($accountList['characterStrengthEquipments']);
-        $adminCharacterStrengthTotal = stripslashes($accountList['characterStrengthTotal']);
-        $adminCharacterMagic = stripslashes($accountList['characterMagic']);
-        $adminCharacterMagicSkillPoints = stripslashes($accountList['characterMagicSkillPoints']);
-        $adminCharacterMagicBonus = stripslashes($accountList['characterMagicBonus']);
-        $adminCharacterMagicEquipments = stripslashes($accountList['characterMagicEquipments']);
-        $adminCharacterMagicTotal = stripslashes($accountList['characterMagicTotal']);
-        $adminCharacterAgility = stripslashes($accountList['characterAgility']);
-        $adminCharacterAgilitySkillPoints = stripslashes($accountList['characterAgilitySkillPoints']);
-        $adminCharacterAgilityBonus = stripslashes($accountList['characterAgilityBonus']);
-        $adminCharacterAgilityEquipments = stripslashes($accountList['characterAgilityEquipments']);
-        $adminCharacterAgilityTotal = stripslashes($accountList['characterAgilityTotal']);
-        $adminCharacterDefense = stripslashes($accountList['characterDefense']);
-        $adminCharacterDefenseSkillPoints = stripslashes($accountList['characterDefenseSkillPoints']);
-        $adminCharacterDefenseBonus = stripslashes($accountList['characterDefenseBonus']);
-        $adminCharacterDefenseEquipment = stripslashes($accountList['characterDefenseEquipments']);
-        $adminCharacterDefenseTotal = stripslashes($accountList['characterDefenseTotal']);
-        $adminCharacterDefenseMagic = stripslashes($accountList['characterDefenseMagic']);
-        $adminCharacterDefenseMagicSkillPoints = stripslashes($accountList['characterDefenseMagicSkillPoints']);
-        $adminCharacterDefenseMagicBonus = stripslashes($accountList['characterDefenseMagicBonus']);
-        $adminCharacterDefenseMagicEquipments = stripslashes($accountList['characterDefenseMagicEquipments']);
-        $adminCharacterDefenseMagicTotal = stripslashes($accountList['characterDefenseMagicTotal']);
-        $adminCharacterWisdom = stripslashes($accountList['characterWisdom']);
-        $adminCharacterWisdomSkillPoints = stripslashes($accountList['characterWisdomSkillPoints']);
-        $adminCharacterWisdomBonus = stripslashes($accountList['characterWisdomBonus']);
-        $adminCharacterWisdomEquipments = stripslashes($accountList['characterWisdomEquipments']);
-        $adminCharacterWisdomTotal = stripslashes($accountList['characterWisdomTotal']);
-        $adminCharacterDefeate = stripslashes($accountList['characterDefeate']);
-        $adminCharacterVictory = stripslashes($accountList['characterVictory']);
-        $adminCharacterExperience = stripslashes($accountList['characterExperience']);
-        $adminCharacterExperienceTotal = stripslashes($accountList['characterExperienceTotal']);
-        $adminCharacterSkillPoints = stripslashes($accountList['characterSkillPoints']);
-        $adminCharacterGold = stripslashes($accountList['characterGold']);
-        $adminCharacterTownId = stripslashes($accountList['characterTownId']);
-        $adminCharacterChapter = stripslashes($accountList['characterChapter']);
-        $adminCharacterOnBattle = stripslashes($accountList['characterOnBattle']);
-        $adminCharacterEnable = stripslashes($accountList['characterEnable']);
-    }
-    $accountListQuery->closeCursor();
-    ?>
+        //On fait une requête pour vérifier si le compte choisit existe
+        $accountQuery = $bdd->prepare('SELECT * FROM car_accounts 
+        WHERE accountId= ?');
+        $accountQuery->execute([$adminAccountId]);
+        $account = $accountQuery->rowCount();
+        $accountQuery->closeCursor();
 
-    <p>Informations du compte (Modifiable)</p>
-    <form method="POST" action="finalEdit.php">
-        Pseudo : <br> <input type="text" name="adminAccountPseudo" class="form-control" placeholder="Pseudo" value="<?php echo $adminAccountPseudo; ?>" required autofocus><br /><br />
-        Email : <br> <input type="mail" name="adminAccountEmail" class="form-control" placeholder="Email" value="<?php echo $adminAccountEmail; ?>" required><br /><br />
-        Accès : <br> <select name="adminAccountAccess" class="form-control">
-            
-        <?php
-        switch ($accountAccess)
+        //Si le compte est disponible
+        if ($account == 1) 
         {
-            case 0:
-            ?>
-            <option selected="selected" value="0">Joueur</option>
-            <option value="1">Modérateur</option>
-            <option value="2">Administrateur</option>
-            <?php
-            break;
+            //On récupères les informations du compte pour le formulaire ci-dessous
+            $accountQuery = $bdd->prepare("SELECT * FROM car_accounts
+            wHERE accountId = ?");
+            $accountQuery->execute([$adminAccountId]);
+            while ($account = $accountQuery->fetch())
+            {
+                //On récupère les informations du compte
+                $adminAccountId = stripslashes($account['accountId']);
+                $adminAccountPseudo = stripslashes($account['accountPseudo']);
+                $adminAccountEmail = stripslashes($account['accountEmail']);
+                $adminAccountAccess = stripslashes($account['accountAccess']);
+            }
+            $accountQuery->closeCursor();
 
-            case 1:
-            ?>
-            <option selected="selected" value="1">Modérateur</option>
-            <option value="0">Joueur</option>
-            <option value="2">Administrateur</option>
-            <?php
-            break;
+            //On récupère le personnage pour l'afficher dans le menu d'information du personnage
+            $characterQuery = $bdd->prepare("SELECT * FROM car_characters
+            WHERE characterAccountId = ?");
+            $characterQuery->execute([$adminAccountId]);
+            while ($character = $characterQuery->fetch())
+            {
+                //On récupère les informations du personnage
+                $adminCharacterId = stripslashes($character['characterId']);
+                $adminCharacterAccountId = stripslashes($character['characterAccountId']);
+                $adminCharacterRaceId = stripslashes($character['characterRaceId']);
+                $adminCharacterName = stripslashes($character['characterName']);
+                $adminCharacterLevel = stripslashes($character['characterLevel']);
+                $adminCharacterSex = stripslashes($character['characterSex']);
+                $adminCharacterHpMin = stripslashes($character['characterHpMin']);
+                $adminCharacterHpMax = stripslashes($character['characterHpMax']);
+                $adminCharacterHpSkillPoints = stripslashes($character['characterHpSkillPoints']);
+                $adminCharacterHpBonus = stripslashes($character['characterHpBonus']);
+                $adminCharacterHpEquipments = stripslashes($character['characterHpEquipments']);
+                $adminCharacterHpTotal = stripslashes($character['characterHpTotal']);
+                $adminCharacterMpMin = stripslashes($character['characterMpMin']);
+                $adminCharacterMpMax = stripslashes($character['characterMpMax']);
+                $adminCharacterMpSkillPoints = stripslashes($character['characterMpSkillPoints']);
+                $adminCharacterMpBonus = stripslashes($character['characterMpBonus']);
+                $adminCharacterMpEquipments = stripslashes($character['characterMpEquipments']);
+                $adminCharacterMpTotal = stripslashes($character['characterMpTotal']);
+                $adminCharacterStrength = stripslashes($character['characterStrength']);
+                $adminCharacterStrengthSkillPoints = stripslashes($character['characterStrengthSkillPoints']);
+                $adminCharacterStrengthBonus = stripslashes($character['characterStrengthBonus']);
+                $adminCharacterStrengthEquipments = stripslashes($character['characterStrengthEquipments']);
+                $adminCharacterStrengthTotal = stripslashes($character['characterStrengthTotal']);
+                $adminCharacterMagic = stripslashes($character['characterMagic']);
+                $adminCharacterMagicSkillPoints = stripslashes($character['characterMagicSkillPoints']);
+                $adminCharacterMagicBonus = stripslashes($character['characterMagicBonus']);
+                $adminCharacterMagicEquipments = stripslashes($character['characterMagicEquipments']);
+                $adminCharacterMagicTotal = stripslashes($character['characterMagicTotal']);
+                $adminCharacterAgility = stripslashes($character['characterAgility']);
+                $adminCharacterAgilitySkillPoints = stripslashes($character['characterAgilitySkillPoints']);
+                $adminCharacterAgilityBonus = stripslashes($character['characterAgilityBonus']);
+                $adminCharacterAgilityEquipments = stripslashes($character['characterAgilityEquipments']);
+                $adminCharacterAgilityTotal = stripslashes($character['characterAgilityTotal']);
+                $adminCharacterDefense = stripslashes($character['characterDefense']);
+                $adminCharacterDefenseSkillPoints = stripslashes($character['characterDefenseSkillPoints']);
+                $adminCharacterDefenseBonus = stripslashes($character['characterDefenseBonus']);
+                $adminCharacterDefenseEquipment = stripslashes($character['characterDefenseEquipments']);
+                $adminCharacterDefenseTotal = stripslashes($character['characterDefenseTotal']);
+                $adminCharacterDefenseMagic = stripslashes($character['characterDefenseMagic']);
+                $adminCharacterDefenseMagicSkillPoints = stripslashes($character['characterDefenseMagicSkillPoints']);
+                $adminCharacterDefenseMagicBonus = stripslashes($character['characterDefenseMagicBonus']);
+                $adminCharacterDefenseMagicEquipments = stripslashes($character['characterDefenseMagicEquipments']);
+                $adminCharacterDefenseMagicTotal = stripslashes($character['characterDefenseMagicTotal']);
+                $adminCharacterWisdom = stripslashes($character['characterWisdom']);
+                $adminCharacterWisdomSkillPoints = stripslashes($character['characterWisdomSkillPoints']);
+                $adminCharacterWisdomBonus = stripslashes($character['characterWisdomBonus']);
+                $adminCharacterWisdomEquipments = stripslashes($character['characterWisdomEquipments']);
+                $adminCharacterWisdomTotal = stripslashes($character['characterWisdomTotal']);
+                $adminCharacterDefeate = stripslashes($character['characterDefeate']);
+                $adminCharacterVictory = stripslashes($character['characterVictory']);
+                $adminCharacterExperience = stripslashes($character['characterExperience']);
+                $adminCharacterExperienceTotal = stripslashes($character['characterExperienceTotal']);
+                $adminCharacterSkillPoints = stripslashes($character['characterSkillPoints']);
+                $adminCharacterGold = stripslashes($character['characterGold']);
+                $adminCharacterTownId = stripslashes($character['characterTownId']);
+                $adminCharacterChapter = stripslashes($character['characterChapter']);
+                $adminCharacterOnBattle = stripslashes($character['characterOnBattle']);
+                $adminCharacterEnable = stripslashes($character['characterEnable']);
+            }
+            $characterQuery->closeCursor();
 
-            case 2:
+            //On va déterminer le sexe du personnage
+            switch ($adminCharacterSex)
+            {
+                //Si le sexe du personnage est 0 c'est sexe féminin
+                case 0:
+                    $adminCharacterSexName = "Féminin";
+                break;
+
+                //Si le sexe du personnage est 1 c'est sexe masculin
+                case 1:
+                    $adminCharacterSexName = "Masculin";
+                break;
+            }
+
+            //On va déterminer si le personnage est en combat ou pas
+            switch ($adminCharacterOnBattle)
+            {
+                //Si OnBattle du personnage est 0 il est hors combat
+                case 0:
+                    $adminCharacterOnBattleName = "Non";
+                break;
+
+                //Si OnBattle du personnage est 1 il est en combat
+                case 1:
+                    $adminCharacterOnBattleName = "Oui";
+                break;
+            }
+
+            //On récupère la classe du personnage pour l'afficher dans le menu d'information du personnage
+            $raceQuery = $bdd->prepare("SELECT * FROM car_races
+            WHERE raceId = ?");
+            $raceQuery->execute([$adminCharacterRaceId]);
+            while ($race = $raceQuery->fetch())
+            {
+                //On récupère le nom de la classe
+                $adminRaceName = stripslashes($race['raceName']);
+            }
+            $raceQuery->closeCursor();
+
+            //On récupère la ville du personnage pour l'afficher dans le menu d'information du personnage
+            $townQuery = $bdd->prepare("SELECT * FROM car_towns
+            WHERE townId = ?");
+            $townQuery->execute([$adminAccountId]);
+            while ($town = $townQuery->fetch())
+            {
+                //On récupère le nom de la ville
+                $adminTownName = stripslashes($town['townName']);
+            }
+            $townQuery->closeCursor();
+
+            //Si le joueur n'est pas dans une ville on affichera carte du monde'
+            if (!isset($townId))
+            {
+                //On affiche Carte du monde
+                $adminTownName = "Carte du monde";
+            }
+
+            //On récupère les équipement équippé du personnage pour l'afficher dans le menu d'information du personnage
+            $equipmentEquipedQuery = $bdd->prepare("SELECT * FROM car_equipments, car_inventory_equipments 
+            WHERE equipmentId = inventoryEquipmentEquipmentId
+            AND inventoryEquipmentEquipped = 1
+            AND inventoryEquipmentCharacterId = ?");
+            $equipmentEquipedQuery->execute([$adminCharacterId]);
+
+            //On fait une boucle sur les résultats et on vérifie à chaque fois de quel type d'équipement il s'agit
+            while ($equipment = $equipmentEquipedQuery->fetch())
+            {
+                switch ($equipment['equipmentType'])
+                {
+                    //S'il s'agit d'une armure
+                    case "Armor":
+                        $adminEquipmentArmorId = stripslashes($equipment['equipmentId']);
+                        $adminEquipmentArmorName = stripslashes($equipment['equipmentName']);
+                        $adminEquipmentArmorDescription = stripslashes($equipment['equipmentDescription']);
+                    break;
+
+                    //S'il s'agit de bottes
+                    case "Boots":
+                        $adminEquipmentBootsId = stripslashes($equipment['equipmentId']);
+                        $adminEquipmentBootsName = stripslashes($equipment['equipmentName']);
+                        $adminEquipmentBootsDescription = stripslashes($equipment['equipmentDescription']);
+                    break;
+
+                    //S'il s'agit de gants
+                    case "Gloves":
+                        $adminEquipmentGlovesId = stripslashes($equipment['equipmentId']);
+                        $adminEquipmentGlovesName = stripslashes($equipment['equipmentName']);
+                        $adminEquipmentGlovesDescription = stripslashes($equipment['equipmentDescription']);
+                    break;
+
+                    //S'il s'agit d'un casque
+                    case "Helmet":
+                        $adminEquipmentHelmetId = stripslashes($equipment['equipmentId']);
+                        $adminEquipmentHelmetName = stripslashes($equipment['equipmentName']);
+                        $adminEquipmentHelmetDescription = stripslashes($equipment['equipmentDescription']);
+                    break;
+
+                    //S'il s'agit d'une arme
+                    case "Weapon":
+                        $adminEquipmentWeaponId = stripslashes($equipment['equipmentId']);
+                        $adminEquipmentWeaponName = stripslashes($equipment['equipmentName']);
+                        $adminEquipmentWeaponDescription = stripslashes($equipment['equipmentDescription']);
+                    break;
+                }
+            }
+
+            //On cherche maintenant à voir quel équipement le personnage n'a pas d'équipé
+
+            //Si la variable $equipmentArmorId existe pas c'est que le personnage n'en est pas équipé
+            if (!isset($equipmentArmorId))
+            {
+                $adminEquipmentArmorId = 0;
+                $adminEquipmentArmorName = "Vide";
+                $adminEquipmentArmorDescription = "";
+            }
+
+            //Si la variable $equipmentBootsId existe pas c'est que le personnage n'en est pas équipé
+            if (!isset($equipmentBootsId))
+            {
+                $adminEquipmentBootsId = 0;
+                $adminEquipmentBootsName = "Vide";
+                $adminEquipmentBootsDescription = "";
+            }
+
+            //Si la variable $equipmentGlovesId existe pas c'est que le personnage n'en est pas équipé
+            if (!isset($equipmentGlovesId))
+            {
+                $adminEquipmentGlovesId = 0;
+                $adminEquipmentGlovesName = "Vide";
+                $adminEquipmentGlovesDescription = "";
+            }
+
+            //Si la variable $equipmentHelmetId existe pas c'est que le personnage n'en est pas équipé
+            if (!isset($equipmentHelmetId))
+            {
+                $adminEquipmentHelmetId = 0;
+                $adminEquipmentHelmetName = "Vide";
+                $adminEquipmentHelmetDescription = "";
+            }
+
+            //Si la variable $equipmentWeaponId existe pas c'est que le personnage n'en est pas équipé
+            if (!isset($equipmentWeaponId))
+            {
+                $adminEquipmentWeaponId = 0;
+                $adminEquipmentWeaponName = "Vide";
+                $adminEquipmentWeaponDescription = "";
+            }
             ?>
-            <option selected="selected" value="2">Administrateur</option>
-            <option value="0">Joueur</option>
-            <option value="1">Modérateur</option>";
+
+            <p>Informations du compte (Modifiable)</p>
+            <form method="POST" action="finalEdit.php">
+                Pseudo : <br> <input type="text" name="adminAccountPseudo" class="form-control" placeholder="Pseudo" value="<?php echo $adminAccountPseudo; ?>" required autofocus><br /><br />
+                Email : <br> <input type="mail" name="adminAccountEmail" class="form-control" placeholder="Email" value="<?php echo $adminAccountEmail; ?>" required><br /><br />
+                Accès : <br> <select name="adminAccountAccess" class="form-control">
+                    
+                <?php
+                switch ($accountAccess)
+                {
+                    case 0:
+                    ?>
+                    <option selected="selected" value="0">Joueur</option>
+                    <option value="1">Modérateur</option>
+                    <option value="2">Administrateur</option>
+                    <?php
+                    break;
+
+                    case 1:
+                    ?>
+                    <option selected="selected" value="1">Modérateur</option>
+                    <option value="0">Joueur</option>
+                    <option value="2">Administrateur</option>
+                    <?php
+                    break;
+
+                    case 2:
+                    ?>
+                    <option selected="selected" value="2">Administrateur</option>
+                    <option value="0">Joueur</option>
+                    <option value="1">Modérateur</option>";
+                    <?php
+                    break;
+                }
+                ?>
+                </select><br /><br />
+                <input type="hidden" name="adminAccountId" value="<?= $adminAccountId ?>">
+                <input name="finalEdit" class="btn btn-default form-control" type="submit" value="Modifier">
+            </form>
+
+            <hr>
+                <p>Informations du personnage (Non modifiable)</p>
+                Race : <?php echo $adminRaceName; ?><br />
+                Nom du personnage : <?php echo $adminCharacterName; ?><br />
+                Niveau du personnage : <?php echo $adminCharacterLevel; ?><br />
+                Armure: <?php echo $adminEquipmentArmorName; ?><br />
+                Bottes: <?php echo $adminEquipmentBootsName; ?><br />
+                Gants: <?php echo $adminEquipmentGlovesName; ?><br />
+                Casque: <?php echo $adminEquipmentHelmetName; ?><br />
+                Arme: <?php echo $adminEquipmentWeaponName; ?><br />
+                Sexe du personnage: <?php echo $adminCharacterSexName; ?><br />
+                HP actuel: <?php echo $adminCharacterHpMin; ?><br />
+                HP maximum: <?php echo $adminCharacterHpMax; ?><br />
+                HP points de compétences: <?php echo $adminCharacterHpSkillPoints; ?><br />
+                HP bonus: <?php echo $adminCharacterHpBonus; ?><br />
+                HP équipement: <?php echo $adminCharacterHpEquipments; ?><br />
+                HP total: <?php echo $adminCharacterHpTotal; ?><br />
+                MP actuel: <?php echo $adminCharacterMpMin; ?><br />
+                MP maximum: <?php echo $adminCharacterMpMax; ?><br />
+                MP points de compétences: <?php echo $adminCharacterMpSkillPoints; ?><br />
+                MP bonus: <?php echo $adminCharacterMpBonus; ?><br />
+                MP équipements: <?php echo $adminCharacterMpEquipments; ?><br />
+                MP total: <?php echo $adminCharacterMpTotal; ?><br />
+                Force actuelle: <?php echo $adminCharacterStrength; ?><br />
+                Force points de compétences: <?php echo $adminCharacterStrengthSkillPoints; ?><br />
+                Force bonus: <?php echo $adminCharacterStrengthBonus; ?><br />
+                Force points de compétences: <?php echo $adminCharacterStrengthEquipments; ?><br />
+                Force Total: <?php echo $adminCharacterStrengthTotal; ?><br />
+                Magie actuelle: <?php echo $adminCharacterMagic; ?><br />
+                Magie points de compétences: <?php echo $adminCharacterMagicSkillPoints; ?><br />
+                Magie bonus: <?php echo $adminCharacterMagicBonus; ?><br />
+                Magie équipement: <?php echo $adminCharacterMagicEquipments; ?><br />
+                Magie Total: <?php echo $adminCharacterMagicTotal; ?><br />
+                Agilité actuelle: <?php echo $adminCharacterAgility; ?><br />
+                Agilité points de compétences: <?php echo $adminCharacterAgilitySkillPoints; ?><br />
+                Agilité bonus: <?php echo $adminCharacterAgilityBonus; ?><br />
+                Agilité équipement: <?php echo $adminCharacterAgilityEquipments; ?><br />
+                Agilité Total: <?php echo $adminCharacterAgilityTotal; ?><br />
+                Défense actuelle: <?php echo $adminCharacterDefense; ?><br />
+                Défense points de compétences: <?php echo $adminCharacterDefenseSkillPoints; ?><br />
+                Défense bonus: <?php echo $adminCharacterDefenseBonus; ?><br />
+                Défense équipment: <?php echo $adminCharacterDefenseEquipment; ?><br />
+                Défense Total: <?php echo $adminCharacterDefenseTotal; ?><br />
+                Défense magique actuelle: <?php echo $adminCharacterDefenseMagic; ?><br />
+                Défense magique points de compétences: <?php echo $adminCharacterDefenseMagicSkillPoints; ?><br />
+                Défense magique bonus: <?php echo $adminCharacterDefenseMagicBonus; ?><br />
+                Défense équipement: <?php echo $adminCharacterDefenseMagicEquipments; ?><br />
+                Défense magique Total: <?php echo $adminCharacterDefenseMagicTotal; ?><br />
+                Sagesse actuelle: <?php echo $adminCharacterWisdom; ?><br />
+                Sagesse points de compétences: <?php echo $adminCharacterWisdomSkillPoints; ?><br />
+                Sagesse bonus: <?php echo $adminCharacterWisdomBonus; ?><br />
+                Sagesse équipement: <?php echo $adminCharacterWisdomEquipments; ?><br />
+                Sagesse Total: <?php echo $adminCharacterWisdomTotal; ?><br />
+                Défaite: <?php echo $adminCharacterDefeate; ?><br />
+                Victoire: <?php echo $adminCharacterVictory; ?><br />
+                Experience: <?php echo $adminCharacterExperience; ?><br />
+                Experience total: <?php echo $adminCharacterExperienceTotal; ?><br />
+                Points de compétence: <?php echo $adminCharacterSkillPoints; ?><br />
+                Argent: <?php echo $adminCharacterGold; ?><br />
+                Ville: <?php echo $adminTownName; ?><br />
+                Chapitre: <?php echo $adminCharacterChapter; ?><br />
+                En combat: <?php echo $adminCharacterOnBattleName; ?><br />
+                Activé: <?php echo $adminCharacterEnable; ?><br />
             <?php
-            break;
         }
-        ?>
-        </select><br /><br />
-        <input type="hidden" name="adminAccountId" value="<?= $adminAccountId ?>">
-        <input name="finalEdit" class="btn btn-default form-control" type="submit" value="Modifier">
-    </form>
-
-    <hr>
-        <p>Informations du personnage (Non modifiable)</p>
-        Race : <?php echo $adminCharacterRaceId; ?><br />
-        Nom du personnage : <?php echo $adminCharacterName; ?><br />
-        Niveau du personnage : <?php echo $adminCharacterLevel; ?><br />
-        Sexe du personnage(0 = Femme, 1 = Homme) : <?php echo $adminCharacterSex; ?><br />
-        HP actuel : <?php echo $adminCharacterHpMin; ?><br />
-        HP maximum : <?php echo $adminCharacterHpMax; ?><br />
-        HP points de compétences : <?php echo $adminCharacterHpSkillPoints; ?><br />
-        HP bonus : <?php echo $adminCharacterHpBonus; ?><br />
-        HP équipement : <?php echo $adminCharacterHpEquipments; ?><br />
-        HP total : <?php echo $adminCharacterHpTotal; ?><br />
-        MP actuel : <?php echo $adminCharacterMpMin; ?><br />
-        MP maximum : <?php echo $adminCharacterMpMax; ?><br />
-        MP points de compétences : <?php echo $adminCharacterMpSkillPoints; ?><br />
-        MP bonus : <?php echo $adminCharacterMpBonus; ?><br />
-        MP équipements : <?php echo $adminCharacterMpEquipments; ?><br />
-        MP total : <?php echo $adminCharacterMpTotal; ?><br />
-        Force actuelle: <?php echo $adminCharacterStrength; ?><br />
-        Force points de compétences : <?php echo $adminCharacterStrengthSkillPoints; ?><br />
-        Force bonus: <?php echo $adminCharacterStrengthBonus; ?><br />
-        Force points de compétences : <?php echo $adminCharacterStrengthEquipments; ?><br />
-        Force Total : <?php echo $adminCharacterStrengthTotal; ?><br />
-        Magie actuelle : <?php echo $adminCharacterMagic; ?><br />
-        Magie points de compétences : <?php echo $adminCharacterMagicSkillPoints; ?><br />
-        Magie bonus : <?php echo $adminCharacterMagicBonus; ?><br />
-        Magie équipement : <?php echo $adminCharacterMagicEquipments; ?><br />
-        Magie Total : <?php echo $adminCharacterMagicTotal; ?><br />
-        Agilité actuelle : <?php echo $adminCharacterAgility; ?><br />
-        Agilité points de compétences : <?php echo $adminCharacterAgilitySkillPoints; ?><br />
-        Agilité bonus : <?php echo $adminCharacterAgilityBonus; ?><br />
-        Agilité équipement : <?php echo $adminCharacterAgilityEquipments; ?><br />
-        Agilité Total : <?php echo $adminCharacterAgilityTotal; ?><br />
-        Défense actuelle: <?php echo $adminCharacterDefense; ?><br />
-        Défense points de compétences : <?php echo $adminCharacterDefenseSkillPoints; ?><br />
-        Défense bonus : <?php echo $adminCharacterDefenseBonus; ?><br />
-        Défense équipment : <?php echo $adminCharacterDefenseEquipment; ?><br />
-        Défense Total : <?php echo $adminCharacterDefenseTotal; ?><br />
-        Défense magique actuelle: <?php echo $adminCharacterDefenseMagic; ?><br />
-        Défense magique points de compétences : <?php echo $adminCharacterDefenseMagicSkillPoints; ?><br />
-        Défense magique bonus : <?php echo $adminCharacterDefenseMagicBonus; ?><br />
-        Défense équipement : <?php echo $adminCharacterDefenseMagicEquipments; ?><br />
-        Défense magique Total : <?php echo $adminCharacterDefenseMagicTotal; ?><br />
-        Sagesse actuelle : <?php echo $adminCharacterWisdom; ?><br />
-        Sagesse points de compétences : <?php echo $adminCharacterWisdomSkillPoints; ?><br />
-        Sagesse bonus : <?php echo $adminCharacterWisdomBonus; ?><br />
-        Sagesse équipement : <?php echo $adminCharacterWisdomEquipments; ?><br />
-        Sagesse Total : <?php echo $adminCharacterWisdomTotal; ?><br />
-        Défaite : <?php echo $adminCharacterDefeate; ?><br />
-        Victoire : <?php echo $adminCharacterVictory; ?><br />
-        Experience : <?php echo $adminCharacterExperience; ?><br />
-        Experience total : <?php echo $adminCharacterExperienceTotal; ?><br />
-        Points de compétence: <?php echo $adminCharacterSkillPoints; ?><br />
-        Argent : <?php echo $adminCharacterGold; ?><br />
-        Ville : <?php echo $adminCharacterTownId; ?><br />
-        Chapitre : <?php echo $adminCharacterChapter; ?><br />
-        En combat (0 = Non, 1 = Oui) : <?php echo $adminCharacterOnBattle; ?><br />
-        Activé : <?php echo $adminCharacterEnable; ?><br />
-    <?php
+        //Si le compte n'est pas disponible
+        else
+        {
+            echo "Erreur: Compte indisponible";
+        }
+    }
+    //Si le compte choisit n'est pas un nombre
+    else
+    {
+        echo "Erreur: compte invalide";
+    }
 }
 //Si l'utilisateur n'a pas cliqué sur le bouton edit
 else

@@ -11,7 +11,7 @@ if ($foundBattleMonster > 0) { exit(header("Location: ../../modules/battleMonste
 //Si tous les champs ont bien été rempli
 if (isset($_POST['battleMonsterId']))
 {
-    //On vérifi si la monstre choisit est correct et que le select retourne bien un nombre
+    //On vérifie si la monstre choisit est correct et que le select retourne bien un nombre
     if(ctype_digit($_POST['battleMonsterId']))
     {
         //On récupère l'Id du monstre
@@ -29,11 +29,6 @@ if (isset($_POST['battleMonsterId']))
         //Si le monstre est disponible
         if ($monsterQuery > 0) 
         {
-            //On fait une requête pour récupérer les informations du monstre
-            $monsterQueryList = $bdd->prepare("SELECT * FROM car_monsters
-            WHERE monsterId = ?");
-            $monsterQueryList->execute([$monsterId]);
-
             while ($monster = $monsterQueryList->fetch())
             {
                 //On récupère les HP et MP du monstre
@@ -63,6 +58,11 @@ if (isset($_POST['battleMonsterId']))
         {
             echo "Erreur: Monstre indisponible";
         }
+    }
+    //Si le monstre n'est pas un nombre
+    else
+    {
+        echo "Erreur: monstre invalide";
     }
 }
 
