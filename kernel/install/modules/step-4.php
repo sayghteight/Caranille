@@ -104,9 +104,14 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
 
                         /*
                         Add character model
-                        '', //characterID
-                        :accountId, //characterAccountID
-                        '0', //characterRaceID
+                        '', //characterId
+                        :accountId, //characterAccountId
+                        '1', //characterRaceId
+                        '1', //characterArmorId
+                        '1', //characterBootsId
+                        '1', //characterGlovesId
+                        '1', //characterHelmetId
+                        '1', //characterWeaponId
                         'http://localhost/character.png', //characterPicture
                         :characterName, //characterName
                         '1', //characterLevel
