@@ -161,6 +161,7 @@ CREATE TABLE IF NOT EXISTS `car_codes_used` (
 CREATE TABLE IF NOT EXISTS `car_equipments` 
 (
   `equipmentID` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `equipmentRaceID` int(11) NOT NULL,
   `equipmentPicture` text NOT NULL,
   `equipmentType` varchar(30) NOT NULL,
   `equipmentLevel` int(11) NOT NULL,
@@ -176,6 +177,15 @@ CREATE TABLE IF NOT EXISTS `car_equipments`
   `equipmentSagesseEffect` int(11) NOT NULL,
   `equipmentPurchasePrice` int(11) NOT NULL,
   `equipmentSalePrice` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `car_Inventory_Equipments` 
+(
+  `inventoryEquipmentId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `inventoryEquipmentCharacterId` int(5) NOT NULL,
+  `inventoryEquipmentEquipmentId` int(5) NOT NULL,
+  `inventoryEquipmentQuantity` int(5) NOT NULL,
+  `inventoryEquipmentEquipped` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `car_monsters` (
