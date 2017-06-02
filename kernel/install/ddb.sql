@@ -146,8 +146,7 @@ CREATE TABLE IF NOT EXISTS `car_codes_gift` (
   `codeGiftcharacterDefense` int(11) NOT NULL,
   `codeGiftcharacterDefenseMagic` int(11) NOT NULL,
   `codeGiftcharacterWisdom` int(11) NOT NULL,
-  `codeGiftEquipmentId` int(11) NOT NULL,
-  `codeGiftItemId` int(11) NOT NULL,
+  `codeGiftitemId` int(11) NOT NULL,
   `codeGiftBonusId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -157,53 +156,27 @@ CREATE TABLE IF NOT EXISTS `car_codes_used` (
   `codeUsedaccountId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `car_equipments` 
-(
-  `equipmentId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `equipmentRaceId` int(11) NOT NULL,
-  `equipmentPicture` text NOT NULL,
-  `equipmentType` varchar(30) NOT NULL,
-  `equipmentLevel` int(11) NOT NULL,
-  `equipmentLevel_Required` int(11) NOT NULL,
-  `equipmentName` varchar(30) NOT NULL,
-  `equipmentDescription` text NOT NULL,
-  `equipmentHpEffect` int(11) NOT NULL,
-  `equipmentMpEffect` int(11) NOT NULL,
-  `equipmentStrengthEffect` int(11) NOT NULL,
-  `equipmentMagicEffect` int(11) NOT NULL,
-  `equipmentAgilityEffect` int(11) NOT NULL,
-  `equipmentDefenseEffect` int(11) NOT NULL,
-  `equipmentSagesseEffect` int(11) NOT NULL,
-  `equipmentPurchasePrice` int(11) NOT NULL,
-  `equipmentSalePrice` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE IF NOT EXISTS `car_inventory_equipments` 
-(
-  `inventoryEquipmentId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `inventoryEquipmentCharacterId` int(5) NOT NULL,
-  `inventoryEquipmentEquipmentId` int(5) NOT NULL,
-  `inventoryEquipmentQuantity` int(5) NOT NULL,
-  `inventoryEquipmentEquipped` int(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE IF NOT EXISTS `car_inventory_items` 
+CREATE TABLE IF NOT EXISTS `car_inventory` 
 (
   `inventoryItemId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `inventoryItemCharacterId` int(11) NOT NULL,
-  `inventoryItemItemId` int(11) NOT NULL
+  `inventoryItemCharacterId` int(5) NOT NULL,
+  `inventoryItemItemId` int(5) NOT NULL,
+  `inventoryItemQuantity` int(5) NOT NULL,
+  `inventoryItemEquipped` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `car_items` 
 (
   `itemId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `itemRaceId` int(11) NOT NULL,
   `itemPicture` text NOT NULL,
   `itemType` varchar(30) NOT NULL,
-  `itemLevelRequired` int(11) NOT NULL,
+  `itemLevel` int(11) NOT NULL,
+  `itemLevel_Required` int(11) NOT NULL,
   `itemName` varchar(30) NOT NULL,
   `itemDescription` text NOT NULL,
-  `itemHPEffect` int(11) NOT NULL,
-  `itemMPEffect` int(11) NOT NULL,
+  `itemHpEffect` int(11) NOT NULL,
+  `itemMpEffect` int(11) NOT NULL,
   `itemStrengthEffect` int(11) NOT NULL,
   `itemMagicEffect` int(11) NOT NULL,
   `itemAgilityEffect` int(11) NOT NULL,
@@ -278,8 +251,14 @@ CREATE TABLE IF NOT EXISTS `car_towns_monsters`
 -- Ajout des exemples dans la base de donnée
 --
 
-INSERT INTO `car_equipments` (`equipmentID`, `equipmentRaceID`, `equipmentPicture`, `equipmentType`, `equipmentLevel`, `equipmentLevel_Required`, `equipmentName`, `equipmentDescription`, `equipmentHpEffect`, `equipmentMpEffect`, `equipmentStrengthEffect`, `equipmentMagicEffect`, `equipmentAgilityEffect`, `equipmentDefenseEffect`, `equipmentSagesseEffect`, `equipmentPurchasePrice`, `equipmentSalePrice`) VALUES 
-(1, '1', 'http://localhost/equipment.png', 'Weapon', '1', '1', 'Epée de cuivre', 'Cette épée de cuivre est parfaite pour débuter.', '0', '0', '10', '0', '0', '0', '0', '10', '5');
+INSERT INTO `car_items` (`itemId`, `itemRaceId`, `itemPicture`, `itemType`, `itemLevel`, `itemLevel_Required`, `itemName`, `itemDescription`, `itemHpEffect`, `itemMpEffect`, `itemStrengthEffect`, `itemMagicEffect`, `itemAgilityEffect`, `itemDefenseEffect`, `itemSagesseEffect`, `itemPurchasePrice`, `itemSalePrice`) VALUES
+(1, 0, 'http://localhost/item.png', 'Item', 1, 1, 'Potion', 'Cette petite fiole vous rendra 100 HP', 100, 0, 0, 0, 0, 0, 0, 50, 10),
+(2, 0, 'http://localhost/item.png', 'Item', 1, 1, 'Ether', 'Cette petite fiole vous rendra 10 MP', 0, 10, 0, 0, 0, 0, 0, 50, 10),
+(3, 0, 'http://localhost/item.png', 'Armor', 1, 1, 'Manteau de laine', 'Ce manteau vous ira a ravir.\r\nCet équipement est disponible pour toutes les classes', 10, 1, 1, 1, 1, 1, 1, 100, 50),
+(4, 0, 'http://localhost/item.png', 'Boots', 1, 1, 'Botte de laine', 'Ses bottes de laine sont 100% moutons.\r\nCet équipement est disponible pour toutes les classes', 10, 1, 1, 1, 1, 1, 1, 100, 50),
+(5, 0, 'http://localhost/item.png', 'Gloves', 1, 1, 'Gants de laine', 'Ses gants vous donneront vous protégerons des courants d\'air mais juste pour les mains.\r\nCet équipement est disponible pour toutes les classes', 10, 1, 1, 1, 1, 1, 1, 100, 50),
+(6, 0, 'http://localhost/item.png', 'Helmet', 1, 1, 'Casque de laine', 'Ce casque vous protégera juste de la pluie.\r\nCet équipement est disponible pour toutes les classes', 10, 1, 1, 1, 1, 1, 1, 100, 50),
+(7, 0, 'http://localhost/item.png', 'Weapon', 1, 1, 'Boule de laine', 'Cette boule de laine pourra être lancée sur vos ennemis en leur occasionnant peu de dégâts.\r\nCet équipement est disponible pour toutes les classes', 10, 1, 1, 1, 1, 1, 1, 100, 50);
 
 INSERT INTO `car_monsters` (`monsterId`, `monsterPicture`, `monsterName`, `monsterDescription`, `monsterLevel`, `monsterHp`, `monsterMp`, `monsterStrength`, `monsterMagic`, `monsterAgility`, `monsterDefense`, `monsterDefenseMagic`, `monsterWisdom`, `monsterExperience`, `monsterGold`) VALUES
 (1, 'http://localhost/monster.png', 'Plop', 'Ce monstre se nourrit exclusivement de plante et de feuille tombé à même le sol.\r\n\r\nIl y a très longtemps celui-ci était jaune et est devenue vert de part son alimentation...\r\n\r\nMais si il est devenu vert de part son alimentation pourquoi était t\'il jaune ?', 1, 10, 10, 1, 1, 1, 1, 1, 1, 10, 10),

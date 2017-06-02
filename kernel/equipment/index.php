@@ -2,50 +2,50 @@
 require_once("../../kernel/config.php");
 
 //On fait une requête pour savoir quel équipement le personnage à d'équipé
-$equipmentEquipedQuery = $bdd->prepare("SELECT * FROM car_equipments, car_inventory_equipments 
-WHERE equipmentId = inventoryEquipmentEquipmentId
-AND inventoryEquipmentEquipped = 1
-AND inventoryEquipmentCharacterId = ?");
+$equipmentEquipedQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
+WHERE itemId = inventoryItemItemId
+AND inventoryItemEquipped = 1
+AND inventoryItemCharacterId = ?");
 $equipmentEquipedQuery->execute([$characterId]);
 
 //On fait une boucle sur les résultats et on vérifie à chaque fois de quel type d'équipement il s'agit
 while ($equipment = $equipmentEquipedQuery->fetch())
 {
-    switch ($equipment['equipmentType'])
+    switch ($equipment['itemType'])
     {
         //Si il s'agit d'une armure
         case "Armor":
-            $equipmentArmorId = stripslashes($equipment['equipmentId']);
-            $equipmentArmorName = stripslashes($equipment['equipmentName']);
-            $equipmentArmorDescription = stripslashes($equipment['equipmentDescription']);
+            $equipmentArmorId = stripslashes($equipment['itemId']);
+            $equipmentArmorName = stripslashes($equipment['itemName']);
+            $equipmentArmorDescription = stripslashes($equipment['itemDescription']);
         break;
 
         //Si il s'agit de bottes
         case "Boots":
-            $equipmentBootsId = stripslashes($equipment['equipmentId']);
-            $equipmentBootsName = stripslashes($equipment['equipmentName']);
-            $equipmentBootsDescription = stripslashes($equipment['equipmentDescription']);
+            $equipmentBootsId = stripslashes($equipment['itemId']);
+            $equipmentBootsName = stripslashes($equipment['itemName']);
+            $equipmentBootsDescription = stripslashes($equipment['itemDescription']);
         break;
 
         //Si il s'agit de gants
         case "Gloves":
-            $equipmentGlovesId = stripslashes($equipment['equipmentId']);
-            $equipmentGlovesName = stripslashes($equipment['equipmentName']);
-            $equipmentGlovesDescription = stripslashes($equipment['equipmentDescription']);
+            $equipmentGlovesId = stripslashes($equipment['itemId']);
+            $equipmentGlovesName = stripslashes($equipment['itemName']);
+            $equipmentGlovesDescription = stripslashes($equipment['itemDescription']);
         break;
 
         //Si il s'agit d'un casque
         case "Helmet":
-            $equipmentHelmetId = stripslashes($equipment['equipmentId']);
-            $equipmentHelmetName = stripslashes($equipment['equipmentName']);
-            $equipmentHelmetDescription = stripslashes($equipment['equipmentDescription']);
+            $equipmentHelmetId = stripslashes($equipment['itemId']);
+            $equipmentHelmetName = stripslashes($equipment['itemName']);
+            $equipmentHelmetDescription = stripslashes($equipment['itemDescription']);
         break;
 
         //Si il s'agit d'une arme
         case "Weapon":
-            $equipmentWeaponId = stripslashes($equipment['equipmentId']);
-            $equipmentWeaponName = stripslashes($equipment['equipmentName']);
-            $equipmentWeaponDescription = stripslashes($equipment['equipmentDescription']);
+            $equipmentWeaponId = stripslashes($equipment['itemId']);
+            $equipmentWeaponName = stripslashes($equipment['itemName']);
+            $equipmentWeaponDescription = stripslashes($equipment['itemDescription']);
         break;
     }
 }

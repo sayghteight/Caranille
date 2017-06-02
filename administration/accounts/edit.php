@@ -165,50 +165,50 @@ if (isset($_POST['edit']))
             }
 
             //On récupère les équipement équippé du personnage pour l'afficher dans le menu d'information du personnage
-            $equipmentEquipedQuery = $bdd->prepare("SELECT * FROM car_equipments, car_inventory_equipments 
-            WHERE equipmentId = inventoryEquipmentEquipmentId
-            AND inventoryEquipmentEquipped = 1
-            AND inventoryEquipmentCharacterId = ?");
+            $equipmentEquipedQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
+            WHERE itemId = inventoryItemItemId
+            AND inventoryItemEquipped = 1
+            AND inventoryItemCharacterId = ?");
             $equipmentEquipedQuery->execute([$adminCharacterId]);
 
             //On fait une boucle sur les résultats et on vérifie à chaque fois de quel type d'équipement il s'agit
             while ($equipment = $equipmentEquipedQuery->fetch())
             {
-                switch ($equipment['equipmentType'])
+                switch ($equipment['itemType'])
                 {
-                    //S'il s'agit d'une armure
+                    //Si il s'agit d'une armure
                     case "Armor":
-                        $adminEquipmentArmorId = stripslashes($equipment['equipmentId']);
-                        $adminEquipmentArmorName = stripslashes($equipment['equipmentName']);
-                        $adminEquipmentArmorDescription = stripslashes($equipment['equipmentDescription']);
+                        $adminEquipmentArmorId = stripslashes($equipment['itemId']);
+                        $adminEquipmentArmorName = stripslashes($equipment['itemName']);
+                        $adminEquipmentArmorDescription = stripslashes($equipment['itemDescription']);
                     break;
 
-                    //S'il s'agit de bottes
+                    //Si il s'agit de bottes
                     case "Boots":
-                        $adminEquipmentBootsId = stripslashes($equipment['equipmentId']);
-                        $adminEquipmentBootsName = stripslashes($equipment['equipmentName']);
-                        $adminEquipmentBootsDescription = stripslashes($equipment['equipmentDescription']);
+                        $adminEquipmentBootsId = stripslashes($equipment['itemId']);
+                        $adminEquipmentBootsName = stripslashes($equipment['itemName']);
+                        $adminEquipmentBootsDescription = stripslashes($equipment['itemDescription']);
                     break;
 
-                    //S'il s'agit de gants
+                    //Si il s'agit de gants
                     case "Gloves":
-                        $adminEquipmentGlovesId = stripslashes($equipment['equipmentId']);
-                        $adminEquipmentGlovesName = stripslashes($equipment['equipmentName']);
-                        $adminEquipmentGlovesDescription = stripslashes($equipment['equipmentDescription']);
+                        $adminEquipmentGlovesId = stripslashes($equipment['itemId']);
+                        $adminEquipmentGlovesName = stripslashes($equipment['itemName']);
+                        $adminEquipmentGlovesDescription = stripslashes($equipment['itemDescription']);
                     break;
 
-                    //S'il s'agit d'un casque
+                    //Si il s'agit d'un casque
                     case "Helmet":
-                        $adminEquipmentHelmetId = stripslashes($equipment['equipmentId']);
-                        $adminEquipmentHelmetName = stripslashes($equipment['equipmentName']);
-                        $adminEquipmentHelmetDescription = stripslashes($equipment['equipmentDescription']);
+                        $adminEquipmentHelmetId = stripslashes($equipment['itemId']);
+                        $adminEquipmentHelmetName = stripslashes($equipment['itemName']);
+                        $adminEquipmentHelmetDescription = stripslashes($equipment['itemDescription']);
                     break;
 
-                    //S'il s'agit d'une arme
+                    //Si il s'agit d'une arme
                     case "Weapon":
-                        $adminEquipmentWeaponId = stripslashes($equipment['equipmentId']);
-                        $adminEquipmentWeaponName = stripslashes($equipment['equipmentName']);
-                        $adminEquipmentWeaponDescription = stripslashes($equipment['equipmentDescription']);
+                        $adminEquipmentWeaponId = stripslashes($equipment['itemId']);
+                        $adminEquipmentWeaponName = stripslashes($equipment['itemName']);
+                        $adminEquipmentWeaponDescription = stripslashes($equipment['itemDescription']);
                     break;
                 }
             }
@@ -216,7 +216,7 @@ if (isset($_POST['edit']))
             //On cherche maintenant à voir quel équipement le personnage n'a pas d'équipé
 
             //Si la variable $equipmentArmorId existe pas c'est que le personnage n'en est pas équipé
-            if (!isset($equipmentArmorId))
+            if (!isset($adminEquipmentArmorId))
             {
                 $adminEquipmentArmorId = 0;
                 $adminEquipmentArmorName = "Vide";
@@ -224,7 +224,7 @@ if (isset($_POST['edit']))
             }
 
             //Si la variable $equipmentBootsId existe pas c'est que le personnage n'en est pas équipé
-            if (!isset($equipmentBootsId))
+            if (!isset($adminEquipmentBootsId))
             {
                 $adminEquipmentBootsId = 0;
                 $adminEquipmentBootsName = "Vide";
@@ -232,7 +232,7 @@ if (isset($_POST['edit']))
             }
 
             //Si la variable $equipmentGlovesId existe pas c'est que le personnage n'en est pas équipé
-            if (!isset($equipmentGlovesId))
+            if (!isset($adminEquipmentGlovesId))
             {
                 $adminEquipmentGlovesId = 0;
                 $adminEquipmentGlovesName = "Vide";
@@ -240,7 +240,7 @@ if (isset($_POST['edit']))
             }
 
             //Si la variable $equipmentHelmetId existe pas c'est que le personnage n'en est pas équipé
-            if (!isset($equipmentHelmetId))
+            if (!isset($adminEquipmentHelmetId))
             {
                 $adminEquipmentHelmetId = 0;
                 $adminEquipmentHelmetName = "Vide";
@@ -248,7 +248,7 @@ if (isset($_POST['edit']))
             }
 
             //Si la variable $equipmentWeaponId existe pas c'est que le personnage n'en est pas équipé
-            if (!isset($equipmentWeaponId))
+            if (!isset($adminEquipmentWeaponId))
             {
                 $adminEquipmentWeaponId = 0;
                 $adminEquipmentWeaponName = "Vide";
