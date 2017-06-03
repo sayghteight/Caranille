@@ -26,10 +26,8 @@ if (isset($_POST['adminAccountId']))
         if ($account == 1) 
         {
             //On récupères les informations du compte pour le formulaire ci-dessous
-            $accountQuery = $bdd->prepare("SELECT * FROM car_accounts, car_characters, car_races
-            WHERE accountId = characterAccountId
-            AND characterRaceId = raceId
-            AND accountId = ?");
+            $accountQuery = $bdd->prepare("SELECT * FROM car_accounts
+            wHERE accountId = ?");
             $accountQuery->execute([$adminAccountId]);
             while ($account = $accountQuery->fetch())
             {
@@ -38,99 +36,87 @@ if (isset($_POST['adminAccountId']))
                 $adminAccountPseudo = stripslashes($account['accountPseudo']);
                 $adminAccountEmail = stripslashes($account['accountEmail']);
                 $adminAccountAccess = stripslashes($account['accountAccess']);
-
-                //On récupère les informations du personnage
-                $adminCharacterId = stripslashes($account['characterId']);
-                $adminCharacterAccountId = stripslashes($account['characterAccountId']);
-                $adminCharacterRaceId = stripslashes($account['characterRaceId']);
-                $adminCharacterName = stripslashes($account['characterName']);
-                $adminCharacterLevel = stripslashes($account['characterLevel']);
-                $adminCharacterSex = stripslashes($account['characterSex']);
-                $adminCharacterHpMin = stripslashes($account['characterHpMin']);
-                $adminCharacterHpMax = stripslashes($account['characterHpMax']);
-                $adminCharacterHpSkillPoints = stripslashes($account['characterHpSkillPoints']);
-                $adminCharacterHpBonus = stripslashes($account['characterHpBonus']);
-                $adminCharacterHpEquipments = stripslashes($account['characterHpEquipments']);
-                $adminCharacterHpTotal = stripslashes($account['characterHpTotal']);
-                $adminCharacterMpMin = stripslashes($account['characterMpMin']);
-                $adminCharacterMpMax = stripslashes($account['characterMpMax']);
-                $adminCharacterMpSkillPoints = stripslashes($account['characterMpSkillPoints']);
-                $adminCharacterMpBonus = stripslashes($account['characterMpBonus']);
-                $adminCharacterMpEquipments = stripslashes($account['characterMpEquipments']);
-                $adminCharacterMpTotal = stripslashes($account['characterMpTotal']);
-                $adminCharacterStrength = stripslashes($account['characterStrength']);
-                $adminCharacterStrengthSkillPoints = stripslashes($account['characterStrengthSkillPoints']);
-                $adminCharacterStrengthBonus = stripslashes($account['characterStrengthBonus']);
-                $adminCharacterStrengthEquipments = stripslashes($account['characterStrengthEquipments']);
-                $adminCharacterStrengthTotal = stripslashes($account['characterStrengthTotal']);
-                $adminCharacterMagic = stripslashes($account['characterMagic']);
-                $adminCharacterMagicSkillPoints = stripslashes($account['characterMagicSkillPoints']);
-                $adminCharacterMagicBonus = stripslashes($account['characterMagicBonus']);
-                $adminCharacterMagicEquipments = stripslashes($account['characterMagicEquipments']);
-                $adminCharacterMagicTotal = stripslashes($account['characterMagicTotal']);
-                $adminCharacterAgility = stripslashes($account['characterAgility']);
-                $adminCharacterAgilitySkillPoints = stripslashes($account['characterAgilitySkillPoints']);
-                $adminCharacterAgilityBonus = stripslashes($account['characterAgilityBonus']);
-                $adminCharacterAgilityEquipments = stripslashes($account['characterAgilityEquipments']);
-                $adminCharacterAgilityTotal = stripslashes($account['characterAgilityTotal']);
-                $adminCharacterDefense = stripslashes($account['characterDefense']);
-                $adminCharacterDefenseSkillPoints = stripslashes($account['characterDefenseSkillPoints']);
-                $adminCharacterDefenseBonus = stripslashes($account['characterDefenseBonus']);
-                $adminCharacterDefenseEquipment = stripslashes($account['characterDefenseEquipments']);
-                $adminCharacterDefenseTotal = stripslashes($account['characterDefenseTotal']);
-                $adminCharacterDefenseMagic = stripslashes($account['characterDefenseMagic']);
-                $adminCharacterDefenseMagicSkillPoints = stripslashes($account['characterDefenseMagicSkillPoints']);
-                $adminCharacterDefenseMagicBonus = stripslashes($account['characterDefenseMagicBonus']);
-                $adminCharacterDefenseMagicEquipments = stripslashes($account['characterDefenseMagicEquipments']);
-                $adminCharacterDefenseMagicTotal = stripslashes($account['characterDefenseMagicTotal']);
-                $adminCharacterWisdom = stripslashes($account['characterWisdom']);
-                $adminCharacterWisdomSkillPoints = stripslashes($account['characterWisdomSkillPoints']);
-                $adminCharacterWisdomBonus = stripslashes($account['characterWisdomBonus']);
-                $adminCharacterWisdomEquipments = stripslashes($account['characterWisdomEquipments']);
-                $adminCharacterWisdomTotal = stripslashes($account['characterWisdomTotal']);
-                $adminCharacterDefeate = stripslashes($account['characterDefeate']);
-                $adminCharacterVictory = stripslashes($account['characterVictory']);
-                $adminCharacterExperience = stripslashes($account['characterExperience']);
-                $adminCharacterExperienceTotal = stripslashes($account['characterExperienceTotal']);
-                $adminCharacterSkillPoints = stripslashes($account['characterSkillPoints']);
-                $adminCharacterGold = stripslashes($account['characterGold']);
-                $adminCharacterTownId = stripslashes($account['characterTownId']);
-                $adminCharacterChapter = stripslashes($account['characterChapter']);
-                $adminCharacterOnBattle = stripslashes($account['characterOnBattle']);
-                $adminCharacterEnable = stripslashes($account['characterEnable']);
-
-                //On récupère le nom de la classe
-                $adminRaceName = stripslashes($account['raceName']);
             }
             $accountQuery->closeCursor();
 
-            //On va déterminer le sexe du personnage
-            switch ($adminCharacterSex)
+            //On récupère le personnage pour l'afficher dans le menu d'information du personnage
+            $characterQuery = $bdd->prepare("SELECT * FROM car_characters
+            WHERE characterAccountId = ?");
+            $characterQuery->execute([$adminAccountId]);
+            while ($character = $characterQuery->fetch())
             {
-                //Si le sexe du personnage est 0 c'est sexe féminin
-                case 0:
-                    $adminCharacterSexName = "Féminin";
-                break;
-
-                //Si le sexe du personnage est 1 c'est sexe masculin
-                case 1:
-                    $adminCharacterSexName = "Masculin";
-                break;
+                //On récupère les informations du personnage
+                $adminCharacterId = stripslashes($character['characterId']);
+                $adminCharacterAccountId = stripslashes($character['characterAccountId']);
+                $adminCharacterRaceId = stripslashes($character['characterRaceId']);
+                $adminCharacterName = stripslashes($character['characterName']);
+                $adminCharacterLevel = stripslashes($character['characterLevel']);
+                $adminCharacterSex = stripslashes($character['characterSex']);
+                $adminCharacterHpMin = stripslashes($character['characterHpMin']);
+                $adminCharacterHpMax = stripslashes($character['characterHpMax']);
+                $adminCharacterHpSkillPoints = stripslashes($character['characterHpSkillPoints']);
+                $adminCharacterHpBonus = stripslashes($character['characterHpBonus']);
+                $adminCharacterHpEquipments = stripslashes($character['characterHpEquipments']);
+                $adminCharacterHpTotal = stripslashes($character['characterHpTotal']);
+                $adminCharacterMpMin = stripslashes($character['characterMpMin']);
+                $adminCharacterMpMax = stripslashes($character['characterMpMax']);
+                $adminCharacterMpSkillPoints = stripslashes($character['characterMpSkillPoints']);
+                $adminCharacterMpBonus = stripslashes($character['characterMpBonus']);
+                $adminCharacterMpEquipments = stripslashes($character['characterMpEquipments']);
+                $adminCharacterMpTotal = stripslashes($character['characterMpTotal']);
+                $adminCharacterStrength = stripslashes($character['characterStrength']);
+                $adminCharacterStrengthSkillPoints = stripslashes($character['characterStrengthSkillPoints']);
+                $adminCharacterStrengthBonus = stripslashes($character['characterStrengthBonus']);
+                $adminCharacterStrengthEquipments = stripslashes($character['characterStrengthEquipments']);
+                $adminCharacterStrengthTotal = stripslashes($character['characterStrengthTotal']);
+                $adminCharacterMagic = stripslashes($character['characterMagic']);
+                $adminCharacterMagicSkillPoints = stripslashes($character['characterMagicSkillPoints']);
+                $adminCharacterMagicBonus = stripslashes($character['characterMagicBonus']);
+                $adminCharacterMagicEquipments = stripslashes($character['characterMagicEquipments']);
+                $adminCharacterMagicTotal = stripslashes($character['characterMagicTotal']);
+                $adminCharacterAgility = stripslashes($character['characterAgility']);
+                $adminCharacterAgilitySkillPoints = stripslashes($character['characterAgilitySkillPoints']);
+                $adminCharacterAgilityBonus = stripslashes($character['characterAgilityBonus']);
+                $adminCharacterAgilityEquipments = stripslashes($character['characterAgilityEquipments']);
+                $adminCharacterAgilityTotal = stripslashes($character['characterAgilityTotal']);
+                $adminCharacterDefense = stripslashes($character['characterDefense']);
+                $adminCharacterDefenseSkillPoints = stripslashes($character['characterDefenseSkillPoints']);
+                $adminCharacterDefenseBonus = stripslashes($character['characterDefenseBonus']);
+                $adminCharacterDefenseEquipment = stripslashes($character['characterDefenseEquipments']);
+                $adminCharacterDefenseTotal = stripslashes($character['characterDefenseTotal']);
+                $adminCharacterDefenseMagic = stripslashes($character['characterDefenseMagic']);
+                $adminCharacterDefenseMagicSkillPoints = stripslashes($character['characterDefenseMagicSkillPoints']);
+                $adminCharacterDefenseMagicBonus = stripslashes($character['characterDefenseMagicBonus']);
+                $adminCharacterDefenseMagicEquipments = stripslashes($character['characterDefenseMagicEquipments']);
+                $adminCharacterDefenseMagicTotal = stripslashes($character['characterDefenseMagicTotal']);
+                $adminCharacterWisdom = stripslashes($character['characterWisdom']);
+                $adminCharacterWisdomSkillPoints = stripslashes($character['characterWisdomSkillPoints']);
+                $adminCharacterWisdomBonus = stripslashes($character['characterWisdomBonus']);
+                $adminCharacterWisdomEquipments = stripslashes($character['characterWisdomEquipments']);
+                $adminCharacterWisdomTotal = stripslashes($character['characterWisdomTotal']);
+                $adminCharacterDefeate = stripslashes($character['characterDefeate']);
+                $adminCharacterVictory = stripslashes($character['characterVictory']);
+                $adminCharacterExperience = stripslashes($character['characterExperience']);
+                $adminCharacterExperienceTotal = stripslashes($character['characterExperienceTotal']);
+                $adminCharacterSkillPoints = stripslashes($character['characterSkillPoints']);
+                $adminCharacterGold = stripslashes($character['characterGold']);
+                $adminCharacterTownId = stripslashes($character['characterTownId']);
+                $adminCharacterChapter = stripslashes($character['characterChapter']);
+                $adminCharacterOnBattle = stripslashes($character['characterOnBattle']);
+                $adminCharacterEnable = stripslashes($character['characterEnable']);
             }
+            $characterQuery->closeCursor();
 
-            //On va déterminer si le personnage est en combat ou pas
-            switch ($adminCharacterOnBattle)
+            //On récupère la classe du personnage pour l'afficher dans le menu d'information du personnage
+            $raceQuery = $bdd->prepare("SELECT * FROM car_races
+            WHERE raceId = ?");
+            $raceQuery->execute([$adminCharacterRaceId]);
+            while ($race = $raceQuery->fetch())
             {
-                //Si OnBattle du personnage est 0 il est hors combat
-                case 0:
-                    $adminCharacterOnBattleName = "Non";
-                break;
-
-                //Si OnBattle du personnage est 1 il est en combat
-                case 1:
-                    $adminCharacterOnBattleName = "Oui";
-                break;
+                //On récupère le nom de la classe
+                $adminRaceName = stripslashes($race['raceName']);
             }
+            $raceQuery->closeCursor();
 
             //Si adminCharacterTownId à un Id supérieur à zéro c'est que le joueur est dans une ville
             if ($adminCharacterTownId > 0)
@@ -241,6 +227,34 @@ if (isset($_POST['adminAccountId']))
                 $adminEquipmentWeaponId = 0;
                 $adminEquipmentWeaponName = "Vide";
                 $adminEquipmentWeaponDescription = "";
+            }
+
+            //On va déterminer le sexe du personnage
+            switch ($adminCharacterSex)
+            {
+                //Si le sexe du personnage est 0 c'est sexe féminin
+                case 0:
+                    $adminCharacterSexName = "Féminin";
+                break;
+
+                //Si le sexe du personnage est 1 c'est sexe masculin
+                case 1:
+                    $adminCharacterSexName = "Masculin";
+                break;
+            }
+
+            //On va déterminer si le personnage est en combat ou pas
+            switch ($adminCharacterOnBattle)
+            {
+                //Si OnBattle du personnage est 0 il est hors combat
+                case 0:
+                    $adminCharacterOnBattleName = "Non";
+                break;
+
+                //Si OnBattle du personnage est 1 il est en combat
+                case 1:
+                    $adminCharacterOnBattleName = "Oui";
+                break;
             }
             ?>
 
