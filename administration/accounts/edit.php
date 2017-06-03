@@ -265,7 +265,7 @@ if (isset($_POST['adminAccountId']))
                 Accès : <br> <select name="adminAccountAccess" class="form-control">
                     
                 <?php
-                switch ($accountAccess)
+                switch ($adminAccountAccess)
                 {
                     case 0:
                     ?>
