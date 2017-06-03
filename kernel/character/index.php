@@ -127,56 +127,56 @@ if ($characterExperience >= $experienceLevel)
     $characterSkillPoints = $characterSkillPoints + $skillPointsByLevel;
     $characterLevel = $characterLevel + 1;
     echo "<script>alert(\"Votre personnage vient de gagner un niveau !\");</script>";
+
+    //On met le personnage à jour si il gagne un niveau
+    $updatecharacter = $bdd->prepare("UPDATE car_characters SET
+    characterLevel = :characterLevel,
+    characterHpMin = :characterHpMin, 
+    characterHpMax = :characterHpMax, 
+    characterHpTotal = :characterHpTotal, 
+    characterMpMin = :characterMpMin, 
+    characterMpMax = :characterMpMax, 
+    characterMpTotal = :characterMpTotal, 
+    characterStrength = :characterStrength, 
+    characterStrengthTotal = :characterStrengthTotal, 
+    characterMagic = :characterMagic, 
+    characterMagicTotal = :characterMagicTotal, 
+    characterAgility = :characterAgility, 
+    characterAgilityTotal = :characterAgilityTotal, 
+    characterDefense = :characterDefense, 
+    characterDefenseTotal = :characterDefenseTotal, 
+    characterDefenseMagic = :characterDefenseMagic, 
+    characterDefenseMagicTotal = :characterDefenseMagicTotal, 
+    characterWisdom = :characterWisdom, 
+    characterWisdomTotal = :characterWisdomTotal, 
+    characterExperience = :characterExperience, 
+    characterExperienceTotal = :characterExperienceTotal,
+    characterSkillPoints = :characterSkillPoints
+    WHERE characterId= :characterId");
+
+    $updatecharacter->execute(array(
+    'characterLevel' => $characterLevel,  
+    'characterHpMin' => $characterHpMin, 
+    'characterHpMax' => $characterHpMax, 
+    'characterHpTotal' => $characterHpTotal, 
+    'characterMpMin' => $characterMpMin, 
+    'characterMpMax' => $characterMpMax, 
+    'characterMpTotal' => $characterMpTotal, 
+    'characterStrength' => $characterStrength, 
+    'characterStrengthTotal' => $characterStrengthTotal, 
+    'characterMagic' => $characterMagic, 
+    'characterMagicTotal' => $characterMagicTotal, 
+    'characterAgility' => $characterAgility, 
+    'characterAgilityTotal' => $characterAgilityTotal, 
+    'characterDefense' => $characterDefense, 
+    'characterDefenseTotal' => $characterDefenseTotal, 
+    'characterDefenseMagic' => $characterDefenseMagic, 
+    'characterDefenseMagicTotal' => $characterDefenseMagicTotal, 
+    'characterWisdom' => $characterWisdom, 
+    'characterWisdomTotal' => $characterWisdomTotal, 
+    'characterExperience' => $characterExperience, 
+    'characterExperienceTotal' => $characterExperienceTotal, 
+    'characterSkillPoints' => $characterSkillPoints, 
+    'characterId' => $characterId));
 }
-
-//On met le personnage à jour
-$updatecharacter = $bdd->prepare("UPDATE car_characters SET
-characterLevel = :characterLevel,
-characterHpMin = :characterHpMin, 
-characterHpMax = :characterHpMax, 
-characterHpTotal = :characterHpTotal, 
-characterMpMin = :characterMpMin, 
-characterMpMax = :characterMpMax, 
-characterMpTotal = :characterMpTotal, 
-characterStrength = :characterStrength, 
-characterStrengthTotal = :characterStrengthTotal, 
-characterMagic = :characterMagic, 
-characterMagicTotal = :characterMagicTotal, 
-characterAgility = :characterAgility, 
-characterAgilityTotal = :characterAgilityTotal, 
-characterDefense = :characterDefense, 
-characterDefenseTotal = :characterDefenseTotal, 
-characterDefenseMagic = :characterDefenseMagic, 
-characterDefenseMagicTotal = :characterDefenseMagicTotal, 
-characterWisdom = :characterWisdom, 
-characterWisdomTotal = :characterWisdomTotal, 
-characterExperience = :characterExperience, 
-characterExperienceTotal = :characterExperienceTotal,
-characterSkillPoints = :characterSkillPoints
-WHERE characterId= :characterId");
-
-$updatecharacter->execute(array(
-'characterLevel' => $characterLevel,  
-'characterHpMin' => $characterHpMin, 
-'characterHpMax' => $characterHpMax, 
-'characterHpTotal' => $characterHpTotal, 
-'characterMpMin' => $characterMpMin, 
-'characterMpMax' => $characterMpMax, 
-'characterMpTotal' => $characterMpTotal, 
-'characterStrength' => $characterStrength, 
-'characterStrengthTotal' => $characterStrengthTotal, 
-'characterMagic' => $characterMagic, 
-'characterMagicTotal' => $characterMagicTotal, 
-'characterAgility' => $characterAgility, 
-'characterAgilityTotal' => $characterAgilityTotal, 
-'characterDefense' => $characterDefense, 
-'characterDefenseTotal' => $characterDefenseTotal, 
-'characterDefenseMagic' => $characterDefenseMagic, 
-'characterDefenseMagicTotal' => $characterDefenseMagicTotal, 
-'characterWisdom' => $characterWisdom, 
-'characterWisdomTotal' => $characterWisdomTotal, 
-'characterExperience' => $characterExperience, 
-'characterExperienceTotal' => $characterExperienceTotal, 
-'characterSkillPoints' => $characterSkillPoints, 
-'characterId' => $characterId));
 ?>
