@@ -122,7 +122,7 @@ while ($item = $itemQueryList->fetch())
             </td>
             
             <td>
-                <form method="POST" action="Sale.php">
+                <form method="POST" action="sale.php">
                     <input type="hidden" name="inventoryID" value="<?php echo $inventoryID ?>">
                     <input type="submit" class="btn btn-default form-control" name="Sale" value="Vendre"><br /><br />
                 </form>
