@@ -8,7 +8,7 @@ if ($foundBattleArena > 0) { exit(header("Location: ../../modules/battleArena/in
 if ($foundBattleMonster > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
 ?>
 
-Liste de vos équippements
+Liste de vos équipements
 
 <hr>
 
@@ -18,21 +18,21 @@ $equipmentId = htmlspecialchars(addslashes($_POST['equipmentId']));
 /*
 SELECT * FROM car_items, car_inventory //On fait une liaison entre la table car_items et car_inventory
 WHERE itemId = inventoryItemItemId //On lie ses deux tables par l'Id de l'objet
-AND itemType = 'Armor' //Il faut que le type de l'objet soit soit une armure (Armor)
+AND (itemType = 'Armor' //Il faut que le type de l'objet soit soit une armure (Armor)
 OR itemType = 'Boots' //Soit des bottes (Boots)
 OR itemType = 'Gloves' //Soit des gants (Gloves)
 OR itemType = 'Helmet' //Soit un casque (Helmet)
-OR itemType = 'Weapon' //Ou soit une arme (Weapon)
+OR itemType = 'Weapon') //Ou soit une arme (Weapon)
 AND inventoryItemCharacterId = ? //Ou le proprietaire et le personnage du joueur
 ORDER BY itemType //Par ordre de type
 */
 $equipmentQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
 WHERE itemId = inventoryItemItemId
-AND itemType = 'Armor' 
+AND (itemType = 'Armor' 
 OR itemType = 'Boots' 
 OR itemType = 'Gloves' 
 OR itemType = 'Helmet' 
-OR itemType = 'Weapon'
+OR itemType = 'Weapon')
 AND inventoryItemCharacterId = ?
 AND itemId = ?");
 $equipmentQuery->execute([$characterId, $equipmentId]);
