@@ -2,7 +2,7 @@
 //Si il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si il y a pas de combat contre un monstre on redirige le joueur vers le module dungeon
-if ($foundBattleMonster == 0) { exit(header("Location: ../../modules/dungeon/index.php")); }
+if ($battleMonsterRow == 0) { exit(header("Location: ../../modules/battleArena/index.php")); }
 
 if (isset($_POST['attack']))
 {
@@ -79,6 +79,7 @@ if (isset($_POST['attack']))
     $updateCharacter->execute([
     'characterHpMin' => $characterHpMin,
     'characterId' => $characterId]);
+    $updateCharacter->closeCursor();
 
     //On met le monstre à jour dans la base de donnée
     $updateMonsterBattle = $bdd->prepare("UPDATE car_battles_monsters
@@ -87,6 +88,7 @@ if (isset($_POST['attack']))
     $updateMonsterBattle->execute([
     'battleMonsterHpRemaining' => $battleMonsterHpRemaining,
     'battleMonsterId' => $battleMonsterId]);
+    $updateMonsterBattle->closeCursor();
 
     //Si le joueur ou le monstre adverse a moins ou a zéro HP on redirige le joueur vers la page des récompenses
     if ($characterHpMin <= 0 || $battleMonsterHpRemaining <= 0)

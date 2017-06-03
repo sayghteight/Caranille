@@ -2,14 +2,15 @@
 //Si il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si il y a pas de combat contre un personnage on redirige le joueur vers le module arena
-if ($foundBattleArena == 0) { exit(header("Location: ../../modules/arena/index.php")); }
+if ($battleArenaRow == 0) { exit(header("Location: ../../modules/battleArena/index.php")); }
 
 if (isset($_POST['escape']))
 {
     //On détruit le combat en cours
-    $DeleteBattle = $bdd->prepare("DELETE FROM car_battles_arenas 
+    $deleteBattle = $bdd->prepare("DELETE FROM car_battles_arenas 
     WHERE battleArenaId = :battleArenaId");
-    $DeleteBattle->execute(array('battleArenaId' => $battleArenaId));
+    $deleteBattle->execute(array('battleArenaId' => $battleArenaId));
+    $deleteBattle->closeCursor();
     ?>
     
     Vous avez fuit le combat !

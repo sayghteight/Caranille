@@ -20,34 +20,34 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
         if ($accountPassword == $accountPasswordConfirm) 
         {
             //On fait une requête pour vérifier si le pseudo est déjà utilisé
-            $pseudoListQuery = $bdd->prepare('SELECT * FROM car_accounts 
+            $pseudoQuery = $bdd->prepare('SELECT * FROM car_accounts 
             WHERE accountPseudo= ?');
-            $pseudoListQuery->execute([$accountPseudo]);
-            $pseudoList = $pseudoListQuery->rowCount();
-            $pseudoListQuery->closeCursor();
+            $pseudoQuery->execute([$accountPseudo]);
+            $pseudoRow = $pseudoQuery->rowCount();
+            $pseudoQuery->closeCursor();
 
             //Si le pseudo est disponible
-            if ($pseudoList == 0) 
+            if ($pseudoRow == 0) 
             {
                 //On fait une requête pour vérifier si le nom du personnage est déjà utilisé
-                $characterListQuery = $bdd->prepare('SELECT * FROM car_characters 
+                $characterQuery = $bdd->prepare('SELECT * FROM car_characters 
                 WHERE characterName= ?');
-                $characterListQuery->execute([$characterName]);
-                $characterList = $characterListQuery->rowCount();
-                $characterListQuery->closeCursor();
+                $characterQuery->execute([$characterName]);
+                $characterRow = $characterQuery->rowCount();
+                $characterQuery->closeCursor();
 
                 //Si le personnage est disponible
-                if ($characterList == 0) 
+                if ($characterRow == 0) 
                 {
                     //On fait une requête pour vérifier si le nom du personnage est déjà utilisé
-                    $raceListQuery = $bdd->prepare('SELECT * FROM car_races 
+                    $raceQuery = $bdd->prepare('SELECT * FROM car_races 
                     WHERE raceId= ?');
-                    $raceListQuery->execute([$characterRaceId]);
-                    $raceList = $raceListQuery->rowCount();
-                    $raceListQuery->closeCursor();
+                    $raceQuery->execute([$characterRaceId]);
+                    $raceRow = $raceQuery->rowCount();
+                    $raceQuery->closeCursor();
 
                     //Si la race du personnage existe
-                    if ($raceList >= 1) 
+                    if ($raceRow >= 1) 
                     {
                         //Variables pour la création d'un compte
                         $date = date('Y-m-d H:i:s');

@@ -4,19 +4,19 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'est pas dans une ville on le redirige vers la carte du monde
 if ($characterTownId == 0) { exit(header("Location: ../../modules/map/index.php")); }
 //Si il y a actuellement un combat contre un joueur on redirige le joueur vers le module battleArena
-if ($foundBattleArena > 0) { exit(header("Location: ../../modules/battleArena/index.php")); }
+if ($battleArenaRow > 0) { exit(header("Location: ../../modules/battleArena/index.php")); }
 //Si il y a actuellement un combat contre un monstre on redirige le joueur vers le module battleMonster
-if ($foundBattleMonster > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
+if ($battleMonsterRow > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
 
 //On fait une recherche de tous les joueurs dans la base de donnée qui ont un Id différent du notre et qui sont dans la même ville
-$opponentQueryList = $bdd->prepare("SELECT * FROM car_characters 
+$opponentQuery = $bdd->prepare("SELECT * FROM car_characters 
 WHERE characterId != ?
 AND characterTownId = ?");
-$opponentQueryList->execute([$characterId, $townId]);
-$opponentQuery = $opponentQueryList->rowCount();
+$opponentQuery->execute([$characterId, $townId]);
+$opponentRow = $opponentQuery->rowCount();
 
 //Si un ou plusieurs personnages ont été trouvé
-if ($opponentQuery > 0)
+if ($opponentRow > 0)
 {
     ?>
     <form method="POST" action="arena.php">
@@ -25,7 +25,7 @@ if ($opponentQuery > 0)
             <select class="form-control" id="opponentCharacterId" name="opponentCharacterId">
             <?php
             //On fait une boucle sur tous les résultats
-            while ($opponent = $opponentQueryList->fetch())
+            while ($opponent = $opponentQuery->fetch())
             {
                 //on récupère les valeurs de chaque joueurs qu'on va ensuite mettre dans le menu déroulant
                 $characterId = stripslashes($opponent['characterId']); 
@@ -48,6 +48,6 @@ else
     Il n'y a aucun joueur à proximité, essayez de vous approcher d'un autre joueur.
     <?php
 }
-$opponentQueryList->closeCursor();
+$opponentQuery->closeCursor();
 
 require_once("../../html/footer.php"); ?>

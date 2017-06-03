@@ -2,7 +2,7 @@
 //Si il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si il y a pas de combat contre un monstre on redirige le joueur vers le module dungeon
-if ($foundBattleMonster == 0) { exit(header("Location: ../../modules/dungeon/index.php")); }
+if ($battleMonsterRow == 0) { exit(header("Location: ../../modules/battleArena/index.php")); }
 
 //Si le monstre et le joueur on 0 HP
 if ($battleMonsterHpRemaining <= 0 && $characterHpMin <= 0)
@@ -17,11 +17,13 @@ if ($battleMonsterHpRemaining <= 0 && $characterHpMin <= 0)
     WHERE characterId = :characterId");
     $updateCharacter->execute([
     'characterId' => $characterId]);
+    $updateCharacter->closeCursor();
 
     //On détruit le combat en cours
-    $DeleteBattle = $bdd->prepare("DELETE FROM car_battles_monsters 
+    $deleteBattle = $bdd->prepare("DELETE FROM car_battles_monsters 
     WHERE battleMonsterId = :battleMonsterId");
-    $DeleteBattle->execute(array('battleMonsterId' => $battleMonsterId));
+    $deleteBattle->execute(array('battleMonsterId' => $battleMonsterId));
+    $deleteBattle->closeCursor();
     ?>
 
     <hr>
@@ -51,11 +53,13 @@ if ($battleMonsterHpRemaining <= 0 && $characterHpMin > 0)
     'monsterExperience' => $monsterExperience,
     'monsterGold' => $monsterGold,
     'characterId' => $characterId]);
+    $updateCharacter->closeCursor();
 
     //On détruit le combat en cours
-    $DeleteBattle = $bdd->prepare("DELETE FROM car_battles_monsters 
+    $deleteBattle = $bdd->prepare("DELETE FROM car_battles_monsters 
     WHERE battleMonsterId = :battleMonsterId");
-    $DeleteBattle->execute(array('battleMonsterId' => $battleMonsterId));
+    $deleteBattle->execute(array('battleMonsterId' => $battleMonsterId));
+    $deleteBattle->closeCursor();
     ?>
 
     <hr>

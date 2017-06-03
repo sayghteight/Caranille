@@ -2,23 +2,24 @@
 require_once("../../kernel/config.php");
 
 //On fait une requête pour vérifier si il y a un combat en cours
-$foundBattleQuery = $bdd->prepare("SELECT * FROM car_battles_arenas, car_characters 
+$battleArenaQuery = $bdd->prepare("SELECT * FROM car_battles_arenas, car_characters 
 WHERE battleArenaCharacterId = characterId
 AND battleArenaCharacterId = ?");
-$foundBattleQuery->execute([$characterId]);
-$foundBattleArena = $foundBattleQuery->rowCount();
+$battleArenaQuery->execute([$characterId]);
+$battleArenaRow = $battleArenaQuery->rowCount();
 
 //Si il y a un combat de trouvé
-if ($foundBattleArena == 1)
+if ($battleArenaRow == 1)
 {
     //On boucle sur le résultat
-    while ($foundBattle = $foundBattleQuery->fetch())
+    while ($battleArena = $battleArenaQuery->fetch())
     {
-        $battleArenaId = $foundBattle['battleArenaId'];
-        $battleArenaOpponentCharacterId = $foundBattle['battleArenaOpponentCharacterId'];
-        $battleArenaOpponentCharacterHpRemaining = $foundBattle['battleArenaOpponentCharacterHpRemaining'];
-        $battleArenaOpponentCharacterMpRemaining = $foundBattle['battleArenaOpponentCharacterMpRemaining'];
+        $battleArenaId = $battleArena['battleArenaId'];
+        $battleArenaOpponentCharacterId = $battleArena['battleArenaOpponentCharacterId'];
+        $battleArenaOpponentCharacterHpRemaining = $battleArena['battleArenaOpponentCharacterHpRemaining'];
+        $battleArenaOpponentCharacterMpRemaining = $battleArena['battleArenaOpponentCharacterMpRemaining'];
     }
+    $battleArenaQuery->closeCursor();
 
     //On recherche le personnage à combattre dans la base de donnée avec son Id
     $opponentQuery = $bdd->prepare("SELECT * FROM car_characters 
@@ -79,5 +80,6 @@ if ($foundBattleArena == 1)
         $opponentCharacterOnBattle = stripslashes($opponent['characterOnBattle']);
         $opponentCharacterEnable = stripslashes($opponent['characterEnable']);
     }
+    $opponentQuery->closeCursor();
 }
 ?>

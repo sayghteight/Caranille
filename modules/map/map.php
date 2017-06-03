@@ -5,9 +5,9 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur est déjà dans une ville on le redirige vers la ville
 if ($characterTownId >= 1) { exit(header("Location: ../../modules/town/index.php")); }
 //Si il y a actuellement un combat contre un joueur on redirige le joueur vers le module battleArena
-if ($foundBattleArena > 0) { exit(header("Location: ../../modules/battleArena/index.php")); }
+if ($battleArenaRow > 0) { exit(header("Location: ../../modules/battleArena/index.php")); }
 //Si il y a actuellement un combat contre un monstre on redirige le joueur vers le module battleMonster
-if ($foundBattleMonster > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
+if ($battleMonsterRow > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
 
 //Si tous les champs ont bien été rempli
 if (isset($_POST['townId']))
@@ -19,15 +19,15 @@ if (isset($_POST['townId']))
         $townId = htmlspecialchars(addslashes($_POST['townId']));
 
         //On fait une requête pour vérifier si le joueur peut accèder à la ville choisie
-        $townListQuery = $bdd->prepare('SELECT * FROM car_towns
+        $townQuery = $bdd->prepare('SELECT * FROM car_towns
         WHERE townChapter <= ?
         AND townId = ?');
-        $townListQuery->execute([$characterChapter, $townId]);
-        $townList = $townListQuery->rowCount();
-        $townListQuery->closeCursor();
+        $townQuery->execute([$characterChapter, $townId]);
+        $townRow = $townQuery->rowCount();
+        $townQuery->closeCursor();
 
         //Si la ville est disponible pour le joueur il y entre
-        if ($townList >= 1) 
+        if ($townRow >= 1) 
         {
             //On met le personnage à jour
             $updatecharacter = $bdd->prepare("UPDATE car_characters SET
@@ -37,6 +37,7 @@ if (isset($_POST['townId']))
             $updatecharacter->execute(array(
             'characterTownId' => $townId, 
             'characterId' => $characterId));
+            $updatecharacter->closeCursor();
 
             header("Location: ../../modules/town/index.php");
         }

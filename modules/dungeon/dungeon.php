@@ -4,9 +4,9 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'est pas dans une ville on le redirige vers la carte du monde
 if ($characterTownId == 0) { exit(header("Location: ../../modules/map/index.php")); }
 //Si il y a actuellement un combat contre un joueur on redirige le joueur vers le module battleArena
-if ($foundBattleArena > 0) { exit(header("Location: ../../modules/battleArena/index.php")); }
+if ($battleArenaRow > 0) { exit(header("Location: ../../modules/battleArena/index.php")); }
 //Si il y a actuellement un combat contre un monstre on redirige le joueur vers le module battleMonster
-if ($foundBattleMonster > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
+if ($battleMonsterRow > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
 
 //Si tous les champs ont bien été rempli
 if (isset($_POST['battleMonsterId']))
@@ -25,23 +25,24 @@ if (isset($_POST['battleMonsterId']))
         AND monsterId = ? //On ajoute l'Id du monstre obtenu par le formulaire
         AND townId = ? //On ajoute l'Id de la ville dans laquel on est
         */
-        $monsterQueryList = $bdd->prepare("SELECT * FROM car_monsters, car_towns, car_towns_monsters
+        $monsterQuery = $bdd->prepare("SELECT * FROM car_monsters, car_towns, car_towns_monsters
         WHERE townMonsterId = monsterId
         AND townTownId = townId
         AND monsterId = ?
         AND townId = ?");
-        $monsterQueryList->execute([$monsterId, $townId]);
-        $monsterQuery = $monsterQueryList->rowCount();
+        $monsterQuery->execute([$monsterId, $townId]);
+        $monsterRow = $monsterQuery->rowCount();
 
         //Si le monstre est disponible
-        if ($monsterQuery == 1) 
+        if ($monsterRow == 1) 
         {
-            while ($monster = $monsterQueryList->fetch())
+            while ($monster = $monsterQuery->fetch())
             {
                 //On récupère les HP et MP du monstre
                 $monsterHp = $monster['monsterHp'];
                 $monsterMp = $monster['monsterMp'];
             }
+            $monsterQuery->closeCursor();
 
             //Insertion du combat dans la base de donnée avec les données du monstre
             $addBattleMonster = $bdd->prepare("INSERT INTO car_battles_monsters VALUES(

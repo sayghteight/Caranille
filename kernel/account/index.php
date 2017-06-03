@@ -19,14 +19,15 @@ while ($account = $accountQuery->fetch())
     $accountLastConnection = stripslashes($account['accountLastConnection']);        
     $accountLastIp = stripslashes($account['accountLastIp']);
 }
+$accountQuery->closeCursor();
 
 $accountLastAction = $date = date('Y-m-d H:i:s');
 
-$updateaccount = $bdd->prepare("UPDATE car_accounts SET 
+$updateAccount = $bdd->prepare("UPDATE car_accounts SET 
 accountLastAction = :accountLastAction
 WHERE accountId= :accountId");
 
-$updateaccount->execute(array(
+$updateAccount->execute(array(
 'accountLastAction' => $accountLastAction,   
 'accountId' => $accountId));
 ?>

@@ -68,6 +68,7 @@ while ($character = $characterQuery->fetch())
     $characterOnBattle = stripslashes($character['characterOnBattle']);
     $characterEnable = stripslashes($character['characterEnable']);
 }
+$characterQuery->closeCursor();
 
 //On fait une recherche dans la base de donnée pour récupérer la race du personnage
 $racerQuery = $bdd->prepare("SELECT * FROM car_races 
@@ -87,6 +88,7 @@ while ($race = $racerQuery->fetch())
     $raceDefenseMagicBonus = stripslashes($race['raceDefenseMagicBonus']);
     $raceWidsomBonus = stripslashes($race['raceWidsomBonus']);
 }
+$racerQuery->closeCursor();
 
 //Valeurs des statistiques qui seront ajoutée à la monté d'un niveau
 $levelBaseExperience = 5000;
@@ -129,7 +131,7 @@ if ($characterExperience >= $experienceLevel)
     echo "<script>alert(\"Votre personnage vient de gagner un niveau !\");</script>";
 
     //On met le personnage à jour si il gagne un niveau
-    $updatecharacter = $bdd->prepare("UPDATE car_characters SET
+    $updateCharacter = $bdd->prepare("UPDATE car_characters SET
     characterLevel = :characterLevel,
     characterHpMin = :characterHpMin, 
     characterHpMax = :characterHpMax, 
@@ -154,7 +156,7 @@ if ($characterExperience >= $experienceLevel)
     characterSkillPoints = :characterSkillPoints
     WHERE characterId= :characterId");
 
-    $updatecharacter->execute(array(
+    $updateCharacter->execute(array(
     'characterLevel' => $characterLevel,  
     'characterHpMin' => $characterHpMin, 
     'characterHpMax' => $characterHpMax, 

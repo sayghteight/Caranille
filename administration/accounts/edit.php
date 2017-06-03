@@ -140,9 +140,9 @@ if (isset($_POST['adminAccountId']))
 
             //On récupère les équipement équippé du personnage pour l'afficher dans le menu d'information du personnage
             $equipmentEquipedQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
-            WHERE itemId = inventoryItemItemId
-            AND inventoryItemEquipped = 1
-            AND inventoryItemCharacterId = ?");
+            WHERE itemId = inventoryItemId
+            AND inventoryEquipped = 1
+            AND inventoryCharacterId = ?");
             $equipmentEquipedQuery->execute([$adminCharacterId]);
 
             //On fait une boucle sur les résultats et on vérifie à chaque fois de quel type d'équipement il s'agit

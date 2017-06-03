@@ -158,11 +158,11 @@ CREATE TABLE IF NOT EXISTS `car_codes_used` (
 
 CREATE TABLE IF NOT EXISTS `car_inventory` 
 (
-  `inventoryItemId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `inventoryItemCharacterId` int(5) NOT NULL,
-  `inventoryItemItemId` int(5) NOT NULL,
-  `inventoryItemQuantity` int(5) NOT NULL,
-  `inventoryItemEquipped` int(2) NOT NULL
+  `inventoryId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `inventoryCharacterId` int(5) NOT NULL,
+  `inventoryItemId` int(5) NOT NULL,
+  `inventoryQuantity` int(5) NOT NULL,
+  `inventoryEquipped` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `car_items` (

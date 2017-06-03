@@ -14,19 +14,19 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
         <?php
         //on récupère les valeurs de chaque joueurs qu'on va ensuite mettre dans le menu déroulant
         //On fait une recherche dans la base de donnée de tous les comptes
-        $accountListQuery = $bdd->query("SELECT * FROM car_accounts, car_characters
+        $accountQuery = $bdd->query("SELECT * FROM car_accounts, car_characters
         WHERE accountId = characterAccountId
         ORDER by characterName");
-        while ($accountList = $accountListQuery->fetch())
+        while ($account = $accountQuery->fetch())
         {
-            $adminAccountId = stripslashes($accountList['accountId']);
-            $adminAccountPseudo = stripslashes($accountList['accountPseudo']);
-            $adminAccountCharacterName =  stripslashes($accountList['characterName']); ?>
+            $adminAccountId = stripslashes($account['accountId']);
+            $adminAccountPseudo = stripslashes($account['accountPseudo']);
+            $adminAccountCharacterName =  stripslashes($account['characterName']); ?>
             ?>
                 <option value="<?php echo $adminAccountId ?>"><?php echo "$adminAccountCharacterName ($adminAccountPseudo)"; ?></option>
             <?php
         }
-        $accountListQuery->closeCursor();
+        $accountQuery->closeCursor();
         ?>
         </select>
     </div>

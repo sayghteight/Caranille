@@ -3,9 +3,9 @@ require_once("../../kernel/config.php");
 
 //On fait une requête pour savoir quel équipement le personnage à d'équipé
 $equipmentEquipedQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
-WHERE itemId = inventoryItemItemId
-AND inventoryItemEquipped = 1
-AND inventoryItemCharacterId = ?");
+WHERE itemId = inventoryItemId
+AND inventoryEquipped = 1
+AND inventoryCharacterId = ?");
 $equipmentEquipedQuery->execute([$characterId]);
 
 //On fait une boucle sur les résultats et on vérifie à chaque fois de quel type d'équipement il s'agit
@@ -49,6 +49,7 @@ while ($equipment = $equipmentEquipedQuery->fetch())
         break;
     }
 }
+$equipmentEquipedQuery->closeCursor();
 
 //On cherche maintenant à voir quel équipement le personnage n'a pas d'équipé pour ne pas faire appel à une variable qui n'existerait pas
 

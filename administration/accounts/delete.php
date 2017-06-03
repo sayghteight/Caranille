@@ -12,14 +12,14 @@ if (isset($_POST['delete']))
     $adminAccountId = htmlspecialchars(addslashes($_POST['adminAccountId']));
 
     //On fait une recherche dans la base de donnée de tous les comptes
-    $accountListQuery = $bdd->prepare("SELECT * FROM car_accounts
+    $accountQuery = $bdd->prepare("SELECT * FROM car_accounts
     WHERE accountId = ?");
-    $accountListQuery->execute([$adminAccountId]);
-    while ($accountList = $accountListQuery->fetch())
+    $accountQuery->execute([$adminAccountId]);
+    while ($account = $accountQuery->fetch())
     {
-        $adminAccountPseudo = stripslashes($accountList['accountPseudo']);
+        $adminAccountPseudo = stripslashes($account['accountPseudo']);
     }
-    $accountListQuery->closeCursor();
+    $accountQuery->closeCursor();
 
     ?>
     <p>ATTENTION</p> 

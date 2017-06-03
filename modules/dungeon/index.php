@@ -4,9 +4,9 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'est pas dans une ville on le redirige vers la carte du monde
 if ($characterTownId == 0) { exit(header("Location: ../../modules/map/index.php")); }
 //Si il y a actuellement un combat contre un joueur on redirige le joueur vers le module battleArena
-if ($foundBattleArena > 0) { exit(header("Location: ../../modules/battleArena/index.php")); }
+if ($battleArenaRow > 0) { exit(header("Location: ../../modules/battleArena/index.php")); }
 //Si il y a actuellement un combat contre un monstre on redirige le joueur vers le module battleMonster
-if ($foundBattleMonster > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
+if ($battleMonsterRow > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
 ?>
 
 Bienvenue dans le donjon.<br />
@@ -40,6 +40,7 @@ if ($monsterQuery > 0)
                     <option value="<?php echo $monsterId ?>"><?php echo $monsterName ?></option>
                 <?php
             }
+            $monsterQueryList->closeCursor();
             ?>
             </select>
         </div>
@@ -54,6 +55,5 @@ else
     Il n'y a aucun monstre de disponible.
     <?php
 }
-$monsterQueryList->closeCursor();
 
 require_once("../../html/footer.php"); ?>
