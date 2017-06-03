@@ -7,12 +7,30 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 ?>
 
-Que souhaitez-vous faire ?
-
-<hr>
-        
-<form method="POST" action="accounts.php">
-    <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer un compte"><br />
+<form method="POST" action="edit.php">
+    <div class="form-group row">
+        <label for="equipmentList" class="col-2 col-form-label">Liste des joueurs</label>
+        <select class="form-control" id="adminAccountId" name="adminAccountId">
+        <?php
+        //on récupère les valeurs de chaque joueurs qu'on va ensuite mettre dans le menu déroulant
+        //On fait une recherche dans la base de donnée de tous les comptes
+        $accountListQuery = $bdd->query("SELECT * FROM car_accounts, car_characters
+        WHERE accountId = characterAccountId
+        ORDER by characterName");
+        while ($accountList = $accountListQuery->fetch())
+        {
+            $adminAccountId = stripslashes($accountList['accountId']);
+            $adminAccountPseudo = stripslashes($accountList['accountPseudo']);
+            $adminAccountCharacterName =  stripslashes($accountList['characterName']); ?>
+            ?>
+                <option value="<?php echo $adminAccountId ?>"><?php echo "$adminAccountCharacterName ($adminAccountPseudo)"; ?></option>
+            <?php
+        }
+        $accountListQuery->closeCursor();
+        ?>
+        </select>
+    </div>
+        <center><input type="submit" name="enter" class="btn btn-default form-control" value="Afficher"></center>
 </form>
 
-<?php require_once("../html/footer.php"); ?>
+<?php require_once("../html/footer.php");

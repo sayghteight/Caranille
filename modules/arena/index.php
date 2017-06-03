@@ -15,7 +15,7 @@ AND characterTownId = ?");
 $opponentQueryList->execute([$characterId, $townId]);
 $opponentQuery = $opponentQueryList->rowCount();
 
-//Si plusieurs personnages ont été trouvé
+//Si un ou plusieurs personnages ont été trouvé
 if ($opponentQuery > 0)
 {
     ?>

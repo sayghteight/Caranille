@@ -47,7 +47,7 @@ require_once("../../kernel/town/index.php");
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gestion de la communauté<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="../../administration/accounts/index.php">Comptes/Personnages</a></li>
+                                <li><a href="../../administration/accounts/index.php">Joueurs</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
