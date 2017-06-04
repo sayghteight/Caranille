@@ -71,7 +71,7 @@ if (isset($_POST['viewItem']))
                     </td>
                     
                     <td>
-                        <?php echo $itemDescription; ?>
+                        <?php echo nl2br($itemDescription); ?>
                     </td>
                 </tr>
                     

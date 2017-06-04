@@ -180,5 +180,6 @@ if ($characterExperience >= $experienceLevel)
     'characterExperienceTotal' => $characterExperienceTotal, 
     'characterSkillPoints' => $characterSkillPoints, 
     'characterId' => $characterId));
+    $updateCharacter->closeCursor();
 }
 ?>

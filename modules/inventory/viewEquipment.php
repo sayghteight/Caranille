@@ -62,6 +62,7 @@ if (isset($_POST['viewEquipment']))
             $equipmentDefenseMagicEffect = stripslashes($equipment['itemDefenseMagicEffect']);
             $equipmentWisdomEffect = stripslashes($equipment['itemWisdomEffect']);
             $equipmentSalePrice = stripslashes($equipment['itemSalePrice']);
+            $equipmentEquipped = stripslashes($equipment['inventoryEquipped']);
             ?>
             <table class="table">
                 <tr>
@@ -80,7 +81,7 @@ if (isset($_POST['viewEquipment']))
                     </td>
                     
                     <td>
-                        <?php echo $equipmentDescription; ?>
+                        <?php echo nl2br($equipmentDescription); ?>
                     </td>
                 </tr>
                     
@@ -138,29 +139,28 @@ if (isset($_POST['viewEquipment']))
                     
                     <td>
                         <?php
-                        //Si cet objet n'est pas équipé on donne la possibilité au joueur de l'équiper ou le vendre
-                        if($equipment['inventoryEquipped'] == '0')
+                        //Si l'équippement n'est pas équippé ont propose au joueur de l'équipper
+                        if ($equipmentEquipped == 0)
                         {
                             ?>
-                            <form method="POST" action="equip.php">
-                                <input type="hidden" name="itemId" value="<?php echo $itemId ?>">
-                                <input type="submit" class="btn btn-default form-control" name="equip" value="Equiper">
-                            </form>
-
-                            <form method="POST" action="sale.php">
-                                <input type="hidden" name="itemId" value="<?php echo $itemId ?>">
-                                <input type="submit" class="btn btn-default form-control" name="sale" value="Vendre"><br /><br />
-                            </form>
+                                <form method="POST" action="equip.php">
+                                    <input type="hidden" name="itemId" value="<?php echo $itemId ?>">
+                                    <input type="submit" class="btn btn-default form-control" name="equip" value="Equiper">
+                                </form> 
                             <?php
                         }
-                        //Si cet objet est équipé le joueur ne peux pas le vendre
+                        //Si l'équippement est équippé on prévient le joueur
                         else
                         {
                             ?>
-                            Aucun actions possible
+                                Cet équipement est actuellement équippé
                             <?php
                         }
-                        ?>  
+                        ?>
+                        <form method="POST" action="sale.php">
+                            <input type="hidden" name="itemId" value="<?php echo $itemId ?>">
+                            <input type="submit" class="btn btn-default form-control" name="sale" value="Vendre"><br /><br />
+                        </form>
                     </td>
                 </tr>
             </table>
