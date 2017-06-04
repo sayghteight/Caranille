@@ -17,7 +17,7 @@ if (isset($_POST['add']))
             Type : <br> <input type="mail" name="adminItemType" class="form-control" placeholder="Type" required><br /><br />
             Niveau : <br> <input type="mail" name="adminItemLevel" class="form-control" placeholder="Email" required><br /><br />
             Niveau requis : <br> <input type="mail" name="adminItemLevelRequired" class="form-control" placeholder="Niveau requis" required><br /><br />
-            Nom : <br> <input type="text" name="adminItemName" class="form-control" placeholder="Nom" required autofocus><br /><br />
+            Nom : <br> <input type="text" name="adminItemName" class="form-control" placeholder="Nom" required><br /><br />
             Description : <br> <input type="mail" name="adminItemDescription" class="form-control" placeholder="Description" required><br /><br />
             HP Bonus : <br> <input type="mail" name="adminItemHpEffects" class="form-control" placeholder="HP Bonus" required><br /><br />
             MP Bonus : <br> <input type="mail" name="adminItemMpEffect" class="form-control" placeholder="MP Bonus" required><br /><br />

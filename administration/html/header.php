@@ -40,7 +40,7 @@ require_once("../../kernel/town/index.php");
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="../../modules/main/index.php">Administration</a>
+                    <a class="navbar-brand" href="../../administration/main/index.php">Administration</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -72,6 +72,7 @@ require_once("../../kernel/town/index.php");
                                 <li><a href="../../administration/updates/index.php">Mises à jour</a></li>
                             </ul>
                         </li>
+                        <li><a href="../../modules/main/index.php">Retour au jeu</a></li>
                     </ul>
                 </div>
             </div>

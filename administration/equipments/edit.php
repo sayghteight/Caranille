@@ -55,7 +55,7 @@ if (isset($_POST['adminItemId']))
                 Type : <br> <input type="mail" name="adminItemType" class="form-control" placeholder="Type" value="<?php echo $adminItemType; ?>" required><br /><br />
                 Niveau : <br> <input type="mail" name="adminItemLevel" class="form-control" placeholder="Email" value="<?php echo $adminItemLevel; ?>" required><br /><br />
                 Niveau requis : <br> <input type="mail" name="adminItemLevelRequired" class="form-control" placeholder="Niveau requis" value="<?php echo $adminItemLevelRequired; ?>" required><br /><br />
-                Nom : <br> <input type="text" name="adminItemName" class="form-control" placeholder="Nom" value="<?php echo $adminItemName; ?>" required autofocus><br /><br />
+                Nom : <br> <input type="text" name="adminItemName" class="form-control" placeholder="Nom" value="<?php echo $adminItemName; ?>" required><br /><br />
                 Description : <br> <input type="mail" name="adminItemDescription" class="form-control" placeholder="Description" value="<?php echo $adminItemDescription; ?>" required><br /><br />
                 HP Bonus : <br> <input type="mail" name="adminItemHpEffects" class="form-control" placeholder="HP Bonus" value="<?php echo $adminItemHpEffects; ?>" required><br /><br />
                 MP Bonus : <br> <input type="mail" name="adminItemMpEffect" class="form-control" placeholder="MP Bonus" value="<?php echo $adminItemMpEffect; ?>" required><br /><br />
