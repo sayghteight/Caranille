@@ -28,7 +28,6 @@ if (isset($_POST['finalDelete']))
         {   
             //On récupère l'Id du personnage
             $adminCharacterId = stripslashes($item['inventoryCharacterId']);
-            echo "$adminCharacterId le possède";
 
             //On remet les stats du joueurs à zéro pour recalculer ensuite le bonus de tous les équippements équippé
             $updateCharacter = $bdd->prepare("UPDATE car_characters SET
@@ -76,8 +75,6 @@ if (isset($_POST['finalDelete']))
                 $defenseMagicBonus = $defenseMagicBonus + stripslashes($equipment['itemDefenseMagicEffect']);
                 $wisdomBonus = $wisdomBonus + stripslashes($equipment['itemWisdomEffect']);
             }
-
-            echo $hpBonus;
 
             //On ajoute les bonus des stats au joueurs
             $updateCharacter = $bdd->prepare("UPDATE car_characters SET

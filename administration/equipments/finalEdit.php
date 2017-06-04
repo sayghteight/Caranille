@@ -80,7 +80,7 @@ if (isset($_POST['finalEdit']))
     $itemRow = $itemQuery->rowCount();
 
     //Si des joueurs en sont équippé
-    if ($itemRow == 1) 
+    if ($itemRow > 0) 
     {
         //On va mettre leur compte à jour
         while ($item = $itemQuery->fetch())
