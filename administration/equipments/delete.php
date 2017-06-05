@@ -9,34 +9,60 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 //Si l'utilisateur à cliqué sur le bouton delete
 if (isset($_POST['delete']))
 {
-    $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
-
-    //On fait une recherche dans la base de donnée de tous les comptes
-    $itemQuery = $bdd->prepare("SELECT * FROM car_items
-    WHERE itemId = ?");
-    $itemQuery->execute([$adminItemId]);
-    while ($item = $itemQuery->fetch())
+    //On vérifie si l'id de l'équippement choisit est correct et que le select retourne bien un nombre
+    if(ctype_digit($_POST['adminItemId']))
     {
-        $adminItemName = stripslashes($item['itemName']);
+        //On récupère l'Id du formulaire précédent
+        $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
+
+        //On fait une requête pour vérifier si l'équippement choisit existe
+        $itemQuery = $bdd->prepare('SELECT * FROM car_items 
+        WHERE itemId= ?');
+        $itemQuery->execute([$adminItemId]);
+        $itemRow = $itemQuery->rowCount();
+
+        //Si l'équippement est disponible
+        if ($itemRow == 1) 
+        {
+            //On fait une recherche dans la base de donnée de tous les comptes
+            $itemQuery = $bdd->prepare("SELECT * FROM car_items
+            WHERE itemId = ?");
+            $itemQuery->execute([$adminItemId]);
+            while ($item = $itemQuery->fetch())
+            {
+                $adminItemName = stripslashes($item['itemName']);
+            }
+            $itemQuery->closeCursor();
+
+            ?>
+            <p>ATTENTION</p> 
+            Vous êtes sur le point de supprimer l'équippement <em><?php echo $adminItemName ?></em><br />
+            confirmez-vous la suppression ?
+
+            <hr>
+                
+            <form method="POST" action="finalDelete.php">
+                <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?= $adminItemId ?>">
+                <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme la suppression">
+            </form>
+
+            <form method="POST" action="index.php">
+                <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
+            </form>
+            <?php
+        }
+        //Si l'équipement n'est pas disponible
+        else
+        {
+            echo "Erreur: Equippement indisponible";
+        }
+        $itemQuery->closeCursor();
     }
-    $itemQuery->closeCursor();
-
-    ?>
-    <p>ATTENTION</p> 
-    Vous êtes sur le point de supprimer l'équippement <em><?php echo $adminItemName ?></em><br />
-    confirmez-vous la suppression ?
-
-    <hr>
-        
-    <form method="POST" action="finalDelete.php">
-        <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?= $adminItemId ?>">
-        <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme la suppression">
-    </form>
-
-    <form method="POST" action="index.php">
-        <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
-    </form>
-    <?php
+    //Si l'équippement choisit n'est pas un nombre
+    else
+    {
+        echo "Erreur: Equippement invalide";
+    }
 }
 //Si l'utilisateur n'a pas cliqué sur le bouton delete
 else

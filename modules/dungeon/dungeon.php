@@ -27,7 +27,7 @@ if (isset($_POST['battleMonsterId']))
         */
         $monsterQuery = $bdd->prepare("SELECT * FROM car_monsters, car_towns, car_towns_monsters
         WHERE townMonsterId = monsterId
-        AND townTownId = townId
+        AND townMonsterTownId = townId
         AND monsterId = ?
         AND townId = ?");
         $monsterQuery->execute([$monsterId, $townId]);

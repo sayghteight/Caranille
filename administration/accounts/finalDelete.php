@@ -9,29 +9,57 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 //Si l'utilisateur à cliqué sur le bouton finalDelete
 if (isset($_POST['finalDelete']))
 {
-    $adminAccountId = htmlspecialchars(addslashes($_POST['adminAccountId']));
+    //On vérifie si l'id du compte choisit est correct et que le select retourne bien un nombre
+    if(ctype_digit($_POST['adminAccountId']))
+    {
+        //On récupère l'Id du formulaire précédent
+        $adminAccountId = htmlspecialchars(addslashes($_POST['adminAccountId']));
 
-    //On supprime le compte de la base de donnée
-    $accountDeleteQuery = $bdd->prepare("DELETE FROM car_accounts
-    WHERE accountId = ?");
-    $accountDeleteQuery->execute([$adminAccountId]);
-    $accountDeleteQuery->closeCursor();
+        //On fait une requête pour vérifier si le compte choisit existe
+        $accountQuery = $bdd->prepare('SELECT * FROM car_accounts 
+        WHERE accountId= ?');
+        $accountQuery->execute([$adminAccountId]);
+        $account = $accountQuery->rowCount();
+        $accountQuery->closeCursor();
 
-    //On supprime aussi le personnage de la base de donnée
-    $characterDeleteQuery = $bdd->prepare("DELETE FROM car_characters
-    WHERE characterAccountId = ?");
-    $characterDeleteQuery->execute([$adminAccountId]);
-    $characterDeleteQuery->closeCursor();
-    ?>
+        //Si le compte est disponible
+        if ($account == 1) 
+        {
+            $adminAccountId = htmlspecialchars(addslashes($_POST['adminAccountId']));
 
-    Le compte a bien été supprimé
+            //On supprime le compte de la base de donnée
+            $accountDeleteQuery = $bdd->prepare("DELETE FROM car_accounts
+            WHERE accountId = ?");
+            $accountDeleteQuery->execute([$adminAccountId]);
+            $accountDeleteQuery->closeCursor();
 
-    <hr>
-        
-    <form method="POST" action="index.php">
-            <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
-        </form>
-    <?php
+            //On supprime aussi le personnage de la base de donnée
+            $characterDeleteQuery = $bdd->prepare("DELETE FROM car_characters
+            WHERE characterAccountId = ?");
+            $characterDeleteQuery->execute([$adminAccountId]);
+            $characterDeleteQuery->closeCursor();
+            ?>
+
+            Le compte a bien été supprimé
+
+            <hr>
+                
+            <form method="POST" action="index.php">
+                    <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
+                </form>
+            <?php
+        }
+        //Si le compte n'est pas disponible
+        else
+        {
+            echo "Erreur: Compte indisponible";
+        }
+    }
+    //Si le compte choisit n'est pas un nombre
+    else
+    {
+        echo "Erreur: Compte invalide";
+    }
 }
 //Si l'utilisateur n'a pas cliqué sur le bouton finalDelete
 else

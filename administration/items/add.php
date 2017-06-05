@@ -19,7 +19,7 @@ if (isset($_POST['add']))
             MP Bonus : <br> <input type="mail" name="adminItemMpEffect" class="form-control" placeholder="MP Bonus" required><br /><br />
             Prix d'achat : <br> <input type="mail" name="adminItemPurchasePrice" class="form-control" placeholder="Prix d'achat" required><br /><br />
             Prix de vente : <br> <input type="mail" name="adminItemSalePrice" class="form-control" placeholder="Prix de vente" required><br /><br />
-            <input name="finalEdit" class="btn btn-default form-control" type="submit" value="Ajouter">
+            <input name="finalAdd" class="btn btn-default form-control" type="submit" value="Ajouter">
         </form>
     <?php
 }

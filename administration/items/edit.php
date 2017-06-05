@@ -6,22 +6,22 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//Si l'utilisateur à choisit un id de compte
+//Si l'utilisateur à choisit un id de l'objet
 if (isset($_POST['adminItemId']))
 {
-    //On vérifie si l'id du compte choisit est correct et que le select retourne bien un nombre
+    //On vérifie si l'id de l'objet choisit est correct et que le select retourne bien un nombre
     if(ctype_digit($_POST['adminItemId']))
     {
         //On récupère l'Id du formulaire précédent
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
 
-        //On fait une requête pour vérifier si le compte choisit existe
+        //On fait une requête pour vérifier si l'objet choisit existe
         $itemQuery = $bdd->prepare('SELECT * FROM car_items 
         WHERE itemId= ?');
         $itemQuery->execute([$adminItemId]);
         $itemRow = $itemQuery->rowCount();
 
-        //Si l'équippement est disponible
+        //Si l'objet est disponible
         if ($itemRow == 1) 
         {
             while ($item = $itemQuery->fetch())
@@ -63,17 +63,17 @@ if (isset($_POST['adminItemId']))
             </form>
             <?php
         }
-        //Si l'équipement n'est pas disponible
+        //Si l'objet n'est pas disponible
         else
         {
-            echo "Erreur: Equippement indisponible";
+            echo "Erreur: Objet indisponible";
         }
         $itemQuery->closeCursor();
     }
-    //Si le compte choisit n'est pas un nombre
+    //Si l'objet choisit n'est pas un nombre
     else
     {
-        echo "Erreur: Equippement invalide";
+        echo "Erreur: Objet invalide";
     }
 }
 //Si l'utilisateur n'a pas cliqué sur le bouton edit

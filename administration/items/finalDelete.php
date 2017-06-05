@@ -9,29 +9,54 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 //Si l'utilisateur à cliqué sur le bouton finalDelete
 if (isset($_POST['finalDelete']))
 {
-    $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
+    //On vérifie si l'id de l'objet choisit est correct et que le select retourne bien un nombre
+    if(ctype_digit($_POST['adminItemId']))
+    {
+        $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
 
-    //On supprime l'équippement de la base de donnée
-    $itemDeleteQuery = $bdd->prepare("DELETE FROM car_items
-    WHERE itemId = ?");
-    $itemDeleteQuery->execute([$adminItemId]);
-    $itemDeleteQuery->closeCursor();
+        //On fait une requête pour vérifier si l'objet choisit existe
+        $itemQuery = $bdd->prepare('SELECT * FROM car_items 
+        WHERE itemId= ?');
+        $itemQuery->execute([$adminItemId]);
+        $itemRow = $itemQuery->rowCount();
 
-    //On supprime aussi l'équippement de l'inventaire dans la base de donnée
-    $inventoryDeleteQuery = $bdd->prepare("DELETE FROM car_inventory
-    WHERE inventoryItemId = ?");
-    $inventoryDeleteQuery->execute([$adminItemId]);
-    $inventoryDeleteQuery->closeCursor();
-    ?>
+        //Si l'objet est disponible
+        if ($itemRow == 1) 
+        {
+            //On supprime l'objet de la base de donnée
+            $itemDeleteQuery = $bdd->prepare("DELETE FROM car_items
+            WHERE itemId = ?");
+            $itemDeleteQuery->execute([$adminItemId]);
+            $itemDeleteQuery->closeCursor();
 
-    L'objet a bien été supprimé
+            //On supprime aussi l'objet de l'inventaire dans la base de donnée
+            $inventoryDeleteQuery = $bdd->prepare("DELETE FROM car_inventory
+            WHERE inventoryItemId = ?");
+            $inventoryDeleteQuery->execute([$adminItemId]);
+            $inventoryDeleteQuery->closeCursor();
+            ?>
 
-    <hr>
-        
-    <form method="POST" action="index.php">
-            <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
-        </form>
-    <?php
+            L'objet a bien été supprimé
+
+            <hr>
+                
+            <form method="POST" action="index.php">
+                    <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
+                </form>
+            <?php
+        }
+        //Si l'objet n'est pas disponible
+        else
+        {
+            echo "Erreur: Objet indisponible";
+        }
+        $itemQuery->closeCursor();
+    }
+    //Si l'objet choisit n'est pas un nombre
+    else
+    {
+        echo "Erreur: Objet invalide";
+    }
 }
 //Si l'utilisateur n'a pas cliqué sur le bouton finalDelete
 else

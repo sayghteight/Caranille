@@ -7,7 +7,7 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //Si l'utilisateur à cliqué sur le bouton finalEdit
-if (isset($_POST['finalEdit']))
+if (isset($_POST['finalAdd']))
 {
     //On récupère les informations du formulaire
     $adminItemPicture = htmlspecialchars(addslashes($_POST['adminItemPicture']));

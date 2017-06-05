@@ -9,40 +9,40 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 //Si l'utilisateur à cliqué sur le bouton delete
 if (isset($_POST['delete']))
 {
-    //On vérifie si l'id de l'objet choisit est correct et que le select retourne bien un nombre
-    if(ctype_digit($_POST['adminItemId']))
+    //On vérifie si l'id du compte choisit est correct et que le select retourne bien un nombre
+    if(ctype_digit($_POST['adminMonsterId']))
     {
         //On récupère l'Id du formulaire précédent
-        $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
+        $adminMonsterId = htmlspecialchars(addslashes($_POST['adminMonsterId']));
 
-        //On fait une requête pour vérifier si l'objet choisit existe
-        $itemQuery = $bdd->prepare('SELECT * FROM car_items 
-        WHERE itemId= ?');
-        $itemQuery->execute([$adminItemId]);
-        $itemRow = $itemQuery->rowCount();
+        //On fait une requête pour vérifier si le monstre choisit existe
+        $monsterQuery = $bdd->prepare('SELECT * FROM car_monsters 
+        WHERE monsterId= ?');
+        $monsterQuery->execute([$adminMonsterId]);
+        $monsterRow = $monsterQuery->rowCount();
 
-        //Si l'objet est disponible
-        if ($itemRow == 1) 
+        //Si l'équippement est disponible
+        if ($monsterRow == 1) 
         {
             //On fait une recherche dans la base de donnée de tous les comptes
-            $itemQuery = $bdd->prepare("SELECT * FROM car_items
-            WHERE itemId = ?");
-            $itemQuery->execute([$adminItemId]);
-            while ($item = $itemQuery->fetch())
+            $monsterQuery = $bdd->prepare("SELECT * FROM car_monsters
+            WHERE monsterId = ?");
+            $monsterQuery->execute([$adminMonsterId]);
+            while ($monster = $monsterQuery->fetch())
             {
-                $adminItemName = stripslashes($item['itemName']);
+                $adminMonsterName = stripslashes($monster['monsterName']);
             }
-            $itemQuery->closeCursor();
+            $monsterQuery->closeCursor();
 
             ?>
             <p>ATTENTION</p> 
-            Vous êtes sur le point de supprimer l'équippement <em><?php echo $adminItemName ?></em><br />
+            Vous êtes sur le point de supprimer le monstre <em><?php echo $adminMonsterName ?></em><br />
             confirmez-vous la suppression ?
 
             <hr>
                 
             <form method="POST" action="finalDelete.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?= $adminItemId ?>">
+                <input type="hidden" class="btn btn-default form-control" name="adminMonsterId" value="<?= $adminMonsterId ?>">
                 <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme la suppression">
             </form>
 
@@ -51,17 +51,17 @@ if (isset($_POST['delete']))
             </form>
             <?php
         }
-        //Si l'objet n'est pas disponible
+        //Si le monstre n'est pas disponible
         else
         {
-            echo "Erreur: Objet indisponible";
+            echo "Erreur: Monstre indisponible";
         }
-        $itemQuery->closeCursor();
+        $monsterQuery->closeCursor();
     }
-    //Si l'objet choisit n'est pas un nombre
+    //Si le monstre choisit n'est pas un nombre
     else
     {
-        echo "Erreur: Objet invalide";
+        echo "Erreur: Monstre invalide";
     }
 }
 //Si l'utilisateur n'a pas cliqué sur le bouton delete
