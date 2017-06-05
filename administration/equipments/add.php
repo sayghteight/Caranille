@@ -12,8 +12,7 @@ if (isset($_POST['add']))
     ?>
         <p>Informations de l'équipement</p>
         <form method="POST" action="finalAdd.php">
-            Classe
-            <select class="form-control" id="adminItemRaceId" name="adminItemRaceId">
+            Classe <br> <select name="adminItemRaceId" class="form-control">
             <option value="0">Toutes les classes</option>
             <?php
             //On rempli le menu déroulant avec la liste des classes disponible
@@ -43,16 +42,15 @@ if (isset($_POST['add']))
             }
             $raceListQuery->closeCursor();
             ?>
-            </select>
-            Image : <br> <input type="mail" name="adminItemPicture" class="form-control" placeholder="Image" required><br />
-            Type:
-            <select class="form-control" id="adminItemType" name="adminItemType">
+            </select><br /><br />
+            Image : <br> <input type="mail" name="adminItemPicture" class="form-control" placeholder="Image" required><br /><br />
+            Type: <br> <select name="adminItemType" class="form-control">
                 <option value="Armor">Armure</option>
                 <option value="Boots">Bottes</option>
                 <option value="Gloves">Gants</option>
                 <option value="Helmet">Casque</option>
                 <option value="Weapon">Arme</option>
-            </select>
+            </select><br /><br />
             Niveau : <br> <input type="mail" name="adminItemLevel" class="form-control" placeholder="Email" required><br /><br />
             Niveau requis : <br> <input type="mail" name="adminItemLevelRequired" class="form-control" placeholder="Niveau requis" required><br /><br />
             Nom : <br> <input type="text" name="adminItemName" class="form-control" placeholder="Nom" required><br /><br />
