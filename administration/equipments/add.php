@@ -12,9 +12,47 @@ if (isset($_POST['add']))
     ?>
         <p>Informations de l'équipement</p>
         <form method="POST" action="finalAdd.php">
-            RaceId : <br> <input type="mail" name="adminItemRaceId" class="form-control" placeholder="RaceId" required><br /><br />
-            Image : <br> <input type="mail" name="adminItemPicture" class="form-control" placeholder="Image" required><br /><br />
-            Type : <br> <input type="mail" name="adminItemType" class="form-control" placeholder="Type" required><br /><br />
+            Classe
+            <select class="form-control" id="adminItemRaceId" name="adminItemRaceId">
+            <option value="0">Toutes les classes</option>
+            <?php
+            //On rempli le menu déroulant avec la liste des classes disponible
+            $raceListQuery = $bdd->query("SELECT * FROM car_races");
+            //On recherche combien il y a de classes disponible
+            $raceList = $raceListQuery->rowCount();
+            //Si il y a au moins une classe de disponible on les affiches dans le menu déroulant
+            if ($raceList >= 1)
+            {
+                //On fait une boucle sur tous les résultats
+                while ($raceList = $raceListQuery->fetch())
+                {
+                    //on récupère les valeurs de chaque classes qu'on va ensuite mettre dans le menu déroulant
+                    $raceId = stripslashes($raceList['raceId']); 
+                    $raceName = stripslashes($raceList['raceName']);
+                    ?>
+                        <option value="<?php echo $raceId ?>"><?php echo $raceName ?></option>
+                    <?php
+                }
+            }
+            //Si il n'y a aucune classe de disponible on ajoute "Aucune classe" dans le menu déroulant
+            else
+            {
+                ?>
+                    <option value="0">Aucune classe</option>
+                <?php
+            }
+            $raceListQuery->closeCursor();
+            ?>
+            </select>
+            Image : <br> <input type="mail" name="adminItemPicture" class="form-control" placeholder="Image" required><br />
+            Type:
+            <select class="form-control" id="adminItemType" name="adminItemType">
+                <option value="Armor">Armure</option>
+                <option value="Boots">Bottes</option>
+                <option value="Gloves">Gants</option>
+                <option value="Helmet">Casque</option>
+                <option value="Weapon">Arme</option>
+            </select>
             Niveau : <br> <input type="mail" name="adminItemLevel" class="form-control" placeholder="Email" required><br /><br />
             Niveau requis : <br> <input type="mail" name="adminItemLevelRequired" class="form-control" placeholder="Niveau requis" required><br /><br />
             Nom : <br> <input type="text" name="adminItemName" class="form-control" placeholder="Nom" required><br /><br />

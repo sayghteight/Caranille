@@ -46,13 +46,133 @@ if (isset($_POST['adminItemId']))
                 $adminItemPurchasePrice = stripslashes($item['itemPurchasePrice']);
                 $adminItemSalePrice = stripslashes($item['itemSalePrice']);
             }
+
+            //On récupère la classe de l'équippement pour l'afficher dans le menu d'information de l'équippement
+            $raceQuery = $bdd->prepare("SELECT * FROM car_races
+            WHERE raceId = ?");
+            $raceQuery->execute([$adminItemRaceId]);
+            while ($race = $raceQuery->fetch())
+            {
+                //On récupère le nom de la classe
+                $adminRaceId = stripslashes($race['raceId']);
+                $adminRaceName = stripslashes($race['raceName']);
+            }
+            $raceQuery->closeCursor();
             ?>
 
             <p>Informations de l'équipement</p>
             <form method="POST" action="finalEdit.php">
-                RaceId : <br> <input type="mail" name="adminItemRaceId" class="form-control" placeholder="RaceId" value="<?php echo $adminItemRaceId; ?>" required><br /><br />
+                Classe <br> <select name="adminItemRaceId" class="form-control">
+                <?php
+                //Si l'équippement a une classe attribuée on la met par défaut dans le select
+                if (isset($adminRaceId))
+                {
+                    ?>
+                    <option selected="selected" value="<?php echo $adminRaceId ?>"><?php echo $adminRaceName ?></option>
+                    <?php
+                }
+                //Si l'équipement n'a pas de classe attribuée c'est qu'il est disponible pour toutes les classes
+                else
+                {
+                    ?>
+                    <option selected="selected" value="0">Toutes les classes</option>
+                    <?php
+                }
+                ?>
+                <?php
+                //On rempli le menu déroulant avec la liste des classes disponible
+                $raceListQuery = $bdd->prepare("SELECT * FROM car_races
+                WHERE raceId != ?");
+                $raceListQuery->execute([$adminItemRaceId]);
+                //On recherche combien il y a de classes disponible
+                $raceList = $raceListQuery->rowCount();
+                //Si il y a au moins une classe de disponible on les affiches dans le menu déroulant
+                if ($raceList >= 1)
+                {
+                    //On fait une boucle sur tous les résultats
+                    while ($raceList = $raceListQuery->fetch())
+                    {
+                        //on récupère les valeurs de chaque classes qu'on va ensuite mettre dans le menu déroulant
+                        $raceId = stripslashes($raceList['raceId']); 
+                        $raceName = stripslashes($raceList['raceName']);
+                        ?>
+                        <option value="<?php echo $raceId ?>"><?php echo $raceName ?></option>
+                        <?php
+                    }
+                }
+                $raceListQuery->closeCursor();
+                //Si l'équippement a une classe attribuée on donne la possibilité au joueur de le rendre disponible à toutes les classes
+                if (isset($adminRaceId))
+                {
+                    ?>
+                    <option value="0">Toutes les classes</option>
+                    <?php
+                }
+                ?>
+                </select><br /><br />
                 Image : <br> <input type="mail" name="adminItemPicture" class="form-control" placeholder="Image" value="<?php echo $adminItemPicture; ?>" required><br /><br />
-                Type : <br> <input type="mail" name="adminItemType" class="form-control" placeholder="Type" value="<?php echo $adminItemType; ?>" required><br /><br />
+                Type <br> <select name="adminItemType" class="form-control">
+                <?php
+                switch ($adminItemType)
+                {
+                    //Si il s'agit d'une armure
+                    case "Armor":
+                        ?>
+                        <option selected="selected" value="Armor">Armure</option>
+                        <option value="Boots">Bottes</option>
+                        <option value="Gloves">Gants</option>
+                        <option value="Helmet">Casque</option>
+                        <option value="Weapon">Arme</option>
+                        <?php
+                    break;
+
+                    //Si il s'agit de bottes
+                    case "Boots":
+                        ?>
+                        <option selected="selected" value="Boots">Bottes</option>
+                        <option value="Armor">Armure</option>
+                        <option value="Gloves">Gants</option>
+                        <option value="Helmet">Casque</option>
+                        <option value="Weapon">Arme</option>
+                        <?php
+                    break;
+
+                    //Si il s'agit de gants
+                    case "Gloves":
+                        ?>
+                        <option selected="selected" value="Gloves">Gants</option>
+                        <option value="Armor">Armure</option>
+                        <option value="Boots">Bottes</option>
+                        <option value="Helmet">Casque</option>
+                        <option value="Weapon">Arme</option>
+                        <?php
+                    break;
+
+                    //Si il s'agit d'un casque
+                    case "Helmet":
+                        ?>
+                        <option selected="selected" value="Helmet">Helmet</option>
+                        <option value="Armor">Armure</option>
+                        <option value="Boots">Bottes</option>
+                        <option value="Gloves">Gants</option>
+                        <option value="Weapon">Arme</option>
+                        <?php
+                    break;
+
+                    //Si il s'agit d'une arme
+                    case "Weapon":
+                        ?>
+                        <option selected="selected" value="Weapon">Arme</option>
+                        <option value="Armor">Armure</option>
+                        <option value="Boots">Bottes</option>
+                        <option value="Gloves">Gants</option>
+                        <option value="Helmet">Casque</option>
+                    
+                        <?php
+                    break;
+                }
+                ?>                    
+                </select><br /><br />
                 Niveau : <br> <input type="mail" name="adminItemLevel" class="form-control" placeholder="Email" value="<?php echo $adminItemLevel; ?>" required><br /><br />
                 Niveau requis : <br> <input type="mail" name="adminItemLevelRequired" class="form-control" placeholder="Niveau requis" value="<?php echo $adminItemLevelRequired; ?>" required><br /><br />
                 Nom : <br> <input type="text" name="adminItemName" class="form-control" placeholder="Nom" value="<?php echo $adminItemName; ?>" required><br /><br />
