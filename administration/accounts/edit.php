@@ -187,8 +187,6 @@ if (isset($_POST['adminAccountId']))
                 }
             }
 
-            //On cherche maintenant à voir quel équipement le personnage n'a pas d'équipé
-
             //Si la variable $equipmentArmorId existe pas c'est que le personnage n'en est pas équipé
             if (!isset($adminEquipmentArmorId))
             {
@@ -299,72 +297,72 @@ if (isset($_POST['adminAccountId']))
 
             <hr>
 
-                <p>Informations du personnage (Non modifiable)</p>
-                Race : <?php echo $adminRaceName; ?><br />
-                Nom du personnage : <?php echo $adminCharacterName; ?><br />
-                Niveau du personnage : <?php echo $adminCharacterLevel; ?><br />
-                Armure: <?php echo $adminEquipmentArmorName; ?><br />
-                Bottes: <?php echo $adminEquipmentBootsName; ?><br />
-                Gants: <?php echo $adminEquipmentGlovesName; ?><br />
-                Casque: <?php echo $adminEquipmentHelmetName; ?><br />
-                Arme: <?php echo $adminEquipmentWeaponName; ?><br />
-                Sexe du personnage: <?php echo $adminCharacterSexName; ?><br />
-                HP actuel: <?php echo $adminCharacterHpMin; ?><br />
-                HP maximum: <?php echo $adminCharacterHpMax; ?><br />
-                HP points de compétences: <?php echo $adminCharacterHpSkillPoints; ?><br />
-                HP bonus: <?php echo $adminCharacterHpBonus; ?><br />
-                HP équipement: <?php echo $adminCharacterHpEquipments; ?><br />
-                HP total: <?php echo $adminCharacterHpTotal; ?><br />
-                MP actuel: <?php echo $adminCharacterMpMin; ?><br />
-                MP maximum: <?php echo $adminCharacterMpMax; ?><br />
-                MP points de compétences: <?php echo $adminCharacterMpSkillPoints; ?><br />
-                MP bonus: <?php echo $adminCharacterMpBonus; ?><br />
-                MP équipements: <?php echo $adminCharacterMpEquipments; ?><br />
-                MP total: <?php echo $adminCharacterMpTotal; ?><br />
-                Force actuelle: <?php echo $adminCharacterStrength; ?><br />
-                Force points de compétences: <?php echo $adminCharacterStrengthSkillPoints; ?><br />
-                Force bonus: <?php echo $adminCharacterStrengthBonus; ?><br />
-                Force points de compétences: <?php echo $adminCharacterStrengthEquipments; ?><br />
-                Force Total: <?php echo $adminCharacterStrengthTotal; ?><br />
-                Magie actuelle: <?php echo $adminCharacterMagic; ?><br />
-                Magie points de compétences: <?php echo $adminCharacterMagicSkillPoints; ?><br />
-                Magie bonus: <?php echo $adminCharacterMagicBonus; ?><br />
-                Magie équipement: <?php echo $adminCharacterMagicEquipments; ?><br />
-                Magie Total: <?php echo $adminCharacterMagicTotal; ?><br />
-                Agilité actuelle: <?php echo $adminCharacterAgility; ?><br />
-                Agilité points de compétences: <?php echo $adminCharacterAgilitySkillPoints; ?><br />
-                Agilité bonus: <?php echo $adminCharacterAgilityBonus; ?><br />
-                Agilité équipement: <?php echo $adminCharacterAgilityEquipments; ?><br />
-                Agilité Total: <?php echo $adminCharacterAgilityTotal; ?><br />
-                Défense actuelle: <?php echo $adminCharacterDefense; ?><br />
-                Défense points de compétences: <?php echo $adminCharacterDefenseSkillPoints; ?><br />
-                Défense bonus: <?php echo $adminCharacterDefenseBonus; ?><br />
-                Défense équipment: <?php echo $adminCharacterDefenseEquipment; ?><br />
-                Défense Total: <?php echo $adminCharacterDefenseTotal; ?><br />
-                Défense magique actuelle: <?php echo $adminCharacterDefenseMagic; ?><br />
-                Défense magique points de compétences: <?php echo $adminCharacterDefenseMagicSkillPoints; ?><br />
-                Défense magique bonus: <?php echo $adminCharacterDefenseMagicBonus; ?><br />
-                Défense équipement: <?php echo $adminCharacterDefenseMagicEquipments; ?><br />
-                Défense magique Total: <?php echo $adminCharacterDefenseMagicTotal; ?><br />
-                Sagesse actuelle: <?php echo $adminCharacterWisdom; ?><br />
-                Sagesse points de compétences: <?php echo $adminCharacterWisdomSkillPoints; ?><br />
-                Sagesse bonus: <?php echo $adminCharacterWisdomBonus; ?><br />
-                Sagesse équipement: <?php echo $adminCharacterWisdomEquipments; ?><br />
-                Sagesse Total: <?php echo $adminCharacterWisdomTotal; ?><br />
-                Défaite: <?php echo $adminCharacterDefeate; ?><br />
-                Victoire: <?php echo $adminCharacterVictory; ?><br />
-                Experience: <?php echo $adminCharacterExperience; ?><br />
-                Experience total: <?php echo $adminCharacterExperienceTotal; ?><br />
-                Points de compétence: <?php echo $adminCharacterSkillPoints; ?><br />
-                Argent: <?php echo $adminCharacterGold; ?><br />
-                Ville: <?php echo $adminTownName; ?><br />
-                Chapitre: <?php echo $adminCharacterChapter; ?><br />
-                En combat: <?php echo $adminCharacterOnBattleName; ?><br />
-                Activé: <?php echo $adminCharacterEnable; ?><br />
+            <p>Informations du personnage (Non modifiable)</p>
+            Race : <?php echo $adminRaceName; ?><br />
+            Nom du personnage : <?php echo $adminCharacterName; ?><br />
+            Niveau du personnage : <?php echo $adminCharacterLevel; ?><br />
+            Armure: <?php echo $adminEquipmentArmorName; ?><br />
+            Bottes: <?php echo $adminEquipmentBootsName; ?><br />
+            Gants: <?php echo $adminEquipmentGlovesName; ?><br />
+            Casque: <?php echo $adminEquipmentHelmetName; ?><br />
+            Arme: <?php echo $adminEquipmentWeaponName; ?><br />
+            Sexe du personnage: <?php echo $adminCharacterSexName; ?><br />
+            HP actuel: <?php echo $adminCharacterHpMin; ?><br />
+            HP maximum: <?php echo $adminCharacterHpMax; ?><br />
+            HP points de compétences: <?php echo $adminCharacterHpSkillPoints; ?><br />
+            HP bonus: <?php echo $adminCharacterHpBonus; ?><br />
+            HP équipement: <?php echo $adminCharacterHpEquipments; ?><br />
+            HP total: <?php echo $adminCharacterHpTotal; ?><br />
+            MP actuel: <?php echo $adminCharacterMpMin; ?><br />
+            MP maximum: <?php echo $adminCharacterMpMax; ?><br />
+            MP points de compétences: <?php echo $adminCharacterMpSkillPoints; ?><br />
+            MP bonus: <?php echo $adminCharacterMpBonus; ?><br />
+            MP équipements: <?php echo $adminCharacterMpEquipments; ?><br />
+            MP total: <?php echo $adminCharacterMpTotal; ?><br />
+            Force actuelle: <?php echo $adminCharacterStrength; ?><br />
+            Force points de compétences: <?php echo $adminCharacterStrengthSkillPoints; ?><br />
+            Force bonus: <?php echo $adminCharacterStrengthBonus; ?><br />
+            Force points de compétences: <?php echo $adminCharacterStrengthEquipments; ?><br />
+            Force Total: <?php echo $adminCharacterStrengthTotal; ?><br />
+            Magie actuelle: <?php echo $adminCharacterMagic; ?><br />
+            Magie points de compétences: <?php echo $adminCharacterMagicSkillPoints; ?><br />
+            Magie bonus: <?php echo $adminCharacterMagicBonus; ?><br />
+            Magie équipement: <?php echo $adminCharacterMagicEquipments; ?><br />
+            Magie Total: <?php echo $adminCharacterMagicTotal; ?><br />
+            Agilité actuelle: <?php echo $adminCharacterAgility; ?><br />
+            Agilité points de compétences: <?php echo $adminCharacterAgilitySkillPoints; ?><br />
+            Agilité bonus: <?php echo $adminCharacterAgilityBonus; ?><br />
+            Agilité équipement: <?php echo $adminCharacterAgilityEquipments; ?><br />
+            Agilité Total: <?php echo $adminCharacterAgilityTotal; ?><br />
+            Défense actuelle: <?php echo $adminCharacterDefense; ?><br />
+            Défense points de compétences: <?php echo $adminCharacterDefenseSkillPoints; ?><br />
+            Défense bonus: <?php echo $adminCharacterDefenseBonus; ?><br />
+            Défense équipment: <?php echo $adminCharacterDefenseEquipment; ?><br />
+            Défense Total: <?php echo $adminCharacterDefenseTotal; ?><br />
+            Défense magique actuelle: <?php echo $adminCharacterDefenseMagic; ?><br />
+            Défense magique points de compétences: <?php echo $adminCharacterDefenseMagicSkillPoints; ?><br />
+            Défense magique bonus: <?php echo $adminCharacterDefenseMagicBonus; ?><br />
+            Défense équipement: <?php echo $adminCharacterDefenseMagicEquipments; ?><br />
+            Défense magique Total: <?php echo $adminCharacterDefenseMagicTotal; ?><br />
+            Sagesse actuelle: <?php echo $adminCharacterWisdom; ?><br />
+            Sagesse points de compétences: <?php echo $adminCharacterWisdomSkillPoints; ?><br />
+            Sagesse bonus: <?php echo $adminCharacterWisdomBonus; ?><br />
+            Sagesse équipement: <?php echo $adminCharacterWisdomEquipments; ?><br />
+            Sagesse Total: <?php echo $adminCharacterWisdomTotal; ?><br />
+            Défaite: <?php echo $adminCharacterDefeate; ?><br />
+            Victoire: <?php echo $adminCharacterVictory; ?><br />
+            Experience: <?php echo $adminCharacterExperience; ?><br />
+            Experience total: <?php echo $adminCharacterExperienceTotal; ?><br />
+            Points de compétence: <?php echo $adminCharacterSkillPoints; ?><br />
+            Argent: <?php echo $adminCharacterGold; ?><br />
+            Ville: <?php echo $adminTownName; ?><br />
+            Chapitre: <?php echo $adminCharacterChapter; ?><br />
+            En combat: <?php echo $adminCharacterOnBattleName; ?><br />
+            Activé: <?php echo $adminCharacterEnable; ?><br />
 
-                <hr>
-                
-                Autre options
+            <hr>
+            
+            Autre options
             <form method="POST" action="delete.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminAccountId" value="<?= $adminAccountId ?>">
                 <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer le compte">

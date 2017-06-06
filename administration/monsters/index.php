@@ -37,6 +37,7 @@ if ($monsterRow > 0)
     </form>
     <?php
 }
+//Si il n'y a aucun monstre on prévient le joueur
 else
 {
     ?>

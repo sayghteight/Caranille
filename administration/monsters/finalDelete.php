@@ -37,7 +37,7 @@ if (isset($_POST['finalDelete']))
             $batleMonsterDeleteQuery->closeCursor();
 
             //On supprime aussi les monstre de la ville où il se trouve
-            $townMonsterDeleteQuery = $bdd->prepare("DELETE FROM car_battles_monsters
+            $townMonsterDeleteQuery = $bdd->prepare("DELETE FROM car_towns_monsters
             WHERE townMonsterMonsterId = ?");
             $townMonsterDeleteQuery->execute([$adminMonsterId]);
             $townMonsterDeleteQuery->closeCursor();

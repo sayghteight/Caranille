@@ -6,7 +6,7 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//on récupère les valeurs de chaque équippements qu'on va ensuite mettre dans le menu déroulant
+//On récupère les valeurs de chaque équippements qu'on va ensuite mettre dans le menu déroulant
 //On fait une recherche dans la base de donnée de tous les équippements
 $equipmentQuery = $bdd->query("SELECT * FROM car_items
 WHERE (itemType = 'Armor' 
@@ -17,7 +17,7 @@ OR itemType = 'Weapon')
 ORDER by itemType");
 $equipmentRow = $equipmentQuery->rowCount();
 
-//Si il existe un ou plusieurs équipement on affiche le menu déroulant
+//S'il existe un ou plusieurs équipements on affiche le menu déroulant
 if ($equipmentRow > 0) 
 {
     ?>
@@ -42,6 +42,7 @@ if ($equipmentRow > 0)
     </form>
     <?php
 }
+//Si il n'y a aucun équippement on préviens le joueur
 else
 {
     ?>

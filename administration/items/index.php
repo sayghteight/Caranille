@@ -39,6 +39,7 @@ if ($itemRow > 0)
     </form>
     <?php
 }
+//Si il n'y a actuellement aucun objet on prévient le joueur
 else
 {
     ?>

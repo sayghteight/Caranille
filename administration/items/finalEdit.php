@@ -7,10 +7,22 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //Si l'utilisateur à cliqué sur le bouton finalEdit
-if (isset($_POST['finalEdit']))
+if (isset($_POST['adminItemId'])
+&& isset($_POST['adminItemPicture'])
+&& isset($_POST['adminItemName'])
+&& isset($_POST['adminItemDescription'])
+&& isset($_POST['adminItemHpEffects'])
+&& isset($_POST['adminItemMpEffect'])
+&& isset($_POST['adminItemPurchasePrice'])
+&& isset($_POST['adminItemSalePrice'])
+&& isset($_POST['finalEdit']))
 {
-    //On vérifie si l'id de l'objet choisit est correct et que le select retourne bien un nombre
-    if(ctype_digit($_POST['adminItemId']))
+    //On vérifie si tous les champs numérique contiennent bien un nombre
+    if(ctype_digit($_POST['adminItemId'])
+    && ctype_digit($_POST['adminItemHpEffects'])
+    && ctype_digit($_POST['adminItemMpEffect'])
+    && ctype_digit($_POST['adminItemPurchasePrice'])
+    && ctype_digit($_POST['adminItemSalePrice']))
     {
         //On récupère les informations du formulaire
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
@@ -70,16 +82,16 @@ if (isset($_POST['finalEdit']))
         }
         $itemQuery->closeCursor();
     }
-    //Si l'objet choisit n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-        echo "Erreur: Objet invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
-//Si l'utilisateur n'a pas cliqué sur le bouton finalEdit
+//Si tous les champs n'ont pas été rempli
 else
 {
-    echo "Erreur: Aucun choix effectué";
+    echo "Erreur: Tous les champs n'ont pas été rempli";
 }
 
 require_once("../html/footer.php");

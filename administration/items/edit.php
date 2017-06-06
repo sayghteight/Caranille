@@ -24,9 +24,10 @@ if (isset($_POST['adminItemId']))
         //Si l'objet est disponible
         if ($itemRow == 1) 
         {
+            //On fait une boucle pour récupérer toutes les information
             while ($item = $itemQuery->fetch())
             {
-                //On récupère les informations du compte
+                //On récupère les informations de l'objet
                 $adminItemId = stripslashes($item['itemId']);
                 $adminItemPicture = stripslashes($item['itemPicture']);
                 $adminItemName = stripslashes($item['itemName']);

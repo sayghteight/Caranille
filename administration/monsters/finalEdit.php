@@ -7,10 +7,36 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //Si l'utilisateur à cliqué sur le bouton finalEdit
-if (isset($_POST['finalEdit']))
+if (isset($_POST['adminMonsterId'])
+&& isset($_POST['adminMonsterPicture'])
+&& isset($_POST['adminMonsterName'])
+&& isset($_POST['adminMonsterLevel'])
+&& isset($_POST['adminMonsterDescription'])
+&& isset($_POST['adminMonsterHp'])
+&& isset($_POST['adminMonsterMp'])
+&& isset($_POST['adminMonsterStrength'])
+&& isset($_POST['adminMonsterMagic'])
+&& isset($_POST['adminMonsterAgility'])
+&& isset($_POST['adminMonsterDefense'])
+&& isset($_POST['adminMonsterDefenseMagic'])
+&& isset($_POST['adminMonsterWisdom'])
+&& isset($_POST['adminMonsterGold'])
+&& isset($_POST['adminMonsterExperience'])
+&& isset($_POST['finalEdit']))
 {
-    //On vérifie si l'id de l'équippement choisit est correct et que le select retourne bien un nombre
-    if(ctype_digit($_POST['adminMonsterId']))
+    //On vérifie si tous les champs numérique contiennent bien un nombre
+    if(ctype_digit($_POST['adminMonsterId']) 
+    && ctype_digit($_POST['adminMonsterLevel']) 
+    && ctype_digit($_POST['adminMonsterHp'])
+    && ctype_digit($_POST['adminMonsterMp'])
+    && ctype_digit($_POST['adminMonsterStrength'])
+    && ctype_digit($_POST['adminMonsterMagic'])
+    && ctype_digit($_POST['adminMonsterAgility'])
+    && ctype_digit($_POST['adminMonsterDefense'])
+    && ctype_digit($_POST['adminMonsterDefenseMagic'])
+    && ctype_digit($_POST['adminMonsterWisdom'])
+    && ctype_digit($_POST['adminMonsterGold'])
+    && ctype_digit($_POST['adminMonsterExperience']))
     {
         //On récupère l'Id du formulaire précédent
         $adminMonsterId = htmlspecialchars(addslashes($_POST['adminMonsterId']));
@@ -94,16 +120,15 @@ if (isset($_POST['finalEdit']))
         }
         $monsterQuery->closeCursor();
     }
-    //Si le monstre choisit n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-        echo "Erreur: Monstre invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
-//Si l'utilisateur n'a pas cliqué sur le bouton finalEdit
+//Si tous les champs n'ont pas été rempli
 else
 {
-    echo "Erreur: Aucun choix effectué";
+    echo "Erreur: Tous les champs n'ont pas été rempli";
 }
-
 require_once("../html/footer.php");

@@ -80,7 +80,7 @@ if (isset($_POST['adminItemId']))
                 }
                 ?>
                 <?php
-                //On rempli le menu déroulant avec la liste des classes disponible
+                //On rempli le menu déroulant avec la liste des classes disponible sans afficher la classe actuelle qui est affiché juste au dessus
                 $raceListQuery = $bdd->prepare("SELECT * FROM car_races
                 WHERE raceId != ?");
                 $raceListQuery->execute([$adminItemRaceId]);
