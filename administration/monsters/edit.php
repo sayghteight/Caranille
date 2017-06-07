@@ -7,7 +7,8 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //Si l'utilisateur à choisit un id de compte
-if (isset($_POST['adminMonsterId']))
+if (isset($_POST['adminMonsterId'])
+&& isset($_POST['edit']))
 {
     //On vérifie si l'id du compte choisit est correct et que le select retourne bien un nombre
     if(ctype_digit($_POST['adminMonsterId']))

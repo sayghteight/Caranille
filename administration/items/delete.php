@@ -7,7 +7,8 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //Si l'utilisateur à cliqué sur le bouton delete
-if (isset($_POST['delete']))
+if (isset($_POST['adminItemId'])
+&& isset($_POST['delete']))
 {
     //On vérifie si l'id de l'objet choisit est correct et que le select retourne bien un nombre
     if(ctype_digit($_POST['adminItemId']))

@@ -6,9 +6,9 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//Si l'utilisateur à cliqué sur le bouton delete
+//Si l'utilisateur à cliqué sur le bouton manage
 if (isset($_POST['adminItemId'])
-&& isset($_POST['delete']))
+&& isset($_POST['manage']))
 {
     //On vérifie si l'id de l'équippement choisit est correct et que le select retourne bien un nombre
     if(ctype_digit($_POST['adminItemId']))
@@ -35,22 +35,23 @@ if (isset($_POST['adminItemId'])
             }
             $itemQuery->closeCursor();
 
-            ?>
-            <p>ATTENTION</p> 
-            Vous êtes sur le point de supprimer l'équippement <em><?php echo $adminItemName ?></em><br />
-            confirmez-vous la suppression ?
+            ?> 
+            Que souhaitez-vous faire de l'équippement <em><?php echo $adminItemName ?></em><br />
 
             <hr>
                 
-            <form method="POST" action="finalDelete.php">
+            <form method="POST" action="edit.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?= $adminItemId ?>">
-                <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme la suppression">
+                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier l'équippement">
             </form>
-
+            <form method="POST" action="delete.php">
+                <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?= $adminItemId ?>">
+                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer l'équippement">
+            </form>
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>
-            <?php
+        <?php
         }
         //Si l'équipement n'est pas disponible
         else
@@ -65,7 +66,7 @@ if (isset($_POST['adminItemId'])
         echo "Erreur: Equippement invalide";
     }
 }
-//Si l'utilisateur n'a pas cliqué sur le bouton delete
+//Si l'utilisateur n'a pas cliqué sur le bouton manage
 else
 {
     echo "Erreur: Aucun choix effectué";

@@ -7,7 +7,8 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //Si l'utilisateur à choisit un id de compte
-if (isset($_POST['adminAccountId']))
+if (isset($_POST['adminAccountId'])
+&& isset($_POST['edit']))
 {
     //On vérifie si l'id du compte choisit est correct et que le select retourne bien un nombre
     if(ctype_digit($_POST['adminAccountId']))
@@ -363,9 +364,8 @@ if (isset($_POST['adminAccountId']))
             <hr>
             
             Autre options
-            <form method="POST" action="delete.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminAccountId" value="<?= $adminAccountId ?>">
-                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer le compte">
+            <form method="POST" action="index.php">
+                <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>
             <?php
         }

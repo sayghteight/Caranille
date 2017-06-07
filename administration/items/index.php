@@ -17,7 +17,7 @@ $itemRow = $itemQuery->rowCount();
 if ($itemRow > 0) 
 {
     ?>
-    <form method="POST" action="edit.php">
+    <form method="POST" action="manage.php">
         <div class="form-group row">
             <label for="equipmentList" class="col-2 col-form-label">Liste des objets</label>
             <select class="form-control" id="adminItemId" name="adminItemId">
@@ -35,7 +35,7 @@ if ($itemRow > 0)
             ?>
             </select>
         </div>
-        <input type="submit" name="edit" class="btn btn-default form-control" value="Afficher/Modifier">
+        <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer l'objet">
     </form>
     <?php
 }

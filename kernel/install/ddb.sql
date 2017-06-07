@@ -166,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `car_inventory`
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `car_items` (
-  `itemId` int(11) NOT NULL,
+  `itemId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `itemRaceId` int(11) NOT NULL,
   `itemPicture` text NOT NULL,
   `itemType` varchar(30) NOT NULL,
