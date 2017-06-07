@@ -41,7 +41,7 @@ if (isset($_POST['adminItemId'])
             ?>
 
             <p>Informations de l'équipement</p>
-            <form method="POST" action="finalEdit.php">
+            <form method="POST" action="editItemEnd.php">
                 Image : <br> <input type="mail" name="adminItemPicture" class="form-control" placeholder="Image" value="<?php echo $adminItemPicture; ?>" required><br /><br />
                 Nom : <br> <input type="text" name="adminItemName" class="form-control" placeholder="Nom" value="<?php echo $adminItemName; ?>" required><br /><br />
                 Description : <br> <input type="mail" name="adminItemDescription" class="form-control" placeholder="Description" value="<?php echo $adminItemDescription; ?>" required><br /><br />
@@ -54,12 +54,6 @@ if (isset($_POST['adminItemId'])
             </form>
             
             <hr>
-
-            Autres options
-            <form method="POST" action="delete.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?= $adminItemId ?>">
-                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer l'objet">
-            </form>
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>

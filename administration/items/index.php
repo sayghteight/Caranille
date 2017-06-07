@@ -17,7 +17,7 @@ $itemRow = $itemQuery->rowCount();
 if ($itemRow > 0) 
 {
     ?>
-    <form method="POST" action="manage.php">
+    <form method="POST" action="manageItem.php">
         <div class="form-group row">
             <label for="equipmentList" class="col-2 col-form-label">Liste des objets</label>
             <select class="form-control" id="adminItemId" name="adminItemId">
@@ -48,7 +48,7 @@ else
 }
 ?>
 
-<form method="POST" action="add.php">
+<form method="POST" action="addItem.php">
     <input type="submit" class="btn btn-default form-control" name="add" value="Ajouter un objet">
 </form>
 <?php require_once("../html/footer.php");

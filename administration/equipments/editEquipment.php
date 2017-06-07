@@ -62,7 +62,7 @@ if (isset($_POST['adminItemId'])
             ?>
 
             <p>Informations de l'équipement</p>
-            <form method="POST" action="finalEdit.php">
+            <form method="POST" action="editEquipmentEnd.php">
                 Classe <br> <select name="adminItemRaceId" class="form-control">
                 <?php
                 //Si l'équippement a une classe attribuée on la met par défaut dans le select
@@ -194,11 +194,6 @@ if (isset($_POST['adminItemId'])
 
             <hr>
 
-            Autres options
-            <form method="POST" action="delete.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?= $adminItemId ?>">
-                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer l'équippement">
-            </form>
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>

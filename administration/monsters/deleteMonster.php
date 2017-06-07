@@ -6,9 +6,9 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//Si l'utilisateur à cliqué sur le bouton manage
+//Si l'utilisateur à cliqué sur le bouton delete
 if (isset($_POST['adminMonsterId'])
-&& isset($_POST['manage']))
+&& isset($_POST['delete']))
 {
     //On vérifie si l'id du compte choisit est correct et que le select retourne bien un nombre
     if(ctype_digit($_POST['adminMonsterId']))
@@ -36,18 +36,19 @@ if (isset($_POST['adminMonsterId'])
             $monsterQuery->closeCursor();
 
             ?>
-            Que souhaitez-vous faire du monstre <em><?php echo $adminMonsterName ?></em><br />
+            <p>ATTENTION</p> 
+            Vous êtes sur le point de supprimer le monstre <em><?php echo $adminMonsterName ?></em><br />
+            confirmez-vous la suppression ?
 
             <hr>
                 
-            <form method="POST" action="edit.php">
+            <form method="POST" action="deleteMonsterEnd.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminMonsterId" value="<?= $adminMonsterId ?>">
-                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier le monstre">
+                <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme la suppression">
             </form>
-            <form method="POST" action="delete.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminMonsterId" value="<?= $adminMonsterId ?>">
-                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer le monstre">
-            </form>
+            
+            <hr>
+
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>
@@ -66,7 +67,7 @@ if (isset($_POST['adminMonsterId'])
         echo "Erreur: Monstre invalide";
     }
 }
-//Si l'utilisateur n'a pas cliqué sur le bouton manage
+//Si l'utilisateur n'a pas cliqué sur le bouton delete
 else
 {
     echo "Erreur: Aucun choix effectué";

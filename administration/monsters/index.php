@@ -16,7 +16,7 @@ $monsterRow = $monsterQuery->rowCount();
 if ($monsterRow > 0) 
 {
     ?>
-    <form method="POST" action="manage.php">
+    <form method="POST" action="manageMonster.php">
         <div class="form-group row">
             <label for="equipmentList" class="col-2 col-form-label">Liste des monstres</label>
             <select class="form-control" id="adminMonsterId" name="adminMonsterId">
@@ -46,7 +46,7 @@ else
 }
 ?>
 
-<form method="POST" action="add.php">
+<form method="POST" action="addMonster.php">
     <input type="submit" class="btn btn-default form-control" name="add" value="Ajouter un monstre">
 </form>
 

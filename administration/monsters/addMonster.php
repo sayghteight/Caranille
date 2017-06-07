@@ -11,7 +11,7 @@ if (isset($_POST['add']))
 {
     ?>
     <p>Informations du monstre</p>
-    <form method="POST" action="finalAdd.php">
+    <form method="POST" action="addMonsterEnd.php">
         Image : <br> <input type="mail" name="adminMonsterPicture" class="form-control" placeholder="Image" required><br /><br />
         Nom : <br> <input type="text" name="adminMonsterName" class="form-control" placeholder="Nom" required><br /><br />
         Niveau : <br> <input type="mail" name="adminMonsterLevel" class="form-control" placeholder="Niveau" required><br /><br />
@@ -28,6 +28,12 @@ if (isset($_POST['add']))
         Argent : <br> <input type="mail" name="adminMonsterGold" class="form-control" placeholder="Argent" required><br /><br />
         <input type="hidden" name="adminMonsterId" value="<?= $adminMonsterId ?>">
         <input name="finalAdd" class="btn btn-default form-control" type="submit" value="Ajouter">
+    </form>
+    
+    <hr>
+
+    <form method="POST" action="index.php">
+        <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
     </form>
     <?php
 }

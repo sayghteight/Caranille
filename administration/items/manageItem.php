@@ -40,14 +40,17 @@ if (isset($_POST['adminItemId'])
 
             <hr>
                 
-            <form method="POST" action="edit.php">
+            <form method="POST" action="editItem.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?= $adminItemId ?>">
                 <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier l'objet">
             </form>
-            <form method="POST" action="delete.php">
+            <form method="POST" action="deleteItem.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?= $adminItemId ?>">
                 <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer l'objet">
             </form>
+            
+            <hr>
+
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>

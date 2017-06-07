@@ -47,7 +47,7 @@ if (isset($_POST['adminMonsterId'])
             ?>
 
             <p>Informations du monstre</p>
-            <form method="POST" action="finalEdit.php">
+            <form method="POST" action="editMonsterEnd.php">
                 Image : <br> <input type="mail" name="adminMonsterPicture" class="form-control" placeholder="Image" value="<?php echo $adminMonsterPicture; ?>" required><br /><br />
                 Nom : <br> <input type="text" name="adminMonsterName" class="form-control" placeholder="Nom" value="<?php echo $adminMonsterName; ?>" required><br /><br />
                 Niveau : <br> <input type="mail" name="adminMonsterLevel" class="form-control" placeholder="Niveau" value="<?php echo $adminMonsterLevel; ?>" required><br /><br />
@@ -68,11 +68,6 @@ if (isset($_POST['adminMonsterId'])
 
             <hr>
 
-            Autres options
-            <form method="POST" action="delete.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminMonsterId" value="<?= $adminMonsterId ?>">
-                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer le monstre">
-            </form>
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>

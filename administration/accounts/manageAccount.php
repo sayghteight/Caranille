@@ -6,8 +6,8 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//Si l'utilisateur à cliqué sur le bouton delete
-if (isset($_POST['delete']))
+//Si l'utilisateur à cliqué sur le bouton manage
+if (isset($_POST['manage']))
 {
     //On vérifie si l'id du compte choisit est correct et que le select retourne bien un nombre
     if(ctype_digit($_POST['adminAccountId']))
@@ -36,16 +36,20 @@ if (isset($_POST['delete']))
             $accountQuery->closeCursor();
 
             ?>
-            <p>ATTENTION</p> 
-            Vous êtes sur le point de supprimer le compte <em><?php echo $adminAccountPseudo ?></em><br />
-            confirmez-vous la suppression ?
+            Que souhaitez-vous faire du joueur <em><?php echo $adminAccountPseudo ?></em><br />
 
             <hr>
                 
-            <form method="POST" action="finalDelete.php">
+            <form method="POST" action="editAccount.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminAccountId" value="<?= $adminAccountId ?>">
-                <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme la suppression">
+                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier le compte">
             </form>
+            <form method="POST" action="deleteAccount.php">
+                <input type="hidden" class="btn btn-default form-control" name="adminAccountId" value="<?= $adminAccountId ?>">
+                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer le compte">
+            </form>
+
+            <hr>
 
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
@@ -64,7 +68,7 @@ if (isset($_POST['delete']))
         echo "Erreur: Compte invalide";
     }
 }
-//Si l'utilisateur n'a pas cliqué sur le bouton delete
+//Si l'utilisateur n'a pas cliqué sur le bouton manage
 else
 {
     echo "Erreur: Aucun choix effectué";

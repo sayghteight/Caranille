@@ -6,23 +6,23 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//Si l'utilisateur à cliqué sur le bouton manage
+//Si l'utilisateur à cliqué sur le bouton delete
 if (isset($_POST['adminItemId'])
-&& isset($_POST['manage']))
+&& isset($_POST['delete']))
 {
-    //On vérifie si l'id de l'équippement choisit est correct et que le select retourne bien un nombre
+    //On vérifie si l'id de l'objet choisit est correct et que le select retourne bien un nombre
     if(ctype_digit($_POST['adminItemId']))
     {
         //On récupère l'Id du formulaire précédent
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
 
-        //On fait une requête pour vérifier si l'équippement choisit existe
+        //On fait une requête pour vérifier si l'objet choisit existe
         $itemQuery = $bdd->prepare('SELECT * FROM car_items 
         WHERE itemId= ?');
         $itemQuery->execute([$adminItemId]);
         $itemRow = $itemQuery->rowCount();
 
-        //Si l'équippement est disponible
+        //Si l'objet est disponible
         if ($itemRow == 1) 
         {
             //On fait une recherche dans la base de donnée de tous les comptes
@@ -35,38 +35,39 @@ if (isset($_POST['adminItemId'])
             }
             $itemQuery->closeCursor();
 
-            ?> 
-            Que souhaitez-vous faire de l'équippement <em><?php echo $adminItemName ?></em><br />
+            ?>
+            <p>ATTENTION</p> 
+            Vous êtes sur le point de supprimer l'équippement <em><?php echo $adminItemName ?></em><br />
+            confirmez-vous la suppression ?
 
             <hr>
                 
-            <form method="POST" action="edit.php">
+            <form method="POST" action="deleteItemEnd.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?= $adminItemId ?>">
-                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier l'équippement">
+                <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme la suppression">
             </form>
-            <form method="POST" action="delete.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?= $adminItemId ?>">
-                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer l'équippement">
-            </form>
+    
+            <hr>
+
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>
-        <?php
+            <?php
         }
-        //Si l'équipement n'est pas disponible
+        //Si l'objet n'est pas disponible
         else
         {
-            echo "Erreur: Equippement indisponible";
+            echo "Erreur: Objet indisponible";
         }
         $itemQuery->closeCursor();
     }
-    //Si l'équippement choisit n'est pas un nombre
+    //Si l'objet choisit n'est pas un nombre
     else
     {
-        echo "Erreur: Equippement invalide";
+        echo "Erreur: Objet invalide";
     }
 }
-//Si l'utilisateur n'a pas cliqué sur le bouton manage
+//Si l'utilisateur n'a pas cliqué sur le bouton delete
 else
 {
     echo "Erreur: Aucun choix effectué";

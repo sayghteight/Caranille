@@ -7,7 +7,7 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 ?>
 
-<form method="POST" action="manage.php">
+<form method="POST" action="manageAccount.php">
     <div class="form-group row">
         <label for="equipmentList" class="col-2 col-form-label">Liste des joueurs</label>
         <select class="form-control" id="adminAccountId" name="adminAccountId">
