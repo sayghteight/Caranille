@@ -67,5 +67,10 @@ if (isset($_POST['opponentCharacterId']))
         echo "Erreur: personnage invalide";
     }
 }
+//Si tous les champs n'ont pas été rempli
+else
+{
+    echo "Erreur: Tous les champs n'ont pas été rempli";
+}
 
 require_once("../../html/footer.php"); ?>

@@ -60,6 +60,7 @@ if (isset($_POST['battleMonsterId']))
             'monsterMp' => $monsterMp]);
             $addBattleMonster->closeCursor();
 
+            //On redirige le joueur vers le combat du monstre
             header("Location: ../../modules/battleMonster/index.php");
         }
         //Si le monstre n'est pas disponible
@@ -73,6 +74,11 @@ if (isset($_POST['battleMonsterId']))
     {
         echo "Erreur: monstre invalide";
     }
+}
+//Si tous les champs n'ont pas été rempli
+else
+{
+    echo "Erreur: Tous les champs n'ont pas été rempli";
 }
 
 require_once("../../html/footer.php"); ?>

@@ -5,6 +5,7 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si il y a pas de combat contre un personnage on redirige le joueur vers le module arena
 if ($battleArenaRow == 0) { exit(header("Location: ../../modules/battleArena/index.php")); }
 
+//Si le joueur a cliqué sur le bouton magic
 if (isset($_POST['attack']))
 {
     /*
@@ -116,6 +117,7 @@ if (isset($_POST['attack']))
         <?php
     }
 }
+//Si le joueur n'a pas cliqué sur le bouton attack
 else
 {
     echo "Erreur: Aucune attaque de lancée";
