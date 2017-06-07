@@ -11,15 +11,15 @@ echo "HP de $characterName: $characterHpMin/$characterHpTotal";
             
 <hr>
 
-<form method="POST" action="attack.php">
+<form method="POST" action="physicalAttackMonster.php">
     <input type="submit" name="attack" class="btn btn-default form-control" value="Attaque physique"><br>
 </form>
     
-<form method="POST" action="magic.php">
+<form method="POST" action="magicAttackMonster.php">
     <input type="submit" name="magic" class="btn btn-default form-control" value="Attaque magique"><br>
 </form>
 
-<form method="POST" action="escape.php">
+<form method="POST" action="escapeMonster.php">
     <input type="submit" name="escape" class="btn btn-default form-control" value="Abandonner le combat"><br />
 </form>
 

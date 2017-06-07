@@ -98,7 +98,7 @@ if (isset($_POST['magic']))
                     
         <hr>
         
-        <form method="POST" action="rewards.php">
+        <form method="POST" action="rewardsArena.php">
             <input type="submit" name="escape" class="btn btn-default form-control" value="Continuer"><br />
         </form>
         <?php

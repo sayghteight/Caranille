@@ -275,6 +275,6 @@ INSERT INTO `car_towns` (`townId`, `townPicture`, `townName`, `townDescription`,
 (1, 'http://localhost/town.png', 'Indicia', 'Petite ville côtière qui vie exclusivement du commerce de la pêche.', 10, 1),
 (2, 'http://localhost/town.png', 'Teran', 'Petite ville rural qui vie de l\'agriculture', 12, 2);
 
-INSERT INTO `car_towns_monsters` (`townMonsterId`, `townTownId`, `townMonsterMonsterId`) VALUES
+INSERT INTO `car_towns_monsters` (`townMonsterId`, `townMonsterTownId`, `townMonsterMonsterId`) VALUES
 (1, 1, 1),
 (2, 2, 2);

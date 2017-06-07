@@ -5,8 +5,8 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si il y a pas de combat contre un monstre on redirige le joueur vers le module dungeon
 if ($battleMonsterRow == 0) { exit(header("Location: ../../modules/battleArena/index.php")); }
 
-//Si le joueur a cliqué sur le bouton magic
-if (isset($_POST['magic']))
+//Si le joueur a cliqué sur le bouton attack
+if (isset($_POST['attack']))
 {
     /*
     VARIABLES GLOBALES
@@ -32,8 +32,8 @@ if (isset($_POST['magic']))
     $characterMaxDefenseMagic = $characterDefenseMagicTotal * 1.1;
 
     //On calcule les dégats du joueur
-    $positiveDamagesCharacter = mt_rand($characterMinMagic, $characterMaxMagic);
-    $negativeDamagesCharacter = mt_rand($monsterMinDefenseMagic, $monsterMaxDefenseMagic);
+    $positiveDamagesCharacter = mt_rand($characterMinStrength, $characterMaxStrength);
+    $negativeDamagesCharacter = mt_rand($monsterMinDefense, $monsterMaxDefense);
     $totalDamagesCharacter = $positiveDamagesCharacter - $negativeDamagesCharacter;
 
     //Si le monstre à plus de puissance physique ou autant que de magique il fera une attaque physique
@@ -68,7 +68,7 @@ if (isset($_POST['magic']))
 
     //On affiche les résultats du tour
     echo "$characterName à fait $totalDamagesCharacter point(s) de dégat à $monsterName<br />";
-    echo "$monsterName à fait $totalDamagesMonster point(s) de dégat à $characterName<br />";
+    echo "$monsterName à fait $totalDamagesMonster point(s) de dégat à $characterName<br /><br />";
 
     //On met à jour la vie du joueur et du monstre
     $battleMonsterHpRemaining = $battleMonsterHpRemaining - $totalDamagesCharacter;
@@ -99,7 +99,7 @@ if (isset($_POST['magic']))
             
         <hr>
         
-        <form method="POST" action="rewards.php">
+        <form method="POST" action="rewardsMonster.php">
             <input type="submit" name="escape" class="btn btn-default form-control" value="Continuer"><br />
         </form>
         <?php
@@ -109,19 +109,19 @@ if (isset($_POST['magic']))
     if ($characterHpMin > 0 && $battleMonsterHpRemaining > 0)
     {
         ?>
-                
+                    
         <hr>
-
+        
         <form method="POST" action="index.php">
             <input type="submit" name="magic" class="btn btn-default form-control" value="Continuer"><br>
         </form>
         <?php
     }
 }
-//Si le joueur n'a pas cliqué sur le bouton magic
+//Si le joueur n'a pas cliqué sur le bouton attack
 else
 {
-    echo "Erreur: Aucune attaque magique de lancée";
+    echo "Erreur: Aucune attaque de lancée";
 }
 
 require_once("../../html/footer.php"); ?>
