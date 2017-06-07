@@ -1,5 +1,4 @@
-<?php
-require_once("../../html/header.php");
+<?php require_once("../../html/header.php");
 
 //Si tous les champs ont bien été rempli
 if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['accountPasswordConfirm']) && ($_POST['accountEmail']))
