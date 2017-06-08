@@ -20,7 +20,7 @@ $opponentRow = $opponentQuery->rowCount();
 if ($opponentRow > 0)
 {
     ?>
-    <form method="POST" action="arena.php">
+    <form method="POST" action="selectedOpponent.php">
         <div class="form-group row">
             <label for="characterList" class="col-2 col-form-label">Liste des joueurs</label>
             <select class="form-control" id="opponentCharacterId" name="opponentCharacterId">

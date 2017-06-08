@@ -1,6 +1,6 @@
 <?php require_once("../../html/header.php"); ?>
 
-<form method="POST" action="register.php">
+<form method="POST" action="completeRegistration.php">
     <div class="form-group row">
         <label for="example-text-input" class="col-2 col-form-label">Pseudo</label>
         <input class="form-control" type="text" name="accountPseudo" required>

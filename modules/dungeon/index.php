@@ -26,7 +26,7 @@ $monsterQuery = $monsterQueryList->rowCount();
 if ($monsterQuery > 0)
 {
     ?>
-    <form method="POST" action="dungeon.php">
+    <form method="POST" action="selectedMonster.php">
         <div class="form-group row">
             <label for="raceList" class="col-2 col-form-label">Liste des monstres</label>
             <select class="form-control" id="townList" name="battleMonsterId">
