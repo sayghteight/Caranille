@@ -143,7 +143,7 @@ if (isset($_POST['viewEquipment']))
                         if ($equipmentEquipped == 0)
                         {
                             ?>
-                                <form method="POST" action="equip.php">
+                                <form method="POST" action="equipItem.php">
                                     <input type="hidden" name="itemId" value="<?php echo $itemId ?>">
                                     <input type="submit" class="btn btn-default form-control" name="equip" value="Equiper">
                                 </form> 
@@ -157,7 +157,7 @@ if (isset($_POST['viewEquipment']))
                             <?php
                         }
                         ?>
-                        <form method="POST" action="sale.php">
+                        <form method="POST" action="saleItem.php">
                             <input type="hidden" name="itemId" value="<?php echo $itemId ?>">
                             <input type="submit" class="btn btn-default form-control" name="sale" value="Vendre"><br /><br />
                         </form>

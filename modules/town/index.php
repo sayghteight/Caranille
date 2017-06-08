@@ -16,7 +16,7 @@ if ($battleMonsterRow > 0) { exit(header("Location: ../../modules/battleMonster/
 <a href="../../modules/dungeon/index.php">Donjon</a><br>
 <a href="../../modules/arena/index.php">L'arène</a><br>
 <a href="../../modules/inn/index.php">L'auberge</a><hr>
-<form method="POST" action="exitTown.php">
+<form method="POST" action="leaveTown.php">
     <input type="submit" class="btn btn-default form-control" value="Quitter la ville">
 </form>
 
