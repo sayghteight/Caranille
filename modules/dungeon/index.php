@@ -16,14 +16,14 @@ Ici vous allez pouvoir choisir le monstre de votre choix pour vous entrainer<br 
 <?php
 //On fait une jointure entre les 3 tables car_monsters, car_towns, car_towns_monsters pour récupérer les monstres lié à la ville
 $monsterQueryList = $bdd->prepare("SELECT * FROM car_monsters, car_towns, car_towns_monsters
-WHERE townMonsterId = monsterId
+WHERE townMonsterMonsterId = monsterId
 AND townMonsterTownId = townId
 AND townId = ?");
 $monsterQueryList->execute([$townId]);
-$monsterQuery = $monsterQueryList->rowCount();
+$monsterRow = $monsterQueryList->rowCount();
 
 //Si plusieurs monstres ont été trouvé
-if ($monsterQuery > 0)
+if ($monsterRow > 0)
 {
     ?>
     <form method="POST" action="selectedMonster.php">

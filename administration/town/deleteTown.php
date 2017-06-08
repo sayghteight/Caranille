@@ -6,12 +6,12 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//Si l'utilisateur à cliqué sur le bouton manage
+//Si l'utilisateur à cliqué sur le bouton delete
 if (isset($_POST['adminItemId'])
-&& isset($_POST['manage']))
+&& isset($_POST['delete']))
 {
     //On vérifie si l'id de l'objet choisit est correct et que le select retourne bien un nombre
-    if (ctype_digit($_POST['adminItemId']))
+    if(ctype_digit($_POST['adminItemId']))
     {
         //On récupère l'Id du formulaire précédent
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
@@ -36,19 +36,17 @@ if (isset($_POST['adminItemId'])
             $itemQuery->closeCursor();
 
             ?>
-            Que souhaitez-vous faire de l'objet <em><?php echo $adminItemName ?></em><br />
+            <p>ATTENTION</p> 
+            Vous êtes sur le point de supprimer l'équippement <em><?php echo $adminItemName ?></em><br />
+            confirmez-vous la suppression ?
 
             <hr>
                 
-            <form method="POST" action="editItem.php">
+            <form method="POST" action="deleteItemEnd.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?= $adminItemId ?>">
-                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier l'objet">
+                <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme la suppression">
             </form>
-            <form method="POST" action="deleteItem.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?= $adminItemId ?>">
-                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer l'objet">
-            </form>
-            
+    
             <hr>
 
             <form method="POST" action="index.php">
@@ -69,7 +67,7 @@ if (isset($_POST['adminItemId'])
         echo "Erreur: Objet invalide";
     }
 }
-//Si l'utilisateur n'a pas cliqué sur le bouton manage
+//Si l'utilisateur n'a pas cliqué sur le bouton delete
 else
 {
     echo "Erreur: Aucun choix effectué";

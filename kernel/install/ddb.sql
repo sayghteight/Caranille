@@ -246,6 +246,7 @@ CREATE TABLE IF NOT EXISTS `car_towns_monsters`
   `townMonsterTownId` int(10) NOT NULL,
   `townMonsterMonsterId` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ 
 
 --
 -- Ajout des exemples dans la base de donnée

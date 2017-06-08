@@ -56,6 +56,7 @@ require_once("../../kernel/town/index.php");
                                 <li><a href="../../administration/monsters/index.php">Monstres</a></li>
                                 <li><a href="../../administration/equipments/index.php">Equipements</a></li>
                                 <li><a href="../../administration/items/index.php">Objets</a></li>
+                                <li><a href="../../administration/townMonster/index.php">Villes</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">

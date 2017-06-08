@@ -10,7 +10,7 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 if (isset($_POST['manage']))
 {
     //On vérifie si l'id du compte choisit est correct et que le select retourne bien un nombre
-    if(ctype_digit($_POST['adminAccountId']))
+    if (ctype_digit($_POST['adminAccountId']))
     {
         //On récupère l'Id du formulaire précédent
         $adminAccountId = htmlspecialchars(addslashes($_POST['adminAccountId']));

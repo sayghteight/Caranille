@@ -11,7 +11,7 @@ if (isset($_POST['adminMonsterId'])
 && isset($_POST['manage']))
 {
     //On vérifie si l'id du compte choisit est correct et que le select retourne bien un nombre
-    if(ctype_digit($_POST['adminMonsterId']))
+    if (ctype_digit($_POST['adminMonsterId']))
     {
         //On récupère l'Id du formulaire précédent
         $adminMonsterId = htmlspecialchars(addslashes($_POST['adminMonsterId']));
