@@ -11,9 +11,11 @@ if (isset($_POST['adminTownMonsterTownId'])
 && isset($_POST['adminTownMonsterMonsterId'])
 && isset($_POST['delete']))
 {
-    //On vérifie si tous les champs numérique contiennent bien un nombre
+    //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
     if (ctype_digit($_POST['adminTownMonsterTownId'])
-    && ctype_digit($_POST['adminTownMonsterMonsterId']))
+    && ctype_digit($_POST['adminTownMonsterMonsterId'])
+    && $_POST['adminTownMonsterTownId'] >= 1
+    && $_POST['adminTownMonsterMonsterId'] >= 1)
     {
         //On récupère l'Id du formulaire précédent
         $adminTownMonsterTownId = htmlspecialchars(addslashes($_POST['adminTownMonsterTownId']));

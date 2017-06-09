@@ -23,7 +23,7 @@ if (isset($_POST['adminMonsterPicture'])
 && isset($_POST['adminMonsterExperience'])
 && isset($_POST['finalAdd']))
 {
-    //On vérifie si tous les champs numérique contiennent bien un nombre
+    //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
     if (ctype_digit($_POST['adminMonsterLevel']) 
     && ctype_digit($_POST['adminMonsterHp'])
     && ctype_digit($_POST['adminMonsterMp'])
@@ -34,7 +34,18 @@ if (isset($_POST['adminMonsterPicture'])
     && ctype_digit($_POST['adminMonsterDefenseMagic'])
     && ctype_digit($_POST['adminMonsterWisdom'])
     && ctype_digit($_POST['adminMonsterGold'])
-    && ctype_digit($_POST['adminMonsterExperience']))
+    && ctype_digit($_POST['adminMonsterExperience'])
+    && $_POST['adminMonsterLevel'] >= 0
+    && $_POST['adminMonsterHp'] >= 0
+    && $_POST['adminMonsterMp'] >= 0
+    && $_POST['adminMonsterStrength'] >= 0
+    && $_POST['adminMonsterMagic'] >= 0
+    && $_POST['adminMonsterAgility'] >= 0
+    && $_POST['adminMonsterDefense'] >= 0
+    && $_POST['adminMonsterDefenseMagic'] >= 0
+    && $_POST['adminMonsterWisdom'] >= 0
+    && $_POST['adminMonsterGold'] >= 0
+    && $_POST['adminMonsterExperience'] >= 0)
     {
         //On récupère les informations du formulaire
         $adminMonsterPicture = htmlspecialchars(addslashes($_POST['adminMonsterPicture']));

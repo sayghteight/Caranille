@@ -15,10 +15,13 @@ if (isset($_POST['adminTownId'])
 && isset($_POST['adminTownChapter'])
 && isset($_POST['finalEdit']))
 {
-    //On vérifie si tous les champs numérique contiennent bien un nombre
+    //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
     if (ctype_digit($_POST['adminTownId'])
     && ctype_digit($_POST['adminTownPriceInn'])
-    && ctype_digit($_POST['adminTownChapter']))
+    && ctype_digit($_POST['adminTownChapter'])
+    && $_POST['adminTownId'] >= 1
+    && $_POST['adminTownPriceInn'] >= 0
+    && $_POST['adminTownChapter'] >= 1)
     {
         //On récupère les informations du formulaire
         $adminTownId = htmlspecialchars(addslashes($_POST['adminTownId']));

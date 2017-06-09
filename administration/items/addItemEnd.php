@@ -16,11 +16,15 @@ if (isset($_POST['adminItemPicture'])
 && isset($_POST['adminItemSalePrice'])
 && isset($_POST['finalAdd']))
 {
-    //On vérifie si tous les champs numérique contiennent bien un nombre
+    //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
     if (ctype_digit($_POST['adminItemHpEffects'])
     && ctype_digit($_POST['adminItemMpEffect'])
     && ctype_digit($_POST['adminItemPurchasePrice'])
-    && ctype_digit($_POST['adminItemSalePrice']))
+    && ctype_digit($_POST['adminItemSalePrice'])
+    && $_POST['adminItemHpEffects'] >= 0
+    && $_POST['adminItemMpEffect'] >= 0
+    && $_POST['adminItemPurchasePrice'] >= 0
+    && $_POST['adminItemSalePrice'] >= 0)
     {
         //On récupère les informations du formulaire
         $adminItemPicture = htmlspecialchars(addslashes($_POST['adminItemPicture']));

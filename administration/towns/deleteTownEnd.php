@@ -9,8 +9,9 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 //Si l'utilisateur à cliqué sur le bouton finalDelete
 if (isset($_POST['finalDelete']))
 {
-    //On vérifie si l'id de l'objet choisit est correct et que le select retourne bien un nombre
-    if(ctype_digit($_POST['adminTownId']))
+    //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
+    if(ctype_digit($_POST['adminTownId'])
+    && $_POST['adminTownId'] >= 1)
     {
         $adminTownId = htmlspecialchars(addslashes($_POST['adminTownId']));
 

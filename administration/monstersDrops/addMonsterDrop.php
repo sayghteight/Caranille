@@ -12,10 +12,13 @@ if (isset($_POST['adminMonsterDropMonsterId'])
 && isset($_POST['adminMonsterDropLuck'])
 && isset($_POST['add']))
 {
-    //On vérifie si tous les champs numérique contiennent bien un nombre
+    //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
     if (ctype_digit($_POST['adminMonsterDropMonsterId'])
     && ctype_digit($_POST['adminMonsterDropItemId'])
-    && ctype_digit($_POST['adminMonsterDropLuck']))
+    && ctype_digit($_POST['adminMonsterDropLuck'])
+    && $_POST['adminMonsterDropMonsterId'] >= 0
+    && $_POST['adminMonsterDropItemId'] >= 0
+    && $_POST['adminMonsterDropLuck'] >= 0)
     {
         //On récupère l'Id du formulaire précédent
         $adminMonsterDropMonsterId = htmlspecialchars(addslashes($_POST['adminMonsterDropMonsterId']));

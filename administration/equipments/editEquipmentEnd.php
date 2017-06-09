@@ -26,7 +26,7 @@ if (isset($_POST['adminItemId'])
 && isset($_POST['adminItemSalePrice'])
 && isset($_POST['finalEdit']))
 {
-    //On vérifie si tous les champs numérique contiennent bien un nombre
+    //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
     if (ctype_digit($_POST['adminItemId']) 
     && ctype_digit($_POST['adminItemRaceId'])
     && ctype_digit($_POST['adminItemRaceId'])
@@ -41,7 +41,20 @@ if (isset($_POST['adminItemId'])
     && ctype_digit($_POST['adminItemDefenseMagicEffect'])
     && ctype_digit($_POST['adminItemWisdomEffect'])
     && ctype_digit($_POST['adminItemPurchasePrice'])
-    && ctype_digit($_POST['adminItemSalePrice']))
+    && ctype_digit($_POST['adminItemSalePrice'])
+    && $_POST['adminItemRaceId'] >= 0
+    && $_POST['adminItemLevel'] >= 0
+    && $_POST['adminItemLevelRequired'] >= 0
+    && $_POST['adminItemHpEffects'] >= 0
+    && $_POST['adminItemMpEffect'] >= 0
+    && $_POST['adminItemStrengthEffect'] >= 0
+    && $_POST['adminItemMagicEffect'] >= 0
+    && $_POST['adminItemAgilityEffect'] >= 0
+    && $_POST['adminItemDefenseEffect'] >= 0
+    && $_POST['adminItemDefenseMagicEffect'] >= 0
+    && $_POST['adminItemWisdomEffect'] >= 0
+    && $_POST['adminItemPurchasePrice'] >= 0
+    && $_POST['adminItemSalePrice'] >= 0)
     {
         //On récupère l'Id du formulaire précédent
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));

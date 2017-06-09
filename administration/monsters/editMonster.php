@@ -10,8 +10,9 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 if (isset($_POST['adminMonsterId'])
 && isset($_POST['edit']))
 {
-    //On vérifie si l'id du compte choisit est correct et que le select retourne bien un nombre
-    if (ctype_digit($_POST['adminMonsterId']))
+    //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
+    if (ctype_digit($_POST['adminMonsterId'])
+    && $_POST['adminMonsterId'] >= 1)
     {
         //On récupère l'Id du formulaire précédent
         $adminMonsterId = htmlspecialchars(addslashes($_POST['adminMonsterId']));

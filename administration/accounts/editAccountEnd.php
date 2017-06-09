@@ -13,8 +13,9 @@ if (isset($_POST['adminAccountId'])
 && isset($_POST['adminAccountAccess'])
 && isset($_POST['finalEdit']))
 {
-    //On vérifie si l'id du compte choisit est correct et que le select retourne bien un nombre
-    if (ctype_digit($_POST['adminAccountId']))
+    //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
+    if (ctype_digit($_POST['adminAccountId'])
+    && $_POST['adminAccountId'] >= 1)
     {
         //On vérifie si le type d'accès choisit est correct et qu'il retourne bien un nombre
         if (ctype_digit($_POST['adminAccountAccess']))

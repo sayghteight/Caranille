@@ -10,8 +10,9 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 if (isset($_POST['adminMonsterDropMonsterId'])
 && isset($_POST['manage']))
 {
-    //On vérifie si l'id de la ville choisit est correct et que le select retourne bien un nombre
-    if (ctype_digit($_POST['adminMonsterDropMonsterId']))
+    //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
+    if (ctype_digit($_POST['adminMonsterDropMonsterId'])
+    && $_POST['adminMonsterDropMonsterId'] >= 1)
     {
         //On récupère l'Id du formulaire précédent
         $adminMonsterDropMonsterId = htmlspecialchars(addslashes($_POST['adminMonsterDropMonsterId']));
