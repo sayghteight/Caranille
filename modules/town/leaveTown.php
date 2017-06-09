@@ -9,16 +9,25 @@ if ($battleArenaRow > 0) { exit(header("Location: ../../modules/battleArena/inde
 //Si il y a actuellement un combat contre un monstre on redirige le joueur vers le module battleMonster
 if ($battleMonsterRow > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
 
-//On met le personnage à jour
-$updatecharacter = $bdd->prepare("UPDATE car_characters SET
-characterTownId = 0
-WHERE characterId= :characterId");
+//Si tous les champs ont bien été rempli
+if (isset($_POST['leave']))
+{
+    //On met le personnage à jour
+    $updatecharacter = $bdd->prepare("UPDATE car_characters SET
+    characterTownId = 0
+    WHERE characterId= :characterId");
 
-$updatecharacter->execute(array(
-'characterId' => $characterId));
-$updatecharacter->closeCursor();
+    $updatecharacter->execute(array(
+    'characterId' => $characterId));
+    $updatecharacter->closeCursor();
 
-//On redirige le joueur vers la carte du monde
-header("Location: ../../modules/map/index.php");
+    //On redirige le joueur vers la carte du monde
+    header("Location: ../../modules/map/index.php");
+}
+//Si tous les champs n'ont pas été rmepli
+else 
+{
+    echo "Tous les champs n'ont pas été rempli";
+}
 
 require_once("../../html/footer.php"); ?>

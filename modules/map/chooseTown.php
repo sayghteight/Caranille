@@ -10,10 +10,12 @@ if ($battleArenaRow > 0) { exit(header("Location: ../../modules/battleArena/inde
 if ($battleMonsterRow > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
 
 //Si tous les champs ont bien été rempli
-if (isset($_POST['townId']))
+if (isset($_POST['townId'])
+&& isset($_POST['enter']))
 {
-    //On vérifi si la ville choisit est correct et que le select retourne bien un nombre
-    if(ctype_digit($_POST['townId']))
+    //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
+    if (ctype_digit($_POST['townId'])
+    && $_POST['townId'] >= 1)
     {
         //On récupère les valeurs du formulaire dans une variable
         $townId = htmlspecialchars(addslashes($_POST['townId']));

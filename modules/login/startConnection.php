@@ -1,7 +1,8 @@
 <?php require_once("../../html/header.php");
 
 //Si tous les champs ont bien été rempli
-if (isset($_POST['accountPseudo']) && ($_POST['accountPassword'])) 
+if (isset($_POST['accountPseudo']) 
+&& isset($_POST['accountPassword']))
 {
     //Récupération des valeurs des deux champs dans une variable
     $accountPseudo = htmlspecialchars(addslashes($_POST['accountPseudo']));

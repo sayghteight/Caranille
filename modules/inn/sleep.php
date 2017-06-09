@@ -9,40 +9,49 @@ if ($battleArenaRow > 0) { exit(header("Location: ../../modules/battleArena/inde
 //Si il y a actuellement un combat contre un monstre on redirige le joueur vers le module battleMonster
 if ($battleMonsterRow > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
 
-//Si le personnage a assez d'argent pour se soigner
-if ($characterGold >= $townPriceInn) 
+//Si tous les champs ont bien été rempli
+if (isset($_POST['sleep']))
 {
-    $updateAccount = $bdd->prepare('UPDATE car_characters
-    SET characterGold = characterGold - :townPriceInn,
-    characterHpMin = characterHpTotal,
-    characterMpMin = characterMpTotal
-    WHERE characterId = :characterId');
-    $updateAccount->execute([
-    'townPriceInn' => $townPriceInn,
-    'characterId' => $characterId]);
-    $updateAccount->closeCursor();
-    ?>
-    Votre personnage à récupéré toutes ses forces !
+    //Si le personnage a assez d'argent pour se soigner
+    if ($characterGold >= $townPriceInn) 
+    {
+        $updateAccount = $bdd->prepare('UPDATE car_characters
+        SET characterGold = characterGold - :townPriceInn,
+        characterHpMin = characterHpTotal,
+        characterMpMin = characterMpTotal
+        WHERE characterId = :characterId');
+        $updateAccount->execute([
+        'townPriceInn' => $townPriceInn,
+        'characterId' => $characterId]);
+        $updateAccount->closeCursor();
+        ?>
+        Votre personnage à récupéré toutes ses forces !
 
-    <hr>
-    
-    <form method="POST" action="../../modules/town/index.php">
-        <input type="submit" class="btn btn-default form-control" value="Retour">
-    </form>
-<?php
-}
-//Si le personnage n'a pas assez d'argent pour se soigner
-else
-{
-    ?>
-    Vous n'avez pas assez d'argent
-    
-    <hr>
-    
-    <form method="POST" action="../../modules/town/index.php">
-        <input type="submit" class="btn btn-default form-control" value="Retour">
-    </form>
+        <hr>
+        
+        <form method="POST" action="../../modules/town/index.php">
+            <input type="submit" class="btn btn-default form-control" value="Retour">
+        </form>
     <?php
+    }
+    //Si le personnage n'a pas assez d'argent pour se soigner
+    else
+    {
+        ?>
+        Vous n'avez pas assez d'argent
+        
+        <hr>
+        
+        <form method="POST" action="../../modules/town/index.php">
+            <input type="submit" class="btn btn-default form-control" value="Retour">
+        </form>
+        <?php
+    }
+}
+//Si tous les champs n'ont pas été rmepli
+else 
+{
+    echo "Tous les champs n'ont pas été rempli";
 }
 
 require_once("../../html/footer.php"); ?>

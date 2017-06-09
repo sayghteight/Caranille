@@ -12,8 +12,9 @@ if ($battleMonsterRow > 0) { exit(header("Location: ../../modules/battleMonster/
 //Si tous les champs ont bien été rempli
 if (isset($_POST['battleMonsterId']))
 {
-    //On vérifie si la monstre choisit est correct et que le select retourne bien un nombre
-    if(ctype_digit($_POST['battleMonsterId']))
+    //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
+    if (ctype_digit($_POST['battleMonsterId'])
+    && $_POST['battleMonsterId'] >= 1)
     {
         //On récupère l'Id du monstre
         $monsterId = htmlspecialchars(addslashes($_POST['battleMonsterId']));

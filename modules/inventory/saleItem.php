@@ -8,10 +8,12 @@ if ($battleArenaRow > 0) { exit(header("Location: ../../modules/battleArena/inde
 if ($battleMonsterRow > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
 
 //Si tous les champs ont bien été rempli
-if (isset($_POST['sale']))
+if (isset($_POST['itemId'])
+&& isset($_POST['sale']))
 {
-    //On vérifie si l'objet ou équipement choisit est correct et retourne bien un nombre
-    if(ctype_digit($_POST['itemId']))
+    //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
+    if(ctype_digit($_POST['itemId'])
+    && $_POST['itemId'] >= 1)
     {
         //On récupère l'Id de l'objet ou équipement
         $itemId = htmlspecialchars(addslashes($_POST['itemId']));

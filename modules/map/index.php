@@ -23,7 +23,7 @@ $townRow = $townQuery->rowCount();
 if ($townRow >= 1)
 {
     ?>
-    <form method="POST" action="map.php">
+    <form method="POST" action="chooseTown.php">
         <div class="form-group row">
             <label for="raceList" class="col-2 col-form-label">Liste des villes</label>
             <select class="form-control" id="townList" name="townId">

@@ -11,7 +11,7 @@ if (isset($_POST['adminMonsterId'])
 && isset($_POST['delete']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
-    if(ctype_digit($_POST['adminMonsterId'])
+    if (ctype_digit($_POST['adminMonsterId'])
     && $_POST['adminMonsterId'] >= 1)
     {
         //On récupère l'Id du formulaire précédent

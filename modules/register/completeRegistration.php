@@ -1,10 +1,20 @@
 <?php require_once("../../html/header.php");
 
 //Si tous les champs ont bien été rempli
-if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['accountPasswordConfirm']) && ($_POST['accountEmail']))
+if (isset($_POST['accountPseudo']) 
+&& isset($_POST['accountPassword'])
+&& isset($_POST['accountPasswordConfirm'])
+&& isset($_POST['accountEmail'])
+&& isset($_POST['characterRaceId'])
+&& isset($_POST['characterSex'])
+&& isset($_POST['characterName']))
 {
-    //On vérifie si la classe choisit est correct et que le select retourne bien un nombre
-    if(ctype_digit($_POST['characterRaceId']))
+    //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
+    if (ctype_digit($_POST['characterRaceId'])
+    && ctype_digit($_POST['characterSex'])
+    && $_POST['characterRaceId'] >= 1
+    && $_POST['characterSex'] >= 0
+    && $_POST['characterSex'] <= 1)
     {
         //On récupère les valeurs du formulaire dans une variable
         $accountPseudo = htmlspecialchars(addslashes($_POST['accountPseudo']));

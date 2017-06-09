@@ -10,7 +10,7 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 if (isset($_POST['finalDelete']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
-    if(ctype_digit($_POST['adminItemId'])
+    if (ctype_digit($_POST['adminItemId'])
     && $_POST['adminItemId'] >= 1)
     {
         //On récupère l'Id du formulaire précédent

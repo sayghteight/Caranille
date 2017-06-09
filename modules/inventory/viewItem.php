@@ -8,10 +8,12 @@ if ($battleArenaRow > 0) { exit(header("Location: ../../modules/battleArena/inde
 if ($battleMonsterRow > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
 //Si tous les champs ont bien été rempli
 
-if (isset($_POST['viewItem']))
+if (isset($_POST['itemId'])
+&& isset($_POST['viewItem']))
 {
-    //On vérifie si la classe choisit est correct et que le select retourne bien un nombre
-    if(ctype_digit($_POST['itemId']))
+    //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
+    if(ctype_digit($_POST['itemId'])
+    && $_POST['itemId'] >= 1)
     {
         ?>
         Information complète de l'objet

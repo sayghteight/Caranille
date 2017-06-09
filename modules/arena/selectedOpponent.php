@@ -12,8 +12,9 @@ if ($battleMonsterRow > 0) { exit(header("Location: ../../modules/battleMonster/
 //Si tous les champs ont bien été rempli
 if (isset($_POST['opponentCharacterId']))
 {
-    //On vérifi si la monstre choisit est correct et que le select retourne bien un nombre
-    if(ctype_digit($_POST['opponentCharacterId']))
+    //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
+    if (ctype_digit($_POST['opponentCharacterId'])
+    && $_POST['opponentCharacterId'] >= 1)
     {
         //On récupère l'ID de la personne à défier
         $opponentCharacterId = htmlspecialchars(addslashes($_POST['opponentCharacterId']));
