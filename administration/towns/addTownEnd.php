@@ -18,7 +18,7 @@ if (isset($_POST['adminTownPicture'])
     if (ctype_digit($_POST['adminTownPriceInn'])
     && ctype_digit($_POST['adminTownChapter'])
     && $_POST['adminTownPriceInn'] >= 0
-    && $_POST['adminTownChapter'] >= 0)
+    && $_POST['adminTownChapter'] >= 1)
     {
         //On récupère les informations du formulaire
         $adminTownPicture = htmlspecialchars(addslashes($_POST['adminTownPicture']));
