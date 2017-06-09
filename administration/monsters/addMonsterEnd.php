@@ -24,7 +24,7 @@ if (isset($_POST['adminMonsterPicture'])
 && isset($_POST['finalAdd']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre
-    if(ctype_digit($_POST['adminMonsterLevel']) 
+    if (ctype_digit($_POST['adminMonsterLevel']) 
     && ctype_digit($_POST['adminMonsterHp'])
     && ctype_digit($_POST['adminMonsterMp'])
     && ctype_digit($_POST['adminMonsterStrength'])

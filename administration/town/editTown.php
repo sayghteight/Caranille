@@ -7,49 +7,44 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //Si l'utilisateur à choisit un id de l'objet
-if (isset($_POST['adminItemId'])
+if (isset($_POST['adminTownId'])
 && isset($_POST['edit']))
 {
     //On vérifie si l'id de l'objet choisit est correct et que le select retourne bien un nombre
-    if(ctype_digit($_POST['adminItemId']))
+    if (ctype_digit($_POST['adminTownId']))
     {
         //On récupère l'Id du formulaire précédent
-        $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
+        $adminTownId = htmlspecialchars(addslashes($_POST['adminTownId']));
 
-        //On fait une requête pour vérifier si l'objet choisit existe
-        $itemQuery = $bdd->prepare('SELECT * FROM car_items 
-        WHERE itemId= ?');
-        $itemQuery->execute([$adminItemId]);
-        $itemRow = $itemQuery->rowCount();
+        //On fait une requête pour vérifier si la ville choisit existe
+        $townQuery = $bdd->prepare('SELECT * FROM car_towns 
+        WHERE townId = ?');
+        $townQuery->execute([$adminTownId]);
+        $townRow = $townQuery->rowCount();
 
-        //Si l'objet est disponible
-        if ($itemRow == 1) 
+        //Si la ville est disponible
+        if ($townRow == 1) 
         {
-            //On fait une boucle pour récupérer toutes les information
-            while ($item = $itemQuery->fetch())
+            //On fait une recherche dans la base de donnée de tous les comptes
+            while ($town = $townQuery->fetch())
             {
                 //On récupère les informations de l'objet
-                $adminItemId = stripslashes($item['itemId']);
-                $adminItemPicture = stripslashes($item['itemPicture']);
-                $adminItemName = stripslashes($item['itemName']);
-                $adminItemDescription = stripslashes($item['itemDescription']);
-                $adminItemHpEffects = stripslashes($item['itemHpEffect']);
-                $adminItemMpEffect = stripslashes($item['itemMpEffect']);
-                $adminItemPurchasePrice = stripslashes($item['itemPurchasePrice']);
-                $adminItemSalePrice = stripslashes($item['itemSalePrice']);
+                $adminTownPicture = stripslashes($town['townPicture']);
+                $adminTownName = stripslashes($town['townName']);
+                $adminTownDescription = stripslashes($town['townDescription']);
+                $adminTownPriceInn = stripslashes($town['townPriceInn']);
+                $adminTownChapter = stripslashes($town['townChapter']);
             }
             ?>
 
-            <p>Informations de l'équipement</p>
-            <form method="POST" action="editItemEnd.php">
-                Image : <br> <input type="mail" name="adminItemPicture" class="form-control" placeholder="Image" value="<?php echo $adminItemPicture; ?>" required><br /><br />
-                Nom : <br> <input type="text" name="adminItemName" class="form-control" placeholder="Nom" value="<?php echo $adminItemName; ?>" required><br /><br />
-                Description : <br> <input type="mail" name="adminItemDescription" class="form-control" placeholder="Description" value="<?php echo $adminItemDescription; ?>" required><br /><br />
-                HP Bonus : <br> <input type="mail" name="adminItemHpEffects" class="form-control" placeholder="HP Bonus" value="<?php echo $adminItemHpEffects; ?>" required><br /><br />
-                MP Bonus : <br> <input type="mail" name="adminItemMpEffect" class="form-control" placeholder="MP Bonus" value="<?php echo $adminItemMpEffect; ?>" required><br /><br />
-                Prix d'achat : <br> <input type="mail" name="adminItemPurchasePrice" class="form-control" placeholder="Prix d'achat" value="<?php echo $adminItemPurchasePrice; ?>" required><br /><br />
-                Prix de vente : <br> <input type="mail" name="adminItemSalePrice" class="form-control" placeholder="Prix de vente" value="<?php echo $adminItemSalePrice; ?>" required><br /><br />
-                <input type="hidden" name="adminItemId" value="<?= $adminItemId ?>">
+            <p>Informations de la ville</p>
+            <form method="POST" action="editTownEnd.php">
+                Image : <br> <input type="text" name="adminTownPicture" class="form-control" placeholder="Image" value="<?php echo $adminTownPicture; ?>" required><br /><br />
+                Nom : <br> <input type="text" name="adminTownName" class="form-control" placeholder="Nom" value="<?php echo $adminTownName; ?>" required><br /><br />
+                Description : <br> <textarea class="form-control" name="adminTownDescription" id="adminTownDescription" rows="3"><?php echo $adminTownDescription; ?></textarea><br /><br />
+                Prix de l'auberge : <br> <input type="number" name="adminTownPriceInn" class="form-control" placeholder="Prix de l'auberge" value="<?php echo $adminTownPriceInn; ?>" required><br /><br />
+                Ville disponible au chapitre : <br> <input type="number" name="adminTownChapter" class="form-control" placeholder="Ville disponible au chapitre" value="<?php echo $adminTownChapter; ?>" required><br /><br />
+                <input type="hidden" name="adminTownId" value="<?= $adminTownId ?>">
                 <input name="finalEdit" class="btn btn-default form-control" type="submit" value="Modifier">
             </form>
             
@@ -59,17 +54,17 @@ if (isset($_POST['adminItemId'])
             </form>
             <?php
         }
-        //Si l'objet n'est pas disponible
+        //Si la ville n'est pas disponible
         else
         {
-            echo "Erreur: Objet indisponible";
+            echo "Erreur: Ville indisponible";
         }
-        $itemQuery->closeCursor();
+        $townQuery->closeCursor();
     }
-    //Si l'objet choisit n'est pas un nombre
+    //Si la ville choisit n'est pas un nombre
     else
     {
-        echo "Erreur: Objet invalide";
+        echo "Erreur: Ville invalide";
     }
 }
 //Si l'utilisateur n'a pas cliqué sur le bouton edit

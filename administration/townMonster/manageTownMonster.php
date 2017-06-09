@@ -60,8 +60,7 @@ if (isset($_POST['adminTownMonsterTownId'])
             }
             $townMonsterQuery->closeCursor();
 
-            $monsterQuery = $bdd->prepare("SELECT * FROM car_monsters");
-            $monsterQuery->execute([$adminTownMonsterTownId]);
+            $monsterQuery = $bdd->query("SELECT * FROM car_monsters");
             $monsterRow = $monsterQuery->rowCount();
             //Si il existe un ou plusieurs monstres on affiche le menu déroulant pour proposer au joueur d'en ajouter
             if ($monsterRow > 0) 

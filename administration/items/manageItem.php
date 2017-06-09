@@ -25,10 +25,7 @@ if (isset($_POST['adminItemId'])
         //Si l'objet est disponible
         if ($itemRow == 1) 
         {
-            //On fait une recherche dans la base de donnée de tous les comptes
-            $itemQuery = $bdd->prepare("SELECT * FROM car_items
-            WHERE itemId = ?");
-            $itemQuery->execute([$adminItemId]);
+            //On fait une recherche dans la base de donnée de tous les objets
             while ($item = $itemQuery->fetch())
             {
                 $adminItemName = stripslashes($item['itemName']);
@@ -36,7 +33,7 @@ if (isset($_POST['adminItemId'])
             $itemQuery->closeCursor();
 
             ?>
-            Que souhaitez-vous faire de l'objet <em><?php echo $adminItemName ?></em><br />
+            Que souhaitez-vous faire de l'objet <em><?php echo $adminItemName ?></em> ?<br />
 
             <hr>
                 

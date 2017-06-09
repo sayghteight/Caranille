@@ -7,66 +7,56 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //Si l'utilisateur à cliqué sur le bouton finalEdit
-if (isset($_POST['adminItemId'])
-&& isset($_POST['adminItemPicture'])
-&& isset($_POST['adminItemName'])
-&& isset($_POST['adminItemDescription'])
-&& isset($_POST['adminItemHpEffects'])
-&& isset($_POST['adminItemMpEffect'])
-&& isset($_POST['adminItemPurchasePrice'])
-&& isset($_POST['adminItemSalePrice'])
+if (isset($_POST['adminTownId'])
+&& isset($_POST['adminTownPicture'])
+&& isset($_POST['adminTownName'])
+&& isset($_POST['adminTownDescription'])
+&& isset($_POST['adminTownPriceInn'])
+&& isset($_POST['adminTownChapter'])
 && isset($_POST['finalEdit']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre
-    if(ctype_digit($_POST['adminItemId'])
-    && ctype_digit($_POST['adminItemHpEffects'])
-    && ctype_digit($_POST['adminItemMpEffect'])
-    && ctype_digit($_POST['adminItemPurchasePrice'])
-    && ctype_digit($_POST['adminItemSalePrice']))
+    if (ctype_digit($_POST['adminTownId'])
+    && ctype_digit($_POST['adminTownPriceInn'])
+    && ctype_digit($_POST['adminTownChapter']))
     {
         //On récupère les informations du formulaire
-        $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
-        $adminItemPicture = htmlspecialchars(addslashes($_POST['adminItemPicture']));
-        $adminItemName = htmlspecialchars(addslashes($_POST['adminItemName']));
-        $adminItemDescription = htmlspecialchars(addslashes($_POST['adminItemDescription']));
-        $adminItemHpEffects = htmlspecialchars(addslashes($_POST['adminItemHpEffects']));
-        $adminItemMpEffect = htmlspecialchars(addslashes($_POST['adminItemMpEffect']));
-        $adminItemPurchasePrice = htmlspecialchars(addslashes($_POST['adminItemPurchasePrice']));
-        $adminItemSalePrice = htmlspecialchars(addslashes($_POST['adminItemSalePrice']));
+        $adminTownId = htmlspecialchars(addslashes($_POST['adminTownId']));
+        $adminTownPicture = htmlspecialchars(addslashes($_POST['adminTownPicture']));
+        $adminTownName = htmlspecialchars(addslashes($_POST['adminTownName']));
+        $adminItemDescription = htmlspecialchars(addslashes($_POST['adminTownDescription']));
+        $adminTownPriceInn = htmlspecialchars(addslashes($_POST['adminTownPriceInn']));
+        $adminTownChapter = htmlspecialchars(addslashes($_POST['adminTownChapter']));
 
-        //On fait une requête pour vérifier si l'objet choisit existe
-        $itemQuery = $bdd->prepare('SELECT * FROM car_items 
-        WHERE itemId= ?');
-        $itemQuery->execute([$adminItemId]);
-        $itemRow = $itemQuery->rowCount();
+        //On fait une requête pour vérifier si la ville choisit existe
+        $townQuery = $bdd->prepare('SELECT * FROM car_towns 
+        WHERE townId = ?');
+        $townQuery->execute([$adminTownId]);
+        $townRow = $townQuery->rowCount();
 
-        //Si l'objet est disponible
-        if ($itemRow == 1) 
+        //Si la ville est disponible
+        if ($townRow == 1) 
         {
             //On met à jour l'objet dans la base de donnée
-            $updateItems = $bdd->prepare('UPDATE car_items 
-            SET itemPicture = :adminItemPicture,
-            itemName = :adminItemName,
-            itemDescription = :adminItemDescription,
-            itemHpEffect = :adminItemHpEffects,
-            itemMpEffect = :adminItemMpEffect,
-            itemPurchasePrice = :adminItemPurchasePrice,
-            itemSalePrice = :adminItemSalePrice
-            WHERE itemId = :adminItemId');
+            $updateTown = $bdd->prepare('UPDATE car_towns 
+            SET townPicture = :adminTownPicture,
+            townName = :adminTownName,
+            townDescription = :adminItemDescription,
+            townPriceInn = :adminTownPriceInn,
+            townChapter = :adminTownChapter
+            WHERE townId = :adminTownId');
 
-            $updateItems->execute([
-            'adminItemPicture' => $adminItemPicture,
-            'adminItemName' => $adminItemName,
+            $updateTown->execute([
+            'adminTownPicture' => $adminTownPicture,
+            'adminTownName' => $adminTownName,
             'adminItemDescription' => $adminItemDescription,
-            'adminItemHpEffects' => $adminItemHpEffects,
-            'adminItemMpEffect' => $adminItemMpEffect,
-            'adminItemPurchasePrice' => $adminItemPurchasePrice,
-            'adminItemSalePrice' => $adminItemSalePrice,
-            'adminItemId' => $adminItemId]);
-            $updateItems->closeCursor();
+            'adminTownPriceInn' => $adminTownPriceInn,
+            'adminTownChapter' => $adminTownChapter,
+            'adminTownId' => $adminTownId]);
+            $updateTown->closeCursor();
             ?>
 
-            L'objet a bien été mit à jour
+            La ville a bien été mit à jour
 
             <hr>
                 
@@ -75,12 +65,12 @@ if (isset($_POST['adminItemId'])
             </form>
             <?php
         }
-        //Si l'objet n'est pas disponible
+        //Si la ville n'est pas disponible
         else
         {
-            echo "Erreur: Objet indisponible";
+            echo "Erreur: Ville indisponible";
         }
-        $itemQuery->closeCursor();
+        $townQuery->closeCursor();
     }
     //Si tous les champs numérique ne contiennent pas un nombre
     else

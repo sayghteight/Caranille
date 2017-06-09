@@ -10,33 +10,33 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 if (isset($_POST['finalDelete']))
 {
     //On vérifie si l'id de l'objet choisit est correct et que le select retourne bien un nombre
-    if(ctype_digit($_POST['adminItemId']))
+    if(ctype_digit($_POST['adminTownId']))
     {
-        $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
+        $adminTownId = htmlspecialchars(addslashes($_POST['adminTownId']));
 
-        //On fait une requête pour vérifier si l'objet choisit existe
-        $itemQuery = $bdd->prepare('SELECT * FROM car_items 
-        WHERE itemId= ?');
-        $itemQuery->execute([$adminItemId]);
-        $itemRow = $itemQuery->rowCount();
+        //On fait une requête pour vérifier si la ville choisit existe
+        $townQuery = $bdd->prepare('SELECT * FROM car_towns
+        WHERE townId= ?');
+        $townQuery->execute([$adminTownId]);
+        $townRow = $townQuery->rowCount();
 
-        //Si l'objet est disponible
-        if ($itemRow == 1) 
+        //Si la ville est disponible
+        if ($townRow == 1) 
         {
-            //On supprime l'objet de la base de donnée
-            $itemDeleteQuery = $bdd->prepare("DELETE FROM car_items
-            WHERE itemId = ?");
-            $itemDeleteQuery->execute([$adminItemId]);
-            $itemDeleteQuery->closeCursor();
+            //On supprime la ville de la base de donnée
+            $townDeleteQuery = $bdd->prepare("DELETE FROM car_towns
+            WHERE townId = ?");
+            $townDeleteQuery->execute([$adminTownId]);
+            $townDeleteQuery->closeCursor();
 
-            //On supprime aussi l'objet de l'inventaire dans la base de donnée
-            $inventoryDeleteQuery = $bdd->prepare("DELETE FROM car_inventory
-            WHERE inventoryItemId = ?");
-            $inventoryDeleteQuery->execute([$adminItemId]);
-            $inventoryDeleteQuery->closeCursor();
+            //On supprime aussi les monstre de la ville
+            $townMonsterDeleteQuery = $bdd->prepare("DELETE FROM car_towns_monsters
+            WHERE townMonsterTownId = ?");
+            $townMonsterDeleteQuery->execute([$adminTownId]);
+            $townMonsterDeleteQuery->closeCursor();
             ?>
 
-            L'objet a bien été supprimé
+            La ville a bien été supprimée
 
             <hr>
                 
@@ -45,17 +45,17 @@ if (isset($_POST['finalDelete']))
                 </form>
             <?php
         }
-        //Si l'objet n'est pas disponible
+        //Si la ville n'est pas disponible
         else
         {
-            echo "Erreur: Objet indisponible";
+            echo "Erreur: Ville indisponible";
         }
-        $itemQuery->closeCursor();
+        $townQuery->closeCursor();
     }
-    //Si l'objet choisit n'est pas un nombre
+    //Si la ville choisit n'est pas un nombre
     else
     {
-        echo "Erreur: Objet invalide";
+        echo "Erreur: Ville invalide";
     }
 }
 //Si l'utilisateur n'a pas cliqué sur le bouton finalDelete

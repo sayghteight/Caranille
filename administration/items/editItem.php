@@ -11,7 +11,7 @@ if (isset($_POST['adminItemId'])
 && isset($_POST['edit']))
 {
     //On vérifie si l'id de l'objet choisit est correct et que le select retourne bien un nombre
-    if(ctype_digit($_POST['adminItemId']))
+    if (ctype_digit($_POST['adminItemId']))
     {
         //On récupère l'Id du formulaire précédent
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
@@ -44,7 +44,7 @@ if (isset($_POST['adminItemId'])
             <form method="POST" action="editItemEnd.php">
                 Image : <br> <input type="mail" name="adminItemPicture" class="form-control" placeholder="Image" value="<?php echo $adminItemPicture; ?>" required><br /><br />
                 Nom : <br> <input type="text" name="adminItemName" class="form-control" placeholder="Nom" value="<?php echo $adminItemName; ?>" required><br /><br />
-                Description : <br> <input type="mail" name="adminItemDescription" class="form-control" placeholder="Description" value="<?php echo $adminItemDescription; ?>" required><br /><br />
+                Description : <br> <textarea class="form-control" name="adminItemDescription" id="adminItemDescription" rows="3" required><?php echo $adminItemDescription; ?></textarea><br /><br />
                 HP Bonus : <br> <input type="mail" name="adminItemHpEffects" class="form-control" placeholder="HP Bonus" value="<?php echo $adminItemHpEffects; ?>" required><br /><br />
                 MP Bonus : <br> <input type="mail" name="adminItemMpEffect" class="form-control" placeholder="MP Bonus" value="<?php echo $adminItemMpEffect; ?>" required><br /><br />
                 Prix d'achat : <br> <input type="mail" name="adminItemPurchasePrice" class="form-control" placeholder="Prix d'achat" value="<?php echo $adminItemPurchasePrice; ?>" required><br /><br />

@@ -25,7 +25,7 @@ if (isset($_POST['adminMonsterId'])
 && isset($_POST['finalEdit']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre
-    if(ctype_digit($_POST['adminMonsterId']) 
+    if (ctype_digit($_POST['adminMonsterId']) 
     && ctype_digit($_POST['adminMonsterLevel']) 
     && ctype_digit($_POST['adminMonsterHp'])
     && ctype_digit($_POST['adminMonsterMp'])

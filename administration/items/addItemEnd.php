@@ -17,7 +17,7 @@ if (isset($_POST['adminItemPicture'])
 && isset($_POST['finalAdd']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre
-    if(ctype_digit($_POST['adminItemHpEffects'])
+    if (ctype_digit($_POST['adminItemHpEffects'])
     && ctype_digit($_POST['adminItemMpEffect'])
     && ctype_digit($_POST['adminItemPurchasePrice'])
     && ctype_digit($_POST['adminItemSalePrice']))

@@ -6,19 +6,17 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//Si l'utilisateur à choisit un id de compte
+//Si l'utilisateur à cliqué sur add
 if (isset($_POST['add']))
 {
     ?>
-    <p>Informations de l'objets</p>
-    <form method="POST" action="addItemEnd.php">
-        Image : <br> <input type="mail" name="adminItemPicture" class="form-control" placeholder="Image" required><br /><br />
-        Nom : <br> <input type="text" name="adminItemName" class="form-control" placeholder="Nom" required><br /><br />
-        Description : <br> <input type="mail" name="adminItemDescription" class="form-control" placeholder="Description" required><br /><br />
-        HP Bonus : <br> <input type="mail" name="adminItemHpEffects" class="form-control" placeholder="HP Bonus" required><br /><br />
-        MP Bonus : <br> <input type="mail" name="adminItemMpEffect" class="form-control" placeholder="MP Bonus" required><br /><br />
-        Prix d'achat : <br> <input type="mail" name="adminItemPurchasePrice" class="form-control" placeholder="Prix d'achat" required><br /><br />
-        Prix de vente : <br> <input type="mail" name="adminItemSalePrice" class="form-control" placeholder="Prix de vente" required><br /><br />
+    <p>Informations de la ville</p>
+    <form method="POST" action="addTownEnd.php">
+        Image : <br> <input type="mail" name="adminTownPicture" class="form-control" placeholder="Image" required><br /><br />
+        Nom : <br> <input type="text" name="adminTownName" class="form-control" placeholder="Nom" required><br /><br />
+        Description : <br> <textarea class="form-control" name="adminTownDescription" id="adminTownDescription" rows="3"></textarea><br /><br />
+        Prix de l'auberge : <br> <input type="text" name="adminTownPriceInn" class="form-control" placeholder="HP Bonus" required><br /><br />
+        Ville disponible au chapitre : <br> <input type="text" name="adminTownChapter" class="form-control" placeholder="MP Bonus" required><br /><br />
         <input name="finalAdd" class="btn btn-default form-control" type="submit" value="Ajouter">
     </form>
     

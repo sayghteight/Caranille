@@ -26,7 +26,7 @@ if (isset($_POST['adminItemRaceId'])
 && isset($_POST['finalAdd']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre
-    if(ctype_digit($_POST['adminItemRaceId'])
+    if (ctype_digit($_POST['adminItemRaceId'])
     && ctype_digit($_POST['adminItemLevel'])
     && ctype_digit($_POST['adminItemLevelRequired'])
     && ctype_digit($_POST['adminItemHpEffects'])

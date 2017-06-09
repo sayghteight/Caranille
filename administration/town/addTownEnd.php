@@ -7,63 +7,43 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //Si l'utilisateur à cliqué sur le bouton finalAdd
-if (isset($_POST['adminItemPicture'])
-&& isset($_POST['adminItemName'])
-&& isset($_POST['adminItemDescription'])
-&& isset($_POST['adminItemHpEffects'])
-&& isset($_POST['adminItemMpEffect'])
-&& isset($_POST['adminItemPurchasePrice'])
-&& isset($_POST['adminItemSalePrice'])
+if (isset($_POST['adminTownPicture'])
+&& isset($_POST['adminTownName'])
+&& isset($_POST['adminTownDescription'])
+&& isset($_POST['adminTownPriceInn'])
+&& isset($_POST['adminTownChapter'])
 && isset($_POST['finalAdd']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre
-    if(ctype_digit($_POST['adminItemHpEffects'])
-    && ctype_digit($_POST['adminItemMpEffect'])
-    && ctype_digit($_POST['adminItemPurchasePrice'])
-    && ctype_digit($_POST['adminItemSalePrice']))
+    if (ctype_digit($_POST['adminTownPriceInn'])
+    && ctype_digit($_POST['adminTownChapter']))
     {
         //On récupère les informations du formulaire
-        $adminItemPicture = htmlspecialchars(addslashes($_POST['adminItemPicture']));
-        $adminItemName = htmlspecialchars(addslashes($_POST['adminItemName']));
-        $adminItemDescription = htmlspecialchars(addslashes($_POST['adminItemDescription']));
-        $adminItemHpEffects = htmlspecialchars(addslashes($_POST['adminItemHpEffects']));
-        $adminItemMpEffect = htmlspecialchars(addslashes($_POST['adminItemMpEffect']));
-        $adminItemPurchasePrice = htmlspecialchars(addslashes($_POST['adminItemPurchasePrice']));
-        $adminItemSalePrice = htmlspecialchars(addslashes($_POST['adminItemSalePrice']));
+        $adminTownPicture = htmlspecialchars(addslashes($_POST['adminTownPicture']));
+        $adminTownName = htmlspecialchars(addslashes($_POST['adminTownName']));
+        $adminTownDescription = htmlspecialchars(addslashes($_POST['adminTownDescription']));
+        $adminTownPriceInn = htmlspecialchars(addslashes($_POST['adminTownPriceInn']));
+        $adminTownChapter = htmlspecialchars(addslashes($_POST['adminTownChapter']));
 
         //On met à jour l'équippement dans la base de donnée
-        $addItem = $bdd->prepare("INSERT INTO car_items VALUES(
+        $addTown = $bdd->prepare("INSERT INTO car_towns VALUES(
         '',
-        '0',
-        :adminItemPicture,
-        'Item',
-        '1',
-        '1',
-        :adminItemName,
-        :adminItemDescription,
-        :adminItemHpEffects,
-        :adminItemMpEffect,
-        '0',
-        '0',
-        '0',
-        '0',
-        '0',
-        '0',
-        :adminItemPurchasePrice,
-        :adminItemSalePrice)");
+        :adminTownPicture,
+        :adminTownName,
+        :adminTownDescription,
+        :adminTownPriceInn,
+        :adminTownChapter)");
 
-        $addItem->execute([
-        'adminItemPicture' => $adminItemPicture,
-        'adminItemName' => $adminItemName,
-        'adminItemDescription' => $adminItemDescription,
-        'adminItemHpEffects' => $adminItemHpEffects,
-        'adminItemMpEffect' => $adminItemMpEffect,
-        'adminItemPurchasePrice' => $adminItemPurchasePrice,
-        'adminItemSalePrice' => $adminItemSalePrice]);
-        $addItem->closeCursor();
+        $addTown->execute([
+        'adminTownPicture' => $adminTownPicture,
+        'adminTownName' => $adminTownName,
+        'adminTownDescription' => $adminTownDescription,
+        'adminTownPriceInn' => $adminTownPriceInn,
+        'adminTownChapter' => $adminTownChapter]);
+        $addTown->closeCursor();
         ?>
 
-        L'objet a bien été crée
+        La ville a bien été crée
 
         <hr>
             

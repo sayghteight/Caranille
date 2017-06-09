@@ -7,46 +7,46 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //Si l'utilisateur à cliqué sur le bouton manage
-if (isset($_POST['adminItemId'])
+if (isset($_POST['adminTownId'])
 && isset($_POST['manage']))
 {
-    //On vérifie si l'id de l'objet choisit est correct et que le select retourne bien un nombre
-    if (ctype_digit($_POST['adminItemId']))
+    //On vérifie si l'id de la ville choisit est correct et que le select retourne bien un nombre
+    if (ctype_digit($_POST['adminTownId']))
     {
         //On récupère l'Id du formulaire précédent
-        $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
+        $adminTownId = htmlspecialchars(addslashes($_POST['adminTownId']));
 
         //On fait une requête pour vérifier si l'objet choisit existe
-        $itemQuery = $bdd->prepare('SELECT * FROM car_items 
-        WHERE itemId= ?');
-        $itemQuery->execute([$adminItemId]);
-        $itemRow = $itemQuery->rowCount();
+        $townQuery = $bdd->prepare('SELECT * FROM car_towns 
+        WHERE townId= ?');
+        $townQuery->execute([$adminTownId]);
+        $townRow = $townQuery->rowCount();
 
-        //Si l'objet est disponible
-        if ($itemRow == 1) 
+        //Si la ville est disponible
+        if ($townRow == 1) 
         {
-            //On fait une recherche dans la base de donnée de tous les comptes
-            $itemQuery = $bdd->prepare("SELECT * FROM car_items
-            WHERE itemId = ?");
-            $itemQuery->execute([$adminItemId]);
-            while ($item = $itemQuery->fetch())
+            //On fait une recherche dans la base de donnée de toutes les villes
+            while ($town = $townQuery->fetch())
             {
-                $adminItemName = stripslashes($item['itemName']);
+                $adminTownName = stripslashes($town['townName']);
             }
-            $itemQuery->closeCursor();
-
+            $townQuery->closeCursor();
             ?>
-            Que souhaitez-vous faire de l'objet <em><?php echo $adminItemName ?></em><br />
+            Que souhaitez-vous faire de la ville <em><?php echo $adminTownName ?></em> ?<br />
 
             <hr>
                 
-            <form method="POST" action="editItem.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?= $adminItemId ?>">
-                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier l'objet">
+            <form method="POST" action="editTown.php">
+                <input type="hidden" class="btn btn-default form-control" name="adminTownId" value="<?= $adminTownId ?>">
+                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier la ville">
             </form>
-            <form method="POST" action="deleteItem.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?= $adminItemId ?>">
-                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer l'objet">
+            <form method="POST" action="../townMonster/manageTownMonster.php">
+                <input type="hidden" class="btn btn-default form-control" name="adminTownMonsterTownId" value="<?= $adminTownId ?>">
+                <input type="submit" class="btn btn-default form-control" name="manage" value="Gérer les monstres">
+            </form>
+            <form method="POST" action="deleteTown.php">
+                <input type="hidden" class="btn btn-default form-control" name="adminTownId" value="<?= $adminTownId ?>">
+                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer la ville">
             </form>
             
             <hr>
@@ -56,17 +56,17 @@ if (isset($_POST['adminItemId'])
             </form>
             <?php
         }
-        //Si l'objet n'est pas disponible
+        //Si la ville n'est pas disponible
         else
         {
-            echo "Erreur: Objet indisponible";
+            echo "Erreur: Ville indisponible";
         }
-        $itemQuery->closeCursor();
+        $townQuery->closeCursor();
     }
-    //Si l'objet choisit n'est pas un nombre
+    //Si la ville choisit n'est pas un nombre
     else
     {
-        echo "Erreur: Objet invalide";
+        echo "Erreur: Ville invalide";
     }
 }
 //Si l'utilisateur n'a pas cliqué sur le bouton manage
