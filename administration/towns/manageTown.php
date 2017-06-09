@@ -40,7 +40,7 @@ if (isset($_POST['adminTownId'])
                 <input type="hidden" class="btn btn-default form-control" name="adminTownId" value="<?= $adminTownId ?>">
                 <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier la ville">
             </form>
-            <form method="POST" action="../townMonster/manageTownMonster.php">
+            <form method="POST" action="../townsMonsters/manageTownMonster.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminTownMonsterTownId" value="<?= $adminTownId ?>">
                 <input type="submit" class="btn btn-default form-control" name="manage" value="Gérer les monstres">
             </form>

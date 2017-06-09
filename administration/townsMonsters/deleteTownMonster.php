@@ -28,39 +28,52 @@ if (isset($_POST['adminTownMonsterTownId'])
         //Si la ville est disponible
         if ($townRow == 1) 
         {
+            while ($town = $townQuery->fetch())
+            {
+                $adminTownMonsterTownName = stripslashes($town['townName']);
+            }
+    
             //On fait une requête pour vérifier si le monstre choisit existe
             $monsterQuery = $bdd->prepare('SELECT * FROM car_monsters 
             WHERE monsterId= ?');
             $monsterQuery->execute([$adminTownMonsterMonsterId]);
             $monsterRow = $monsterQuery->rowCount();
 
-            //Si l'équippement est disponible
+            //Si le monstre est disponible
             if ($monsterRow == 1) 
             {
+                while ($monster = $monsterQuery->fetch())
+                {
+                    $adminTownMonsterMonsterName = stripslashes($monster['monsterName']);
+                }
+
                 //On fait une requête pour vérifier si le monstre choisit existe bien dans la ville
-                $monsterQuery = $bdd->prepare('SELECT * FROM car_towns_monsters 
+                $monsterTownQuery = $bdd->prepare('SELECT * FROM car_towns_monsters 
                 WHERE townMonsterTownId = ?
                 AND townMonsterMonsterId = ?');
-                $monsterQuery->execute([$adminTownMonsterTownId, $adminTownMonsterMonsterId]);
-                $monsterRow = $monsterQuery->rowCount();
+                $monsterTownQuery->execute([$adminTownMonsterTownId, $adminTownMonsterMonsterId]);
+                $monsterTownRow = $monsterTownQuery->rowCount();
 
-                //Si l'équippement est disponible
-                if ($monsterRow == 1) 
+                //Si le monstre est disponible
+                if ($monsterTownRow == 1) 
                 {
-                    //On supprime l'équippement de la base de donnée
-                    $monsterDeleteQuery = $bdd->prepare("DELETE FROM car_towns_monsters
-                    WHERE townMonsterMonsterId = ?");
-                    $monsterDeleteQuery->execute([$adminTownMonsterMonsterId]);
-                    $monsterDeleteQuery->closeCursor();
                     ?>
-
-                    Le monstre a bien été supprimé de la ville
+                    <p>ATTENTION</p> 
+                    Vous êtes sur le point de supprimer le monstre <em><?php echo $adminTownMonsterMonsterName ?></em> de la ville <em><?php echo $adminTownMonsterTownName ?></em><br />
+                    confirmez-vous la suppression ?
 
                     <hr>
                         
-                    <form method="POST" action="manageTownMonster.php">
-                        <input type="hidden" name="adminTownMonsterTownId" value="<?= $adminTownMonsterTownId ?>">
-                        <input type="submit" class="btn btn-default form-control" name="manage" value="Continuer">
+                    <form method="POST" action="deleteTownMonsterEnd.php">
+                        <input type="hidden" class="btn btn-default form-control" name="adminTownMonsterTownId" value="<?= $adminTownMonsterTownId ?>">
+                        <input type="hidden" class="btn btn-default form-control" name="adminTownMonsterMonsterId" value="<?= $adminTownMonsterMonsterId ?>">
+                        <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme la suppression">
+                    </form>
+            
+                    <hr>
+
+                    <form method="POST" action="index.php">
+                        <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
                     </form>
                     <?php
                 }
@@ -69,7 +82,7 @@ if (isset($_POST['adminTownMonsterTownId'])
                 {
                     echo "Erreur: Monstre indisponible";
                 }
-                $monsterQuery->closeCursor();
+                $monsterTownQuery->closeCursor();
             }
             //Si le monstre existe pas
             else

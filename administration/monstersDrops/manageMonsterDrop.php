@@ -1,0 +1,129 @@
+<?php 
+require_once("../html/header.php");
+
+//Si il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
+if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
+//Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
+if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
+
+//Si l'utilisateur à cliqué sur le bouton manage
+if (isset($_POST['adminMonsterDropMonsterId'])
+&& isset($_POST['manage']))
+{
+    //On vérifie si l'id de la ville choisit est correct et que le select retourne bien un nombre
+    if (ctype_digit($_POST['adminMonsterDropMonsterId']))
+    {
+        //On récupère l'Id du formulaire précédent
+        $adminMonsterDropMonsterId = htmlspecialchars(addslashes($_POST['adminMonsterDropMonsterId']));
+
+        //On fait une requête pour vérifier si le monstre choisit existe
+        $monsterQuery = $bdd->prepare('SELECT * FROM car_monsters 
+        WHERE monsterId= ?');
+        $monsterQuery->execute([$adminMonsterDropMonsterId]);
+        $monsterRow = $monsterQuery->rowCount();
+
+        //Si la ville est disponible
+        if ($monsterRow == 1) 
+        {
+            $monsterDropQuery = $bdd->prepare("SELECT * FROM car_monsters, car_items, car_monsters_drops
+            WHERE monsterDropMonsterID = monsterId
+            AND monsterDropItemID = itemId
+            AND monsterDropMonsterID = ?");
+            $monsterDropQuery->execute([$adminMonsterDropMonsterId]);
+            $monsterDropRow = $monsterDropQuery->rowCount();
+
+            //Si il existe un ou plusieurs objet pour ce monstre on affiche le menu déroulant
+            if ($monsterDropRow > 0) 
+            {
+                ?>
+                <form method="POST" action="deleteMonsterDrop.php">
+                    <div class="form-group row">
+                        <label for="townMonsterMonsterId" class="col-2 col-form-label">Liste des objets du monstre</label>
+                        <select class="form-control" id="adminMonsterDropItemId" name="adminMonsterDropItemId">
+                        <?php
+                        while ($monsterDrop = $monsterDropQuery->fetch())
+                        {
+                            $adminMonsterDropItemId = stripslashes($monsterDrop['itemId']);
+                            $adminMonsterDropItemName = stripslashes($monsterDrop['itemName']);
+                            $adminMonsterDropLuck = stripslashes($monsterDrop['monsterDropLuck']);?>
+                            ?>
+                                <option value="<?php echo $adminMonsterDropItemId ?>"><?php echo "$adminMonsterDropItemName ($adminMonsterDropLuck/1000)"; ?></option>
+                            <?php
+                        }
+                        $monsterDropQuery->closeCursor();
+                        ?>
+                        </select>
+                    </div>
+                    <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
+                    <input type="submit" name="delete" class="btn btn-default form-control" value="Supprimer cet objet">
+                </form>
+
+                <hr>
+
+                <?php
+            }
+            $monsterQuery->closeCursor();
+
+            $itemQuery = $bdd->query("SELECT * FROM car_items");
+            $itemRow = $itemQuery->rowCount();
+            //Si il existe un ou plusieurs monstres on affiche le menu déroulant pour proposer au joueur d'en ajouter
+            if ($itemRow > 0) 
+            {
+                ?>
+                <form method="POST" action="addMonsterDrop.php">
+                    <div class="form-group row">
+                        <label for="adminMonsterDropItemId" class="col-2 col-form-label">Objets disponible</label>
+                        <select class="form-control" id="adminMonsterDropItemId" name="adminMonsterDropItemId">
+                        <?php
+                        while ($item = $itemQuery->fetch())
+                        {
+                            $adminMonsterDropItemId = stripslashes($item['itemId']);
+                            $adminMonsterDropItemName = stripslashes($item['itemName']);?>
+                            ?>
+                                <option value="<?php echo $adminMonsterDropItemId ?>"><?php echo "$adminMonsterDropItemName"; ?></option>
+                            <?php
+                        }
+                        $itemQuery->closeCursor();
+                        ?>
+                        </select>
+                    </div>
+                    Chance d'obtenir cet objet (Sur 1000) : <br> <input type="number" name="adminMonsterDropLuck" class="form-control" placeholder="Chance d'obtention" required><br /><br />
+                    <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
+                    <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter cet objet">
+                </form>
+                <?php
+            }
+            else
+            {
+                ?>
+                Il n'y a actuellement aucun objet
+                <?php
+            }
+            ?>
+
+            <hr>
+
+            <form method="POST" action="index.php">
+                <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
+            </form>
+            <?php
+        }
+        //Si l'objet n'est pas disponible
+        else
+        {
+            echo "Erreur: Objet indisponible";
+        }
+    }
+    //Si l'objet choisit n'est pas un nombre
+    else
+    {
+        echo "Erreur: Objet invalide";
+    }
+}
+//Si l'utilisateur n'a pas cliqué sur le bouton manage
+else
+{
+    echo "Erreur: Aucun choix effectué";
+}
+
+require_once("../html/footer.php");

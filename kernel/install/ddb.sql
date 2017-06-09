@@ -204,6 +204,14 @@ CREATE TABLE IF NOT EXISTS `car_monsters` (
   `monsterGold` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `car_monsters_drops`
+(
+  `monsterDropID` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `monsterDropMonsterID` int(11) NOT NULL,
+  `monsterDropItemID` int(11) NOT NULL,
+  `monsterDropLuck` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `car_news` 
 (
   `newsId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -279,3 +287,6 @@ INSERT INTO `car_towns` (`townId`, `townPicture`, `townName`, `townDescription`,
 INSERT INTO `car_towns_monsters` (`townMonsterId`, `townMonsterTownId`, `townMonsterMonsterId`) VALUES
 (1, 1, 1),
 (2, 2, 2);
+
+INSERT INTO `car_monsters_drops` (`monsterDropID`, `monsterDropMonsterID`, `monsterDropItemID`, `monsterDropLuck`) VALUES 
+(1, '1', '1', '500');

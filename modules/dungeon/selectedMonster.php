@@ -27,7 +27,7 @@ if (isset($_POST['battleMonsterId']))
         AND townId = ? //On ajoute l'Id de la ville dans laquel on est
         */
         $monsterQuery = $bdd->prepare("SELECT * FROM car_monsters, car_towns, car_towns_monsters
-        WHERE townMonsterId = monsterId
+        WHERE townMonsterMonsterId = monsterId
         AND townMonsterTownId = townId
         AND monsterId = ?
         AND townId = ?");

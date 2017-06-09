@@ -32,7 +32,7 @@ if (isset($_POST['adminTownMonsterTownId'])
             $townMonsterQuery->execute([$adminTownMonsterTownId]);
             $townMonsterRow = $townMonsterQuery->rowCount();
 
-            //Si il existe un ou plusieurs villes on affiche le menu déroulant
+            //Si il existe un ou plusieurs monstre dans la ville on affiche le menu déroulant
             if ($townMonsterRow > 0) 
             {
                 ?>
@@ -56,6 +56,9 @@ if (isset($_POST['adminTownMonsterTownId'])
                     <input type="hidden" name="adminTownMonsterTownId" value="<?= $adminTownMonsterTownId ?>">
                     <input type="submit" name="delete" class="btn btn-default form-control" value="Supprimer ce monstre">
                 </form>
+                
+                <hr>
+
                 <?php
             }
             $townMonsterQuery->closeCursor();
