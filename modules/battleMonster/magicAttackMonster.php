@@ -54,21 +54,82 @@ if (isset($_POST['magic']))
         $totalDamagesMonster = $positiveDamagesMonster - $negativeDamagesMonster;
     }
 
-    //Si le joueur à fait des dégats négatif ont bloque à zéro pour ne pas soigner le monstre (Car moins et moins fait plus)
+    //Si le joueur a fait des dégats négatif ont bloque à zéro pour ne pas soigner le monstre (Car moins et moins fait plus)
     if ($totalDamagesCharacter < 0)
     {
         $totalDamagesCharacter = 0;
     }
 
-    //Si le monstre à fait des dégats négatif ont bloque à zéro pour ne pas soigner le personnage (Car moins et moins fait plus)
+    //Si le monstre a fait des dégats négatif ont bloque à zéro pour ne pas soigner le personnage (Car moins et moins fait plus)
     if ($totalDamagesMonster < 1)
     {
         $totalDamagesMonster = 0;
     }
 
-    //On affiche les résultats du tour
-    echo "$characterName à fait $totalDamagesCharacter point(s) de dégat à $monsterName<br />";
-    echo "$monsterName à fait $totalDamagesMonster point(s) de dégat à $characterName<br />";
+    //On vérifie si le monstre esquive l'attaque du joueur
+    if ($monsterAgility >= $characterAgilityTotal)
+    {
+        $totalDifference = $monsterAgility - $characterAgilityTotal;
+        $percentage = $totalDifference/$monsterAgility * 100;
+
+        //Si la différence est de plus de 50% on bloque pour ne pas rendre le monstre intouchable
+        if ($percentage > 50)
+        {
+            $percentage = 50;
+        }
+
+        //On génère un nombre entre 0 et 100 (inclus)
+        $result = mt_rand(0, 101);
+
+        //Si le nombre généré est inférieur ou égal le monstre esquive l'attaque, on met donc $totalDamagesCharacter à 0
+        if ($result <= $percentage)
+        {
+            $totalDamagesCharacter = 0;
+            echo "$monsterName a esquivé l'attaque de $characterName<br />";
+        }
+        else
+        {
+            echo "$characterName a fait $totalDamagesCharacter point(s) de dégat à $monsterName<br />";
+        }
+    }
+    //Si le monstre a moins d'agilité que le joueur il subit l'attaque
+    else
+    {
+        echo "$characterName a fait $totalDamagesCharacter point(s) de dégat à $monsterName<br />";
+    }
+
+    //On vérifie si le joueur esquive l'attaque du monstre
+    if ($characterAgilityTotal >= $monsterAgility)
+    {
+        $totalDifference = $characterAgilityTotal - $monsterAgility;
+        $percentage = $totalDifference/$characterAgilityTotal * 100;
+
+        //Si la différence est de plus de 50% on bloque pour ne pas rendre le joueur intouchable
+        if ($percentage > 50)
+        {
+            $percentage = 50;
+        }
+
+        //On génère un nombre entre 0 et 100 (inclus)
+        $result = mt_rand(0, 101);
+
+        //Si le nombre généré est inférieur ou égal le monstre esquive l'attaque, on met donc $totalDamagesMonster à 0
+        if ($result <= $percentage)
+        {
+            $totalDamagesMonster = 0;
+            echo "$characterName a esquivé l'attaque de $monsterName<br />";
+        }
+        //Sinon le monstre subit l'attaque
+        else
+        {
+            echo "$monsterName a fait $totalDamagesMonster point(s) de dégat à $characterName<br />";
+        }
+    }
+    //Si le joueur a moins d'agilité que le monstre il subit l'attaque
+    else
+    {
+        echo "$monsterName a fait $totalDamagesMonster point(s) de dégat à $characterName<br />";
+    }
 
     //On met à jour la vie du joueur et du monstre
     $battleMonsterHpRemaining = $battleMonsterHpRemaining - $totalDamagesCharacter;
