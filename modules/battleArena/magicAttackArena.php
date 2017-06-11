@@ -36,10 +36,10 @@ if (isset($_POST['magic']))
     $negativeDamagesCharacter = mt_rand($opponentCharacterMinDefenseMagic, $opponentCharacterMaxDefenseMagic);
     $totalDamagesCharacter = $positiveDamagesCharacter - $negativeDamagesCharacter;
 
-    //Si le personnage adversaire à plus de puissance physique ou autant que de magique il fera une attaque physique
+    //Si l'adversaire à plus de puissance physique ou autant que de magique il fera une attaque physique
     if ($opponentCharacterStrengthTotal >= $opponentCharacterMagicTotal)
     {
-        //On calcule les dégats du personnage adverse
+        //On calcule les dégats de l'adversaire
         $positiveDamagesOpponentCharacter = mt_rand($opponentCharacterMinStrength, $opponentCharacterMaxStrength);
         $negativeDamagesOpponentCharacter = mt_rand($characterMinDefense, $characterMaxDefense);
         $totalDamagesOpponentCharacter = $positiveDamagesOpponentCharacter - $negativeDamagesOpponentCharacter;
@@ -47,22 +47,22 @@ if (isset($_POST['magic']))
     //Sinon il fera une attaque magique
     else
     {
-        //On calcule les dégats du personnage adverse
+        //On calcule les dégats de l'adversaire
         $positiveDamagesOpponentCharacter = mt_rand($opponentCharacterMinMagic, $opponentCharacterMaxMagic);
         $negativeDamagesOpponentCharacter = mt_rand($characterMinDefenseMagic, $characterMaxDefenseMagic);
         $totalDamagesOpponentCharacter = $positiveDamagesOpponentCharacter - $negativeDamagesOpponentCharacter;
     }
 
-    //Si le joueur a fait des dégats négatif ont bloque à zéro pour ne pas soigner le monstre (Car moins et moins fait plus)
+    //Si le joueur a fait des dégats négatif ont bloque à zéro pour ne pas soigner l'adversaire (Car moins et moins fait plus)
     if ($totalDamagesCharacter < 0)
     {
         $totalDamagesCharacter = 0;
     }
 
-    //Si le monstre a fait des dégats négatif ont bloque à zéro pour ne pas soigner le personnage (Car moins et moins fait plus)
-    if ($totalDamagesMonster < 1)
+    //Si l'adversaire a fait des dégats négatif ont bloque à zéro pour ne pas soigner le personnage (Car moins et moins fait plus)
+    if ($totalDamagesOpponentCharacter < 0)
     {
-        $totalDamagesMonster = 0;
+        $totalDamagesOpponentCharacter = 0;
     }
 
     //On vérifie si l'adversaire esquive l'attaque du joueur
@@ -71,7 +71,7 @@ if (isset($_POST['magic']))
         $totalDifference = $opponentCharacterAgilityTotal - $characterAgilityTotal;
         $percentage = $totalDifference/$opponentCharacterAgilityTotal * 100;
 
-        //Si la différence est de plus de 50% on bloque pour ne pas rendre le monstre intouchable
+        //Si la différence est de plus de 50% on bloque pour ne pas rendre l'adversaire intouchable
         if ($percentage > 50)
         {
             $percentage = 50;
@@ -131,7 +131,7 @@ if (isset($_POST['magic']))
         echo "$opponentCharacterName a fait $totalDamagesOpponentCharacter point(s) de dégat à $characterName<br />";
     }
 
-    //On met à jour la vie du joueur et du monstre
+    //On met à jour la vie du joueur et de l'adversaire
     $battleArenaOpponentCharacterHpRemaining = $battleArenaOpponentCharacterHpRemaining - $totalDamagesCharacter;
     $characterHpMin = $characterHpMin - $totalDamagesOpponentCharacter;
 
@@ -144,7 +144,7 @@ if (isset($_POST['magic']))
     'characterId' => $characterId]);
     $updateCharacter->closeCursor();
 
-    //On met le monstre à jour dans la base de donnée
+    //On met l'adversaire à jour dans la base de donnée
     $updateCharacterBattle = $bdd->prepare("UPDATE car_battles_arenas
     SET battleArenaOpponentCharacterHpRemaining = :battleArenaOpponentCharacterHpRemaining
     WHERE battleArenaOpponentCharacterId = :battleArenaOpponentCharacterId");
@@ -153,7 +153,7 @@ if (isset($_POST['magic']))
     'battleArenaOpponentCharacterId' => $battleArenaOpponentCharacterId]);
     $updateCharacterBattle->closeCursor();
 
-    //Si le joueur ou le personnage adverse a moins ou a zéro HP on redirige le joueur vers la page des récompenses
+    //Si le joueur ou l'adversaire adverse a moins ou a zéro HP on redirige le joueur vers la page des récompenses
     if ($characterHpMin <= 0 || $battleArenaOpponentCharacterHpRemaining <= 0)
     {
         ?>
@@ -166,7 +166,7 @@ if (isset($_POST['magic']))
         <?php
     }
 
-    //Si le monstre et le joueur ont plus de zéro HP on continue le combat
+    //Si l'adversaire et le joueur ont plus de zéro HP on continue le combat
     if ($battleArenaOpponentCharacterHpRemaining > 0 && $characterHpMin > 0 )
     {
         ?>

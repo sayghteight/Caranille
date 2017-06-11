@@ -61,7 +61,7 @@ if (isset($_POST['magic']))
     }
 
     //Si le monstre a fait des dégats négatif ont bloque à zéro pour ne pas soigner le personnage (Car moins et moins fait plus)
-    if ($totalDamagesMonster < 1)
+    if ($totalDamagesMonster < 0)
     {
         $totalDamagesMonster = 0;
     }
