@@ -9,7 +9,9 @@ if ($battleMonsterRow == 0) { exit(header("Location: ../../modules/battleArena/i
 if ($battleMonsterHpRemaining <= 0 && $characterHpMin <= 0)
 {
     //On prévient le joueur qu'il y a un match nul
-    echo "<p>Match Nul !</p>";
+    ?>
+    <p>Match Nul !</p>";
+    <?php
     
     //On soigne le personnage et ont le met à jour dans la base de donnée
     $updateCharacter = $bdd->prepare("UPDATE car_characters
@@ -43,23 +45,25 @@ if ($battleMonsterHpRemaining <= 0 && $characterHpMin > 0)
     $monsterExperience = $monsterExperience + $experienceBonus;
 
     //On prévient le joueur qu'il a remporté le combat
-    echo "<p>$characterName remporte le combat !</p>";
-    echo "Vous obtenez:<br />";
-    echo "-$monsterExperience point(s) d'experience<br />";
-    echo "-$monsterGold pièce(s) d'or<br />";
+    ?>
+    <p><?php echo $characterName; ?> remporte le combat !</p>
+    Vous obtenez:<br />
+    -<?php echo $monsterExperience; ?> point(s) d'experience<br />
+    -<?php echo $monsterGold; ?> pièce(s) d'or<br />
+    <?php
 
     //On recherche dans la base de donnée les objets que ce monstre peut faire gagner
     $monsterDropQuery = $bdd->prepare("SELECT * FROM car_monsters, car_items, car_monsters_drops
     WHERE monsterDropMonsterID = monsterId
     AND monsterDropItemID = itemId
     AND monsterDropMonsterID = ?");
-    $monsterDropQuery->execute([$battleMonsterId]);
+    $monsterDropQuery->execute([$battleMonsterMonsterId]);
     $monsterDropRow = $monsterDropQuery->rowCount();
 
     //Si il existe un ou plusieurs objet pour ce monstre
     if ($monsterDropRow > 0) 
     {
-        //On va voir pour chaque objet si le joueur obtient ou non
+        //On va voir pour chaque objet si le joueur l'obtient ou non
         while ($monsterDrop = $monsterDropQuery->fetch())
         {
             $monsterDropItemId = stripslashes($monsterDrop['itemId']);
@@ -68,12 +72,45 @@ if ($battleMonsterHpRemaining <= 0 && $characterHpMin > 0)
 
             //On génère un nombre entre 0 et 1001 (Pour que 1000 puisse aussi être choisit)
             $numberRandom = mt_rand(0, 1001);
-
+            
             //Si le nombre obtenu est inférieur ou égal à l'objet il l'obtient
             if ($numberRandom <= $monsterDropLuck)
             {
+                $itemQuery = $bdd->prepare("SELECT * FROM car_inventory 
+                WHERE inventoryItemId = ?");
+                $itemQuery->execute([$monsterDropItemId]);
+                $itemRow = $itemQuery->rowCount();
+
+                //Si l'objet a été trouvé dans l'inventaire du joueur on ajoute +1 à cet objet
+                if ($itemRow > 0)
+                {
+                    //On met à jour l'objet dans la base de donnée
+                    $updateItems = $bdd->prepare('UPDATE car_inventory 
+                    SET inventoryQuantity = inventoryQuantity + 1
+                    WHERE inventoryItemId = :monsterDropItemId');
+
+                    $updateItems->execute(['monsterDropItemId' => $monsterDropItemId]);
+                    $updateItems->closeCursor();
+                }
+                //Si l'objet n'a pas été trouvé dans l'inventaire du joueur on l'ajoute
+                else
+                {
+                    //On ajoute l'objet dans la base de donnée
+                    $addItem = $bdd->prepare("INSERT INTO car_inventory VALUES(
+                    '',
+                    :characterId,
+                    :monsterDropItemId,
+                    '1',
+                    'no')");
+
+                    $addItem->execute([
+                    'characterId' => $characterId,
+                    'monsterDropItemId' => $monsterDropItemId]);
+                    $addItem->closeCursor();
+                }
+                $itemQuery->closeCursor();
                 ?>
-                -Objet: <?php echo "$monsterDropItemName<br />" ?>
+                -1 <?php echo "$monsterDropItemName<br />" ?>
                 <?php
             }
         }
@@ -100,7 +137,7 @@ if ($battleMonsterHpRemaining <= 0 && $characterHpMin > 0)
     ?>
 
     <hr>
-    
+
     <form method="POST" action="../../modules/dungeon/index.php">
         <input type="submit" name="escape" class="btn btn-default form-control" value="Continuer"><br />
     </form>
@@ -111,7 +148,9 @@ if ($battleMonsterHpRemaining <= 0 && $characterHpMin > 0)
 if ($characterHpMin <= 0 && $battleMonsterHpRemaining > 0)
 {
     //On prévient le joueur qu'il a perdu
-    echo "<p>$monsterName remporte le combat !</p>";
+    ?>
+    <p><?php echo $monsterName; ?> remporte le combat !</p>
+    <?php
     
     //On soigne le personnage et ont le met à jour dans la base de donnée
     $updateCharacter = $bdd->prepare("UPDATE car_characters
