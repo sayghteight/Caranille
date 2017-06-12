@@ -6,13 +6,7 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($battleArenaRow > 0) { exit(header("Location: ../../modules/battleArena/index.php")); }
 //Si il y a actuellement un combat contre un monstre on redirige le joueur vers le module battleMonster
 if ($battleMonsterRow > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
-?>
 
-Vos objets
-
-<hr>
-
-<?php
 $itemQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
 WHERE itemId = inventoryItemId
 AND itemType = 'Item'

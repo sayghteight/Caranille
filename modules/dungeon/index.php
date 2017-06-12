@@ -8,12 +8,7 @@ if ($characterTownId == 0) { exit(header("Location: ../../modules/map/index.php"
 if ($battleArenaRow > 0) { exit(header("Location: ../../modules/battleArena/index.php")); }
 //Si il y a actuellement un combat contre un monstre on redirige le joueur vers le module battleMonster
 if ($battleMonsterRow > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
-?>
 
-Bienvenue dans le donjon.<br />
-Ici vous allez pouvoir choisir le monstre de votre choix pour vous entrainer<br /><br />
-
-<?php
 //On fait une jointure entre les 3 tables car_monsters, car_towns, car_towns_monsters pour récupérer les monstres lié à la ville
 $monsterQueryList = $bdd->prepare("SELECT * FROM car_monsters, car_towns, car_towns_monsters
 WHERE townMonsterMonsterId = monsterId
