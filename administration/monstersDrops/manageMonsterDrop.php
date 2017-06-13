@@ -29,7 +29,8 @@ if (isset($_POST['adminMonsterDropMonsterId'])
             $monsterDropQuery = $bdd->prepare("SELECT * FROM car_monsters, car_items, car_monsters_drops
             WHERE monsterDropMonsterID = monsterId
             AND monsterDropItemID = itemId
-            AND monsterDropMonsterID = ?");
+            AND monsterDropMonsterID = ?
+            ORDER BY itemName");
             $monsterDropQuery->execute([$adminMonsterDropMonsterId]);
             $monsterDropRow = $monsterDropQuery->rowCount();
 
@@ -56,8 +57,8 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                         </select>
                     </div>
                     <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
-                    <input type="submit" name="edit" class="btn btn-default form-control" value="Modifier l'obtention">
-                    <input type="submit" name="delete" class="btn btn-default form-control" value="Supprimer cet objet">
+                    <input type="submit" name="edit" class="btn btn-default form-control" value="Modifier le taux d'obtention">
+                    <input type="submit" name="delete" class="btn btn-default form-control" value="Supprimer cet objet/équippement">
                 </form>
 
                 <hr>
@@ -66,7 +67,8 @@ if (isset($_POST['adminMonsterDropMonsterId'])
             }
             $monsterQuery->closeCursor();
 
-            $itemQuery = $bdd->query("SELECT * FROM car_items");
+            $itemQuery = $bdd->query("SELECT * FROM car_items
+            ORDER BY itemName");
             $itemRow = $itemQuery->rowCount();
             //Si il existe un ou plusieurs monstres on affiche le menu déroulant pour proposer au joueur d'en ajouter
             if ($itemRow > 0) 
@@ -74,7 +76,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                 ?>
                 <form method="POST" action="addMonsterDrop.php">
                     <div class="form-group row">
-                        <label for="adminMonsterDropItemId" class="col-2 col-form-label">Objets disponible</label>
+                        <label for="adminMonsterDropItemId" class="col-2 col-form-label">Objets/équippements existant</label>
                         <select class="form-control" id="adminMonsterDropItemId" name="adminMonsterDropItemId">
                         <?php
                         while ($item = $itemQuery->fetch())
@@ -89,9 +91,9 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                         ?>
                         </select>
                     </div>
-                    Taux d'obtention (De 0 à 1000) <br> <input type="number" name="adminMonsterDropLuck" class="form-control" placeholder="Chance d'obtention" required><br /><br />
+                    Taux d'obtention (De 0 à 1000) <br> <input type="number" name="adminMonsterDropLuck" class="form-control" placeholder="Taux d'obtention (De 0 à 1000)" required><br /><br />
                     <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
-                    <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter cet objet">
+                    <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter cet objet/équippement">
                 </form>
                 <?php
             }
