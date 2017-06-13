@@ -37,9 +37,9 @@ if (isset($_POST['adminMonsterDropMonsterId'])
             if ($monsterDropRow > 0) 
             {
                 ?>
-                <form method="POST" action="deleteMonsterDrop.php">
+                <form method="POST" action="editDeleteMonsterDrop.php">
                     <div class="form-group row">
-                        <label for="townMonsterMonsterId" class="col-2 col-form-label">Liste des objets du monstre</label>
+                        <label for="townMonsterMonsterId" class="col-2 col-form-label">Liste des objets/équippements du monstre</label>
                         <select class="form-control" id="adminMonsterDropItemId" name="adminMonsterDropItemId">
                         <?php
                         while ($monsterDrop = $monsterDropQuery->fetch())
@@ -48,7 +48,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                             $adminMonsterDropItemName = stripslashes($monsterDrop['itemName']);
                             $adminMonsterDropLuck = stripslashes($monsterDrop['monsterDropLuck']);?>
                             ?>
-                                <option value="<?php echo $adminMonsterDropItemId ?>"><?php echo "$adminMonsterDropItemName ($adminMonsterDropLuck/1000)"; ?></option>
+                                <option value="<?php echo $adminMonsterDropItemId ?>"><?php echo "$adminMonsterDropItemName (Obtention: $adminMonsterDropLuck/1000)"; ?></option>
                             <?php
                         }
                         $monsterDropQuery->closeCursor();
@@ -56,6 +56,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                         </select>
                     </div>
                     <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
+                    <input type="submit" name="edit" class="btn btn-default form-control" value="Modifier l'obtention">
                     <input type="submit" name="delete" class="btn btn-default form-control" value="Supprimer cet objet">
                 </form>
 
@@ -88,7 +89,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                         ?>
                         </select>
                     </div>
-                    Chance d'obtenir cet objet (Sur 1000) : <br> <input type="number" name="adminMonsterDropLuck" class="form-control" placeholder="Chance d'obtention" required><br /><br />
+                    Taux d'obtention (De 0 à 1000) <br> <input type="number" name="adminMonsterDropLuck" class="form-control" placeholder="Chance d'obtention" required><br /><br />
                     <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
                     <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter cet objet">
                 </form>

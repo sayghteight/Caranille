@@ -6,20 +6,19 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//Si l'utilisateur à cliqué sur le bouton add
+//Si l'utilisateur à cliqué sur le bouton finalEdit
 if (isset($_POST['adminMonsterDropMonsterId'])
 && isset($_POST['adminMonsterDropItemId'])
 && isset($_POST['adminMonsterDropLuck'])
-&& isset($_POST['add']))
+&& isset($_POST['finalEdit']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
     if (ctype_digit($_POST['adminMonsterDropMonsterId'])
     && ctype_digit($_POST['adminMonsterDropItemId'])
     && ctype_digit($_POST['adminMonsterDropLuck'])
-    && $_POST['adminMonsterDropMonsterId'] >= 0
-    && $_POST['adminMonsterDropItemId'] >= 0
-    && $_POST['adminMonsterDropLuck'] >= 0
-    && $_POST['adminMonsterDropLuck'] <= 1000)
+    && $_POST['adminMonsterDropMonsterId'] >= 1
+    && $_POST['adminMonsterDropItemId'] >= 1
+    && $_POST['adminMonsterDropLuck'] >= 0)
     {
         //On récupère l'Id du formulaire précédent
         $adminMonsterDropMonsterId = htmlspecialchars(addslashes($_POST['adminMonsterDropMonsterId']));
@@ -47,31 +46,28 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                 //Si l'objet est disponible
                 if ($itemRow == 1) 
                 {
-                    //On fait une requête pour vérifier si l'objet n'est pas déjà sur ce monstre
+                    //On fait une requête pour vérifier si l'objet est sur ce monstre
                     $monsterDropQuery = $bdd->prepare('SELECT * FROM car_monsters_drops 
                     WHERE monsterDropMonsterID = ?
                     AND monsterDropItemID = ?');
                     $monsterDropQuery->execute([$adminMonsterDropMonsterId, $adminMonsterDropItemId]);
                     $monsterDropRow = $monsterDropQuery->rowCount();
 
-                    //Si cet objet n'est pas sur le monstre
-                    if ($monsterDropRow == 0) 
+                    //Si cet objet est sur le monstre
+                    if ($monsterDropRow == 1) 
                     {
-                        //On met à jour le monstre dans la base de donnée
-                        $addTownMonster = $bdd->prepare("INSERT INTO car_monsters_drops VALUES(
-                        '',
-                        :adminMonsterDropMonsterId,
-                        :adminMonsterDropItemId,
-                        :adminMonsterDropLuck)");
+                        //On met l'objet/équippement à jour dans la base de donnée
+                        $updateMonsterDrop = $bdd->prepare('UPDATE car_monsters_drops
+                        SET monsterDropLuck = :adminMonsterDropLuck
+                        WHERE monsterDropItemID = :adminMonsterDropItemId');
 
-                        $addTownMonster->execute([
-                        'adminMonsterDropMonsterId' => $adminMonsterDropMonsterId,
-                        'adminMonsterDropItemId' => $adminMonsterDropItemId,
-                        'adminMonsterDropLuck' => $adminMonsterDropLuck]);
-                        $addTownMonster->closeCursor();
+                        $updateMonsterDrop->execute([
+                        'adminMonsterDropLuck' => $adminMonsterDropLuck,
+                        'adminMonsterDropItemId' => $adminMonsterDropItemId]);
+                        $updateMonsterDrop->closeCursor();
                         ?>
 
-                        L'objet/équippement a bien été ajouté au monstre
+                        L'objet a bien été mit à jour
 
                         <hr>
                             
@@ -81,17 +77,10 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                         </form>
                         <?php
                     }
-                    //Si l'objet est déjà sur le monstre est déjà dans cette ville
+                    //Si l'objet n'est pas disponible
                     else
                     {
-                        //Si le joueur a essayé de mettre un objet qui est déjà sur le monstre on lui donne la possibilité de revenir en arrière
-                        ?>
-                        Erreur: Cet objet est déjà sur ce monstre
-                        <form method="POST" action="manageMonsterDrop.php">
-                            <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
-                            <input type="submit" class="btn btn-default form-control" name="manage" value="Retour">
-                        </form>
-                        <?php
+                        echo "Erreur: Objet indisponible";
                     }
                     $monsterDropQuery->closeCursor();
                 }
@@ -127,10 +116,10 @@ if (isset($_POST['adminMonsterDropMonsterId'])
         echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
-//Si tous les champs n'ont pas été rempli
+//Si le joueur n'a pas cliqué sur le bouton finalDelete
 else
 {
-    echo "Erreur: Tous les champs n'ont pas été rempli";
+    echo "Erreur: Aucun choix effectué";
 }
 
 require_once("../html/footer.php");
