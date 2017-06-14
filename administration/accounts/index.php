@@ -30,7 +30,7 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
         ?>
         </select>
     </div>
-    <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer le compte">
+    <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer">
 </form>
 
 <?php require_once("../html/footer.php");

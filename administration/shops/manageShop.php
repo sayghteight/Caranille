@@ -39,11 +39,15 @@ if (isset($_POST['adminShopId'])
                 
             <form method="POST" action="editShop.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminShopId" value="<?= $adminShopId ?>">
-                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier le magasin">
+                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier">
+            </form>
+            <form method="POST" action="../shopItems/manageShopItem.php">
+                <input type="hidden" class="btn btn-default form-control" name="adminShopItemShopId" value="<?= $adminShopId ?>">
+                <input type="submit" class="btn btn-default form-control" name="manage" value="Objets">
             </form>
             <form method="POST" action="deleteShop.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminShopId" value="<?= $adminShopId ?>">
-                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer le magasin">
+                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer">
             </form>
             
             <hr>

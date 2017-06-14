@@ -38,15 +38,19 @@ if (isset($_POST['adminTownId'])
                 
             <form method="POST" action="editTown.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminTownId" value="<?= $adminTownId ?>">
-                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier la ville">
+                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier">
+            </form>
+            <form method="POST" action="../townsMonsters/manageTownShop.php">
+                <input type="hidden" class="btn btn-default form-control" name="adminTownShopTownId" value="<?= $adminTownId ?>">
+                <input type="submit" class="btn btn-default form-control" name="manage" value="Magasins">
             </form>
             <form method="POST" action="../townsMonsters/manageTownMonster.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminTownMonsterTownId" value="<?= $adminTownId ?>">
-                <input type="submit" class="btn btn-default form-control" name="manage" value="Gérer les monstres">
+                <input type="submit" class="btn btn-default form-control" name="manage" value="Monstres">
             </form>
             <form method="POST" action="deleteTown.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminTownId" value="<?= $adminTownId ?>">
-                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer la ville">
+                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer">
             </form>
             
             <hr>

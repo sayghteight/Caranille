@@ -7,25 +7,26 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //Si l'utilisateur à cliqué sur le bouton manage
-if (isset($_POST['adminTownMonsterTownId'])
+if (isset($_POST['adminTownShopTownId'])
 && isset($_POST['manage']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
-    if (ctype_digit($_POST['adminTownMonsterTownId'])
-    && $_POST['adminTownMonsterTownId'] >= 1)
+    if (ctype_digit($_POST['adminTownShopTownId'])
+    && $_POST['adminTownShopTownId'] >= 1)
     {
         //On récupère l'Id du formulaire précédent
-        $adminTownMonsterTownId = htmlspecialchars(addslashes($_POST['adminTownMonsterTownId']));
+        $adminTownShopTownId = htmlspecialchars(addslashes($_POST['adminTownShopTownId']));
 
         //On fait une requête pour vérifier si la ville choisit existe
         $townQuery = $bdd->prepare('SELECT * FROM car_towns 
         WHERE townId= ?');
-        $townQuery->execute([$adminTownMonsterTownId]);
+        $townQuery->execute([$adminTownShopTownId]);
         $townRow = $townQuery->rowCount();
 
         //Si la ville est disponible
         if ($townRow == 1)
         {
+            //On fait une requête pour vérifier si il y a des magasins dans cette ville
             $townMonsterQuery = $bdd->prepare("SELECT * FROM car_monsters, car_towns, car_towns_monsters
             WHERE townMonsterMonsterId = monsterId
             AND townMonsterTownId = townId
@@ -55,7 +56,7 @@ if (isset($_POST['adminTownMonsterTownId'])
                         </select>
                     </div>
                     <input type="hidden" name="adminTownMonsterTownId" value="<?= $adminTownMonsterTownId ?>">
-                    <input type="submit" name="delete" class="btn btn-default form-control" value="Supprimer ce monstre">
+                    <input type="submit" name="delete" class="btn btn-default form-control" value="Retirer">
                 </form>
                 
                 <hr>
@@ -88,7 +89,7 @@ if (isset($_POST['adminTownMonsterTownId'])
                         </select>
                     </div>
                     <input type="hidden" name="adminTownMonsterTownId" value="<?= $adminTownMonsterTownId ?>">
-                    <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter ce monstre">
+                    <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter">
                 </form>
                 <?php
             }

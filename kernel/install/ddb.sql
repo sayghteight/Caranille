@@ -156,21 +156,6 @@ CREATE TABLE IF NOT EXISTS `car_codes_used` (
   `codeUsedaccountId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `car_shops` 
-(
-  `shopId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `shopName` varchar(30) NOT NULL,
-  `shopDescription` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE IF NOT EXISTS `car_shops_items` 
-(
-  `shopItemId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `shopItemShopId` varchar(30) NOT NULL,
-  `shopItemItemId` varchar(30) NOT NULL,
-  `shopItemDiscount` int(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 CREATE TABLE IF NOT EXISTS `car_inventory` 
 (
   `inventoryId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -251,6 +236,22 @@ CREATE TABLE IF NOT EXISTS `car_races`
   `raceDefenseBonus` int(11) NOT NULL,
   `raceDefenseMagicBonus` int(11) NOT NULL,
   `raceWidsomBonus` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `car_shops` 
+(
+  `shopId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `shopPicture` varchar(50) NOT NULL,
+  `shopName` varchar(30) NOT NULL,
+  `shopDescription` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `car_shops_items` 
+(
+  `shopItemId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `shopItemShopId` varchar(30) NOT NULL,
+  `shopItemItemId` varchar(30) NOT NULL,
+  `shopItemDiscount` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `car_towns` 

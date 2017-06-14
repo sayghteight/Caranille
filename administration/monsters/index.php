@@ -33,7 +33,7 @@ if ($monsterRow > 0)
             ?>
             </select>
         </div>
-        <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer le monstre">
+        <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer">
     </form>
     <?php
 }
@@ -47,7 +47,7 @@ else
 ?>
 
 <form method="POST" action="addMonster.php">
-    <input type="submit" class="btn btn-default form-control" name="add" value="Ajouter un monstre">
+    <input type="submit" class="btn btn-default form-control" name="add" value="Nouveau monstre">
 </form>
 
 <?php require_once("../html/footer.php");
