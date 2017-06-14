@@ -27,7 +27,7 @@ if (isset($_POST['add']))
     </form>
     <?php
 }
-//Si l'utilisateur n'a pas cliqué sur le bouton edit
+//Si l'utilisateur n'a pas cliqué sur le bouton add
 else
 {
     echo "Erreur: Aucun choix effectué";

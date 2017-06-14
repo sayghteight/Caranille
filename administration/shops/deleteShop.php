@@ -7,44 +7,39 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //Si l'utilisateur à cliqué sur le bouton delete
-if (isset($_POST['adminItemId'])
+if (isset($_POST['adminShopId'])
 && isset($_POST['delete']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
-    if (ctype_digit($_POST['adminItemId'])
-    && $_POST['adminItemId'] >= 1)
+    if (ctype_digit($_POST['adminShopId'])
+    && $_POST['adminShopId'] >= 1)
     {
         //On récupère l'Id du formulaire précédent
-        $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
+        $adminShopId = htmlspecialchars(addslashes($_POST['adminShopId']));
 
-        //On fait une requête pour vérifier si l'objet choisit existe
-        $itemQuery = $bdd->prepare('SELECT * FROM car_items 
-        WHERE itemId= ?');
-        $itemQuery->execute([$adminItemId]);
-        $itemRow = $itemQuery->rowCount();
+        //On fait une requête pour vérifier si le magasin choisit existe
+        $shopQuery = $bdd->prepare('SELECT * FROM car_shops 
+        WHERE shopId= ?');
+        $shopQuery->execute([$adminShopId]);
+        $shopRow = $shopQuery->rowCount();
 
-        //Si l'objet est disponible
-        if ($itemRow == 1) 
+        //Si le magasin est disponible
+        if ($shopRow == 1) 
         {
-            //On fait une recherche dans la base de donnée de tous les comptes
-            $itemQuery = $bdd->prepare("SELECT * FROM car_items
-            WHERE itemId = ?");
-            $itemQuery->execute([$adminItemId]);
-            while ($item = $itemQuery->fetch())
+            while ($shop = $shopQuery->fetch())
             {
-                $adminItemName = stripslashes($item['itemName']);
+                $adminShopName = stripslashes($shop['shopName']);
             }
-            $itemQuery->closeCursor();
 
             ?>
             <p>ATTENTION</p> 
-            Vous êtes sur le point de supprimer l'équippement <em><?php echo $adminItemName ?></em><br />
+            Vous êtes sur le point de supprimer le magasin <em><?php echo $adminShopName ?></em><br />
             confirmez-vous la suppression ?
 
             <hr>
                 
-            <form method="POST" action="deleteItemEnd.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?= $adminItemId ?>">
+            <form method="POST" action="deleteShopEnd.php">
+                <input type="hidden" class="btn btn-default form-control" name="adminShopId" value="<?= $adminShopId ?>">
                 <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme la suppression">
             </form>
     
@@ -55,17 +50,17 @@ if (isset($_POST['adminItemId'])
             </form>
             <?php
         }
-        //Si l'objet n'est pas disponible
+        //Si le magasin n'est pas disponible
         else
         {
-            echo "Erreur: Objet indisponible";
+            echo "Erreur: Magasin indisponible";
         }
-        $itemQuery->closeCursor();
+        $shopRow->closeCursor();
     }
-    //Si l'objet choisit n'est pas un nombre
+    //Si le magasin choisit n'est pas un nombre
     else
     {
-        echo "Erreur: Objet invalide";
+        echo "Erreur: Magasin invalide";
     }
 }
 //Si l'utilisateur n'a pas cliqué sur le bouton delete

@@ -6,19 +6,15 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//Si l'utilisateur à choisit un id de compte
+//Si l'utilisateur à cliqué sur add
 if (isset($_POST['add']))
 {
     ?>
-    <p>Informations de l'objets</p>
-    <form method="POST" action="addItemEnd.php">
-        Image : <br> <input type="text" name="adminItemPicture" class="form-control" placeholder="Image" required><br /><br />
-        Nom : <br> <input type="text" name="adminItemName" class="form-control" placeholder="Nom" required><br /><br />
-        Description : <br> <textarea class="form-control" name="adminItemDescription" id="adminItemDescription" rows="3" required></textarea><br /><br />
-        HP Bonus : <br> <input type="number" name="adminItemHpEffects" class="form-control" placeholder="HP Bonus" required><br /><br />
-        MP Bonus : <br> <input type="number" name="adminItemMpEffect" class="form-control" placeholder="MP Bonus" required><br /><br />
-        Prix d'achat : <br> <input type="number" name="adminItemPurchasePrice" class="form-control" placeholder="Prix d'achat" required><br /><br />
-        Prix de vente : <br> <input type="number" name="adminItemSalePrice" class="form-control" placeholder="Prix de vente" required><br /><br />
+    <p>Informations du magasin</p>
+    <form method="POST" action="addShopEnd.php">
+        Image : <br> <input type="text" name="adminShopPicture" class="form-control" placeholder="Image" required><br /><br />
+        Nom : <br> <input type="text" name="adminShopName" class="form-control" placeholder="Nom" required><br /><br />
+        Description : <br> <textarea class="form-control" name="adminShopDescription" id="adminShopDescription" rows="3" required></textarea><br /><br />
         <input name="finalAdd" class="btn btn-default form-control" type="submit" value="Ajouter">
     </form>
     
@@ -29,7 +25,7 @@ if (isset($_POST['add']))
     </form>
     <?php
 }
-//Si l'utilisateur n'a pas cliqué sur le bouton edit
+//Si l'utilisateur n'a pas cliqué sur le bouton add
 else
 {
     echo "Erreur: Aucun choix effectué";

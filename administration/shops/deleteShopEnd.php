@@ -7,38 +7,39 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //Si l'utilisateur à cliqué sur le bouton finalDelete
-if (isset($_POST['adminItemId'])
+if (isset($_POST['adminShopId'])
 && isset($_POST['finalDelete']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
-    if (ctype_digit($_POST['adminItemId'])
-    && $_POST['adminItemId'] >= 1)
+    if (ctype_digit($_POST['adminShopId'])
+    && $_POST['adminShopId'] >= 1)
     {
-        $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
+        //On récupère l'Id du formulaire précédent
+        $adminShopId = htmlspecialchars(addslashes($_POST['adminShopId']));
 
-        //On fait une requête pour vérifier si l'objet choisit existe
-        $itemQuery = $bdd->prepare('SELECT * FROM car_items 
-        WHERE itemId= ?');
-        $itemQuery->execute([$adminItemId]);
-        $itemRow = $itemQuery->rowCount();
+        //On fait une requête pour vérifier si le magasin choisit existe
+        $shopQuery = $bdd->prepare('SELECT * FROM car_shops 
+        WHERE shopId= ?');
+        $shopQuery->execute([$adminShopId]);
+        $shopRow = $shopQuery->rowCount();
 
-        //Si l'objet est disponible
-        if ($itemRow == 1) 
+        //Si le magasin existe
+        if ($shopRow == 1) 
         {
             //On supprime l'objet de la base de donnée
-            $itemDeleteQuery = $bdd->prepare("DELETE FROM car_items
-            WHERE itemId = ?");
-            $itemDeleteQuery->execute([$adminItemId]);
-            $itemDeleteQuery->closeCursor();
+            $shopDeleteQuery = $bdd->prepare("DELETE FROM car_shops
+            WHERE shopId = ?");
+            $shopDeleteQuery->execute([$adminShopId]);
+            $shopDeleteQuery->closeCursor();
 
-            //On supprime aussi l'objet de l'inventaire dans la base de donnée
-            $inventoryDeleteQuery = $bdd->prepare("DELETE FROM car_inventory
-            WHERE inventoryItemId = ?");
-            $inventoryDeleteQuery->execute([$adminItemId]);
-            $inventoryDeleteQuery->closeCursor();
+            //On supprime aussi les objets en vente du magasin
+            $shopItemDeleteQuery = $bdd->prepare("DELETE FROM car_shops_items
+            WHERE shopItemShopId = ?");
+            $shopItemDeleteQuery->execute([$adminShopId]);
+            $shopItemDeleteQuery->closeCursor();
             ?>
 
-            L'objet a bien été supprimé
+            Le magasin a bien été supprimé
 
             <hr>
                 

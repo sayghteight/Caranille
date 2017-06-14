@@ -7,85 +7,43 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //Si l'utilisateur à cliqué sur le bouton finalAdd
-if (isset($_POST['adminItemPicture'])
-&& isset($_POST['adminItemName'])
-&& isset($_POST['adminItemDescription'])
-&& isset($_POST['adminItemHpEffects'])
-&& isset($_POST['adminItemMpEffect'])
-&& isset($_POST['adminItemPurchasePrice'])
-&& isset($_POST['adminItemSalePrice'])
+if (isset($_POST['adminShopPicture'])
+&& isset($_POST['adminShopName'])
+&& isset($_POST['adminShopDescription'])
 && isset($_POST['finalAdd']))
 {
-    //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
-    if (ctype_digit($_POST['adminItemHpEffects'])
-    && ctype_digit($_POST['adminItemMpEffect'])
-    && ctype_digit($_POST['adminItemPurchasePrice'])
-    && ctype_digit($_POST['adminItemSalePrice'])
-    && $_POST['adminItemHpEffects'] >= 0
-    && $_POST['adminItemMpEffect'] >= 0
-    && $_POST['adminItemPurchasePrice'] >= 0
-    && $_POST['adminItemSalePrice'] >= 0)
-    {
-        //On récupère les informations du formulaire
-        $adminItemPicture = htmlspecialchars(addslashes($_POST['adminItemPicture']));
-        $adminItemName = htmlspecialchars(addslashes($_POST['adminItemName']));
-        $adminItemDescription = htmlspecialchars(addslashes($_POST['adminItemDescription']));
-        $adminItemHpEffects = htmlspecialchars(addslashes($_POST['adminItemHpEffects']));
-        $adminItemMpEffect = htmlspecialchars(addslashes($_POST['adminItemMpEffect']));
-        $adminItemPurchasePrice = htmlspecialchars(addslashes($_POST['adminItemPurchasePrice']));
-        $adminItemSalePrice = htmlspecialchars(addslashes($_POST['adminItemSalePrice']));
+    //On récupère les informations du formulaire
+    $adminShopPicture = htmlspecialchars(addslashes($_POST['adminShopPicture']));
+    $adminShopName = htmlspecialchars(addslashes($_POST['adminShopName']));
+    $adminShopDescription = htmlspecialchars(addslashes($_POST['adminShopDescription']));
 
-        //On met à jour l'équippement dans la base de donnée
-        $addItem = $bdd->prepare("INSERT INTO car_items VALUES(
-        '',
-        '0',
-        :adminItemPicture,
-        'Item',
-        '1',
-        '1',
-        :adminItemName,
-        :adminItemDescription,
-        :adminItemHpEffects,
-        :adminItemMpEffect,
-        '0',
-        '0',
-        '0',
-        '0',
-        '0',
-        '0',
-        :adminItemPurchasePrice,
-        :adminItemSalePrice)");
+    //On ajoute le magasin dans la base de donnée
+    $addShop = $bdd->prepare("INSERT INTO car_shops VALUES(
+    '',
+    :adminShopPicture,
+    :adminShopName,
+    :adminShopDescription)");
 
-        $addItem->execute([
-        'adminItemPicture' => $adminItemPicture,
-        'adminItemName' => $adminItemName,
-        'adminItemDescription' => $adminItemDescription,
-        'adminItemHpEffects' => $adminItemHpEffects,
-        'adminItemMpEffect' => $adminItemMpEffect,
-        'adminItemPurchasePrice' => $adminItemPurchasePrice,
-        'adminItemSalePrice' => $adminItemSalePrice]);
-        $addItem->closeCursor();
-        ?>
+    $addShop->execute([
+    'adminShopPicture' => $adminShopPicture,
+    'adminShopName' => $adminShopName,
+    'adminShopDescription' => $adminShopDescription]);
+    $addShop->closeCursor();
+    ?>
 
-        L'objet a bien été crée
+    Le magasin a bien été crée
 
-        <hr>
-            
-        <form method="POST" action="index.php">
-                <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
-            </form>
-        <?php
-    }
-    //Si tous les champs numérique ne contiennent pas un nombre
-    else
-    {
-        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
-    }
+    <hr>
+        
+    <form method="POST" action="index.php">
+            <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
+        </form>
+    <?php
 }
-//Si tous les champs n'ont pas été rempli
+//Si l'utilisateur n'a pas cliqué sur le bouton add
 else
 {
-    echo "Erreur: Tous les champs n'ont pas été rempli";
+    echo "Erreur: Aucun choix effectué";
 }
 
 require_once("../html/footer.php");
