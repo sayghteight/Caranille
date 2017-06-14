@@ -76,9 +76,8 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                         </form>
                         <?php
                     }
-                    
                     //Si l'utilisateur à cliqué sur le bouton delete
-                    if (isset($_POST['delete']))
+                    elseif (isset($_POST['delete']))
                     {
                         ?>
                         <p>ATTENTION</p> 
@@ -99,6 +98,11 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                             <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
                         </form>
                         <?php
+                    }
+                    //Si l'utilisateur n'a pas cliqué sur le bouton edit ou delete
+                    else 
+                    {
+                        echo "Erreur: Aucun choix effectué";
                     }
                 }
                 //Si l'objet n'est pas disponible
@@ -128,7 +132,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
         echo "Erreur: Monstre invalide";
     }
 }
-//Si le joueur n'a pas cliqué sur le bouton finalDelete
+//Si le joueur n'a pas cliqué sur le bouton edit ou delete
 else
 {
     echo "Erreur: Aucun choix effectué";

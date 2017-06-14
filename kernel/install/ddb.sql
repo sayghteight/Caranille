@@ -156,6 +156,21 @@ CREATE TABLE IF NOT EXISTS `car_codes_used` (
   `codeUsedaccountId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `car_shops` 
+(
+  `shopId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `shopName` varchar(30) NOT NULL,
+  `shopDescription` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `car_shops_items` 
+(
+  `shopItemId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `shopItemShopId` varchar(30) NOT NULL,
+  `shopItemItemId` varchar(30) NOT NULL,
+  `shopItemDiscount` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `car_inventory` 
 (
   `inventoryId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -253,6 +268,13 @@ CREATE TABLE IF NOT EXISTS `car_towns_monsters`
   `townMonsterId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `townMonsterTownId` int(10) NOT NULL,
   `townMonsterMonsterId` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `car_towns_shops` 
+(
+  `townShopId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `townShopTownId` int(10) NOT NULL,
+  `townShopShopId` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
  
 
