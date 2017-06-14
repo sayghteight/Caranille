@@ -6,49 +6,47 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//on récupère les valeurs de chaque objets qu'on va ensuite mettre dans le menu déroulant
-//On fait une recherche dans la base de donnée de tous les équippements
-$itemQuery = $bdd->query("SELECT * FROM car_items
-WHERE itemType = 'Item'
-ORDER by itemName");
-$itemRow = $itemQuery->rowCount();
+//on récupère les valeurs de chaque magasin qu'on va ensuite mettre dans le menu déroulant
+//On fait une recherche dans la base de donnée de tous les magasins
+$shopQuery = $bdd->query("SELECT * FROM car_shops
+ORDER by shopName");
+$shopRow = $shopQuery->rowCount();
 
-//Si il existe un ou plusieurs objet(s) on affiche le menu déroulant
-if ($itemRow > 0) 
+//Si il existe un ou plusieurs magasin(s) on affiche le menu déroulant
+if ($shopRow > 0) 
 {
     ?>
-    <form method="POST" action="manageItem.php">
+    <form method="POST" action="manageShop.php">
         <div class="form-group row">
-            <label for="equipmentList" class="col-2 col-form-label">Liste des objets</label>
-            <select class="form-control" id="adminItemId" name="adminItemId">
+            <label for="equipmentList" class="col-2 col-form-label">Liste des magasins</label>
+            <select class="form-control" id="adminShopId" name="adminShopId">
             <?php
-
-            while ($item = $itemQuery->fetch())
+            while ($shop = $shopQuery->fetch())
             {
-                $adminItemId = stripslashes($item['itemId']);
-                $adminItemName = stripslashes($item['itemName']);?>
+                $adminShopId = stripslashes($shop['shopId']);
+                $adminShopName = stripslashes($shop['shopName']);?>
                 ?>
-                    <option value="<?php echo $adminItemId ?>"><?php echo "$adminItemName"; ?></option>
+                    <option value="<?php echo $adminShopId ?>"><?php echo "$adminShopName"; ?></option>
                 <?php
             }
-            $itemQuery->closeCursor();
             ?>
             </select>
         </div>
-        <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer l'objet">
+        <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer le magasin">
     </form>
     <?php
 }
-//Si il n'y a actuellement aucun objet on prévient le joueur
+//Si il n'y a actuellement aucun magasin on prévient le joueur
 else
 {
     ?>
-    Il n'y a actuellement aucun objet
+    Il n'y a actuellement aucun magasin
     <?php
 }
+$shopQuery->closeCursor();
 ?>
 
-<form method="POST" action="addItem.php">
+<form method="POST" action="addShop.php">
     <input type="submit" class="btn btn-default form-control" name="add" value="Ajouter un objet">
 </form>
 <?php require_once("../html/footer.php");

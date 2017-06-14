@@ -29,7 +29,6 @@ if ($townRow > 0)
                     <option value="<?php echo $adminTownId ?>"><?php echo "$adminTownName"; ?></option>
                 <?php
             }
-            $townQuery->closeCursor();
             ?>
             </select>
         </div>
@@ -44,6 +43,7 @@ else
     Il n'y a actuellement aucune ville
     <?php
 }
+$townQuery->closeCursor();
 ?>
 
 <form method="POST" action="addTown.php">

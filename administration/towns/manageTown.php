@@ -31,7 +31,6 @@ if (isset($_POST['adminTownId'])
             {
                 $adminTownName = stripslashes($town['townName']);
             }
-            $townQuery->closeCursor();
             ?>
             Que souhaitez-vous faire de la ville <em><?php echo $adminTownName ?></em> ?<br />
 
