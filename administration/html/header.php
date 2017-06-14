@@ -53,9 +53,10 @@ require_once("../../kernel/town/index.php");
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gestion des ressources<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="../../administration/monsters/index.php">Monstres</a></li>
                                 <li><a href="../../administration/equipments/index.php">Equipements</a></li>
                                 <li><a href="../../administration/items/index.php">Objets</a></li>
+                                <li><a href="../../administration/monsters/index.php">Monstres</a></li>
+                                <li><a href="../../administration/shops/index.php">Magasins</a></li>
                                 <li><a href="../../administration/towns/index.php">Villes</a></li>
                             </ul>
                         </li>
