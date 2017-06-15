@@ -53,7 +53,7 @@ if (isset($_POST['adminShopId'])
         {
             echo "Erreur: Objet indisponible";
         }
-        $shopQuery->closeCursor();
+        $itemQuery->closeCursor();
     }
     //Si l'objet choisit n'est pas un nombre
     else

@@ -7,54 +7,54 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //Si l'utilisateur à cliqué sur le bouton manage
-if (isset($_POST['adminTownMonsterTownId'])
+if (isset($_POST['adminShopItemShopId'])
 && isset($_POST['manage']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
-    if (ctype_digit($_POST['adminTownMonsterTownId'])
-    && $_POST['adminTownMonsterTownId'] >= 1)
+    if (ctype_digit($_POST['adminShopItemShopId'])
+    && $_POST['adminShopItemShopId'] >= 1)
     {
         //On récupère l'Id du formulaire précédent
-        $adminTownMonsterTownId = htmlspecialchars(addslashes($_POST['adminTownMonsterTownId']));
+        $adminShopItemShopId = htmlspecialchars(addslashes($_POST['adminShopItemShopId']));
 
-        //On fait une requête pour vérifier si la ville choisit existe
-        $townQuery = $bdd->prepare('SELECT * FROM car_towns 
+        //On fait une requête pour vérifier si le magasin choisit existe
+        $shopQuery = $bdd->prepare('SELECT * FROM car_towns 
         WHERE townId= ?');
-        $townQuery->execute([$adminTownMonsterTownId]);
-        $townRow = $townQuery->rowCount();
+        $shopQuery->execute([$adminShopItemShopId]);
+        $shopRow = $shopQuery->rowCount();
 
-        //Si la ville est disponible
-        if ($townRow == 1)
+        //Si le magasin existe est disponible
+        if ($shopRow == 1)
         {
-            $townMonsterQuery = $bdd->prepare("SELECT * FROM car_monsters, car_towns, car_towns_monsters
-            WHERE townMonsterMonsterId = monsterId
-            AND townMonsterTownId = townId
-            AND townId = ?");
-            $townMonsterQuery->execute([$adminTownMonsterTownId]);
-            $townMonsterRow = $townMonsterQuery->rowCount();
+            $townShopQuery = $bdd->prepare("SELECT * FROM car_shops, car_towns, car_towns_shops
+            WHERE townShopShopId = shopId
+            AND townShopTownId = townId
+            AND shopId = ?
+            ORDER BY itemName");
+            $townShopQuery->execute([$adminShopItemShopId]);
+            $townShopRow = $townShopQuery->rowCount();
 
-            //Si il existe un ou plusieurs monstre dans la ville on affiche le menu déroulant
-            if ($townMonsterRow > 0) 
+            //Si il existe un ou plusieurs magasins dans la ville on affiche le menu déroulant
+            if ($townShopRow > 0) 
             {
                 ?>
-                <form method="POST" action="deleteTownMonster.php">
+                <form method="POST" action="deleteShopItem.php">
                     <div class="form-group row">
-                        <label for="townMonsterMonsterId" class="col-2 col-form-label">Monstres présent dans la ville</label>
-                        <select class="form-control" id="adminTownMonsterMonsterId" name="adminTownMonsterMonsterId">
+                        <label for="townMonsterMonsterId" class="col-2 col-form-label">Objets/équippements présent dans le magasin</label>
+                        <select class="form-control" id="adminTownShopItemId" name="adminTownShopItemId">
                         <?php
-                        while ($townMonster = $townMonsterQuery->fetch())
+                        while ($townShop = $townShopQuery->fetch())
                         {
-                            $adminTownMonsterMonsterId = stripslashes($townMonster['monsterId']);
-                            $adminTownMonsterMonsterName = stripslashes($townMonster['monsterName']);?>
+                            $adminTownShopItemId = stripslashes($townShop['itemId']);
+                            $adminTownShopItemName = stripslashes($townShop['itemName']);?>
                             ?>
-                                <option value="<?php echo $adminTownMonsterMonsterId ?>"><?php echo "$adminTownMonsterMonsterName"; ?></option>
+                                <option value="<?php echo $adminTownShopItemId ?>"><?php echo "$adminTownShopItemName"; ?></option>
                             <?php
                         }
-                        $townMonsterQuery->closeCursor();
                         ?>
                         </select>
                     </div>
-                    <input type="hidden" name="adminTownMonsterTownId" value="<?= $adminTownMonsterTownId ?>">
+                    <input type="hidden" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
                     <input type="submit" name="delete" class="btn btn-default form-control" value="Retirer">
                 </form>
                 
@@ -64,38 +64,40 @@ if (isset($_POST['adminTownMonsterTownId'])
             }
             $townMonsterQuery->closeCursor();
 
-            $monsterQuery = $bdd->query("SELECT * FROM car_monsters");
-            $monsterRow = $monsterQuery->rowCount();
+            $itemQuery = $bdd->query("SELECT * FROM car_items
+            ORDER BY itemName");
+            $itemRow = $itemQuery->rowCount();
             //Si il existe un ou plusieurs monstres on affiche le menu déroulant pour proposer au joueur d'en ajouter
-            if ($monsterRow > 0) 
+            if ($itemRow > 0) 
             {
                 ?>
-                <form method="POST" action="addTownMonster.php">
+                <form method="POST" action="addShopItem.php">
                     <div class="form-group row">
-                        <label for="townMonsterMonsterId" class="col-2 col-form-label">Monstres disponible</label>
-                        <select class="form-control" id="adminTownMonsterMonsterId" name="adminTownMonsterMonsterId">
+                        <label for="adminMonsterDropItemId" class="col-2 col-form-label">Objets/équippements existant</label>
+                        <select class="form-control" id="adminMonsterDropItemId" name="adminMonsterDropItemId">
                         <?php
-                        while ($monster = $monsterQuery->fetch())
+                        while ($item = $itemQuery->fetch())
                         {
-                            $adminTownMonsterMonsterId = stripslashes($monster['monsterId']);
-                            $adminTownMonsterMonsterName = stripslashes($monster['monsterName']);?>
+                            $adminTownShopItemId = stripslashes($townShop['itemId']);
+                            $adminTownShopItemName = stripslashes($townShop['itemName']);?>
                             ?>
-                                <option value="<?php echo $adminTownMonsterMonsterId ?>"><?php echo "$adminTownMonsterMonsterName"; ?></option>
+                                <option value="<?php echo $adminTownShopItemId ?>"><?php echo "$adminTownShopItemName"; ?></option>
                             <?php
                         }
-                        $monsterQuery->closeCursor();
+                        $itemQuery->closeCursor();
                         ?>
                         </select>
                     </div>
-                    <input type="hidden" name="adminTownMonsterTownId" value="<?= $adminTownMonsterTownId ?>">
-                    <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter">
+                    Réduction (De 0 à 100%) <br> <input type="number" name="adminShopItemDiscount" class="form-control" placeholder="Réduction (De 0 à 100%)" required><br /><br />
+                    <input type="hidden" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
+                    <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter cet objet/équippement">
                 </form>
                 <?php
             }
             else
             {
                 ?>
-                Il n'y a actuellement aucun monstre
+                Il n'y a actuellement aucun objet
                 <?php
             }
             ?>
@@ -107,16 +109,17 @@ if (isset($_POST['adminTownMonsterTownId'])
             </form>
             <?php
         }
-        //Si le monstre n'est pas disponible
+        //Si le magasin n'est pas disponible
         else
         {
-            echo "Erreur: Monstre indisponible";
+            echo "Erreur: Magasin indisponible";
         }
+        $shopQuery->closeCursor();
     }
-    //Si le monstre choisit n'est pas un nombre
+    //Si le magasin choisit n'est pas un nombre
     else
     {
-        echo "Erreur: Monstre invalide";
+        echo "Erreur: Magasin invalide";
     }
 }
 //Si l'utilisateur n'a pas cliqué sur le bouton manage

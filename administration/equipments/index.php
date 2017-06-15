@@ -38,7 +38,7 @@ if ($equipmentRow > 0)
             ?>
             </select>
         </div>
-        <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer">
+        <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer l'équippement">
     </form>
     <?php
 }
@@ -52,7 +52,7 @@ else
 ?>
 
 <form method="POST" action="addEquipment.php">
-    <input type="submit" class="btn btn-default form-control" name="add" value="Nouvel équippement">
+    <input type="submit" class="btn btn-default form-control" name="add" value="Ajouter un équippement">
 </form>
 
 <?php require_once("../html/footer.php");

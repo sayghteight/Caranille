@@ -23,7 +23,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
         $monsterQuery->execute([$adminMonsterDropMonsterId]);
         $monsterRow = $monsterQuery->rowCount();
 
-        //Si la ville est disponible
+        //Si le monstre est disponible
         if ($monsterRow == 1) 
         {
             $monsterDropQuery = $bdd->prepare("SELECT * FROM car_monsters, car_items, car_monsters_drops
@@ -57,8 +57,8 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                         </select>
                     </div>
                     <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
-                    <input type="submit" name="edit" class="btn btn-default form-control" value="Modifier">
-                    <input type="submit" name="delete" class="btn btn-default form-control" value="Retirer">
+                    <input type="submit" name="edit" class="btn btn-default form-control" value="Modifier le taux d'obtention">
+                    <input type="submit" name="delete" class="btn btn-default form-control" value="Supprimer cet objet/équippement">
                 </form>
 
                 <hr>
@@ -93,7 +93,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                     </div>
                     Taux d'obtention (De 0 à 1000) <br> <input type="number" name="adminMonsterDropLuck" class="form-control" placeholder="Taux d'obtention (De 0 à 1000)" required><br /><br />
                     <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
-                    <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter">
+                    <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter cet objet/équippement">
                 </form>
                 <?php
             }

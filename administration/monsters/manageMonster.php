@@ -47,7 +47,7 @@ if (isset($_POST['adminMonsterId'])
             </form>
             <form method="POST" action="../monstersDrops/manageMonsterDrop.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropMonsterId" value="<?= $adminMonsterId ?>">
-                <input type="submit" class="btn btn-default form-control" name="manage" value="Objets">
+                <input type="submit" class="btn btn-default form-control" name="manage" value="Equippement">
             </form>
             <form method="POST" action="deleteMonster.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminMonsterId" value="<?= $adminMonsterId ?>">

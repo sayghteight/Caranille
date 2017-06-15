@@ -32,7 +32,7 @@ if ($townRow > 0)
             ?>
             </select>
         </div>
-        <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer">
+        <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer la ville">
     </form>
     <?php
 }
@@ -47,7 +47,7 @@ $townQuery->closeCursor();
 ?>
 
 <form method="POST" action="addTown.php">
-    <input type="submit" class="btn btn-default form-control" name="add" value="Nouvelle ville">
+    <input type="submit" class="btn btn-default form-control" name="add" value="Ajouter une ville">
 </form>
 
 <?php require_once("../html/footer.php");

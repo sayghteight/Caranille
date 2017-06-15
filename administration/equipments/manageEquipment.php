@@ -43,11 +43,11 @@ if (isset($_POST['adminItemId'])
                 
             <form method="POST" action="editEquipment.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?= $adminItemId ?>">
-                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier">
+                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier l'équippement">
             </form>
             <form method="POST" action="deleteEquipment.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?= $adminItemId ?>">
-                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer">
+                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer l'équippement">
             </form>
 
             <hr>

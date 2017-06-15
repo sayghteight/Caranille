@@ -26,7 +26,6 @@ if (isset($_POST['adminTownMonsterTownId'])
         //Si la ville est disponible
         if ($townRow == 1)
         {
-            //On fait une requête pour vérifier si il y a des monstres dans cette ville
             $townMonsterQuery = $bdd->prepare("SELECT * FROM car_monsters, car_towns, car_towns_monsters
             WHERE townMonsterMonsterId = monsterId
             AND townMonsterTownId = townId
@@ -56,7 +55,7 @@ if (isset($_POST['adminTownMonsterTownId'])
                         </select>
                     </div>
                     <input type="hidden" name="adminTownMonsterTownId" value="<?= $adminTownMonsterTownId ?>">
-                    <input type="submit" name="delete" class="btn btn-default form-control" value="Retirer">
+                    <input type="submit" name="delete" class="btn btn-default form-control" value="Supprimer ce monstre">
                 </form>
                 
                 <hr>
@@ -89,7 +88,7 @@ if (isset($_POST['adminTownMonsterTownId'])
                         </select>
                     </div>
                     <input type="hidden" name="adminTownMonsterTownId" value="<?= $adminTownMonsterTownId ?>">
-                    <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter">
+                    <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter ce monstre">
                 </form>
                 <?php
             }

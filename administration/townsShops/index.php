@@ -1,3 +1,3 @@
 <?php
-header("Location: ../shops/index.php");
+header("Location: ../town/index.php");
 ?>
