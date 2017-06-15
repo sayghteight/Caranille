@@ -41,7 +41,7 @@ if (isset($_POST['adminShopId'])
                 <input type="hidden" class="btn btn-default form-control" name="adminShopId" value="<?= $adminShopId ?>">
                 <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier">
             </form>
-            <form method="POST" action="editShop.php">
+            <form method="POST" action="../shopsItems/manageShopItem.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminShopItemShopId" value="<?= $adminShopId ?>">
                 <input type="submit" class="btn btn-default form-control" name="manage" value="Objets/Equippement">
             </form>

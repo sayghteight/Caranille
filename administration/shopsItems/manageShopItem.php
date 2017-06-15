@@ -26,9 +26,9 @@ if (isset($_POST['adminShopItemShopId'])
         //Si le magasin existe est disponible
         if ($shopRow == 1)
         {
-            $townShopQuery = $bdd->prepare("SELECT * FROM car_shops, car_towns, car_towns_shops
-            WHERE townShopShopId = shopId
-            AND townShopTownId = townId
+            $townShopQuery = $bdd->prepare("SELECT * FROM car_shops, car_items, car_shops_items
+            WHERE shopItemShopId = shopId
+            AND shopItemItemId = itemId
             AND shopId = ?
             ORDER BY itemName");
             $townShopQuery->execute([$adminShopItemShopId]);
@@ -46,9 +46,10 @@ if (isset($_POST['adminShopItemShopId'])
                         while ($townShop = $townShopQuery->fetch())
                         {
                             $adminTownShopItemId = stripslashes($townShop['itemId']);
-                            $adminTownShopItemName = stripslashes($townShop['itemName']);?>
+                            $adminTownShopItemName = stripslashes($townShop['itemName']);
+                            $adminTownShopDiscount = stripslashes($townShop['shopItemDiscount']);?>
                             ?>
-                                <option value="<?php echo $adminTownShopItemId ?>"><?php echo "$adminTownShopItemName"; ?></option>
+                                <option value="<?php echo $adminTownShopItemId ?>"><?php echo "$adminTownShopItemName (Réduction: $adminTownShopDiscount%)"; ?></option>
                             <?php
                         }
                         ?>
@@ -62,7 +63,7 @@ if (isset($_POST['adminShopItemShopId'])
 
                 <?php
             }
-            $townMonsterQuery->closeCursor();
+            $townShopQuery->closeCursor();
 
             $itemQuery = $bdd->query("SELECT * FROM car_items
             ORDER BY itemName");

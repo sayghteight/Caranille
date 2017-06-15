@@ -30,7 +30,7 @@ if (isset($_POST['adminTownShopTownId'])
             WHERE townShopShopId = shopId
             AND townShopTownId = townId
             AND townId = ?");
-            $townShopQuery->execute([$adminTownMonsterTownId]);
+            $townShopQuery->execute([$adminTownShopTownId]);
             $townShopRow = $townShopQuery->rowCount();
 
             //Si il existe un ou plusieurs magasins dans la ville on affiche le menu déroulant
@@ -62,7 +62,7 @@ if (isset($_POST['adminTownShopTownId'])
 
                 <?php
             }
-            $townMonsterQuery->closeCursor();
+            $townShopQuery->closeCursor();
 
             $shopQuery = $bdd->query("SELECT * FROM car_shops");
             $shopRow = $shopQuery->rowCount();
@@ -75,10 +75,10 @@ if (isset($_POST['adminTownShopTownId'])
                         <label for="townMonsterMonsterId" class="col-2 col-form-label">Magasins disponible</label>
                         <select class="form-control" id="adminTownShopShopId" name="adminTownShopShopId">
                         <?php
-                        while ($monster = $monsterQuery->fetch())
+                        while ($shop = $shopQuery->fetch())
                         {
-                            $adminTownShopShopId = stripslashes($monster['shopId']);
-                            $adminTownShopShopName = stripslashes($monster['shopName']);?>
+                            $adminTownShopShopId = stripslashes($shop['shopId']);
+                            $adminTownShopShopName = stripslashes($shop['shopName']);?>
                             ?>
                                 <option value="<?php echo $adminTownShopShopId ?>"><?php echo "$adminTownShopShopName"; ?></option>
                             <?php
