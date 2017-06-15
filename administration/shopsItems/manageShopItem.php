@@ -34,28 +34,29 @@ if (isset($_POST['adminShopItemShopId'])
             $townShopQuery->execute([$adminShopItemShopId]);
             $townShopRow = $townShopQuery->rowCount();
 
-            //Si il existe un ou plusieurs magasins dans la ville on affiche le menu déroulant
+            //Si il existe un ou plusieurs objet dans le magasin on affiche le menu déroulant
             if ($townShopRow > 0) 
             {
                 ?>
-                <form method="POST" action="deleteShopItem.php">
+                <form method="POST" action="editDeleteShopItem.php">
                     <div class="form-group row">
-                        <label for="townMonsterMonsterId" class="col-2 col-form-label">Objets/équippements présent dans le magasin</label>
-                        <select class="form-control" id="adminTownShopItemId" name="adminTownShopItemId">
+                        <label for="adminShopItemItemId" class="col-2 col-form-label">Objets/équippements présent dans le magasin</label>
+                        <select class="form-control" id="adminShopItemItemId" name="adminShopItemItemId">
                         <?php
                         while ($townShop = $townShopQuery->fetch())
                         {
-                            $adminTownShopItemId = stripslashes($townShop['itemId']);
-                            $adminTownShopItemName = stripslashes($townShop['itemName']);
-                            $adminTownShopDiscount = stripslashes($townShop['shopItemDiscount']);?>
+                            $adminShopItemItemId = stripslashes($townShop['itemId']);
+                            $adminShopItemItemName = stripslashes($townShop['itemName']);
+                            $adminShopItemDiscount = stripslashes($townShop['shopItemDiscount']);?>
                             ?>
-                                <option value="<?php echo $adminTownShopItemId ?>"><?php echo "$adminTownShopItemName (Réduction: $adminTownShopDiscount%)"; ?></option>
+                                <option value="<?php echo $adminShopItemItemId ?>"><?php echo "$adminShopItemItemName (Réduction: $adminShopItemDiscount%)"; ?></option>
                             <?php
                         }
                         ?>
                         </select>
                     </div>
                     <input type="hidden" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
+                    <input type="submit" name="edit" class="btn btn-default form-control" value="Modifier la réduction">
                     <input type="submit" name="delete" class="btn btn-default form-control" value="Retirer">
                 </form>
                 
@@ -68,24 +69,23 @@ if (isset($_POST['adminShopItemShopId'])
             $itemQuery = $bdd->query("SELECT * FROM car_items
             ORDER BY itemName");
             $itemRow = $itemQuery->rowCount();
-            //Si il existe un ou plusieurs monstres on affiche le menu déroulant pour proposer au joueur d'en ajouter
+            //Si il existe un ou plusieurs objets on affiche le menu déroulant pour proposer au joueur d'en ajouter
             if ($itemRow > 0) 
             {
                 ?>
                 <form method="POST" action="addShopItem.php">
                     <div class="form-group row">
                         <label for="adminMonsterDropItemId" class="col-2 col-form-label">Objets/équippements existant</label>
-                        <select class="form-control" id="adminMonsterDropItemId" name="adminMonsterDropItemId">
+                        <select class="form-control" id="adminShopItemItemId" name="adminShopItemItemId">
                         <?php
                         while ($item = $itemQuery->fetch())
                         {
-                            $adminTownShopItemId = stripslashes($townShop['itemId']);
-                            $adminTownShopItemName = stripslashes($townShop['itemName']);?>
+                            $adminShopItemItemId = stripslashes($item['itemId']);
+                            $adminShopItemItemName = stripslashes($item['itemName']);?>
                             ?>
-                                <option value="<?php echo $adminTownShopItemId ?>"><?php echo "$adminTownShopItemName"; ?></option>
+                                <option value="<?php echo $adminShopItemItemId ?>"><?php echo "$adminShopItemItemName"; ?></option>
                             <?php
                         }
-                        $itemQuery->closeCursor();
                         ?>
                         </select>
                     </div>
@@ -101,6 +101,7 @@ if (isset($_POST['adminShopItemShopId'])
                 Il n'y a actuellement aucun objet
                 <?php
             }
+            $itemQuery->closeCursor();
             ?>
 
             <hr>

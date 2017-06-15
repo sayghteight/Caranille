@@ -6,11 +6,11 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//Si l'utilisateur à cliqué sur le bouton add
+//Si l'utilisateur à cliqué sur le bouton finalEdit
 if (isset($_POST['adminShopItemShopId'])
 && isset($_POST['adminShopItemItemId'])
 && isset($_POST['adminShopItemDiscount'])
-&& isset($_POST['add']))
+&& isset($_POST['finalEdit']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
     if (ctype_digit($_POST['adminShopItemShopId'])
@@ -52,24 +52,21 @@ if (isset($_POST['adminShopItemShopId'])
                     $shopItemQuery->execute([$adminShopItemShopId, $adminShopItemItemId]);
                     $shopItemRow = $shopItemQuery->rowCount();
 
-                    //Si l'objet n'est pas dans ce magasin
-                    if ($shopItemRow == 0) 
+                    //Si l'objet est dans ce magasin
+                    if ($shopItemRow == 1) 
                     {
                         //On met à jour le magasin dans la base de donnée
-                        $addShopItem = $bdd->prepare("INSERT INTO car_shops_items VALUES(
-                        '',
-                        :adminShopItemShopId,
-                        :adminShopItemItemId,
-                        :adminShopItemDiscount)");
+                        $updateShopItem = $bdd->prepare("UPDATE car_shops_items
+                        SET shopItemDiscount = :adminShopItemDiscount
+                        WHERE shopItemItemId = :adminShopItemItemId");
 
-                        $addShopItem->execute([
-                        'adminShopItemShopId' => $adminShopItemShopId,
-                        'adminShopItemItemId' => $adminShopItemItemId,
-                        'adminShopItemDiscount' => $adminShopItemDiscount]);
-                        $addShopItem->closeCursor();
+                        $updateShopItem->execute([
+                        'adminShopItemDiscount' => $adminShopItemDiscount,
+                        'adminShopItemItemId' => $adminShopItemItemId]);
+                        $updateShopItem->closeCursor();
                         ?>
 
-                        L'objet a bien été ajouté au magasin
+                        L'objet a bien été mit à jour
 
                         <hr>
                             
@@ -111,7 +108,7 @@ if (isset($_POST['adminShopItemShopId'])
         else
         {
             ?>
-            Erreur: Le taux de réduction doit être de 0 à 100
+            Erreur: Le taux d'obtention doit être de 0 à 100
             <form method="POST" action="manageShopItem.php">
                 <input type="hidden" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
                 <input type="submit" class="btn btn-default form-control" name="manage" value="Continuer">

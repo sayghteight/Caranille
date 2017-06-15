@@ -56,7 +56,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                     $monsterDropDeleteQuery->closeCursor();
                     ?>
 
-                    L'objet/équippement a bien été supprimé du monstre
+                    L'objet/équippement a bien été retiré du monstre
 
                     <hr>
                         

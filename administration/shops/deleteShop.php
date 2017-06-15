@@ -55,7 +55,7 @@ if (isset($_POST['adminShopId'])
         {
             echo "Erreur: Magasin indisponible";
         }
-        $shopRow->closeCursor();
+        $shopQuery->closeCursor();
     }
     //Si le magasin choisit n'est pas un nombre
     else

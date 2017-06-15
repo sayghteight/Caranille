@@ -56,7 +56,7 @@ if (isset($_POST['adminTownMonsterTownId'])
                     $townMonsterDeleteQuery->closeCursor();
                     ?>
 
-                    Le monstre a bien été supprimé de la ville
+                    Le monstre a bien été retiré de la ville
 
                     <hr>
                         

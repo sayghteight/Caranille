@@ -57,8 +57,8 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                         </select>
                     </div>
                     <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
-                    <input type="submit" name="edit" class="btn btn-default form-control" value="Modifier le taux d'obtention">
-                    <input type="submit" name="delete" class="btn btn-default form-control" value="Supprimer cet objet/équippement">
+                    <input type="submit" name="edit" class="btn btn-default form-control" value="Modifier">
+                    <input type="submit" name="delete" class="btn btn-default form-control" value="Retirer">
                 </form>
 
                 <hr>

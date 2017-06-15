@@ -7,78 +7,78 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //Si l'utilisateur à cliqué sur le bouton delete
-if (isset($_POST['adminTownMonsterTownId'])
-&& isset($_POST['adminTownMonsterMonsterId'])
+if (isset($_POST['adminTownShopTownId'])
+&& isset($_POST['adminTownShopShopId'])
 && isset($_POST['finalDelete']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
-    if (ctype_digit($_POST['adminTownMonsterTownId'])
-    && ctype_digit($_POST['adminTownMonsterMonsterId'])
-    && $_POST['adminTownMonsterTownId'] >= 1
-    && $_POST['adminTownMonsterMonsterId'] >= 1)
+    if (ctype_digit($_POST['adminTownShopTownId'])
+    && ctype_digit($_POST['adminTownShopShopId'])
+    && $_POST['adminTownShopTownId'] >= 1
+    && $_POST['adminTownShopShopId'] >= 1)
     {
         //On récupère l'Id du formulaire précédent
-        $adminTownMonsterTownId = htmlspecialchars(addslashes($_POST['adminTownMonsterTownId']));
-        $adminTownMonsterMonsterId = htmlspecialchars(addslashes($_POST['adminTownMonsterMonsterId']));
+        $adminTownShopTownId = htmlspecialchars(addslashes($_POST['adminTownShopTownId']));
+        $adminTownShopShopId = htmlspecialchars(addslashes($_POST['adminTownShopShopId']));
 
         //On fait une requête pour vérifier si la ville choisie existe
         $townQuery = $bdd->prepare('SELECT * FROM car_towns 
         WHERE townId= ?');
-        $townQuery->execute([$adminTownMonsterTownId]);
+        $townQuery->execute([$adminTownShopTownId]);
         $townRow = $townQuery->rowCount();
 
         //Si la ville est disponible
         if ($townRow == 1) 
         {
-            //On fait une requête pour vérifier si le monstre choisit existe
-            $monsterQuery = $bdd->prepare('SELECT * FROM car_monsters 
-            WHERE monsterId= ?');
-            $monsterQuery->execute([$adminTownMonsterMonsterId]);
-            $monsterRow = $monsterQuery->rowCount();
+            //On fait une requête pour vérifier si le magasin choisit existe
+            $shopQuery = $bdd->prepare('SELECT * FROM car_shops 
+            WHERE shopId= ?');
+            $shopQuery->execute([$adminTownShopShopId]);
+            $shopRow = $shopQuery->rowCount();
 
-            //Si l'équippement est disponible
-            if ($monsterRow == 1) 
+            //Si le magasin est disponible
+            if ($shopRow == 1) 
             {
-                //On fait une requête pour vérifier si le monstre choisit existe bien dans la ville
-                $monsterQuery = $bdd->prepare('SELECT * FROM car_towns_monsters 
-                WHERE townMonsterTownId = ?
-                AND townMonsterMonsterId = ?');
-                $monsterQuery->execute([$adminTownMonsterTownId, $adminTownMonsterMonsterId]);
-                $monsterRow = $monsterQuery->rowCount();
+                //On fait une requête pour vérifier si le magasin n'est pas déjà dans cette ville
+                $townShopQuery = $bdd->prepare('SELECT * FROM car_towns_shops 
+                WHERE townShopTownId = ?
+                AND townShopShopId = ?');
+                $townShopQuery->execute([$adminTownShopTownId, $adminTownShopShopId]);
+                $townShopRow = $townShopQuery->rowCount();
 
-                //Si l'équippement est disponible
-                if ($monsterRow == 1) 
+                //Si le magasin est dans la ville
+                if ($townShopRow == 1) 
                 {
                     //On supprime l'équippement de la base de donnée
-                    $townMonsterDeleteQuery = $bdd->prepare("DELETE FROM car_towns_monsters
-                    WHERE townMonsterMonsterId = ?");
-                    $townMonsterDeleteQuery->execute([$adminTownMonsterMonsterId]);
-                    $townMonsterDeleteQuery->closeCursor();
+                    $townShopDeleteQuery = $bdd->prepare("DELETE FROM car_towns_shops
+                    WHERE townShopShopId = ?");
+                    $townShopDeleteQuery->execute([$adminTownShopShopId]);
+                    $townShopDeleteQuery->closeCursor();
                     ?>
 
-                    Le monstre a bien été supprimé de la ville
+                    Le magasin a bien été retiré de la ville
 
                     <hr>
                         
-                    <form method="POST" action="manageTownMonster.php">
-                        <input type="hidden" name="adminTownMonsterTownId" value="<?= $adminTownMonsterTownId ?>">
+                    <form method="POST" action="manageTownShop.php">
+                        <input type="hidden" name="adminTownShopTownId" value="<?= $adminTownShopTownId ?>">
                         <input type="submit" class="btn btn-default form-control" name="manage" value="Continuer">
                     </form>
                     <?php
                 }
-                //Si le monstre n'est pas disponible
+                //Si le magasin n'est pas dans la ville disponible
                 else
                 {
-                    echo "Erreur: Monstre indisponible";
+                    echo "Erreur: Ce magasin n'est pas dans cette ville";
                 }
-                $monsterQuery->closeCursor();
+                $townShopQuery->closeCursor();
             }
-            //Si le monstre existe pas
+            //Si le magasin existe pas
             else
             {
-                echo "Erreur: Monstre indisponible";
+                echo "Erreur: Magasin indisponible";
             }
-            $monsterQuery->closeCursor();
+            $shopQuery->closeCursor();
         }
         //Si la ville existe pas
         else

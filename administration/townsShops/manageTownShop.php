@@ -86,7 +86,7 @@ if (isset($_POST['adminTownShopTownId'])
                         ?>
                         </select>
                     </div>
-                    <input type="hidden" name="adminTownShopShopId" value="<?= $adminTownShopShopId ?>">
+                    <input type="hidden" name="adminTownShopTownId" value="<?= $adminTownShopTownId ?>">
                     <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter">
                 </form>
                 <?php

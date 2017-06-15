@@ -55,7 +55,7 @@ if (isset($_POST['adminTownMonsterTownId'])
                         </select>
                     </div>
                     <input type="hidden" name="adminTownMonsterTownId" value="<?= $adminTownMonsterTownId ?>">
-                    <input type="submit" name="delete" class="btn btn-default form-control" value="Supprimer ce monstre">
+                    <input type="submit" name="delete" class="btn btn-default form-control" value="Retirer">
                 </form>
                 
                 <hr>
@@ -88,7 +88,7 @@ if (isset($_POST['adminTownMonsterTownId'])
                         </select>
                     </div>
                     <input type="hidden" name="adminTownMonsterTownId" value="<?= $adminTownMonsterTownId ?>">
-                    <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter ce monstre">
+                    <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter">
                 </form>
                 <?php
             }

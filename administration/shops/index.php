@@ -32,7 +32,7 @@ if ($shopRow > 0)
             ?>
             </select>
         </div>
-        <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer le magasin">
+        <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer">
     </form>
     <?php
 }
@@ -47,6 +47,6 @@ $shopQuery->closeCursor();
 ?>
 
 <form method="POST" action="addShop.php">
-    <input type="submit" class="btn btn-default form-control" name="add" value="Ajouter un objet">
+    <input type="submit" class="btn btn-default form-control" name="add" value="Nouveau magasin">
 </form>
 <?php require_once("../html/footer.php");

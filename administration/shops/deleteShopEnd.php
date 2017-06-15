@@ -48,17 +48,17 @@ if (isset($_POST['adminShopId'])
                 </form>
             <?php
         }
-        //Si l'objet n'est pas disponible
+        //Si le magasin n'est pas disponible
         else
         {
-            echo "Erreur: Objet indisponible";
+            echo "Erreur: Magasin indisponible";
         }
-        $itemQuery->closeCursor();
+        $shopQuery->closeCursor();
     }
-    //Si l'objet choisit n'est pas un nombre
+    //Si le magasin choisit n'est pas un nombre
     else
     {
-        echo "Erreur: Objet invalide";
+        echo "Erreur: Magasin invalide";
     }
 }
 //Si l'utilisateur n'a pas cliqué sur le bouton finalDelete

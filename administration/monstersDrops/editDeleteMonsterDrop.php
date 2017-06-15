@@ -81,15 +81,15 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                     {
                         ?>
                         <p>ATTENTION</p> 
-                        Vous êtes sur le point de supprimer l'objet <em><?php echo $adminMonsterDropItemName ?></em> du monstre <em><?php echo $adminMonsterDropMonsterName ?></em><br />
-                        confirmez-vous la suppression ?
+                        Vous êtes sur le point de retirer l'objet <em><?php echo $adminMonsterDropItemName ?></em> du monstre <em><?php echo $adminMonsterDropMonsterName ?></em><br />
+                        confirmez-vous ?
 
                         <hr>
                             
                         <form method="POST" action="deleteMonsterDrop.php">
                             <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
                             <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropItemId" value="<?= $adminMonsterDropItemId ?>">
-                            <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme la suppression">
+                            <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme">
                         </form>
                 
                         <hr>

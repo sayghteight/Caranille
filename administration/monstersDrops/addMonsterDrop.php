@@ -17,9 +17,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
     && ctype_digit($_POST['adminMonsterDropItemId'])
     && ctype_digit($_POST['adminMonsterDropLuck'])
     && $_POST['adminMonsterDropMonsterId'] >= 0
-    && $_POST['adminMonsterDropItemId'] >= 0
-    && $_POST['adminMonsterDropLuck'] >= 0
-    && $_POST['adminMonsterDropLuck'] <= 1000)
+    && $_POST['adminMonsterDropItemId'] >= 0)
     {
         //On récupère l'Id du formulaire précédent
         $adminMonsterDropMonsterId = htmlspecialchars(addslashes($_POST['adminMonsterDropMonsterId']));
@@ -27,7 +25,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
         $adminMonsterDropLuck = htmlspecialchars(addslashes($_POST['adminMonsterDropLuck']));
 
         //Si la chance d'obtention est entre 0 et 1000 on ajoute l'objet
-        if ($adminMonsterDropLuck > 0 && $adminMonsterDropLuck < 1000)
+        if ($adminMonsterDropLuck >= 0 && $adminMonsterDropLuck <= 1000)
         {
             //On fait une requête pour vérifier si le monstre choisit existe
             $monsterQuery = $bdd->prepare('SELECT * FROM car_monsters 

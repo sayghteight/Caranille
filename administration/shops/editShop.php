@@ -7,50 +7,41 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //Si l'utilisateur à choisit un id de l'objet
-if (isset($_POST['adminItemId'])
+if (isset($_POST['adminShopId'])
 && isset($_POST['edit']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
-    if (ctype_digit($_POST['adminItemId'])
-    && $_POST['adminItemId'] >= 1)
+    if (ctype_digit($_POST['adminShopId'])
+    && $_POST['adminShopId'] >= 1)
     {
         //On récupère l'Id du formulaire précédent
-        $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
+        $adminShopId = htmlspecialchars(addslashes($_POST['adminShopId']));
 
-        //On fait une requête pour vérifier si l'objet choisit existe
-        $itemQuery = $bdd->prepare('SELECT * FROM car_items 
-        WHERE itemId= ?');
-        $itemQuery->execute([$adminItemId]);
-        $itemRow = $itemQuery->rowCount();
+        //On fait une requête pour vérifier si le magasin choisit existe
+        $shopQuery = $bdd->prepare('SELECT * FROM car_shops 
+        WHERE shopId= ?');
+        $shopQuery->execute([$adminShopId]);
+        $shopRow = $shopQuery->rowCount();
 
-        //Si l'objet est disponible
-        if ($itemRow == 1) 
+        //Si le magasin est disponible
+        if ($shopRow == 1) 
         {
             //On fait une boucle pour récupérer toutes les information
-            while ($item = $itemQuery->fetch())
+            while ($shop = $shopQuery->fetch())
             {
-                //On récupère les informations de l'objet
-                $adminItemId = stripslashes($item['itemId']);
-                $adminItemPicture = stripslashes($item['itemPicture']);
-                $adminItemName = stripslashes($item['itemName']);
-                $adminItemDescription = stripslashes($item['itemDescription']);
-                $adminItemHpEffects = stripslashes($item['itemHpEffect']);
-                $adminItemMpEffect = stripslashes($item['itemMpEffect']);
-                $adminItemPurchasePrice = stripslashes($item['itemPurchasePrice']);
-                $adminItemSalePrice = stripslashes($item['itemSalePrice']);
+                //On récupère les informations du magasin
+                $adminShopPicture = stripslashes($shop['shopPicture']);
+                $adminShopName = stripslashes($shop['shopName']);
+                $adminShopDescription = stripslashes($shop['shopDescription']);
             }
             ?>
 
-            <p>Informations de l'équipement</p>
-            <form method="POST" action="editItemEnd.php">
-                Image : <br> <input type="mail" name="adminItemPicture" class="form-control" placeholder="Image" value="<?php echo $adminItemPicture; ?>" required><br /><br />
-                Nom : <br> <input type="text" name="adminItemName" class="form-control" placeholder="Nom" value="<?php echo $adminItemName; ?>" required><br /><br />
-                Description : <br> <textarea class="form-control" name="adminItemDescription" id="adminItemDescription" rows="3" required><?php echo $adminItemDescription; ?></textarea><br /><br />
-                HP Bonus : <br> <input type="mail" name="adminItemHpEffects" class="form-control" placeholder="HP Bonus" value="<?php echo $adminItemHpEffects; ?>" required><br /><br />
-                MP Bonus : <br> <input type="mail" name="adminItemMpEffect" class="form-control" placeholder="MP Bonus" value="<?php echo $adminItemMpEffect; ?>" required><br /><br />
-                Prix d'achat : <br> <input type="mail" name="adminItemPurchasePrice" class="form-control" placeholder="Prix d'achat" value="<?php echo $adminItemPurchasePrice; ?>" required><br /><br />
-                Prix de vente : <br> <input type="mail" name="adminItemSalePrice" class="form-control" placeholder="Prix de vente" value="<?php echo $adminItemSalePrice; ?>" required><br /><br />
-                <input type="hidden" name="adminItemId" value="<?= $adminItemId ?>">
+            <p>Informations du magasin</p>
+            <form method="POST" action="editShopEnd.php">
+                Image : <br> <input type="text" name="adminShopPicture" class="form-control" placeholder="Image" value= "<?php echo $adminShopPicture; ?>" required><br /><br />
+                Nom : <br> <input type="text" name="adminShopName" class="form-control" placeholder="Nom" value= "<?php echo $adminShopName; ?>" required><br /><br />
+                Description : <br> <textarea class="form-control" name="adminShopDescription" id="adminShopDescription" rows="3" required><?php echo $adminShopDescription; ?></textarea><br /><br />
+                <input type="hidden" name="adminShopId" value="<?= $adminShopId ?>">
                 <input name="finalEdit" class="btn btn-default form-control" type="submit" value="Modifier">
             </form>
             
@@ -65,12 +56,12 @@ if (isset($_POST['adminItemId'])
         {
             echo "Erreur: Objet indisponible";
         }
-        $itemQuery->closeCursor();
+        $shopQuery->closeCursor();
     }
-    //Si l'objet choisit n'est pas un nombre
+    //Si le magasin choisit n'est pas un nombre
     else
     {
-        echo "Erreur: Objet invalide";
+        echo "Erreur: Magasin invalide";
     }
 }
 //Si l'utilisateur n'a pas cliqué sur le bouton edit
