@@ -75,7 +75,7 @@ if (isset($_POST['adminShopItemShopId'])
                 ?>
                 <form method="POST" action="addShopItem.php">
                     <div class="form-group row">
-                        <label for="adminMonsterDropItemId" class="col-2 col-form-label">Objets/équippements existant</label>
+                        <label for="adminShopItemItemId" class="col-2 col-form-label">Objets/équippements existant</label>
                         <select class="form-control" id="adminShopItemItemId" name="adminShopItemItemId">
                         <?php
                         while ($item = $itemQuery->fetch())
