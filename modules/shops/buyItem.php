@@ -44,7 +44,7 @@ if (isset($_POST['shopId'])
                 while ($item = $itemQuery->fetch())
                 {
                     $itemName = stripslashes($item['itemName']);
-                    $itemSalePrice = stripslashes($item['itemPurchasePrice']);
+                    $itemPurchasePrice = stripslashes($item['itemPurchasePrice']);
                 }
                 
                 //On fait une requête pour récupérer les informations de l'objet du magasin
@@ -60,86 +60,26 @@ if (isset($_POST['shopId'])
                     $itemDiscount = stripslashes($shopItem['shopItemDiscount']);
                 }
 
-                $discount = $itemSalePrice * $itemDiscount / 100;
-                $itemSalePrice = $itemSalePrice - $discount;
+                $discount = $itemPurchasePrice * $itemDiscount / 100;
+                $itemPurchasePrice = $itemPurchasePrice - $discount; 
+                ?>
 
-                //Si le joueur à suffisament d'argent
-                if ($characterGold >= $itemSalePrice)
-                {
-                    //On cherche à savoir si l'objet que le joueur va acheter appartient déjà au joueur
-                    $itemQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
-                    WHERE itemId = inventoryItemId
-                    AND inventoryCharacterId = ?
-                    AND itemId = ?");
-                    $itemQuery->execute([$characterId, $itemId]);
-                    $itemRow = $itemQuery->rowCount();
+                <p>ATTENTION</p> 
+                Vous êtes sur le point d'acheter l'objet/équipement <em><?php echo $itemName ?> pour <?php echo $itemPurchasePrice ?> Pièce(s) d'or.</em><br />
+                Cnfirmez-vous l'achat ?
 
-                    //Si le personne possède cet objet
-                    if ($itemRow == 1) 
-                    {
-                        //On récupère les informations de l'inventaire
-                        while ($item = $itemQuery->fetch())
-                        {
-                            $inventoryId = stripslashes($item['inventoryId']);
-                            $itemQuantity = stripslashes($item['inventoryQuantity']);
-                            $inventoryEquipped = stripslashes($item['inventoryEquipped']);
-                        }
-                        $itemQuery->closeCursor();
+                <form method="POST" action="buyItemEnd.php">
+                    <input type="hidden" class="btn btn-default form-control" name="shopId" value="<?= $shopId ?>">
+                    <input type="hidden" class="btn btn-default form-control" name="itemId" value="<?= $itemId ?>">
+                    <input type="submit" class="btn btn-default form-control" name="finalBuy" value="Je confirme">
+                </form>
+    
+                <hr>
 
-                        //On met l'inventaire à jour
-                        $updateInventory = $bdd->prepare("UPDATE car_inventory SET
-                        inventoryQuantity = inventoryQuantity + 1
-                        WHERE inventoryId= :inventoryId");
-                        $updateInventory->execute(array(
-                        'inventoryId' => $inventoryId));
-                        $updateInventory->closeCursor();
-
-                        //On retire l'argent de la vente au personnage
-                        $updatecharacter = $bdd->prepare("UPDATE car_characters SET
-                        characterGold = characterGold - :itemSalePrice
-                        WHERE characterId= :characterId");
-
-                        $updatecharacter->execute(array(
-                        'itemSalePrice' => $itemSalePrice,  
-                        'characterId' => $characterId));
-                        $updatecharacter->closeCursor();
-                    }
-                    //Si le joueur ne possède pas encore cet objet/équipement
-                    else
-                    {
-                        $addItem = $bdd->prepare("INSERT INTO car_inventory VALUES(
-                        '',
-                        :characterId,
-                        :itemId,
-                        '1',
-                        '0')");
-                        $addItem->execute([
-                        'characterId' => $characterId,
-                        'itemId' => $itemId]);
-                        $addItem->closeCursor();
-                    }
-                    ?>
-                    Vous venez d'acheter l'objet <?php echo $itemName ?> pour <?php echo $itemSalePrice ?> Pièce(s) d'or
-
-                    <hr>
-
-                    <form method="POST" action="index.php">
-                        <input type="submit" class="btn btn-default form-control" value="Retour">
-                    </form>
-                    <?php
-                }
-                else
-                {
-                    ?>
-                    Vous n'avez pas assez d'argent
-
-                    <hr>
-
-                    <form method="POST" action="index.php">
-                        <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
-                    </form>
-                    <?php
-                }
+                <form method="POST" action="index.php">
+                    <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
+                </form>
+                <?php
             }
             //Si l'objet n'est pas disponible
             else

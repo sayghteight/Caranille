@@ -73,9 +73,15 @@ if (isset($_POST['shopId']))
                         {
                             $itemId = stripslashes($townShop['itemId']);
                             $itemName = stripslashes($townShop['itemName']);
-                            $itemDiscount = stripslashes($townShop['shopItemDiscount']);?>
+                            $itemPurchasePrice = stripslashes($townShop['itemPurchasePrice']);
+                            $itemDiscount = stripslashes($townShop['shopItemDiscount']);
+
+                            //On calcule la réduction de l'objet/équipement
+                            $discount = $itemPurchasePrice * $itemDiscount / 100;
+                            //On applique la réduction
+                            $itemPurchasePrice = $itemPurchasePrice - $discount?>
                             ?>
-                                <option value="<?php echo $itemId ?>"><?php echo "$itemName (Réduction: $itemDiscount%)"; ?></option>
+                                <option value="<?php echo $itemId ?>"><?php echo "$itemName ($itemPurchasePrice Pièce d'or)"; ?></option>
                             <?php
                         }
                         ?>
