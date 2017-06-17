@@ -45,13 +45,13 @@ require_once("../../kernel/town/index.php");
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gestion de la communauté<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Communauté<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="../../administration/accounts/index.php">Joueurs</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gestion des ressources<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ressources<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="../../administration/equipments/index.php">Equipements</a></li>
                                 <li><a href="../../administration/items/index.php">Objets</a></li>
@@ -61,14 +61,20 @@ require_once("../../kernel/town/index.php");
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gestion du scénario<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Scénario<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="../../administration/story/index.php">Histoire</a></li>
                                 <li><a href="../../administration/missions/index.php">Missions</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gestion de la configuration<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Communication<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="../../administration/news/index.php">News</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Outils<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="../../administration/configuration/index.php">Configuration</a></li>
                                 <li><a href="../../administration/updates/index.php">Mises à jour</a></li>
