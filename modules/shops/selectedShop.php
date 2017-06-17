@@ -82,7 +82,7 @@ if (isset($_POST['shopId']))
                         </select>
                     </div>
                     <input type="hidden" name="shopId" value="<?= $shopId ?>">
-                    <input type="submit" name="delete" class="btn btn-default form-control" value="Acheter">
+                    <input type="submit" name="buy" class="btn btn-default form-control" value="Acheter">
                 </form>
                 <?php
             }

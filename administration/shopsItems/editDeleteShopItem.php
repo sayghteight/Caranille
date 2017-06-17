@@ -49,7 +49,7 @@ if (isset($_POST['adminShopItemShopId'])
                     $adminShopItemItemName = stripslashes($item['itemName']);
                 }
 
-                //On fait une requête pour vérifier si le monstre n'est pas déjà dans cette ville
+                //On fait une requête pour vérifier si l'objet n'est pas déjà dans ce magasin
                 $shopItemQuery = $bdd->prepare('SELECT * FROM car_shops_items
                 WHERE shopItemShopId = ?
                 AND shopItemItemId = ?');
@@ -62,7 +62,7 @@ if (isset($_POST['adminShopItemShopId'])
                     //Si l'utilisateur à cliqué sur le bouton edit
                     if (isset($_POST['edit']))
                     {
-                        //On récupère le taux d'obtention de l'objet/équipement
+                        //On récupère le taux de réduction de l'objet/équipement
                         while ($shopItem = $shopItemQuery->fetch())
                         {
                             $adminShopItemDiscount = stripslashes($shopItem['shopItemDiscount']);

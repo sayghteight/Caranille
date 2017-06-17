@@ -51,10 +51,10 @@ if (isset($_POST['adminShopId'])
             </form>
             <?php
         }
-        //Si l'objet n'est pas disponible
+        //Si le magasin n'est pas disponible
         else
         {
-            echo "Erreur: Objet indisponible";
+            echo "Erreur: Magasin indisponible";
         }
         $shopQuery->closeCursor();
     }

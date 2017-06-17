@@ -12,7 +12,7 @@ if (isset($_POST['itemId'])
 && isset($_POST['sale']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
-    if(ctype_digit($_POST['itemId'])
+    if (ctype_digit($_POST['itemId'])
     && $_POST['itemId'] >= 1)
     {
         //On récupère l'Id de l'objet ou équipement
