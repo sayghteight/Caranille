@@ -6,7 +6,7 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//Si l'utilisateur à choisit un id d'équippement
+//Si les variables $_POST suivantes existent
 if (isset($_POST['adminItemId'])
 && isset($_POST['edit']))
 {
@@ -14,21 +14,21 @@ if (isset($_POST['adminItemId'])
     if (ctype_digit($_POST['adminItemId'])
     && $_POST['adminItemId'] >= 1)
     {
-        //On récupère l'Id du formulaire précédent
+        //On récupère l'id de l'équipement
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
 
-        //On fait une requête pour vérifier si l'équippement choisit existe
+        //On fait une requête pour vérifier si l'équipement choisit existe
         $itemQuery = $bdd->prepare('SELECT * FROM car_items 
         WHERE itemId= ?');
         $itemQuery->execute([$adminItemId]);
         $itemRow = $itemQuery->rowCount();
 
-        //Si l'équippement est disponible
+        //Si l'équipement existe
         if ($itemRow == 1) 
         {
             while ($item = $itemQuery->fetch())
             {
-                //On récupère les informations de l'équippement
+                //On récupère les informations de l'équipement
                 $adminItemPicture = stripslashes($item['itemPicture']);
                 $adminItemType = stripslashes($item['itemType']);
                 $adminItemName = stripslashes($item['itemName']);
@@ -53,7 +53,7 @@ if (isset($_POST['adminItemId'])
                 <?php
                 switch ($adminItemType)
                 {
-                    //Si il s'agit d'une armure
+                    //S'il s'agit d'une armure
                     case "Armor":
                         ?>
                         <option selected="selected" value="Armor">Armure</option>
@@ -64,7 +64,7 @@ if (isset($_POST['adminItemId'])
                         <?php
                     break;
 
-                    //Si il s'agit de bottes
+                    //S'il s'agit de bottes
                     case "Boots":
                         ?>
                         <option selected="selected" value="Boots">Bottes</option>
@@ -75,7 +75,7 @@ if (isset($_POST['adminItemId'])
                         <?php
                     break;
 
-                    //Si il s'agit de gants
+                    //S'il s'agit de gants
                     case "Gloves":
                         ?>
                         <option selected="selected" value="Gloves">Gants</option>
@@ -86,7 +86,7 @@ if (isset($_POST['adminItemId'])
                         <?php
                     break;
 
-                    //Si il s'agit d'un casque
+                    //S'il s'agit d'un casque
                     case "Helmet":
                         ?>
                         <option selected="selected" value="Helmet">Helmet</option>
@@ -97,7 +97,7 @@ if (isset($_POST['adminItemId'])
                         <?php
                     break;
 
-                    //Si il s'agit d'une arme
+                    //S'il s'agit d'une arme
                     case "Weapon":
                         ?>
                         <option selected="selected" value="Weapon">Arme</option>
@@ -134,20 +134,20 @@ if (isset($_POST['adminItemId'])
             </form>
             <?php
         }
-        //Si l'équipement n'est pas disponible
+        //Si l'équipement n'existe pas
         else
         {
-            echo "Erreur: Equippement indisponible";
+            echo "Erreur: cet équipement n'existe pas";
         }
         $itemQuery->closeCursor();
     }
-    //Si l'équippement choisit n'est pas un nombre
+    //Si l'équipement choisit n'est pas un nombre
     else
     {
-        echo "Erreur: Equippement invalide";
+        echo "Erreur: équipement invalide";
     }
 }
-//Si l'utilisateur n'a pas cliqué sur le bouton edit
+//Si toutes les variables $_POST n'existent pas
 else
 {
     echo "Erreur: Aucun choix effectué";

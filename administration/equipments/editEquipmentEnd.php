@@ -6,7 +6,7 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//Si tous les champs ont été rempli
+//Si les variables $_POST suivantes existent
 if (isset($_POST['adminItemId'])
 && isset($_POST['adminItemPicture'])
 && isset($_POST['adminItemName'])
@@ -46,16 +46,16 @@ if (isset($_POST['adminItemId'])
     && $_POST['adminItemPurchasePrice'] >= 0
     && $_POST['adminItemSalePrice'] >= 0)
     {
-        //On récupère l'Id du formulaire précédent
+        //On récupère l'id de l'équipement
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
         
-        //On fait une requête pour vérifier si l'équippement choisit existe
+        //On fait une requête pour vérifier si l'équipement choisit existe
         $itemQuery = $bdd->prepare('SELECT * FROM car_items 
         WHERE itemId= ?');
         $itemQuery->execute([$adminItemId]);
         $itemRow = $itemQuery->rowCount();
 
-        //Si l'équippement est disponible
+        //Si l'équippement existe
         if ($itemRow == 1) 
         {
             //On récupère les informations du formulaire
@@ -75,7 +75,7 @@ if (isset($_POST['adminItemId'])
             $adminItemPurchasePrice = htmlspecialchars(addslashes($_POST['adminItemPurchasePrice']));
             $adminItemSalePrice = htmlspecialchars(addslashes($_POST['adminItemSalePrice']));
 
-            //On met à jour l'équippement dans la base de donnée
+            //On met à jour l'équipement dans la base de donnée
             $updateItems = $bdd->prepare('UPDATE car_items 
             SET itemPicture = :adminItemPicture, 
             itemType = :adminItemType,
@@ -111,7 +111,7 @@ if (isset($_POST['adminItemId'])
             'adminItemId' => $adminItemId]);
             $updateItems->closeCursor();
 
-            //On cherche à savoir quel joueur à cet équippement et si il en est équippé pour appliquer la mise à jour
+            //On cherche à savoir quel joueur à cet équipement et si il en est équippé pour appliquer la mise à jour
             $itemQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
             WHERE itemId = inventoryItemId
             AND inventoryEquipped = 1
@@ -125,10 +125,10 @@ if (isset($_POST['adminItemId'])
                 //On va mettre leur compte à jour
                 while ($item = $itemQuery->fetch())
                 {   
-                    //On récupère l'Id du personnage
+                    //On récupère l'id du personnage
                     $adminCharacterId = stripslashes($item['inventoryCharacterId']);
 
-                    //On remet les stats du joueurs à zéro pour recalculer ensuite le bonus de tous les équippements équippé
+                    //On remet les stats du joueurs à zéro pour recalculer ensuite le bonus de tous les équipements équippé
                     $updateCharacter = $bdd->prepare("UPDATE car_characters SET
                     characterHpEquipments = 0,
                     characterMpEquipments = 0, 
@@ -144,7 +144,7 @@ if (isset($_POST['adminItemId'])
                     'adminCharacterId' => $adminCharacterId));
                     $updateCharacter->closeCursor();
 
-                    //Initialisation des variables qui vont contenir les bonus de tous les équippements actuellement équippé
+                    //Initialisation des variables qui vont contenir les bonus de tous les équipements actuellement équippé
                     $hpBonus = 0;
                     $mpBonus = 0;
                     $strengthBonus = 0;
@@ -215,7 +215,7 @@ if (isset($_POST['adminItemId'])
             }
             ?>
 
-            L'équippement a bien été mit à jour
+            L'équipement a bien été mit à jour
 
             <hr>
                 
@@ -224,20 +224,20 @@ if (isset($_POST['adminItemId'])
             </form>
             <?php
         }
-        //Si l'équippement n'est pas disponible
+        //Si l'équipement n'existe pas
         else
         {
-            echo "Erreur: Equippement indisponible";
+            echo "Erreur: cet équipement n'existe pas";
         }
         $itemQuery->closeCursor();
     }
-    //Si tous les champs numérique ne contiennent pas un nombre
+    //Si l'équipement choisit n'est pas un nombre
     else
     {
-        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
+        echo "Erreur: équipement invalide";
     }
 }
-//Si tous les champs n'ont pas été rempli
+//Si toutes les variables $_POST n'existent pas
 else
 {
     echo "Erreur: Tous les champs n'ont pas été rempli";

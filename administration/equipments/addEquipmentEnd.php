@@ -6,7 +6,7 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//Si l'utilisateur à cliqué sur le bouton finalAdd
+//Si les variables $_POST suivantes existent
 if (isset($_POST['adminItemPicture'])
 && isset($_POST['adminItemName'])
 && isset($_POST['adminItemDescription'])
@@ -60,7 +60,7 @@ if (isset($_POST['adminItemPicture'])
         $adminItemPurchasePrice = htmlspecialchars(addslashes($_POST['adminItemPurchasePrice']));
         $adminItemSalePrice = htmlspecialchars(addslashes($_POST['adminItemSalePrice']));
 
-        //On met à jour l'équippement dans la base de donnée
+        //On met à jour l'équipement dans la base de donnée
         $addItem = $bdd->prepare("INSERT INTO car_items VALUES(
         '',
         :adminItemPicture,
@@ -96,7 +96,7 @@ if (isset($_POST['adminItemPicture'])
         $addItem->closeCursor();
         ?>
 
-        L'équippement a bien été crée
+        L'équipement a bien été crée
 
         <hr>
             
@@ -111,7 +111,7 @@ if (isset($_POST['adminItemPicture'])
         echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
-//Si tous les champs n'ont pas été rempli
+//Si toutes les variables $_POST n'existent pas
 else
 {
     echo "Erreur: Tous les champs n'ont pas été rempli";

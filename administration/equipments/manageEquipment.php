@@ -6,7 +6,7 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//Si l'utilisateur à cliqué sur le bouton manage
+//Si les variables $_POST suivantes existent
 if (isset($_POST['adminItemId'])
 && isset($_POST['manage']))
 {
@@ -60,17 +60,17 @@ if (isset($_POST['adminItemId'])
         //Si l'équipement n'est pas disponible
         else
         {
-            echo "Erreur: Equippement indisponible";
+            echo "Erreur: équipements indisponible";
         }
         $itemQuery->closeCursor();
     }
     //Si l'équippement choisit n'est pas un nombre
     else
     {
-        echo "Erreur: Equippement invalide";
+        echo "Erreur: équipements invalide";
     }
 }
-//Si l'utilisateur n'a pas cliqué sur le bouton manage
+//Si toutes les variables $_POST n'existent pas
 else
 {
     echo "Erreur: Aucun choix effectué";

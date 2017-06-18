@@ -6,26 +6,26 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//Si l'utilisateur à cliqué sur le bouton finalEdit
+//Si les variables $_POST suivantes existent
 if (isset($_POST['finalDelete']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
     if (ctype_digit($_POST['adminItemId'])
     && $_POST['adminItemId'] >= 1)
     {
-        //On récupère l'Id du formulaire précédent
+        //On récupère l'id de l'équipement
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
         
-        //On fait une requête pour vérifier si l'équippement choisit existe
+        //On fait une requête pour vérifier si l'équipement choisit existe
         $itemQuery = $bdd->prepare('SELECT * FROM car_items 
         WHERE itemId= ?');
         $itemQuery->execute([$adminItemId]);
         $itemRow = $itemQuery->rowCount();
 
-        //Si l'équippement est disponible
+        //Si l'équipement existe
         if ($itemRow == 1) 
         {
-            //Avant de supprimer l'équippement On cherche à savoir quel joueur à cet équippement et si il en est équippé pour appliquer la mise à jour
+            //Avant de supprimer l'équipement on cherche à savoir quel joueur à cet équipement et si il en est équippé pour appliquer la mise à jour
             $itemQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
             WHERE itemId = inventoryItemId
             AND inventoryEquipped = 1
@@ -36,11 +36,10 @@ if (isset($_POST['finalDelete']))
             //Si des joueurs en sont équippé
             if ($itemRow > 0) 
             {
-                echo "Un ou plusieurs joueurs ont cet équippement";
                 //On va mettre leur compte à jour
                 while ($item = $itemQuery->fetch())
                 {   
-                    //On récupère l'Id du personnage
+                    //On récupère l'id du personnage
                     $adminCharacterId = stripslashes($item['inventoryCharacterId']);
 
                     //On remet les stats du joueurs à zéro pour recalculer ensuite le bonus de tous les équippements équippé
@@ -130,20 +129,20 @@ if (isset($_POST['finalDelete']))
                 }
             }
 
-            //On supprime l'équippement de la base de donnée
+            //On supprime l'équipement de la base de donnée
             $itemDeleteQuery = $bdd->prepare("DELETE FROM car_items
             WHERE itemId = ?");
             $itemDeleteQuery->execute([$adminItemId]);
             $itemDeleteQuery->closeCursor();
 
-            //On supprime aussi l'équippement de l'inventaire dans la base de donnée
+            //On supprime aussi l'équipement de l'inventaire dans la base de donnée
             $inventoryDeleteQuery = $bdd->prepare("DELETE FROM car_inventory
             WHERE inventoryItemId = ?");
             $inventoryDeleteQuery->execute([$adminItemId]);
             $inventoryDeleteQuery->closeCursor();
             ?>
 
-            L'équippement a bien été supprimé
+            L'équipement a bien été supprimé
 
             <hr>
                 
@@ -152,20 +151,20 @@ if (isset($_POST['finalDelete']))
             </form>
             <?php
         }
-        //Si l'équippement n'est pas disponible
+        //Si l'équipement n'existe pas
         else
         {
-            echo "Erreur: Equippement indisponible";
+            echo "Erreur: cet équipement n'existe pas";
         }
         $itemQuery->closeCursor();
     }
-    //Si l'équippement choisit n'est pas un nombre
+    //Si l'équipement choisit n'est pas un nombre
     else
     {
-        echo "Erreur: Equippement invalide";
+        echo "Erreur: équipement invalide";
     }
 }
-//Si l'utilisateur n'a pas cliqué sur le bouton finalDelete
+//Si toutes les variables $_POST n'existent pas
 else
 {
     echo "Erreur: Aucun choix effectué";

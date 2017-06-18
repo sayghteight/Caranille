@@ -6,7 +6,7 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//Si l'utilisateur a choisit de modifier le compte
+//Si les variables $_POST suivantes existent
 if (isset($_POST['adminAccountId']) 
 && isset($_POST['adminAccountPseudo']) 
 && isset($_POST['adminAccountEmail']) 
@@ -74,7 +74,7 @@ if (isset($_POST['adminAccountId'])
         echo "Erreur: Le compte choisit est incorrect";
     }
 }
-//Si tous les champs n'ont pas été rempli
+//Si toutes les variables $_POST n'existent pas
 else
 {
     echo "Erreur: Tous les champs n'ont pas été rempli";

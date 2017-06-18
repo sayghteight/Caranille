@@ -6,7 +6,7 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//Si l'utilisateur à choisit un id de l'objet
+//Si les variables $_POST suivantes existent
 if (isset($_POST['adminItemId'])
 && isset($_POST['edit']))
 {
@@ -73,7 +73,7 @@ if (isset($_POST['adminItemId'])
         echo "Erreur: Objet invalide";
     }
 }
-//Si l'utilisateur n'a pas cliqué sur le bouton edit
+//Si toutes les variables $_POST n'existent pas
 else
 {
     echo "Erreur: Aucun choix effectué";
