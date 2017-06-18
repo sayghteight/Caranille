@@ -9,7 +9,7 @@ if ($battleArenaRow > 0) { exit(header("Location: ../../modules/battleArena/inde
 //Si il y a actuellement un combat contre un monstre on redirige le joueur vers le module battleMonster
 if ($battleMonsterRow > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
 
-//Si tous les champs ont bien été rempli
+//Si les variables $_POST suivantes existent
 if (isset($_POST['opponentCharacterId']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
@@ -68,7 +68,7 @@ if (isset($_POST['opponentCharacterId']))
         echo "Erreur: personnage invalide";
     }
 }
-//Si tous les champs n'ont pas été rempli
+//Si toutes les variables $_POST n'existent pas
 else
 {
     echo "Erreur: Tous les champs n'ont pas été rempli";

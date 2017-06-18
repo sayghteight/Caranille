@@ -1,6 +1,6 @@
 <?php require_once("../../html/header.php");
 
-//Si tous les champs ont bien été rempli
+//Si les variables $_POST suivantes existent
 if (isset($_POST['accountPseudo']) 
 && isset($_POST['accountPassword']))
 {
@@ -32,7 +32,7 @@ if (isset($_POST['accountPseudo'])
         echo "Mauvais Pseudo/Mot de passe";
     }
 }
-//Si tous les champs n'ont pas été rempli
+//Si toutes les variables $_POST n'existent pas
 else
 {
 	echo "Tous les champs n'ont pas été rempli";

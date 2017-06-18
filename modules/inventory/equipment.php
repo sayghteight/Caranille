@@ -8,17 +8,6 @@ if ($battleArenaRow > 0) { exit(header("Location: ../../modules/battleArena/inde
 if ($battleMonsterRow > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
 
 //On fait une requête pour avoir la liste des équipements du personnage
-/*
-SELECT * FROM car_items, car_inventory //On fait une liaison entre la table car_items et car_inventory
-WHERE itemId = inventoryItemItemId //On lie ses deux tables par l'Id de l'objet
-AND (itemType = 'Armor' //Il faut que le type de l'objet soit soit une armure (Armor)
-OR itemType = 'Boots' //Soit des bottes (Boots)
-OR itemType = 'Gloves' //Soit des gants (Gloves)
-OR itemType = 'Helmet' //Soit un casque (Helmet)
-OR itemType = 'Weapon') //Ou soit une arme (Weapon)
-AND inventoryItemCharacterId = ? //Ou le proprietaire et le personnage du joueur
-ORDER BY itemType //Par ordre de type
-*/
 $equipmentQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
 WHERE itemId = inventoryItemId
 AND (itemType = 'Armor' 
@@ -55,7 +44,7 @@ if ($equipmentRow > 0)
     </form>
     <?php
 }
-//Si aucun équipement n'a été trouvé
+//Si toutes les variables $_POST n'existent pas
 else
 {
     ?>

@@ -5,6 +5,7 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si il y a pas de combat contre un personnage on redirige le joueur vers le module arena
 if ($battleArenaRow == 0) { exit(header("Location: ../../modules/battleArena/index.php")); }
 
+//Si les variables $_POST suivantes existent
 if (isset($_POST['escape']))
 {
     //On détruit le combat en cours
@@ -23,6 +24,7 @@ if (isset($_POST['escape']))
     </form>
     <?php
 }
+//Si toutes les variables $_POST n'existent pas
 else
 {
     echo "Erreur: Vous ne pouvez pas fuire";

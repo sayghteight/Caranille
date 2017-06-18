@@ -5,7 +5,7 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si il y a pas de combat contre un monstre on redirige le joueur vers le module dungeon
 if ($battleMonsterRow == 0) { exit(header("Location: ../../modules/battleArena/index.php")); }
 
-//Si le joueur a cliqué sur le bouton attack
+//Si les variables $_POST suivantes existent
 if (isset($_POST['attack']))
 {
     /*
@@ -178,7 +178,7 @@ if (isset($_POST['attack']))
         <?php
     }
 }
-//Si le joueur n'a pas cliqué sur le bouton attack
+//Si toutes les variables $_POST n'existent pas
 else
 {
     echo "Erreur: Aucune attaque de lancée";

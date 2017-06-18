@@ -9,7 +9,7 @@ if ($battleArenaRow > 0) { exit(header("Location: ../../modules/battleArena/inde
 //Si il y a actuellement un combat contre un monstre on redirige le joueur vers le module battleMonster
 if ($battleMonsterRow > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
 
-//Si tous les champs ont bien été rempli
+//Si les variables $_POST suivantes existent
 if (isset($_POST['leave']))
 {
     //On met le personnage à jour
@@ -24,7 +24,7 @@ if (isset($_POST['leave']))
     //On redirige le joueur vers la carte du monde
     header("Location: ../../modules/map/index.php");
 }
-//Si tous les champs n'ont pas été rmepli
+//Si toutes les variables $_POST n'existent pas
 else 
 {
     echo "Tous les champs n'ont pas été rempli";

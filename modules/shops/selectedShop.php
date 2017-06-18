@@ -9,7 +9,7 @@ if ($battleArenaRow > 0) { exit(header("Location: ../../modules/battleArena/inde
 //Si il y a actuellement un combat contre un monstre on redirige le joueur vers le module battleMonster
 if ($battleMonsterRow > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
 
-//Si tous les champs ont bien été rempli
+//Si les variables $_POST suivantes existent
 if (isset($_POST['shopId']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
@@ -20,14 +20,6 @@ if (isset($_POST['shopId']))
         $shopId = htmlspecialchars(addslashes($_POST['shopId']));
 
         //On fait une requête pour vérifier si le magasin est bien disponible dans la ville du joueur
-        /*
-        SELECT * FROM car_shops, car_towns, car_towns_shops //On prend les trois tables car_shops, car_towns, car_towns_shops afin de les lier
-        WHERE townShopShopId = shopId //On fait une liaison entre la table car_towns_shops et car_shops avec l'Id du magasin
-        AND townShopTownId = townId //On fait une liaison entre la table car_towns_shops et car_towns avec l'Id de la ville
-        AND monsterId = ? //On ajoute l'Id du magasin obtenu par le formulaire
-        AND townId = ? //On ajoute l'Id de la ville dans laquel on est
-        */
-        //On fait une jointure entre les 3 tables car_shops, car_towns, car_towns_shops pour récupérer les magasin lié à la ville
         $shopQueryList = $bdd->prepare("SELECT * FROM car_shops, car_towns, car_towns_shops
         WHERE townShopShopId = shopId
         AND townShopTownId = townId
@@ -109,7 +101,7 @@ if (isset($_POST['shopId']))
         echo "Erreur: Magasin invalide";
     }
 }
-//Si tous les champs n'ont pas été rempli
+//Si toutes les variables $_POST n'existent pas
 else
 {
     echo "Erreur: Tous les champs n'ont pas été rempli";

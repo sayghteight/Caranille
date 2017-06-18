@@ -7,7 +7,7 @@ if ($battleArenaRow > 0) { exit(header("Location: ../../modules/battleArena/inde
 //Si il y a actuellement un combat contre un monstre on redirige le joueur vers le module battleMonster
 if ($battleMonsterRow > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
 
-//Si tous les champs ont bien été rempli
+//Si les variables $_POST suivantes existent
 if (isset($_POST['addWisdom']))
 {
     if ($characterSkillPoints > 0)

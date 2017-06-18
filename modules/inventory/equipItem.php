@@ -180,7 +180,7 @@ if (isset($_POST['itemId'])
          echo "L'équipment choisit est invalid";
     }
 }
-//Si tous les champs n'ont pas été rempli
+//Si toutes les variables $_POST n'existent pas
 else 
 {
     echo "Tous les champs n'ont pas été rempli";
