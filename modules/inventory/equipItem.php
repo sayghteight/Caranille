@@ -163,7 +163,7 @@ if (isset($_POST['itemId'])
 
             <hr>
 
-            <form method="POST" action="index.php">
+            <form method="POST" action="equipment.php">
                 <input type="submit" class="btn btn-default form-control" value="Retour">
             </form>
             <?php
