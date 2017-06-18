@@ -44,6 +44,7 @@ if (isset($_POST['shopId'])
                 while ($item = $itemQuery->fetch())
                 {
                     $itemType = stripslashes($item['itemType']);
+                    $itemLevelRequired = stripslashes($item['itemLevelRequired']);
                     $itemName = stripslashes($item['itemName']);
                     $itemDescription = stripslashes($item['itemDescription']);
                     $itemHpEffect = stripslashes($item['itemHpEffect']);
@@ -76,6 +77,15 @@ if (isset($_POST['shopId'])
                 ?>
 
                 <table class="table">
+                    <tr>
+                        <td>
+                            Niveau requis
+                        </td>
+                        
+                        <td>
+                            <?php echo $itemLevelRequired; ?>
+                        </td>
+                    </tr>
                     <tr>
                         <td>
                             Nom

@@ -32,6 +32,7 @@ if (isset($_POST['adminItemId'])
                 //On récupère les informations de l'objet
                 $adminItemId = stripslashes($item['itemId']);
                 $adminItemPicture = stripslashes($item['itemPicture']);
+                $adminItemLevelRequired = stripslashes($item['itemLevelRequired']);
                 $adminItemName = stripslashes($item['itemName']);
                 $adminItemDescription = stripslashes($item['itemDescription']);
                 $adminItemHpEffects = stripslashes($item['itemHpEffect']);
@@ -41,9 +42,10 @@ if (isset($_POST['adminItemId'])
             }
             ?>
 
-            <p>Informations de l'équipement</p>
+            <p>Informations de l'objet</p>
             <form method="POST" action="editItemEnd.php">
                 Image : <br> <input type="mail" name="adminItemPicture" class="form-control" placeholder="Image" value="<?php echo $adminItemPicture; ?>" required><br /><br />
+                Niveau requis : <br> <input type="number" name="adminItemLevelRequired" class="form-control" placeholder="Niveau requis" value="<?php echo $adminItemLevelRequired; ?>" required><br /><br />
                 Nom : <br> <input type="text" name="adminItemName" class="form-control" placeholder="Nom" value="<?php echo $adminItemName; ?>" required><br /><br />
                 Description : <br> <textarea class="form-control" name="adminItemDescription" id="adminItemDescription" rows="3" required><?php echo $adminItemDescription; ?></textarea><br /><br />
                 HP Bonus : <br> <input type="mail" name="adminItemHpEffects" class="form-control" placeholder="HP Bonus" value="<?php echo $adminItemHpEffects; ?>" required><br /><br />

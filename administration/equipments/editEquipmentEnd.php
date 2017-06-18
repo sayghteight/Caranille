@@ -9,6 +9,8 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 //Si les variables $_POST suivantes existent
 if (isset($_POST['adminItemId'])
 && isset($_POST['adminItemPicture'])
+&& isset($_POST['adminItemType'])
+&& isset($_POST['adminItemLevelRequired'])
 && isset($_POST['adminItemName'])
 && isset($_POST['adminItemDescription'])
 && isset($_POST['adminItemHpEffects'])
@@ -25,6 +27,7 @@ if (isset($_POST['adminItemId'])
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
     if (ctype_digit($_POST['adminItemId'])
+    && ctype_digit($_POST['adminItemLevelRequired'])
     && ctype_digit($_POST['adminItemHpEffects'])
     && ctype_digit($_POST['adminItemMpEffect'])
     && ctype_digit($_POST['adminItemStrengthEffect'])
@@ -35,6 +38,8 @@ if (isset($_POST['adminItemId'])
     && ctype_digit($_POST['adminItemWisdomEffect'])
     && ctype_digit($_POST['adminItemPurchasePrice'])
     && ctype_digit($_POST['adminItemSalePrice'])
+    && $_POST['adminItemId'] >= 1
+    && $_POST['adminItemLevelRequired'] >= 1
     && $_POST['adminItemHpEffects'] >= 0
     && $_POST['adminItemMpEffect'] >= 0
     && $_POST['adminItemStrengthEffect'] >= 0
@@ -62,6 +67,7 @@ if (isset($_POST['adminItemId'])
             $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
             $adminItemPicture = htmlspecialchars(addslashes($_POST['adminItemPicture']));
             $adminItemType = htmlspecialchars(addslashes($_POST['adminItemType']));
+            $adminItemLevelRequired = htmlspecialchars(addslashes($_POST['adminItemLevelRequired']));
             $adminItemName = htmlspecialchars(addslashes($_POST['adminItemName']));
             $adminItemDescription = htmlspecialchars(addslashes($_POST['adminItemDescription']));
             $adminItemHpEffects = htmlspecialchars(addslashes($_POST['adminItemHpEffects']));
@@ -79,6 +85,7 @@ if (isset($_POST['adminItemId'])
             $updateItems = $bdd->prepare('UPDATE car_items 
             SET itemPicture = :adminItemPicture, 
             itemType = :adminItemType,
+            itemLevelrequired = :adminItemLevelRequired,
             itemName = :adminItemName,
             itemDescription = :adminItemDescription,
             itemHpEffect = :adminItemHpEffects,
@@ -96,6 +103,7 @@ if (isset($_POST['adminItemId'])
             $updateItems->execute([
             'adminItemPicture' => $adminItemPicture,
             'adminItemType' => $adminItemType,
+            'adminItemLevelRequired' => $adminItemLevelRequired,
             'adminItemName' => $adminItemName,
             'adminItemDescription' => $adminItemDescription,
             'adminItemHpEffects' => $adminItemHpEffects,

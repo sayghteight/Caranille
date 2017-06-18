@@ -20,6 +20,7 @@ if (isset($_POST['add']))
             <option value="Helmet">Casque</option>
             <option value="Weapon">Arme</option>
         </select><br /><br />
+        Niveau requis : <br> <input type="number" name="adminItemLevelRequired" class="form-control" placeholder="Niveau requis" required><br /><br />
         Nom : <br> <input type="text" name="adminItemName" class="form-control" placeholder="Nom" required><br /><br />
         Description : <br> <textarea class="form-control" name="adminItemDescription" id="adminItemDescription" rows="3" required></textarea><br /><br />
         HP Bonus : <br> <input type="number" name="adminItemHpEffects" class="form-control" placeholder="HP Bonus" required><br /><br />

@@ -31,6 +31,7 @@ if (isset($_POST['adminItemId'])
                 //On récupère les informations de l'équipement
                 $adminItemPicture = stripslashes($item['itemPicture']);
                 $adminItemType = stripslashes($item['itemType']);
+                $adminItemLevelRequired = stripslashes($item['itemLevelRequired']);
                 $adminItemName = stripslashes($item['itemName']);
                 $adminItemDescription = stripslashes($item['itemDescription']);
                 $adminItemHpEffects = stripslashes($item['itemHpEffect']);
@@ -111,6 +112,7 @@ if (isset($_POST['adminItemId'])
                 }
                 ?>                    
                 </select><br /><br />
+                Niveau requis : <br> <input type="text" name="adminItemLevelRequired" class="form-control" placeholder="Niveau requis" value="<?php echo $adminItemLevelRequired; ?>" required><br /><br />
                 Nom : <br> <input type="text" name="adminItemName" class="form-control" placeholder="Nom" value="<?php echo $adminItemName; ?>" required><br /><br />
                 Description : <br> <textarea class="form-control"name="adminItemDescription" id="adminItemDescription" rows="3" required><?php echo $adminItemDescription; ?></textarea><br /><br />
                 HP Bonus : <br> <input type="text" name="adminItemHpEffects" class="form-control" placeholder="HP Bonus" value="<?php echo $adminItemHpEffects; ?>" required><br /><br />

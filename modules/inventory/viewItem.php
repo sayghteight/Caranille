@@ -36,6 +36,7 @@ if (isset($_POST['itemId'])
         {
             $itemId = stripslashes($item['itemId']);
             $itemType = stripslashes($item['itemType']);
+            $itemLevelRequired = stripslashes($item['itemLevelRequired']);
             $itemName = stripslashes($item['itemName']);
             $itemDescription = stripslashes($item['itemDescription']);
             $itemQuantity = stripslashes($item['inventoryQuantity']);
@@ -50,6 +51,16 @@ if (isset($_POST['itemId'])
             $itemSalePrice = stripslashes($item['itemSalePrice']);
             ?>
             <table class="table">
+                <tr>
+                    <td>
+                        Niveau requis
+                    </td>
+                    
+                    <td>
+                        <?php echo $itemLevelRequired; ?>
+                    </td>
+                </tr>
+
                 <tr>
                     <td>
                         Nom
