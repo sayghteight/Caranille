@@ -64,9 +64,9 @@ if (isset($_POST['shopId']))
 
                 <hr>
 
-                <form method="POST" action="buyItem.php">
+                <form method="POST" action="viewItem.php">
                     <div class="form-group row">
-                        <label for="adminShopItemItemId" class="col-2 col-form-label">Objets/équippements en vente</label>
+                        <label for="adminShopItemItemId" class="col-2 col-form-label">Articles en vente</label>
                         <select class="form-control" id="itemId" name="itemId">
                         <?php
                         while ($townShop = $townShopQuery->fetch())
@@ -88,7 +88,7 @@ if (isset($_POST['shopId']))
                         </select>
                     </div>
                     <input type="hidden" name="shopId" value="<?= $shopId ?>">
-                    <input type="submit" name="buy" class="btn btn-default form-control" value="Acheter">
+                    <input type="submit" name="view" class="btn btn-default form-control" value="Détail/Achat">
                 </form>
                 <?php
             }

@@ -56,7 +56,7 @@ if (isset($_POST['adminShopItemShopId'])
                     $shopItemDeleteQuery->closeCursor();
                     ?>
 
-                    L'objet a bien été retiré du magasin
+                    L'article a bien été retiré du magasin
 
                     <hr>
                         

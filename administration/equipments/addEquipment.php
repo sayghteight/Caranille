@@ -12,37 +12,6 @@ if (isset($_POST['add']))
     ?>
     <p>Informations de l'équipement</p>
     <form method="POST" action="addEquipmentEnd.php">
-        Classe <br> <select name="adminItemRaceId" class="form-control">
-        <option value="0">Toutes les classes</option>
-        <?php
-        //On rempli le menu déroulant avec la liste des classes disponible
-        $raceListQuery = $bdd->query("SELECT * FROM car_races");
-        //On recherche combien il y a de classes disponible
-        $raceList = $raceListQuery->rowCount();
-        //Si il y a au moins une classe de disponible on les affiches dans le menu déroulant
-        if ($raceList >= 1)
-        {
-            //On fait une boucle sur tous les résultats
-            while ($raceList = $raceListQuery->fetch())
-            {
-                //on récupère les valeurs de chaque classes qu'on va ensuite mettre dans le menu déroulant
-                $raceId = stripslashes($raceList['raceId']); 
-                $raceName = stripslashes($raceList['raceName']);
-                ?>
-                    <option value="<?php echo $raceId ?>"><?php echo $raceName ?></option>
-                <?php
-            }
-        }
-        //Si il n'y a aucune classe de disponible on ajoute "Aucune classe" dans le menu déroulant
-        else
-        {
-            ?>
-                <option value="0">Aucune classe</option>
-            <?php
-        }
-        $raceListQuery->closeCursor();
-        ?>
-        </select><br /><br />
         Image : <br> <input type="text" name="adminItemPicture" class="form-control" placeholder="Image" required><br /><br />
         Type: <br> <select name="adminItemType" class="form-control">
             <option value="Armor">Armure</option>
@@ -51,8 +20,6 @@ if (isset($_POST['add']))
             <option value="Helmet">Casque</option>
             <option value="Weapon">Arme</option>
         </select><br /><br />
-        Niveau : <br> <input type="number" name="adminItemLevel" class="form-control" placeholder="Email" required><br /><br />
-        Niveau requis : <br> <input type="number" name="adminItemLevelRequired" class="form-control" placeholder="Niveau requis" required><br /><br />
         Nom : <br> <input type="text" name="adminItemName" class="form-control" placeholder="Nom" required><br /><br />
         Description : <br> <textarea class="form-control" name="adminItemDescription" id="adminItemDescription" rows="3" required></textarea><br /><br />
         HP Bonus : <br> <input type="number" name="adminItemHpEffects" class="form-control" placeholder="HP Bonus" required><br /><br />

@@ -81,7 +81,7 @@ if (isset($_POST['adminShopItemShopId'])
                     {
                         ?>
                         <p>ATTENTION</p> 
-                        Vous êtes sur le point de retirer l'objet <em><?php echo $adminShopItemItemName ?></em> du magasin <em><?php echo $adminShopItemShopName ?></em><br />
+                        Vous êtes sur le point de retirer l'article <em><?php echo $adminShopItemItemName ?></em> du magasin <em><?php echo $adminShopItemShopName ?></em><br />
                         confirmez-vous ?
 
                         <hr>

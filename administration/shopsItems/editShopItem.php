@@ -66,7 +66,7 @@ if (isset($_POST['adminShopItemShopId'])
                         $updateShopItem->closeCursor();
                         ?>
 
-                        L'objet a bien été mit à jour
+                        L'article a bien été mit à jour
 
                         <hr>
                             

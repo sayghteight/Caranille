@@ -53,7 +53,6 @@ if (isset($_POST['itemId'])
             $equipmentType = stripslashes($equipment['itemType']);
             $equipmentName = stripslashes($equipment['itemName']);
             $equipmentDescription = stripslashes($equipment['itemDescription']);
-            $equipmentLevelRequired = stripslashes($equipment['itemLevelRequired']);
             $equipmentQuantity = stripslashes($equipment['inventoryQuantity']);
             $equipmentHpEffect = stripslashes($equipment['itemHpEffect']);
             $equipmentMpEffect = stripslashes($equipment['itemMpEffect']);
@@ -84,16 +83,6 @@ if (isset($_POST['itemId'])
                     
                     <td>
                         <?php echo nl2br($equipmentDescription); ?>
-                    </td>
-                </tr>
-                    
-                <tr>
-                    <td>
-                        Niveau requis
-                    </td>
-                    
-                    <td>
-                        <?php echo $equipmentLevelRequired; ?>
                     </td>
                 </tr>
                     

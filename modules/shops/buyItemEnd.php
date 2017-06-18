@@ -119,7 +119,7 @@ if (isset($_POST['shopId'])
                     'characterId' => $characterId));
                     $updatecharacter->closeCursor();
                     ?>
-                    Vous venez d'acheter l'objet <?php echo $itemName ?> pour <?php echo $itemPurchasePrice ?> Pièce(s) d'or
+                    Vous venez d'acheter l'article <?php echo $itemName ?> pour <?php echo $itemPurchasePrice ?> Pièce(s) d'or
 
                     <hr>
 
@@ -144,7 +144,7 @@ if (isset($_POST['shopId'])
             //Si l'objet n'est pas disponible
             else
             {
-                echo "Erreur: Objet indisponible";
+                echo "Erreur: Article indisponible";
             }
             $itemQuery->closeCursor();
         }

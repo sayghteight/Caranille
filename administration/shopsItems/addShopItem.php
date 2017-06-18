@@ -69,7 +69,7 @@ if (isset($_POST['adminShopItemShopId'])
                         $addShopItem->closeCursor();
                         ?>
 
-                        L'objet a bien été ajouté au magasin
+                        L'article a bien été ajouté au magasin
 
                         <hr>
                             

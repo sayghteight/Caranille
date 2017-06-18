@@ -38,11 +38,8 @@ if (isset($_POST['adminItemPicture'])
         //On met à jour l'équippement dans la base de donnée
         $addItem = $bdd->prepare("INSERT INTO car_items VALUES(
         '',
-        '0',
         :adminItemPicture,
         'Item',
-        '1',
-        '1',
         :adminItemName,
         :adminItemDescription,
         :adminItemHpEffects,

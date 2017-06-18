@@ -167,11 +167,8 @@ CREATE TABLE IF NOT EXISTS `car_inventory`
 
 CREATE TABLE IF NOT EXISTS `car_items` (
   `itemId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `itemRaceId` int(11) NOT NULL,
   `itemPicture` text NOT NULL,
   `itemType` varchar(30) NOT NULL,
-  `itemLevel` int(11) NOT NULL,
-  `itemLevelRequired` int(11) NOT NULL,
   `itemName` varchar(30) NOT NULL,
   `itemDescription` text NOT NULL,
   `itemHpEffect` int(11) NOT NULL,
@@ -282,14 +279,14 @@ CREATE TABLE IF NOT EXISTS `car_towns_shops`
 -- Ajout des exemples dans la base de donnée
 --
 
-INSERT INTO `car_items` (`itemId`, `itemRaceId`, `itemPicture`, `itemType`, `itemLevel`, `itemLevelRequired`, `itemName`, `itemDescription`, `itemHpEffect`, `itemMpEffect`, `itemStrengthEffect`, `itemMagicEffect`, `itemAgilityEffect`, `itemDefenseEffect`, `itemDefenseMagicEffect`, `itemWisdomEffect`, `itemPurchasePrice`, `itemSalePrice`) VALUES
-(1, 0, 'http://localhost/item.png', 'Item', 1, 1, 'Potion', 'Cette petite fiole vous rendra 100 HP', 100, 0, 0, 0, 0, 0, 0, 0, 50, 10),
-(2, 0, 'http://localhost/item.png', 'Item', 1, 1, 'Ether', 'Cette petite fiole vous rendra 10 MP', 0, 10, 0, 0, 0, 0, 0, 0, 50, 10),
-(3, 0, 'http://localhost/item.png', 'Armor', 1, 1, 'Manteau de laine', 'Ce manteau vous ira a ravir.\r\nCet équipement est disponible pour toutes les classes', 10, 1, 1, 1, 1, 1, 0, 1, 100, 50),
-(4, 0, 'http://localhost/item.png', 'Boots', 1, 1, 'Botte de laine', 'Ses bottes de laine sont 100% moutons.\r\nCet équipement est disponible pour toutes les classes', 10, 1, 1, 1, 1, 1, 0, 1, 100, 50),
-(5, 0, 'http://localhost/item.png', 'Gloves', 1, 1, 'Gants de laine', 'Ses gants vous donneront vous protégerons des courants d\'air mais juste pour les mains.\r\nCet équipement est disponible pour toutes les classes', 10, 1, 1, 1, 1, 1, 0, 1, 100, 50),
-(6, 0, 'http://localhost/item.png', 'Helmet', 1, 1, 'Casque de laine', 'Ce casque vous protégera juste de la pluie.\r\nCet équipement est disponible pour toutes les classes', 10, 1, 1, 1, 1, 1, 0, 1, 100, 50),
-(7, 0, 'http://localhost/item.png', 'Weapon', 1, 1, 'Boule de laine', 'Cette boule de laine pourra être lancée sur vos ennemis en leur occasionnant peu de dégâts.\r\nCet équipement est disponible pour toutes les classes', 10, 1, 1, 1, 1, 1, 0, 1, 100, 50);
+INSERT INTO `car_items` (`itemId`, `itemPicture`, `itemType`, `itemName`, `itemDescription`, `itemHpEffect`, `itemMpEffect`, `itemStrengthEffect`, `itemMagicEffect`, `itemAgilityEffect`, `itemDefenseEffect`, `itemDefenseMagicEffect`, `itemWisdomEffect`, `itemPurchasePrice`, `itemSalePrice`) VALUES
+(1, 'http://localhost/item.png', 'Item', 'Potion', 'Cette petite fiole vous rendra 100 HP', 100, 0, 0, 0, 0, 0, 0, 0, 50, 10),
+(2, 'http://localhost/item.png', 'Item', 'Ether', 'Cette petite fiole vous rendra 10 MP', 0, 10, 0, 0, 0, 0, 0, 0, 50, 10),
+(3, 'http://localhost/item.png', 'Armor', 'Manteau de laine', 'Ce manteau vous ira a ravir.l\r\nCet équipement est disponible pour toutes les classes', 10, 1, 1, 1, 1, 1, 0, 1, 100, 50),
+(4, 'http://localhost/item.png', 'Boots', 'Botte de laine', 'Ses bottes de laine sont 100% moutons.\r\nCet équipement est disponible pour toutes les classes', 10, 1, 1, 1, 1, 1, 0, 1, 100, 50),
+(5, 'http://localhost/item.png', 'Gloves', 'Gants de laine', 'Ses gants vous donneront vous protégerons des courants d\'air mais juste pour les mains.\r\nCet équipement est disponible pour toutes les classes', 10, 1, 1, 1, 1, 1, 0, 1, 100, 50),
+(6, 'http://localhost/item.png', 'Helmet', 'Casque de laine', 'Ce casque vous protégera juste de la pluie.\r\nCet équipement est disponible pour toutes les classes', 10, 1, 1, 1, 1, 1, 0, 1, 100, 50),
+(7, 'http://localhost/item.png', 'Weapon', 'Boule de laine', 'Cette boule de laine pourra être lancée sur vos ennemis en leur occasionnant peu de dégâts.\r\nCet équipement est disponible pour toutes les classes', 10, 1, 1, 1, 1, 1, 0, 1, 100, 50);
 
 INSERT INTO `car_monsters` (`monsterId`, `monsterPicture`, `monsterName`, `monsterDescription`, `monsterLevel`, `monsterHp`, `monsterMp`, `monsterStrength`, `monsterMagic`, `monsterAgility`, `monsterDefense`, `monsterDefenseMagic`, `monsterWisdom`, `monsterExperience`, `monsterGold`) VALUES
 (1, 'http://localhost/monster.png', 'Plop', 'Ce monstre se nourrit exclusivement de plante et de feuille tombé à même le sol.\r\n\r\nIl y a très longtemps celui-ci était jaune et est devenue vert de part son alimentation...\r\n\r\nMais si il est devenu vert de part son alimentation pourquoi était t\'il jaune ?', 1, 10, 10, 1, 1, 1, 1, 1, 1, 10, 10),
