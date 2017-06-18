@@ -54,7 +54,7 @@ if (isset($_POST['shopId'])
                 $shopItemQuery->execute([$shopId, $itemId]);
                 $shopItemRow = $shopItemQuery->rowCount();
 
-                //On récupère le taux de réduction de l'objet/équipement
+                //On récupère le taux de réduction de l'article
                 while ($shopItem = $shopItemQuery->fetch())
                 {
                     $itemDiscount = stripslashes($shopItem['shopItemDiscount']);
@@ -65,7 +65,7 @@ if (isset($_POST['shopId'])
                 ?>
 
                 <p>ATTENTION</p> 
-                Vous êtes sur le point d'acheter l'objet/équipement <em><?php echo $itemName ?> pour <?php echo $itemPurchasePrice ?> Pièce(s) d'or.</em><br />
+                Vous êtes sur le point d'acheter l'article <em><?php echo $itemName ?> pour <?php echo $itemPurchasePrice ?> Pièce(s) d'or.</em><br />
                 Confirmez-vous l'achat ?
                 
 
@@ -82,10 +82,10 @@ if (isset($_POST['shopId'])
                 </form>
                 <?php
             }
-            //Si l'objet n'est pas disponible
+            //Si l'article n'est pas disponible
             else
             {
-                echo "Erreur: Objet indisponible";
+                echo "Erreur: Article indisponible";
             }
             $itemQuery->closeCursor();
         }
