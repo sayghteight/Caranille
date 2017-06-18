@@ -12,8 +12,8 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
         <label for="equipmentList" class="col-2 col-form-label">Liste des joueurs</label>
         <select class="form-control" id="adminAccountId" name="adminAccountId">
         <?php
-        //on récupère les valeurs de chaque joueurs qu'on va ensuite mettre dans le menu déroulant
-        //On fait une recherche dans la base de donnée de tous les comptes
+        //on récupère les valeurs de chaque compte et personnage qu'on va ensuite mettre dans le menu déroulant
+        //On fait une recherche dans la base de donnée de tous les comptes et personnage
         $accountQuery = $bdd->query("SELECT * FROM car_accounts, car_characters
         WHERE accountId = characterAccountId
         ORDER by characterName");
@@ -30,7 +30,7 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
         ?>
         </select>
     </div>
-    <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer le compte">
+    <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer">
 </form>
 
 <?php require_once("../html/footer.php");

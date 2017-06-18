@@ -6,14 +6,14 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//Si l'utilisateur à cliqué sur le bouton finalDelete
+//Si l'utilisateur à confirmé vouloir supprimer le compte
 if (isset($_POST['finalDelete']))
 {
-    //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
+    //On vérifie si l'id du compte récupéré dans le formulaire est en entier positif
     if (ctype_digit($_POST['adminAccountId'])
     && $_POST['adminAccountId'] >= 1)
     {
-        //On récupère l'Id du formulaire précédent
+        //On récupère l'id du compte
         $adminAccountId = htmlspecialchars(addslashes($_POST['adminAccountId']));
 
         //On fait une requête pour vérifier si le compte choisit existe
@@ -23,7 +23,7 @@ if (isset($_POST['finalDelete']))
         $account = $accountQuery->rowCount();
         $accountQuery->closeCursor();
 
-        //Si le compte est disponible
+        //Si le compte existe
         if ($account == 1) 
         {
             $adminAccountId = htmlspecialchars(addslashes($_POST['adminAccountId']));
@@ -50,16 +50,17 @@ if (isset($_POST['finalDelete']))
                 </form>
             <?php
         }
-        //Si le compte n'est pas disponible
+        //Si le compte n'existe pas
         else
         {
-            echo "Erreur: Compte indisponible";
+            echo "Erreur: Ce compte n'existe pas";
         }
+        $accountQuery->closeCursor();
     }
     //Si le compte choisit n'est pas un nombre
     else
     {
-        echo "Erreur: Compte invalide";
+        echo "Erreur: Le compte choisit est incorrect";
     }
 }
 //Si l'utilisateur n'a pas cliqué sur le bouton finalDelete

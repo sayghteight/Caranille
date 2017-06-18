@@ -6,14 +6,15 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//Si l'utilisateur à cliqué sur le bouton manage
-if (isset($_POST['manage']))
+//Si l'utilisateur a choisit un compte
+if (isset($_POST['adminAccountId'])
+&& isset($_POST['manage']))
 {
-    //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
+    //On vérifie si l'id du compte récupéré dans le formulaire est en entier positif
     if (ctype_digit($_POST['adminAccountId'])
     && $_POST['adminAccountId'] >= 1)
     {
-        //On récupère l'Id du formulaire précédent
+        //On récupère l'id du compte
         $adminAccountId = htmlspecialchars(addslashes($_POST['adminAccountId']));
 
         //On fait une requête pour vérifier si le compte choisit existe
@@ -26,28 +27,24 @@ if (isset($_POST['manage']))
         //Si le compte est disponible
         if ($account == 1) 
         {
-            //On fait une recherche dans la base de donnée de tous les comptes
-            $accountQuery = $bdd->prepare("SELECT * FROM car_accounts
-            WHERE accountId = ?");
-            $accountQuery->execute([$adminAccountId]);
+            //On Récupère le pseudo du compte
             while ($account = $accountQuery->fetch())
             {
                 $adminAccountPseudo = stripslashes($account['accountPseudo']);
             }
-            $accountQuery->closeCursor();
 
             ?>
-            Que souhaitez-vous faire du joueur <em><?php echo $adminAccountPseudo ?></em><br />
+            Que souhaitez-vous faire du compte <em><?php echo $adminAccountPseudo ?></em><br />
 
             <hr>
                 
             <form method="POST" action="editAccount.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminAccountId" value="<?= $adminAccountId ?>">
-                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier le compte">
+                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier">
             </form>
             <form method="POST" action="deleteAccount.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminAccountId" value="<?= $adminAccountId ?>">
-                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer le compte">
+                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer">
             </form>
 
             <hr>
@@ -57,16 +54,17 @@ if (isset($_POST['manage']))
             </form>
             <?php
         }
-        //Si le compte n'est pas disponible
+        //Si le compte n'existe pas
         else
         {
-            echo "Erreur: Compte indisponible";
+            echo "Erreur: Ce compte n'existe pas";
         }
+        $accountQuery->closeCursor();
     }
     //Si le compte choisit n'est pas un nombre
     else
     {
-        echo "Erreur: Compte invalide";
+        echo "Erreur: Le compte choisit est incorrect";
     }
 }
 //Si l'utilisateur n'a pas cliqué sur le bouton manage
