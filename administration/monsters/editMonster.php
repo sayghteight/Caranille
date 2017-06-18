@@ -14,7 +14,7 @@ if (isset($_POST['adminMonsterId'])
     if (ctype_digit($_POST['adminMonsterId'])
     && $_POST['adminMonsterId'] >= 1)
     {
-        //On récupère l'Id du formulaire précédent
+        //On récupère l'id du formulaire précédent
         $adminMonsterId = htmlspecialchars(addslashes($_POST['adminMonsterId']));
 
         //On fait une requête pour vérifier si le monstre choisit existe

@@ -16,17 +16,10 @@ if (isset($_POST['battleMonsterId']))
     if (ctype_digit($_POST['battleMonsterId'])
     && $_POST['battleMonsterId'] >= 1)
     {
-        //On récupère l'Id du monstre
+        //On récupère l'id du monstre
         $monsterId = htmlspecialchars(addslashes($_POST['battleMonsterId']));
 
         //On fait une requête pour vérifier si le monstre est bien disponible dans la ville du joueur
-        /*
-        SELECT * FROM car_monsters, car_towns, car_towns_monsters //On prend les trois tables car_monsters, car_towns, car_towns_monsters afin de les lier
-        WHERE townMonsterId = monsterId //On fait une liaison entre la table car_towns_monsters et car_monsters avec l'Id du monstre
-        AND townTownId = townId //On fait une liaison entre la table car_towns_monsters et car_towns avec l'Id de la ville
-        AND monsterId = ? //On ajoute l'Id du monstre obtenu par le formulaire
-        AND townId = ? //On ajoute l'Id de la ville dans laquel on est
-        */
         $monsterQuery = $bdd->prepare("SELECT * FROM car_monsters, car_towns, car_towns_monsters
         WHERE townMonsterMonsterId = monsterId
         AND townMonsterTownId = townId

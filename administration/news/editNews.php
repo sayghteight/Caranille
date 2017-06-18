@@ -14,7 +14,7 @@ if (isset($_POST['adminNewsId'])
     if (ctype_digit($_POST['adminNewsId'])
     && $_POST['adminNewsId'] >= 1)
     {
-        //On récupère l'Id du formulaire précédent
+        //On récupère l'id du formulaire précédent
         $adminNewsId = htmlspecialchars(addslashes($_POST['adminNewsId']));
 
         //On fait une requête pour vérifier si la news choisie existe

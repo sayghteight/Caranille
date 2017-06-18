@@ -14,7 +14,7 @@ if (isset($_POST['adminTownShopTownId'])
     if (ctype_digit($_POST['adminTownShopTownId'])
     && $_POST['adminTownShopTownId'] >= 1)
     {
-        //On récupère l'Id du formulaire précédent
+        //On récupère l'id du formulaire précédent
         $adminTownShopTownId = htmlspecialchars(addslashes($_POST['adminTownShopTownId']));
 
         //On fait une requête pour vérifier si la ville choisit existe

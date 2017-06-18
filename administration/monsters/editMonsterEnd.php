@@ -50,7 +50,7 @@ if (isset($_POST['adminMonsterId'])
     && $_POST['adminMonsterGold'] >= 0
     && $_POST['adminMonsterExperience'] > 0)
     {
-        //On récupère l'Id du formulaire précédent
+        //On récupère l'id du formulaire précédent
         $adminMonsterId = htmlspecialchars(addslashes($_POST['adminMonsterId']));
 
         //On fait une requête pour vérifier si le monstre choisit existe

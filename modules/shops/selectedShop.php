@@ -16,7 +16,7 @@ if (isset($_POST['shopId']))
     if (ctype_digit($_POST['shopId'])
     && $_POST['shopId'] >= 1)
     {
-        //On récupère l'Id du magasin
+        //On récupère l'id du magasin
         $shopId = htmlspecialchars(addslashes($_POST['shopId']));
 
         //On fait une requête pour vérifier si le magasin est bien disponible dans la ville du joueur

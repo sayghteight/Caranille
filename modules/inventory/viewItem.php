@@ -16,14 +16,8 @@ if (isset($_POST['itemId'])
     && $_POST['itemId'] >= 1)
     {
         $itemId = htmlspecialchars(addslashes($_POST['itemId']));
+        
         //On fait une requête pour avoir la liste des objets du personnage
-        /*
-        SELECT * FROM car_items, car_inventory //On fait une liaison entre la table car_items et car_inventory
-        WHERE itemId = inventoryItemItemId //On lie ses deux tables par l'Id de l'objet
-        AND itemType = 'Item' //Il faut que le type de l'objet soit un objet (Item)
-        AND inventoryItemCharacterId = ? //Ou le proprietaire et le personnage du joueur
-        ORDER BY itemType //Par ordre de type
-        */
         $itemQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
         WHERE itemId = inventoryItemId
         AND itemType = 'Item' 

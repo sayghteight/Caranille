@@ -19,7 +19,7 @@ if (isset($_POST['itemId'])
         //On fait une requête pour avoir la liste des équipements du personnage
         /*
         SELECT * FROM car_items, car_inventory //On fait une liaison entre la table car_items et car_inventory
-        WHERE itemId = inventoryItemItemId //On lie ses deux tables par l'Id de l'objet
+        WHERE itemId = inventoryItemItemId //On lie ses deux tables par l'id de l'objet
         AND (itemType = 'Armor' //Il faut que le type de l'objet soit soit une armure (Armor)
         OR itemType = 'Boots' //Soit des bottes (Boots)
         OR itemType = 'Gloves' //Soit des gants (Gloves)

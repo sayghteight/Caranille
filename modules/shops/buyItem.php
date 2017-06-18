@@ -18,7 +18,7 @@ if (isset($_POST['shopId'])
     && $_POST['shopId'] >= 1
     && $_POST['itemId'] >= 1)
     {
-        //On récupère l'Id de l'objet ou équipement
+        //On récupère l'id de l'objet ou équipement
         $shopId = htmlspecialchars(addslashes($_POST['shopId']));
         $itemId = htmlspecialchars(addslashes($_POST['itemId']));
 

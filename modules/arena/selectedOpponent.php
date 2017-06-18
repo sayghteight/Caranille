@@ -16,7 +16,7 @@ if (isset($_POST['opponentCharacterId']))
     if (ctype_digit($_POST['opponentCharacterId'])
     && $_POST['opponentCharacterId'] >= 1)
     {
-        //On récupère l'ID de la personne à défier
+        //On récupère l'id de la personne à défier
         $opponentCharacterId = htmlspecialchars(addslashes($_POST['opponentCharacterId']));
 
         //On fait une requête pour vérifier si le personnage est bien disponible dans la ville du joueur

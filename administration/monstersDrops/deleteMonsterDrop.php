@@ -17,7 +17,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
     && $_POST['adminMonsterDropMonsterId'] >= 1
     && $_POST['adminMonsterDropItemId'] >= 1)
     {
-        //On récupère l'Id du formulaire précédent
+        //On récupère l'id du formulaire précédent
         $adminMonsterDropMonsterId = htmlspecialchars(addslashes($_POST['adminMonsterDropMonsterId']));
         $adminMonsterDropItemId = htmlspecialchars(addslashes($_POST['adminMonsterDropItemId']));
 

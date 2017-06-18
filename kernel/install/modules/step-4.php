@@ -98,7 +98,7 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
 
                         while ($accountId = $accountIdQuery->fetch())
                         {
-                            //On Stock l'Id du compte
+                            //On Stock l'id du compte
                             $id = $accountId['accountId'];
                         }
                         $accountIdQuery->closeCursor();

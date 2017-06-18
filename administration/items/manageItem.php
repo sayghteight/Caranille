@@ -14,7 +14,7 @@ if (isset($_POST['adminItemId'])
     if (ctype_digit($_POST['adminItemId'])
     && $_POST['adminItemId'] >= 1)
     {
-        //On récupère l'Id du formulaire précédent
+        //On récupère l'id du formulaire précédent
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
 
         //On fait une requête pour vérifier si l'objet choisit existe

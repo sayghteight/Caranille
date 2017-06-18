@@ -15,7 +15,7 @@ if (isset($_POST['itemId'])
     if (ctype_digit($_POST['itemId'])
     && $_POST['itemId'] >= 1)
     {
-        //On récupère l'Id de l'équipement
+        //On récupère l'id de l'équipement
         $itemId = htmlspecialchars(addslashes($_POST['itemId']));
 
         //On cherche à savoir si l'équipement que l'on va équipper appartient bien au joueur
@@ -51,7 +51,7 @@ if (isset($_POST['itemId'])
             {
                 while ($equipment = $equipmentQuery->fetch())
                 {
-                    //On récupère L'Id de l'inventaire dans lequel il est pour la futur requête
+                    //On récupère l'id de l'inventaire dans lequel il est pour la futur requête
                     $inventoryId = stripslashes($equipment['inventoryId']);
 
                     //On rend l'objet non équippé

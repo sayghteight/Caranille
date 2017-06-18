@@ -14,7 +14,7 @@ if (isset($_POST['adminShopItemShopId'])
     if (ctype_digit($_POST['adminShopItemShopId'])
     && $_POST['adminShopItemShopId'] >= 1)
     {
-        //On récupère l'Id du formulaire précédent
+        //On récupère l'id du formulaire précédent
         $adminShopItemShopId = htmlspecialchars(addslashes($_POST['adminShopItemShopId']));
 
         //On fait une requête pour vérifier si le magasin choisit existe
