@@ -9,7 +9,6 @@ if ($battleMonsterRow > 0) { exit(header("Location: ../../modules/battleMonster/
 ?>
 
 <?php echo $characterName; ?><br />
-Classe: <?php echo $characterRaceName; ?><br />
 
 <hr>
 

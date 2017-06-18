@@ -11,7 +11,6 @@ while ($character = $characterQuery->fetch())
 {
     $characterId = stripslashes($character['characterId']);
     $characterAccountId = stripslashes($character['characterAccountId']);
-    $characterRaceId = stripslashes($character['characterRaceId']);
     $characterName = stripslashes($character['characterName']);
     $characterLevel = stripslashes($character['characterLevel']);
     $characterSex = stripslashes($character['characterSex']);
@@ -70,36 +69,8 @@ while ($character = $characterQuery->fetch())
 }
 $characterQuery->closeCursor();
 
-//On fait une recherche dans la base de donnée pour récupérer la race du personnage
-$racerQuery = $bdd->prepare("SELECT * FROM car_races 
-WHERE raceId = ?");
-$racerQuery->execute([$characterRaceId]);
-
-//On fait une boucle sur les résultats
-while ($race = $racerQuery->fetch())
-{
-    $characterRaceName = stripslashes($race['raceName']);
-    $raceHpBonus = stripslashes($race['raceHpBonus']);
-    $raceMpBonus = stripslashes($race['raceMpBonus']);
-    $raceStrengthBonus = stripslashes($race['raceStrengthBonus']);
-    $raceMagicBonus = stripslashes($race['raceMagicBonus']);
-    $raceAgilityBonus = stripslashes($race['raceAgilityBonus']);
-    $raceDefenseBonus = stripslashes($race['raceDefenseBonus']);
-    $raceDefenseMagicBonus = stripslashes($race['raceDefenseMagicBonus']);
-    $raceWidsomBonus = stripslashes($race['raceWidsomBonus']);
-}
-$racerQuery->closeCursor();
-
 //Valeurs des statistiques qui seront ajoutée à la monté d'un niveau
 $levelBaseExperience = 500;
-$hPByLevel = $raceHpBonus;
-$mPByLevel = $raceMpBonus;
-$strengthByLevel = $raceStrengthBonus;
-$magicByLevel = $raceMagicBonus;
-$agilityByLevel = $raceAgilityBonus;
-$defenseByLevel = $raceDefenseBonus;
-$defenseMagicByLevel = $raceDefenseMagicBonus;
-$wisdomByLevel = $raceWidsomBonus;
 $skillPointsByLevel = 2;
 $experienceLevel = $characterLevel * $levelBaseExperience;
 $experienceRemaining = $characterLevel * $levelBaseExperience - $characterExperience;
@@ -107,24 +78,24 @@ $experienceRemaining = $characterLevel * $levelBaseExperience - $characterExperi
 //Si le personnage à suffisament d'experience pour monter de niveau
 if ($characterExperience >= $experienceLevel)
 {
-    $characterHpMin = $characterHpMin + $hPByLevel;
-    $characterHpMax = $characterHpMax + $hPByLevel;
-    $characterHpTotal = $characterHpTotal + $hPByLevel;
-    $characterMpMin = $characterMpMin + $mPByLevel;
-    $characterMpMax = $characterMpMax + $mPByLevel;
-    $characterMpTotal = $characterMpTotal + $mPByLevel;
-    $characterStrength = $characterStrength + $strengthByLevel;
-    $characterStrengthTotal = $characterStrengthTotal + $strengthByLevel;
-    $characterMagic = $characterMagic + $magicByLevel;
-    $characterMagicTotal = $characterMagicTotal + $magicByLevel;
-    $characterAgility = $characterAgility + $agilityByLevel;
-    $characterAgilityTotal = $characterAgilityTotal + $agilityByLevel;
-    $characterDefense = $characterDefense + $defenseByLevel;
-    $characterDefenseTotal = $characterDefenseTotal + $defenseByLevel;
-    $characterDefenseMagic = $characterDefenseMagic + $defenseMagicByLevel;
-    $characterDefenseMagicTotal = $characterDefenseMagicTotal + $defenseMagicByLevel;
-    $characterWisdom = $characterWisdom + $wisdomByLevel;
-    $characterWisdomTotal = $characterWisdomTotal + $wisdomByLevel;
+    $characterHpMin = $characterHpMin + 10;
+    $characterHpMax = $characterHpMax + 1;
+    $characterHpTotal = $characterHpTotal + 1;
+    $characterMpMin = $characterMpMin + 1;
+    $characterMpMax = $characterMpMax + 1;
+    $characterMpTotal = $characterMpTotal + 1;
+    $characterStrength = $characterStrength + 1;
+    $characterStrengthTotal = $characterStrengthTotal + 1;
+    $characterMagic = $characterMagic + 1;
+    $characterMagicTotal = $characterMagicTotal + 1;
+    $characterAgility = $characterAgility + 1;
+    $characterAgilityTotal = $characterAgilityTotal + 1;
+    $characterDefense = $characterDefense + 1;
+    $characterDefenseTotal = $characterDefenseTotal + 1;
+    $characterDefenseMagic = $characterDefenseMagic + 1;
+    $characterDefenseMagicTotal = $characterDefenseMagicTotal + 1;
+    $characterWisdom = $characterWisdom + 1;
+    $characterWisdomTotal = $characterWisdomTotal + 1;
     $characterExperience = $characterExperience - $experienceLevel;
     $characterSkillPoints = $characterSkillPoints + $skillPointsByLevel;
     $characterLevel = $characterLevel + 1;
