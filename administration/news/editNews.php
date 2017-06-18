@@ -18,31 +18,27 @@ if (isset($_POST['adminNewsId'])
         $adminNewsId = htmlspecialchars(addslashes($_POST['adminNewsId']));
 
         //On fait une requête pour vérifier si la news choisie existe
-        $itemQuery = $bdd->prepare('SELECT * FROM car_items 
-        WHERE itemId= ?');
-        $itemQuery->execute([$adminItemId]);
-        $itemRow = $itemQuery->rowCount();
+        $newsQuery = $bdd->prepare('SELECT * FROM car_news 
+        WHERE newsId= ?');
+        $newsQuery->execute([$adminNewsId]);
+        $newsRow = $newsQuery->rowCount();
 
-        //Si l'objet est disponible
-        if ($itemRow == 1) 
+        //Si la news est disponible
+        if ($newsRow == 1) 
         {
-            //On fait une boucle pour récupérer toutes les information
-            while ($item = $itemQuery->fetch())
+            //On fait une boucle pour récupérer toutes les informations
+            while ($news = $newsQuery->fetch())
             {
-                //On récupère les informations de l'objet
-                $adminItemId = stripslashes($item['itemId']);
-                $adminItemPicture = stripslashes($item['itemPicture']);
-                $adminItemName = stripslashes($item['itemName']);
-                $adminItemDescription = stripslashes($item['itemDescription']);
-                $adminItemHpEffects = stripslashes($item['itemHpEffect']);
-                $adminItemMpEffect = stripslashes($item['itemMpEffect']);
-                $adminItemPurchasePrice = stripslashes($item['itemPurchasePrice']);
-                $adminItemSalePrice = stripslashes($item['itemSalePrice']);
+                //On récupère les informations de la news
+                $adminNewsId = stripslashes($news['newsId']);
+                $adminNewsPicture = stripslashes($news['newsPicture']);
+                $adminNewsTitle = stripslashes($news['newsTitle']);
+                $adminNewsMessage = stripslashes($news['newsMessage']);
             }
             ?>
 
-            <p>Informations de l'équipement</p>
-            <form method="POST" action="editItemEnd.php">
+            <p>Informations de la news</p>
+            <form method="POST" action="editNewsEnd.php">
                 Image : <br> <input type="text" name="adminNewsPicture" class="form-control" placeholder="Image" value="<?php echo $adminNewsPicture ?>" required><br /><br />
                 Titre : <br> <input type="text" name="adminNewsTitle" class="form-control" placeholder="Titre" value="<?php echo $adminNewsTitle ?>"required><br /><br />
                 Message : <br> <textarea class="form-control" name="adminNewsMessage" id="adminNewsMessage" rows="3" required><?php echo $adminNewsMessage ?></textarea><br /><br />
@@ -61,7 +57,7 @@ if (isset($_POST['adminNewsId'])
         {
             echo "Erreur: News indisponible";
         }
-        $itemQuery->closeCursor();
+        $newsQuery->closeCursor();
     }
     //Si la news choisie n'est pas un nombre
     else

@@ -6,8 +6,8 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($battleArenaRow > 0) { exit(header("Location: ../../modules/battleArena/index.php")); }
 //Si il y a actuellement un combat contre un monstre on redirige le joueur vers le module battleMonster
 if ($battleMonsterRow > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
-//Si tous les champs ont bien été rempli
 
+//Si tous les champs ont bien été rempli
 if (isset($_POST['itemId'])
 && isset($_POST['viewItem']))
 {
@@ -15,12 +15,6 @@ if (isset($_POST['itemId'])
     if(ctype_digit($_POST['itemId'])
     && $_POST['itemId'] >= 1)
     {
-        ?>
-        Information complète de l'objet
-
-        <hr>
-
-        <?php
         $itemId = htmlspecialchars(addslashes($_POST['itemId']));
         //On fait une requête pour avoir la liste des objets du personnage
         /*
@@ -44,7 +38,6 @@ if (isset($_POST['itemId'])
             $itemType = stripslashes($item['itemType']);
             $itemName = stripslashes($item['itemName']);
             $itemDescription = stripslashes($item['itemDescription']);
-            $itemLevelRequired = stripslashes($item['itemLevelRequired']);
             $itemQuantity = stripslashes($item['inventoryQuantity']);
             $itemHpEffect = stripslashes($item['itemHpEffect']);
             $itemMpEffect = stripslashes($item['itemMpEffect']);
@@ -74,16 +67,6 @@ if (isset($_POST['itemId'])
                     
                     <td>
                         <?php echo nl2br($itemDescription); ?>
-                    </td>
-                </tr>
-                    
-                <tr>
-                    <td>
-                        Niveau requis
-                    </td>
-                    
-                    <td>
-                        <?php echo $itemLevelRequired; ?>
                     </td>
                 </tr>
                     
@@ -137,6 +120,12 @@ if (isset($_POST['itemId'])
                     </td>
                 </tr>
             </table>
+                        
+            <hr>
+
+            <form method="POST" action="index.php">
+                <input type="submit" class="btn btn-default form-control" value="Retour">
+            </form>
             <?php
         }
         $itemQuery->closeCursor();

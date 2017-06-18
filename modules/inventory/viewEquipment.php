@@ -15,13 +15,6 @@ if (isset($_POST['itemId'])
     if(ctype_digit($_POST['itemId'])
     && $_POST['itemId'] >= 1)
     {
-        ?>
-
-        Liste de vos équipements
-
-        <hr>
-
-        <?php
         $itemId = htmlspecialchars(addslashes($_POST['itemId']));
         //On fait une requête pour avoir la liste des équipements du personnage
         /*
@@ -155,6 +148,12 @@ if (isset($_POST['itemId'])
                     </td>
                 </tr>
             </table>
+            
+            <hr>
+
+            <form method="POST" action="equipment.php">
+                <input type="submit" class="btn btn-default form-control" value="Retour">
+            </form>
             <?php
         }
         $equipmentQuery->closeCursor();

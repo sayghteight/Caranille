@@ -7,45 +7,41 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //Si l'utilisateur à cliqué sur le bouton delete
-if (isset($_POST['adminItemId'])
+if (isset($_POST['adminNewsId'])
 && isset($_POST['delete']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
-    if (ctype_digit($_POST['adminItemId'])
-    && $_POST['adminItemId'] >= 1)
+    if (ctype_digit($_POST['adminNewsId'])
+    && $_POST['adminNewsId'] >= 1)
     {
         //On récupère l'Id du formulaire précédent
-        $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
+        $adminNewsId = htmlspecialchars(addslashes($_POST['adminNewsId']));
 
-        //On fait une requête pour vérifier si l'objet choisit existe
-        $itemQuery = $bdd->prepare('SELECT * FROM car_items 
-        WHERE itemId= ?');
-        $itemQuery->execute([$adminItemId]);
-        $itemRow = $itemQuery->rowCount();
+        //On fait une requête pour vérifier si la news choisie existe
+        $newsQuery = $bdd->prepare('SELECT * FROM car_news 
+        WHERE newsId= ?');
+        $newsQuery->execute([$adminNewsId]);
+        $newsRow = $newsQuery->rowCount();
 
-        //Si l'objet est disponible
-        if ($itemRow == 1) 
+        //Si la news est disponible
+        if ($newsRow == 1) 
         {
-            //On fait une recherche dans la base de donnée de tous les comptes
-            $itemQuery = $bdd->prepare("SELECT * FROM car_items
-            WHERE itemId = ?");
-            $itemQuery->execute([$adminItemId]);
-            while ($item = $itemQuery->fetch())
+            //On récupère l'information de la news
+            while ($news = $newsQuery->fetch())
             {
-                $adminItemName = stripslashes($item['itemName']);
+                $adminNewstitle = stripslashes($news['newsTitle']);
             }
-            $itemQuery->closeCursor();
 
             ?>
             <p>ATTENTION</p> 
-            Vous êtes sur le point de supprimer l'équippement <em><?php echo $adminItemName ?></em><br />
+            Vous êtes sur le point de supprimer la news <em><?php echo $adminNewstitle ?></em><br />
             confirmez-vous la suppression ?
 
             <hr>
                 
-            <form method="POST" action="deleteItemEnd.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?= $adminItemId ?>">
-                <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme la suppression">
+            <form method="POST" action="deleteNewsEnd.php">
+                <input type="hidden" class="btn btn-default form-control" name="adminNewsId" value="<?= $adminNewsId ?>">
+                <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme">
             </form>
     
             <hr>
@@ -55,12 +51,12 @@ if (isset($_POST['adminItemId'])
             </form>
             <?php
         }
-        //Si l'objet n'est pas disponible
+        //Si la news n'est pas disponible
         else
         {
-            echo "Erreur: Objet indisponible";
+            echo "Erreur: News indisponible";
         }
-        $itemQuery->closeCursor();
+        $newsQuery->closeCursor();
     }
     //Si l'objet choisit n'est pas un nombre
     else

@@ -14,8 +14,8 @@ if ($battleMonsterRow > 0) { exit(header("Location: ../../modules/battleMonster/
 <?php echo $townName; ?><br />
 <?php echo $townDescription; ?><br /><br />
 <a href="../../modules/dungeon/index.php">Donjon</a><br>
-<a href="../../modules/arena/index.php">L'arène</a><br>
-<a href="../../modules/inn/index.php">L'auberge</a><br>
+<a href="../../modules/arena/index.php">Arène</a><br>
+<a href="../../modules/inn/index.php">Auberge</a><br>
 <a href="../../modules/shops/index.php">Magasin(s)</a>
 
 <hr>

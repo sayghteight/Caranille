@@ -7,38 +7,33 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //Si l'utilisateur à cliqué sur le bouton finalDelete
-if (isset($_POST['adminItemId'])
+if (isset($_POST['adminNewsId'])
 && isset($_POST['finalDelete']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
-    if (ctype_digit($_POST['adminItemId'])
-    && $_POST['adminItemId'] >= 1)
+    if (ctype_digit($_POST['adminNewsId'])
+    && $_POST['adminNewsId'] >= 1)
     {
-        $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
+        //On récupère l'Id du formulaire précédent
+        $adminNewsId = htmlspecialchars(addslashes($_POST['adminNewsId']));
 
-        //On fait une requête pour vérifier si l'objet choisit existe
-        $itemQuery = $bdd->prepare('SELECT * FROM car_items 
-        WHERE itemId= ?');
-        $itemQuery->execute([$adminItemId]);
-        $itemRow = $itemQuery->rowCount();
+        //On fait une requête pour vérifier si la news choisie existe
+        $newsQuery = $bdd->prepare('SELECT * FROM car_news 
+        WHERE newsId= ?');
+        $newsQuery->execute([$adminNewsId]);
+        $newsRow = $newsQuery->rowCount();
 
-        //Si l'objet est disponible
-        if ($itemRow == 1) 
+        //Si la news est disponible
+        if ($newsRow == 1) 
         {
-            //On supprime l'objet de la base de donnée
-            $itemDeleteQuery = $bdd->prepare("DELETE FROM car_items
-            WHERE itemId = ?");
-            $itemDeleteQuery->execute([$adminItemId]);
-            $itemDeleteQuery->closeCursor();
-
-            //On supprime aussi l'objet de l'inventaire dans la base de donnée
-            $inventoryDeleteQuery = $bdd->prepare("DELETE FROM car_inventory
-            WHERE inventoryItemId = ?");
-            $inventoryDeleteQuery->execute([$adminItemId]);
-            $inventoryDeleteQuery->closeCursor();
+            //On supprime la news de la base de donnée
+            $newsDeleteQuery = $bdd->prepare("DELETE FROM car_news
+            WHERE newsId = ?");
+            $newsDeleteQuery->execute([$adminNewsId]);
+            $newsDeleteQuery->closeCursor();
             ?>
 
-            L'objet a bien été supprimé
+            La news a bien été supprimée
 
             <hr>
                 
@@ -47,17 +42,17 @@ if (isset($_POST['adminItemId'])
                 </form>
             <?php
         }
-        //Si l'objet n'est pas disponible
+        //Si la news n'est pas disponible
         else
         {
-            echo "Erreur: Objet indisponible";
+            echo "Erreur: News indisponible";
         }
-        $itemQuery->closeCursor();
+        $newsQuery->closeCursor();
     }
-    //Si l'objet choisit n'est pas un nombre
+    //Si la news choisit n'est pas un nombre
     else
     {
-        echo "Erreur: Objet invalide";
+        echo "Erreur: News invalide";
     }
 }
 //Si l'utilisateur n'a pas cliqué sur le bouton finalDelete
