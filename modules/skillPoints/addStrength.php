@@ -43,9 +43,10 @@ if (isset($_POST['addStrength']))
             <input type="submit" class="btn btn-default form-control" value="Retour">
         </form>
         <?php
+    }
 }
 //Si toutes les variables $_POST n'existent pas
-else 
+else
 {
     echo "Tous les champs n'ont pas été rempli";
 }
