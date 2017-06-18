@@ -22,7 +22,6 @@ if (isset($_POST['adminAccountId'])
         WHERE accountId= ?');
         $accountQuery->execute([$adminAccountId]);
         $account = $accountQuery->rowCount();
-        $accountQuery->closeCursor();
 
         //Si le compte existe
         if ($account == 1) 
