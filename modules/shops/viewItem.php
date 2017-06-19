@@ -43,7 +43,9 @@ if (isset($_POST['shopId'])
                 //On récupère les informations de l'objet
                 while ($item = $itemQuery->fetch())
                 {
+                    $itemRaceId = stripslashes($item['itemRaceId']);
                     $itemType = stripslashes($item['itemType']);
+                    $itemLevel = stripslashes($item['itemLevel']);
                     $itemLevelRequired = stripslashes($item['itemLevelRequired']);
                     $itemName = stripslashes($item['itemName']);
                     $itemDescription = stripslashes($item['itemDescription']);
@@ -58,6 +60,17 @@ if (isset($_POST['shopId'])
                     $itemSalePrice = stripslashes($item['itemSalePrice']);
                     $itemPurchasePrice = stripslashes($item['itemPurchasePrice']);
                 }
+
+                //On récupère la classe de l'équipement
+                $raceQuery = $bdd->prepare("SELECT * FROM car_races
+                WHERE raceId = ?");
+                $raceQuery->execute([$itemRaceId]);
+                while ($race = $raceQuery->fetch())
+                {
+                    //On récupère le nom de la classe
+                    $itemRaceName = stripslashes($race['raceName']);
+                }
+                $raceQuery->closeCursor();
                 
                 //On fait une requête pour récupérer les informations de l'objet du magasin
                 $shopItemQuery = $bdd->prepare('SELECT * FROM car_shops_items
@@ -75,17 +88,31 @@ if (isset($_POST['shopId'])
                 $discount = $itemPurchasePrice * $itemDiscount / 100;
                 $itemPurchasePrice = $itemPurchasePrice - $discount; 
                 ?>
-
                 <table class="table">
-                    <tr>
+                    <?php
+                    //Si il s'agit d'un équipement on affiche la race de celui-ci ainsi que son niveu requis
+                    if ($itemType != "Item")
+                    {
+                        ?>
                         <td>
-                            Niveau requis
+                            Classe
                         </td>
                         
                         <td>
-                            <?php echo $itemLevelRequired; ?>
+                            <?php echo $itemRaceName; ?>
                         </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                Niveau requis
+                            </td>
+                            
+                            <td>
+                                <?php echo $itemLevelRequired; ?>
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
                     <tr>
                         <td>
                             Nom
@@ -113,16 +140,8 @@ if (isset($_POST['shopId'])
                         
                         <td>
                             <?php
-                            //Si il s'agit d'un objet on affiche que les stats HP et MP qui sont concernée
-                            if ($itemType == "Item")
-                            {
-                                ?>
-                                <?php echo '+' .$itemHpEffect. ' HP'; ?><br />
-                                <?php echo '+' .$itemMpEffect. ' MP'; ?><br />
-                                <?php
-                            }
-                            //Si il s'agit d'une équipement on affiche toutes les stats concernée
-                            else
+                            //Si il s'agit d'un équipement on affiche toutes les stats concernée
+                            if ($itemType != "Item")
                             {
                                 ?>
                                 <?php echo '+' .$itemHpEffect. ' HP'; ?><br />
@@ -133,6 +152,15 @@ if (isset($_POST['shopId'])
                                 <?php echo '+' .$itemDefenseEffect. ' Défense'; ?><br />
                                 <?php echo '+' .$itemDefenseMagicEffect. ' Défense magique'; ?><br />
                                 <?php echo '+' .$itemWisdomEffect. ' Sagesse'; ?>
+                                
+                                <?php
+                            }
+                            //Si il s'agit d'un objet on affiche que les stats HP et MP qui sont concernée
+                            else
+                            {
+                                ?>
+                                <?php echo '+' .$itemHpEffect. ' HP'; ?><br />
+                                <?php echo '+' .$itemMpEffect. ' MP'; ?><br />
                                 <?php
                             }
                             ?>                            
