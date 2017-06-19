@@ -104,14 +104,24 @@ if (isset($_POST['shopId'])
                         ?>
                         <tr>
                             <td>
-                                Classe
+                                Classe requise
                             </td>
                         
                             <td>
                                 <?php echo $itemRaceName; ?>
                             </td>
                         </tr>
-                        
+
+                        <tr>
+                            <td>
+                                Niveau de l'objet
+                            </td>
+
+                            <td>
+                                <?php echo $itemLevel; ?>
+                            </td>
+                        </tr>
+
                         <tr>
                             <td>
                                 Niveau requis

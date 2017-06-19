@@ -83,11 +83,21 @@ if (isset($_POST['itemId'])
             <table class="table">
                 <tr>
                     <td>
-                        Classe
+                        Classe requise
                     </td>
                 
                     <td>
-                        <?php echo $itemRaceName; ?>
+                        <?php echo $equipmentLevel; ?>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Niveau de l'objet
+                    </td>
+                    
+                    <td>
+                        <?php echo $equipmentLevel; ?>
                     </td>
                 </tr>
                 
@@ -97,7 +107,7 @@ if (isset($_POST['itemId'])
                     </td>
                     
                     <td>
-                        <?php echo $itemLevelRequired; ?>
+                        <?php echo $equipmentRequired; ?>
                     </td>
                 </tr>
                 
