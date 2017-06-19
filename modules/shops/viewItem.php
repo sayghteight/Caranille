@@ -61,16 +61,24 @@ if (isset($_POST['shopId'])
                     $itemPurchasePrice = stripslashes($item['itemPurchasePrice']);
                 }
 
-                //On récupère la classe de l'équipement
-                $raceQuery = $bdd->prepare("SELECT * FROM car_races
-                WHERE raceId = ?");
-                $raceQuery->execute([$itemRaceId]);
-                while ($race = $raceQuery->fetch())
+                //Si la race de l'équipement est supérieur à 1 c'est qu'il est attitré à une classe
+                if ($itemRaceId >= 1)
                 {
-                    //On récupère le nom de la classe
-                    $itemRaceName = stripslashes($race['raceName']);
+                    //On récupère la classe de l'équipement
+                    $raceQuery = $bdd->prepare("SELECT * FROM car_races
+                    WHERE raceId = ?");
+                    $raceQuery->execute([$itemRaceId]);
+                    while ($race = $raceQuery->fetch())
+                    {
+                        //On récupère le nom de la classe
+                        $itemRaceName = stripslashes($race['raceName']);
+                    }
+                    $raceQuery->closeCursor();
                 }
-                $raceQuery->closeCursor();
+                else
+                {
+                    $itemRaceName = "Toutes les classes";
+                }
                 
                 //On fait une requête pour récupérer les informations de l'objet du magasin
                 $shopItemQuery = $bdd->prepare('SELECT * FROM car_shops_items
