@@ -167,6 +167,7 @@ CREATE TABLE IF NOT EXISTS `car_inventory`
 
 CREATE TABLE IF NOT EXISTS `car_items` (
   `itemId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `itemRaceId` int(11) NOT NULL,
   `itemPicture` text NOT NULL,
   `itemType` varchar(30) NOT NULL,
   `itemLevelRequired` int(11) NOT NULL,
@@ -218,6 +219,22 @@ CREATE TABLE IF NOT EXISTS `car_news`
   `newsMessage` text NOT NULL,
   `newsAccountPseudo` varchar(15) NOT NULL,
   `newsDate` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `car_races` 
+(
+  `raceId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `racePicture` varchar(50) NOT NULL,
+  `raceName` varchar(30) NOT NULL,
+  `raceDescription` text NOT NULL,
+  `raceHpBonus` int(11) NOT NULL,
+  `raceMpBonus` int(11) NOT NULL,
+  `raceStrengthBonus` int(11) NOT NULL,
+  `raceMagicBonus` int(11) NOT NULL,
+  `raceAgilityBonus` int(11) NOT NULL,
+  `raceDefenseBonus` int(11) NOT NULL,
+  `raceDefenseMagicBonus` int(11) NOT NULL,
+  `raceWidsomBonus` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `car_shops` 
@@ -279,6 +296,10 @@ INSERT INTO `car_monsters` (`monsterId`, `monsterPicture`, `monsterName`, `monst
 
 INSERT INTO `car_news` (`newsId`, `newsPicture`, `newsTitle`, `newsMessage`, `newsAccountPseudo`, `newsDate`) VALUES
 (1, 'http://localhost/news.png', 'Installation de Caranille', 'Félicitation Caranille est bien installé vous pouvez maintenant vous connecter avec vos identifiants \r\n\r\nBon RPG Making', 'admin', '2017-05-18');
+
+INSERT INTO `car_races` (`raceId`, `racePicture`, `raceName`, `raceDescription`, `raceHpBonus`, `raceMpBonus`, `raceStrengthBonus`, `raceMagicBonus`, `raceAgilityBonus`, `raceDefenseBonus`, `raceDefenseMagicBonus`, `raceWidsomBonus`) VALUES
+(1, 'http://localhost/race.png', 'Guerrier', 'Classe de personnage axé sur la force et les HP', 11, 1, 2, 1, 1, 1, 1, 0),
+(2, 'http://localhost/race.png', 'Mage', 'Classe de personnage axé sur la magie et les MP', 10, 2, 1, 2, 1, 1, 1, 0);
 
 INSERT INTO `car_towns` (`townId`, `townPicture`, `townName`, `townDescription`, `townPriceInn`, `townChapter`) VALUES
 (1, 'http://localhost/town.png', 'Indicia', 'Petite ville côtière qui vie exclusivement du commerce de la pêche.', 10, 1),

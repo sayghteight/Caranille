@@ -14,19 +14,22 @@ if (isset($_POST['adminItemId'])
     if (ctype_digit($_POST['adminItemId'])
     && $_POST['adminItemId'] >= 1)
     {
-        //On récupère l'id de l'équipement
+        //On récupère l'Id du formulaire précédent
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
 
-        //On fait une requête pour vérifier si l'équipement choisit existe
+        //On fait une requête pour vérifier si l'équippement choisit existe
         $itemQuery = $bdd->prepare('SELECT * FROM car_items 
         WHERE itemId= ?');
         $itemQuery->execute([$adminItemId]);
         $itemRow = $itemQuery->rowCount();
 
-        //Si l'équipement existe
+        //Si l'équippement est disponible
         if ($itemRow == 1) 
         {
-            //On récupère le nom de l'équipement
+            //On fait une recherche dans la base de donnée de tous les comptes
+            $itemQuery = $bdd->prepare("SELECT * FROM car_items
+            WHERE itemId = ?");
+            $itemQuery->execute([$adminItemId]);
             while ($item = $itemQuery->fetch())
             {
                 $adminItemName = stripslashes($item['itemName']);
@@ -35,7 +38,7 @@ if (isset($_POST['adminItemId'])
 
             ?>
             <p>ATTENTION</p> 
-            Vous êtes sur le point de supprimer l'équipement <em><?php echo $adminItemName ?></em><br />
+            Vous êtes sur le point de supprimer l'équippement <em><?php echo $adminItemName ?></em><br />
             confirmez-vous la suppression ?
 
             <hr>
@@ -52,17 +55,17 @@ if (isset($_POST['adminItemId'])
             </form>
             <?php
         }
-        //Si l'équipement n'existe pas
+        //Si l'équipement n'est pas disponible
         else
         {
-            echo "Erreur: cet équipement n'existe pas";
+            echo "Erreur: Equippement indisponible";
         }
         $itemQuery->closeCursor();
     }
-    //Si l'équipement choisit n'est pas un nombre
+    //Si l'équippement choisit n'est pas un nombre
     else
     {
-        echo "Erreur: équipement invalide";
+        echo "Erreur: Equippement invalide";
     }
 }
 //Si toutes les variables $_POST n'existent pas

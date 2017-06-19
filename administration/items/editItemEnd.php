@@ -6,10 +6,9 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//Si les variables $_POST suivantes existent
+//Si l'utilisateur à cliqué sur le bouton finalEdit
 if (isset($_POST['adminItemId'])
 && isset($_POST['adminItemPicture'])
-&& isset($_POST['adminItemLevelRequired'])
 && isset($_POST['adminItemName'])
 && isset($_POST['adminItemDescription'])
 && isset($_POST['adminItemHpEffects'])
@@ -20,13 +19,11 @@ if (isset($_POST['adminItemId'])
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
     if (ctype_digit($_POST['adminItemId'])
-    && ctype_digit($_POST['adminItemLevelRequired'])
     && ctype_digit($_POST['adminItemHpEffects'])
     && ctype_digit($_POST['adminItemMpEffect'])
     && ctype_digit($_POST['adminItemPurchasePrice'])
     && ctype_digit($_POST['adminItemSalePrice'])
     && $_POST['adminItemId'] >= 1
-    && $_POST['adminItemLevelRequired'] >= 1
     && $_POST['adminItemHpEffects'] >= 0
     && $_POST['adminItemMpEffect'] >= 0
     && $_POST['adminItemPurchasePrice'] >= 0
@@ -35,7 +32,6 @@ if (isset($_POST['adminItemId'])
         //On récupère les informations du formulaire
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
         $adminItemPicture = htmlspecialchars(addslashes($_POST['adminItemPicture']));
-        $adminItemLevelRequired = htmlspecialchars(addslashes($_POST['adminItemLevelRequired']));
         $adminItemName = htmlspecialchars(addslashes($_POST['adminItemName']));
         $adminItemDescription = htmlspecialchars(addslashes($_POST['adminItemDescription']));
         $adminItemHpEffects = htmlspecialchars(addslashes($_POST['adminItemHpEffects']));
@@ -55,7 +51,6 @@ if (isset($_POST['adminItemId'])
             //On met à jour l'objet dans la base de donnée
             $updateItems = $bdd->prepare('UPDATE car_items 
             SET itemPicture = :adminItemPicture,
-            itemLevelRequired = :adminItemLevelRequired,
             itemName = :adminItemName,
             itemDescription = :adminItemDescription,
             itemHpEffect = :adminItemHpEffects,
@@ -66,7 +61,6 @@ if (isset($_POST['adminItemId'])
 
             $updateItems->execute([
             'adminItemPicture' => $adminItemPicture,
-            'adminItemLevelRequired' => $adminItemLevelRequired,
             'adminItemName' => $adminItemName,
             'adminItemDescription' => $adminItemDescription,
             'adminItemHpEffects' => $adminItemHpEffects,
@@ -99,7 +93,7 @@ if (isset($_POST['adminItemId'])
         echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
-//Si toutes les variables $_POST n'existent pas
+//Si tous les champs n'ont pas été rempli
 else
 {
     echo "Erreur: Tous les champs n'ont pas été rempli";

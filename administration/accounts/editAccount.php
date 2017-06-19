@@ -45,6 +45,7 @@ if (isset($_POST['adminAccountId'])
                 //On récupère les informations du personnage
                 $adminCharacterId = stripslashes($character['characterId']);
                 $adminCharacterAccountId = stripslashes($character['characterAccountId']);
+                $adminCharacterRaceId = stripslashes($character['characterRaceId']);
                 $adminCharacterName = stripslashes($character['characterName']);
                 $adminCharacterLevel = stripslashes($character['characterLevel']);
                 $adminCharacterSex = stripslashes($character['characterSex']);
@@ -102,6 +103,17 @@ if (isset($_POST['adminAccountId'])
                 $adminCharacterEnable = stripslashes($character['characterEnable']);
             }
             $characterQuery->closeCursor();
+
+            //On récupère la classe du personnage pour l'afficher dans le menu d'information du personnage
+            $raceQuery = $bdd->prepare("SELECT * FROM car_races
+            WHERE raceId = ?");
+            $raceQuery->execute([$adminCharacterRaceId]);
+            while ($race = $raceQuery->fetch())
+            {
+                //On récupère le nom de la classe
+                $adminRaceName = stripslashes($race['raceName']);
+            }
+            $raceQuery->closeCursor();
 
             //Si adminCharacterTownId à un Id supérieur à zéro c'est que le joueur est dans une ville
             if ($adminCharacterTownId > 0)
@@ -283,6 +295,7 @@ if (isset($_POST['adminAccountId'])
             <hr>
 
             <p>Informations du personnage (Non modifiable)</p>
+            Race : <?php echo $adminRaceName; ?><br />
             Nom du personnage : <?php echo $adminCharacterName; ?><br />
             Niveau du personnage : <?php echo $adminCharacterLevel; ?><br />
             Armure: <?php echo $adminEquipmentArmorName; ?><br />

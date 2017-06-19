@@ -14,7 +14,7 @@ if (isset($_POST['adminItemId'])
     if (ctype_digit($_POST['adminItemId'])
     && $_POST['adminItemId'] >= 1)
     {
-        //On récupère l'id du formulaire précédent
+        //On récupère l'Id du formulaire précédent
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
 
         //On fait une requête pour vérifier si l'équippement choisit existe
@@ -60,14 +60,14 @@ if (isset($_POST['adminItemId'])
         //Si l'équipement n'est pas disponible
         else
         {
-            echo "Erreur: équipements indisponible";
+            echo "Erreur: Equippement indisponible";
         }
         $itemQuery->closeCursor();
     }
     //Si l'équippement choisit n'est pas un nombre
     else
     {
-        echo "Erreur: équipements invalide";
+        echo "Erreur: Equippement invalide";
     }
 }
 //Si toutes les variables $_POST n'existent pas

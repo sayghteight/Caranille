@@ -7,8 +7,9 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //Si les variables $_POST suivantes existent
-if (isset($_POST['adminItemPicture'])
-&& isset($_POST['adminItemType'])
+if (isset($_POST['adminItemRaceId'])
+&& isset($_POST['adminItemPicture'])
+&& isset($_POST['adminItemLevel'])
 && isset($_POST['adminItemLevelRequired'])
 && isset($_POST['adminItemName'])
 && isset($_POST['adminItemDescription'])
@@ -25,7 +26,9 @@ if (isset($_POST['adminItemPicture'])
 && isset($_POST['finalAdd']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
-    if (ctype_digit($_POST['adminItemLevelRequired'])
+    if (ctype_digit($_POST['adminItemRaceId'])
+    && ctype_digit($_POST['adminItemLevel'])
+    && ctype_digit($_POST['adminItemLevelRequired'])
     && ctype_digit($_POST['adminItemHpEffects'])
     && ctype_digit($_POST['adminItemMpEffect'])
     && ctype_digit($_POST['adminItemStrengthEffect'])
@@ -36,7 +39,9 @@ if (isset($_POST['adminItemPicture'])
     && ctype_digit($_POST['adminItemWisdomEffect'])
     && ctype_digit($_POST['adminItemPurchasePrice'])
     && ctype_digit($_POST['adminItemSalePrice'])
-    && $_POST['adminItemLevelRequired'] >= 1
+    && $_POST['adminItemRaceId'] >= 0
+    && $_POST['adminItemLevel'] >= 0
+    && $_POST['adminItemLevelRequired'] >= 0
     && $_POST['adminItemHpEffects'] >= 0
     && $_POST['adminItemMpEffect'] >= 0
     && $_POST['adminItemStrengthEffect'] >= 0
@@ -49,8 +54,10 @@ if (isset($_POST['adminItemPicture'])
     && $_POST['adminItemSalePrice'] >= 0)
     {
         //On récupère les informations du formulaire
+        $adminItemRaceId = htmlspecialchars(addslashes($_POST['adminItemRaceId']));
         $adminItemPicture = htmlspecialchars(addslashes($_POST['adminItemPicture']));
         $adminItemType = htmlspecialchars(addslashes($_POST['adminItemType']));
+        $adminItemLevel = htmlspecialchars(addslashes($_POST['adminItemLevel']));
         $adminItemLevelRequired = htmlspecialchars(addslashes($_POST['adminItemLevelRequired']));
         $adminItemName = htmlspecialchars(addslashes($_POST['adminItemName']));
         $adminItemDescription = htmlspecialchars(addslashes($_POST['adminItemDescription']));
@@ -65,11 +72,13 @@ if (isset($_POST['adminItemPicture'])
         $adminItemPurchasePrice = htmlspecialchars(addslashes($_POST['adminItemPurchasePrice']));
         $adminItemSalePrice = htmlspecialchars(addslashes($_POST['adminItemSalePrice']));
 
-        //On met à jour l'équipement dans la base de donnée
+        //On met à jour l'équippement dans la base de donnée
         $addItem = $bdd->prepare("INSERT INTO car_items VALUES(
         '',
+        :adminItemRaceId,
         :adminItemPicture,
         :adminItemType,
+        :adminItemLevel,
         :adminItemLevelRequired,
         :adminItemName,
         :adminItemDescription,
@@ -85,8 +94,10 @@ if (isset($_POST['adminItemPicture'])
         :adminItemSalePrice)");
 
         $addItem->execute([
+        'adminItemRaceId' => $adminItemRaceId,
         'adminItemPicture' => $adminItemPicture,
         'adminItemType' => $adminItemType,
+        'adminItemLevel' => $adminItemLevel,
         'adminItemLevelRequired' => $adminItemLevelRequired,
         'adminItemName' => $adminItemName,
         'adminItemDescription' => $adminItemDescription,
@@ -103,7 +114,7 @@ if (isset($_POST['adminItemPicture'])
         $addItem->closeCursor();
         ?>
 
-        L'équipement a bien été crée
+        L'équippement a bien été crée
 
         <hr>
             

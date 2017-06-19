@@ -6,7 +6,7 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//Si les variables $_POST suivantes existent
+//Si l'utilisateur à choisit un id de l'objet
 if (isset($_POST['adminItemId'])
 && isset($_POST['edit']))
 {
@@ -14,7 +14,7 @@ if (isset($_POST['adminItemId'])
     if (ctype_digit($_POST['adminItemId'])
     && $_POST['adminItemId'] >= 1)
     {
-        //On récupère l'id du formulaire précédent
+        //On récupère l'Id du formulaire précédent
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
 
         //On fait une requête pour vérifier si l'objet choisit existe
@@ -32,7 +32,6 @@ if (isset($_POST['adminItemId'])
                 //On récupère les informations de l'objet
                 $adminItemId = stripslashes($item['itemId']);
                 $adminItemPicture = stripslashes($item['itemPicture']);
-                $adminItemLevelRequired = stripslashes($item['itemLevelRequired']);
                 $adminItemName = stripslashes($item['itemName']);
                 $adminItemDescription = stripslashes($item['itemDescription']);
                 $adminItemHpEffects = stripslashes($item['itemHpEffect']);
@@ -42,10 +41,9 @@ if (isset($_POST['adminItemId'])
             }
             ?>
 
-            <p>Informations de l'objet</p>
+            <p>Informations de l'équipement</p>
             <form method="POST" action="editItemEnd.php">
                 Image : <br> <input type="mail" name="adminItemPicture" class="form-control" placeholder="Image" value="<?php echo $adminItemPicture; ?>" required><br /><br />
-                Niveau requis : <br> <input type="number" name="adminItemLevelRequired" class="form-control" placeholder="Niveau requis" value="<?php echo $adminItemLevelRequired; ?>" required><br /><br />
                 Nom : <br> <input type="text" name="adminItemName" class="form-control" placeholder="Nom" value="<?php echo $adminItemName; ?>" required><br /><br />
                 Description : <br> <textarea class="form-control" name="adminItemDescription" id="adminItemDescription" rows="3" required><?php echo $adminItemDescription; ?></textarea><br /><br />
                 HP Bonus : <br> <input type="mail" name="adminItemHpEffects" class="form-control" placeholder="HP Bonus" value="<?php echo $adminItemHpEffects; ?>" required><br /><br />
@@ -75,7 +73,7 @@ if (isset($_POST['adminItemId'])
         echo "Erreur: Objet invalide";
     }
 }
-//Si toutes les variables $_POST n'existent pas
+//Si l'utilisateur n'a pas cliqué sur le bouton edit
 else
 {
     echo "Erreur: Aucun choix effectué";

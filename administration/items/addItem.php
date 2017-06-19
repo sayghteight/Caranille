@@ -6,14 +6,13 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//Si les variables $_POST suivantes existent
+//Si l'utilisateur à choisit un id de compte
 if (isset($_POST['add']))
 {
     ?>
     <p>Informations de l'objets</p>
     <form method="POST" action="addItemEnd.php">
         Image : <br> <input type="text" name="adminItemPicture" class="form-control" placeholder="Image" required><br /><br />
-        Niveau requis : <br> <input type="number" name="adminItemLevelRequired" class="form-control" placeholder="Niveau requis" required><br /><br />
         Nom : <br> <input type="text" name="adminItemName" class="form-control" placeholder="Nom" required><br /><br />
         Description : <br> <textarea class="form-control" name="adminItemDescription" id="adminItemDescription" rows="3" required></textarea><br /><br />
         HP Bonus : <br> <input type="number" name="adminItemHpEffects" class="form-control" placeholder="HP Bonus" required><br /><br />
@@ -30,7 +29,7 @@ if (isset($_POST['add']))
     </form>
     <?php
 }
-//Si toutes les variables $_POST n'existent pas
+//Si l'utilisateur n'a pas cliqué sur le bouton edit
 else
 {
     echo "Erreur: Aucun choix effectué";

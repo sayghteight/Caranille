@@ -6,7 +6,7 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//Si les variables $_POST suivantes existent
+//Si l'utilisateur à cliqué sur le bouton delete
 if (isset($_POST['adminItemId'])
 && isset($_POST['delete']))
 {
@@ -14,7 +14,7 @@ if (isset($_POST['adminItemId'])
     if (ctype_digit($_POST['adminItemId'])
     && $_POST['adminItemId'] >= 1)
     {
-        //On récupère l'id du formulaire précédent
+        //On récupère l'Id du formulaire précédent
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
 
         //On fait une requête pour vérifier si l'objet choisit existe
@@ -68,7 +68,7 @@ if (isset($_POST['adminItemId'])
         echo "Erreur: Objet invalide";
     }
 }
-//Si toutes les variables $_POST n'existent pas
+//Si l'utilisateur n'a pas cliqué sur le bouton delete
 else
 {
     echo "Erreur: Aucun choix effectué";
