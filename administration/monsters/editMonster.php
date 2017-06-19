@@ -23,7 +23,7 @@ if (isset($_POST['adminMonsterId'])
         $monsterQuery->execute([$adminMonsterId]);
         $monsterRow = $monsterQuery->rowCount();
 
-        //Si l'équippement est disponible
+        //Si l'équipement est disponible
         if ($monsterRow == 1) 
         {
             while ($monster = $monsterQuery->fetch())

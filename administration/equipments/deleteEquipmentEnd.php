@@ -16,16 +16,16 @@ if (isset($_POST['finalDelete']))
         //On récupère l'Id du formulaire précédent
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
         
-        //On fait une requête pour vérifier si l'équippement choisit existe
+        //On fait une requête pour vérifier si l'équipement choisit existe
         $itemQuery = $bdd->prepare('SELECT * FROM car_items 
         WHERE itemId= ?');
         $itemQuery->execute([$adminItemId]);
         $itemRow = $itemQuery->rowCount();
 
-        //Si l'équippement est disponible
+        //Si l'équipement est disponible
         if ($itemRow == 1) 
         {
-            //Avant de supprimer l'équippement On cherche à savoir quel joueur à cet équippement et si il en est équippé pour appliquer la mise à jour
+            //Avant de supprimer l'équipement On cherche à savoir quel joueur à cet équipement et si il en est équippé pour appliquer la mise à jour
             $itemQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
             WHERE itemId = inventoryItemId
             AND inventoryEquipped = 1
@@ -36,14 +36,14 @@ if (isset($_POST['finalDelete']))
             //Si des joueurs en sont équippé
             if ($itemRow > 0) 
             {
-                echo "Un ou plusieurs joueurs ont cet équippement";
+                echo "Un ou plusieurs joueurs ont cet équipement";
                 //On va mettre leur compte à jour
                 while ($item = $itemQuery->fetch())
                 {   
                     //On récupère l'Id du personnage
                     $adminCharacterId = stripslashes($item['inventoryCharacterId']);
 
-                    //On remet les stats du joueurs à zéro pour recalculer ensuite le bonus de tous les équippements équippé
+                    //On remet les stats du joueurs à zéro pour recalculer ensuite le bonus de tous les équipements équippé
                     $updateCharacter = $bdd->prepare("UPDATE car_characters SET
                     characterHpEquipments = 0,
                     characterMpEquipments = 0, 
@@ -59,7 +59,7 @@ if (isset($_POST['finalDelete']))
                     'adminCharacterId' => $adminCharacterId));
                     $updateCharacter->closeCursor();
 
-                    //Initialisation des variables qui vont contenir les bonus de tous les équippements actuellement équippé
+                    //Initialisation des variables qui vont contenir les bonus de tous les équipements actuellement équippé
                     $hpBonus = 0;
                     $mpBonus = 0;
                     $strengthBonus = 0;
@@ -130,20 +130,20 @@ if (isset($_POST['finalDelete']))
                 }
             }
 
-            //On supprime l'équippement de la base de donnée
+            //On supprime l'équipement de la base de donnée
             $itemDeleteQuery = $bdd->prepare("DELETE FROM car_items
             WHERE itemId = ?");
             $itemDeleteQuery->execute([$adminItemId]);
             $itemDeleteQuery->closeCursor();
 
-            //On supprime aussi l'équippement de l'inventaire dans la base de donnée
+            //On supprime aussi l'équipement de l'inventaire dans la base de donnée
             $inventoryDeleteQuery = $bdd->prepare("DELETE FROM car_inventory
             WHERE inventoryItemId = ?");
             $inventoryDeleteQuery->execute([$adminItemId]);
             $inventoryDeleteQuery->closeCursor();
             ?>
 
-            L'équippement a bien été supprimé
+            L'équipement a bien été supprimé
 
             <hr>
                 
@@ -152,14 +152,14 @@ if (isset($_POST['finalDelete']))
             </form>
             <?php
         }
-        //Si l'équippement n'est pas disponible
+        //Si l'équipement n'est pas disponible
         else
         {
             echo "Erreur: Equippement indisponible";
         }
         $itemQuery->closeCursor();
     }
-    //Si l'équippement choisit n'est pas un nombre
+    //Si l'équipement choisit n'est pas un nombre
     else
     {
         echo "Erreur: Equippement invalide";

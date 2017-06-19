@@ -40,7 +40,7 @@ if (isset($_POST['itemId'])
             }
             $itemQuery->closeCursor();
 
-            //Si la variable $inventoryEquipped est égale à 1 c'est qu'il s'agit d'un équippement actuellement équippé
+            //Si la variable $inventoryEquipped est égale à 1 c'est qu'il s'agit d'un équipement actuellement équippé
             if ($inventoryEquipped == 1)
             {
                 //On va rendre l'équipement non équippé

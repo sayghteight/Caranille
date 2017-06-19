@@ -36,7 +36,7 @@ if (isset($_POST['adminTownMonsterTownId'])
             $monsterQuery->execute([$adminTownMonsterMonsterId]);
             $monsterRow = $monsterQuery->rowCount();
 
-            //Si l'équippement est disponible
+            //Si l'équipement est disponible
             if ($monsterRow == 1) 
             {
                 //On fait une requête pour vérifier si le monstre choisit existe bien dans la ville
@@ -46,10 +46,10 @@ if (isset($_POST['adminTownMonsterTownId'])
                 $monsterQuery->execute([$adminTownMonsterTownId, $adminTownMonsterMonsterId]);
                 $monsterRow = $monsterQuery->rowCount();
 
-                //Si l'équippement est disponible
+                //Si l'équipement est disponible
                 if ($monsterRow == 1) 
                 {
-                    //On supprime l'équippement de la base de donnée
+                    //On supprime l'équipement de la base de donnée
                     $townMonsterDeleteQuery = $bdd->prepare("DELETE FROM car_towns_monsters
                     WHERE townMonsterMonsterId = ?");
                     $townMonsterDeleteQuery->execute([$adminTownMonsterMonsterId]);

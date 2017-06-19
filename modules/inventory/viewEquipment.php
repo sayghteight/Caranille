@@ -134,7 +134,7 @@ if (isset($_POST['itemId'])
                     
                     <td>
                         <?php
-                        //Si l'équippement n'est pas équippé ont propose au joueur de l'équiper
+                        //Si l'équipement n'est pas équippé ont propose au joueur de l'équiper
                         if ($equipmentEquipped == 0)
                         {
                             //Si le niveau du joueur est supérieur ou égal à celui du niveau requis
@@ -156,7 +156,7 @@ if (isset($_POST['itemId'])
                             }
                             
                         }
-                        //Si l'équippement est équippé on prévient le joueur
+                        //Si l'équipement est équippé on prévient le joueur
                         else
                         {
                             ?>

@@ -7,7 +7,7 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //on récupère les valeurs de chaque objets qu'on va ensuite mettre dans le menu déroulant
-//On fait une recherche dans la base de donnée de tous les équippements
+//On fait une recherche dans la base de donnée de tous les équipements
 $itemQuery = $bdd->query("SELECT * FROM car_items
 WHERE itemType = 'Item'
 ORDER by itemName");

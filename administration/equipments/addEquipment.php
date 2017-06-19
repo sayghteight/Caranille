@@ -33,13 +33,6 @@ if (isset($_POST['add']))
                 <?php
             }
         }
-        //Si il n'y a aucune classe de disponible on ajoute "Aucune classe" dans le menu déroulant
-        else
-        {
-            ?>
-                <option value="0">Aucune classe</option>
-            <?php
-        }
         $raceListQuery->closeCursor();
         ?>
         </select><br /><br />

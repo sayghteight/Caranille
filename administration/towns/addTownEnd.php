@@ -27,7 +27,7 @@ if (isset($_POST['adminTownPicture'])
         $adminTownPriceInn = htmlspecialchars(addslashes($_POST['adminTownPriceInn']));
         $adminTownChapter = htmlspecialchars(addslashes($_POST['adminTownChapter']));
 
-        //On met à jour l'équippement dans la base de donnée
+        //On met à jour l'équipement dans la base de donnée
         $addTown = $bdd->prepare("INSERT INTO car_towns VALUES(
         '',
         :adminTownPicture,

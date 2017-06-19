@@ -35,7 +35,7 @@ if (isset($_POST['adminItemPicture'])
         $adminItemPurchasePrice = htmlspecialchars(addslashes($_POST['adminItemPurchasePrice']));
         $adminItemSalePrice = htmlspecialchars(addslashes($_POST['adminItemSalePrice']));
 
-        //On met à jour l'équippement dans la base de donnée
+        //On met à jour l'équipement dans la base de donnée
         $addItem = $bdd->prepare("INSERT INTO car_items VALUES(
         '',
         '0',

@@ -49,7 +49,7 @@ if (isset($_POST['adminTownShopTownId'])
                 //Si le magasin est dans la ville
                 if ($townShopRow == 1) 
                 {
-                    //On supprime l'équippement de la base de donnée
+                    //On supprime l'équipement de la base de donnée
                     $townShopDeleteQuery = $bdd->prepare("DELETE FROM car_towns_shops
                     WHERE townShopShopId = ?");
                     $townShopDeleteQuery->execute([$adminTownShopShopId]);

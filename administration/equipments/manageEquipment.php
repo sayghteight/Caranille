@@ -17,13 +17,13 @@ if (isset($_POST['adminItemId'])
         //On récupère l'Id du formulaire précédent
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
 
-        //On fait une requête pour vérifier si l'équippement choisit existe
+        //On fait une requête pour vérifier si l'équipement choisit existe
         $itemQuery = $bdd->prepare('SELECT * FROM car_items 
         WHERE itemId= ?');
         $itemQuery->execute([$adminItemId]);
         $itemRow = $itemQuery->rowCount();
 
-        //Si l'équippement est disponible
+        //Si l'équipement est disponible
         if ($itemRow == 1) 
         {
             //On fait une recherche dans la base de donnée de tous les comptes
@@ -37,17 +37,17 @@ if (isset($_POST['adminItemId'])
             $itemQuery->closeCursor();
 
             ?> 
-            Que souhaitez-vous faire de l'équippement <em><?php echo $adminItemName ?></em><br />
+            Que souhaitez-vous faire de l'équipement <em><?php echo $adminItemName ?></em><br />
 
             <hr>
                 
             <form method="POST" action="editEquipment.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?= $adminItemId ?>">
-                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier l'équippement">
+                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier l'équipement">
             </form>
             <form method="POST" action="deleteEquipment.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?= $adminItemId ?>">
-                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer l'équippement">
+                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer l'équipement">
             </form>
 
             <hr>
@@ -64,7 +64,7 @@ if (isset($_POST['adminItemId'])
         }
         $itemQuery->closeCursor();
     }
-    //Si l'équippement choisit n'est pas un nombre
+    //Si l'équipement choisit n'est pas un nombre
     else
     {
         echo "Erreur: Equippement invalide";

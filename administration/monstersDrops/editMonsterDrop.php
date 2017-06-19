@@ -56,7 +56,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                     //Si cet objet est sur le monstre
                     if ($monsterDropRow == 1) 
                     {
-                        //On met l'objet/équippement à jour dans la base de donnée
+                        //On met l'objet/équipement à jour dans la base de donnée
                         $updateMonsterDrop = $bdd->prepare('UPDATE car_monsters_drops
                         SET monsterDropLuck = :adminMonsterDropLuck
                         WHERE monsterDropItemID = :adminMonsterDropItemId');

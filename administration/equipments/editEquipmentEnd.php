@@ -59,13 +59,13 @@ if (isset($_POST['adminItemId'])
         //On récupère l'Id du formulaire précédent
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
         
-        //On fait une requête pour vérifier si l'équippement choisit existe
+        //On fait une requête pour vérifier si l'équipement choisit existe
         $itemQuery = $bdd->prepare('SELECT * FROM car_items 
         WHERE itemId= ?');
         $itemQuery->execute([$adminItemId]);
         $itemRow = $itemQuery->rowCount();
 
-        //Si l'équippement est disponible
+        //Si l'équipement est disponible
         if ($itemRow == 1) 
         {
             $adminItemRaceId = htmlspecialchars(addslashes($_POST['adminItemRaceId']));
@@ -108,7 +108,7 @@ if (isset($_POST['adminItemId'])
                 $adminItemPurchasePrice = htmlspecialchars(addslashes($_POST['adminItemPurchasePrice']));
                 $adminItemSalePrice = htmlspecialchars(addslashes($_POST['adminItemSalePrice']));
 
-                //On met à jour l'équippement dans la base de donnée
+                //On met à jour l'équipement dans la base de donnée
                 $updateItems = $bdd->prepare('UPDATE car_items 
                 SET itemRaceId = :adminItemRaceId, 
                 itemPicture = :adminItemPicture, 
@@ -150,7 +150,7 @@ if (isset($_POST['adminItemId'])
                 'adminItemId' => $adminItemId]);
                 $updateItems->closeCursor();
 
-                //On cherche à savoir quel joueur à cet équippement et si il en est équippé pour appliquer la mise à jour
+                //On cherche à savoir quel joueur à cet équipement et si il en est équippé pour appliquer la mise à jour
                 $itemQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
                 WHERE itemId = inventoryItemId
                 AND inventoryEquipped = 1
@@ -167,7 +167,7 @@ if (isset($_POST['adminItemId'])
                         //On récupère l'Id du personnage
                         $adminCharacterId = stripslashes($item['inventoryCharacterId']);
 
-                        //On remet les stats du joueurs à zéro pour recalculer ensuite le bonus de tous les équippements équippé
+                        //On remet les stats du joueurs à zéro pour recalculer ensuite le bonus de tous les équipements équippé
                         $updateCharacter = $bdd->prepare("UPDATE car_characters SET
                         characterHpEquipments = 0,
                         characterMpEquipments = 0, 
@@ -183,7 +183,7 @@ if (isset($_POST['adminItemId'])
                         'adminCharacterId' => $adminCharacterId));
                         $updateCharacter->closeCursor();
 
-                        //Initialisation des variables qui vont contenir les bonus de tous les équippements actuellement équippé
+                        //Initialisation des variables qui vont contenir les bonus de tous les équipements actuellement équippé
                         $hpBonus = 0;
                         $mpBonus = 0;
                         $strengthBonus = 0;
@@ -254,7 +254,7 @@ if (isset($_POST['adminItemId'])
                 }
                 ?>
 
-                L'équippement a bien été mit à jour
+                L'équipement a bien été mit à jour
 
                 <hr>
                     
@@ -269,7 +269,7 @@ if (isset($_POST['adminItemId'])
                 echo "Erreur: La classe choisie n'existe pas";
             }
         }
-        //Si l'équippement n'est pas disponible
+        //Si l'équipement n'est pas disponible
         else
         {
             echo "Erreur: Equippement indisponible";

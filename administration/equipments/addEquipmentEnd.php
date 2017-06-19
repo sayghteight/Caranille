@@ -72,7 +72,7 @@ if (isset($_POST['adminItemRaceId'])
         $adminItemPurchasePrice = htmlspecialchars(addslashes($_POST['adminItemPurchasePrice']));
         $adminItemSalePrice = htmlspecialchars(addslashes($_POST['adminItemSalePrice']));
 
-        //On met à jour l'équippement dans la base de donnée
+        //On met à jour l'équipement dans la base de donnée
         $addItem = $bdd->prepare("INSERT INTO car_items VALUES(
         '',
         :adminItemRaceId,
@@ -114,7 +114,7 @@ if (isset($_POST['adminItemRaceId'])
         $addItem->closeCursor();
         ?>
 
-        L'équippement a bien été crée
+        L'équipement a bien été crée
 
         <hr>
             

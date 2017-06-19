@@ -40,7 +40,7 @@ if (isset($_POST['itemId'])
             }
             $itemQuery->closeCursor();
 
-            //Si la variable $inventoryEquipped est égale à 1 c'est qu'il s'agit d'un équippement actuellement équippé
+            //Si la variable $inventoryEquipped est égale à 1 c'est qu'il s'agit d'un équipement actuellement équippé
             if ($inventoryEquipped == 1)
             {
                 //On va donc rendre l'objet non équippé afin de le vendre
@@ -52,7 +52,7 @@ if (isset($_POST['itemId'])
                 'inventoryId' => $inventoryId));
                 $updateInventory->closeCursor();
 
-                //On remet les stats du joueurs à zéro pour recalculer ensuite le bonus de tous les équippements équippé
+                //On remet les stats du joueurs à zéro pour recalculer ensuite le bonus de tous les équipements équippé
                 $updateCharacter = $bdd->prepare("UPDATE car_characters SET
                 characterHpEquipments = 0,
                 characterMpEquipments = 0, 
@@ -68,7 +68,7 @@ if (isset($_POST['itemId'])
                 'characterId' => $characterId));
                 $updateCharacter->closeCursor();
 
-                //Initialisation des variables qui vont contenir les bonus de tous les équippements équippé
+                //Initialisation des variables qui vont contenir les bonus de tous les équipements équippé
                 $hpBonus = 0;
                 $mpBonus = 0;
                 $strengthBonus = 0;

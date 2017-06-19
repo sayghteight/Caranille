@@ -19,7 +19,7 @@ if (isset($_POST['adminNewsPicture'])
     $adminNewsAccountPseudo = $accountPseudo;
     $adminNewsDate = date('Y-m-d H:i:s');
 
-    //On met à jour l'équippement dans la base de donnée
+    //On met à jour l'équipement dans la base de donnée
     $addNews = $bdd->prepare("INSERT INTO car_news VALUES(
     '',
     :adminNewsPicture,

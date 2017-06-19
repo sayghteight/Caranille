@@ -23,10 +23,10 @@ if (isset($_POST['adminMonsterId'])
         $monsterQuery->execute([$adminMonsterId]);
         $monsterRow = $monsterQuery->rowCount();
 
-        //Si l'équippement est disponible
+        //Si l'équipement est disponible
         if ($monsterRow == 1) 
         {
-            //On supprime l'équippement de la base de donnée
+            //On supprime l'équipement de la base de donnée
             $monsterDeleteQuery = $bdd->prepare("DELETE FROM car_monsters
             WHERE monsterId = ?");
             $monsterDeleteQuery->execute([$adminMonsterId]);

@@ -121,7 +121,7 @@ if (isset($_POST['shopId'])
                                 <?php echo '+' .$itemMpEffect. ' MP'; ?><br />
                                 <?php
                             }
-                            //Si il s'agit d'une équippement on affiche toutes les stats concernée
+                            //Si il s'agit d'une équipement on affiche toutes les stats concernée
                             else
                             {
                                 ?>

@@ -69,7 +69,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                         $addTownMonster->closeCursor();
                         ?>
 
-                        L'objet/équippement a bien été ajouté au monstre
+                        L'objet/équipement a bien été ajouté au monstre
 
                         <hr>
                             

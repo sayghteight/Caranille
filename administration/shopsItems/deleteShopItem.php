@@ -49,7 +49,7 @@ if (isset($_POST['adminShopItemShopId'])
                 //Si l'objet n'est pas dans ce magasin
                 if ($shopItemRow == 1) 
                 {
-                    //On supprime l'équippement de la base de donnée
+                    //On supprime l'équipement de la base de donnée
                     $shopItemDeleteQuery = $bdd->prepare("DELETE FROM car_shops_items
                     WHERE shopItemItemId = ?");
                     $shopItemDeleteQuery->execute([$adminShopItemItemId]);

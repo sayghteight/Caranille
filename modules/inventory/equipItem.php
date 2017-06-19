@@ -46,7 +46,7 @@ if (isset($_POST['itemId'])
             $equipmentQuery->execute([$itemType, $characterId]);
             $equipmentRow = $equipmentQuery->rowCount();
 
-            //Si un autre équippement de ce type est déjà équippé on va le rendre non équippé
+            //Si un autre équipement de ce type est déjà équippé on va le rendre non équippé
             if ($equipmentRow > 0)
             {
                 while ($equipment = $equipmentQuery->fetch())
@@ -65,7 +65,7 @@ if (isset($_POST['itemId'])
                 }
             }
 
-            //On équippe maintenant l'équippement choisit
+            //On équippe maintenant l'équipement choisit
             $updateInventory = $bdd->prepare("UPDATE car_inventory SET
             inventoryEquipped = 1
             WHERE inventoryId= :inventoryId");
@@ -74,7 +74,7 @@ if (isset($_POST['itemId'])
             'inventoryId' => $inventoryId));
             $updateInventory->closeCursor();
 
-            //On remet les stats du joueurs à zéro pour recalculer ensuite le bonus de tous les équippements équippé
+            //On remet les stats du joueurs à zéro pour recalculer ensuite le bonus de tous les équipements équippé
             $updateCharacter = $bdd->prepare("UPDATE car_characters SET
             characterHpEquipments = 0,
             characterMpEquipments = 0, 
@@ -90,7 +90,7 @@ if (isset($_POST['itemId'])
             'characterId' => $characterId));
             $updateCharacter->closeCursor();
 
-            //Initialisation des variables qui vont contenir les bonus de tous les équippements actuellement équippé
+            //Initialisation des variables qui vont contenir les bonus de tous les équipements actuellement équippé
             $hpBonus = 0;
             $mpBonus = 0;
             $strengthBonus = 0;
@@ -159,7 +159,7 @@ if (isset($_POST['itemId'])
             $updateCharacter->closeCursor();
             ?>
 
-            L'équippement <?php echo $itemName ?> est maintenant équippé
+            L'équipement <?php echo $itemName ?> est maintenant équippé
 
             <hr>
 
@@ -168,7 +168,7 @@ if (isset($_POST['itemId'])
             </form>
             <?php
         }
-        //Si le joueur ne possèdep pas cet équippement
+        //Si le joueur ne possèdep pas cet équipement
         else
         {
             echo "Erreur: Vous ne possedez pas cet équipement";

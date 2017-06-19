@@ -40,7 +40,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                 ?>
                 <form method="POST" action="editDeleteMonsterDrop.php">
                     <div class="form-group row">
-                        <label for="townMonsterMonsterId" class="col-2 col-form-label">Liste des objets/équippements du monstre</label>
+                        <label for="townMonsterMonsterId" class="col-2 col-form-label">Liste des objets/équipements du monstre</label>
                         <select class="form-control" id="adminMonsterDropItemId" name="adminMonsterDropItemId">
                         <?php
                         while ($monsterDrop = $monsterDropQuery->fetch())
@@ -76,7 +76,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                 ?>
                 <form method="POST" action="addMonsterDrop.php">
                     <div class="form-group row">
-                        <label for="adminMonsterDropItemId" class="col-2 col-form-label">Objets/équippements existant</label>
+                        <label for="adminMonsterDropItemId" class="col-2 col-form-label">Objets/équipements existant</label>
                         <select class="form-control" id="adminMonsterDropItemId" name="adminMonsterDropItemId">
                         <?php
                         while ($item = $itemQuery->fetch())
@@ -93,7 +93,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                     </div>
                     Taux d'obtention (De 0 à 1000) <br> <input type="number" name="adminMonsterDropLuck" class="form-control" placeholder="Taux d'obtention (De 0 à 1000)" required><br /><br />
                     <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
-                    <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter cet objet/équippement">
+                    <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter cet objet/équipement">
                 </form>
                 <?php
             }
