@@ -302,6 +302,13 @@ INSERT INTO `car_races` (`raceId`, `racePicture`, `raceName`, `raceDescription`,
 (1, 'http://localhost/race.png', 'Guerrier', 'Classe de personnage axé sur la force et les HP', 11, 1, 2, 1, 1, 1, 1, 0),
 (2, 'http://localhost/race.png', 'Mage', 'Classe de personnage axé sur la magie et les MP', 10, 2, 1, 2, 1, 1, 1, 0);
 
+INSERT INTO `car_shops` (`shopId`, `shopPicture`, `shopName`, `shopDescription`) VALUES
+(1, 'http://localhost/shop.png', 'LittleShop', 'Le petit magasin de proximité');
+
+INSERT INTO `car_shops_items` (`shopItemId`, `shopItemShopId`, `shopItemItemId`, `shopItemDiscount`) VALUES
+(1, '1', '1', 0),
+(2, '1', '2', 0);
+
 INSERT INTO `car_towns` (`townId`, `townPicture`, `townName`, `townDescription`, `townPriceInn`, `townChapter`) VALUES
 (1, 'http://localhost/town.png', 'Indicia', 'Petite ville côtière qui vie exclusivement du commerce de la pêche.', 10, 1),
 (2, 'http://localhost/town.png', 'Teran', 'Petite ville rural qui vie de l\'agriculture', 12, 2);
@@ -309,6 +316,9 @@ INSERT INTO `car_towns` (`townId`, `townPicture`, `townName`, `townDescription`,
 INSERT INTO `car_towns_monsters` (`townMonsterId`, `townMonsterTownId`, `townMonsterMonsterId`) VALUES
 (1, 1, 1),
 (2, 2, 2);
+
+INSERT INTO `car_towns_shops` (`townShopId`, `townShopTownId`, `townShopShopId`) VALUES
+(1, 1, 1);
 
 INSERT INTO `car_monsters_drops` (`monsterDropID`, `monsterDropMonsterID`, `monsterDropItemID`, `monsterDropLuck`) VALUES 
 (1, '1', '1', '500');
