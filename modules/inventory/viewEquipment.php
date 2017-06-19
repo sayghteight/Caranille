@@ -87,7 +87,7 @@ if (isset($_POST['itemId'])
                     </td>
                 
                     <td>
-                        <?php echo $equipmentLevel; ?>
+                        <?php echo $equipmentRaceName; ?>
                     </td>
                 </tr>
 
