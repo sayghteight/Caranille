@@ -43,7 +43,7 @@ if (isset($_POST['itemId'])
         while ($equipment = $equipmentQuery->fetch())
         {
             $equipmentId = stripslashes($equipment['itemId']);
-            $equipmentRaceId = stripslashes($item['itemRaceId']);
+            $equipmentRaceId = stripslashes($equipment['itemRaceId']);
             $equipmentType = stripslashes($equipment['itemType']);
             $equipmentLevel = stripslashes($equipment['itemLevel']);
             $equipmentLevelRequired = stripslashes($equipment['itemLevelRequired']);
@@ -179,21 +179,32 @@ if (isset($_POST['itemId'])
                         //Si l'équipement n'est pas équippé ont propose au joueur de l'équiper
                         if ($equipmentEquipped == 0)
                         {
-                            //Si le niveau du joueur est supérieur ou égal à celui du niveau requis
-                            if ($characterLevel >= $equipmentLevelRequired)
+                            //On vérifie si la classe du joueur lui permet de s'équiper de cet équipement, ou si celui-ci est pour toutes les classes
+                            if ($characterRaceId == $equipmentRaceId || $equipmentRaceId == 0)
                             {
-                                ?>
-                                    <form method="POST" action="equipItem.php">
-                                        <input type="hidden" name="itemId" value="<?php echo $itemId ?>">
-                                        <input type="submit" class="btn btn-default form-control" name="equip" value="Equiper">
-                                    </form> 
-                                <?php
+                                //Si le niveau du joueur est supérieur ou égal à celui du niveau requis
+                                if ($characterLevel >= $equipmentLevelRequired)
+                                {
+                                    ?>
+                                        <form method="POST" action="equipItem.php">
+                                            <input type="hidden" name="itemId" value="<?php echo $itemId ?>">
+                                            <input type="submit" class="btn btn-default form-control" name="equip" value="Equiper">
+                                        </form> 
+                                    <?php
+                                }
+                                //Si le niveau du joueur n'est pas supérieur ou égal à celui du niveau requis
+                                else
+                                {
+                                    ?>
+                                    Votre niveau est trop faible pour vous équiper de cet objet
+                                    <?php
+                                }
                             }
-                            //Si le niveau du joueur n'est pas supérieur ou égal à celui du niveau requis
+                            //Si la classe de l'objet est incompatible avec celle du joueur
                             else
                             {
                                 ?>
-                                    Votre niveau est trop faible pour vous équiper de cet objet
+                                Votre classe ne vous permet pas de vous équiper de cet équipement
                                 <?php
                             }
                             
