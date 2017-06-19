@@ -43,8 +43,10 @@ if (isset($_POST['itemId'])
         while ($equipment = $equipmentQuery->fetch())
         {
             $equipmentId = stripslashes($equipment['itemId']);
+            $equipmentRaceId = stripslashes($item['itemRaceId']);
             $equipmentType = stripslashes($equipment['itemType']);
-            $equipmentLevelRequired = stripslashes($equipment['itemLevelRequired']);
+            $equipmentLevel = stripslashes($item['itemLevel']);
+            $equipmentRequired = stripslashes($item['itemLevelRequired']);
             $equipmentName = stripslashes($equipment['itemName']);
             $equipmentDescription = stripslashes($equipment['itemDescription']);
             $equipmentQuantity = stripslashes($equipment['inventoryQuantity']);
@@ -58,15 +60,44 @@ if (isset($_POST['itemId'])
             $equipmentWisdomEffect = stripslashes($equipment['itemWisdomEffect']);
             $equipmentSalePrice = stripslashes($equipment['itemSalePrice']);
             $equipmentEquipped = stripslashes($equipment['inventoryEquipped']);
+
+            //Si la race de l'équipement est supérieur à 1 c'est qu'il est attitré à une classe
+            if ($equipmentRaceId >= 1)
+            {
+                //On récupère la classe de l'équipement
+                $raceQuery = $bdd->prepare("SELECT * FROM car_races
+                WHERE raceId = ?");
+                $raceQuery->execute([$equipmentRaceId]);
+                while ($race = $raceQuery->fetch())
+                {
+                    //On récupère le nom de la classe
+                    $equipmentRaceName = stripslashes($race['raceName']);
+                }
+                $raceQuery->closeCursor();
+            }
+            else
+            {
+                $equipmentRaceName = "Toutes les classes";
+            }
             ?>
             <table class="table">
+                <tr>
+                    <td>
+                        Classe
+                    </td>
+                
+                    <td>
+                        <?php echo $itemRaceName; ?>
+                    </td>
+                </tr>
+                
                 <tr>
                     <td>
                         Niveau requis
                     </td>
                     
                     <td>
-                        <?php echo $equipmentLevelRequired; ?>
+                        <?php echo $itemLevelRequired; ?>
                     </td>
                 </tr>
                 

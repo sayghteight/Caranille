@@ -102,13 +102,16 @@ if (isset($_POST['shopId'])
                     if ($itemType != "Item")
                     {
                         ?>
-                        <td>
-                            Classe
-                        </td>
+                        <tr>
+                            <td>
+                                Classe
+                            </td>
                         
-                        <td>
-                            <?php echo $itemRaceName; ?>
-                        </td>
+                            <td>
+                                <?php echo $itemRaceName; ?>
+                            </td>
+                        </tr>
+                        
                         <tr>
                             <td>
                                 Niveau requis
