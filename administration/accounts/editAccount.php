@@ -253,7 +253,7 @@ if (isset($_POST['adminAccountId'])
             }
             ?>
 
-            <p>Informations du compte (Modifiable)</p>
+            <p>Informations du compte</p>
             <form method="POST" action="editAccountEnd.php">
                 Pseudo : <br> <input type="text" name="adminAccountPseudo" class="form-control" placeholder="Pseudo" value="<?php echo $adminAccountPseudo; ?>" required autofocus><br /><br />
                 Email : <br> <input type="mail" name="adminAccountEmail" class="form-control" placeholder="Email" value="<?php echo $adminAccountEmail; ?>" required><br /><br />
@@ -294,7 +294,7 @@ if (isset($_POST['adminAccountId'])
 
             <hr>
 
-            <p>Informations du personnage (Non modifiable)</p>
+            <p>Informations du personnage</p>
             Race : <?php echo $adminRaceName; ?><br />
             Nom du personnage : <?php echo $adminCharacterName; ?><br />
             Niveau du personnage : <?php echo $adminCharacterLevel; ?><br />
@@ -358,8 +358,7 @@ if (isset($_POST['adminAccountId'])
             Activé: <?php echo $adminCharacterEnable; ?><br />
 
             <hr>
-            
-            Autre options
+
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>

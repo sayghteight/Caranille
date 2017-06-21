@@ -299,8 +299,12 @@ INSERT INTO `car_news` (`newsId`, `newsPicture`, `newsTitle`, `newsMessage`, `ne
 (1, 'http://localhost/news.png', 'Installation de Caranille', 'Félicitation Caranille est bien installé vous pouvez maintenant vous connecter avec vos identifiants \r\n\r\nBon RPG Making', 'admin', '2017-05-18');
 
 INSERT INTO `car_races` (`raceId`, `racePicture`, `raceName`, `raceDescription`, `raceHpBonus`, `raceMpBonus`, `raceStrengthBonus`, `raceMagicBonus`, `raceAgilityBonus`, `raceDefenseBonus`, `raceDefenseMagicBonus`, `raceWidsomBonus`) VALUES
-(1, 'http://localhost/race.png', 'Guerrier', 'Classe de personnage axé sur la force et les HP', 11, 1, 2, 1, 1, 1, 1, 0),
-(2, 'http://localhost/race.png', 'Mage', 'Classe de personnage axé sur la magie et les MP', 10, 2, 1, 2, 1, 1, 1, 0);
+(1, 'http://localhost/race.png', 'Chevalier', 'Classe de personnage axé sur la force.', 10, 1, 2, 1, 1, 1, 1, 1),
+(2, 'http://localhost/race.png', 'Mage Noir', 'Classe de personnage axé sur la magie.', 10, 1, 1, 2, 1, 1, 1, 1),
+(3, 'http://localhost/race.png', 'Ninja', 'Classe de personnage axé sur l''agilité.', 10, 1, 1, 1, 2, 1, 1, 1),
+(4, 'http://localhost/race.png', 'Guerrier', 'Classe de personnage axé sur la défense.', 10, 1, 1, 1, 1, 2, 1, 1),
+(5, 'http://localhost/race.png', 'Mage Blanc', 'Classe de personnage axé sur la défense magique.', 10, 1, 1, 1, 1, 1, 2, 1),
+(6, 'http://localhost/race.png', 'Sage', 'Classe de personnage axé sur la sagesse.', 10, 1, 1, 1, 1, 1, 1, 2);
 
 INSERT INTO `car_shops` (`shopId`, `shopPicture`, `shopName`, `shopDescription`) VALUES
 (1, 'http://localhost/shop.png', 'LittleShop', 'Le petit magasin de proximité');

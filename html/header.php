@@ -53,6 +53,7 @@ if (isset($_SESSION['account']['id']))
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                     <li class="active"><a href="../../modules/main/index.php">Accueil</a></li>
+                    <li><a href="../../modules/races/index.php">Les classes</a></li>
                     <?php
                     //Si le joueur est connecté on affiche le menu du jeu
                     if (isset($_SESSION['account']['id']))
