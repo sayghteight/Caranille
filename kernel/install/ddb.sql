@@ -45,6 +45,17 @@ CREATE TABLE IF NOT EXISTS `car_battles_monsters` (
   `battleMonsterMonsterMpRemaining` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `car_chapters` 
+(
+  `chapterId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `chapterNumber` int(5) NOT NULL,
+  `chapterName` varchar(30) NOT NULL,
+  `chapterOpening` text NOT NULL,
+  `chapterEnding` text NOT NULL,
+  `chapterDefeate` text NOT NULL,
+  `chapterMonster` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `car_characters` (
   `characterId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `characterAccountId` int(11) NOT NULL,

@@ -11,25 +11,25 @@ if (isset($_POST['attack']))
     /*
     VARIABLES GLOBALES
     */
-    $characterMinStrength = $characterStrengthTotal / 1.1;
-    $characterMaxStrength = $characterStrengthTotal * 1.1;    
-    $characterMinMagic = $characterMagicTotal / 1.1;
-    $characterMaxMagic = $characterMagicTotal * 1.1;
+    $characterMinStrength = $characterStrengthTotal / 2;
+    $characterMaxStrength = $characterStrengthTotal * 2;    
+    $characterMinMagic = $characterMagicTotal / 2;
+    $characterMaxMagic = $characterMagicTotal * 4;
 
-    $monsterMinStrength = $monsterStrength / 1.1;
-    $monsterMaxStrength = $monsterStrength * 1.1;    
-    $monsterMinMagic = $monsterMagic / 1.1;
-    $monsterMaxMagic = $monsterMagic * 1.1;
+    $monsterMinStrength = $monsterStrength / 2;
+    $monsterMaxStrength = $monsterStrength * 2;    
+    $monsterMinMagic = $monsterMagic / 2;
+    $monsterMaxMagic = $monsterMagic * 4;
 
-    $monsterMinDefense = $monsterDefense / 1.1;
-    $monsterMaxDefense = $monsterDefense * 1.1;
-    $monsterMinDefenseMagic = $monsterDefenseMagic / 1.1;
-    $monsterMaxDefenseMagic = $monsterDefenseMagic * 1.1;
+    $monsterMinDefense = $monsterDefense / 2;
+    $monsterMaxDefense = $monsterDefense * 2;
+    $monsterMinDefenseMagic = $monsterDefenseMagic / 2;
+    $monsterMaxDefenseMagic = $monsterDefenseMagic * 2;
 
-    $characterMinDefense = $characterDefenseTotal / 1.1;
-    $characterMaxDefense = $characterDefenseTotal * 1.1;
-    $characterMinDefenseMagic = $characterDefenseMagicTotal / 1.1;
-    $characterMaxDefenseMagic = $characterDefenseMagicTotal * 1.1;
+    $characterMinDefense = $characterDefenseTotal / 2;
+    $characterMaxDefense = $characterDefenseTotal * 2;
+    $characterMinDefenseMagic = $characterDefenseMagicTotal / 2;
+    $characterMaxDefenseMagic = $characterDefenseMagicTotal * 2;
 
     //On calcule les dégats du joueur
     $positiveDamagesCharacter = mt_rand($characterMinStrength, $characterMaxStrength);

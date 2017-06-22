@@ -90,7 +90,7 @@ while ($race = $racerQuery->fetch())
 }
 $racerQuery->closeCursor();
 
-//Valeurs des statistiques qui seront ajoutée à la monté d'un niveau
+//Valeurs des statistiques qui seront ajouté à la monté d'un niveau
 $levelBaseExperience = 500;
 $hPByLevel = $raceHpBonus;
 $mPByLevel = $raceMpBonus;

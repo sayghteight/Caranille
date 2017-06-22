@@ -6,7 +6,8 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($battleArenaRow == 0) { exit(header("Location: ../../modules/battleArena/index.php")); }
 
 echo "Combat de $characterName contre $opponentCharacterName<br />";
-echo "HP de $characterName: $characterHpMin/$characterHpTotal";
+echo "HP de $characterName: $characterHpMin/$characterHpTotal<br />";
+echo "MP de $characterName: $characterMpMin/$characterMpTotal";
 ?>
             
 <hr>
