@@ -8,6 +8,8 @@ require_once("../../kernel/config.php");
 //Si le joueur est connecté on va récupérer toutes les informations du joueur (Compte, Personnage, Combat en cours...)
 if (isset($_SESSION['account']['id']))
 {
+    //On récupère les informations de configuration du jeu
+    require_once("../../kernel/configuration/index.php");
     //On récupère toutes les informations du compte
     require_once("../../kernel/account/index.php");
     //On récupère toutes les informations du personnage grâce au compte
@@ -52,8 +54,14 @@ if (isset($_SESSION['account']['id']))
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                    <li class="active"><a href="../../modules/main/index.php">Accueil</a></li>
-                    <li><a href="../../modules/races/index.php">Les classes</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Informations<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="../../modules/main/index.php">Accueil</a></li>
+                            <li><a href="../../modules/presentation/index.php">Présentation</a></li>
+                            <li><a href="../../modules/races/index.php">Les classes</a></li>
+                        </ul>
+                    </li>
                     <?php
                     //Si le joueur est connecté on affiche le menu du jeu
                     if (isset($_SESSION['account']['id']))

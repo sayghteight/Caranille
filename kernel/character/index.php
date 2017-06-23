@@ -75,7 +75,7 @@ $racerQuery = $bdd->prepare("SELECT * FROM car_races
 WHERE raceId = ?");
 $racerQuery->execute([$characterRaceId]);
 
-//On fait une boucle sur les résultats
+//On récupère les augmentations de statistique lié à la classe
 while ($race = $racerQuery->fetch())
 {
     $characterRaceName = stripslashes($race['raceName']);
@@ -90,8 +90,10 @@ while ($race = $racerQuery->fetch())
 }
 $racerQuery->closeCursor();
 
-//Valeurs des statistiques qui seront ajouté à la monté d'un niveau
+//Base d'experience multiple du niveau pour obtenir le montant d'experience pour la monté d'un niveau
 $levelBaseExperience = 500;
+
+//Valeurs des statistiques qui seront ajouté à la monté d'un niveau
 $hPByLevel = $raceHpBonus;
 $mPByLevel = $raceMpBonus;
 $strengthByLevel = $raceStrengthBonus;
@@ -100,11 +102,13 @@ $agilityByLevel = $raceAgilityBonus;
 $defenseByLevel = $raceDefenseBonus;
 $defenseMagicByLevel = $raceDefenseMagicBonus;
 $wisdomByLevel = $raceWidsomBonus;
-$skillPointsByLevel = 2;
+
+//Valeur des points de compétences obtenu à la monté d'un niveau ($gameSkillPoint = kernel/configuration/index.php)
+$skillPointsByLevel = $gameSkillPoint;
 $experienceLevel = $characterLevel * $levelBaseExperience;
 $experienceRemaining = $characterLevel * $levelBaseExperience - $characterExperience;
 
-//Si le personnage à suffisament d'experience pour monter de niveau
+//Si le personnage à suffisament d'experience pour la monté d'un niveau
 if ($characterExperience >= $experienceLevel)
 {
     $characterHpMin = $characterHpMin + $hPByLevel;
@@ -130,7 +134,7 @@ if ($characterExperience >= $experienceLevel)
     $characterLevel = $characterLevel + 1;
     echo "<script>alert(\"Votre personnage vient de gagner un niveau !\");</script>";
 
-    //On met le personnage à jour si il gagne un niveau
+    //On met le personnage à jour
     $updateCharacter = $bdd->prepare("UPDATE car_characters SET
     characterLevel = :characterLevel,
     characterHpMin = :characterHpMin, 

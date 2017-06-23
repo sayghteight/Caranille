@@ -3,6 +3,8 @@ $timeStart = microtime(true);
 session_start();
 require_once("../../kernel/config.php");
 
+//On récupère les informations de configuration du jeu
+require_once("../../kernel/configuration/index.php");
 //On récupère toutes les informations du compte
 require_once("../../kernel/account/index.php");
 //On récupère toutes les informations du personnage grâce au compte
