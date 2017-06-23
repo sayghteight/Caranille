@@ -131,8 +131,8 @@ if (isset($_POST['adminItemId'])
                     //Si il s'agit de bottes
                     case "Boots":
                         ?>
-                        <option selected="selected" value="Boots">Bottes</option>
                         <option value="Armor">Armure</option>
+                        <option selected="selected" value="Boots">Bottes</option>
                         <option value="Gloves">Gants</option>
                         <option value="Helmet">Casque</option>
                         <option value="Weapon">Arme</option>
@@ -142,9 +142,9 @@ if (isset($_POST['adminItemId'])
                     //Si il s'agit de gants
                     case "Gloves":
                         ?>
-                        <option selected="selected" value="Gloves">Gants</option>
                         <option value="Armor">Armure</option>
                         <option value="Boots">Bottes</option>
+                        <option selected="selected" value="Gloves">Gants</option>
                         <option value="Helmet">Casque</option>
                         <option value="Weapon">Arme</option>
                         <?php
@@ -153,10 +153,10 @@ if (isset($_POST['adminItemId'])
                     //Si il s'agit d'un casque
                     case "Helmet":
                         ?>
-                        <option selected="selected" value="Helmet">Helmet</option>
                         <option value="Armor">Armure</option>
                         <option value="Boots">Bottes</option>
                         <option value="Gloves">Gants</option>
+                        <option selected="selected" value="Helmet">Casque</option>
                         <option value="Weapon">Arme</option>
                         <?php
                     break;
@@ -164,12 +164,11 @@ if (isset($_POST['adminItemId'])
                     //Si il s'agit d'une arme
                     case "Weapon":
                         ?>
-                        <option selected="selected" value="Weapon">Arme</option>
                         <option value="Armor">Armure</option>
                         <option value="Boots">Bottes</option>
                         <option value="Gloves">Gants</option>
                         <option value="Helmet">Casque</option>
-                    
+                        <option selected="selected" value="Weapon">Arme</option>
                         <?php
                     break;
                 }

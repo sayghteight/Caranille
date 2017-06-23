@@ -167,6 +167,15 @@ CREATE TABLE IF NOT EXISTS `car_codes_used` (
   `codeUsedaccountId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `car_configuration` 
+(
+  `configurationId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `configurationGameName` varchar(30) NOT NULL,
+  `configurationPresentation` text NOT NULL,
+  `configurationSkillPoint` int(11) NOT NULL,
+  `configurationAccess` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `car_inventory` 
 (
   `inventoryId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -292,6 +301,9 @@ CREATE TABLE IF NOT EXISTS `car_towns_shops`
 --
 -- Ajout des exemples dans la base de donnée
 --
+
+INSERT INTO `caranille`.`car_configuration` (`configurationId`, `configurationGameName`, `configurationPresentation`, `configurationSkillPoint`, `configurationAccess`) VALUES 
+(1, 'Caranille', 'MMORPG Officiel de Caranille', '4', '0');
 
 INSERT INTO `car_items` (`itemId`, `itemRaceId`, `itemPicture`, `itemType`, `itemLevel`, `itemLevelRequired`, `itemName`, `itemDescription`, `itemHpEffect`, `itemMpEffect`, `itemStrengthEffect`, `itemMagicEffect`, `itemAgilityEffect`, `itemDefenseEffect`, `itemDefenseMagicEffect`, `itemWisdomEffect`, `itemPurchasePrice`, `itemSalePrice`) VALUES
 (1, 0, 'http://localhost/item.png', 'Item', 1, 1, 'Potion', 'Cette petite fiole vous rendra 100 HP', 100, 0, 0, 0, 0, 0, 0, 0, 50, 10),
