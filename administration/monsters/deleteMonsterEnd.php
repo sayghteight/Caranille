@@ -23,36 +23,57 @@ if (isset($_POST['adminMonsterId'])
         $monsterQuery->execute([$adminMonsterId]);
         $monsterRow = $monsterQuery->rowCount();
 
-        //Si l'équipement est disponible
+        //Si le monstre est disponible
         if ($monsterRow == 1) 
         {
-            //On supprime l'équipement de la base de donnée
-            $monsterDeleteQuery = $bdd->prepare("DELETE FROM car_monsters
+            //On vérifie si le monstre n'est pas attribué à un chapitre
+            $monsterChapterQuery = $bdd->prepare("SELECT * FROM car_chapters
             WHERE monsterId = ?");
-            $monsterDeleteQuery->execute([$adminMonsterId]);
-            $monsterDeleteQuery->closeCursor();
+            $monsterQuery->execute([$adminMonsterId]);
+            //On recherche combien il y a de monstres disponible
+            $monsterRow = $monsterQuery->rowCount();
 
-            //On supprime aussi les combats contre ce monstre dans la base de donnée
-            $batleMonsterDeleteQuery = $bdd->prepare("DELETE FROM car_battles_monsters
-            WHERE battleMonsterMonsterId = ?");
-            $batleMonsterDeleteQuery->execute([$adminMonsterId]);
-            $batleMonsterDeleteQuery->closeCursor();
-
-            //On supprime aussi les monstre de la ville où il se trouve
-            $townMonsterDeleteQuery = $bdd->prepare("DELETE FROM car_towns_monsters
-            WHERE townMonsterMonsterId = ?");
-            $townMonsterDeleteQuery->execute([$adminMonsterId]);
-            $townMonsterDeleteQuery->closeCursor();
-            ?>
-
-            Le monstre a bien été supprimé
-
-            <hr>
-                
-            <form method="POST" action="index.php">
-                    <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
+            //Si ce monstre n'est pas attribué à un chapitre
+            if ($monsterRow == 0)
+            {
+                //On supprime l'équipement de la base de donnée
+                $monsterDeleteQuery = $bdd->prepare("DELETE FROM car_monsters
+                WHERE monsterId = ?");
+                $monsterDeleteQuery->execute([$adminMonsterId]);
+                $monsterDeleteQuery->closeCursor();
+    
+                //On supprime aussi les combats contre ce monstre dans la base de donnée
+                $batleMonsterDeleteQuery = $bdd->prepare("DELETE FROM car_battles_monsters
+                WHERE battleMonsterMonsterId = ?");
+                $batleMonsterDeleteQuery->execute([$adminMonsterId]);
+                $batleMonsterDeleteQuery->closeCursor();
+    
+                //On supprime aussi les monstre de la ville où il se trouve
+                $townMonsterDeleteQuery = $bdd->prepare("DELETE FROM car_towns_monsters
+                WHERE townMonsterMonsterId = ?");
+                $townMonsterDeleteQuery->execute([$adminMonsterId]);
+                $townMonsterDeleteQuery->closeCursor();
+                ?>
+    
+                Le monstre a bien été supprimé
+    
+                <hr>
+                    
+                <form method="POST" action="index.php">
+                        <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
+                    </form>
+                <?php
+            }
+            //Si le monstre est attribué à un chapitre
+            {
+                ?>
+                Impossible de supprimer ce monstre car il est attribué à un chapitre.
+                <form method="POST" action="manageMonster.php">
+                    <input type="hidden" name="adminMonsterId" value="<?= $adminMonsterId ?>">
+                    <input type="submit" class="btn btn-default form-control" name="manage" value="Retour">
                 </form>
-            <?php
+                <?php
+            }
         }
         //Si le monstre n'est pas disponible
         else

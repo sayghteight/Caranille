@@ -35,25 +35,46 @@ if (isset($_POST['adminMonsterId'])
                 $adminMonsterName = stripslashes($monster['monsterName']);
             }
             $monsterQuery->closeCursor();
-
-            ?>
-            <p>ATTENTION</p> 
-            Vous êtes sur le point de supprimer le monstre <em><?php echo $adminMonsterName ?></em><br />
-            confirmez-vous la suppression ?
-
-            <hr>
-                
-            <form method="POST" action="deleteMonsterEnd.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminMonsterId" value="<?= $adminMonsterId ?>">
-                <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme la suppression">
-            </form>
             
-            <hr>
-
-            <form method="POST" action="index.php">
-                <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
-            </form>
-            <?php
+            //On vérifie si le monstre n'est pas attribué à un chapitre
+            $monsterChapterQuery = $bdd->prepare("SELECT * FROM car_chapters
+            WHERE monsterId = ?");
+            $monsterQuery->execute([$adminMonsterId]);
+            //On recherche combien il y a de monstres disponible
+            $monsterRow = $monsterQuery->rowCount();
+            
+            //Si ce monstre n'est pas attribué à un chapitre
+            if ($monsterRow == 0)
+            {
+                ?>
+                <p>ATTENTION</p> 
+                Vous êtes sur le point de supprimer le monstre <em><?php echo $adminMonsterName ?></em><br />
+                confirmez-vous la suppression ?
+    
+                <hr>
+                    
+                <form method="POST" action="deleteMonsterEnd.php">
+                    <input type="hidden" class="btn btn-default form-control" name="adminMonsterId" value="<?= $adminMonsterId ?>">
+                    <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme la suppression">
+                </form>
+                
+                <hr>
+    
+                <form method="POST" action="index.php">
+                    <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
+                </form>
+                <?php
+            }
+            //Si le monstre est attribué à un chapitre
+            {
+                ?>
+                Impossible de supprimer ce monstre car il est attribué à un chapitre.
+                <form method="POST" action="manageMonster.php">
+                    <input type="hidden" name="adminMonsterId" value="<?= $adminMonsterId ?>">
+                    <input type="submit" class="btn btn-default form-control" name="manage" value="Retour">
+                </form>
+                <?php
+            }
         }
         //Si le monstre n'est pas disponible
         else

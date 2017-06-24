@@ -90,7 +90,7 @@ while ($race = $racerQuery->fetch())
 }
 $racerQuery->closeCursor();
 
-//Base d'experience multiple du niveau pour obtenir le montant d'experience pour la monté d'un niveau
+//Base d'experience multiple du niveau pour obtenir le montant d'experience nécessaire pour la monté d'un niveau
 $levelBaseExperience = 500;
 
 //Valeurs des statistiques qui seront ajouté à la monté d'un niveau

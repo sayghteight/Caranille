@@ -38,7 +38,7 @@ if ($opponentRow > 0)
             ?>
             </select>
         </div>
-        <center><input type="submit" name="enter" class="btn btn-default form-control" value="Lancer le combat"></center>
+        <input type="submit" name="enter" class="btn btn-default form-control" value="Lancer le combat">
     </form>
     <?php
 }

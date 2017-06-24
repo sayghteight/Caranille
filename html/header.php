@@ -81,22 +81,28 @@ if (isset($_SESSION['account']['id']))
                                 <li><a href="../../modules/inventory/equipment.php">Equipment</a></li>
                             </ul>
                         </li>
-                        <?php
-                        //Si characterTownId est supérieur ou égal à un le joueur est dans une ville. On met le raccourcit vers la ville
-                        if($characterTownId >= 1)
-                        {
-                            ?>
-                                <li><a href="../../modules/town/index.php">Retourner en ville</a></li>
-                            <?php
-                        }
-                        //Si characterTownId n'est pas supérieur ou égal à un le joueur est dans aucune ville. On met le raccourcit vers la carte du monde
-                        else
-                        {
-                            ?>
-                                <li><a href="../../modules/map/index.php">Carte du monde</a></li>
-                            <?php
-                        }
-                        ?>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contenu du jeu<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <?php
+                                //Si characterTownId est supérieur ou égal à un le joueur est dans une ville. On met le raccourcit vers la ville
+                                if($characterTownId >= 1)
+                                {
+                                    ?>
+                                        <li><a href="../../modules/town/index.php">Retourner en ville</a></li>
+                                    <?php
+                                }
+                                //Si characterTownId n'est pas supérieur ou égal à un le joueur est dans aucune ville. On met le raccourcit vers la carte du monde
+                                else
+                                {
+                                    ?>
+                                        <li><a href="../../modules/map/index.php">Carte du monde</a></li>
+                                    <?php
+                                }
+                                ?>
+                                <li><a href="../../modules/story/index.php">Histoire</a></li>
+                            </ul>
+                        </li>
                         <?php
                     }
                     //Sinon on affiche rien

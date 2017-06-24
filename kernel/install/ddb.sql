@@ -48,10 +48,11 @@ CREATE TABLE IF NOT EXISTS `car_battles_monsters` (
 CREATE TABLE IF NOT EXISTS `car_chapters` 
 (
   `chapterId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `chapterMonsterId` int(5) NOT NULL,
   `chapterNumber` int(5) NOT NULL,
-  `chapterName` varchar(30) NOT NULL,
-  `chapterContent` text NOT NULL,
-  `chapterMonster` int(5) NOT NULL
+  `chapterTitle` varchar(30) NOT NULL,
+  `chapterOpening` text NOT NULL,
+  `chapterEnding` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `car_characters` (
@@ -299,6 +300,9 @@ CREATE TABLE IF NOT EXISTS `car_towns_shops`
 --
 -- Ajout des exemples dans la base de donnée
 --
+
+INSERT INTO `car_chapters` (`chapterId`, `chapterMonsterId`, `chapterTitle`, `chapterOpening`, `chapterEnding`) VALUES
+(1, 2, 'Un étrange dragon', 'Vous êtes actuellement en train de dormir quand tout à coup...\r\n\r\nA secours !!!\r\n\r\nD''énorme cri se font entendre et lorsque vous regardé à l''extérieur vous voyez apparaître la silhouette d''un énorme dragon.\r\n\r\nVotre sang ne fait qu''un tour vous prenez votre arme et vous courrez vers le dragon pour protéger le village.', 'Merci, bravo, félicitation, tels sont les mots que vous pouvez entendre de la part des villageois.\r\n\r\nLe dragon quand a lui servira de repas de fête le soir pour fêter votre victoire.');
 
 INSERT INTO `caranille`.`car_configuration` (`configurationId`, `configurationGameName`, `configurationPresentation`, `configurationSkillPoint`, `configurationAccess`) VALUES 
 (1, 'Caranille', 'MMORPG Officiel de Caranille', '4', '0');

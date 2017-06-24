@@ -66,8 +66,7 @@ require_once("../../kernel/town/index.php");
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Scénario<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="../../administration/story/index.php">Histoire</a></li>
-                                <li><a href="../../administration/missions/index.php">Missions</a></li>
+                                <li><a href="../../administration/chapters/index.php">Chapitres</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
