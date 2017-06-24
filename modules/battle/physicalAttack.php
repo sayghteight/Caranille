@@ -2,8 +2,8 @@
 
 //Si il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
-//Si il y a pas de combat contre un personnage on redirige le joueur vers le module arena
-if ($battleArenaRow == 0) { exit(header("Location: ../../modules/battleArena/index.php")); }
+//Si il y a actuellement un combat on redirige le joueur vers le module battle
+if ($battleRow == 0) { exit(header("Location: ../../modules/main/index.php")); }
 
 //Si les variables $_POST suivantes existent
 if (isset($_POST['attack']))
@@ -16,15 +16,15 @@ if (isset($_POST['attack']))
     $characterMinMagic = $characterMagicTotal / 2;
     $characterMaxMagic = $characterMagicTotal * 4;
 
-    $opponentCharacterMinStrength = $opponentCharacterStrengthTotal / 2;
-    $opponentCharacterMaxStrength = $opponentCharacterStrengthTotal * 2;    
-    $opponentCharacterMinMagic = $opponentCharacterMagicTotal / 2;
-    $opponentCharacterMaxMagic = $opponentCharacterMagicTotal * 4;
+    $opponentMinStrength = $opponentStrength / 2;
+    $opponentMaxStrength = $opponentStrength * 2;    
+    $opponentMinMagic = $opponentMagic / 2;
+    $opponentMaxMagic = $opponentMagic * 4;
 
-    $opponentCharacterMinDefense = $opponentCharacterDefenseTotal / 2;
-    $opponentCharacterMaxDefense = $opponentCharacterDefenseTotal * 2;
-    $opponentCharacterMinDefenseMagic = $opponentCharacterDefenseMagicTotal / 2;
-    $opponentCharacterMaxDefenseMagic = $opponentCharacterDefenseMagicTotal * 2;
+    $opponentMinDefense = $opponentDefense / 2;
+    $opponentMaxDefense = $opponentDefense * 2;
+    $opponentMinDefenseMagic = $opponentDefenseMagic / 2;
+    $opponentMaxDefenseMagic = $opponentDefenseMagic * 2;
 
     $characterMinDefense = $characterDefenseTotal / 2;
     $characterMaxDefense = $characterDefenseTotal * 2;
@@ -33,24 +33,24 @@ if (isset($_POST['attack']))
 
     //On calcule les dégats du joueur
     $positiveDamagesCharacter = mt_rand($characterMinStrength, $characterMaxStrength);
-    $negativeDamagesCharacter = mt_rand($opponentCharacterMinDefense, $opponentCharacterMaxDefense);
+    $negativeDamagesCharacter = mt_rand($opponentMinDefense, $opponentMaxDefense);
     $totalDamagesCharacter = $positiveDamagesCharacter - $negativeDamagesCharacter;
 
     //Si l'adversaire à plus de puissance physique ou autant que de magique il fera une attaque physique
-    if ($opponentCharacterStrengthTotal >= $opponentCharacterMagicTotal)
+    if ($opponentStrength >= $opponentMagic)
     {
         //On calcule les dégats de l'adversaire
-        $positiveDamagesOpponentCharacter = mt_rand($opponentCharacterMinStrength, $opponentCharacterMaxStrength);
-        $negativeDamagesOpponentCharacter = mt_rand($characterMinDefense, $characterMaxDefense);
-        $totalDamagesOpponentCharacter = $positiveDamagesOpponentCharacter - $negativeDamagesOpponentCharacter;
+        $positiveDamagesOpponent = mt_rand($opponentMinStrength, $opponentMaxStrength);
+        $negativeDamagesOpponent = mt_rand($characterMinDefense, $characterMaxDefense);
+        $totalDamagesOpponent = $positiveDamagesOpponent - $negativeDamagesOpponent;
     }
     //Sinon il fera une attaque magique
     else
     {
         //On calcule les dégats de l'adversaire
-        $positiveDamagesOpponentCharacter = mt_rand($opponentCharacterMinMagic, $opponentCharacterMaxMagic);
-        $negativeDamagesOpponentCharacter = mt_rand($characterMinDefenseMagic, $characterMaxDefenseMagic);
-        $totalDamagesOpponentCharacter = $positiveDamagesOpponentCharacter - $negativeDamagesOpponentCharacter;
+        $positiveDamagesOpponent = mt_rand($opponentMinMagic, $opponentMaxMagic);
+        $negativeDamagesOpponent = mt_rand($characterMinDefenseMagic, $characterMaxDefenseMagic);
+        $totalDamagesOpponent = $positiveDamagesOpponent - $negativeDamagesOpponent;
     }
 
     //Si le joueur a fait des dégats négatif ont bloque à zéro pour ne pas soigner l'adversaire (Car moins et moins fait plus)
@@ -60,16 +60,16 @@ if (isset($_POST['attack']))
     }
 
     //Si l'adversaire a fait des dégats négatif ont bloque à zéro pour ne pas soigner le personnage (Car moins et moins fait plus)
-    if ($totalDamagesOpponentCharacter < 0)
+    if ($totalDamagesOpponent < 0)
     {
-        $totalDamagesOpponentCharacter = 0;
+        $totalDamagesOpponent = 0;
     }
 
     //On vérifie si l'adversaire esquive l'attaque du joueur
-    if ($opponentCharacterAgilityTotal >= $characterAgilityTotal)
+    if ($opponentAgility >= $characterAgilityTotal)
     {
-        $totalDifference = $opponentCharacterAgilityTotal - $characterAgilityTotal;
-        $percentage = $totalDifference/$opponentCharacterAgilityTotal * 100;
+        $totalDifference = $opponentAgility - $characterAgilityTotal;
+        $percentage = $totalDifference/$opponentAgility * 100;
 
         //Si la différence est de plus de 50% on bloque pour ne pas rendre l'adversaire intouchable
         if ($percentage > 50)
@@ -84,24 +84,24 @@ if (isset($_POST['attack']))
         if ($result <= $percentage)
         {
             $totalDamagesCharacter = 0;
-            echo "$opponentCharacterName a esquivé l'attaque de $characterName<br />";
+            echo "$opponentName a esquivé l'attaque de $characterName<br />";
         }
         //Sinon l'adversaire subit l'attaque
         else
         {
-            echo "$characterName a fait $totalDamagesCharacter point(s) de dégat à $opponentCharacterName<br />";
+            echo "$characterName a fait $totalDamagesCharacter point(s) de dégat à $opponentName<br />";
         }
     }
     //Si l'adversaire a moins d'agilité que le joueur il subit l'attaque
     else
     {
-        echo "$characterName a fait $totalDamagesCharacter point(s) de dégat à $opponentCharacterName<br />";
+        echo "$characterName a fait $totalDamagesCharacter point(s) de dégat à $opponentName<br />";
     }
 
     //On vérifie si le joueur esquive l'attaque de l'adversaire
-    if ($characterAgilityTotal >= $opponentCharacterAgilityTotal)
+    if ($characterAgilityTotal >= $opponentAgility)
     {
-        $totalDifference = $characterAgilityTotal - $opponentCharacterAgilityTotal;
+        $totalDifference = $characterAgilityTotal - $opponentAgilityTotal;
         $percentage = $totalDifference/$characterAgilityTotal * 100;
 
         //Si la différence est de plus de 50% on bloque pour ne pas rendre le joueur intouchable
@@ -113,27 +113,27 @@ if (isset($_POST['attack']))
         //On génère un nombre entre 0 et 100 (inclus)
         $result = mt_rand(0, 101);
 
-        //Si le nombre généré est inférieur ou égal le joueur esquive l'attaque, on met donc $totalDamagesOpponentCharacter à 0
+        //Si le nombre généré est inférieur ou égal le joueur esquive l'attaque, on met donc $totalDamagesOpponent à 0
         if ($result <= $percentage)
         {
-            $totalDamagesOpponentCharacter = 0;
-            echo "$characterName a esquivé l'attaque de $opponentCharacterName<br />";
+            $totalDamagesOpponent = 0;
+            echo "$characterName a esquivé l'attaque de $opponentName<br />";
         }
         //Sinon le joueur subit l'attaque
         else
         {
-            echo "$opponentCharacterName a fait $totalDamagesOpponentCharacter point(s) de dégat à $characterName<br />";
+            echo "$opponentName a fait $totalDamagesOpponent point(s) de dégat à $characterName<br />";
         }
     }
     //Si le joueur a moins d'agilité que l'adversaire il subit l'attaque
     else
     {
-        echo "$opponentCharacterName a fait $totalDamagesOpponentCharacter point(s) de dégat à $characterName<br />";
+        echo "$opponentName a fait $totalDamagesOpponent point(s) de dégat à $characterName<br />";
     }
     
     //On met à jour la vie du joueur et de l'adversaire
-    $battleArenaOpponentCharacterHpRemaining = $battleArenaOpponentCharacterHpRemaining - $totalDamagesCharacter;
-    $characterHpMin = $characterHpMin - $totalDamagesOpponentCharacter;
+    $battleOpponentHpRemaining = $battleOpponentHpRemaining - $totalDamagesCharacter;
+    $characterHpMin = $characterHpMin - $totalDamagesOpponent;
 
     //On met le personnage à jour dans la base de donnée
     $updateCharacter = $bdd->prepare("UPDATE car_characters
@@ -145,29 +145,30 @@ if (isset($_POST['attack']))
     $updateCharacter->closeCursor();
 
     //On met l'adversaire à jour dans la base de donnée
-    $updateCharacterBattle = $bdd->prepare("UPDATE car_battles_arenas
-    SET battleArenaOpponentCharacterHpRemaining = :battleArenaOpponentCharacterHpRemaining
-    WHERE battleArenaOpponentCharacterId = :battleArenaOpponentCharacterId");
-    $updateCharacterBattle->execute([
-    'battleArenaOpponentCharacterHpRemaining' => $battleArenaOpponentCharacterHpRemaining,
-    'battleArenaOpponentCharacterId' => $battleArenaOpponentCharacterId]);
-    $updateCharacterBattle->closeCursor();
+    $updateBattle = $bdd->prepare("UPDATE car_battles
+    SET battleOpponentHpRemaining = :battleOpponentHpRemaining
+    WHERE battleId = :battleId");
+    $updateBattle->execute([
+    'battleOpponentHpRemaining' => $battleOpponentHpRemaining,
+    'battleId' => $battleId]);
+    $updateBattle->closeCursor();
+    
 
     //Si le joueur ou l'adversaire a moins ou a zéro HP on redirige le joueur vers la page des récompenses
-    if ($characterHpMin <= 0 || $battleArenaOpponentCharacterHpRemaining <= 0)
+    if ($characterHpMin <= 0 || $battleOpponentHpRemaining <= 0)
     {
         ?>
                     
         <hr>
         
-        <form method="POST" action="rewardsArena.php">
+        <form method="POST" action="rewards.php">
             <input type="submit" name="escape" class="btn btn-default form-control" value="Continuer"><br />
         </form>
         <?php
     }
 
     //Si l'adversaire et le joueur ont plus de zéro HP on continue le combat
-    if ($battleArenaOpponentCharacterHpRemaining > 0 && $characterHpMin > 0 )
+    if ($battleOpponentHpRemaining > 0 && $characterHpMin > 0 )
     {
         ?>
                 

@@ -15,34 +15,13 @@ CREATE TABLE IF NOT EXISTS `car_accounts` (
   `accountLastIp` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `car_battles_arenas` (
-  `battleArenaId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `battleArenaCharacterId` int(11) NOT NULL,
-  `battleArenaOpponentCharacterId` int(11) NOT NULL,
-  `battleArenaOpponentCharacterHpRemaining` int(11) NOT NULL,
-  `battleArenaOpponentCharacterMpRemaining` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE IF NOT EXISTS `car_battles_arenas` (
-  `battleArenaId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `battleArenaCharacterOneId` int(11) NOT NULL,
-  `battleArenaCharacterOneStep` int(11) NOT NULL,
-  `battleArenaCharacterOneDamages` int(11) NOT NULL,
-  `battleArenaCharacterOneHp` int(11) NOT NULL,
-  `battleArenaCharacterOneMp` int(11) NOT NULL,
-  `battleArenaCharacterTwoId` int(11) NOT NULL,
-  `battleArenaCharacterTwoStep` int(11) NOT NULL,
-  `battleArenaCharacterTwoDamages` int(11) NOT NULL,
-  `battleArenaCharacterTwoHp` int(11) NOT NULL,
-  `battleArenaCharacterTwoMp` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE IF NOT EXISTS `car_battles_monsters` (
-  `battleMonsterId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `battleMonsterCharacterId` int(11) NOT NULL,
-  `battleMonsterMonsterId` int(11) NOT NULL,
-  `battleMonsterMonsterHpRemaining` int(11) NOT NULL,
-  `battleMonsterMonsterMpRemaining` int(11) NOT NULL
+CREATE TABLE IF NOT EXISTS `car_battles` (
+  `battleId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `battleCharacterId` int(11) NOT NULL,
+  `battleOpponentId` int(11) NOT NULL,
+  `battleType` int(11) NOT NULL,
+  `battleOpponentHpRemaining` int(11) NOT NULL,
+  `battleOpponentMpRemaining` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `car_chapters` 

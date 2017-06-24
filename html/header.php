@@ -1,8 +1,9 @@
 <?php
-////On récupère le temps Unix actuel une première fois
-$timeStart = microtime(true);
+ob_start();
 //On démarre le module des sessions de PHP
 session_start();
+//On récupère le temps Unix actuel une première fois
+$timeStart = microtime(true);
 //On inclue le fichier de configuration qui contient les paramètre de connexion SQL ainsi que la création d'un objet $bdd pour les requêtes SQL
 require_once("../../kernel/config.php");
 //Si le joueur est connecté on va récupérer toutes les informations du joueur (Compte, Personnage, Combat en cours...)
@@ -14,10 +15,8 @@ if (isset($_SESSION['account']['id']))
     require_once("../../kernel/account/index.php");
     //On récupère toutes les informations du personnage grâce au compte
     require_once("../../kernel/character/index.php");
-    //On vérifie si le personnage est actuellement dans un combat de joueur. Si c'est le cas on récupère toutes les informations du personnage
-    require_once("../../kernel/battleArena/index.php");
     //On vérifie si le personnage est actuellement dans un combat de monstre. Si c'est le cas on récupère toutes les informations du monstre
-    require_once("../../kernel/battleMonster/index.php");
+    require_once("../../kernel/battle/index.php");
     //On récupère toutes les informations des équipements équipé au personnage
     require_once("../../kernel/equipment/index.php");
     //On vérifie si le personnage est actuellement dans une ville. Si c'est le cas on récupère toutes les informations de la ville

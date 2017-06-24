@@ -4,10 +4,8 @@
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'est pas dans une ville on le redirige vers la carte du monde
 if ($characterTownId == 0) { exit(header("Location: ../../modules/map/index.php")); }
-//Si il y a actuellement un combat contre un joueur on redirige le joueur vers le module battleArena
-if ($battleArenaRow > 0) { exit(header("Location: ../../modules/battleArena/index.php")); }
-//Si il y a actuellement un combat contre un monstre on redirige le joueur vers le module battleMonster
-if ($battleMonsterRow > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
+//Si il y a actuellement un combat on redirige le joueur vers le module battle
+if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); }
 
 //Si les variables $_POST suivantes existent
 if (isset($_POST['battleMonsterId']))
@@ -17,45 +15,46 @@ if (isset($_POST['battleMonsterId']))
     && $_POST['battleMonsterId'] >= 1)
     {
         //On récupère l'id du monstre
-        $monsterId = htmlspecialchars(addslashes($_POST['battleMonsterId']));
+        $opponentId = htmlspecialchars(addslashes($_POST['battleMonsterId']));
 
         //On fait une requête pour vérifier si le monstre est bien disponible dans la ville du joueur
-        $monsterQuery = $bdd->prepare("SELECT * FROM car_monsters, car_towns, car_towns_monsters
+        $opponentQuery = $bdd->prepare("SELECT * FROM car_monsters, car_towns, car_towns_monsters
         WHERE townMonsterMonsterId = monsterId
         AND townMonsterTownId = townId
         AND monsterId = ?
         AND townId = ?");
-        $monsterQuery->execute([$monsterId, $townId]);
-        $monsterRow = $monsterQuery->rowCount();
+        $opponentQuery->execute([$opponentId, $townId]);
+        $opponentRow = $opponentQuery->rowCount();
 
         //Si le monstre est disponible
-        if ($monsterRow == 1) 
+        if ($opponentRow == 1) 
         {
-            while ($monster = $monsterQuery->fetch())
+            while ($opponent = $opponentQuery->fetch())
             {
                 //On récupère les HP et MP du monstre
-                $monsterHp = $monster['monsterHp'];
-                $monsterMp = $monster['monsterMp'];
+                $opponentHp = $opponent['monsterHp'];
+                $opponentMp = $opponent['monsterMp'];
             }
-            $monsterQuery->closeCursor();
+            $opponentQuery->closeCursor();
 
-            //Insertion du combat dans la base de donnée avec les données du monstre
-            $addBattleMonster = $bdd->prepare("INSERT INTO car_battles_monsters VALUES(
+            //Insertion du combat dans la base de donnée avec les données
+            $addBattle = $bdd->prepare("INSERT INTO car_battles VALUES(
             '',
             :characterId,
-            :monsterId,
-            :monsterHp,
-            :monsterMp)");
+            :opponentId,
+            0,
+            :opponentHp,
+            :opponentMp)");
 
-            $addBattleMonster->execute([
+            $addBattle->execute([
             'characterId' => $characterId,
-            'monsterId' => $monsterId,
-            'monsterHp' => $monsterHp,
-            'monsterMp' => $monsterMp]);
-            $addBattleMonster->closeCursor();
+            'opponentId' => $opponentId,
+            'opponentHp' => $opponentHp,
+            'opponentMp' => $opponentMp]);
+            $addBattle->closeCursor();
 
             //On redirige le joueur vers le combat du monstre
-            header("Location: ../../modules/battleMonster/index.php");
+            header("Location: ../../modules/battle/index.php");
         }
         //Si le monstre n'est pas disponible
         else

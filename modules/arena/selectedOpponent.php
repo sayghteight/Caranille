@@ -4,10 +4,8 @@
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'est pas dans une ville on le redirige vers la carte du monde
 if ($characterTownId == 0) { exit(header("Location: ../../modules/map/index.php")); }
-//Si il y a actuellement un combat contre un joueur on redirige le joueur vers le module battleArena
-if ($battleArenaRow > 0) { exit(header("Location: ../../modules/battleArena/index.php")); }
-//Si il y a actuellement un combat contre un monstre on redirige le joueur vers le module battleMonster
-if ($battleMonsterRow > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
+//Si il y a actuellement un combat on redirige le joueur vers le module battle
+if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); }
 
 //Si les variables $_POST suivantes existent
 if (isset($_POST['opponentCharacterId']))
@@ -17,44 +15,44 @@ if (isset($_POST['opponentCharacterId']))
     && $_POST['opponentCharacterId'] >= 1)
     {
         //On récupère l'id de la personne à défier
-        $opponentCharacterId = htmlspecialchars(addslashes($_POST['opponentCharacterId']));
+        $opponentId = htmlspecialchars(addslashes($_POST['opponentCharacterId']));
 
         //On fait une requête pour vérifier si le personnage est bien disponible dans la ville du joueur
         $opponentQuery = $bdd->prepare("SELECT * FROM car_characters 
         WHERE characterId = ?
         AND characterTownId = ?");
-        $opponentQuery->execute([$opponentCharacterId, $townId]);
-        $opponent = $opponentQuery->rowCount();
+        $opponentQuery->execute([$opponentId, $townId]);
+        $opponentRow = $opponentQuery->rowCount();
 
         //Si le personnages a été trouvé
-        if ($opponent == 1)
+        if ($opponentRow == 1)
         {
             //On recherche le personnage
             while ($opponent = $opponentQuery->fetch())
             {
-                $opponentCharacterHp = stripslashes($opponent['characterHpTotal']);
-                $opponentCharacterMp = stripslashes($opponent['characterMpTotal']);
+                $opponentHp = stripslashes($opponent['characterHpTotal']);
+                $opponentMp = stripslashes($opponent['characterMpTotal']);
             }
             $opponentQuery->closeCursor();
 
-            //Insertion du combat dans la base de donnée avec les données du personnage adverse
-            $addBattleArena = $bdd->prepare("INSERT INTO car_battles_arenas VALUES(
+            //Insertion du combat dans la base de donnée avec les données
+            $addBattle = $bdd->prepare("INSERT INTO car_battles VALUES(
             '',
             :characterId,
-            :opponentCharacterId,
-            :opponentCharacterHp,
-            :opponentCharacterMp)");
+            :opponentId,
+            3,
+            :opponentHp,
+            :opponentMp)");
 
-            $addBattleArena->execute([
+            $addBattle->execute([
             'characterId' => $characterId,
-            'opponentCharacterId' => $opponentCharacterId,
-            'opponentCharacterHp' => $opponentCharacterHp,
-            'opponentCharacterMp' => $opponentCharacterMp]);
-            
-            $addBattleArena->closeCursor();
+            'opponentId' => $opponentId,
+            'opponentHp' => $opponentHp,
+            'opponentMp' => $opponentMp]);
+            $addBattle->closeCursor();
 
             //On redirige l'utilisateur vers le module battleArena
-            header("Location: ../../modules/battleArena/index.php");
+            header("Location: ../../modules/battle/index.php");
         }
         //Si le personnage n'est pas disponible
         else

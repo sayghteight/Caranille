@@ -4,10 +4,8 @@
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'est pas dans une ville on le redirige vers la carte du monde
 if ($characterTownId == 0) { exit(header("Location: ../../modules/map/index.php")); }
-//Si il y a actuellement un combat contre un joueur on redirige le joueur vers le module battleArena
-if ($battleArenaRow > 0) { exit(header("Location: ../../modules/battleArena/index.php")); }
-//Si il y a actuellement un combat contre un monstre on redirige le joueur vers le module battleMonster
-if ($battleMonsterRow > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
+//Si il y a actuellement un combat on redirige le joueur vers le module battle
+if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); }
 
 //On fait une recherche de tous les joueurs dans la base de donnée qui ont un Id différent du notre et qui sont dans la même ville
 $opponentQuery = $bdd->prepare("SELECT * FROM car_characters 
@@ -46,7 +44,7 @@ if ($opponentRow > 0)
 else
 {
     ?>
-    Il n'y a aucun joueur à proximité, essayez de vous approcher d'un autre joueur.
+    Il n'y a aucun autre joueur.
     <?php
 }
 $opponentQuery->closeCursor();

@@ -4,10 +4,8 @@
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur est déjà dans une ville on le redirige vers la ville
 if ($characterTownId >= 1) { exit(header("Location: ../../modules/town/index.php")); }
-//Si il y a actuellement un combat contre un joueur on redirige le joueur vers le module battleArena
-if ($battleArenaRow > 0) { exit(header("Location: ../../modules/battleArena/index.php")); }
-//Si il y a actuellement un combat contre un monstre on redirige le joueur vers le module battleMonster
-if ($battleMonsterRow > 0) { exit(header("Location: ../../modules/battleMonster/index.php")); }
+//Si il y a actuellement un combat on redirige le joueur vers le module battle
+if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); }
 ?>
 
 Bienvenue sur la carte du monde.<br />
