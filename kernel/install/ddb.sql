@@ -282,7 +282,7 @@ CREATE TABLE IF NOT EXISTS `car_towns_shops`
 INSERT INTO `car_chapters` (`chapterId`, `chapterMonsterId`, `chapterTitle`, `chapterOpening`, `chapterEnding`) VALUES
 (1, 2, 'Un étrange dragon', 'Vous êtes actuellement en train de dormir quand tout à coup...\r\n\r\nA secours !!!\r\n\r\nD''énorme cri se font entendre et lorsque vous regardé à l''extérieur vous voyez apparaître la silhouette d''un énorme dragon.\r\n\r\nVotre sang ne fait qu''un tour vous prenez votre arme et vous courrez vers le dragon pour protéger le village.', 'Merci, bravo, félicitation, tels sont les mots que vous pouvez entendre de la part des villageois.\r\n\r\nLe dragon quand a lui servira de repas de fête le soir pour fêter votre victoire.');
 
-INSERT INTO `caranille`.`car_configuration` (`configurationId`, `configurationGameName`, `configurationPresentation`, `configurationSkillPoint`, `configurationAccess`) VALUES 
+INSERT INTO `car_configuration` (`configurationId`, `configurationGameName`, `configurationPresentation`, `configurationSkillPoint`, `configurationAccess`) VALUES 
 (1, 'Caranille', 'MMORPG Officiel de Caranille', '4', '0');
 
 INSERT INTO `car_items` (`itemId`, `itemRaceId`, `itemPicture`, `itemType`, `itemLevel`, `itemLevelRequired`, `itemName`, `itemDescription`, `itemHpEffect`, `itemMpEffect`, `itemStrengthEffect`, `itemMagicEffect`, `itemAgilityEffect`, `itemDefenseEffect`, `itemDefenseMagicEffect`, `itemWisdomEffect`, `itemPurchasePrice`, `itemSalePrice`) VALUES
