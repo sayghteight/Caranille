@@ -49,7 +49,6 @@ CREATE TABLE IF NOT EXISTS `car_chapters`
 (
   `chapterId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `chapterMonsterId` int(5) NOT NULL,
-  `chapterNumber` int(5) NOT NULL,
   `chapterTitle` varchar(30) NOT NULL,
   `chapterOpening` text NOT NULL,
   `chapterEnding` text NOT NULL
