@@ -50,9 +50,7 @@ CREATE TABLE IF NOT EXISTS `car_chapters`
   `chapterId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `chapterNumber` int(5) NOT NULL,
   `chapterName` varchar(30) NOT NULL,
-  `chapterOpening` text NOT NULL,
-  `chapterEnding` text NOT NULL,
-  `chapterDefeate` text NOT NULL,
+  `chapterContent` text NOT NULL,
   `chapterMonster` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
