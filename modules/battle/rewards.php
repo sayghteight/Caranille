@@ -30,7 +30,7 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin <= 0)
 
     <hr>
 
-    <form method="POST" action="../../modules/main/index.php">
+    <form method="POST" action="../../modules/town/index.php">
         <input type="submit" name="escape" class="btn btn-default form-control" value="Continuer"><br />
     </form>
     <?php
@@ -49,7 +49,7 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
     Vous obtenez:<br />
     
     <?php
-    //Si il s'agit d'un combat de Donjon (0), d'histoire (1) ou de mission (2)
+    //Si il s'agit d'un combat de monstre comme un combat de Donjon (0), d'histoire (1) ou de mission (2)
     if ($battleType >= 0 && $battleType <= 2)
     {
         ?>
@@ -58,32 +58,32 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
         <?php
     
         //On recherche dans la base de donnée les objets que ce monstre peut faire gagner
-        $monsterDropQuery = $bdd->prepare("SELECT * FROM car_monsters, car_items, car_monsters_drops
+        $opponentDropQuery = $bdd->prepare("SELECT * FROM car_monsters, car_items, car_monsters_drops
         WHERE monsterDropMonsterID = monsterId
         AND monsterDropItemID = itemId
         AND monsterDropMonsterID = ?");
-        $monsterDropQuery->execute([$battleMonsterMonsterId]);
-        $monsterDropRow = $monsterDropQuery->rowCount();
+        $opponentDropQuery->execute([$opponentId]);
+        $opponentDropRow = $opponentDropQuery->rowCount();
     
         //Si il existe un ou plusieurs objet pour ce monstre
-        if ($monsterDropRow > 0) 
+        if ($opponentDropRow > 0) 
         {
             //On va voir pour chaque objet si le joueur l'obtient ou non
-            while ($monsterDrop = $monsterDropQuery->fetch())
+            while ($opponentDrop = $opponentDropQuery->fetch())
             {
-                $monsterDropItemId = stripslashes($monsterDrop['itemId']);
-                $monsterDropItemName = stripslashes($monsterDrop['itemName']);
-                $monsterDropLuck = stripslashes($monsterDrop['monsterDropLuck']);
+                $opponentDropItemId = stripslashes($opponentDrop['itemId']);
+                $opponentDropItemName = stripslashes($opponentDrop['itemName']);
+                $opponentDropLuck = stripslashes($opponentDrop['monsterDropLuck']);
     
                 //On génère un nombre entre 0 et 1001 (Pour que 1000 puisse aussi être choisit)
                 $numberRandom = mt_rand(0, 1001);
                 
                 //Si le nombre obtenu est inférieur ou égal à l'objet il l'obtient
-                if ($numberRandom <= $monsterDropLuck)
+                if ($numberRandom <= $opponentDropLuck)
                 {
                     $itemQuery = $bdd->prepare("SELECT * FROM car_inventory 
                     WHERE inventoryItemId = ?");
-                    $itemQuery->execute([$monsterDropItemId]);
+                    $itemQuery->execute([$opponentId]);
                     $itemRow = $itemQuery->rowCount();
     
                     //Si l'objet a été trouvé dans l'inventaire du joueur on ajoute +1 à cet objet
@@ -94,7 +94,7 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
                         SET inventoryQuantity = inventoryQuantity + 1
                         WHERE inventoryItemId = :monsterDropItemId');
     
-                        $updateItems->execute(['monsterDropItemId' => $monsterDropItemId]);
+                        $updateItems->execute(['monsterDropItemId' => $opponentId]);
                         $updateItems->closeCursor();
                     }
                     //Si l'objet n'a pas été trouvé dans l'inventaire du joueur on l'ajoute
@@ -110,17 +110,17 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
     
                         $addItem->execute([
                         'characterId' => $characterId,
-                        'monsterDropItemId' => $monsterDropItemId]);
+                        'monsterDropItemId' => $opponentId]);
                         $addItem->closeCursor();
                     }
                     $itemQuery->closeCursor();
                     ?>
-                    -1 <?php echo "$monsterDropItemName<br />" ?>
+                    -1 <?php echo "$opponentDropItemName<br />" ?>
                     <?php
                 }
             }
-            $monsterDropQuery->closeCursor();
         }
+        $opponentDropQuery->closeCursor();
 
         //On donne les récompenses au personnage et on le met à jour dans la base de donnée
         $updateCharacter = $bdd->prepare("UPDATE car_characters
@@ -154,7 +154,7 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
 
     <hr>
 
-    <form method="POST" action="../../modules/main/index.php">
+    <form method="POST" action="../../modules/town/index.php">
         <input type="submit" name="escape" class="btn btn-default form-control" value="Continuer"><br />
     </form>
     <?php
@@ -184,7 +184,7 @@ if ($characterHpMin <= 0 && $battleOpponentHpRemaining > 0)
 
     <hr>
 
-    <form method="POST" action="../../modules/main/index.php">
+    <form method="POST" action="../../modules/town/index.php">
         <input type="submit" name="escape" class="btn btn-default form-control" value="Continuer"><br />
     </form>
     <?php

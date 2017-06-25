@@ -107,7 +107,7 @@ if (isset($_POST['magic']))
         //On vérifie si le joueur esquive l'attaque de l'adversaire
         if ($characterAgilityTotal >= $opponentAgility)
         {
-            $totalDifference = $characterAgilityTotal - $opponentAgilityTotal;
+            $totalDifference = $characterAgilityTotal - $opponentAgility;
             $percentage = $totalDifference/$characterAgilityTotal * 100;
     
             //Si la différence est de plus de 50% on bloque pour ne pas rendre le joueur intouchable
