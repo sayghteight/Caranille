@@ -31,8 +31,7 @@ if ($chapterRow == 1)
 		
 	<hr>
 	
-    <form method="POST" action="story.php">
-        <input type="hidden" class="btn btn-default form-control" name="chapterId" value="<?= $chapterId ?>">
+    <form method="POST" action="launchStory.php">
         <input type="submit" class="btn btn-default form-control" name="continue" value="Continuer">
     </form>
 	<?php

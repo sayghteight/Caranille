@@ -42,7 +42,7 @@ if (isset($_POST['battleMonsterId']))
             '',
             :characterId,
             :opponentId,
-            0,
+            'Dungeon',
             :opponentHp,
             :opponentMp)");
 

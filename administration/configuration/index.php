@@ -30,17 +30,17 @@ $configurationQuery->closeCursor();
     <?php
     switch ($adminGameAccess)
     {
-        case 0:
+        case "Opened":
         ?>
-        <option selected="selected" value="0">Oui</option>
-        <option value="1">Non</option>
+        <option selected="selected" value="Opened">Ouvert</option>
+        <option value="Closed">Fermé</option>
         <?php
         break;
 
-        case 1:
+        case "Closed":
         ?>
-        <option value="0">Oui</option>
-        <option selected="selected" value="1">Non</option>
+        <option value="Opened">Ouvert</option>
+        <option selected="selected" value="Closed">Fermé</option>
         <?php
         break;
     }

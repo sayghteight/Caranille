@@ -15,9 +15,7 @@ if (isset($_POST['adminGameName'])
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
     if (ctype_digit($_POST['adminGameSkillPoint'])
-    && ctype_digit($_POST['adminGameAccess'])
-    && $_POST['adminGameSkillPoint'] >= 0
-    && $_POST['adminGameAccess'] >= 0)
+    && $_POST['adminGameSkillPoint'] >= 0)
     {
         //On récupère les informations du formulaire
         $adminGameName = htmlspecialchars(addslashes($_POST['adminGameName']));
@@ -47,6 +45,11 @@ if (isset($_POST['adminGameName'])
             <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
         </form>
         <?php
+    }
+    //Si tous les champs numérique ne contiennent pas un nombre
+    else
+    {
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 

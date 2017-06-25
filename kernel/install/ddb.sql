@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `car_battles` (
   `battleId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `battleCharacterId` int(11) NOT NULL,
   `battleOpponentId` int(11) NOT NULL,
-  `battleType` int(11) NOT NULL,
+  `battleType` varchar(30) NOT NULL,
   `battleOpponentHpRemaining` int(11) NOT NULL,
   `battleOpponentMpRemaining` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `car_configuration`
   `configurationGameName` varchar(30) NOT NULL,
   `configurationPresentation` text NOT NULL,
   `configurationSkillPoint` int(11) NOT NULL,
-  `configurationAccess` varchar(10) NOT NULL
+  `configurationAccess` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `car_inventory` 
@@ -283,7 +283,7 @@ INSERT INTO `car_chapters` (`chapterId`, `chapterMonsterId`, `chapterTitle`, `ch
 (1, 2, 'Un étrange dragon', 'Vous êtes actuellement en train de dormir quand tout à coup...\r\n\r\nA secours !!!\r\n\r\nD''énorme cri se font entendre et lorsque vous regardé à l''extérieur vous voyez apparaître la silhouette d''un énorme dragon.\r\n\r\nVotre sang ne fait qu''un tour vous prenez votre arme et vous courrez vers le dragon pour protéger le village.', 'Merci, bravo, félicitation, tels sont les mots que vous pouvez entendre de la part des villageois.\r\n\r\nLe dragon quand a lui servira de repas de fête le soir pour fêter votre victoire.');
 
 INSERT INTO `car_configuration` (`configurationId`, `configurationGameName`, `configurationPresentation`, `configurationSkillPoint`, `configurationAccess`) VALUES 
-(1, 'Caranille', 'MMORPG Officiel de Caranille', '4', '0');
+(1, 'Caranille', 'MMORPG Officiel de Caranille', '4', 'Opened');
 
 INSERT INTO `car_items` (`itemId`, `itemRaceId`, `itemPicture`, `itemType`, `itemLevel`, `itemLevelRequired`, `itemName`, `itemDescription`, `itemHpEffect`, `itemMpEffect`, `itemStrengthEffect`, `itemMagicEffect`, `itemAgilityEffect`, `itemDefenseEffect`, `itemDefenseMagicEffect`, `itemWisdomEffect`, `itemPurchasePrice`, `itemSalePrice`) VALUES
 (1, 0, 'http://localhost/item.png', 'Item', 1, 1, 'Potion', 'Cette petite fiole vous rendra 100 HP', 100, 0, 0, 0, 0, 0, 0, 0, 50, 10),

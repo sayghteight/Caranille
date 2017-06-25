@@ -49,8 +49,10 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
     Vous obtenez:<br />
     
     <?php
-    //Si il s'agit d'un combat de monstre comme un combat de Donjon (0), d'histoire (1) ou de mission (2)
-    if ($battleType >= 0 && $battleType <= 2)
+    //S'il s'agit d'un combat de Donjon, de mission ou d'histoire
+    if ($battleType == "Dungeon"
+    || $battleType == "Mission"
+    || $battleType == "Story")
     {
         ?>
         -<?php echo $opponentExperience; ?> point(s) d'experience<br />
@@ -134,8 +136,8 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
         'characterId' => $characterId]);
         $updateCharacter->closeCursor();
     }
-    //Si il s'agit d'un combat contre un joueur (3)
-    else
+    //Si il s'agit d'un combat contre un joueur
+    else if ($battleType == "Arena")
     {
         echo "-1 point de victoire<br />";
         //On donne les récompenses au personnage et on le met à jour dans la base de donnée

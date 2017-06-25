@@ -8,30 +8,33 @@ if ($characterTownId == 0) { exit(header("Location: ../../modules/map/index.php"
 if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); }
 
 //Si les variables $_POST suivantes existent
-if (isset($_POST['opponentCharacterId']))
+if (isset($_POST['continue']))
 {
-    //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
-    if (ctype_digit($_POST['opponentCharacterId'])
-    && $_POST['opponentCharacterId'] >= 1)
+    //On vérifie si le chapitre existe
+    $chapterQuery = $bdd->prepare("SELECT * FROM car_chapters
+    WHERE chapterId = ?");
+    $chapterQuery->execute([$characterChapter]);
+    $chapterRow = $chapterQuery->rowCount();
+    
+    //Si le chapitre existe
+    if ($chapterRow == 1)
     {
-        //On récupère l'id de la personne à défier
-        $opponentId = htmlspecialchars(addslashes($_POST['opponentCharacterId']));
-
-        //On fait une requête pour vérifier si le personnage est bien disponible dans la ville du joueur
-        $opponentQuery = $bdd->prepare("SELECT * FROM car_characters 
-        WHERE characterId = ?
-        AND characterTownId = ?");
-        $opponentQuery->execute([$opponentId, $townId]);
+        //On fait une requête pour récupérer le monstre du chapitre
+        $opponentQuery = $bdd->prepare("SELECT * FROM car_monsters, car_chapters
+        WHERE monsterId = chapterMonsterId
+        AND chapterId = ?");
+        $opponentQuery->execute([$characterChapter]);
         $opponentRow = $opponentQuery->rowCount();
 
-        //Si le personnages a été trouvé
-        if ($opponentRow == 1)
+        //Si le monstre est disponible
+        if ($opponentRow == 1) 
         {
-            //On recherche le personnage
             while ($opponent = $opponentQuery->fetch())
             {
-                $opponentHp = stripslashes($opponent['characterHpTotal']);
-                $opponentMp = stripslashes($opponent['characterMpTotal']);
+                //On récupère les HP et MP du monstre
+                $opponentId = $opponent['monsterId'];
+                $opponentHp = $opponent['monsterHp'];
+                $opponentMp = $opponent['monsterMp'];
             }
             $opponentQuery->closeCursor();
 
@@ -40,7 +43,7 @@ if (isset($_POST['opponentCharacterId']))
             '',
             :characterId,
             :opponentId,
-            'Arena',
+            'Story',
             :opponentHp,
             :opponentMp)");
 
@@ -51,25 +54,24 @@ if (isset($_POST['opponentCharacterId']))
             'opponentMp' => $opponentMp]);
             $addBattle->closeCursor();
 
-            //On redirige l'utilisateur vers le module battleArena
+            //On redirige le joueur vers le combat du monstre
             header("Location: ../../modules/battle/index.php");
         }
-        //Si le personnage n'est pas disponible
+        //Si le monstre n'est pas disponible
         else
         {
-            echo "Erreur: Personnage indisponible";
+            echo "Erreur: Monstre indisponible";
         }
     }
-    //Si le personnage n'est pas un nombre
-    else
+    //Si le chapitre n'exite pas
     {
-        echo "Erreur: personnage invalide";
+        echo "Erreur: Le chapitre demandé n'existe pas";
     }
 }
 //Si toutes les variables $_POST n'existent pas
 else
 {
-    echo "Erreur: Tous les champs n'ont pas été rempli";
+    echo "Erreur: Aucun choix effectué";
 }
 
 require_once("../../html/footer.php"); ?>

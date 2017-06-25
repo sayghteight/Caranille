@@ -22,8 +22,10 @@ if ($battleRow == 1)
     }
     $battleQuery->closeCursor();
     
-    //Si il s'agit d'un combat de Donjon (0), d'histoire (1) ou de mission (2)
-    if ($battleType >= 0 && $battleType <= 2)
+    //S'il s'agit d'un combat de Donjon, de mission ou d'histoire
+    if ($battleType == "Dungeon"
+    || $battleType == "Mission"
+    || $battleType == "Story")
     {
         //On récupère toutes les informations du monstre que nous sommes en train de combattre
         $opponentQuery = $bdd->prepare("SELECT * FROM car_monsters 
@@ -49,8 +51,8 @@ if ($battleRow == 1)
         }
         $opponentQuery->closeCursor();
     }
-    //Si il s'agit d'un combat contre un joueur (3)
-    else
+    //Si il s'agit d'un combat contre un joueur
+    else if ($battleType == "Arena")
     {
         //On récupère toutes les informations du personnage que nous sommes en train de combattre
         $opponentQuery = $bdd->prepare("SELECT * FROM car_characters 
