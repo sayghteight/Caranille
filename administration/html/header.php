@@ -77,7 +77,6 @@ require_once("../../kernel/town/index.php");
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Outils<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="../../administration/configuration/index.php">Configuration</a></li>
-                                <li><a href="../../administration/updates/index.php">Mises à jour</a></li>
                             </ul>
                         </li>
                         <li><a href="../../modules/main/index.php">Retour au jeu</a></li>

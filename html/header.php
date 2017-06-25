@@ -125,13 +125,11 @@ if (isset($_SESSION['account']['id']))
 
                             case 1:
                             ?>
-                                <li><a href="#">Modération</a></li>
                             <?php
                             break;
 
                             case 2:
                             ?>
-                                <li><a href="#">Modération</a></li>
                                 <li><a href="../../administration/main/index.php">Administration</a></li>
                             <?php
                             break;
