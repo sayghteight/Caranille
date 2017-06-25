@@ -49,7 +49,7 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
     Vous obtenez:<br />
     
     <?php
-    //S'il s'agit d'un combat de Donjon, de mission ou d'histoire
+    //S'il s'agit d'un combat de Donjon, de mission
     if ($battleType == "Dungeon"
     || $battleType == "Mission"
     || $battleType == "Story")
@@ -123,6 +123,47 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
             }
         }
         $opponentDropQuery->closeCursor();
+        
+        //S'il s'agit d'un combat d'histoire
+        if ($battleType == "Story")
+        {
+            ?>
+            
+            <hr>
+        
+            <?php
+            //On récupère les informations du chapitre en cours
+            $chapterQuery = $bdd->prepare("SELECT * FROM car_chapters
+            WHERE chapterId = ?");
+            $chapterQuery->execute([$characterChapter]);
+            $chapterRow = $chapterQuery->rowCount();
+            
+            //Si le chapitre du joueur est disponible
+            if ($chapterRow == 1)
+            {
+                //On récupère la fin du chapitre pour l'afficher au joueur
+            	while ($chapter = $chapterQuery->fetch())
+            	{
+            		$chapterEnding = stripslashes(nl2br($chapter['chapterEnding']));
+            	}
+            	$chapterQuery->closeCursor();
+            	
+                //On affiche la fin du chapitre
+                echo "$chapterEnding";
+                
+                //On met à jour le chapitre du joueur à jour
+                $updateCharacterChapter = $bdd->prepare('UPDATE car_characters 
+                SET characterChapter = characterChapter + 1
+                WHERE characterId = :characterId');
+                $updateCharacterChapter->execute(['characterId' => $characterId]);
+                $updateCharacterChapter->closeCursor();
+            }
+            //Si le chapitre n'existe pas
+            else 
+            {
+            	echo "Il n'y a actuellement aucun nouveau chapitre";
+            }
+        }
 
         //On donne les récompenses au personnage et on le met à jour dans la base de donnée
         $updateCharacter = $bdd->prepare("UPDATE car_characters
