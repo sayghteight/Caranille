@@ -49,6 +49,6 @@ else
 ?>
 
 <form method="POST" action="addItem.php">
-    <input type="submit" class="btn btn-default form-control" name="add" value="Ajouter un objet">
+    <input type="submit" class="btn btn-default form-control" name="add" value="Créer un objet">
 </form>
 <?php require_once("../html/footer.php");

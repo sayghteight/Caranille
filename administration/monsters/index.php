@@ -47,7 +47,7 @@ else
 ?>
 
 <form method="POST" action="addMonster.php">
-    <input type="submit" class="btn btn-default form-control" name="add" value="Ajouter un monstre">
+    <input type="submit" class="btn btn-default form-control" name="add" value="Créer un monstre">
 </form>
 
 <?php require_once("../html/footer.php");

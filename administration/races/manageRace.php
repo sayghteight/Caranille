@@ -33,13 +33,17 @@ if (isset($_POST['adminRaceId'])
             }
 
             ?>
-            Que souhaitez-vous faire de la race <em><?php echo $adminRaceName ?></em><br />
+            Que souhaitez-vous faire de la classe <em><?php echo $adminRaceName ?></em><br />
 
             <hr>
                 
             <form method="POST" action="editRace.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminRaceId" value="<?= $adminRaceId ?>">
-                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier">
+                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier la classe">
+            </form>
+            <form method="POST" action="deleteRace.php">
+                <input type="hidden" class="btn btn-default form-control" name="adminRaceId" value="<?= $adminRaceId ?>">
+                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer la classe">
             </form>
 
             <hr>

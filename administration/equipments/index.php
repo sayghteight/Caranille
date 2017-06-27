@@ -52,7 +52,7 @@ else
 ?>
 
 <form method="POST" action="addEquipment.php">
-    <input type="submit" class="btn btn-default form-control" name="add" value="Ajouter un équipement">
+    <input type="submit" class="btn btn-default form-control" name="add" value="Créer un équipement">
 </form>
 
 <?php require_once("../html/footer.php");

@@ -30,4 +30,8 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
     <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer">
 </form>
 
+<form method="POST" action="addRace.php">
+    <input type="submit" class="btn btn-default form-control" name="add" value="Créer une classe">
+</form>
+
 <?php require_once("../html/footer.php");

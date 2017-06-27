@@ -55,7 +55,7 @@ if (isset($_POST['adminTownShopTownId'])
                         </select>
                     </div>
                     <input type="hidden" name="adminTownShopTownId" value="<?= $adminTownShopTownId ?>">
-                    <input type="submit" name="delete" class="btn btn-default form-control" value="Retirer">
+                    <input type="submit" name="delete" class="btn btn-default form-control" value="Retirer le magasin">
                 </form>
                 
                 <hr>
@@ -87,7 +87,7 @@ if (isset($_POST['adminTownShopTownId'])
                         </select>
                     </div>
                     <input type="hidden" name="adminTownShopTownId" value="<?= $adminTownShopTownId ?>">
-                    <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter">
+                    <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter le magasin">
                 </form>
                 <?php
             }

@@ -57,7 +57,7 @@ if (isset($_POST['adminShopItemShopId'])
                     </div>
                     <input type="hidden" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
                     <input type="submit" name="edit" class="btn btn-default form-control" value="Modifier la réduction">
-                    <input type="submit" name="delete" class="btn btn-default form-control" value="Retirer">
+                    <input type="submit" name="delete" class="btn btn-default form-control" value="Retirer l'objet">
                 </form>
                 
                 <hr>
@@ -91,7 +91,7 @@ if (isset($_POST['adminShopItemShopId'])
                     </div>
                     Réduction (De 0 à 100%) <br> <input type="number" name="adminShopItemDiscount" class="form-control" placeholder="Réduction (De 0 à 100%)" required><br /><br />
                     <input type="hidden" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
-                    <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter">
+                    <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter l'objet">
                 </form>
                 <?php
             }

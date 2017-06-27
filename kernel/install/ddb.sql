@@ -232,7 +232,7 @@ CREATE TABLE IF NOT EXISTS `car_races`
   `raceAgilityBonus` int(11) NOT NULL,
   `raceDefenseBonus` int(11) NOT NULL,
   `raceDefenseMagicBonus` int(11) NOT NULL,
-  `raceWidsomBonus` int(11) NOT NULL
+  `raceWisdomBonus` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `car_shops` 
@@ -301,7 +301,7 @@ INSERT INTO `car_monsters` (`monsterId`, `monsterPicture`, `monsterName`, `monst
 INSERT INTO `car_news` (`newsId`, `newsPicture`, `newsTitle`, `newsMessage`, `newsAccountPseudo`, `newsDate`) VALUES
 (1, 'http://localhost/news.png', 'Installation de Caranille', 'Félicitation Caranille est bien installé vous pouvez maintenant vous connecter avec vos identifiants \r\n\r\nBon RPG Making', 'admin', '2017-05-18');
 
-INSERT INTO `car_races` (`raceId`, `racePicture`, `raceName`, `raceDescription`, `raceHpBonus`, `raceMpBonus`, `raceStrengthBonus`, `raceMagicBonus`, `raceAgilityBonus`, `raceDefenseBonus`, `raceDefenseMagicBonus`, `raceWidsomBonus`) VALUES
+INSERT INTO `car_races` (`raceId`, `racePicture`, `raceName`, `raceDescription`, `raceHpBonus`, `raceMpBonus`, `raceStrengthBonus`, `raceMagicBonus`, `raceAgilityBonus`, `raceDefenseBonus`, `raceDefenseMagicBonus`, `raceWisdomBonus`) VALUES
 (1, 'http://localhost/race.png', 'Chevalier', 'Classe de personnage axé sur la force.', 10, 1, 2, 1, 1, 1, 1, 1),
 (2, 'http://localhost/race.png', 'Mage Noir', 'Classe de personnage axé sur la magie.', 10, 1, 1, 2, 1, 1, 1, 1),
 (3, 'http://localhost/race.png', 'Ninja', 'Classe de personnage axé sur l''agilité.', 10, 1, 1, 1, 2, 1, 1, 1),

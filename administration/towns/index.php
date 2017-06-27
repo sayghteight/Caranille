@@ -47,7 +47,7 @@ $townQuery->closeCursor();
 ?>
 
 <form method="POST" action="addTown.php">
-    <input type="submit" class="btn btn-default form-control" name="add" value="Ajouter une ville">
+    <input type="submit" class="btn btn-default form-control" name="add" value="Créer une ville">
 </form>
 
 <?php require_once("../html/footer.php");

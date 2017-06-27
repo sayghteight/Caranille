@@ -33,7 +33,7 @@ if ($chapterRow > 0)
             ?>
             </select>
         </div>
-        <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer">
+        <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer le chapitre">
     </form>
     <?php
 }
@@ -47,6 +47,6 @@ else
 ?>
 
 <form method="POST" action="addChapter.php">
-    <input type="submit" class="btn btn-default form-control" name="add" value="Nouveau">
+    <input type="submit" class="btn btn-default form-control" name="add" value="Nouveau chapitre">
 </form>
 <?php require_once("../html/footer.php");

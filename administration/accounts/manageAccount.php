@@ -40,11 +40,11 @@ if (isset($_POST['adminAccountId'])
                 
             <form method="POST" action="editAccount.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminAccountId" value="<?= $adminAccountId ?>">
-                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier">
+                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier le compte">
             </form>
             <form method="POST" action="deleteAccount.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminAccountId" value="<?= $adminAccountId ?>">
-                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer">
+                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer le compte">
             </form>
 
             <hr>

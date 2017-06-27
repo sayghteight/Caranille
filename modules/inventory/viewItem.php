@@ -116,6 +116,10 @@ if (isset($_POST['itemId'])
                     </td>
                     
                     <td>
+                        <form method="POST" action="useItem.php">
+                            <input type="hidden" name="itemId" value="<?php echo $itemId ?>">
+                            <input type="submit" class="btn btn-default form-control" name="use" value="Utiliser"><br /><br />
+                        </form>
                         <form method="POST" action="saleItem.php">
                             <input type="hidden" name="itemId" value="<?php echo $itemId ?>">
                             <input type="submit" class="btn btn-default form-control" name="sale" value="Vendre"><br /><br />

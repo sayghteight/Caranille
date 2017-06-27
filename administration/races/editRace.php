@@ -30,6 +30,7 @@ if (isset($_POST['adminRaceId'])
             while ($race = $raceQuery->fetch())
             {
                 //On récupère les informations du compte
+                $adminRacePicture = stripslashes($race['racePicture']);
                 $adminRaceName = stripslashes($race['raceName']);
                 $adminRaceDescription = stripslashes($race['raceDescription']);
                 $adminRaceHpBonus = stripslashes($race['raceHpBonus']);
@@ -39,30 +40,27 @@ if (isset($_POST['adminRaceId'])
                 $adminRaceAgilityBonus = stripslashes($race['raceAgilityBonus']);
                 $adminRaceDefenseBonus = stripslashes($race['raceDefenseBonus']);
                 $adminRaceDefenseMagicBonus = stripslashes($race['raceDefenseMagicBonus']);
-                $adminRaceWidsomBonus = stripslashes($race['raceWidsomBonus']);
+                $adminRaceWisdomBonus = stripslashes($race['raceWisdomBonus']);
             }
             ?>
 
             <p>Informations de la classe</p>
             <form method="POST" action="editRaceEnd.php">
+                Image : <br> <input type="text" name="adminRacePicture" class="form-control" placeholder="Nom" value="<?php echo $adminRacePicture; ?>" required autofocus><br /><br />
                 Nom : <br> <input type="text" name="adminRaceName" class="form-control" placeholder="Nom" value="<?php echo $adminRaceName; ?>" required autofocus><br /><br />
                 Description : <br> <textarea class="form-control" name="adminRaceDescription" id="adminRaceDescription" rows="3" required><?php echo $adminRaceDescription; ?></textarea><br /><br />
+                HP par niveau : <br> <input type="number" name="adminRaceHpBonus" class="form-control" placeholder="HP par niveau" value="<?php echo $adminRaceHpBonus; ?>" required autofocus><br /><br />
+                MP par niveau : <br> <input type="number" name="adminRaceMpBonus" class="form-control" placeholder="MP par niveau" value="<?php echo $adminRaceMpBonus; ?>" required autofocus><br /><br />
+                Force par niveau : <br> <input type="number" name="adminRaceStrengthBonus" class="form-control" placeholder="Force par niveau" value="<?php echo $adminRaceStrengthBonus; ?>" required autofocus><br /><br />
+                Magie par niveau : <br> <input type="number" name="adminRaceMagicBonus" class="form-control" placeholder="Magie par niveau" value="<?php echo $adminRaceMagicBonus; ?>" required autofocus><br /><br />
+                Agilité par niveau : <br> <input type="number" name="adminRaceAgilityBonus" class="form-control" placeholder="Agilité par niveau" value="<?php echo $adminRaceAgilityBonus; ?>" required autofocus><br /><br />
+                Défense par niveau : <br> <input type="number" name="adminRaceDefenseBonus" class="form-control" placeholder="Défense par niveau" value="<?php echo $adminRaceDefenseBonus; ?>" required autofocus><br /><br />
+                Défense Magique par niveau : <br> <input type="number" name="adminRaceDefenseMagicBonus" class="form-control" placeholder="Défense Magique par niveau" value="<?php echo $adminRaceDefenseMagicBonus; ?>" required autofocus><br /><br />
+                Sagesse par niveau : <br> <input type="number" name="adminRaceWisdomBonus" class="form-control" placeholder="Sagesse par niveau" value="<?php echo $adminRaceWisdomBonus; ?>" required autofocus><br /><br />
                 <input type="hidden" name="adminRaceId" value="<?= $adminRaceId ?>">
                 <input name="finalEdit" class="btn btn-default form-control" type="submit" value="Modifier">
             </form>
             
-            <hr>
-            
-            <p>Amélioration par niveau</p>
-            +<?php echo $adminRaceHpBonus; ?> Hp<br />
-            +<?php echo $adminRaceMpBonus; ?> Mp<br />
-            +<?php echo $adminRaceStrengthBonus; ?> Force<br />
-            +<?php echo $adminRaceMagicBonus; ?> Magie<br />
-            +<?php echo $adminRaceAgilityBonus; ?> Agilité<br />
-            +<?php echo $adminRaceDefenseBonus; ?> Défense<br />
-            +<?php echo $adminRaceDefenseMagicBonus; ?> Défense magique<br />
-            +<?php echo $adminRaceWidsomBonus; ?> Sagesse<br /><br />
-
             <hr>
 
             <form method="POST" action="index.php">

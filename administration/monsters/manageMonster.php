@@ -43,15 +43,15 @@ if (isset($_POST['adminMonsterId'])
                 
             <form method="POST" action="editMonster.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminMonsterId" value="<?= $adminMonsterId ?>">
-                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier">
+                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier le monstre">
             </form>
             <form method="POST" action="../monstersDrops/manageMonsterDrop.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropMonsterId" value="<?= $adminMonsterId ?>">
-                <input type="submit" class="btn btn-default form-control" name="manage" value="Objets/Equippements">
+                <input type="submit" class="btn btn-default form-control" name="manage" value="Objets/Equippements du monstre">
             </form>
             <form method="POST" action="deleteMonster.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminMonsterId" value="<?= $adminMonsterId ?>">
-                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer">
+                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer le monstre">
             </form>
 
             <hr>

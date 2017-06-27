@@ -167,13 +167,13 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
 
         //On donne les récompenses au personnage et on le met à jour dans la base de donnée
         $updateCharacter = $bdd->prepare("UPDATE car_characters
-        SET characterExperience = characterExperience + :monsterExperience,
-        characterExperienceTotal = characterExperienceTotal + :monsterExperience,
-        characterGold = characterGold + :monsterGold
+        SET characterExperience = characterExperience + :opponentExperience,
+        characterExperienceTotal = characterExperienceTotal + :opponentExperience,
+        characterGold = characterGold + :opponentGold
         WHERE characterId = :characterId");
         $updateCharacter->execute([
-        'monsterExperience' => $monsterExperience,
-        'monsterGold' => $monsterGold,
+        'opponentExperience' => $opponentExperience,
+        'opponentGold' => $opponentGold,
         'characterId' => $characterId]);
         $updateCharacter->closeCursor();
     }
