@@ -77,7 +77,7 @@ if (isset($_SESSION['account']['id']))
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sac à dos<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="../../modules/inventory/index.php">Objets</a></li>
-                                <li><a href="../../modules/inventory/equipment.php">Equipment</a></li>
+                                <li><a href="../../modules/inventory/equipment.php">Equipement</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">

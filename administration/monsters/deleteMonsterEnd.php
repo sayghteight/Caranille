@@ -36,19 +36,25 @@ if (isset($_POST['adminMonsterId'])
             //Si ce monstre n'est pas attribué à un chapitre
             if ($monsterRow == 0)
             {
-                //On supprime l'équipement de la base de donnée
+                //On supprime le monstre de la base de donnée
                 $monsterDeleteQuery = $bdd->prepare("DELETE FROM car_monsters
                 WHERE monsterId = ?");
                 $monsterDeleteQuery->execute([$adminMonsterId]);
                 $monsterDeleteQuery->closeCursor();
-    
+
                 //On supprime aussi les combats contre ce monstre dans la base de donnée
                 $batleMonsterDeleteQuery = $bdd->prepare("DELETE FROM car_battles_monsters
                 WHERE battleMonsterMonsterId = ?");
                 $batleMonsterDeleteQuery->execute([$adminMonsterId]);
                 $batleMonsterDeleteQuery->closeCursor();
+                
+                //On supprime aussi les objets à dropper du monstre
+                $monsterDropDeleteQuery = $bdd->prepare("DELETE FROM car_monsters_drops
+                WHERE monsterDropMonsterId = ?");
+                $monsterDropDeleteQuery->execute([$adminMonsterId]);
+                $monsterDropDeleteQuery->closeCursor();
     
-                //On supprime aussi les monstre de la ville où il se trouve
+                //On supprime aussi le monstre de la ville où il se trouve
                 $townMonsterDeleteQuery = $bdd->prepare("DELETE FROM car_towns_monsters
                 WHERE townMonsterMonsterId = ?");
                 $townMonsterDeleteQuery->execute([$adminMonsterId]);

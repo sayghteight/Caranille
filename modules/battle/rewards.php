@@ -61,9 +61,9 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
     
         //On recherche dans la base de donnée les objets que ce monstre peut faire gagner
         $opponentDropQuery = $bdd->prepare("SELECT * FROM car_monsters, car_items, car_monsters_drops
-        WHERE monsterDropMonsterID = monsterId
-        AND monsterDropItemID = itemId
-        AND monsterDropMonsterID = ?");
+        WHERE monsterDropMonsterId = monsterId
+        AND monsterDropItemId = itemId
+        AND monsterDropMonsterId = ?");
         $opponentDropQuery->execute([$opponentId]);
         $opponentDropRow = $opponentDropQuery->rowCount();
     

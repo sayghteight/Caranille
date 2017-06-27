@@ -31,11 +31,17 @@ if (isset($_POST['adminTownId'])
             $townDeleteQuery->execute([$adminTownId]);
             $townDeleteQuery->closeCursor();
 
-            //On supprime aussi les monstre de la ville
+            //On supprime aussi les monstres de la ville
             $townMonsterDeleteQuery = $bdd->prepare("DELETE FROM car_towns_monsters
             WHERE townMonsterTownId = ?");
             $townMonsterDeleteQuery->execute([$adminTownId]);
             $townMonsterDeleteQuery->closeCursor();
+            
+            //On supprime aussi les magasins de la ville
+            $townShopDeleteQuery = $bdd->prepare("DELETE FROM car_towns_shops
+            WHERE townShopTownId = ?");
+            $townShopDeleteQuery->execute([$adminTownId]);
+            $townShopDeleteQuery->closeCursor();
             ?>
 
             La ville a bien été supprimée

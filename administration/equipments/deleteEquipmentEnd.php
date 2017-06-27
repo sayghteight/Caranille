@@ -25,7 +25,7 @@ if (isset($_POST['finalDelete']))
         //Si l'équipement est disponible
         if ($itemRow == 1) 
         {
-            //Avant de supprimer l'équipement On cherche à savoir quel joueur à cet équipement et si il en est équippé pour appliquer la mise à jour
+            //Avant de supprimer l'équipement On cherche à savoir quel joueur a cet équipement et si il en est équippé pour appliquer la mise à jour
             $itemQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
             WHERE itemId = inventoryItemId
             AND inventoryEquipped = 1
@@ -36,7 +36,6 @@ if (isset($_POST['finalDelete']))
             //Si des joueurs en sont équippé
             if ($itemRow > 0) 
             {
-                echo "Un ou plusieurs joueurs ont cet équipement";
                 //On va mettre leur compte à jour
                 while ($item = $itemQuery->fetch())
                 {   
@@ -69,7 +68,7 @@ if (isset($_POST['finalDelete']))
                     $defenseMagicBonus = 0;
                     $wisdomBonus = 0;
 
-                    //On va maintenant faire une requête sur tous les équipements que possède le joueurs et qui sont équippé pour rajouter les bonus
+                    //On va maintenant faire une requête sur tous les équipements que possède le joueurs et qui sont équippé pour rajouter les bonus en ignorant celui qu'on va supprimer
                     $equipmentEquipedQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
                     WHERE itemId = inventoryItemId
                     AND inventoryEquipped = 1

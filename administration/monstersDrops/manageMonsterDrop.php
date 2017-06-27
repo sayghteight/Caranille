@@ -28,8 +28,8 @@ if (isset($_POST['adminMonsterDropMonsterId'])
         {
             $monsterDropQuery = $bdd->prepare("SELECT * FROM car_monsters, car_items, car_monsters_drops
             WHERE monsterDropMonsterID = monsterId
-            AND monsterDropItemID = itemId
-            AND monsterDropMonsterID = ?
+            AND monsterDropItemId = itemId
+            AND monsterDropMonsterId = ?
             ORDER BY itemName");
             $monsterDropQuery->execute([$adminMonsterDropMonsterId]);
             $monsterDropRow = $monsterDropQuery->rowCount();

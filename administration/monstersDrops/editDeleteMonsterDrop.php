@@ -51,8 +51,8 @@ if (isset($_POST['adminMonsterDropMonsterId'])
 
                 //On fait une requête pour vérifier si l'objet est sur ce monstre
                 $monsterDropQuery = $bdd->prepare('SELECT * FROM car_monsters_drops 
-                WHERE monsterDropMonsterID = ?
-                AND monsterDropItemID = ?');
+                WHERE monsterDropMonsterId = ?
+                AND monsterDropItemId = ?');
                 $monsterDropQuery->execute([$adminMonsterDropMonsterId, $adminMonsterDropItemId]);
                 $monsterDropRow = $monsterDropQuery->rowCount();
 
