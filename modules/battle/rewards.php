@@ -49,7 +49,7 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
     Vous obtenez:<br />
     
     <?php
-    //S'il s'agit d'un combat de Donjon, de mission
+    //S'il s'agit d'un combat de Donjon, de mission ou d'histoire
     if ($battleType == "Dungeon"
     || $battleType == "Mission"
     || $battleType == "Story")
@@ -59,7 +59,7 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
         -<?php echo $opponentGold; ?> pièce(s) d'or<br />
         <?php
     
-        //On recherche dans la base de donnée les objets que ce monstre peut faire gagner
+        //On recherche dans la base de donnée les objets et équipements que ce monstre peut faire gagner
         $opponentDropQuery = $bdd->prepare("SELECT * FROM car_monsters, car_items, car_monsters_drops
         WHERE monsterDropMonsterId = monsterId
         AND monsterDropItemId = itemId
@@ -67,10 +67,10 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
         $opponentDropQuery->execute([$opponentId]);
         $opponentDropRow = $opponentDropQuery->rowCount();
     
-        //Si il existe un ou plusieurs objet pour ce monstre
+        //S'il existe un ou plusieurs objet pour ce monstre
         if ($opponentDropRow > 0) 
         {
-            //On va voir pour chaque objet si le joueur l'obtient ou non
+            //On va tester si le joueur l'obtient
             while ($opponentDrop = $opponentDropQuery->fetch())
             {
                 $opponentDropItemId = stripslashes($opponentDrop['itemId']);
@@ -80,39 +80,40 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
                 //On génère un nombre entre 0 et 1001 (Pour que 1000 puisse aussi être choisit)
                 $numberRandom = mt_rand(0, 1001);
                 
-                //Si le nombre obtenu est inférieur ou égal à l'objet il l'obtient
+                //Si le nombre obtenu est inférieur ou égal à l'objet le joueur le gagne
                 if ($numberRandom <= $opponentDropLuck)
                 {
+                    //On vérifie si le joueur possède déjà cet objet ou équipement
                     $itemQuery = $bdd->prepare("SELECT * FROM car_inventory 
                     WHERE inventoryItemId = ?");
-                    $itemQuery->execute([$opponentId]);
+                    $itemQuery->execute([$opponentDropItemId]);
                     $itemRow = $itemQuery->rowCount();
     
-                    //Si l'objet a été trouvé dans l'inventaire du joueur on ajoute +1 à cet objet
+                    //Si le joueur possède déjà cet objet ou équipement on modifie les quantités de celui-ci
                     if ($itemRow > 0)
                     {
                         //On met à jour l'objet dans la base de donnée
                         $updateItems = $bdd->prepare('UPDATE car_inventory 
                         SET inventoryQuantity = inventoryQuantity + 1
-                        WHERE inventoryItemId = :monsterDropItemId');
+                        WHERE inventoryItemId = :opponentDropItemId');
     
-                        $updateItems->execute(['monsterDropItemId' => $opponentId]);
+                        $updateItems->execute(['opponentDropItemId' => $opponentDropItemId]);
                         $updateItems->closeCursor();
                     }
-                    //Si l'objet n'a pas été trouvé dans l'inventaire du joueur on l'ajoute
+                    //Si le joueur ne possède pas cet objet on l'ajoute dans l'inventaire
                     else
                     {
                         //On ajoute l'objet dans la base de donnée
                         $addItem = $bdd->prepare("INSERT INTO car_inventory VALUES(
                         '',
                         :characterId,
-                        :monsterDropItemId,
+                        :opponentDropItemId,
                         '1',
                         'no')");
     
                         $addItem->execute([
                         'characterId' => $characterId,
-                        'monsterDropItemId' => $opponentId]);
+                        'opponentDropItemId' => $opponentDropItemId]);
                         $addItem->closeCursor();
                     }
                     $itemQuery->closeCursor();
@@ -132,13 +133,13 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
             <hr>
         
             <?php
-            //On récupère les informations du chapitre en cours
+            //On récupère la fin du chapitre en cours
             $chapterQuery = $bdd->prepare("SELECT * FROM car_chapters
             WHERE chapterId = ?");
             $chapterQuery->execute([$characterChapter]);
             $chapterRow = $chapterQuery->rowCount();
             
-            //Si le chapitre du joueur est disponible
+            //Si le chapitre du joueur existe
             if ($chapterRow == 1)
             {
                 //On récupère la fin du chapitre pour l'afficher au joueur
@@ -151,7 +152,7 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
                 //On affiche la fin du chapitre
                 echo "$chapterEnding";
                 
-                //On met à jour le chapitre du joueur à jour
+                //On fait passer le joueur au chapitre suivant
                 $updateCharacterChapter = $bdd->prepare('UPDATE car_characters 
                 SET characterChapter = characterChapter + 1
                 WHERE characterId = :characterId');
@@ -165,7 +166,7 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
             }
         }
 
-        //On donne les récompenses au personnage et on le met à jour dans la base de donnée
+        //On rajoute l'expérience ainsi que l'argent au joueur
         $updateCharacter = $bdd->prepare("UPDATE car_characters
         SET characterExperience = characterExperience + :opponentExperience,
         characterExperienceTotal = characterExperienceTotal + :opponentExperience,
@@ -176,12 +177,54 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
         'opponentGold' => $opponentGold,
         'characterId' => $characterId]);
         $updateCharacter->closeCursor();
+        
+        //On vérifie si ce monstre est déjà dans le bestiaire du joueur
+        $bestiaryQuery = $bdd->prepare("SELECT * FROM car_bestiary
+        WHERE bestiaryCharacterId = ?
+        AND bestiaryMonsterId = ?");
+        $bestiaryQuery->execute([$characterId, $opponentId]);
+        $bestiaryRow = $bestiaryQuery->rowCount();
+        
+        //Si le monstre est déjà dans le bestiaire du joueur
+        if ($bestiaryRow > 0)
+        {
+            //On récupère l'id du bestiaire
+        	while ($bestiary = $bestiaryQuery->fetch())
+        	{
+        		$bestiaryId = stripslashes($bestiary['bestiaryId']);
+        	}
+
+            //On met à jour le bestiaire du joueur
+            $updateBestiary = $bdd->prepare('UPDATE car_bestiary 
+            SET bestiaryMonsterQuantity = bestiaryMonsterQuantity + 1
+            WHERE bestiaryId = :bestiaryId');
+            $updateBestiary->execute(['bestiaryId' => $bestiaryId]);
+            $updateBestiary->closeCursor();
+        }
+        //Si le monstre n'est pas déjà dans le bestiaire
+        else 
+        {
+            //On l'ajoute dans le bestiaire
+             $addBestiary = $bdd->prepare("INSERT INTO car_bestiary VALUES(
+            '',
+            :characterId,
+            :opponentId,
+            '1')");
+    
+            $addBestiary->execute([
+            'characterId' => $characterId,
+            'opponentId' => $opponentId]);
+            $addBestiary->closeCursor();
+        }
+        $bestiaryQuery->closeCursor();
+        
     }
-    //Si il s'agit d'un combat contre un joueur
+    //S'il s'agit d'un combat contre un autre joueur
     else if ($battleType == "Arena")
     {
         echo "-1 point de victoire<br />";
-        //On donne les récompenses au personnage et on le met à jour dans la base de donnée
+        
+        //On ajoute un point de victoire au joueur
         $updateCharacter = $bdd->prepare("UPDATE car_characters
         SET characterVictory = characterVictory + 1
         WHERE characterId = :characterId");
@@ -189,7 +232,8 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
         'characterId' => $characterId]);
         $updateCharacter->closeCursor();
     }
-    //On détruit le combat en cours
+    
+    //On met fin au combat en cours
     $deleteBattle = $bdd->prepare("DELETE FROM car_battles 
     WHERE battleId = :battleId");
     $deleteBattle->execute(array('battleId' => $battleId));
@@ -219,7 +263,7 @@ if ($characterHpMin <= 0 && $battleOpponentHpRemaining > 0)
     $updateCharacter->execute([
     'characterId' => $characterId]);
 
-    //On détruit le combat en cours
+    //On met fin au combat en cours
     $deleteBattle = $bdd->prepare("DELETE FROM car_battles 
     WHERE battleId = :battleId");
     $deleteBattle->execute(array('battleId' => $battleId));

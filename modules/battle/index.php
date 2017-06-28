@@ -8,6 +8,8 @@ if ($battleRow == 0) { exit(header("Location: ../../modules/main/index.php")); }
 echo "Combat de $characterName contre $opponentName<br />";
 echo "HP de $characterName: $characterHpMin/$characterHpTotal<br />";
 echo "MP de $characterName: $characterMpMin/$characterMpTotal";
+
+$mpNeed = $characterLevel * 2;
 ?>
             
 <hr>
@@ -17,7 +19,7 @@ echo "MP de $characterName: $characterMpMin/$characterMpTotal";
 </form>
     
 <form method="POST" action="magicAttack.php">
-    <input type="submit" name="magic" class="btn btn-default form-control" value="Attaque magique"><br>
+    <input type="submit" name="magic" class="btn btn-default form-control" value="Attaque magique (<?php echo $mpNeed; ?> MP)"><br>
 </form>
 
 <form method="POST" action="escape.php">
