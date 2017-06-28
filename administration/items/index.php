@@ -44,6 +44,9 @@ else
 {
     ?>
     Il n'y a actuellement aucun objet
+        
+    <hr>
+
     <?php
 }
 ?>

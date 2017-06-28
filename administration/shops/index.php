@@ -41,6 +41,9 @@ else
 {
     ?>
     Il n'y a actuellement aucun magasin
+        
+    <hr>
+
     <?php
 }
 $shopQuery->closeCursor();

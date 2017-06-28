@@ -42,6 +42,9 @@ else
 {
     ?>
     Il n'y a actuellement aucun chapitre
+        
+    <hr>
+
     <?php
 }
 ?>

@@ -40,6 +40,9 @@ else
 {
     ?>
     Il n'y a actuellement aucune news
+        
+    <hr>
+
     <?php
 }
 $newsQuery->closeCursor();

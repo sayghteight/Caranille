@@ -41,6 +41,9 @@ else
 {
     ?>
     Il n'y a actuellement aucune ville
+    
+    <hr>
+    
     <?php
 }
 $townQuery->closeCursor();

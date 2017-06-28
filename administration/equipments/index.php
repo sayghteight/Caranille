@@ -47,6 +47,9 @@ else
 {
     ?>
     Il n'y a actuellement aucun équipement
+        
+    <hr>
+
     <?php
 }
 ?>
