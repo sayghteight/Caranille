@@ -42,6 +42,30 @@ if (isset($_POST['adminTownId'])
             WHERE townShopTownId = ?");
             $townShopDeleteQuery->execute([$adminTownId]);
             $townShopDeleteQuery->closeCursor();
+            
+            //On recherche tous les joueurs qui sont dans cette ville et ont les met dans la carte du monde
+            $characterTownQuery = $bdd->prepare('SELECT * FROM car_characters 
+            WHERE characterTownId = ?');
+            $characterTownQuery->execute([$adminTownId]);
+
+            //Pour chaque joueur trouvé
+            while ($characterTown = $characterTownQuery->fetch())
+            {
+                $adminCharacterId = stripslashes($characterTown['characterId']);
+                $adminCharacterName = stripslashes($characterTown['characterName']);
+                
+                echo "Le joueur $adminCharacterName était dans cette ville et a été téléporté à la carte du monde<br />";
+                
+                //On met à jour les personnages
+                $updateCharacter = $bdd->prepare("UPDATE car_characters SET
+                characterTownId = 0
+                WHERE characterId= :adminCharacterId");
+                
+                $updateCharacter->execute(array(
+                'adminCharacterId' => $adminCharacterId));
+                $updateCharacter->closeCursor();
+            }
+            
             ?>
 
             La ville a bien été supprimée

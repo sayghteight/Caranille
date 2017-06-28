@@ -28,13 +28,14 @@ if (isset($_POST['adminMonsterId'])
         {
             //On vérifie si le monstre n'est pas attribué à un chapitre
             $monsterChapterQuery = $bdd->prepare("SELECT * FROM car_chapters
-            WHERE monsterId = ?");
-            $monsterQuery->execute([$adminMonsterId]);
+            WHERE chapterMonsterId = ?");
+            $monsterChapterQuery->execute([$adminMonsterId]);
             //On recherche combien il y a de monstres disponible
-            $monsterRow = $monsterQuery->rowCount();
+            $monsterChapterRow = $monsterChapterQuery->rowCount();
+            $monsterChapterQuery->closeCursor();
 
             //Si ce monstre n'est pas attribué à un chapitre
-            if ($monsterRow == 0)
+            if ($monsterChapterRow == 0)
             {
                 //On supprime le monstre de la base de donnée
                 $monsterDeleteQuery = $bdd->prepare("DELETE FROM car_monsters
@@ -43,8 +44,8 @@ if (isset($_POST['adminMonsterId'])
                 $monsterDeleteQuery->closeCursor();
 
                 //On supprime aussi les combats contre ce monstre dans la base de donnée
-                $batleMonsterDeleteQuery = $bdd->prepare("DELETE FROM car_battles_monsters
-                WHERE battleMonsterMonsterId = ?");
+                $batleMonsterDeleteQuery = $bdd->prepare("DELETE FROM car_battles
+                WHERE battleOpponentId = ?");
                 $batleMonsterDeleteQuery->execute([$adminMonsterId]);
                 $batleMonsterDeleteQuery->closeCursor();
                 
@@ -71,6 +72,7 @@ if (isset($_POST['adminMonsterId'])
                 <?php
             }
             //Si le monstre est attribué à un chapitre
+            else
             {
                 ?>
                 Impossible de supprimer ce monstre car il est attribué à un chapitre.

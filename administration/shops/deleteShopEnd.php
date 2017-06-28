@@ -37,6 +37,12 @@ if (isset($_POST['adminShopId'])
             WHERE shopItemShopId = ?");
             $shopItemDeleteQuery->execute([$adminShopId]);
             $shopItemDeleteQuery->closeCursor();
+            
+            //On supprime aussi ce magasin des villes où il se trouve
+            $townShopDeleteQuery = $bdd->prepare("DELETE FROM car_towns_shops
+            WHERE townShopShopId = ?");
+            $townShopDeleteQuery->execute([$adminShopId]);
+            $townShopDeleteQuery->closeCursor();
             ?>
 
             Le magasin a bien été supprimé

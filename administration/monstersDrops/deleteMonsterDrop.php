@@ -49,7 +49,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                 //Si cet objet est sur le monstre
                 if ($monsterDropRow == 1) 
                 {
-                    //On supprime l'équipement de la base de donnée
+                    //On supprime les objets et équippement du monstre
                     $monsterDropDeleteQuery = $bdd->prepare("DELETE FROM car_monsters_drops
                     WHERE monsterDropItemID = ?");
                     $monsterDropDeleteQuery->execute([$adminMonsterDropItemId]);

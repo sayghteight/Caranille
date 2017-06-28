@@ -14,6 +14,7 @@ if (isset($_POST['adminItemId'])
     if (ctype_digit($_POST['adminItemId'])
     && $_POST['adminItemId'] >= 1)
     {
+        //On récupère l'id du formulaire précédent
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
 
         //On fait une requête pour vérifier si l'objet choisit existe
@@ -36,6 +37,12 @@ if (isset($_POST['adminItemId'])
             WHERE inventoryItemId = ?");
             $inventoryDeleteQuery->execute([$adminItemId]);
             $inventoryDeleteQuery->closeCursor();
+            
+            //On supprime les objets et équippements qui sont lié à un monstre
+            $itemDropDeleteQuery = $bdd->prepare("DELETE FROM car_monsters_drops
+            WHERE monsterDropItemID = ?");
+            $itemDropDeleteQuery->execute([$adminItemId]);
+            $itemDropDeleteQuery->closeCursor();
             ?>
 
             L'objet a bien été supprimé

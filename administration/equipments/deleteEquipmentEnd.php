@@ -140,6 +140,12 @@ if (isset($_POST['finalDelete']))
             WHERE inventoryItemId = ?");
             $inventoryDeleteQuery->execute([$adminItemId]);
             $inventoryDeleteQuery->closeCursor();
+            
+            //On supprime les objets et équippements qui sont lié à un monstre
+            $itemDropDeleteQuery = $bdd->prepare("DELETE FROM car_monsters_drops
+            WHERE monsterDropItemID = ?");
+            $itemDropDeleteQuery->execute([$adminItemId]);
+            $itemDropDeleteQuery->closeCursor();
             ?>
 
             L'équipement a bien été supprimé
