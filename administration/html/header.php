@@ -79,6 +79,8 @@ require_once("../../kernel/town/index.php");
                                 <li><a href="../../administration/configuration/index.php">Configuration</a></li>
                             </ul>
                         </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
                         <li><a href="../../modules/main/index.php">Retour au jeu</a></li>
                     </ul>
                 </div>
