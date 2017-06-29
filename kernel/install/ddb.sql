@@ -27,8 +27,8 @@ CREATE TABLE IF NOT EXISTS `car_battles` (
 CREATE TABLE IF NOT EXISTS `car_bestiary` (
   `bestiaryId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `bestiaryCharacterId` int(11) NOT NULL,
-  `bestiaryMonsterQuantity` int(11) NOT NULL,
-  `bestiaryQuantity` int(11) NOT NULL
+  `bestiaryMonsterId` int(11) NOT NULL,
+  `bestiaryMonsterQuantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `car_chapters` 

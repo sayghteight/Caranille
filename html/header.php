@@ -53,101 +53,101 @@ if (isset($_SESSION['account']['id']))
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Informations<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="../../modules/main/index.php">Accueil</a></li>
-                            <li><a href="../../modules/presentation/index.php">Présentation</a></li>
-                            <li><a href="../../modules/races/index.php">Les classes</a></li>
-                        </ul>
-                    </li>
-                    <?php
-                    //Si le joueur est connecté on affiche le menu du jeu
-                    if (isset($_SESSION['account']['id']))
-                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Informations<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="../../modules/main/index.php">Actualité</a></li>
+                                <li><a href="../../modules/presentation/index.php">Présentation</a></li>
+                                <li><a href="../../modules/races/index.php">Les classes</a></li>
+                                <li><a href="../../modules/contact/index.php">Contact</a></li>
+                            </ul>
+                        </li>
+                        <?php
+                        //Si le joueur est connecté on affiche le menu du jeu
+                        if (isset($_SESSION['account']['id']))
+                        {
+                            ?>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Personnage<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="../../modules/character/index.php">Fiche complète</a></li>
+                                    <li><a href="../../modules/skillPoints/index.php">Points de compétences</a></li>
+                                    <li><a href="../../modules/inventory/index.php">Inventaire</a></li>
+                                    <li><a href="../../modules/bestiary/index.php">Bestiaire</a></li>
+                                </ul>
+                            </li>
+                            <?php
+                            //Si characterTownId est supérieur ou égal à un le joueur est dans une ville. On met le raccourcit vers la ville
+                            if($characterTownId >= 1)
+                            {
+                                ?>
+                                    <li><a href="../../modules/town/index.php">Retourner en ville</a></li>
+                                <?php
+                            }
+                            //Si characterTownId n'est pas supérieur ou égal à un le joueur est dans aucune ville. On met le raccourcit vers la carte du monde
+                            else
+                            {
+                                ?>
+                                    <li><a href="../../modules/map/index.php">Carte du monde</a></li>
+                                <?php
+                            }
+                            ?>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Aventure<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="../../modules/story/index.php">Continuer l'aventure</a></li>
+                                </ul>
+                            </li>
+                            <?php
+                        }
+                        //Sinon on affiche rien
+                        else
+                        {
+                            ?>
+                            <?php
+                        }
                         ?>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Personnage<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="../../modules/character/index.php">Fiche</a></li>
-                                <li><a href="../../modules/skillPoints/index.php">Points de compétences</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sac à dos<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="../../modules/inventory/index.php">Objets</a></li>
-                                <li><a href="../../modules/inventory/equipment.php">Equipement</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contenu du jeu<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mon compte<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <?php
-                                //Si characterTownId est supérieur ou égal à un le joueur est dans une ville. On met le raccourcit vers la ville
-                                if($characterTownId >= 1)
+                                //Si le joueur est connecté on lui donne la possibilité de se déconnecter
+                                if (isset($_SESSION['account']['id']))
                                 {
+                                    switch ($accountAccess)
+                                    {
+                                        case 0:
+                                        
+                                        break;
+            
+                                        case 1:
+                                        ?>
+                                        <?php
+                                        break;
+            
+                                        case 2:
+                                        ?>
+                                            <li><a href="../../administration/main/index.php">Administration</a></li>
+                                        <?php
+                                        break;
+                                    }
                                     ?>
-                                        <li><a href="../../modules/town/index.php">Retourner en ville</a></li>
+                                        <li><a href="../../modules/logout/index.php">Déconnexion</a></li>
                                     <?php
                                 }
-                                //Si characterTownId n'est pas supérieur ou égal à un le joueur est dans aucune ville. On met le raccourcit vers la carte du monde
+                                //Sinon on propose au joueur de s'inscrire ou se connecter
                                 else
                                 {
                                     ?>
-                                        <li><a href="../../modules/map/index.php">Carte du monde</a></li>
+                                        <li><a href="../../modules/login/index.php">Connexion</a></li>
+                                        <li><a href="../../modules/register/index.php">Inscription</a></li>
                                     <?php
                                 }
                                 ?>
-                                <li><a href="../../modules/story/index.php">Histoire</a></li>
                             </ul>
                         </li>
-                        <?php
-                    }
-                    //Sinon on affiche rien
-                    else
-                    {
-                        ?>
-                        <?php
-                    }
-                    ?>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                    <?php
-                    //Si le joueur est connecté on lui donne la possibilité de se déconnecter
-                    if (isset($_SESSION['account']['id']))
-                    {
-                        switch ($accountAccess)
-                        {
-                            case 0:
-                            
-                            break;
-
-                            case 1:
-                            ?>
-                            <?php
-                            break;
-
-                            case 2:
-                            ?>
-                                <li><a href="../../administration/main/index.php">Administration</a></li>
-                            <?php
-                            break;
-                        }
-                        ?>
-                            <li><a href="../../modules/logout/index.php">Déconnexion</a></li>
-                        <?php
-                    }
-                    //Sinon on propose au joueur de s'inscrire ou se connecter
-                    else
-                    {
-                        ?>
-                            <li><a href="../../modules/register/index.php">Inscription</a></li>
-                            <li><a href="../../modules/login/index.php">Connexion</a></li>
-                        <?php
-                    }
-                    ?>
-                    <li><a href="../../modules/contact/index.php">Contact</a></li>
                     </ul>
                 </div>
             </div>

@@ -4,46 +4,15 @@
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si il y a actuellement un combat on redirige le joueur vers le module battle
 if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); }
+?>
 
-$itemQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
-WHERE itemId = inventoryItemId
-AND itemType = 'Item'
-AND inventoryCharacterId = ?");
-$itemQuery->execute([$characterId]);
-$itemRow = $itemQuery->rowCount();
+Que souhaitez-vous consulter ?<br />
 
-//Si un ou plusieurs équipements ont été trouvé
-if ($itemRow > 0)
-{
-    ?>
-    <form method="POST" action="viewItem.php">
-        <div class="form-group row">
-            <label for="equipmentList" class="col-2 col-form-label">Liste des objets</label>
-            <select class="form-control" id="itemId" name="itemId">
-            <?php
-            //on récupère les valeurs de chaque joueurs qu'on va ensuite mettre dans le menu déroulant
-            while ($item = $itemQuery->fetch())
-            {
-                $itemId = stripslashes($item['itemId']); 
-                $itemName = stripslashes($item['itemName']);
-                ?>
-                    <option value="<?php echo $itemId ?>"><?php echo $itemName ?></option>
-                <?php
-            }
-            $itemQuery->closeCursor();
-            ?>
-            </select>
-        </div>
-        <center><input type="submit" name="viewItem" class="btn btn-default form-control" value="Plus d'information"></center>
-    </form>
-    <?php
-}
-//Si aucun objet n'a été trouvé
-else
-{
-    ?>
-    Vous ne possédez aucun objets.
-    <?php
-}
+<form method="POST" action="item.php">
+    <input type="submit" class="btn btn-default form-control" name="edit" value="Mes objets">
+</form>
+<form method="POST" action="equipment.php">
+    <input type="submit" class="btn btn-default form-control" name="delete" value="Mes équipements">
+</form>
 
-require_once("../../html/footer.php"); ?>
+<?php require_once("../../html/footer.php"); ?>
