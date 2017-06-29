@@ -198,7 +198,7 @@ if (isset($_POST['monsterId'])
                         $monsterTownQuery = $bdd->prepare("SELECT * FROM car_towns, car_towns_monsters
                         WHERE townMonsterTownId = townId
                         AND townMonsterMonsterId = ?");
-                        $monsterTownQuery->execute([$characterChapter, $monsterId]);
+                        $monsterTownQuery->execute([$monsterId]);
                         $monsterTownRow = $monsterTownQuery->rowCount();
                     
                         //S'il existe une ou plusieurs ville pour ce monstre
