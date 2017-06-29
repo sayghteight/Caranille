@@ -49,7 +49,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                             $adminMonsterDropItemName = stripslashes($monsterDrop['itemName']);
                             $adminMonsterDropLuck = stripslashes($monsterDrop['monsterDropLuck']);?>
                             ?>
-                                <option value="<?php echo $adminMonsterDropItemId ?>"><?php echo "$adminMonsterDropItemName (Obtention: $adminMonsterDropLuck/1000)"; ?></option>
+                                <option value="<?php echo $adminMonsterDropItemId ?>"><?php echo "$adminMonsterDropItemName (Obtention: $adminMonsterDropLuck%)"; ?></option>
                             <?php
                         }
                         $monsterDropQuery->closeCursor();
@@ -91,7 +91,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                         ?>
                         </select>
                     </div>
-                    Taux d'obtention (De 0 à 1000) <br> <input type="number" name="adminMonsterDropLuck" class="form-control" placeholder="Taux d'obtention (De 0 à 1000)" required><br /><br />
+                    Taux d'obtention (en pourcentage) <br> <input type="number" name="adminMonsterDropLuck" class="form-control" placeholder="Taux d'obtention (en pourcentage)" required><br /><br />
                     <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
                     <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter cet objet/équipement">
                 </form>

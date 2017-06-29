@@ -322,8 +322,8 @@ INSERT INTO `car_monsters` (`monsterId`, `monsterPicture`, `monsterName`, `monst
 --
 
 INSERT INTO `car_monsters_drops` (`monsterDropID`, `monsterDropMonsterId`, `monsterDropItemId`, `monsterDropLuck`) VALUES
-(1, 1, 1, 500),
-(2, 2, 2, 750);
+(1, 1, 1, 50),
+(2, 2, 2, 75);
 
 --
 -- Contenu de la table `car_news`

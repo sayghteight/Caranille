@@ -24,8 +24,8 @@ if (isset($_POST['adminMonsterDropMonsterId'])
         $adminMonsterDropItemId = htmlspecialchars(addslashes($_POST['adminMonsterDropItemId']));
         $adminMonsterDropLuck = htmlspecialchars(addslashes($_POST['adminMonsterDropLuck']));
 
-        //Si la chance d'obtention est entre 0 et 1000 on ajoute l'objet
-        if ($adminMonsterDropLuck >= 0 && $adminMonsterDropLuck <= 1000)
+        //Si le taux d'obtention est entre 0 et 100 on ajoute l'objet
+        if ($adminMonsterDropLuck >= 0 && $adminMonsterDropLuck <= 100)
         {
             //On fait une requête pour vérifier si le monstre choisit existe
             $monsterQuery = $bdd->prepare('SELECT * FROM car_monsters 
@@ -111,7 +111,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
         else
         {
             ?>
-            Erreur: Le taux d'obtention doit être de 0 à 1000
+            Erreur: Le taux d'obtention doit être entre 0 et 100%
             <form method="POST" action="manageMonsterDrop.php">
                 <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
                 <input type="submit" class="btn btn-default form-control" name="manage" value="Continuer">

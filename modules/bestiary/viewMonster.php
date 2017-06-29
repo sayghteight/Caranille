@@ -243,7 +243,7 @@ if (isset($_POST['monsterId'])
                                 $monsterDropItemId = stripslashes($monsterDrop['itemId']);
                                 $monsterDropItemName = stripslashes($monsterDrop['itemName']);
                                 $monsterDropLuck = stripslashes($monsterDrop['monsterDropLuck']);
-                                echo "$monsterDropItemName ($monsterDropLuck/1000)<br />";
+                                echo "$monsterDropItemName ($monsterDropLuck%)<br />";
                             }
                         }
                         //Si aucun objet ne peut être obtenu
@@ -273,7 +273,7 @@ if (isset($_POST['monsterId'])
     //Si le monstre choisit n'est pas un nombre
     else
     {
-         echo "Le monstre choisit est invalid";
+         echo "Le monstre choisit est invalide";
     }
 }
 //Si toutes les variables $_POST n'existent pas

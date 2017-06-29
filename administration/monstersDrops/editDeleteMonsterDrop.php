@@ -69,7 +69,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                         }
                         ?>
                         <form method="POST" action="editMonsterDrop.php">
-                            Taux d'obtention (De 0 à 1000) : <br> <input type="number" name="adminMonsterDropLuck" class="form-control" placeholder="Taux d'obtention" value="<?php echo $adminMonsterDropLuck; ?>" required><br /><br />
+                            Taux d'obtention (en pourcentage) : <br> <input type="number" name="adminMonsterDropLuck" class="form-control" placeholder="Taux d'obtention (en pourcentage)" value="<?php echo $adminMonsterDropLuck; ?>" required><br /><br />
                             <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
                             <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropItemId" value="<?= $adminMonsterDropItemId ?>">
                             <input type="submit" class="btn btn-default form-control" name="finalEdit" value="Mettre à jour">

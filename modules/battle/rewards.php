@@ -77,8 +77,8 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
                 $opponentDropItemName = stripslashes($opponentDrop['itemName']);
                 $opponentDropLuck = stripslashes($opponentDrop['monsterDropLuck']);
     
-                //On génère un nombre entre 0 et 1001 (Pour que 1000 puisse aussi être choisit)
-                $numberRandom = mt_rand(0, 1001);
+                //On génère un nombre entre 0 et 101 (Pour que 100 puisse aussi être choisit)
+                $numberRandom = mt_rand(0, 101);
                 
                 //Si le nombre obtenu est inférieur ou égal à l'objet le joueur le gagne
                 if ($numberRandom <= $opponentDropLuck)
