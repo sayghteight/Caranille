@@ -73,7 +73,7 @@ if (isset($_POST['monsterId'])
                     </td>
                     
                     <td>
-                        <?php echo "$monsterId/$monsterNumberTotal"; ?>
+                        <?php echo "$monsterId sur $monsterNumberTotal monstres"; ?>
                     </td>
                 </tr>
                 
