@@ -55,16 +55,6 @@ if (isset($_POST['monsterId'])
                 $monsterGold = stripslashes($monster['monsterGold']);
                 $monsterExperience = stripslashes($monster['monsterExperience']);
             }
-            
-            $monsterNumberTotal = 0;
-            
-            //On fait une requête pour vérifier le nombre total de monstre
-            $monsterNumberQuery = $bdd->query("SELECT * FROM car_monsters");
-            
-            while ($monsterNumber = $monsterNumberQuery->fetch())
-            {
-                $monsterNumberTotal++;
-            }
             ?>
             <table class="table">
                 <tr>
@@ -73,7 +63,7 @@ if (isset($_POST['monsterId'])
                     </td>
                     
                     <td>
-                        <?php echo "$monsterId sur $monsterNumberTotal monstres"; ?>
+                        <?php echo $monsterId; ?>
                     </td>
                 </tr>
                 
