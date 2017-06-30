@@ -46,7 +46,7 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
     //On prévient le joueur qu'il a remporté le combat
     ?>
     <p><?php echo $characterName; ?> remporte le combat !</p>
-    Vous obtenez:<br />
+    Récompenses:<br />
     
     <?php
     //S'il s'agit d'un combat de Donjon, de mission ou d'histoire
@@ -204,6 +204,12 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
         //Si le monstre n'est pas déjà dans le bestiaire
         else 
         {
+            ?>
+            <hr>
+            
+            Nouvelle entrée dans le bestiaire pour <?php echo $opponentName ?><br/>
+            
+            <?php
             //On l'ajoute dans le bestiaire
              $addBestiary = $bdd->prepare("INSERT INTO car_bestiary VALUES(
             '',

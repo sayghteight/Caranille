@@ -55,8 +55,28 @@ if (isset($_POST['monsterId'])
                 $monsterGold = stripslashes($monster['monsterGold']);
                 $monsterExperience = stripslashes($monster['monsterExperience']);
             }
+            
+            $monsterNumberTotal = 0;
+            
+            //On fait une requête pour vérifier le nombre total de monstre
+            $monsterNumberQuery = $bdd->query("SELECT * FROM car_monsters");
+            
+            while ($monsterNumber = $monsterNumberQuery->fetch())
+            {
+                $monsterNumberTotal++;
+            }
             ?>
             <table class="table">
+                <tr>
+                    <td>
+                        Numéro
+                    </td>
+                    
+                    <td>
+                        <?php echo "$monsterId/$monsterNumberTotal"; ?>
+                    </td>
+                </tr>
+                
                 <tr>
                     <td>
                         Nom
@@ -208,7 +228,18 @@ if (isset($_POST['monsterId'])
                             while ($monsterTown = $monsterTownQuery->fetch())
                             {
                                 $monsterTownName = stripslashes($monsterTown['townName']);
-                                echo "$monsterTownName<br />";
+                                $monsterTownChapter = stripslashes($monsterTown['townChapter']);
+                                
+                                //Si le joueur à accès à cette ville on l'affiche
+                                if ($monsterTownChapter <= $characterChapter)
+                                {
+                                   echo "$monsterTownName<br />"; 
+                                }
+                                //Si le joueur n'a pas accès à cette ville on cache le nom
+                                else 
+                                {
+                                    echo "???<br />";
+                                }
                             }
                         }
                         //Si ce monstre se trouve dans aucune ville
