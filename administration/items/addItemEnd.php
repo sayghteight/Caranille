@@ -1,12 +1,12 @@
 <?php 
 require_once("../html/header.php");
 
-//Si il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
+//S'il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//Si l'utilisateur à cliqué sur le bouton finalAdd
+//Si les variables $_POST suivantes existent
 if (isset($_POST['adminItemPicture'])
 && isset($_POST['adminItemName'])
 && isset($_POST['adminItemDescription'])
@@ -82,7 +82,7 @@ if (isset($_POST['adminItemPicture'])
         echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
-//Si tous les champs n'ont pas été rempli
+//Si toutes les variables $_POST n'existent pas
 else
 {
     echo "Erreur: Tous les champs n'ont pas été rempli";

@@ -1,7 +1,7 @@
 <?php 
 require_once("../html/header.php");
 
-//Si il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
+//S'il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
@@ -56,7 +56,7 @@ if (isset($_POST['adminShopId'])
             </form>
             <?php
         }
-        //Si le magasin n'est pas disponible
+        //Si le magasin n'exite pas
         else
         {
             echo "Erreur: Magasin indisponible";

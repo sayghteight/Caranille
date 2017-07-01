@@ -1,12 +1,12 @@
 <?php 
 require_once("../html/header.php");
 
-//Si il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
+//S'il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//Si l'utilisateur à cliqué sur le bouton manage
+//Si les variables $_POST suivantes existent
 if (isset($_POST['adminItemId'])
 && isset($_POST['manage']))
 {
@@ -54,7 +54,7 @@ if (isset($_POST['adminItemId'])
             </form>
             <?php
         }
-        //Si l'objet n'est pas disponible
+        //Si l'objet n'exite pas
         else
         {
             echo "Erreur: Objet indisponible";
@@ -67,7 +67,7 @@ if (isset($_POST['adminItemId'])
         echo "Erreur: Objet invalide";
     }
 }
-//Si l'utilisateur n'a pas cliqué sur le bouton manage
+//Si toutes les variables $_POST n'existent pas
 else
 {
     echo "Erreur: Aucun choix effectué";

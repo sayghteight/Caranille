@@ -1,7 +1,7 @@
 <?php 
 require_once("../html/header.php");
 
-//Si il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
+//S'il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
@@ -147,35 +147,35 @@ if (isset($_POST['adminAccountId'])
             {
                 switch ($equipment['itemType'])
                 {
-                    //Si il s'agit d'une armure
+                    //S'il s'agit d'une armure
                     case "Armor":
                         $adminEquipmentArmorId = stripslashes($equipment['itemId']);
                         $adminEquipmentArmorName = stripslashes($equipment['itemName']);
                         $adminEquipmentArmorDescription = stripslashes($equipment['itemDescription']);
                     break;
 
-                    //Si il s'agit de bottes
+                    //S'il s'agit de bottes
                     case "Boots":
                         $adminEquipmentBootsId = stripslashes($equipment['itemId']);
                         $adminEquipmentBootsName = stripslashes($equipment['itemName']);
                         $adminEquipmentBootsDescription = stripslashes($equipment['itemDescription']);
                     break;
 
-                    //Si il s'agit de gants
+                    //S'il s'agit de gants
                     case "Gloves":
                         $adminEquipmentGlovesId = stripslashes($equipment['itemId']);
                         $adminEquipmentGlovesName = stripslashes($equipment['itemName']);
                         $adminEquipmentGlovesDescription = stripslashes($equipment['itemDescription']);
                     break;
 
-                    //Si il s'agit d'un casque
+                    //S'il s'agit d'un casque
                     case "Helmet":
                         $adminEquipmentHelmetId = stripslashes($equipment['itemId']);
                         $adminEquipmentHelmetName = stripslashes($equipment['itemName']);
                         $adminEquipmentHelmetDescription = stripslashes($equipment['itemDescription']);
                     break;
 
-                    //Si il s'agit d'une arme
+                    //S'il s'agit d'une arme
                     case "Weapon":
                         $adminEquipmentWeaponId = stripslashes($equipment['itemId']);
                         $adminEquipmentWeaponName = stripslashes($equipment['itemName']);

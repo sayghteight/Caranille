@@ -1,8 +1,8 @@
 <?php require_once("../../html/header.php");
 
-//Si il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
+//S'il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
-//Si il y a actuellement un combat on redirige le joueur vers le module battle
+//S'il y a actuellement un combat on redirige le joueur vers le module battle
 if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); }
 
 //Si les variables $_POST suivantes existent
@@ -96,7 +96,7 @@ if (isset($_POST['shopId'])
                 ?>
                 <table class="table">
                     <?php
-                    //Si il s'agit d'un équipement on affiche la race de celui-ci ainsi que son niveu requis
+                    //S'il s'agit d'un équipement on affiche la race de celui-ci ainsi que son niveu requis
                     if ($itemType != "Item")
                     {
                         ?>
@@ -159,7 +159,7 @@ if (isset($_POST['shopId'])
                         
                         <td>
                             <?php
-                            //Si il s'agit d'un équipement on affiche toutes les stats concernée
+                            //S'il s'agit d'un équipement on affiche toutes les stats concernée
                             if ($itemType != "Item")
                             {
                                 ?>
@@ -174,7 +174,7 @@ if (isset($_POST['shopId'])
                                 
                                 <?php
                             }
-                            //Si il s'agit d'un objet on affiche que les stats HP et MP qui sont concernée
+                            //S'il s'agit d'un objet on affiche que les stats HP et MP qui sont concernée
                             else
                             {
                                 ?>
@@ -219,14 +219,14 @@ if (isset($_POST['shopId'])
                 </form>
                 <?php
             }
-            //Si l'objet n'est pas disponible
+            //Si l'objet n'exite pas
             else
             {
                 echo "Erreur: Article indisponible";
             }
             $itemQuery->closeCursor();
         }
-        //Si le magasin n'est pas disponible
+        //Si le magasin n'exite pas
         else
         {
             echo "Erreur: Magasin indisponible";
@@ -236,7 +236,7 @@ if (isset($_POST['shopId'])
     //Si l'objet choisit n'est pas un nombre
     else
     {
-         echo "L'équipment choisit est invalid";
+         echo "L'équipment choisit est invalide";
     }
 }
 //Si toutes les variables $_POST n'existent pas

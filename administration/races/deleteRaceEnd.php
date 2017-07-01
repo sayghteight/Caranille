@@ -1,7 +1,7 @@
 <?php 
 require_once("../html/header.php");
 
-//Si il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
+//S'il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
@@ -39,7 +39,7 @@ if (isset($_POST['adminRaceId'])
             $characterRaceQuery->execute([$adminRaceId]);
             $characterRaceRow = $characterRaceQuery->rowCount();
     
-            //Si il y a aucun joueur qui utilise cette classe
+            //S'il y a aucun joueur qui utilise cette classe
             if ($characterRaceRow == 0)
             {
                 //On supprime la classe de la base de donnée

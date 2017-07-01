@@ -13,35 +13,35 @@ while ($equipment = $equipmentEquipedQuery->fetch())
 {
     switch ($equipment['itemType'])
     {
-        //Si il s'agit d'une armure
+        //S'il s'agit d'une armure
         case "Armor":
             $equipmentArmorId = stripslashes($equipment['itemId']);
             $equipmentArmorName = stripslashes($equipment['itemName']);
             $equipmentArmorDescription = stripslashes($equipment['itemDescription']);
         break;
 
-        //Si il s'agit de bottes
+        //S'il s'agit de bottes
         case "Boots":
             $equipmentBootsId = stripslashes($equipment['itemId']);
             $equipmentBootsName = stripslashes($equipment['itemName']);
             $equipmentBootsDescription = stripslashes($equipment['itemDescription']);
         break;
 
-        //Si il s'agit de gants
+        //S'il s'agit de gants
         case "Gloves":
             $equipmentGlovesId = stripslashes($equipment['itemId']);
             $equipmentGlovesName = stripslashes($equipment['itemName']);
             $equipmentGlovesDescription = stripslashes($equipment['itemDescription']);
         break;
 
-        //Si il s'agit d'un casque
+        //S'il s'agit d'un casque
         case "Helmet":
             $equipmentHelmetId = stripslashes($equipment['itemId']);
             $equipmentHelmetName = stripslashes($equipment['itemName']);
             $equipmentHelmetDescription = stripslashes($equipment['itemDescription']);
         break;
 
-        //Si il s'agit d'une arme
+        //S'il s'agit d'une arme
         case "Weapon":
             $equipmentWeaponId = stripslashes($equipment['itemId']);
             $equipmentWeaponName = stripslashes($equipment['itemName']);

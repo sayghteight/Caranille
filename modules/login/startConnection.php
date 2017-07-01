@@ -15,7 +15,7 @@ if (isset($_POST['accountPseudo'])
     $accountQuery->execute([$accountPseudo, $accountPassword]);
     $accountRow = $accountQuery->rowCount();
 
-    //Si il y a un résultat de trouvé c'est que la combinaison pseudo/mot de passe est bonne
+    //S'il y a un résultat de trouvé c'est que la combinaison pseudo/mot de passe est bonne
     if ($accountRow == 1)
     {
         //Dans ce cas on boucle pour récupérer le tableau retourné par la base de donnée pour faire la session account
@@ -26,7 +26,7 @@ if (isset($_POST['accountPseudo'])
         }
         $accountQuery->closeCursor();
     }
-    //Si il n'y a aucun résultat de trouvé c'est que la combinaison pseudo/mot de passe est mauvaise
+    //S'il n'y a aucun résultat de trouvé c'est que la combinaison pseudo/mot de passe est mauvaise
     else
     {
         echo "Mauvais Pseudo/Mot de passe";

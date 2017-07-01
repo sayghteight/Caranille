@@ -1,7 +1,7 @@
 <?php 
 require_once("../html/header.php");
 
-//Si il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
+//S'il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
@@ -12,7 +12,7 @@ $townQuery = $bdd->query("SELECT * FROM car_towns
 ORDER by townName");
 $townRow = $townQuery->rowCount();
 
-//Si il existe un ou plusieurs villes on affiche le menu déroulant
+//S'il existe un ou plusieurs villes on affiche le menu déroulant
 if ($townRow > 0) 
 {
     ?>
@@ -36,7 +36,7 @@ if ($townRow > 0)
     </form>
     <?php
 }
-//Si il n'y a aucune ville on prévient le joueur
+//S'il n'y a aucune ville on prévient le joueur
 else
 {
     ?>

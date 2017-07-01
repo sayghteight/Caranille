@@ -1,10 +1,10 @@
 <?php require_once("../../html/header.php");
 
-//Si il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
+//S'il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'est pas dans une ville on le redirige vers la carte du monde
 if ($characterTownId == 0) { exit(header("Location: ../../modules/map/index.php")); }
-//Si il y a actuellement un combat on redirige le joueur vers le module battle
+//S'il y a actuellement un combat on redirige le joueur vers le module battle
 if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); }
 
 //Si les variables $_POST suivantes existent
@@ -36,7 +36,7 @@ if (isset($_POST['shopId']))
                 $shopDescription = stripslashes($shop['shopDescription']);
             }
 
-            //On cherche à savoir si il y a un ou plusieurs objets en vente
+            //On cherche à savoir S'il y a un ou plusieurs objets en vente
             $townShopQuery = $bdd->prepare("SELECT * FROM car_shops, car_items, car_shops_items
             WHERE shopItemShopId = shopId
             AND shopItemItemId = itemId
@@ -45,7 +45,7 @@ if (isset($_POST['shopId']))
             $townShopQuery->execute([$shopId]);
             $townShopRow = $townShopQuery->rowCount();
 
-            //Si il existe un ou plusieurs objet dans le magasin on affiche le menu déroulant
+            //S'il existe un ou plusieurs objet dans le magasin on affiche le menu déroulant
             if ($townShopRow > 0) 
             {
                 ?>
@@ -87,7 +87,7 @@ if (isset($_POST['shopId']))
                 echo "Il n'y a rien en vente";
             }
         }
-        //Si le magasin n'est pas disponible
+        //Si le magasin n'exite pas
         else
         {
             echo "Erreur: Magasin indisponible";

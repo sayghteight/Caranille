@@ -1,7 +1,7 @@
 <?php 
 require_once("../html/header.php");
 
-//Si il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
+//S'il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
@@ -25,7 +25,7 @@ if (isset($_POST['finalDelete']))
         //Si l'équipement existe
         if ($itemRow == 1) 
         {
-            //Avant de supprimer l'équipement On cherche à savoir quel joueur a cet équipement et si il en est équippé pour appliquer la mise à jour
+            //Avant de supprimer l'équipement On cherche à savoir quel joueur a cet équipement et S'il en est équippé pour appliquer la mise à jour
             $itemQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
             WHERE itemId = inventoryItemId
             AND inventoryEquipped = 1
@@ -157,7 +157,7 @@ if (isset($_POST['finalDelete']))
             </form>
             <?php
         }
-        //Si l'équipement n'est pas disponible
+        //Si l'équipement n'exite pas
         else
         {
             echo "Erreur: Equippement indisponible";

@@ -1,7 +1,7 @@
 <?php 
 require_once("../html/header.php");
 
-//Si il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
+//S'il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
@@ -12,7 +12,7 @@ $shopQuery = $bdd->query("SELECT * FROM car_shops
 ORDER by shopName");
 $shopRow = $shopQuery->rowCount();
 
-//Si il existe un ou plusieurs magasin(s) on affiche le menu déroulant
+//S'il existe un ou plusieurs magasin(s) on affiche le menu déroulant
 if ($shopRow > 0) 
 {
     ?>
@@ -36,7 +36,7 @@ if ($shopRow > 0)
     </form>
     <?php
 }
-//Si il n'y a actuellement aucun magasin on prévient le joueur
+//S'il n'y a actuellement aucun magasin on prévient le joueur
 else
 {
     ?>

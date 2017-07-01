@@ -1,13 +1,13 @@
 <?php
 require_once("../../kernel/config.php");
 
-//On fait une requête pour vérifier si il y a un combat en cours
+//On fait une requête pour vérifier S'il y a un combat en cours
 $battleQuery = $bdd->prepare("SELECT * FROM car_battles
 WHERE battleCharacterId = ?");
 $battleQuery->execute([$characterId]);
 $battleRow = $battleQuery->rowCount();
 
-//Si il y a un combat de trouvé
+//S'il y a un combat de trouvé
 if ($battleRow == 1)
 {
     //On récupères les informations du combat (Id du combat, Id du monstre, Hp et Mp restant au monstre)
@@ -51,7 +51,7 @@ if ($battleRow == 1)
         }
         $opponentQuery->closeCursor();
     }
-    //Si il s'agit d'un combat contre un joueur
+    //S'il s'agit d'un combat contre un joueur
     else if ($battleType == "Arena")
     {
         //On récupère toutes les informations du personnage que nous sommes en train de combattre

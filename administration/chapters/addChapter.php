@@ -1,7 +1,7 @@
 <?php 
 require_once("../html/header.php");
 
-//Si il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
+//S'il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
@@ -9,12 +9,12 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 //Si les variables $_POST suivantes existent
 if (isset($_POST['add']))
 {
-    //On vérifie si il existe au moins un monstre pour créer le monstre du chapitre (le boss)
+    //On vérifie S'il existe au moins un monstre pour créer le monstre du chapitre (le boss)
     $monsterQuery = $bdd->query("SELECT * FROM car_monsters
     ORDER BY monsterName");
     //On recherche combien il y a de monstres disponible
     $monsterRow = $monsterQuery->rowCount();
-    //Si il y a au moins un monstre de disponible on peut créer un chapitre
+    //S'il y a au moins un monstre de disponible on peut créer un chapitre
     if ($monsterRow >= 1)
     {
         ?>
@@ -48,10 +48,10 @@ if (isset($_POST['add']))
         </form>
         <?php
     }
-    //Si il n'y a aucun monstre dans le jeu
+    //S'il n'y a aucun monstre dans le jeu
     else
     {
-        echo "Il est impossible de créer un chapitre s'il n'existe aucun monstres dans le jeu";
+        echo "Il est impossible de créer un chapitre S'il n'existe aucun monstres dans le jeu";
     }
 }
 //Si l'utilisateur n'a pas cliqué sur le bouton edit

@@ -314,7 +314,7 @@ INSERT INTO `car_items` (`itemId`, `itemRaceId`, `itemPicture`, `itemType`, `ite
 --
 
 INSERT INTO `car_monsters` (`monsterId`, `monsterPicture`, `monsterName`, `monsterDescription`, `monsterLevel`, `monsterHp`, `monsterMp`, `monsterStrength`, `monsterMagic`, `monsterAgility`, `monsterDefense`, `monsterDefenseMagic`, `monsterWisdom`, `monsterExperience`, `monsterGold`) VALUES
-(1, 'http://localhost/monster.png', 'Plop', 'Ce monstre se nourrit exclusivement de plante et de feuille tombé à même le sol.\r\nIl y a très longtemps celui-ci était jaune et est devenue vert de part son alimentation...\r\nMais si il est devenu vert de part son alimentation pourquoi était t\\''il jaune ?', 1, 50, 10, 12, 1, 1, 1, 1, 1, 25, 25),
+(1, 'http://localhost/monster.png', 'Plop', 'Ce monstre se nourrit exclusivement de plante et de feuille tombé à même le sol.\r\nIl y a très longtemps celui-ci était jaune et est devenue vert de part son alimentation...\r\nMais S'il est devenu vert de part son alimentation pourquoi était t\\''il jaune ?', 1, 50, 10, 12, 1, 1, 1, 1, 1, 25, 25),
 (2, 'http://localhost/monster.png', 'Dragon', 'Cet énorme dragon peut faire brûler des hectare de forêt en quelques minutes.', 2, 500, 1, 15, 1, 1, 1, 1, 1, 1000, 1000);
 
 --

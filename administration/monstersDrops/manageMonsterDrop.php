@@ -1,7 +1,7 @@
 <?php 
 require_once("../html/header.php");
 
-//Si il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
+//S'il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
@@ -34,7 +34,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
             $monsterDropQuery->execute([$adminMonsterDropMonsterId]);
             $monsterDropRow = $monsterDropQuery->rowCount();
 
-            //Si il existe un ou plusieurs objet pour ce monstre on affiche le menu déroulant
+            //S'il existe un ou plusieurs objet pour ce monstre on affiche le menu déroulant
             if ($monsterDropRow > 0) 
             {
                 ?>
@@ -70,7 +70,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
             $itemQuery = $bdd->query("SELECT * FROM car_items
             ORDER BY itemName");
             $itemRow = $itemQuery->rowCount();
-            //Si il existe un ou plusieurs monstres on affiche le menu déroulant pour proposer au joueur d'en ajouter
+            //S'il existe un ou plusieurs monstres on affiche le menu déroulant pour proposer au joueur d'en ajouter
             if ($itemRow > 0) 
             {
                 ?>
@@ -112,7 +112,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
             </form>
             <?php
         }
-        //Si l'objet n'est pas disponible
+        //Si l'objet n'exite pas
         else
         {
             echo "Erreur: Objet indisponible";

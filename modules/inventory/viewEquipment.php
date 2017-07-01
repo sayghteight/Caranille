@@ -1,8 +1,8 @@
 <?php require_once("../../html/header.php");
 
-//Si il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
+//S'il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
-//Si il y a actuellement un combat on redirige le joueur vers le module battle
+//S'il y a actuellement un combat on redirige le joueur vers le module battle
 if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); }
 
 //Si les variables $_POST suivantes existent
@@ -13,6 +13,7 @@ if (isset($_POST['itemId'])
     if(ctype_digit($_POST['itemId'])
     && $_POST['itemId'] >= 1)
     {
+        //On récupère l'Id du formulaire précédent
         $itemId = htmlspecialchars(addslashes($_POST['itemId']));
         
         //On fait une requête pour vérifier si l'équipement choisit existe
@@ -255,7 +256,7 @@ if (isset($_POST['itemId'])
     //Si l'équipement choisit n'est pas un nombre
     else
     {
-         echo "L'équipment choisit est invalid";
+         echo "L'équipment choisit est invalide";
     }
 }
 //Si toutes les variables $_POST n'existent pas

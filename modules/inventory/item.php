@@ -1,10 +1,11 @@
 <?php require_once("../../html/header.php");
 
-//Si il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
+//S'il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
-//Si il y a actuellement un combat on redirige le joueur vers le module battle
+//S'il y a actuellement un combat on redirige le joueur vers le module battle
 if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); }
 
+//On fait une requête pour vérifier tous les objets qui sont dans l'inventaire du joueur
 $itemQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
 WHERE itemId = inventoryItemId
 AND itemType = 'Item'

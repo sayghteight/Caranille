@@ -4,7 +4,7 @@
 $newsQuery = $bdd->query('SELECT * FROM car_news ORDER BY newsId desc LIMIT 0,4');
 $newsRow = $newsQuery->rowCount();
 
-//Si il existe des news on les affiche
+//S'il existe des news on les affiche
 if ($newsRow > 0)
 {
     //Pour chaque news trouvées on l'affiche
@@ -19,7 +19,7 @@ if ($newsRow > 0)
     }
     $newsQuery->closeCursor();
 }
-//Si il n'y a aucune news on prévient le joueur
+//S'il n'y a aucune news on prévient le joueur
 else
 {
     echo "Il n'y a actuellement aucune news ";

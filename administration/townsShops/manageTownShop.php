@@ -1,7 +1,7 @@
 <?php 
 require_once("../html/header.php");
 
-//Si il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
+//S'il n'y a aucune session c'est que le joueur n'est pas connecté alors on le redirige vers l'accueil
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
@@ -33,7 +33,7 @@ if (isset($_POST['adminTownShopTownId'])
             $townShopQuery->execute([$adminTownShopTownId]);
             $townShopRow = $townShopQuery->rowCount();
 
-            //Si il existe un ou plusieurs magasins dans la ville on affiche le menu déroulant
+            //S'il existe un ou plusieurs magasins dans la ville on affiche le menu déroulant
             if ($townShopRow > 0) 
             {
                 ?>
@@ -66,7 +66,7 @@ if (isset($_POST['adminTownShopTownId'])
 
             $shopQuery = $bdd->query("SELECT * FROM car_shops");
             $shopRow = $shopQuery->rowCount();
-            //Si il existe un ou plusieurs magasin on affiche le menu déroulant pour proposer au joueur d'en ajouter
+            //S'il existe un ou plusieurs magasin on affiche le menu déroulant pour proposer au joueur d'en ajouter
             if ($shopRow > 0) 
             {
                 ?>
@@ -107,7 +107,7 @@ if (isset($_POST['adminTownShopTownId'])
             </form>
             <?php
         }
-        //Si le monstre n'est pas disponible
+        //Si le monstre n'exite pas
         else
         {
             echo "Erreur: Monstre indisponible";

@@ -4,7 +4,7 @@
 $raceQuery = $bdd->query('SELECT * FROM car_races');
 $raceRow = $raceQuery->rowCount();
 
-//Si il existe des news on les affiche
+//S'il existe des news on les affiche
 if ($raceRow > 0)
 {
     //Pour chaque races trouvées on l'affiche
