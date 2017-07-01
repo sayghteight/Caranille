@@ -24,7 +24,7 @@ if (isset($_POST['adminAccountId'])
         $account = $accountQuery->rowCount();
         $accountQuery->closeCursor();
 
-        //Si le compte est disponible
+        //Si le compte existe
         if ($account == 1) 
         {
             //On Récupère le pseudo du compte

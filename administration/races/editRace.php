@@ -23,7 +23,7 @@ if (isset($_POST['adminRaceId'])
         $raceQuery->execute([$adminRaceId]);
         $raceRow = $raceQuery->rowCount();
 
-        //Si la race est disponible
+        //Si la race existe
         if ($raceRow == 1) 
         {
             //On récupères les informations de la race pour le formulaire ci-dessous

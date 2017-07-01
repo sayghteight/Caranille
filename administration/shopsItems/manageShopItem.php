@@ -23,7 +23,7 @@ if (isset($_POST['adminShopItemShopId'])
         $shopQuery->execute([$adminShopItemShopId]);
         $shopRow = $shopQuery->rowCount();
 
-        //Si le magasin existe est disponible
+        //Si le magasin existe existe
         if ($shopRow == 1)
         {
             $townShopQuery = $bdd->prepare("SELECT * FROM car_shops, car_items, car_shops_items

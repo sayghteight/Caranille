@@ -11,7 +11,7 @@ WHERE chapterId = ?");
 $chapterQuery->execute([$characterChapter]);
 $chapterRow = $chapterQuery->rowCount();
 
-//Si le chapitre du joueur est disponible
+//Si le chapitre du joueur existe
 if ($chapterRow == 1)
 {
 	while ($chapter = $chapterQuery->fetch())

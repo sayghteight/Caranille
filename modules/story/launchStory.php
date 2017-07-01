@@ -26,7 +26,7 @@ if (isset($_POST['continue']))
         $opponentQuery->execute([$characterChapter]);
         $opponentRow = $opponentQuery->rowCount();
 
-        //Si le monstre est disponible
+        //Si le monstre existe
         if ($opponentRow == 1) 
         {
             while ($opponent = $opponentQuery->fetch())

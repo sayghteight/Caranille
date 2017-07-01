@@ -22,7 +22,7 @@ if (isset($_POST['finalDelete']))
         $itemQuery->execute([$adminItemId]);
         $itemRow = $itemQuery->rowCount();
 
-        //Si l'équipement est disponible
+        //Si l'équipement existe
         if ($itemRow == 1) 
         {
             //Avant de supprimer l'équipement On cherche à savoir quel joueur a cet équipement et si il en est équippé pour appliquer la mise à jour

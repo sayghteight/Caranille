@@ -27,7 +27,7 @@ if (isset($_POST['adminTownMonsterTownId'])
         $townQuery->execute([$adminTownMonsterTownId]);
         $townRow = $townQuery->rowCount();
 
-        //Si la ville est disponible
+        //Si la ville existe
         if ($townRow == 1) 
         {
             //On fait une requête pour vérifier si le monstre choisit existe
@@ -36,7 +36,7 @@ if (isset($_POST['adminTownMonsterTownId'])
             $monsterQuery->execute([$adminTownMonsterMonsterId]);
             $monsterRow = $monsterQuery->rowCount();
 
-            //Si le monstre est disponible
+            //Si le monstre existe
             if ($monsterRow == 1) 
             {
                 //On fait une requête pour vérifier si le monstre n'est pas déjà dans cette ville

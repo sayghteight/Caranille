@@ -23,7 +23,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
         $monsterQuery->execute([$adminMonsterDropMonsterId]);
         $monsterRow = $monsterQuery->rowCount();
 
-        //Si le monstre est disponible
+        //Si le monstre existe
         if ($monsterRow == 1) 
         {
             $monsterDropQuery = $bdd->prepare("SELECT * FROM car_monsters, car_items, car_monsters_drops

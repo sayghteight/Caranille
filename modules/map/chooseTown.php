@@ -26,7 +26,7 @@ if (isset($_POST['townId'])
         $townRow = $townQuery->rowCount();
         $townQuery->closeCursor();
 
-        //Si la ville est disponible pour le joueur il y entre
+        //Si la ville existe pour le joueur il y entre
         if ($townRow >= 1) 
         {
             //On met le personnage à jour

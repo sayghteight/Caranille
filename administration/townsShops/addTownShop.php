@@ -27,7 +27,7 @@ if (isset($_POST['adminTownShopTownId'])
         $townQuery->execute([$adminTownShopTownId]);
         $townRow = $townQuery->rowCount();
 
-        //Si la ville est disponible
+        //Si la ville existe
         if ($townRow == 1) 
         {
             //On fait une requête pour vérifier si le magasin choisit existe
@@ -36,7 +36,7 @@ if (isset($_POST['adminTownShopTownId'])
             $shopQuery->execute([$adminTownShopShopId]);
             $shopRow = $shopQuery->rowCount();
 
-            //Si le magasin est disponible
+            //Si le magasin existe
             if ($shopRow == 1) 
             {
                 //On fait une requête pour vérifier si le magasin n'est pas déjà dans cette ville

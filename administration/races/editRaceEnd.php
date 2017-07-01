@@ -61,7 +61,7 @@ if (isset($_POST['adminRaceId'])
         $raceQuery->execute([$adminRaceId]);
         $raceRow = $raceQuery->rowCount();
 
-        //Si la race est disponible
+        //Si la race existe
         if ($raceRow == 1) 
         {
             //On met à jour la race dans la base de donnée

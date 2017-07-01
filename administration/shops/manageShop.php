@@ -23,7 +23,7 @@ if (isset($_POST['adminShopId'])
         $shopQuery->execute([$adminShopId]);
         $shopRow = $shopQuery->rowCount();
 
-        //Si l'objet est disponible
+        //Si l'objet existe
         if ($shopRow == 1) 
         {
             //On fait une recherche dans la base de donnée de tous les magasins

@@ -23,7 +23,7 @@ if (isset($_POST['adminMonsterId'])
         $monsterQuery->execute([$adminMonsterId]);
         $monsterRow = $monsterQuery->rowCount();
 
-        //Si le monstre est disponible
+        //Si le monstre existe
         if ($monsterRow == 1) 
         {
             //On vérifie si le monstre n'est pas attribué à un chapitre

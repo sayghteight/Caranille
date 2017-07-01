@@ -26,7 +26,7 @@ if (isset($_POST['adminShopItemShopId'])
         $shopQuery->execute([$adminShopItemShopId]);
         $shopRow = $shopQuery->rowCount();
 
-        //Si le magasin est disponible
+        //Si le magasin existe
         if ($shopRow == 1) 
         {
             //On récupère les informations du magasin
@@ -41,7 +41,7 @@ if (isset($_POST['adminShopItemShopId'])
             $itemQuery->execute([$adminShopItemItemId]);
             $itemRow = $itemQuery->rowCount();
 
-            //Si l'objet est disponible
+            //Si l'objet existe
             if ($itemRow == 1) 
             {
                 while ($item = $itemQuery->fetch())

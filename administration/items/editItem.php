@@ -23,7 +23,7 @@ if (isset($_POST['adminItemId'])
         $itemQuery->execute([$adminItemId]);
         $itemRow = $itemQuery->rowCount();
 
-        //Si l'objet est disponible
+        //Si l'objet existe
         if ($itemRow == 1) 
         {
             //On fait une boucle pour récupérer toutes les information

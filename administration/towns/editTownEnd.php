@@ -37,7 +37,7 @@ if (isset($_POST['adminTownId'])
         $townQuery->execute([$adminTownId]);
         $townRow = $townQuery->rowCount();
 
-        //Si la ville est disponible
+        //Si la ville existe
         if ($townRow == 1) 
         {
             //On met à jour l'objet dans la base de donnée

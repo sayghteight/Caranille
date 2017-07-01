@@ -27,7 +27,7 @@ if (isset($_POST['adminTownMonsterTownId'])
         $townQuery->execute([$adminTownMonsterTownId]);
         $townRow = $townQuery->rowCount();
 
-        //Si la ville est disponible
+        //Si la ville existe
         if ($townRow == 1) 
         {
             while ($town = $townQuery->fetch())
@@ -41,7 +41,7 @@ if (isset($_POST['adminTownMonsterTownId'])
             $monsterQuery->execute([$adminTownMonsterMonsterId]);
             $monsterRow = $monsterQuery->rowCount();
 
-            //Si le monstre est disponible
+            //Si le monstre existe
             if ($monsterRow == 1) 
             {
                 while ($monster = $monsterQuery->fetch())
@@ -56,7 +56,7 @@ if (isset($_POST['adminTownMonsterTownId'])
                 $monsterTownQuery->execute([$adminTownMonsterTownId, $adminTownMonsterMonsterId]);
                 $monsterTownRow = $monsterTownQuery->rowCount();
 
-                //Si le monstre est disponible
+                //Si le monstre existe
                 if ($monsterTownRow == 1) 
                 {
                     ?>

@@ -21,7 +21,7 @@ if (isset($_POST['itemId'])
         $itemQuery->execute([$itemId]);
         $itemRow = $itemQuery->rowCount();
 
-        //Si l'objet est disponible
+        //Si l'objet existe
         if ($itemRow == 1) 
         {
             //On fait une requête pour avoir la liste des objets du personnage

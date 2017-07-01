@@ -23,7 +23,7 @@ if (isset($_POST['adminMonsterId'])
         $monsterQuery->execute([$adminMonsterId]);
         $monsterRow = $monsterQuery->rowCount();
 
-        //Si l'équipement est disponible
+        //Si l'équipement existe
         if ($monsterRow == 1) 
         {
             //On fait une recherche dans la base de donnée de tous les comptes

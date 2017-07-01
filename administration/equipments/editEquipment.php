@@ -23,7 +23,7 @@ if (isset($_POST['adminItemId'])
         $itemQuery->execute([$adminItemId]);
         $itemRow = $itemQuery->rowCount();
 
-        //Si l'équipement est disponible
+        //Si l'équipement existe
         if ($itemRow == 1) 
         {
             while ($item = $itemQuery->fetch())

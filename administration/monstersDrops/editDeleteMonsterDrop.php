@@ -26,7 +26,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
         $monsterQuery->execute([$adminMonsterDropMonsterId]);
         $monsterRow = $monsterQuery->rowCount();
 
-        //Si le monstre est disponible
+        //Si le monstre existe
         if ($monsterRow == 1) 
         {
             //On récupère les informations du monstre
@@ -41,7 +41,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
             $itemQuery->execute([$adminMonsterDropItemId]);
             $itemRow = $itemQuery->rowCount();
 
-            //Si l'objet est disponible
+            //Si l'objet existe
             if ($itemRow == 1) 
             {
                 while ($item = $itemQuery->fetch())

@@ -33,7 +33,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
             $monsterQuery->execute([$adminMonsterDropMonsterId]);
             $monsterRow = $monsterQuery->rowCount();
 
-            //Si la ville est disponible
+            //Si la ville existe
             if ($monsterRow == 1) 
             {
                 //On fait une requête pour vérifier si l'objet choisit existe
@@ -42,7 +42,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                 $itemQuery->execute([$adminMonsterDropItemId]);
                 $itemRow = $itemQuery->rowCount();
 
-                //Si l'objet est disponible
+                //Si l'objet existe
                 if ($itemRow == 1) 
                 {
                     //On fait une requête pour vérifier si l'objet n'est pas déjà sur ce monstre

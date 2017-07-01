@@ -27,7 +27,7 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
             $pseudoList = $pseudoListQuery->rowCount();
             $pseudoListQuery->closeCursor();
 
-            //Si le pseudo est disponible
+            //Si le pseudo existe
             if ($pseudoList == 0) 
             {
                 //On fait une requête pour vérifier si le nom du personnage est déjà utilisé
@@ -37,7 +37,7 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                 $characterList = $characterListQuery->rowCount();
                 $characterListQuery->closeCursor();
 
-                //Si le personnage est disponible
+                //Si le personnage existe
                 if ($characterList == 0) 
                 {
                     //On fait une requête pour vérifier si le nom du personnage est déjà utilisé

@@ -27,7 +27,7 @@ if (isset($_POST['adminShopItemShopId'])
         $shopQuery->execute([$adminShopItemShopId]);
         $shopRow = $shopQuery->rowCount();
 
-        //Si le magasin est disponible
+        //Si le magasin existe
         if ($shopRow == 1) 
         {
             //On fait une requête pour vérifier si l'objet choisit existe
@@ -36,7 +36,7 @@ if (isset($_POST['adminShopItemShopId'])
             $itemQuery->execute([$adminShopItemItemId]);
             $itemRow = $itemQuery->rowCount();
 
-            //Si l'objet est disponible
+            //Si l'objet existe
             if ($itemRow == 1) 
             {
                 //On fait une requête pour vérifier si le monstre n'est pas déjà dans cette ville

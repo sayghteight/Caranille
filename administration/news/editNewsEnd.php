@@ -29,7 +29,7 @@ if (isset($_POST['adminNewsId'])
         $newsQuery->execute([$adminNewsId]);
         $newsRow = $newsQuery->rowCount();
 
-        //Si la news est disponible
+        //Si la news existe
         if ($newsRow == 1) 
         {
             //On met à jour la news dans la base de donnée

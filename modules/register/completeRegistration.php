@@ -45,7 +45,7 @@ if (isset($_POST['accountPseudo'])
                 $characterRow = $characterQuery->rowCount();
                 $characterQuery->closeCursor();
 
-                //Si le personnage est disponible
+                //Si le personnage existe
                 if ($characterRow == 0) 
                 {
                     //On fait une requête pour vérifier si le nom du personnage est déjà utilisé

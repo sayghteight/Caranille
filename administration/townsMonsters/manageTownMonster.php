@@ -23,7 +23,7 @@ if (isset($_POST['adminTownMonsterTownId'])
         $townQuery->execute([$adminTownMonsterTownId]);
         $townRow = $townQuery->rowCount();
 
-        //Si la ville est disponible
+        //Si la ville existe
         if ($townRow == 1)
         {
             $townMonsterQuery = $bdd->prepare("SELECT * FROM car_monsters, car_towns, car_towns_monsters

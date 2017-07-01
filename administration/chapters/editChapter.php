@@ -23,7 +23,7 @@ if (isset($_POST['adminChapterId'])
         $chapterQuery->execute([$adminChapterId]);
         $chapterRow = $chapterQuery->rowCount();
 
-        //Si le chapitre est disponible
+        //Si le chapitre existe
         if ($chapterRow == 1) 
         {
             //On fait une boucle pour récupérer toutes les information

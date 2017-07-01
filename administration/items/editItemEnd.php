@@ -45,7 +45,7 @@ if (isset($_POST['adminItemId'])
         $itemQuery->execute([$adminItemId]);
         $itemRow = $itemQuery->rowCount();
 
-        //Si l'objet est disponible
+        //Si l'objet existe
         if ($itemRow == 1) 
         {
             //On met à jour l'objet dans la base de donnée

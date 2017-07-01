@@ -21,7 +21,7 @@ if (isset($_POST['itemId'])
         $itemQuery->execute([$itemId]);
         $itemRow = $itemQuery->rowCount();
 
-        //Si l'objet est disponible
+        //Si l'objet existe
         if ($itemRow == 1) 
         {
             //On cherche à savoir si l'objet que le joueur va utiliser lui appartient bien
