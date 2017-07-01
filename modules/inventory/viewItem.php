@@ -14,126 +14,152 @@ if (isset($_POST['itemId'])
     && $_POST['itemId'] >= 1)
     {
         $itemId = htmlspecialchars(addslashes($_POST['itemId']));
-        
-        //On fait une requête pour avoir la liste des objets du personnage
-        $itemQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
-        WHERE itemId = inventoryItemId
-        AND itemType = 'Item' 
-        AND inventoryCharacterId = ?
-        AND itemId = ?");
-        $itemQuery->execute([$characterId, $itemId]);
+                
+        //On fait une requête pour vérifier si l'objet choisit existe
+        $itemQuery = $bdd->prepare('SELECT * FROM car_items 
+        WHERE itemId= ?');
+        $itemQuery->execute([$itemId]);
+        $itemRow = $itemQuery->rowCount();
 
-        //On fait une boucle sur les résultats et on vérifie à chaque fois de quel type d'équipement il s'agit
-        while ($item = $itemQuery->fetch())
+        //Si l'objet est disponible
+        if ($itemRow == 1) 
         {
-            $itemId = stripslashes($item['itemId']);
-            $itemType = stripslashes($item['itemType']);
-            $itemLevelRequired = stripslashes($item['itemLevelRequired']);
-            $itemName = stripslashes($item['itemName']);
-            $itemDescription = stripslashes($item['itemDescription']);
-            $itemQuantity = stripslashes($item['inventoryQuantity']);
-            $itemHpEffect = stripslashes($item['itemHpEffect']);
-            $itemMpEffect = stripslashes($item['itemMpEffect']);
-            $itemStrengthEffect = stripslashes($item['itemStrengthEffect']);
-            $itemMagicEffect = stripslashes($item['itemMagicEffect']);
-            $itemAgilityEffect = stripslashes($item['itemAgilityEffect']);
-            $itemDefenseEffect = stripslashes($item['itemDefenseEffect']);
-            $itemDefenseMagicEffect = stripslashes($item['itemDefenseMagicEffect']);
-            $itemWisdomEffect = stripslashes($item['itemWisdomEffect']);
-            $itemSalePrice = stripslashes($item['itemSalePrice']);
-            ?>
-            <table class="table">
-                <tr>
-                    <td>
-                        Niveau requis
-                    </td>
-                    
-                    <td>
-                        <?php echo $itemLevelRequired; ?>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        Nom
-                    </td>
-                    
-                    <td>
-                        <?php echo $itemName; ?>
-                    </td>
-                </tr>
-                    
-                <tr>
-                    <td>
-                        Description
-                    </td>
-                    
-                    <td>
-                        <?php echo nl2br($itemDescription); ?>
-                    </td>
-                </tr>
-                    
-                <tr>
-                    <td>
-                        Quantité
-                    </td>
-                    
-                    <td>
-                        <?php echo $itemQuantity; ?>
-                    </td>
-                </tr>
-                    
-                <tr>
-                    <td>
-                        Effet(s)
-                    </td>
-                    
-                    <td>
-                        <?php echo '+' .$itemHpEffect. ' HP'; ?><br />
-                        <?php echo '+' .$itemMpEffect. ' MP'; ?><br />
-                        <?php echo '+' .$itemStrengthEffect. ' Force'; ?><br />
-                        <?php echo '+' .$itemMagicEffect. ' Magie'; ?><br />
-                        <?php echo '+' .$itemAgilityEffect. ' Agilité'; ?><br />
-                        <?php echo '+' .$itemDefenseEffect. ' Défense'; ?><br />
-                        <?php echo '+' .$itemDefenseMagicEffect. ' Défense magique'; ?><br />
-                        <?php echo '+' .$itemWisdomEffect. ' Sagesse'; ?>
-                    </td>
-                </tr>
-                    
-                <tr>
-                    <td>
-                        Prix de vente
-                    </td>
-                    
-                    <td>
-                        <?php echo $itemSalePrice; ?>
-                    </td>
-                </tr>
-                    
-                <tr>
-                    <td>
-                        Actions
-                    </td>
-                    
-                    <td>
-                        <form method="POST" action="useItem.php">
-                            <input type="hidden" name="itemId" value="<?php echo $itemId ?>">
-                            <input type="submit" class="btn btn-default form-control" name="use" value="Utiliser"><br /><br />
-                        </form>
-                        <form method="POST" action="saleItem.php">
-                            <input type="hidden" name="itemId" value="<?php echo $itemId ?>">
-                            <input type="submit" class="btn btn-default form-control" name="sale" value="Vendre"><br /><br />
-                        </form>
-                    </td>
-                </tr>
-            </table>
-                        
-            <hr>
-
-            <form method="POST" action="index.php">
-                <input type="submit" class="btn btn-default form-control" value="Retour">
-            </form>
-            <?php
+            //On fait une requête pour avoir la liste des objets du personnage
+            $itemInventoryQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
+            WHERE itemId = inventoryItemId
+            AND itemType = 'Item' 
+            AND inventoryCharacterId = ?
+            AND inventoryItemId = ?");
+            $itemInventoryQuery->execute([$characterId, $itemId]);
+            $itemInventoryRow = $itemInventoryQuery->rowCount();
+            
+            //Si le personnage possède cet objet
+            if ($itemInventoryRow == 1) 
+            {
+                //On fait une boucle sur les résultats et on vérifie à chaque fois de quel type d'équipement il s'agit
+                while ($itemInventory = $itemInventoryQuery->fetch())
+                {
+                    $itemId = stripslashes($itemInventory['itemId']);
+                    $itemType = stripslashes($itemInventory['itemType']);
+                    $itemLevelRequired = stripslashes($itemInventory['itemLevelRequired']);
+                    $itemName = stripslashes($itemInventory['itemName']);
+                    $itemDescription = stripslashes($itemInventory['itemDescription']);
+                    $itemQuantity = stripslashes($itemInventory['inventoryQuantity']);
+                    $itemHpEffect = stripslashes($itemInventory['itemHpEffect']);
+                    $itemMpEffect = stripslashes($itemInventory['itemMpEffect']);
+                    $itemStrengthEffect = stripslashes($itemInventory['itemStrengthEffect']);
+                    $itemMagicEffect = stripslashes($itemInventory['itemMagicEffect']);
+                    $itemAgilityEffect = stripslashes($itemInventory['itemAgilityEffect']);
+                    $itemDefenseEffect = stripslashes($itemInventory['itemDefenseEffect']);
+                    $itemDefenseMagicEffect = stripslashes($itemInventory['itemDefenseMagicEffect']);
+                    $itemWisdomEffect = stripslashes($itemInventory['itemWisdomEffect']);
+                    $itemSalePrice = stripslashes($itemInventory['itemSalePrice']);
+                    ?>
+                    <table class="table">
+                        <tr>
+                            <td>
+                                Niveau requis
+                            </td>
+                            
+                            <td>
+                                <?php echo $itemLevelRequired; ?>
+                            </td>
+                        </tr>
+        
+                        <tr>
+                            <td>
+                                Nom
+                            </td>
+                            
+                            <td>
+                                <?php echo $itemName; ?>
+                            </td>
+                        </tr>
+                            
+                        <tr>
+                            <td>
+                                Description
+                            </td>
+                            
+                            <td>
+                                <?php echo nl2br($itemDescription); ?>
+                            </td>
+                        </tr>
+                            
+                        <tr>
+                            <td>
+                                Quantité
+                            </td>
+                            
+                            <td>
+                                <?php echo $itemQuantity; ?>
+                            </td>
+                        </tr>
+                            
+                        <tr>
+                            <td>
+                                Effet(s)
+                            </td>
+                            
+                            <td>
+                                <?php echo '+' .$itemHpEffect. ' HP'; ?><br />
+                                <?php echo '+' .$itemMpEffect. ' MP'; ?><br />
+                                <?php echo '+' .$itemStrengthEffect. ' Force'; ?><br />
+                                <?php echo '+' .$itemMagicEffect. ' Magie'; ?><br />
+                                <?php echo '+' .$itemAgilityEffect. ' Agilité'; ?><br />
+                                <?php echo '+' .$itemDefenseEffect. ' Défense'; ?><br />
+                                <?php echo '+' .$itemDefenseMagicEffect. ' Défense magique'; ?><br />
+                                <?php echo '+' .$itemWisdomEffect. ' Sagesse'; ?>
+                            </td>
+                        </tr>
+                            
+                        <tr>
+                            <td>
+                                Prix de vente
+                            </td>
+                            
+                            <td>
+                                <?php echo $itemSalePrice; ?>
+                            </td>
+                        </tr>
+                            
+                        <tr>
+                            <td>
+                                Actions
+                            </td>
+                            
+                            <td>
+                                <form method="POST" action="useItem.php">
+                                    <input type="hidden" name="itemId" value="<?php echo $itemId ?>">
+                                    <input type="submit" class="btn btn-default form-control" name="use" value="Utiliser"><br /><br />
+                                </form>
+                                <form method="POST" action="saleItem.php">
+                                    <input type="hidden" name="itemId" value="<?php echo $itemId ?>">
+                                    <input type="submit" class="btn btn-default form-control" name="sale" value="Vendre"><br /><br />
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                                
+                    <hr>
+        
+                    <form method="POST" action="index.php">
+                        <input type="submit" class="btn btn-default form-control" value="Retour">
+                    </form>
+                    <?php
+                }
+                $itemInventoryQuery->closeCursor();
+            }
+            //Si le joueur ne possède pas cet objet
+            else
+            {
+                echo "Erreur: Impossible de visualiser un objet que vous ne possédez pas.";
+            }
+        }
+        //Si l'objet n'est pas disponible
+        else
+        {
+            echo "Erreur: Objet indisponible";
         }
         $itemQuery->closeCursor();
     }

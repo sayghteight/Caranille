@@ -12,7 +12,7 @@ AND inventoryCharacterId = ?");
 $itemQuery->execute([$characterId]);
 $itemRow = $itemQuery->rowCount();
 
-//Si un ou plusieurs équipements ont été trouvé
+//Si un ou plusieurs objets ont été trouvé
 if ($itemRow > 0)
 {
     ?>
