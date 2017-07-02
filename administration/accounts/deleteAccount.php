@@ -9,7 +9,7 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 //Si les variables $_POST suivantes existent
 if (isset($_POST['delete']))
 {
-    //On vérifie si l'id du compte récupéré dans le formulaire est en entier positif
+    //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
     if (ctype_digit($_POST['adminAccountId'])
     && $_POST['adminAccountId'] >= 1)
     {

@@ -9,11 +9,11 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 //Si les variables $_POST suivantes existent
 if (isset($_POST['finalDelete']))
 {
-    //On vérifie si l'id du compte récupéré dans le formulaire est en entier positif
+    //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
     if (ctype_digit($_POST['adminAccountId'])
     && $_POST['adminAccountId'] >= 1)
     {
-        //On récupère l'id du compte
+        //On récupère l'Id du formulaire précédent
         $adminAccountId = htmlspecialchars(addslashes($_POST['adminAccountId']));
 
         //On fait une requête pour vérifier si le compte choisit existe
