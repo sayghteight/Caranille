@@ -8,38 +8,42 @@ if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); 
 //Si les variables $_POST suivantes existent
 if (isset($_POST['addWisdom']))
 {
+    //Si le personnage a suffisamment de PC
     if ($characterSkillPoints > 0)
     {
-        //On met la stats à jour
-        $updateCharacter = $bdd->prepare('UPDATE car_characters 
-        SET characterWisdomSkillPoints = characterWisdomSkillPoints + 1,
-        characterSkillPoints = characterSkillPoints -1
-        WHERE characterId = :characterId');
-        $updateCharacter->execute(['characterId' => $characterId]);
-        $updateCharacter->closeCursor();
-
-        $updateCharacter = $bdd->prepare('UPDATE car_characters
-        SET characterHpTotal = characterHpMax + characterHpSkillPoints + characterHpBonus + characterHpEquipments,
-        characterMpTotal = characterMpMax + characterMpSkillPoints + characterMpBonus + characterMpEquipments,
-        characterStrengthTotal = characterStrength + characterStrengthSkillPoints + characterStrengthBonus + characterStrengthEquipments,
-        characterMagicTotal = characterMagic + characterMagicSkillPoints + characterMagicBonus + characterMagicEquipments,
-        characterAgilityTotal = characterAgility + characterAgilitySkillPoints + characterAgilityBonus + characterAgilityEquipments,
-        characterDefenseTotal = characterDefense + characterDefenseSkillPoints + characterDefenseBonus + characterDefenseEquipments,
-        characterDefenseMagicTotal = characterDefenseMagic + characterDefenseMagicSkillPoints + characterDefenseMagicBonus + characterDefenseMagicEquipments,
-        characterWisdomTotal = characterWisdom + characterWisdomSkillPoints + characterWisdomBonus + characterWisdomEquipments
-        WHERE characterId = :characterId');
-        $updateCharacter->execute(['characterId' => $characterId]);
-        $updateCharacter->closeCursor();
-
-        header("Location: index.php");
-    }
-    else
-    {
-        echo "Vous n'avez pas assez de points de compétences";
         ?>
+        
+        <p>ATTENTION</p> 
+        Vous êtes sur le point d'attribuer 1 point en sagesse à votre personnage pour 1 PC.<br />
+        Confirmez-vous ?
+
+        <hr>
+            
+        <form method="POST" action="addWisdomEnd.php">
+            <input type="submit" class="btn btn-default form-control" name="finalAddWisdom" value="Je confirme">
+        </form>
+        
+        <hr>
+            
         <form method="POST" action="index.php">
             <input type="submit" class="btn btn-default form-control" value="Retour">
         </form>
+        
+        <?php
+    }
+    //Si le personnage n'a pas suffisamment de PC
+    else
+    {
+        ?>
+        
+        Vous n'avez pas assez de points de compétences
+                
+        <hr>
+        
+        <form method="POST" action="index.php">
+            <input type="submit" class="btn btn-default form-control" value="Retour">
+        </form>
+
         <?php
     }
 }
