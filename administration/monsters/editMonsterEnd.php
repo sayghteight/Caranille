@@ -53,7 +53,7 @@ if (isset($_POST['adminMonsterId'])
         //On récupère l'id du formulaire précédent
         $adminMonsterId = htmlspecialchars(addslashes($_POST['adminMonsterId']));
 
-        //On fait une requête pour vérifier si le monstre choisit existe
+        //On fait une requête pour vérifier si le monstre choisi existe
         $monsterQuery = $bdd->prepare('SELECT * FROM car_monsters 
         WHERE monsterId= ?');
         $monsterQuery->execute([$adminMonsterId]);

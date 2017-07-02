@@ -28,7 +28,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
         //Si le taux d'obtention est entre 0 et 100 on ajoute l'objet
         if ($adminMonsterDropLuck >= 0 && $adminMonsterDropLuck <= 100)
         {
-            //On fait une requête pour vérifier si le monstre choisit existe
+            //On fait une requête pour vérifier si le monstre choisi existe
             $monsterQuery = $bdd->prepare('SELECT * FROM car_monsters 
             WHERE monsterId= ?');
             $monsterQuery->execute([$adminMonsterDropMonsterId]);
@@ -37,7 +37,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
             //Si la ville existe
             if ($monsterRow == 1) 
             {
-                //On fait une requête pour vérifier si l'objet choisit existe
+                //On fait une requête pour vérifier si l'objet choisi existe
                 $itemQuery = $bdd->prepare('SELECT * FROM car_items 
                 WHERE itemId= ?');
                 $itemQuery->execute([$adminMonsterDropItemId]);

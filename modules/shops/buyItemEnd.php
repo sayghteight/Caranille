@@ -20,7 +20,7 @@ if (isset($_POST['shopId'])
         $shopId = htmlspecialchars(addslashes($_POST['shopId']));
         $itemId = htmlspecialchars(addslashes($_POST['itemId']));
 
-        //On fait une requête pour vérifier si le magasin choisit existe
+        //On fait une requête pour vérifier si le magasin choisi existe
         $shopQuery = $bdd->prepare('SELECT * FROM car_shops 
         WHERE shopId= ?');
         $shopQuery->execute([$shopId]);
@@ -29,7 +29,7 @@ if (isset($_POST['shopId'])
         //Si le magasin existe
         if ($shopRow == 1) 
         {
-            //On fait une requête pour vérifier si l'objet choisit existe
+            //On fait une requête pour vérifier si l'objet choisi existe
             $itemQuery = $bdd->prepare('SELECT * FROM car_items 
             WHERE itemId= ?');
             $itemQuery->execute([$itemId]);
@@ -153,10 +153,10 @@ if (isset($_POST['shopId'])
         }
         $shopQuery->closeCursor();
     }
-    //Si l'objet choisit n'est pas un nombre
+    //Si l'objet choisi n'est pas un nombre
     else
     {
-         echo "L'équipment choisit est invalide";
+         echo "L'équipment choisi est invalide";
     }
 }
 //Si toutes les variables $_POST n'existent pas

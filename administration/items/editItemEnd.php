@@ -39,7 +39,7 @@ if (isset($_POST['adminItemId'])
         $adminItemPurchasePrice = htmlspecialchars(addslashes($_POST['adminItemPurchasePrice']));
         $adminItemSalePrice = htmlspecialchars(addslashes($_POST['adminItemSalePrice']));
 
-        //On fait une requête pour vérifier si l'objet choisit existe
+        //On fait une requête pour vérifier si l'objet choisi existe
         $itemQuery = $bdd->prepare('SELECT * FROM car_items 
         WHERE itemId= ?');
         $itemQuery->execute([$adminItemId]);

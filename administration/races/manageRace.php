@@ -17,7 +17,7 @@ if (isset($_POST['adminRaceId'])
         //On récupère l'id de la race
         $adminRaceId = htmlspecialchars(addslashes($_POST['adminRaceId']));
 
-        //On fait une requête pour vérifier si le compte choisit existe
+        //On fait une requête pour vérifier si le compte choisi existe
         $raceQuery = $bdd->prepare('SELECT * FROM car_races 
         WHERE raceId= ?');
         $raceQuery->execute([$adminRaceId]);
@@ -60,7 +60,7 @@ if (isset($_POST['adminRaceId'])
         }
         $raceQuery->closeCursor();
     }
-    //Si la race choisit n'est pas un nombre
+    //Si la race choisi n'est pas un nombre
     else
     {
         echo "Erreur: La race choisie est incorrect";

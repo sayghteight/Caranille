@@ -16,7 +16,7 @@ if (isset($_POST['itemId'])
         //On récupère l'Id du formulaire précédent
         $itemId = htmlspecialchars(addslashes($_POST['itemId']));
                 
-        //On fait une requête pour vérifier si l'objet choisit existe
+        //On fait une requête pour vérifier si l'objet choisi existe
         $itemQuery = $bdd->prepare('SELECT * FROM car_items 
         WHERE itemId= ?');
         $itemQuery->execute([$itemId]);
@@ -164,10 +164,10 @@ if (isset($_POST['itemId'])
         }
         $itemQuery->closeCursor();
     }
-    //Si l'objet choisit n'est pas un nombre
+    //Si l'objet choisi n'est pas un nombre
     else
     {
-         echo "L'objet choisit est invalide";
+         echo "L'objet choisi est invalide";
     }
 }
 //Si toutes les variables $_POST n'existent pas

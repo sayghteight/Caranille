@@ -17,7 +17,7 @@ if (isset($_POST['adminChapterId'])
         //On récupère l'Id du formulaire précédent
         $adminChapterId = htmlspecialchars(addslashes($_POST['adminChapterId']));
 
-        //On fait une requête pour vérifier si le chapitre choisit existe
+        //On fait une requête pour vérifier si le chapitre choisi existe
         $chapterQuery = $bdd->prepare('SELECT * FROM car_chapters 
         WHERE chapterId = ?');
         $chapterQuery->execute([$adminChapterId]);
@@ -58,7 +58,7 @@ if (isset($_POST['adminChapterId'])
         }
         $chapterQuery->closeCursor();
     }
-    //Si le chapitre choisit n'est pas un nombre
+    //Si le chapitre choisi n'est pas un nombre
     else
     {
         echo "Erreur: Chapitre invalide";

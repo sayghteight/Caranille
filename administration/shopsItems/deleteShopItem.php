@@ -21,7 +21,7 @@ if (isset($_POST['adminShopItemShopId'])
         $adminShopItemShopId = htmlspecialchars(addslashes($_POST['adminShopItemShopId']));
         $adminShopItemItemId = htmlspecialchars(addslashes($_POST['adminShopItemItemId']));
 
-        //On fait une requête pour vérifier si le magasin choisit existe
+        //On fait une requête pour vérifier si le magasin choisi existe
         $shopQuery = $bdd->prepare('SELECT * FROM car_shops 
         WHERE shopId= ?');
         $shopQuery->execute([$adminShopItemShopId]);
@@ -30,7 +30,7 @@ if (isset($_POST['adminShopItemShopId'])
         //Si le magasin existe
         if ($shopRow == 1) 
         {
-            //On fait une requête pour vérifier si l'objet choisit existe
+            //On fait une requête pour vérifier si l'objet choisi existe
             $itemQuery = $bdd->prepare('SELECT * FROM car_items 
             WHERE itemId = ?');
             $itemQuery->execute([$adminShopItemItemId]);
@@ -87,7 +87,7 @@ if (isset($_POST['adminShopItemShopId'])
         }
         $shopQuery->closeCursor();
     }
-    //Si le magasin choisit n'est pas un nombre
+    //Si le magasin choisi n'est pas un nombre
     else
     {
         echo "Erreur: Magasin invalide";

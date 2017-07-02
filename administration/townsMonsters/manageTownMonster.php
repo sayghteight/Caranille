@@ -17,7 +17,7 @@ if (isset($_POST['adminTownMonsterTownId'])
         //On récupère l'id du formulaire précédent
         $adminTownMonsterTownId = htmlspecialchars(addslashes($_POST['adminTownMonsterTownId']));
 
-        //On fait une requête pour vérifier si la ville choisit existe
+        //On fait une requête pour vérifier si la ville choisi existe
         $townQuery = $bdd->prepare('SELECT * FROM car_towns 
         WHERE townId= ?');
         $townQuery->execute([$adminTownMonsterTownId]);
@@ -113,7 +113,7 @@ if (isset($_POST['adminTownMonsterTownId'])
             echo "Erreur: Monstre indisponible";
         }
     }
-    //Si le monstre choisit n'est pas un nombre
+    //Si le monstre choisi n'est pas un nombre
     else
     {
         echo "Erreur: Monstre invalide";

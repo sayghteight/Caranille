@@ -31,7 +31,7 @@ if (isset($_POST['adminTownId'])
         $adminTownPriceInn = htmlspecialchars(addslashes($_POST['adminTownPriceInn']));
         $adminTownChapter = htmlspecialchars(addslashes($_POST['adminTownChapter']));
 
-        //On fait une requête pour vérifier si la ville choisit existe
+        //On fait une requête pour vérifier si la ville choisi existe
         $townQuery = $bdd->prepare('SELECT * FROM car_towns 
         WHERE townId = ?');
         $townQuery->execute([$adminTownId]);

@@ -91,7 +91,7 @@ if (isset($_POST['adminRacePicture'])
             </form>
         <?php
     }
-    //Si la race choisit n'est pas un nombre
+    //Si la race choisi n'est pas un nombre
     else
     {
         echo "Erreur: La race choisie est incorrect";

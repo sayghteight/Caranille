@@ -49,7 +49,7 @@ if (isset($_POST['adminNewsId'])
         }
         $newsQuery->closeCursor();
     }
-    //Si la news choisit n'est pas un nombre
+    //Si la news choisi n'est pas un nombre
     else
     {
         echo "Erreur: News invalide";

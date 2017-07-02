@@ -17,7 +17,7 @@ if (isset($_POST['adminRaceId'])
         //On récupère l'Id du formulaire précédent
         $adminRaceId = htmlspecialchars(addslashes($_POST['adminRaceId']));
 
-        //On fait une requête pour vérifier si la race choisit existe
+        //On fait une requête pour vérifier si la race choisi existe
         $raceQuery = $bdd->prepare('SELECT * FROM car_races 
         WHERE raceId = ?');
         $raceQuery->execute([$adminRaceId]);
@@ -104,7 +104,7 @@ if (isset($_POST['adminRaceId'])
         }
         $raceQuery->closeCursor();
     }
-    //Si la classe choisit n'est pas un nombre
+    //Si la classe choisi n'est pas un nombre
     else
     {
         echo "Erreur: Classe invalide";

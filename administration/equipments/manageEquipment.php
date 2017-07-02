@@ -17,7 +17,7 @@ if (isset($_POST['adminItemId'])
         //On récupère l'Id du formulaire précédent
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
 
-        //On fait une requête pour vérifier si l'équipement choisit existe
+        //On fait une requête pour vérifier si l'équipement choisi existe
         $itemQuery = $bdd->prepare('SELECT * FROM car_items 
         WHERE itemId= ?');
         $itemQuery->execute([$adminItemId]);
@@ -64,7 +64,7 @@ if (isset($_POST['adminItemId'])
         }
         $itemQuery->closeCursor();
     }
-    //Si l'équipement choisit n'est pas un nombre
+    //Si l'équipement choisi n'est pas un nombre
     else
     {
         echo "Erreur: Equippement invalide";

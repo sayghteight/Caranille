@@ -17,7 +17,7 @@ if (isset($_POST['adminTownId'])
         //On récupère l'id du formulaire précédent
         $adminTownId = htmlspecialchars(addslashes($_POST['adminTownId']));
 
-        //On fait une requête pour vérifier si l'objet choisit existe
+        //On fait une requête pour vérifier si l'objet choisi existe
         $townQuery = $bdd->prepare('SELECT * FROM car_towns 
         WHERE townId= ?');
         $townQuery->execute([$adminTownId]);
@@ -67,7 +67,7 @@ if (isset($_POST['adminTownId'])
         }
         $townQuery->closeCursor();
     }
-    //Si la ville choisit n'est pas un nombre
+    //Si la ville choisi n'est pas un nombre
     else
     {
         echo "Erreur: Ville invalide";

@@ -30,7 +30,7 @@ if (isset($_POST['adminTownShopTownId'])
         //Si la ville existe
         if ($townRow == 1) 
         {
-            //On fait une requête pour vérifier si le magasin choisit existe
+            //On fait une requête pour vérifier si le magasin choisi existe
             $shopQuery = $bdd->prepare('SELECT * FROM car_shops 
             WHERE shopId= ?');
             $shopQuery->execute([$adminTownShopShopId]);
@@ -87,7 +87,7 @@ if (isset($_POST['adminTownShopTownId'])
         }
         $townQuery->closeCursor();
     }
-    //Si le monstre choisit n'est pas un nombre
+    //Si le monstre choisi n'est pas un nombre
     else
     {
         echo "Erreur: Equippement invalide";

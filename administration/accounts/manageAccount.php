@@ -17,7 +17,7 @@ if (isset($_POST['adminAccountId'])
         //On récupère l'Id du formulaire précédent
         $adminAccountId = htmlspecialchars(addslashes($_POST['adminAccountId']));
 
-        //On fait une requête pour vérifier si le compte choisit existe
+        //On fait une requête pour vérifier si le compte choisi existe
         $accountQuery = $bdd->prepare('SELECT * FROM car_accounts 
         WHERE accountId= ?');
         $accountQuery->execute([$adminAccountId]);
@@ -61,10 +61,10 @@ if (isset($_POST['adminAccountId'])
         }
         $accountQuery->closeCursor();
     }
-    //Si le compte choisit n'est pas un nombre
+    //Si le compte choisi n'est pas un nombre
     else
     {
-        echo "Erreur: Le compte choisit est incorrect";
+        echo "Erreur: Le compte choisi est incorrect";
     }
 }
 //Si toutes les variables $_POST n'existent pas

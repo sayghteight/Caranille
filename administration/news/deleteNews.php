@@ -58,7 +58,7 @@ if (isset($_POST['adminNewsId'])
         }
         $newsQuery->closeCursor();
     }
-    //Si l'objet choisit n'est pas un nombre
+    //Si l'objet choisi n'est pas un nombre
     else
     {
         echo "Erreur: Objet invalide";

@@ -27,7 +27,7 @@ if (isset($_POST['adminShopItemShopId'])
         //Si la réduction est entre 0 et 100 on ajoute l'objet
         if ($adminShopItemDiscount >= 0 && $adminShopItemDiscount <= 100)
         {
-            //On fait une requête pour vérifier si le magasin choisit existe
+            //On fait une requête pour vérifier si le magasin choisi existe
             $shopQuery = $bdd->prepare('SELECT * FROM car_shops 
             WHERE shopId= ?');
             $shopQuery->execute([$adminShopItemShopId]);
@@ -36,7 +36,7 @@ if (isset($_POST['adminShopItemShopId'])
             //Si le magasin existe
             if ($shopRow == 1) 
             {
-                //On fait une requête pour vérifier si l'objet choisit existe
+                //On fait une requête pour vérifier si l'objet choisi existe
                 $itemQuery = $bdd->prepare('SELECT * FROM car_items 
                 WHERE itemId = ?');
                 $itemQuery->execute([$adminShopItemItemId]);

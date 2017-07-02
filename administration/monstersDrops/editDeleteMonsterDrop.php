@@ -20,7 +20,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
         $adminMonsterDropMonsterId = htmlspecialchars(addslashes($_POST['adminMonsterDropMonsterId']));
         $adminMonsterDropItemId = htmlspecialchars(addslashes($_POST['adminMonsterDropItemId']));
 
-        //On fait une requête pour vérifier si le monstre choisit existe
+        //On fait une requête pour vérifier si le monstre choisi existe
         $monsterQuery = $bdd->prepare('SELECT * FROM car_monsters 
         WHERE monsterId= ?');
         $monsterQuery->execute([$adminMonsterDropMonsterId]);
@@ -35,7 +35,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                 $adminMonsterDropMonsterName = stripslashes($monster['monsterName']);
             }
 
-            //On fait une requête pour vérifier si l'objet choisit existe
+            //On fait une requête pour vérifier si l'objet choisi existe
             $itemQuery = $bdd->prepare('SELECT * FROM car_items 
             WHERE itemId= ?');
             $itemQuery->execute([$adminMonsterDropItemId]);
@@ -126,7 +126,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
         }
         $monsterQuery->closeCursor();
     }
-    //Si le monstre choisit n'est pas un nombre
+    //Si le monstre choisi n'est pas un nombre
     else
     {
         echo "Erreur: Monstre invalide";

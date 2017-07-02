@@ -17,7 +17,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
         //On récupère l'id du formulaire précédent
         $adminMonsterDropMonsterId = htmlspecialchars(addslashes($_POST['adminMonsterDropMonsterId']));
 
-        //On fait une requête pour vérifier si le monstre choisit existe
+        //On fait une requête pour vérifier si le monstre choisi existe
         $monsterQuery = $bdd->prepare('SELECT * FROM car_monsters 
         WHERE monsterId= ?');
         $monsterQuery->execute([$adminMonsterDropMonsterId]);
@@ -118,7 +118,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
             echo "Erreur: Objet indisponible";
         }
     }
-    //Si l'objet choisit n'est pas un nombre
+    //Si l'objet choisi n'est pas un nombre
     else
     {
         echo "Erreur: Objet invalide";

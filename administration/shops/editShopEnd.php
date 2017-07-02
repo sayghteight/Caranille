@@ -23,7 +23,7 @@ if (isset($_POST['adminShopId'])
         $adminShopName = htmlspecialchars(addslashes($_POST['adminShopName']));
         $adminShopDescription = htmlspecialchars(addslashes($_POST['adminShopDescription']));
 
-        //On fait une requête pour vérifier si le magasin choisit existe
+        //On fait une requête pour vérifier si le magasin choisi existe
         $shopQuery = $bdd->prepare('SELECT * FROM car_shops 
         WHERE shopId= ?');
         $shopQuery->execute([$adminShopId]);

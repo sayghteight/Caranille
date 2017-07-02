@@ -5,7 +5,7 @@ require_once("../../config.php");
 //Si tous les champs ont bien été rempli
 if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['accountPasswordConfirm']) && ($_POST['accountEmail']))
 {
-    //On vérifi si la classe choisit est correct et que le select retourne bien un nombre
+    //On vérifi si la classe choisi est correct et que le select retourne bien un nombre
     if(ctype_digit($_POST['characterRaceId']))
     {
         //On récupère les valeurs du formulaire dans une variable
@@ -241,7 +241,7 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                     //Si la classe choisie n'existe pas
                     else
                     {
-                        echo "La classe choisit n'existe pas";
+                        echo "La classe choisi n'existe pas";
                     }
                 }
                 //Si le nom du personnage a déjà été utilisé
@@ -262,10 +262,10 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
             echo "Les deux mots de passe ne sont pas identiques";
         }
     }
-    //Si la classe choisit n'est pas un nombre
+    //Si la classe choisi n'est pas un nombre
     else
     {
-         echo "La classe choisit est invalide";
+         echo "La classe choisi est invalide";
     }
 }
 //Si tous les champs n'ont pas été rmepli

@@ -30,7 +30,7 @@ if (isset($_POST['adminTownMonsterTownId'])
         //Si la ville existe
         if ($townRow == 1) 
         {
-            //On fait une requête pour vérifier si le monstre choisit existe
+            //On fait une requête pour vérifier si le monstre choisi existe
             $monsterQuery = $bdd->prepare('SELECT * FROM car_monsters 
             WHERE monsterId= ?');
             $monsterQuery->execute([$adminTownMonsterMonsterId]);
@@ -39,7 +39,7 @@ if (isset($_POST['adminTownMonsterTownId'])
             //Si l'équipement existe
             if ($monsterRow == 1) 
             {
-                //On fait une requête pour vérifier si le monstre choisit existe bien dans la ville
+                //On fait une requête pour vérifier si le monstre choisi existe bien dans la ville
                 $monsterQuery = $bdd->prepare('SELECT * FROM car_towns_monsters 
                 WHERE townMonsterTownId = ?
                 AND townMonsterMonsterId = ?');
@@ -87,7 +87,7 @@ if (isset($_POST['adminTownMonsterTownId'])
         }
         $townQuery->closeCursor();
     }
-    //Si le monstre choisit n'est pas un nombre
+    //Si le monstre choisi n'est pas un nombre
     else
     {
         echo "Erreur: Equippement invalide";

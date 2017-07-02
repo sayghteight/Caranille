@@ -67,7 +67,7 @@ if (isset($_POST['itemId'])
                     }
                 }
 
-                //On équippe maintenant l'équipement choisit
+                //On équippe maintenant l'équipement choisi
                 $updateInventory = $bdd->prepare("UPDATE car_inventory SET
                 inventoryEquipped = 1
                 WHERE inventoryId= :inventoryId");
@@ -190,10 +190,10 @@ if (isset($_POST['itemId'])
             echo "Erreur: Vous ne possedez pas cet équipement";
         }
     }
-    //Si l'équipement choisit n'est pas un nombre
+    //Si l'équipement choisi n'est pas un nombre
     else
     {
-         echo "L'équipment choisit est invalide";
+         echo "L'équipment choisi est invalide";
     }
 }
 //Si toutes les variables $_POST n'existent pas

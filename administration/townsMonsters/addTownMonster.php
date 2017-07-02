@@ -30,7 +30,7 @@ if (isset($_POST['adminTownMonsterTownId'])
         //Si la ville existe
         if ($townRow == 1) 
         {
-            //On fait une requête pour vérifier si le monstre choisit existe
+            //On fait une requête pour vérifier si le monstre choisi existe
             $monsterQuery = $bdd->prepare('SELECT * FROM car_monsters 
             WHERE monsterId= ?');
             $monsterQuery->execute([$adminTownMonsterMonsterId]);
