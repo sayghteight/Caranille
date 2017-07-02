@@ -297,7 +297,7 @@ if (isset($_POST['adminAccountId'])
             <hr>
 
             <p>Informations du personnage</p>
-            Race : <?php echo $adminRaceName; ?><br />
+            Classe : <?php echo $adminRaceName; ?><br />
             Nom du personnage : <?php echo $adminCharacterName; ?><br />
             Niveau du personnage : <?php echo $adminCharacterLevel; ?><br />
             Armure: <?php echo $adminEquipmentArmorName; ?><br />
@@ -364,6 +364,7 @@ if (isset($_POST['adminAccountId'])
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>
+            
             <?php
         }
         //Si le compte n'existe pas
