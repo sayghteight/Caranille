@@ -15,32 +15,36 @@ $chapterRow = $chapterQuery->rowCount();
 if ($chapterRow > 0) 
 {
     ?>
+
     <form method="POST" action="manageChapter.php">
         <div class="form-group row">
             <label for="adminChapterId" class="col-2 col-form-label">Liste des chapitres</label>
             <select class="form-control" id="adminChapterId" name="adminChapterId">
-            <?php
-
-            while ($chapter = $chapterQuery->fetch())
-            {
-                $adminChapterId = stripslashes($chapter['chapterId']);
-                $adminChapterTitle = stripslashes($chapter['chapterTitle']);
-                ?>
-                    <option value="<?php echo $adminChapterId ?>"><?php echo "Chapitre $adminChapterId - $adminChapterTitle"; ?></option>
+                
                 <?php
-            }
-            $chapterQuery->closeCursor();
-            ?>
+                while ($chapter = $chapterQuery->fetch())
+                {
+                    $adminChapterId = stripslashes($chapter['chapterId']);
+                    $adminChapterTitle = stripslashes($chapter['chapterTitle']);
+                    ?>
+                        <option value="<?php echo $adminChapterId ?>"><?php echo "Chapitre $adminChapterId - $adminChapterTitle"; ?></option>
+                    <?php
+                }
+                $chapterQuery->closeCursor();
+                ?>
+
             </select>
         </div>
         <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer le chapitre">
     </form>
+
     <?php
 }
 //S'il n'y a actuellement aucun objet on prévient le joueur
 else
 {
     ?>
+
     Il n'y a actuellement aucun chapitre
         
     <hr>
@@ -52,4 +56,5 @@ else
 <form method="POST" action="addChapter.php">
     <input type="submit" class="btn btn-default form-control" name="add" value="Nouveau chapitre">
 </form>
+
 <?php require_once("../html/footer.php");

@@ -33,8 +33,8 @@ if (isset($_POST['adminChapterId'])
                 $adminChapterNumber = stripslashes($chapter['chapterNumber']);
                 $adminChapterTitle = stripslashes($chapter['chapterTitle']);
             }
-
             ?>
+
             Que souhaitez-vous faire du chapitre <em><?php echo "$adminChapterNumber - $adminChapterTitle"; ?></em> ?<br />
 
             <hr>
@@ -49,6 +49,7 @@ if (isset($_POST['adminChapterId'])
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>
+
             <?php
         }
         //Si le chapitre n'exite pas

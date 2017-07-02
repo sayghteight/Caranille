@@ -14,14 +14,17 @@ if (isset($_POST['add']))
     ORDER BY monsterName");
     //On recherche combien il y a de monstres disponible
     $monsterRow = $monsterQuery->rowCount();
+    
     //S'il y a au moins un monstre de disponible on peut créer un chapitre
     if ($monsterRow >= 1)
     {
         ?>
+        
         <p>Informations du chapitre</p>
         <form method="POST" action="addChapterEnd.php">
             Monstre du chapitre <br> 
             <select name="adminChapterMonsterId" class="form-control">
+                
                 <?php
                 //On fait une boucle sur tous les résultats
                 while ($monster = $monsterQuery->fetch())
@@ -35,6 +38,7 @@ if (isset($_POST['add']))
                 }
                 $monsterQuery->closeCursor();
                 ?>
+                
             </select><br /><br />
             Titre : <br> <input type="text" name="adminChapterTitle" class="form-control" placeholder="Titre" required><br /><br />
             Introduction :  <br> <textarea class="form-control" name="adminChapterOpening" id="adminChapterOpening" rows="3" required></textarea><br /><br />
@@ -43,15 +47,17 @@ if (isset($_POST['add']))
         </form>
         
         <hr>
+
         <form method="POST" action="index.php">
             <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
         </form>
+        
         <?php
     }
     //S'il n'y a aucun monstre dans le jeu
     else
     {
-        echo "Il est impossible de créer un chapitre S'il n'existe aucun monstres dans le jeu";
+        echo "Impossible de créer un chapitre si votre jeu ne possède aucun monstre";
     }
 }
 //Si l'utilisateur n'a pas cliqué sur le bouton edit

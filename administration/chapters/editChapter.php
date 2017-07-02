@@ -56,6 +56,7 @@ if (isset($_POST['adminChapterId'])
                 Monstre du chapitre <br> 
                 <select name="adminChapterMonsterId" class="form-control">
                     <option selected="selected" value="<?php echo $adminMonsterId ?>"><?php echo $adminMonsterName ?>
+                    
                     <?php
                     //On rempli le menu déroulant avec la liste des monstres disponible sans afficher celui juste au dessus
                     $monsterQuery = $bdd->prepare("SELECT * FROM car_monsters
@@ -64,6 +65,7 @@ if (isset($_POST['adminChapterId'])
                     $monsterQuery->execute([$adminChapterMonsterId]);
                     //On recherche combien il y a de monstres disponible
                     $monsterRow = $monsterQuery->rowCount();
+                    
                     //S'il y a au moins un monstre de disponible on les affiches dans le menu déroulant
                     if ($monsterRow >= 1)
                     {
@@ -74,12 +76,15 @@ if (isset($_POST['adminChapterId'])
                             $adminMonsterId = stripslashes($monster['monsterId']); 
                             $adminMonsterName = stripslashes($monster['monsterName']);
                             ?>
+                            
                             <option value="<?php echo $adminMonsterId ?>"><?php echo $adminMonsterName ?></option>
+
                             <?php
                         }
                     }
                     $monsterQuery->closeCursor();
                     ?>
+                    
                 </select><br /><br />
                 Titre : <br> <input type="text" name="adminChapterTitle" class="form-control" placeholder="Titre" value="<?php echo $adminChapterTitle; ?>" required><br /><br />
                 Introduction :  <br> <textarea class="form-control" name="adminChapterOpening" id="adminChapterOpening" rows="3" required><?php echo $adminChapterOpening; ?></textarea><br /><br />
@@ -89,22 +94,24 @@ if (isset($_POST['adminChapterId'])
             </form>
             
             <hr>
+
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>
+            
             <?php
         }
         //Si le chapitre n'exite pas
         else
         {
-            echo "Erreur: Chapitre indisponible";
+            echo "Erreur: Impossible de modifier un chapitre qui n'existe pas";
         }
         $chapterQuery->closeCursor();
     }
-    //Si le chapitre choisi n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-        echo "Erreur: Chapitre invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si l'utilisateur n'a pas cliqué sur le bouton edit
