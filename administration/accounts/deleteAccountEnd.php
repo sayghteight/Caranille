@@ -7,7 +7,8 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //Si les variables $_POST suivantes existent
-if (isset($_POST['finalDelete']))
+if (isset($_POST['adminAccountId'])
+&& isset($_POST['finalDelete']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
     if (ctype_digit($_POST['adminAccountId'])
@@ -26,19 +27,35 @@ if (isset($_POST['finalDelete']))
         //Si le compte existe
         if ($account == 1) 
         {
-            $adminAccountId = htmlspecialchars(addslashes($_POST['adminAccountId']));
-
             //On supprime le compte de la base de donnée
             $accountDeleteQuery = $bdd->prepare("DELETE FROM car_accounts
             WHERE accountId = ?");
             $accountDeleteQuery->execute([$adminAccountId]);
             $accountDeleteQuery->closeCursor();
 
-            //On supprime aussi le personnage de la base de donnée
+            //On supprime le personnage de la base de donnée
             $characterDeleteQuery = $bdd->prepare("DELETE FROM car_characters
             WHERE characterAccountId = ?");
             $characterDeleteQuery->execute([$adminAccountId]);
             $characterDeleteQuery->closeCursor();
+            
+            //On supprime les combats de ce personnage de la base de donnée
+            $characterBattleDeleteQuery = $bdd->prepare("DELETE FROM car_battles
+            WHERE battleCharacterId = ?");
+            $characterBattleDeleteQuery->execute([$adminAccountId]);
+            $characterBattleDeleteQuery->closeCursor();
+            
+            //On supprime l'inventaire de ce personnage de la base de donnée
+            $characterInventoryDeleteQuery = $bdd->prepare("DELETE FROM car_inventory
+            WHERE inventoryCharacterId = ?");
+            $characterInventoryDeleteQuery->execute([$adminAccountId]);
+            $characterInventoryDeleteQuery->closeCursor();
+            
+            //On supprime le bestiaire de ce personnage de la base de donnée
+            $characterBestiaryDeleteQuery = $bdd->prepare("DELETE FROM car_bestiary
+            WHERE bestiaryCharacterId = ?");
+            $characterBestiaryDeleteQuery->execute([$adminAccountId]);
+            $characterBestiaryDeleteQuery->closeCursor();
             ?>
 
             Le compte a bien été supprimé
