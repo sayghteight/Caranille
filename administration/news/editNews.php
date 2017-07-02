@@ -68,7 +68,7 @@ if (isset($_POST['adminNewsId'])
 //Si toutes les variables $_POST n'existent pas
 else
 {
-    echo "Erreur: Aucun choix effectué";
+    echo "Erreur: Tous les champs n'ont pas été remplis";
 }
 
 require_once("../html/footer.php");

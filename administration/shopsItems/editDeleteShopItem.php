@@ -102,7 +102,7 @@ if (isset($_POST['adminShopItemShopId'])
                     //Si l'utilisateur n'a pas cliqué sur le bouton edit ou delete
                     else 
                     {
-                        echo "Erreur: Aucun choix effectué";
+                        echo "Erreur: Tous les champs n'ont pas été remplis";
                     }
                 }
                 //Si l'objet n'exite pas
@@ -135,7 +135,7 @@ if (isset($_POST['adminShopItemShopId'])
 //Si toutes les variables $_POST n'existent pas
 else
 {
-    echo "Erreur: Aucun choix effectué";
+    echo "Erreur: Tous les champs n'ont pas été remplis";
 }
 
 require_once("../html/footer.php");

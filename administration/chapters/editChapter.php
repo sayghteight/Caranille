@@ -110,7 +110,7 @@ if (isset($_POST['adminChapterId'])
 //Si l'utilisateur n'a pas cliqué sur le bouton edit
 else
 {
-    echo "Erreur: Aucun choix effectué";
+    echo "Erreur: Tous les champs n'ont pas été remplis";
 }
 
 require_once("../html/footer.php");
