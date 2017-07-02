@@ -31,8 +31,8 @@ if (isset($_POST['adminAccountId'])
             {
                 $adminAccountPseudo = stripslashes($account['accountPseudo']);
             }
-
             ?>
+            
             <p>ATTENTION</p> 
             Vous êtes sur le point de supprimer le compte <em><?php echo $adminAccountPseudo ?></em><br />
             confirmez-vous la suppression ?
@@ -49,6 +49,7 @@ if (isset($_POST['adminAccountId'])
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>
+            
             <?php
         }
         //Si le compte n'existe pas

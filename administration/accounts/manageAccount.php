@@ -27,13 +27,13 @@ if (isset($_POST['adminAccountId'])
         //Si le compte existe
         if ($account == 1) 
         {
-            //On Récupère le pseudo du compte
+            //On récupère le pseudo du compte
             while ($account = $accountQuery->fetch())
             {
                 $adminAccountPseudo = stripslashes($account['accountPseudo']);
             }
-
             ?>
+            
             Que souhaitez-vous faire du compte <em><?php echo $adminAccountPseudo ?></em><br />
 
             <hr>
@@ -52,6 +52,7 @@ if (isset($_POST['adminAccountId'])
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>
+
             <?php
         }
         //Si le compte n'existe pas

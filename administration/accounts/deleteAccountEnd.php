@@ -63,8 +63,9 @@ if (isset($_POST['adminAccountId'])
             <hr>
                 
             <form method="POST" action="index.php">
-                    <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
-                </form>
+                <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
+            </form>
+            
             <?php
         }
         //Si le compte n'existe pas

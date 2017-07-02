@@ -129,13 +129,14 @@ if (isset($_POST['adminAccountId'])
                 }
                 $townQuery->closeCursor();
             }
+            //Si adminCharacterTownId à un Id à zéro c'est que le joueur est sur la carte du monde
             else
             {
                 //On affiche Carte du monde
                 $adminTownName = "Carte du monde";
             }
 
-            //On récupère les équipement équippé du personnage pour l'afficher dans le menu d'information du personnage
+            //On récupère les équipements équippé du personnage pour les afficher dans le menu d'information du personnage
             $equipmentEquipedQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
             WHERE itemId = inventoryItemId
             AND inventoryEquipped = 1
@@ -258,7 +259,7 @@ if (isset($_POST['adminAccountId'])
                 Pseudo : <br> <input type="text" name="adminAccountPseudo" class="form-control" placeholder="Pseudo" value="<?php echo $adminAccountPseudo; ?>" required autofocus><br /><br />
                 Email : <br> <input type="mail" name="adminAccountEmail" class="form-control" placeholder="Email" value="<?php echo $adminAccountEmail; ?>" required><br /><br />
                 Accès : <br> <select name="adminAccountAccess" class="form-control">
-                    
+
                 <?php
                 switch ($adminAccountAccess)
                 {
@@ -287,6 +288,7 @@ if (isset($_POST['adminAccountId'])
                     break;
                 }
                 ?>
+                
                 </select><br /><br />
                 <input type="hidden" name="adminAccountId" value="<?= $adminAccountId ?>">
                 <input name="finalEdit" class="btn btn-default form-control" type="submit" value="Modifier">
