@@ -37,21 +37,24 @@ if (isset($_POST['adminTownMonsterTownId'])
             if ($townMonsterRow > 0) 
             {
                 ?>
+                
                 <form method="POST" action="deleteTownMonster.php">
                     <div class="form-group row">
                         <label for="townMonsterMonsterId" class="col-2 col-form-label">Monstres présent dans la ville</label>
                         <select class="form-control" id="adminTownMonsterMonsterId" name="adminTownMonsterMonsterId">
-                        <?php
-                        while ($townMonster = $townMonsterQuery->fetch())
-                        {
-                            $adminTownMonsterMonsterId = stripslashes($townMonster['monsterId']);
-                            $adminTownMonsterMonsterName = stripslashes($townMonster['monsterName']);?>
-                            ?>
-                                <option value="<?php echo $adminTownMonsterMonsterId ?>"><?php echo "$adminTownMonsterMonsterName"; ?></option>
+                            
                             <?php
-                        }
-                        $townMonsterQuery->closeCursor();
-                        ?>
+                            while ($townMonster = $townMonsterQuery->fetch())
+                            {
+                                $adminTownMonsterMonsterId = stripslashes($townMonster['monsterId']);
+                                $adminTownMonsterMonsterName = stripslashes($townMonster['monsterName']);?>
+                                ?>
+                                    <option value="<?php echo $adminTownMonsterMonsterId ?>"><?php echo "$adminTownMonsterMonsterName"; ?></option>
+                                <?php
+                            }
+                            $townMonsterQuery->closeCursor();
+                            ?>
+                            
                         </select>
                     </div>
                     <input type="hidden" name="adminTownMonsterTownId" value="<?= $adminTownMonsterTownId ?>">
@@ -70,32 +73,38 @@ if (isset($_POST['adminTownMonsterTownId'])
             if ($monsterRow > 0) 
             {
                 ?>
+                
                 <form method="POST" action="addTownMonster.php">
                     <div class="form-group row">
                         <label for="townMonsterMonsterId" class="col-2 col-form-label">Monstres disponible</label>
                         <select class="form-control" id="adminTownMonsterMonsterId" name="adminTownMonsterMonsterId">
-                        <?php
-                        while ($monster = $monsterQuery->fetch())
-                        {
-                            $adminTownMonsterMonsterId = stripslashes($monster['monsterId']);
-                            $adminTownMonsterMonsterName = stripslashes($monster['monsterName']);?>
-                            ?>
-                                <option value="<?php echo $adminTownMonsterMonsterId ?>"><?php echo "$adminTownMonsterMonsterName"; ?></option>
+                            
                             <?php
-                        }
-                        $monsterQuery->closeCursor();
-                        ?>
+                            while ($monster = $monsterQuery->fetch())
+                            {
+                                $adminTownMonsterMonsterId = stripslashes($monster['monsterId']);
+                                $adminTownMonsterMonsterName = stripslashes($monster['monsterName']);?>
+                                ?>
+                                    <option value="<?php echo $adminTownMonsterMonsterId ?>"><?php echo "$adminTownMonsterMonsterName"; ?></option>
+                                <?php
+                            }
+                            $monsterQuery->closeCursor();
+                            ?>
+                            
                         </select>
                     </div>
                     <input type="hidden" name="adminTownMonsterTownId" value="<?= $adminTownMonsterTownId ?>">
                     <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter le monstre">
                 </form>
+                
                 <?php
             }
             else
             {
                 ?>
+                
                 Il n'y a actuellement aucun monstre
+                
                 <?php
             }
             ?>
@@ -105,6 +114,7 @@ if (isset($_POST['adminTownMonsterTownId'])
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>
+            
             <?php
         }
         //Si le monstre n'exite pas
@@ -113,10 +123,10 @@ if (isset($_POST['adminTownMonsterTownId'])
             echo "Erreur: Monstre indisponible";
         }
     }
-    //Si le monstre choisi n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-        echo "Erreur: Monstre invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si toutes les variables $_POST n'existent pas

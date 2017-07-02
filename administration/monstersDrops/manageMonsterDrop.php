@@ -38,6 +38,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
             if ($monsterDropRow > 0) 
             {
                 ?>
+                
                 <form method="POST" action="editDeleteMonsterDrop.php">
                     <div class="form-group row">
                         <label for="townMonsterMonsterId" class="col-2 col-form-label">Liste des objets/équipements du monstre</label>
@@ -78,17 +79,19 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                     <div class="form-group row">
                         <label for="adminMonsterDropItemId" class="col-2 col-form-label">Objets/équipements existant</label>
                         <select class="form-control" id="adminMonsterDropItemId" name="adminMonsterDropItemId">
-                        <?php
-                        while ($item = $itemQuery->fetch())
-                        {
-                            $adminMonsterDropItemId = stripslashes($item['itemId']);
-                            $adminMonsterDropItemName = stripslashes($item['itemName']);?>
-                            ?>
-                                <option value="<?php echo $adminMonsterDropItemId ?>"><?php echo "$adminMonsterDropItemName"; ?></option>
+                            
                             <?php
-                        }
-                        $itemQuery->closeCursor();
-                        ?>
+                            while ($item = $itemQuery->fetch())
+                            {
+                                $adminMonsterDropItemId = stripslashes($item['itemId']);
+                                $adminMonsterDropItemName = stripslashes($item['itemName']);?>
+                                ?>
+                                    <option value="<?php echo $adminMonsterDropItemId ?>"><?php echo "$adminMonsterDropItemName"; ?></option>
+                                <?php
+                            }
+                            $itemQuery->closeCursor();
+                            ?>
+                            
                         </select>
                     </div>
                     Taux d'obtention (en pourcentage) <br> <input type="number" name="adminMonsterDropLuck" class="form-control" placeholder="Taux d'obtention (en pourcentage)" required><br /><br />
@@ -100,7 +103,9 @@ if (isset($_POST['adminMonsterDropMonsterId'])
             else
             {
                 ?>
+                
                 Il n'y a actuellement aucun objet
+                
                 <?php
             }
             ?>
@@ -110,6 +115,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>
+            
             <?php
         }
         //Si l'objet n'exite pas
@@ -118,10 +124,10 @@ if (isset($_POST['adminMonsterDropMonsterId'])
             echo "Erreur: Objet indisponible";
         }
     }
-    //Si l'objet choisi n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-        echo "Erreur: Objet invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si toutes les variables $_POST n'existent pas

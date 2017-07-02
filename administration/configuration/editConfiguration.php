@@ -37,6 +37,7 @@ if (isset($_POST['adminGameName'])
         'adminGameAccess' => $adminGameAccess]);
         $updateConfiguration->closeCursor();
         ?>
+        
         La configuration a bien été mise à jour
 
         <hr>
@@ -44,6 +45,7 @@ if (isset($_POST['adminGameName'])
         <form method="POST" action="index.php">
             <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
         </form>
+        
         <?php
     }
     //Si tous les champs numérique ne contiennent pas un nombre
@@ -51,6 +53,11 @@ if (isset($_POST['adminGameName'])
     {
         echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
+}
+//Si toutes les variables $_POST n'existent pas
+else
+{
+    echo "Erreur: Tous les champs n'ont pas été remplis";
 }
 
 require_once("../html/footer.php");

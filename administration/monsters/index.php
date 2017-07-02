@@ -20,27 +20,31 @@ if ($monsterRow > 0)
         <div class="form-group row">
             <label for="equipmentList" class="col-2 col-form-label">Liste des monstres</label>
             <select class="form-control" id="adminMonsterId" name="adminMonsterId">
-            <?php
-            while ($monster = $monsterQuery->fetch())
-            {
-                $adminMonsterId = stripslashes($monster['monsterId']);
-                $adminMonsterName = stripslashes($monster['monsterName']);?>
-                ?>
-                    <option value="<?php echo $adminMonsterId ?>"><?php echo "$adminMonsterName"; ?></option>
+                
                 <?php
-            }
-            $monsterQuery->closeCursor();
-            ?>
+                while ($monster = $monsterQuery->fetch())
+                {
+                    $adminMonsterId = stripslashes($monster['monsterId']);
+                    $adminMonsterName = stripslashes($monster['monsterName']);?>
+                    ?>
+                        <option value="<?php echo $adminMonsterId ?>"><?php echo "$adminMonsterName"; ?></option>
+                    <?php
+                }
+                $monsterQuery->closeCursor();
+                ?>
+                
             </select>
         </div>
         <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer le monstre">
     </form>
+    
     <?php
 }
 //S'il n'y a aucun monstre on prévient le joueur
 else
 {
     ?>
+    
     Il n'y a actuellement aucun monstre
         
     <hr>

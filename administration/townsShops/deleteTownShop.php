@@ -60,6 +60,7 @@ if (isset($_POST['adminTownShopTownId'])
                 if ($townShopRow == 1) 
                 {
                     ?>
+                    
                     <p>ATTENTION</p> 
                     Vous êtes sur le point de retirer le magasin <em><?php echo $adminTownShopShopName ?></em> de la ville <em><?php echo $adminTownShopTownName ?></em><br />
                     confirmez-vous ?
@@ -77,6 +78,7 @@ if (isset($_POST['adminTownShopTownId'])
                     <form method="POST" action="index.php">
                         <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
                     </form>
+                    
                     <?php
                 }
                 //Si le magasin n'exite pas
@@ -100,10 +102,10 @@ if (isset($_POST['adminTownShopTownId'])
         }
         $townQuery->closeCursor();
     }
-    //Si le magasin choisi n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-        echo "Erreur: Equippement invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si toutes les variables $_POST n'existent pas

@@ -69,6 +69,7 @@ if (isset($_POST['adminTownMonsterTownId'])
                         <input type="hidden" name="adminTownMonsterTownId" value="<?= $adminTownMonsterTownId ?>">
                         <input type="submit" class="btn btn-default form-control" name="manage" value="Continuer">
                     </form>
+                    
                     <?php
                 }
                 //Si le monstre est déjà dans cette ville
@@ -76,11 +77,13 @@ if (isset($_POST['adminTownMonsterTownId'])
                 {
                     //Si le joueur a essayé de mettre un monstre qui est déjà dans la ville on lui donne la possibilité de revenir en arrière
                     ?>
+                    
                     Erreur: Ce monstre est déjà dans cette ville
                     <form method="POST" action="manageTownMonster.php">
                         <input type="hidden" name="adminTownMonsterTownId" value="<?= $adminTownMonsterTownId ?>">
                         <input type="submit" class="btn btn-default form-control" name="manage" value="Retour">
                     </form>
+                    
                     <?php
                 }
                 $monsterQuery->closeCursor();

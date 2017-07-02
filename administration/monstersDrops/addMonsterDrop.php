@@ -77,6 +77,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                             <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
                             <input type="submit" class="btn btn-default form-control" name="manage" value="Continuer">
                         </form>
+                        
                         <?php
                     }
                     //Si l'objet est déjà sur le monstre est déjà dans cette ville
@@ -84,11 +85,13 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                     {
                         //Si le joueur a essayé de mettre un objet qui est déjà sur le monstre on lui donne la possibilité de revenir en arrière
                         ?>
+                        
                         Erreur: Cet objet est déjà sur ce monstre
                         <form method="POST" action="manageMonsterDrop.php">
                             <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
                             <input type="submit" class="btn btn-default form-control" name="manage" value="Retour">
                         </form>
+                        
                         <?php
                     }
                     $monsterDropQuery->closeCursor();
@@ -111,11 +114,13 @@ if (isset($_POST['adminMonsterDropMonsterId'])
         else
         {
             ?>
+            
             Erreur: Le taux d'obtention doit être entre 0 et 100%
             <form method="POST" action="manageMonsterDrop.php">
                 <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
                 <input type="submit" class="btn btn-default form-control" name="manage" value="Continuer">
             </form>
+            
             <?php
         }
     }

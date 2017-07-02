@@ -34,6 +34,7 @@ if (isset($_POST['adminTownId'])
             $townQuery->closeCursor();
 
             ?>
+            
             <p>ATTENTION</p> 
             Vous êtes sur le point de supprimer la ville <em><?php echo $adminTownName ?></em><br />
             confirmez-vous la suppression ?
@@ -50,6 +51,7 @@ if (isset($_POST['adminTownId'])
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>
+            
             <?php
         }
         //Si la ville n'exite pas
@@ -59,10 +61,10 @@ if (isset($_POST['adminTownId'])
         }
         $townQuery->closeCursor();
     }
-    //Si la ville choisi n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-        echo "Erreur: Ville invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si toutes les variables $_POST n'existent pas

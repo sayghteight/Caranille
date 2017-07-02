@@ -7,7 +7,8 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //Si les variables $_POST suivantes existent
-if (isset($_POST['finalDelete']))
+if (isset($_POST['adminItemId'])
+&& isset($_POST['finalDelete']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
     if (ctype_digit($_POST['adminItemId'])
@@ -153,21 +154,22 @@ if (isset($_POST['finalDelete']))
             <hr>
                 
             <form method="POST" action="index.php">
-                    <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
+                <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>
+            
             <?php
         }
         //Si l'équipement n'exite pas
         else
         {
-            echo "Erreur: Equippement indisponible";
+            echo "Erreur: Equipement indisponible";
         }
         $itemQuery->closeCursor();
     }
-    //Si l'équipement choisi n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-        echo "Erreur: Equippement invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si toutes les variables $_POST n'existent pas

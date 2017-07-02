@@ -36,7 +36,8 @@ if (isset($_POST['adminItemId'])
             }
             $itemQuery->closeCursor();
 
-            ?> 
+            ?>
+            
             Que souhaitez-vous faire de l'équipement <em><?php echo $adminItemName ?></em><br />
 
             <hr>
@@ -55,7 +56,8 @@ if (isset($_POST['adminItemId'])
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>
-        <?php
+            
+            <?php
         }
         //Si l'équipement n'exite pas
         else
@@ -64,10 +66,10 @@ if (isset($_POST['adminItemId'])
         }
         $itemQuery->closeCursor();
     }
-    //Si l'équipement choisi n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-        echo "Erreur: Equippement invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si toutes les variables $_POST n'existent pas

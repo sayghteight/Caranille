@@ -21,28 +21,32 @@ if ($itemRow > 0)
         <div class="form-group row">
             <label for="equipmentList" class="col-2 col-form-label">Liste des objets</label>
             <select class="form-control" id="adminItemId" name="adminItemId">
-            <?php
-
-            while ($item = $itemQuery->fetch())
-            {
-                $adminItemId = stripslashes($item['itemId']);
-                $adminItemName = stripslashes($item['itemName']);?>
-                ?>
-                    <option value="<?php echo $adminItemId ?>"><?php echo "$adminItemName"; ?></option>
+                
                 <?php
-            }
-            $itemQuery->closeCursor();
-            ?>
+    
+                while ($item = $itemQuery->fetch())
+                {
+                    $adminItemId = stripslashes($item['itemId']);
+                    $adminItemName = stripslashes($item['itemName']);?>
+                    ?>
+                        <option value="<?php echo $adminItemId ?>"><?php echo "$adminItemName"; ?></option>
+                    <?php
+                }
+                $itemQuery->closeCursor();
+                ?>
+                
             </select>
         </div>
         <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer l'objet">
     </form>
+    
     <?php
 }
 //S'il n'y a actuellement aucun objet on prévient le joueur
 else
 {
     ?>
+    
     Il n'y a actuellement aucun objet
         
     <hr>
@@ -54,4 +58,5 @@ else
 <form method="POST" action="addItem.php">
     <input type="submit" class="btn btn-default form-control" name="add" value="Créer un objet">
 </form>
+
 <?php require_once("../html/footer.php");

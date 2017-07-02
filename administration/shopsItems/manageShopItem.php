@@ -42,17 +42,19 @@ if (isset($_POST['adminShopItemShopId'])
                     <div class="form-group row">
                         <label for="adminShopItemItemId" class="col-2 col-form-label">Articles en vente</label>
                         <select class="form-control" id="adminShopItemItemId" name="adminShopItemItemId">
-                        <?php
-                        while ($townShop = $townShopQuery->fetch())
-                        {
-                            $adminShopItemItemId = stripslashes($townShop['itemId']);
-                            $adminShopItemItemName = stripslashes($townShop['itemName']);
-                            $adminShopItemDiscount = stripslashes($townShop['shopItemDiscount']);?>
-                            ?>
-                                <option value="<?php echo $adminShopItemItemId ?>"><?php echo "$adminShopItemItemName (Réduction: $adminShopItemDiscount%)"; ?></option>
+                            
                             <?php
-                        }
-                        ?>
+                            while ($townShop = $townShopQuery->fetch())
+                            {
+                                $adminShopItemItemId = stripslashes($townShop['itemId']);
+                                $adminShopItemItemName = stripslashes($townShop['itemName']);
+                                $adminShopItemDiscount = stripslashes($townShop['shopItemDiscount']);?>
+                                ?>
+                                    <option value="<?php echo $adminShopItemItemId ?>"><?php echo "$adminShopItemItemName (Réduction: $adminShopItemDiscount%)"; ?></option>
+                                <?php
+                            }
+                            ?>
+                            
                         </select>
                     </div>
                     <input type="hidden" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
@@ -73,32 +75,38 @@ if (isset($_POST['adminShopItemShopId'])
             if ($itemRow > 0) 
             {
                 ?>
+                
                 <form method="POST" action="addShopItem.php">
                     <div class="form-group row">
                         <label for="adminShopItemItemId" class="col-2 col-form-label">Articles existant</label>
                         <select class="form-control" id="adminShopItemItemId" name="adminShopItemItemId">
-                        <?php
-                        while ($item = $itemQuery->fetch())
-                        {
-                            $adminShopItemItemId = stripslashes($item['itemId']);
-                            $adminShopItemItemName = stripslashes($item['itemName']);?>
-                            ?>
-                                <option value="<?php echo $adminShopItemItemId ?>"><?php echo "$adminShopItemItemName"; ?></option>
+                            
                             <?php
-                        }
-                        ?>
+                            while ($item = $itemQuery->fetch())
+                            {
+                                $adminShopItemItemId = stripslashes($item['itemId']);
+                                $adminShopItemItemName = stripslashes($item['itemName']);?>
+                                ?>
+                                    <option value="<?php echo $adminShopItemItemId ?>"><?php echo "$adminShopItemItemName"; ?></option>
+                                <?php
+                            }
+                            ?>
+                            
                         </select>
                     </div>
                     Réduction (De 0 à 100%) <br> <input type="number" name="adminShopItemDiscount" class="form-control" placeholder="Réduction (De 0 à 100%)" required><br /><br />
                     <input type="hidden" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
                     <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter l'objet">
                 </form>
+                
                 <?php
             }
             else
             {
                 ?>
+                
                 Il n'y a actuellement aucun article
+                
                 <?php
             }
             $itemQuery->closeCursor();
@@ -109,6 +117,7 @@ if (isset($_POST['adminShopItemShopId'])
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>
+            
             <?php
         }
         //Si le magasin n'exite pas
@@ -118,10 +127,10 @@ if (isset($_POST['adminShopItemShopId'])
         }
         $shopQuery->closeCursor();
     }
-    //Si le magasin choisi n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-        echo "Erreur: Magasin invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si toutes les variables $_POST n'existent pas

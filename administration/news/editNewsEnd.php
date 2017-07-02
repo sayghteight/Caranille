@@ -54,6 +54,7 @@ if (isset($_POST['adminNewsId'])
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>
+            
             <?php
         }
         //Si la news n'exite pas

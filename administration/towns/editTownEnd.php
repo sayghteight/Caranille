@@ -66,6 +66,7 @@ if (isset($_POST['adminTownId'])
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>
+            
             <?php
         }
         //Si la ville n'exite pas

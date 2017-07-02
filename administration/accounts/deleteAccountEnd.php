@@ -75,10 +75,10 @@ if (isset($_POST['adminAccountId'])
         }
         $accountQuery->closeCursor();
     }
-    //Si le compte choisi n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-        echo "Erreur: Le compte choisi est incorrect";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si toutes les variables $_POST n'existent pas

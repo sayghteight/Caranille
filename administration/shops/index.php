@@ -20,16 +20,18 @@ if ($shopRow > 0)
         <div class="form-group row">
             <label for="equipmentList" class="col-2 col-form-label">Liste des magasins</label>
             <select class="form-control" id="adminShopId" name="adminShopId">
-            <?php
-            while ($shop = $shopQuery->fetch())
-            {
-                $adminShopId = stripslashes($shop['shopId']);
-                $adminShopName = stripslashes($shop['shopName']);?>
-                ?>
-                    <option value="<?php echo $adminShopId ?>"><?php echo "$adminShopName"; ?></option>
+                
                 <?php
-            }
-            ?>
+                while ($shop = $shopQuery->fetch())
+                {
+                    $adminShopId = stripslashes($shop['shopId']);
+                    $adminShopName = stripslashes($shop['shopName']);?>
+                    ?>
+                        <option value="<?php echo $adminShopId ?>"><?php echo "$adminShopName"; ?></option>
+                    <?php
+                }
+                ?>
+                
             </select>
         </div>
         <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer le magasin">
@@ -40,6 +42,7 @@ if ($shopRow > 0)
 else
 {
     ?>
+    
     Il n'y a actuellement aucun magasin
         
     <hr>
@@ -52,4 +55,5 @@ $shopQuery->closeCursor();
 <form method="POST" action="addShop.php">
     <input type="submit" class="btn btn-default form-control" name="add" value="Créer un magasin">
 </form>
+
 <?php require_once("../html/footer.php");

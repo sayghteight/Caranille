@@ -47,9 +47,11 @@ if (isset($_POST['adminNewsId'])
             </form>
             
             <hr>
+            
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>
+            
             <?php
         }
         //Si la news n'exite pas
@@ -59,10 +61,10 @@ if (isset($_POST['adminNewsId'])
         }
         $newsQuery->closeCursor();
     }
-    //Si la news choisie n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-        echo "Erreur: News invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si toutes les variables $_POST n'existent pas

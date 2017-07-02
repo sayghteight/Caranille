@@ -68,18 +68,21 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                             $adminMonsterDropLuck = stripslashes($monsterDrop['monsterDropLuck']);
                         }
                         ?>
+                        
                         <form method="POST" action="editMonsterDrop.php">
                             Taux d'obtention (en pourcentage) : <br> <input type="number" name="adminMonsterDropLuck" class="form-control" placeholder="Taux d'obtention (en pourcentage)" value="<?php echo $adminMonsterDropLuck; ?>" required><br /><br />
                             <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
                             <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropItemId" value="<?= $adminMonsterDropItemId ?>">
                             <input type="submit" class="btn btn-default form-control" name="finalEdit" value="Mettre à jour">
                         </form>
+                        
                         <?php
                     }
                     //Si l'utilisateur à cliqué sur le bouton delete
                     elseif (isset($_POST['delete']))
                     {
                         ?>
+                        
                         <p>ATTENTION</p> 
                         Vous êtes sur le point de retirer l'objet <em><?php echo $adminMonsterDropItemName ?></em> du monstre <em><?php echo $adminMonsterDropMonsterName ?></em><br />
                         confirmez-vous ?
@@ -97,6 +100,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                         <form method="POST" action="index.php">
                             <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
                         </form>
+                        
                         <?php
                     }
                     //Si l'utilisateur n'a pas cliqué sur le bouton edit ou delete
@@ -126,10 +130,10 @@ if (isset($_POST['adminMonsterDropMonsterId'])
         }
         $monsterQuery->closeCursor();
     }
-    //Si le monstre choisi n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-        echo "Erreur: Monstre invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si toutes les variables $_POST n'existent pas

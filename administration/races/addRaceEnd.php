@@ -87,14 +87,15 @@ if (isset($_POST['adminRacePicture'])
         <hr>
             
         <form method="POST" action="index.php">
-                <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
-            </form>
+            <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
+        </form>
+        
         <?php
     }
-    //Si la race choisi n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-        echo "Erreur: La race choisie est incorrect";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si toutes les variables $_POST n'existent pas

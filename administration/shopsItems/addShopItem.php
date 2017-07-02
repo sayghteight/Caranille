@@ -77,6 +77,7 @@ if (isset($_POST['adminShopItemShopId'])
                             <input type="hidden" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
                             <input type="submit" class="btn btn-default form-control" name="manage" value="Continuer">
                         </form>
+                        
                         <?php
                     }
                     //Si l'objet est déjà dans ce magasin
@@ -84,11 +85,13 @@ if (isset($_POST['adminShopItemShopId'])
                     {
                         //Si le joueur a essayé de mettre un objet qui est déjà dans ce magasin on lui donne la possibilité de revenir en arrière
                         ?>
+                        
                         Erreur: Cet objet est déjà dans ce magasin
                         <form method="POST" action="manageShopItem.php">
                             <input type="hidden" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
                             <input type="submit" class="btn btn-default form-control" name="manage" value="Retour">
                         </form>
+                        
                         <?php
                     }
                     $shopItemQuery->closeCursor();
@@ -111,11 +114,13 @@ if (isset($_POST['adminShopItemShopId'])
         else
         {
             ?>
+            
             Erreur: Le taux de réduction doit être de 0 à 100
             <form method="POST" action="manageShopItem.php">
                 <input type="hidden" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
                 <input type="submit" class="btn btn-default form-control" name="manage" value="Continuer">
             </form>
+            
             <?php
         }
     }

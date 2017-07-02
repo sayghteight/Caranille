@@ -10,6 +10,7 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 if (isset($_POST['add']))
 {
     ?>
+    
     <p>Informations de la ville</p>
     <form method="POST" action="addTownEnd.php">
         Image : <br> <input type="mail" name="adminTownPicture" class="form-control" placeholder="Image" required><br /><br />
@@ -25,6 +26,7 @@ if (isset($_POST['add']))
     <form method="POST" action="index.php">
         <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
     </form>
+    
     <?php
 }
 //Si toutes les variables $_POST n'existent pas

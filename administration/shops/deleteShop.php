@@ -30,8 +30,8 @@ if (isset($_POST['adminShopId'])
             {
                 $adminShopName = stripslashes($shop['shopName']);
             }
-
             ?>
+            
             <p>ATTENTION</p> 
             Vous êtes sur le point de supprimer le magasin <em><?php echo $adminShopName ?></em><br />
             confirmez-vous la suppression ?
@@ -48,6 +48,7 @@ if (isset($_POST['adminShopId'])
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>
+            
             <?php
         }
         //Si le magasin n'exite pas
@@ -57,10 +58,10 @@ if (isset($_POST['adminShopId'])
         }
         $shopQuery->closeCursor();
     }
-    //Si le magasin choisi n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-        echo "Erreur: Magasin invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si toutes les variables $_POST n'existent pas

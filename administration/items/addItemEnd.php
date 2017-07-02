@@ -72,8 +72,9 @@ if (isset($_POST['adminItemPicture'])
         <hr>
             
         <form method="POST" action="index.php">
-                <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
-            </form>
+            <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
+        </form>
+        
         <?php
     }
     //Si tous les champs numérique ne contiennent pas un nombre

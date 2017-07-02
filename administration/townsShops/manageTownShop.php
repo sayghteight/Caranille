@@ -37,21 +37,24 @@ if (isset($_POST['adminTownShopTownId'])
             if ($townShopRow > 0) 
             {
                 ?>
+                
                 <form method="POST" action="deleteTownShop.php">
                     <div class="form-group row">
                         <label for="townMonsterMonsterId" class="col-2 col-form-label">Magasins présent dans la ville</label>
                         <select class="form-control" id="adminTownShopShopId" name="adminTownShopShopId">
-                        <?php
-                        while ($townShop = $townShopQuery->fetch())
-                        {
-                            $adminTownShopShopId = stripslashes($townShop['shopId']);
-                            $adminTownShopShopName = stripslashes($townShop['shopName']);?>
-                            ?>
-                                <option value="<?php echo $adminTownShopShopId ?>"><?php echo "$adminTownShopShopName"; ?></option>
+                            
                             <?php
-                        }
-                        $townShopQuery->closeCursor();
-                        ?>
+                            while ($townShop = $townShopQuery->fetch())
+                            {
+                                $adminTownShopShopId = stripslashes($townShop['shopId']);
+                                $adminTownShopShopName = stripslashes($townShop['shopName']);?>
+                                ?>
+                                    <option value="<?php echo $adminTownShopShopId ?>"><?php echo "$adminTownShopShopName"; ?></option>
+                                <?php
+                            }
+                            $townShopQuery->closeCursor();
+                            ?>
+                            
                         </select>
                     </div>
                     <input type="hidden" name="adminTownShopTownId" value="<?= $adminTownShopTownId ?>">
@@ -70,31 +73,37 @@ if (isset($_POST['adminTownShopTownId'])
             if ($shopRow > 0) 
             {
                 ?>
+                
                 <form method="POST" action="addTownShop.php">
                     <div class="form-group row">
                         <label for="townMonsterMonsterId" class="col-2 col-form-label">Magasins disponible</label>
                         <select class="form-control" id="adminTownShopShopId" name="adminTownShopShopId">
-                        <?php
-                        while ($shop = $shopQuery->fetch())
-                        {
-                            $adminTownShopShopId = stripslashes($shop['shopId']);
-                            $adminTownShopShopName = stripslashes($shop['shopName']);?>
-                            ?>
-                                <option value="<?php echo $adminTownShopShopId ?>"><?php echo "$adminTownShopShopName"; ?></option>
+                            
                             <?php
-                        }
-                        ?>
+                            while ($shop = $shopQuery->fetch())
+                            {
+                                $adminTownShopShopId = stripslashes($shop['shopId']);
+                                $adminTownShopShopName = stripslashes($shop['shopName']);?>
+                                ?>
+                                    <option value="<?php echo $adminTownShopShopId ?>"><?php echo "$adminTownShopShopName"; ?></option>
+                                <?php
+                            }
+                            ?>
+                            
                         </select>
                     </div>
                     <input type="hidden" name="adminTownShopTownId" value="<?= $adminTownShopTownId ?>">
                     <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter le magasin">
                 </form>
+                
                 <?php
             }
             else
             {
                 ?>
+                
                 Il n'y a actuellement aucun magasin
+                
                 <?php
             }
             $shopQuery->closeCursor();
@@ -105,6 +114,7 @@ if (isset($_POST['adminTownShopTownId'])
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>
+            
             <?php
         }
         //Si le monstre n'exite pas
@@ -113,10 +123,10 @@ if (isset($_POST['adminTownShopTownId'])
             echo "Erreur: Monstre indisponible";
         }
     }
-    //Si le monstre choisi n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-        echo "Erreur: Monstre invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si toutes les variables $_POST n'existent pas

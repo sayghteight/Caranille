@@ -19,16 +19,18 @@ if ($newsRow > 0)
         <div class="form-group row">
             <label for="adminNewsId" class="col-2 col-form-label">Liste des news</label>
             <select class="form-control" id="adminNewsId" name="adminNewsId">
-            <?php
-            while ($news = $newsQuery->fetch())
-            {
-                $adminNewsId = stripslashes($news['newsId']);
-                $adminNewsTitle = stripslashes($news['newsTitle']);?>
-                ?>
-                    <option value="<?php echo $adminNewsId ?>"><?php echo "$adminNewsTitle"; ?></option>
+                
                 <?php
-            }
-            ?>
+                while ($news = $newsQuery->fetch())
+                {
+                    $adminNewsId = stripslashes($news['newsId']);
+                    $adminNewsTitle = stripslashes($news['newsTitle']);?>
+                    ?>
+                        <option value="<?php echo $adminNewsId ?>"><?php echo "$adminNewsTitle"; ?></option>
+                    <?php
+                }
+                ?>
+                
             </select>
         </div>
         <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer">
@@ -39,6 +41,7 @@ if ($newsRow > 0)
 else
 {
     ?>
+    
     Il n'y a actuellement aucune news
         
     <hr>
@@ -49,7 +52,7 @@ $newsQuery->closeCursor();
 ?>
 
 <form method="POST" action="addNews.php">
-    <input type="submit" class="btn btn-default form-control" name="add" value="Ajouter">
+    <input type="submit" class="btn btn-default form-control" name="add" value="Publier">
 </form>
 
 <?php require_once("../html/footer.php");

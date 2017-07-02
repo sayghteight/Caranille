@@ -66,6 +66,7 @@ if (isset($_POST['adminItemId'])
             <form method="POST" action="editEquipmentEnd.php">
                 Classe <br> 
                 <select name="adminItemRaceId" class="form-control">
+                    
                     <?php
                     //Si l'équipement a une classe attribuée on la met par défaut dans le select
                     if (isset($adminRaceId))
@@ -81,14 +82,14 @@ if (isset($_POST['adminItemId'])
                         <option selected="selected" value="0">Toutes les classes</option>
                         <?php
                     }
-                    ?>
-                    <?php
+
                     //On rempli le menu déroulant avec la liste des classes disponible sans afficher la classe actuelle qui est affiché juste au dessus
                     $raceListQuery = $bdd->prepare("SELECT * FROM car_races
                     WHERE raceId != ?");
                     $raceListQuery->execute([$adminItemRaceId]);
                     //On recherche combien il y a de classes disponible
                     $raceList = $raceListQuery->rowCount();
+                    
                     //S'il y a au moins une classe de disponible on les affiches dans le menu déroulant
                     if ($raceList >= 1)
                     {
@@ -104,6 +105,7 @@ if (isset($_POST['adminItemId'])
                         }
                     }
                     $raceListQuery->closeCursor();
+                    
                     //Si l'équipement a une classe attribuée on donne la possibilité au joueur de le rendre disponible à toutes les classes
                     if (isset($adminRaceId))
                     {
@@ -112,68 +114,71 @@ if (isset($_POST['adminItemId'])
                         <?php
                     }
                     ?>
+                    
                 </select><br /><br />
                 Image : <br> <input type="mail" name="adminItemPicture" class="form-control" placeholder="Image" value="<?php echo $adminItemPicture; ?>" required><br /><br />
                 Type <br> <select name="adminItemType" class="form-control">
-                <?php
-                switch ($adminItemType)
-                {
-                    //S'il s'agit d'une armure
-                    case "Armor":
-                        ?>
-                        <option selected="selected" value="Armor">Armure</option>
-                        <option value="Boots">Bottes</option>
-                        <option value="Gloves">Gants</option>
-                        <option value="Helmet">Casque</option>
-                        <option value="Weapon">Arme</option>
-                        <?php
-                    break;
-
-                    //S'il s'agit de bottes
-                    case "Boots":
-                        ?>
-                        <option value="Armor">Armure</option>
-                        <option selected="selected" value="Boots">Bottes</option>
-                        <option value="Gloves">Gants</option>
-                        <option value="Helmet">Casque</option>
-                        <option value="Weapon">Arme</option>
-                        <?php
-                    break;
-
-                    //S'il s'agit de gants
-                    case "Gloves":
-                        ?>
-                        <option value="Armor">Armure</option>
-                        <option value="Boots">Bottes</option>
-                        <option selected="selected" value="Gloves">Gants</option>
-                        <option value="Helmet">Casque</option>
-                        <option value="Weapon">Arme</option>
-                        <?php
-                    break;
-
-                    //S'il s'agit d'un casque
-                    case "Helmet":
-                        ?>
-                        <option value="Armor">Armure</option>
-                        <option value="Boots">Bottes</option>
-                        <option value="Gloves">Gants</option>
-                        <option selected="selected" value="Helmet">Casque</option>
-                        <option value="Weapon">Arme</option>
-                        <?php
-                    break;
-
-                    //S'il s'agit d'une arme
-                    case "Weapon":
-                        ?>
-                        <option value="Armor">Armure</option>
-                        <option value="Boots">Bottes</option>
-                        <option value="Gloves">Gants</option>
-                        <option value="Helmet">Casque</option>
-                        <option selected="selected" value="Weapon">Arme</option>
-                        <?php
-                    break;
-                }
-                ?>                    
+                    
+                    <?php
+                    switch ($adminItemType)
+                    {
+                        //S'il s'agit d'une armure
+                        case "Armor":
+                            ?>
+                            <option selected="selected" value="Armor">Armure</option>
+                            <option value="Boots">Bottes</option>
+                            <option value="Gloves">Gants</option>
+                            <option value="Helmet">Casque</option>
+                            <option value="Weapon">Arme</option>
+                            <?php
+                        break;
+    
+                        //S'il s'agit de bottes
+                        case "Boots":
+                            ?>
+                            <option value="Armor">Armure</option>
+                            <option selected="selected" value="Boots">Bottes</option>
+                            <option value="Gloves">Gants</option>
+                            <option value="Helmet">Casque</option>
+                            <option value="Weapon">Arme</option>
+                            <?php
+                        break;
+    
+                        //S'il s'agit de gants
+                        case "Gloves":
+                            ?>
+                            <option value="Armor">Armure</option>
+                            <option value="Boots">Bottes</option>
+                            <option selected="selected" value="Gloves">Gants</option>
+                            <option value="Helmet">Casque</option>
+                            <option value="Weapon">Arme</option>
+                            <?php
+                        break;
+    
+                        //S'il s'agit d'un casque
+                        case "Helmet":
+                            ?>
+                            <option value="Armor">Armure</option>
+                            <option value="Boots">Bottes</option>
+                            <option value="Gloves">Gants</option>
+                            <option selected="selected" value="Helmet">Casque</option>
+                            <option value="Weapon">Arme</option>
+                            <?php
+                        break;
+    
+                        //S'il s'agit d'une arme
+                        case "Weapon":
+                            ?>
+                            <option value="Armor">Armure</option>
+                            <option value="Boots">Bottes</option>
+                            <option value="Gloves">Gants</option>
+                            <option value="Helmet">Casque</option>
+                            <option selected="selected" value="Weapon">Arme</option>
+                            <?php
+                        break;
+                    }
+                    ?>  
+                
                 </select><br /><br />
                 Niveau : <br> <input type="text" name="adminItemLevel" class="form-control" placeholder="Email" value="<?php echo $adminItemLevel; ?>" required><br /><br />
                 Niveau requis : <br> <input type="text" name="adminItemLevelRequired" class="form-control" placeholder="Niveau requis" value="<?php echo $adminItemLevelRequired; ?>" required><br /><br />
@@ -203,14 +208,14 @@ if (isset($_POST['adminItemId'])
         //Si l'équipement n'exite pas
         else
         {
-            echo "Erreur: Equippement indisponible";
+            echo "Erreur: Equipement indisponible";
         }
         $itemQuery->closeCursor();
     }
-    //Si l'équipement choisi n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-        echo "Erreur: Equippement invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si toutes les variables $_POST n'existent pas

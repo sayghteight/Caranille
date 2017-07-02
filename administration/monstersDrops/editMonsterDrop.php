@@ -75,6 +75,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                             <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
                             <input type="submit" class="btn btn-default form-control" name="manage" value="Continuer">
                         </form>
+                        
                         <?php
                     }
                     //Si l'objet n'exite pas
@@ -102,11 +103,13 @@ if (isset($_POST['adminMonsterDropMonsterId'])
         else
         {
             ?>
+            
             Erreur: Le taux d'obtention doit être entre 0 et 100%
             <form method="POST" action="manageMonsterDrop.php">
                 <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
                 <input type="submit" class="btn btn-default form-control" name="manage" value="Continuer">
             </form>
+            
             <?php
         }
     }

@@ -81,10 +81,10 @@ if (isset($_POST['adminMonsterId'])
         }
         $monsterQuery->closeCursor();
     }
-    //Si le monstre choisi n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-        echo "Erreur: Monstre invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si toutes les variables $_POST n'existent pas

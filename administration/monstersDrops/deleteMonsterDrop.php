@@ -64,6 +64,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                         <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
                         <input type="submit" class="btn btn-default form-control" name="manage" value="Continuer">
                     </form>
+                    
                     <?php
                 }
                 //Si l'objet n'exite pas
@@ -87,10 +88,10 @@ if (isset($_POST['adminMonsterDropMonsterId'])
         }
         $monsterQuery->closeCursor();
     }
-    //Si le monstre choisi n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-        echo "Erreur: Monstre invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si toutes les variables $_POST n'existent pas

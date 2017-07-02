@@ -261,6 +261,7 @@ if (isset($_POST['adminItemId'])
                 <form method="POST" action="index.php">
                     <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
                 </form>
+                
                 <?php
             }
             //Si la classe choisie n'existe pas
@@ -272,7 +273,7 @@ if (isset($_POST['adminItemId'])
         //Si l'équipement n'exite pas
         else
         {
-            echo "Erreur: Equippement indisponible";
+            echo "Erreur: Equipement indisponible";
         }
         $itemQuery->closeCursor();
     }

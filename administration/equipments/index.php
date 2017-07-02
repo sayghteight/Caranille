@@ -21,31 +21,36 @@ $equipmentRow = $equipmentQuery->rowCount();
 if ($equipmentRow > 0) 
 {
     ?>
+    
     <form method="POST" action="manageEquipment.php">
         <div class="form-group row">
             <label for="equipmentList" class="col-2 col-form-label">Liste des équipements</label>
             <select class="form-control" id="adminItemId" name="adminItemId">
-            <?php
-            while ($equipment = $equipmentQuery->fetch())
-            {
-                $adminItemId = stripslashes($equipment['itemId']);
-                $adminItemName = stripslashes($equipment['itemName']);?>
-                ?>
-                    <option value="<?php echo $adminItemId ?>"><?php echo "$adminItemName"; ?></option>
+                
                 <?php
-            }
-            $equipmentQuery->closeCursor();
-            ?>
+                while ($equipment = $equipmentQuery->fetch())
+                {
+                    $adminItemId = stripslashes($equipment['itemId']);
+                    $adminItemName = stripslashes($equipment['itemName']);?>
+                    ?>
+                        <option value="<?php echo $adminItemId ?>"><?php echo "$adminItemName"; ?></option>
+                    <?php
+                }
+                $equipmentQuery->closeCursor();
+                ?>
+            
             </select>
         </div>
         <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer l'équipement">
     </form>
+    
     <?php
 }
 //S'il n'y a aucun équipement on préviens le joueur
 else
 {
     ?>
+    
     Il n'y a actuellement aucun équipement
         
     <hr>

@@ -10,31 +10,34 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 if (isset($_POST['add']))
 {
     ?>
+    
     <p>Informations de l'équipement</p>
     <form method="POST" action="addEquipmentEnd.php">
         Classe <br> <select name="adminItemRaceId" class="form-control">
         <option value="0">Toutes les classes</option>
-        <?php
-        //On rempli le menu déroulant avec la liste des classes disponible
-        $raceListQuery = $bdd->query("SELECT * FROM car_races");
-        //On recherche combien il y a de classes disponible
-        $raceList = $raceListQuery->rowCount();
-        //S'il y a au moins une classe de disponible on les affiches dans le menu déroulant
-        if ($raceList >= 1)
-        {
-            //On fait une boucle sur tous les résultats
-            while ($raceList = $raceListQuery->fetch())
+        
+            <?php
+            //On rempli le menu déroulant avec la liste des classes disponible
+            $raceListQuery = $bdd->query("SELECT * FROM car_races");
+            //On recherche combien il y a de classes disponible
+            $raceList = $raceListQuery->rowCount();
+            //S'il y a au moins une classe de disponible on les affiches dans le menu déroulant
+            if ($raceList >= 1)
             {
-                //on récupère les valeurs de chaque classes qu'on va ensuite mettre dans le menu déroulant
-                $raceId = stripslashes($raceList['raceId']); 
-                $raceName = stripslashes($raceList['raceName']);
-                ?>
-                    <option value="<?php echo $raceId ?>"><?php echo $raceName ?></option>
-                <?php
+                //On fait une boucle sur tous les résultats
+                while ($raceList = $raceListQuery->fetch())
+                {
+                    //on récupère les valeurs de chaque classes qu'on va ensuite mettre dans le menu déroulant
+                    $raceId = stripslashes($raceList['raceId']); 
+                    $raceName = stripslashes($raceList['raceName']);
+                    ?>
+                        <option value="<?php echo $raceId ?>"><?php echo $raceName ?></option>
+                    <?php
+                }
             }
-        }
-        $raceListQuery->closeCursor();
-        ?>
+            $raceListQuery->closeCursor();
+            ?>
+            
         </select><br /><br />
         Image : <br> <input type="text" name="adminItemPicture" class="form-control" placeholder="Image" required><br /><br />
         Type: <br> <select name="adminItemType" class="form-control">
@@ -66,6 +69,7 @@ if (isset($_POST['add']))
     <form method="POST" action="index.php">
         <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
     </form>
+    
     <?php
 }
 //Si toutes les variables $_POST n'existent pas

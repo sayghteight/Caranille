@@ -48,6 +48,7 @@ if (isset($_POST['adminMonsterId'])
             if ($monsterChapterRow == 0)
             {
                 ?>
+                
                 <p>ATTENTION</p> 
                 Vous êtes sur le point de supprimer le monstre <em><?php echo $adminMonsterName ?></em><br />
                 confirmez-vous la suppression ?
@@ -64,17 +65,20 @@ if (isset($_POST['adminMonsterId'])
                 <form method="POST" action="index.php">
                     <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
                 </form>
+                
                 <?php
             }
             //Si le monstre est attribué à un chapitre
             else
             {
                 ?>
+                
                 Impossible de supprimer ce monstre car il est attribué à un chapitre.
                 <form method="POST" action="manageMonster.php">
                     <input type="hidden" name="adminMonsterId" value="<?= $adminMonsterId ?>">
                     <input type="submit" class="btn btn-default form-control" name="manage" value="Retour">
                 </form>
+                
                 <?php
             }
         }
@@ -85,10 +89,10 @@ if (isset($_POST['adminMonsterId'])
         }
         $monsterQuery->closeCursor();
     }
-    //Si le monstre choisi n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-        echo "Erreur: Monstre invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si toutes les variables $_POST n'existent pas

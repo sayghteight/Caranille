@@ -59,10 +59,10 @@ if (isset($_POST['adminChapterId'])
         }
         $chapterQuery->closeCursor();
     }
-    //Si le chapitre choisi n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-        echo "Erreur: Chapitre invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si l'utilisateur n'a pas cliqué sur le bouton manage

@@ -54,6 +54,7 @@ if (isset($_POST['adminShopId'])
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>
+            
             <?php
         }
         //Si le magasin n'exite pas
