@@ -34,7 +34,7 @@ if (isset($_POST['adminRaceId'])
 
             ?>
             
-            Que souhaitez-vous faire de la classe <em><?php echo $adminRaceName ?></em><br />
+            Que souhaitez-vous faire de la classe <em><?php echo $adminRaceName ?></em> ?
 
             <hr>
                 

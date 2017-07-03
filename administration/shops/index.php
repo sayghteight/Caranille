@@ -41,16 +41,12 @@ if ($shopRow > 0)
 //S'il n'y a actuellement aucun magasin on prévient le joueur
 else
 {
-    ?>
-    
-    Il n'y a actuellement aucun magasin
-        
-    <hr>
-
-    <?php
+    echo "Il n'y a actuellement aucun magasin";
 }
 $shopQuery->closeCursor();
 ?>
+
+<hr>
 
 <form method="POST" action="addShop.php">
     <input type="submit" class="btn btn-default form-control" name="add" value="Créer un magasin">

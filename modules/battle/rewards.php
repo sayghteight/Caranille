@@ -10,7 +10,9 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin <= 0)
 {
     //On prévient le joueur qu'il y a un match nul
     ?>
-    <p>Match Nul !</p>";
+    
+    <p>Match Nul !</p>
+    
     <?php
     
     //On soigne le personnage et ont le met à jour dans la base de donnée
@@ -55,8 +57,10 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
     || $battleType == "Story")
     {
         ?>
+        
         -<?php echo $opponentExperience; ?> point(s) d'experience<br />
         -<?php echo $opponentGold; ?> pièce(s) d'or<br />
+        
         <?php
     
         //On recherche dans la base de donnée les objets et équipements que ce monstre peut faire gagner
@@ -205,6 +209,7 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
         else 
         {
             ?>
+            
             <hr>
             
             Nouvelle entrée dans le bestiaire pour <?php echo $opponentName ?><br/>
@@ -258,7 +263,9 @@ if ($characterHpMin <= 0 && $battleOpponentHpRemaining > 0)
 {
     //On prévient le joueur qu'il a perdu
     ?>
+    
     <p><?php echo $opponentName; ?> remporte le combat !</p>
+    
     <?php
     
     //On soigne le personnage et ont le met à jour dans la base de donnée
@@ -280,6 +287,7 @@ if ($characterHpMin <= 0 && $battleOpponentHpRemaining > 0)
     <form method="POST" action="../../modules/town/index.php">
         <input type="submit" name="escape" class="btn btn-default form-control" value="Continuer"><br />
     </form>
+    
     <?php
 }
 

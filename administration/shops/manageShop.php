@@ -33,7 +33,7 @@ if (isset($_POST['adminShopId'])
             }
             ?>
             
-            Que souhaitez-vous faire du magasin <em><?php echo $adminShopName ?></em> ?<br />
+            Que souhaitez-vous faire du magasin <em><?php echo $adminShopName ?></em> ?
 
             <hr>
                 

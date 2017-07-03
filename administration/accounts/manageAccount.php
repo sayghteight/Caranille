@@ -33,7 +33,7 @@ if (isset($_POST['adminAccountId'])
             }
             ?>
             
-            Que souhaitez-vous faire du compte <em><?php echo $adminAccountPseudo ?></em><br />
+            Que souhaitez-vous faire du compte <em><?php echo $adminAccountPseudo ?></em> ?
 
             <hr>
                 

@@ -101,11 +101,7 @@ if (isset($_POST['adminTownMonsterTownId'])
             }
             else
             {
-                ?>
-                
-                Il n'y a actuellement aucun monstre
-                
-                <?php
+                echo "Il n'y a actuellement aucun monstre";
             }
             ?>
 

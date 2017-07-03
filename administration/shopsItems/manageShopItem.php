@@ -103,11 +103,7 @@ if (isset($_POST['adminShopItemShopId'])
             }
             else
             {
-                ?>
-                
-                Il n'y a actuellement aucun article
-                
-                <?php
+                echo "Il n'y a actuellement aucun article";
             }
             $itemQuery->closeCursor();
             ?>

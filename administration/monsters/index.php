@@ -43,15 +43,11 @@ if ($monsterRow > 0)
 //S'il n'y a aucun monstre on prévient le joueur
 else
 {
-    ?>
-    
-    Il n'y a actuellement aucun monstre
-        
-    <hr>
-
-    <?php
+    echo "Il n'y a actuellement aucun monstre";
 }
 ?>
+
+<hr>
 
 <form method="POST" action="addMonster.php">
     <input type="submit" class="btn btn-default form-control" name="add" value="Créer un monstre">

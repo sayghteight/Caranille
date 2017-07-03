@@ -33,7 +33,7 @@ if (isset($_POST['adminNewsId'])
             }
             ?>
             
-            Que souhaitez-vous faire de la news <em><?php echo $adminNewsTitle ?></em> ?<br />
+            Que souhaitez-vous faire de la news <em><?php echo $adminNewsTitle ?></em> ?
 
             <hr>
                 

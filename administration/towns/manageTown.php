@@ -33,7 +33,7 @@ if (isset($_POST['adminTownId'])
             }
             ?>
             
-            Que souhaitez-vous faire de la ville <em><?php echo $adminTownName ?></em> ?<br />
+            Que souhaitez-vous faire de la ville <em><?php echo $adminTownName ?></em> ?
 
             <hr>
                 

@@ -35,7 +35,7 @@ if (isset($_POST['adminChapterId'])
             }
             ?>
 
-            Que souhaitez-vous faire du chapitre <em><?php echo "$adminChapterNumber - $adminChapterTitle"; ?></em> ?<br />
+            Que souhaitez-vous faire du chapitre <em><?php echo "$adminChapterNumber - $adminChapterTitle"; ?></em> ?
 
             <hr>
                 

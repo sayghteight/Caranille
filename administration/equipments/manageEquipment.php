@@ -38,7 +38,7 @@ if (isset($_POST['adminItemId'])
 
             ?>
             
-            Que souhaitez-vous faire de l'équipement <em><?php echo $adminItemName ?></em><br />
+            Que souhaitez-vous faire de l'équipement <em><?php echo $adminItemName ?></em> ?
 
             <hr>
                 

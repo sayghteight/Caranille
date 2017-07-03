@@ -38,7 +38,7 @@ if (isset($_POST['adminMonsterId'])
 
             ?>
             
-            Que souhaitez-vous faire du monstre <em><?php echo $adminMonsterName ?></em><br />
+            Que souhaitez-vous faire du monstre <em><?php echo $adminMonsterName ?></em> ?
 
             <hr>
                 

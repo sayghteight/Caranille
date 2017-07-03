@@ -49,15 +49,11 @@ if ($equipmentRow > 0)
 //S'il n'y a aucun équipement on préviens le joueur
 else
 {
-    ?>
-    
-    Il n'y a actuellement aucun équipement
-        
-    <hr>
-
-    <?php
+    echo "Il n'y a actuellement aucun équipement";
 }
 ?>
+
+<hr>
 
 <form method="POST" action="addEquipment.php">
     <input type="submit" class="btn btn-default form-control" name="add" value="Créer un équipement">

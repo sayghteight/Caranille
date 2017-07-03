@@ -100,11 +100,7 @@ if (isset($_POST['adminTownShopTownId'])
             }
             else
             {
-                ?>
-                
-                Il n'y a actuellement aucun magasin
-                
-                <?php
+                echo "Il n'y a actuellement aucun magasin";
             }
             $shopQuery->closeCursor();
             ?>

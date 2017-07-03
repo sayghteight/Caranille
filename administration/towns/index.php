@@ -43,16 +43,12 @@ if ($townRow > 0)
 //S'il n'y a aucune ville on prévient le joueur
 else
 {
-    ?>
-    
-    Il n'y a actuellement aucune ville
-    
-    <hr>
-    
-    <?php
+    echo "Il n'y a actuellement aucune ville";
 }
 $townQuery->closeCursor();
 ?>
+
+<hr>
 
 <form method="POST" action="addTown.php">
     <input type="submit" class="btn btn-default form-control" name="add" value="Créer une ville">

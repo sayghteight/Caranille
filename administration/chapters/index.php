@@ -43,15 +43,11 @@ if ($chapterRow > 0)
 //S'il n'y a actuellement aucun objet on prévient le joueur
 else
 {
-    ?>
-
-    Il n'y a actuellement aucun chapitre
-        
-    <hr>
-
-    <?php
+    echo "Il n'y a actuellement aucun chapitre";
 }
 ?>
+
+<hr>
 
 <form method="POST" action="addChapter.php">
     <input type="submit" class="btn btn-default form-control" name="add" value="Nouveau chapitre">

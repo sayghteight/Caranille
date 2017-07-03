@@ -13,6 +13,7 @@ if (isset($_POST['monsterId'])
     if(ctype_digit($_POST['monsterId'])
     && $_POST['monsterId'] >= 1)
     {
+        //On récupère l'Id du formulaire précédent
         $monsterId = htmlspecialchars(addslashes($_POST['monsterId']));
         
         //On fait une requête pour vérifier si le monstre entré est bien dans le bestiaire du joueur
@@ -56,6 +57,7 @@ if (isset($_POST['monsterId'])
                 $monsterExperience = stripslashes($monster['monsterExperience']);
             }
             ?>
+            
             <table class="table">
                 <tr>
                     <td>
@@ -203,6 +205,7 @@ if (isset($_POST['monsterId'])
                     </td>
                     
                     <td>
+                        
                         <?php
                         //On recherche dans la base de donnée les ville dans lequel ce monstre se trouve
                         $monsterTownQuery = $bdd->prepare("SELECT * FROM car_towns, car_towns_monsters
@@ -238,6 +241,7 @@ if (isset($_POST['monsterId'])
                             echo "Lieu inconnu";
                         }
                         ?>
+                        
                     </td>
                 </tr>
                 
@@ -247,6 +251,7 @@ if (isset($_POST['monsterId'])
                     </td>
                     
                     <td>
+                        
                         <?php
                         //On recherche dans la base de donnée les objets et équipements que ce monstre peut faire gagner
                         $monsterDropQuery = $bdd->prepare("SELECT * FROM car_items, car_monsters_drops
@@ -273,6 +278,7 @@ if (isset($_POST['monsterId'])
                             echo "Aucun objet";
                         }
                         ?>
+                        
                     </td>
                 </tr>
             </table>
@@ -282,6 +288,7 @@ if (isset($_POST['monsterId'])
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" value="Retour">
             </form>
+            
             <?php
             
         }

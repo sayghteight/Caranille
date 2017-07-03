@@ -45,15 +45,11 @@ if ($itemRow > 0)
 //S'il n'y a actuellement aucun objet on prévient le joueur
 else
 {
-    ?>
-    
-    Il n'y a actuellement aucun objet
-        
-    <hr>
-
-    <?php
+    echo "Il n'y a actuellement aucun objet";
 }
 ?>
+
+<hr>
 
 <form method="POST" action="addItem.php">
     <input type="submit" class="btn btn-default form-control" name="add" value="Créer un objet">

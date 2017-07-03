@@ -40,16 +40,12 @@ if ($newsRow > 0)
 //S'il n'y a actuellement aucune news on prévient le joueur
 else
 {
-    ?>
-    
-    Il n'y a actuellement aucune news
-        
-    <hr>
-
-    <?php
+    echo "Il n'y a actuellement aucune news";
 }
 $newsQuery->closeCursor();
 ?>
+
+<hr>
 
 <form method="POST" action="addNews.php">
     <input type="submit" class="btn btn-default form-control" name="add" value="Publier">
