@@ -20,6 +20,7 @@
     <div class="form-group row">
         <label for="raceList" class="col-2 col-form-label">Classe</label>
         <select class="form-control" id="raceList" name="characterRaceId">
+            
         <?php
         //On rempli le menu déroulant avec la liste des classes disponible
         $raceListQuery = $bdd->query("SELECT * FROM car_races");
@@ -39,15 +40,8 @@
                 <?php
             }
         }
-        //S'il n'y a aucune classe de disponible on ajoute "Aucune classe" dans le menu déroulant
-        else
-        {
-            ?>
-                <option value="0">Aucune classe</option>
-            <?php
-        }
-        $raceListQuery->closeCursor();
         ?>
+        
         </select>
     </div>
     <div class="form-group row">

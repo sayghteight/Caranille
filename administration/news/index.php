@@ -15,6 +15,7 @@ $newsRow = $newsQuery->rowCount();
 if ($newsRow > 0) 
 {
     ?>
+    
     <form method="POST" action="manageNews.php">
         <div class="form-group row">
             <label for="adminNewsId" class="col-2 col-form-label">Liste des news</label>
@@ -35,6 +36,7 @@ if ($newsRow > 0)
         </div>
         <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer">
     </form>
+    
     <?php
 }
 //S'il n'y a actuellement aucune news on prévient le joueur

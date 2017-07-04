@@ -17,13 +17,13 @@ $itemRow = $itemQuery->rowCount();
 if ($itemRow > 0) 
 {
     ?>
+    
     <form method="POST" action="manageItem.php">
         <div class="form-group row">
             <label for="equipmentList" class="col-2 col-form-label">Liste des objets</label>
             <select class="form-control" id="adminItemId" name="adminItemId">
                 
                 <?php
-    
                 while ($item = $itemQuery->fetch())
                 {
                     $adminItemId = stripslashes($item['itemId']);

@@ -125,55 +125,65 @@ if (isset($_POST['adminItemId'])
                         //S'il s'agit d'une armure
                         case "Armor":
                             ?>
+                            
                             <option selected="selected" value="Armor">Armure</option>
                             <option value="Boots">Bottes</option>
                             <option value="Gloves">Gants</option>
                             <option value="Helmet">Casque</option>
                             <option value="Weapon">Arme</option>
+                            
                             <?php
                         break;
     
                         //S'il s'agit de bottes
                         case "Boots":
                             ?>
+                            
                             <option value="Armor">Armure</option>
                             <option selected="selected" value="Boots">Bottes</option>
                             <option value="Gloves">Gants</option>
                             <option value="Helmet">Casque</option>
                             <option value="Weapon">Arme</option>
+                            
                             <?php
                         break;
     
                         //S'il s'agit de gants
                         case "Gloves":
                             ?>
+                            
                             <option value="Armor">Armure</option>
                             <option value="Boots">Bottes</option>
                             <option selected="selected" value="Gloves">Gants</option>
                             <option value="Helmet">Casque</option>
                             <option value="Weapon">Arme</option>
+                            
                             <?php
                         break;
     
                         //S'il s'agit d'un casque
                         case "Helmet":
                             ?>
+                            
                             <option value="Armor">Armure</option>
                             <option value="Boots">Bottes</option>
                             <option value="Gloves">Gants</option>
                             <option selected="selected" value="Helmet">Casque</option>
                             <option value="Weapon">Arme</option>
+                            
                             <?php
                         break;
     
                         //S'il s'agit d'une arme
                         case "Weapon":
                             ?>
+                            
                             <option value="Armor">Armure</option>
                             <option value="Boots">Bottes</option>
                             <option value="Gloves">Gants</option>
                             <option value="Helmet">Casque</option>
                             <option selected="selected" value="Weapon">Arme</option>
+                            
                             <?php
                         break;
                     }

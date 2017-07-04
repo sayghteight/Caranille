@@ -59,7 +59,7 @@ if (isset($_POST['adminMonsterId'])
         $monsterQuery->execute([$adminMonsterId]);
         $monsterRow = $monsterQuery->rowCount();
 
-        //Si l'équipement existe
+        //Si le monstre existe
         if ($monsterRow == 1) 
         {
             //On récupère les informations du formulaire
@@ -79,7 +79,7 @@ if (isset($_POST['adminMonsterId'])
             $adminMonsterExperience = htmlspecialchars(addslashes($_POST['adminMonsterExperience']));          
             $adminMonsterGold = htmlspecialchars(addslashes($_POST['adminMonsterGold']));
 
-            //On met à jour l'équipement dans la base de donnée
+            //On met le monstre à jour dans la base de donnée
             $updateMonster = $bdd->prepare('UPDATE car_monsters 
             SET monsterPicture = :adminMonsterPicture,
             monsterName = :adminMonsterName,

@@ -19,13 +19,14 @@ if (isset($_POST['adminTownShopTownId'])
 
         //On fait une requête pour vérifier si la ville choisi existe
         $townQuery = $bdd->prepare('SELECT * FROM car_towns 
-        WHERE townId= ?');
+        WHERE townId = ?');
         $townQuery->execute([$adminTownShopTownId]);
         $townRow = $townQuery->rowCount();
 
         //Si la ville existe
         if ($townRow == 1)
         {
+            //On fait une requête pour afficher la liste des magasins de cette ville
             $townShopQuery = $bdd->prepare("SELECT * FROM car_shops, car_towns, car_towns_shops
             WHERE townShopShopId = shopId
             AND townShopTownId = townId
@@ -67,6 +68,7 @@ if (isset($_POST['adminTownShopTownId'])
             }
             $townShopQuery->closeCursor();
 
+            //On fait une requête pour afficher la liste des magasins du jeu
             $shopQuery = $bdd->query("SELECT * FROM car_shops");
             $shopRow = $shopQuery->rowCount();
             //S'il existe un ou plusieurs magasin on affiche le menu déroulant pour proposer au joueur d'en ajouter
@@ -113,10 +115,10 @@ if (isset($_POST['adminTownShopTownId'])
             
             <?php
         }
-        //Si le monstre n'exite pas
+        //Si la ville n'exite pas
         else
         {
-            echo "Erreur: Monstre indisponible";
+            echo "Erreur: Ville indisponible";
         }
     }
     //Si tous les champs numérique ne contiennent pas un nombre

@@ -32,7 +32,6 @@ if (isset($_POST['adminTownId'])
                 $adminTownName = stripslashes($town['townName']);
             }
             $townQuery->closeCursor();
-
             ?>
             
             <p>ATTENTION</p> 

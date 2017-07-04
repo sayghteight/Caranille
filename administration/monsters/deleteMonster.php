@@ -26,7 +26,7 @@ if (isset($_POST['adminMonsterId'])
         //Si l'équipement existe
         if ($monsterRow == 1) 
         {
-            //On fait une recherche dans la base de donnée de tous les comptes
+            //On fait une recherche dans la base de donnée de tous les monstres
             $monsterQuery = $bdd->prepare("SELECT * FROM car_monsters
             WHERE monsterId = ?");
             $monsterQuery->execute([$adminMonsterId]);

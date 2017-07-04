@@ -53,7 +53,7 @@ if (isset($_POST['battleMonsterId']))
             'opponentMp' => $opponentMp]);
             $addBattle->closeCursor();
 
-            //On redirige le joueur vers le combat du monstre
+            //On redirige le joueur vers le combat
             header("Location: ../../modules/battle/index.php");
         }
         //Si le monstre n'exite pas

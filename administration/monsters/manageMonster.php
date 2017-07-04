@@ -23,13 +23,14 @@ if (isset($_POST['adminMonsterId'])
         $monsterQuery->execute([$adminMonsterId]);
         $monsterRow = $monsterQuery->rowCount();
 
-        //Si l'équipement existe
+        //Si le monstre existe
         if ($monsterRow == 1) 
         {
-            //On fait une recherche dans la base de donnée de tous les comptes
+            //On fait une recherche dans la base de donnée de tous les monstres
             $monsterQuery = $bdd->prepare("SELECT * FROM car_monsters
             WHERE monsterId = ?");
             $monsterQuery->execute([$adminMonsterId]);
+            
             while ($monster = $monsterQuery->fetch())
             {
                 $adminMonsterName = stripslashes($monster['monsterName']);

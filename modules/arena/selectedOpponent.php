@@ -51,7 +51,7 @@ if (isset($_POST['opponentCharacterId']))
             'opponentMp' => $opponentMp]);
             $addBattle->closeCursor();
 
-            //On redirige l'utilisateur vers le module battleArena
+            //On redirige le joueur vers le combat
             header("Location: ../../modules/battle/index.php");
         }
         //Si le personnage n'exite pas

@@ -78,7 +78,6 @@ if (isset($_POST['adminRaceId'])
                 <?php
             }
             $characterRaceQuery->closeCursor();
-
         }
         //Si la classe n'existe pas
         else

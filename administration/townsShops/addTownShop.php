@@ -49,16 +49,16 @@ if (isset($_POST['adminTownShopTownId'])
                 //Si le magasin n'est pas dans la ville
                 if ($townShopRow == 0) 
                 {
-                    //On met à jour le monstre dans la base de donnée
-                    $addTownMonster = $bdd->prepare("INSERT INTO car_towns_shops VALUES(
+                    //On ajoute le magasin dans la ville dans la base de donnée
+                    $addTownShop = $bdd->prepare("INSERT INTO car_towns_shops VALUES(
                     '',
                     :adminTownShopTownId,
                     :adminTownShopShopId)");
 
-                    $addTownMonster->execute([
+                    $addTownShop->execute([
                     'adminTownShopTownId' => $adminTownShopTownId,
                     'adminTownShopShopId' => $adminTownShopShopId]);
-                    $addTownMonster->closeCursor();
+                    $addTownShop->closeCursor();
                     ?>
 
                     Le magasin a bien été ajouté à la ville

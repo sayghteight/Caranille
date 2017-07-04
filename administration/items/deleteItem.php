@@ -37,6 +37,7 @@ if (isset($_POST['adminItemId'])
             $itemQuery->closeCursor();
 
             ?>
+            
             <p>ATTENTION</p> 
             Vous êtes sur le point de supprimer l'équipement <em><?php echo $adminItemName ?></em><br />
             confirmez-vous la suppression ?

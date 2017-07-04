@@ -23,9 +23,10 @@ if (isset($_POST['adminShopItemShopId'])
         $shopQuery->execute([$adminShopItemShopId]);
         $shopRow = $shopQuery->rowCount();
 
-        //Si le magasin existe existe
+        //Si le magasin existe
         if ($shopRow == 1)
         {
+            //On fait une requête pour vérifier la liste des objets/équipement dans le magasin
             $townShopQuery = $bdd->prepare("SELECT * FROM car_shops, car_items, car_shops_items
             WHERE shopItemShopId = shopId
             AND shopItemItemId = itemId
@@ -38,6 +39,7 @@ if (isset($_POST['adminShopItemShopId'])
             if ($townShopRow > 0) 
             {
                 ?>
+                
                 <form method="POST" action="editDeleteShopItem.php">
                     <div class="form-group row">
                         <label for="adminShopItemItemId" class="col-2 col-form-label">Articles en vente</label>
@@ -68,6 +70,7 @@ if (isset($_POST['adminShopItemShopId'])
             }
             $townShopQuery->closeCursor();
 
+            //On fait une requête pour afficher la liste des objets du jeu
             $itemQuery = $bdd->query("SELECT * FROM car_items
             ORDER BY itemName");
             $itemRow = $itemQuery->rowCount();

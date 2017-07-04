@@ -26,7 +26,7 @@ if (isset($_POST['adminItemId'])
         //Si l'objet existe
         if ($itemRow == 1) 
         {
-            //On fait une boucle pour récupérer toutes les information
+            //On fait une boucle pour récupérer toutes les informations
             while ($item = $itemQuery->fetch())
             {
                 //On récupère les informations de l'objet
@@ -41,7 +41,7 @@ if (isset($_POST['adminItemId'])
             }
             ?>
 
-            <p>Informations de l'équipement</p>
+            <p>Informations de l'objet</p>
             <form method="POST" action="editItemEnd.php">
                 Image : <br> <input type="mail" name="adminItemPicture" class="form-control" placeholder="Image" value="<?php echo $adminItemPicture; ?>" required><br /><br />
                 Nom : <br> <input type="text" name="adminItemName" class="form-control" placeholder="Nom" value="<?php echo $adminItemName; ?>" required><br /><br />

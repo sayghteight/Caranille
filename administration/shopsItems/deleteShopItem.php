@@ -39,17 +39,17 @@ if (isset($_POST['adminShopItemShopId'])
             //Si l'objet existe
             if ($itemRow == 1) 
             {
-                //On fait une requête pour vérifier si le monstre n'est pas déjà dans cette ville
+                //On fait une requête pour vérifier si l'objet est bien dans ce magasin
                 $shopItemQuery = $bdd->prepare('SELECT * FROM car_shops_items
                 WHERE shopItemShopId = ?
                 AND shopItemItemId = ?');
                 $shopItemQuery->execute([$adminShopItemShopId, $adminShopItemItemId]);
                 $shopItemRow = $shopItemQuery->rowCount();
 
-                //Si l'objet n'est pas dans ce magasin
+                //Si l'objet est dans ce magasin
                 if ($shopItemRow == 1) 
                 {
-                    //On supprime l'équipement de la base de donnée
+                    //On supprime l'objet/équipement du magasin de la base de donnée
                     $shopItemDeleteQuery = $bdd->prepare("DELETE FROM car_shops_items
                     WHERE shopItemItemId = ?");
                     $shopItemDeleteQuery->execute([$adminShopItemItemId]);
@@ -67,10 +67,10 @@ if (isset($_POST['adminShopItemShopId'])
                     
                     <?php
                 }
-                //Si l'objet n'exite pas
+                //Si l'objet n'est pas dans ce magasin
                 else
                 {
-                    echo "Erreur: Objet indisponible";
+                    echo "Impossible de retirer un objet/équipement qui ne fait pas parti de ce magasin";
                 }
                 $shopItemQuery->closeCursor();
             }

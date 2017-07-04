@@ -26,6 +26,7 @@ if (isset($_POST['adminTownMonsterTownId'])
         //Si la ville existe
         if ($townRow == 1)
         {
+            //On fait une requête pour rechercher tous les monstres présent dans cette ville
             $townMonsterQuery = $bdd->prepare("SELECT * FROM car_monsters, car_towns, car_towns_monsters
             WHERE townMonsterMonsterId = monsterId
             AND townMonsterTownId = townId
@@ -67,6 +68,7 @@ if (isset($_POST['adminTownMonsterTownId'])
             }
             $townMonsterQuery->closeCursor();
 
+            //On fait une requête pour afficher la liste des monstres du jeu
             $monsterQuery = $bdd->query("SELECT * FROM car_monsters");
             $monsterRow = $monsterQuery->rowCount();
             //S'il existe un ou plusieurs monstres on affiche le menu déroulant pour proposer au joueur d'en ajouter
@@ -99,6 +101,7 @@ if (isset($_POST['adminTownMonsterTownId'])
                 
                 <?php
             }
+            //Si il n'y a actuellement aucun monstre dans le jeu
             else
             {
                 echo "Il n'y a actuellement aucun monstre";
@@ -113,10 +116,10 @@ if (isset($_POST['adminTownMonsterTownId'])
             
             <?php
         }
-        //Si le monstre n'exite pas
+        //Si la ville n'exite pas
         else
         {
-            echo "Erreur: Monstre indisponible";
+            echo "Erreur: Ville indisponible";
         }
     }
     //Si tous les champs numérique ne contiennent pas un nombre

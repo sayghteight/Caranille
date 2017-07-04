@@ -16,6 +16,7 @@ $shopRow = $shopQuery->rowCount();
 if ($shopRow > 0) 
 {
     ?>
+    
     <form method="POST" action="manageShop.php">
         <div class="form-group row">
             <label for="equipmentList" class="col-2 col-form-label">Liste des magasins</label>
@@ -36,6 +37,7 @@ if ($shopRow > 0)
         </div>
         <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer le magasin">
     </form>
+    
     <?php
 }
 //S'il n'y a actuellement aucun magasin on prévient le joueur

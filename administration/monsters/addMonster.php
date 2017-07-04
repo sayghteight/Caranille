@@ -10,6 +10,7 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 if (isset($_POST['add']))
 {
     ?>
+    
     <p>Informations du monstre</p>
     <form method="POST" action="addMonsterEnd.php">
         Image : <br> <input type="text" name="adminMonsterPicture" class="form-control" placeholder="Image" required><br /><br />

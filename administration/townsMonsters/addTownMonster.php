@@ -49,7 +49,7 @@ if (isset($_POST['adminTownMonsterTownId'])
                 //Si le monstre n'est pas dans la ville
                 if ($townMonsterRow == 0) 
                 {
-                    //On met à jour le monstre dans la base de donnée
+                    //On ajoute le monstre dans la ville la base de donnée
                     $addTownMonster = $bdd->prepare("INSERT INTO car_towns_monsters VALUES(
                     '',
                     :townMonsterTownId,

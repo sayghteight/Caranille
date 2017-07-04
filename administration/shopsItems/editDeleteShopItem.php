@@ -68,12 +68,14 @@ if (isset($_POST['adminShopItemShopId'])
                             $adminShopItemDiscount = stripslashes($shopItem['shopItemDiscount']);
                         }
                         ?>
+                        
                         <form method="POST" action="editShopItem.php">
                             Réduction (de 0 à 100%) : <br> <input type="number" name="adminShopItemDiscount" class="form-control" placeholder="Réduction (de 0 à 100%)" value="<?php echo $adminShopItemDiscount; ?>" required><br /><br />
                             <input type="hidden" class="btn btn-default form-control" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
                             <input type="hidden" class="btn btn-default form-control" name="adminShopItemItemId" value="<?= $adminShopItemItemId ?>">
                             <input type="submit" class="btn btn-default form-control" name="finalEdit" value="Mettre à jour">
                         </form>
+                        
                         <?php
                     }
                     //Si l'utilisateur à cliqué sur le bouton delete

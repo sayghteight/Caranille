@@ -26,10 +26,10 @@ if (isset($_POST['adminTownId'])
         //Si la ville existe
         if ($townRow == 1) 
         {
-            //On fait une recherche dans la base de donnée de tous les comptes
+            //On fait une recherche dans la base de donnée de la ville
             while ($town = $townQuery->fetch())
             {
-                //On récupère les informations de l'objet
+                //On récupère les informations de la ville
                 $adminTownPicture = stripslashes($town['townPicture']);
                 $adminTownName = stripslashes($town['townName']);
                 $adminTownDescription = stripslashes($town['townDescription']);

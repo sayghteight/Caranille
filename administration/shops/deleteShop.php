@@ -33,7 +33,7 @@ if (isset($_POST['adminShopId'])
             ?>
             
             <p>ATTENTION</p> 
-            Vous êtes sur le point de supprimer le magasin <em><?php echo $adminShopName ?></em><br />
+            Vous êtes sur le point de supprimer le magasin <em><?php echo $adminShopName ?></em><br />.
             confirmez-vous la suppression ?
 
             <hr>

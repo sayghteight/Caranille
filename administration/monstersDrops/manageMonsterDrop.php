@@ -68,6 +68,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
             }
             $monsterQuery->closeCursor();
 
+            //On recherche la liste des objets et équipements du jeu
             $itemQuery = $bdd->query("SELECT * FROM car_items
             ORDER BY itemName");
             $itemRow = $itemQuery->rowCount();
@@ -75,6 +76,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
             if ($itemRow > 0) 
             {
                 ?>
+                
                 <form method="POST" action="addMonsterDrop.php">
                     <div class="form-group row">
                         <label for="adminMonsterDropItemId" class="col-2 col-form-label">Objets/équipements existant</label>
@@ -98,15 +100,12 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                     <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
                     <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter cet objet/équipement">
                 </form>
+                
                 <?php
             }
             else
             {
-                ?>
-                
-                Il n'y a actuellement aucun objet
-                
-                <?php
+               echo "Il n'y a actuellement aucun objet";
             }
             ?>
 

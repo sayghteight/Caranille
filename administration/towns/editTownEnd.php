@@ -40,7 +40,7 @@ if (isset($_POST['adminTownId'])
         //Si la ville existe
         if ($townRow == 1) 
         {
-            //On met à jour l'objet dans la base de donnée
+            //On met à jour la ville dans la base de donnée
             $updateTown = $bdd->prepare('UPDATE car_towns 
             SET townPicture = :adminTownPicture,
             townName = :adminTownName,

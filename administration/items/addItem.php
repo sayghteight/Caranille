@@ -10,6 +10,7 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 if (isset($_POST['add']))
 {
     ?>
+    
     <p>Informations de l'objets</p>
     <form method="POST" action="addItemEnd.php">
         Image : <br> <input type="text" name="adminItemPicture" class="form-control" placeholder="Image" required><br /><br />

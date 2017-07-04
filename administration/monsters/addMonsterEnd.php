@@ -63,7 +63,7 @@ if (isset($_POST['adminMonsterPicture'])
         $adminMonsterGold = htmlspecialchars(addslashes($_POST['adminMonsterGold']));
         $adminMonsterExperience = htmlspecialchars(addslashes($_POST['adminMonsterExperience']));
 
-        //On met à jour le monstre dans la base de donnée
+        //On ajoute le monstre dans la base de donnée
         $addMonster = $bdd->prepare("INSERT INTO car_monsters VALUES(
         '',
         :adminMonsterPicture,

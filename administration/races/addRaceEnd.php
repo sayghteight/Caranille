@@ -52,7 +52,7 @@ if (isset($_POST['adminRacePicture'])
         $adminRaceDefenseMagicBonus = htmlspecialchars(addslashes($_POST['adminRaceDefenseMagicBonus']));
         $adminRaceWisdomBonus = htmlspecialchars(addslashes($_POST['adminRaceWisdomBonus']));
         
-        //On ajoute la race
+        //On ajoute la race dans la base de donnée
         $addRace = $bdd->prepare("INSERT INTO car_races VALUES(
         '',
         :adminRacePicture,
