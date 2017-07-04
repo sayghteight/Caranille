@@ -13,7 +13,7 @@ if (isset($_POST['monsterId'])
     if(ctype_digit($_POST['monsterId'])
     && $_POST['monsterId'] >= 1)
     {
-        //On récupère l'Id du formulaire précédent
+        //On récupère l'id du formulaire précédent
         $monsterId = htmlspecialchars(addslashes($_POST['monsterId']));
         
         //On fait une requête pour vérifier si le monstre entré est bien dans le bestiaire du joueur

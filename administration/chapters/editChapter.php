@@ -14,7 +14,7 @@ if (isset($_POST['adminChapterId'])
     if (ctype_digit($_POST['adminChapterId'])
     && $_POST['adminChapterId'] >= 1)
     {
-        //On récupère l'Id du formulaire précédent
+        //On récupère l'id du formulaire précédent
         $adminChapterId = htmlspecialchars(addslashes($_POST['adminChapterId']));
 
         //On fait une requête pour vérifier si le chapitre choisi existe

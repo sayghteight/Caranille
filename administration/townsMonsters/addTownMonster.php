@@ -23,7 +23,7 @@ if (isset($_POST['adminTownMonsterTownId'])
 
         //On fait une requête pour vérifier si la ville choisie existe
         $townQuery = $bdd->prepare('SELECT * FROM car_towns 
-        WHERE townId= ?');
+        WHERE townId = ?');
         $townQuery->execute([$adminTownMonsterTownId]);
         $townRow = $townQuery->rowCount();
 
@@ -32,7 +32,7 @@ if (isset($_POST['adminTownMonsterTownId'])
         {
             //On fait une requête pour vérifier si le monstre choisi existe
             $monsterQuery = $bdd->prepare('SELECT * FROM car_monsters 
-            WHERE monsterId= ?');
+            WHERE monsterId = ?');
             $monsterQuery->execute([$adminTownMonsterMonsterId]);
             $monsterRow = $monsterQuery->rowCount();
 

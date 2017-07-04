@@ -19,7 +19,7 @@ if (isset($_POST['adminRaceId'])
 
         //On fait une requête pour vérifier si le compte choisi existe
         $raceQuery = $bdd->prepare('SELECT * FROM car_races 
-        WHERE raceId= ?');
+        WHERE raceId = ?');
         $raceQuery->execute([$adminRaceId]);
         $raceRow = $raceQuery->rowCount();
 

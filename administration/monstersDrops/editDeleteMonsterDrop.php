@@ -22,7 +22,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
 
         //On fait une requête pour vérifier si le monstre choisi existe
         $monsterQuery = $bdd->prepare('SELECT * FROM car_monsters 
-        WHERE monsterId= ?');
+        WHERE monsterId = ?');
         $monsterQuery->execute([$adminMonsterDropMonsterId]);
         $monsterRow = $monsterQuery->rowCount();
 
@@ -37,7 +37,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
 
             //On fait une requête pour vérifier si l'objet choisi existe
             $itemQuery = $bdd->prepare('SELECT * FROM car_items 
-            WHERE itemId= ?');
+            WHERE itemId = ?');
             $itemQuery->execute([$adminMonsterDropItemId]);
             $itemRow = $itemQuery->rowCount();
 

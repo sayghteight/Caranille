@@ -13,12 +13,12 @@ if (isset($_POST['itemId'])
     if(ctype_digit($_POST['itemId'])
     && $_POST['itemId'] >= 1)
     {
-        //On récupère l'Id du formulaire précédent
+        //On récupère l'id du formulaire précédent
         $itemId = htmlspecialchars(addslashes($_POST['itemId']));
         
         //On fait une requête pour vérifier si l'objet choisi existe
         $itemQuery = $bdd->prepare('SELECT * FROM car_items 
-        WHERE itemId= ?');
+        WHERE itemId = ?');
         $itemQuery->execute([$itemId]);
         $itemRow = $itemQuery->rowCount();
 
@@ -171,7 +171,7 @@ if (isset($_POST['itemId'])
                     //On met l'inventaire à jour
                     $updateInventory = $bdd->prepare("UPDATE car_inventory SET
                     inventoryQuantity = inventoryQuantity - 1
-                    WHERE inventoryId= :inventoryId");
+                    WHERE inventoryId = :inventoryId");
                     $updateInventory->execute(array(
                     'inventoryId' => $inventoryId));
                     $updateInventory->closeCursor();
@@ -181,7 +181,7 @@ if (isset($_POST['itemId'])
                 {
                     //On supprime l'objet de l'inventaire
                     $updateInventory = $bdd->prepare("DELETE FROM car_inventory
-                    WHERE inventoryId= :inventoryId");
+                    WHERE inventoryId = :inventoryId");
                     $updateInventory->execute(array(
                     'inventoryId' => $inventoryId));
                     $updateInventory->closeCursor();

@@ -19,7 +19,7 @@ if (isset($_POST['adminTownId'])
 
         //On fait une requête pour vérifier si l'objet choisi existe
         $townQuery = $bdd->prepare('SELECT * FROM car_towns 
-        WHERE townId= ?');
+        WHERE townId = ?');
         $townQuery->execute([$adminTownId]);
         $townRow = $townQuery->rowCount();
 

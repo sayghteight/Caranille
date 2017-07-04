@@ -13,7 +13,7 @@ if (isset($_POST['itemId'])
     if (ctype_digit($_POST['itemId'])
     && $_POST['itemId'] >= 1)
     {
-        //On récupère l'Id du formulaire précédent
+        //On récupère l'id du formulaire précédent
         $itemId = htmlspecialchars(addslashes($_POST['itemId']));
 
         //On cherche à savoir si l'équipement qui va se déséquiper appartient bien au joueur
@@ -44,7 +44,7 @@ if (isset($_POST['itemId'])
                 //On va rendre l'équipement non équippé
                 $updateInventory = $bdd->prepare("UPDATE car_inventory SET
                 inventoryEquipped = 0
-                WHERE inventoryId= :inventoryId");
+                WHERE inventoryId = :inventoryId");
 
                 $updateInventory->execute(array(
                 'inventoryId' => $inventoryId));
@@ -60,7 +60,7 @@ if (isset($_POST['itemId'])
                 characterDefenseEquipments = 0, 
                 characterDefenseMagicEquipments = 0, 
                 characterWisdomEquipments = 0
-                WHERE characterId= :characterId");
+                WHERE characterId = :characterId");
 
                 $updateCharacter->execute(array(
                 'characterId' => $characterId));
@@ -106,7 +106,7 @@ if (isset($_POST['itemId'])
                 characterDefenseEquipments = :defenseBonus, 
                 characterDefenseMagicEquipments = :defenseMagicBonus, 
                 characterWisdomEquipments = :wisdomBonus
-                WHERE characterId= :characterId");
+                WHERE characterId = :characterId");
 
                 $updateCharacter->execute(array(
                 'hpBonus' => $hpBonus,

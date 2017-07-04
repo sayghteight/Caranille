@@ -50,7 +50,7 @@ if (isset($_POST['accountPseudo'])
                 {
                     //On fait une requête pour vérifier si le nom du personnage est déjà utilisé
                     $raceQuery = $bdd->prepare('SELECT * FROM car_races 
-                    WHERE raceId= ?');
+                    WHERE raceId = ?');
                     $raceQuery->execute([$characterRaceId]);
                     $raceRow = $raceQuery->rowCount();
                     $raceQuery->closeCursor();
@@ -106,7 +106,7 @@ if (isset($_POST['accountPseudo'])
 
                         while ($accountId = $accountIdQuery->fetch())
                         {
-                            //On Stock l'Id du compte
+                            //On Stock l'id du compte
                             $id = $accountId['accountId'];
                         }
                         $accountIdQuery->closeCursor();

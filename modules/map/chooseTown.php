@@ -32,7 +32,7 @@ if (isset($_POST['townId'])
             //On met le personnage à jour
             $updatecharacter = $bdd->prepare("UPDATE car_characters SET
             characterTownId = :characterTownId
-            WHERE characterId= :characterId");
+            WHERE characterId = :characterId");
 
             $updatecharacter->execute(array(
             'characterTownId' => $townId, 

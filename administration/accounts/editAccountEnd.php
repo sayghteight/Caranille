@@ -18,12 +18,12 @@ if (isset($_POST['adminAccountId'])
     && ctype_digit($_POST['adminAccountAccess'])
     && $_POST['adminAccountId'] >= 1)
     {
-        //On récupère l'Id du formulaire précédent
+        //On récupère l'id du formulaire précédent
         $adminAccountId = htmlspecialchars(addslashes($_POST['adminAccountId']));
 
         //On fait une requête pour vérifier si le compte choisi existe
         $accountQuery = $bdd->prepare('SELECT * FROM car_accounts 
-        WHERE accountId= ?');
+        WHERE accountId = ?');
         $accountQuery->execute([$adminAccountId]);
         $account = $accountQuery->rowCount();
         $accountQuery->closeCursor();

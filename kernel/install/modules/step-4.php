@@ -42,7 +42,7 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                 {
                     //On fait une requête pour vérifier si le nom du personnage est déjà utilisé
                     $raceListQuery = $bdd->prepare('SELECT * FROM car_races 
-                    WHERE raceId= ?');
+                    WHERE raceId = ?');
                     $raceListQuery->execute([$characterRaceId]);
                     $raceList = $raceListQuery->rowCount();
                     $raceListQuery->closeCursor();

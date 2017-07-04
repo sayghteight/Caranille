@@ -158,7 +158,7 @@ if ($characterExperience >= $experienceLevel)
     characterExperience = :characterExperience, 
     characterExperienceTotal = :characterExperienceTotal,
     characterSkillPoints = :characterSkillPoints
-    WHERE characterId= :characterId");
+    WHERE characterId = :characterId");
 
     $updateCharacter->execute(array(
     'characterLevel' => $characterLevel,  

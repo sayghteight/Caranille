@@ -13,7 +13,7 @@ if (isset($_POST['itemId'])
     if (ctype_digit($_POST['itemId'])
     && $_POST['itemId'] >= 1)
     {
-        //On récupère l'Id du formulaire précédent
+        //On récupère l'id du formulaire précédent
         $itemId = htmlspecialchars(addslashes($_POST['itemId']));
 
         //On cherche à savoir si l'objet qui va se vendre appartient bien au joueur

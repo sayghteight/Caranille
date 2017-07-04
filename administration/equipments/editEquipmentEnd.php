@@ -56,12 +56,12 @@ if (isset($_POST['adminItemId'])
     && $_POST['adminItemPurchasePrice'] >= 0
     && $_POST['adminItemSalePrice'] >= 0)
     {
-        //On récupère l'Id du formulaire précédent
+        //On récupère l'id du formulaire précédent
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
         
         //On fait une requête pour vérifier si l'équipement choisi existe
         $itemQuery = $bdd->prepare('SELECT * FROM car_items 
-        WHERE itemId= ?');
+        WHERE itemId = ?');
         $itemQuery->execute([$adminItemId]);
         $itemRow = $itemQuery->rowCount();
 
@@ -74,7 +74,7 @@ if (isset($_POST['adminItemId'])
             {
                 //On fait une requête pour vérifier si la classe choisie existe
                 $raceQuery = $bdd->prepare('SELECT * FROM car_races 
-                WHERE raceId= ?');
+                WHERE raceId = ?');
                 $raceQuery->execute([$adminItemRaceId]);
                 $raceRow = $raceQuery->rowCount();
             }
@@ -164,7 +164,7 @@ if (isset($_POST['adminItemId'])
                     //On va mettre leur compte à jour
                     while ($item = $itemQuery->fetch())
                     {   
-                        //On récupère l'Id du personnage
+                        //On récupère l'id du personnage
                         $adminCharacterId = stripslashes($item['inventoryCharacterId']);
 
                         //On remet les stats du joueurs à zéro pour recalculer ensuite le bonus de tous les équipements équippé
@@ -177,7 +177,7 @@ if (isset($_POST['adminItemId'])
                         characterDefenseEquipments = 0, 
                         characterDefenseMagicEquipments = 0, 
                         characterWisdomEquipments = 0
-                        WHERE characterId= :adminCharacterId");
+                        WHERE characterId = :adminCharacterId");
 
                         $updateCharacter->execute(array(
                         'adminCharacterId' => $adminCharacterId));
@@ -223,7 +223,7 @@ if (isset($_POST['adminItemId'])
                         characterDefenseEquipments = :defenseBonus, 
                         characterDefenseMagicEquipments = :defenseMagicBonus, 
                         characterWisdomEquipments = :wisdomBonus
-                        WHERE characterId= :adminCharacterId");
+                        WHERE characterId = :adminCharacterId");
 
                         $updateCharacter->execute(array(
                         'hpBonus' => $hpBonus,

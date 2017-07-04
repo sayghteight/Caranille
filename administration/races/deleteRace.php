@@ -14,7 +14,7 @@ if (isset($_POST['adminRaceId'])
     if (ctype_digit($_POST['adminRaceId'])
     && $_POST['adminRaceId'] >= 1)
     {
-        //On récupère l'Id du formulaire précédent
+        //On récupère l'id du formulaire précédent
         $adminRaceId = htmlspecialchars(addslashes($_POST['adminRaceId']));
 
         //On fait une requête pour vérifier si la race choisi existe

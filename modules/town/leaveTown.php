@@ -13,7 +13,7 @@ if (isset($_POST['leave']))
     //On met le personnage à jour
     $updatecharacter = $bdd->prepare("UPDATE car_characters SET
     characterTownId = 0
-    WHERE characterId= :characterId");
+    WHERE characterId = :characterId");
 
     $updatecharacter->execute(array(
     'characterId' => $characterId));

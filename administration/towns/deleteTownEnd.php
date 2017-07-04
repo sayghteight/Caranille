@@ -19,7 +19,7 @@ if (isset($_POST['adminTownId'])
 
         //On fait une requête pour vérifier si la ville choisi existe
         $townQuery = $bdd->prepare('SELECT * FROM car_towns
-        WHERE townId= ?');
+        WHERE townId = ?');
         $townQuery->execute([$adminTownId]);
         $townRow = $townQuery->rowCount();
 
@@ -60,7 +60,7 @@ if (isset($_POST['adminTownId'])
                 //On met à jour les personnages
                 $updateCharacter = $bdd->prepare("UPDATE car_characters SET
                 characterTownId = 0
-                WHERE characterId= :adminCharacterId");
+                WHERE characterId = :adminCharacterId");
                 
                 $updateCharacter->execute(array(
                 'adminCharacterId' => $adminCharacterId));

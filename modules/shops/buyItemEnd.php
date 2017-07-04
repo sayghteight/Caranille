@@ -22,7 +22,7 @@ if (isset($_POST['shopId'])
 
         //On fait une requête pour vérifier si le magasin choisi existe
         $shopQuery = $bdd->prepare('SELECT * FROM car_shops 
-        WHERE shopId= ?');
+        WHERE shopId = ?');
         $shopQuery->execute([$shopId]);
         $shopRow = $shopQuery->rowCount();
 
@@ -31,7 +31,7 @@ if (isset($_POST['shopId'])
         {
             //On fait une requête pour vérifier si l'objet choisi existe
             $itemQuery = $bdd->prepare('SELECT * FROM car_items 
-            WHERE itemId= ?');
+            WHERE itemId = ?');
             $itemQuery->execute([$itemId]);
             $itemRow = $itemQuery->rowCount();
 
@@ -87,7 +87,7 @@ if (isset($_POST['shopId'])
                         //On met l'inventaire à jour
                         $updateInventory = $bdd->prepare("UPDATE car_inventory SET
                         inventoryQuantity = inventoryQuantity + 1
-                        WHERE inventoryId= :inventoryId");
+                        WHERE inventoryId = :inventoryId");
                         $updateInventory->execute(array(
                         'inventoryId' => $inventoryId));
                         $updateInventory->closeCursor();
@@ -110,7 +110,7 @@ if (isset($_POST['shopId'])
                     //On retire l'argent de la vente au personnage
                     $updatecharacter = $bdd->prepare("UPDATE car_characters SET
                     characterGold = characterGold - :itemPurchasePrice
-                    WHERE characterId= :characterId");
+                    WHERE characterId = :characterId");
 
                     $updatecharacter->execute(array(
                     'itemPurchasePrice' => $itemPurchasePrice,  

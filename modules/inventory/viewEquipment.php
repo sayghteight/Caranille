@@ -13,12 +13,12 @@ if (isset($_POST['itemId'])
     if(ctype_digit($_POST['itemId'])
     && $_POST['itemId'] >= 1)
     {
-        //On récupère l'Id du formulaire précédent
+        //On récupère l'id du formulaire précédent
         $itemId = htmlspecialchars(addslashes($_POST['itemId']));
         
         //On fait une requête pour vérifier si l'équipement choisi existe
         $equipmentQuery = $bdd->prepare('SELECT * FROM car_items 
-        WHERE itemId= ?');
+        WHERE itemId = ?');
         $equipmentQuery->execute([$itemId]);
         $equipmentRow = $equipmentQuery->rowCount();
 

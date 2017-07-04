@@ -23,7 +23,7 @@ if (isset($_POST['adminTownShopTownId'])
 
         //On fait une requête pour vérifier si la ville choisie existe
         $townQuery = $bdd->prepare('SELECT * FROM car_towns 
-        WHERE townId= ?');
+        WHERE townId = ?');
         $townQuery->execute([$adminTownShopTownId]);
         $townRow = $townQuery->rowCount();
 
@@ -32,7 +32,7 @@ if (isset($_POST['adminTownShopTownId'])
         {
             //On fait une requête pour vérifier si le magasin choisi existe
             $shopQuery = $bdd->prepare('SELECT * FROM car_shops 
-            WHERE shopId= ?');
+            WHERE shopId = ?');
             $shopQuery->execute([$adminTownShopShopId]);
             $shopRow = $shopQuery->rowCount();
 

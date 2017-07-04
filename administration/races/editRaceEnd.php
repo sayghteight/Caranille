@@ -57,7 +57,7 @@ if (isset($_POST['adminRaceId'])
         
         //On fait une requête pour vérifier si la race choisie existe
         $raceQuery = $bdd->prepare('SELECT * FROM car_races 
-        WHERE raceId= ?');
+        WHERE raceId = ?');
         $raceQuery->execute([$adminRaceId]);
         $raceRow = $raceQuery->rowCount();
 
@@ -135,7 +135,7 @@ if (isset($_POST['adminRaceId'])
                 characterDefense = :adminCharacterDefense, 
                 characterDefenseMagic = :adminCharacterDefenseMagic, 
                 characterWisdom = :adminCharacterSagesse
-                WHERE characterId= :adminCharacterId");
+                WHERE characterId = :adminCharacterId");
             
                 $updateCharacter->execute(array(
                 'adminCharacterHP' => $adminCharacterHP,  

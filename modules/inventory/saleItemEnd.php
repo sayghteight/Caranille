@@ -13,7 +13,7 @@ if (isset($_POST['itemId'])
     if (ctype_digit($_POST['itemId'])
     && $_POST['itemId'] >= 1)
     {
-        //On récupère l'Id du formulaire précédent
+        //On récupère l'id du formulaire précédent
         $itemId = htmlspecialchars(addslashes($_POST['itemId']));
 
         //On cherche à savoir si l'objet qui va se vendre appartient bien au joueur
@@ -44,7 +44,7 @@ if (isset($_POST['itemId'])
                 //On va donc rendre l'objet non équippé afin de le vendre
                 $updateInventory = $bdd->prepare("UPDATE car_inventory SET
                 inventoryEquipped = 0
-                WHERE inventoryId= :inventoryId");
+                WHERE inventoryId = :inventoryId");
 
                 $updateInventory->execute(array(
                 'inventoryId' => $inventoryId));
@@ -60,7 +60,7 @@ if (isset($_POST['itemId'])
                 characterDefenseEquipments = 0, 
                 characterDefenseMagicEquipments = 0, 
                 characterWisdomEquipments = 0
-                WHERE characterId= :characterId");
+                WHERE characterId = :characterId");
 
                 $updateCharacter->execute(array(
                 'characterId' => $characterId));
@@ -106,7 +106,7 @@ if (isset($_POST['itemId'])
                 characterDefenseEquipments = :defenseBonus, 
                 characterDefenseMagicEquipments = :defenseMagicBonus, 
                 characterWisdomEquipments = :wisdomBonus
-                WHERE characterId= :characterId");
+                WHERE characterId = :characterId");
 
                 $updateCharacter->execute(array(
                 'hpBonus' => $hpBonus,
@@ -141,7 +141,7 @@ if (isset($_POST['itemId'])
                 //On met l'inventaire à jour
                 $updateInventory = $bdd->prepare("UPDATE car_inventory SET
                 inventoryQuantity = inventoryQuantity - 1
-                WHERE inventoryId= :inventoryId");
+                WHERE inventoryId = :inventoryId");
                 $updateInventory->execute(array(
                 'inventoryId' => $inventoryId));
                 $updateInventory->closeCursor();
@@ -151,7 +151,7 @@ if (isset($_POST['itemId'])
             {
                 //On supprime l'objet de l'inventaire
                 $updateInventory = $bdd->prepare("DELETE FROM car_inventory
-                WHERE inventoryId= :inventoryId");
+                WHERE inventoryId = :inventoryId");
                 $updateInventory->execute(array(
                 'inventoryId' => $inventoryId));
                 $updateInventory->closeCursor();
@@ -160,7 +160,7 @@ if (isset($_POST['itemId'])
             //On donne l'argent de la vente au personnage
             $updatecharacter = $bdd->prepare("UPDATE car_characters SET
             characterGold = characterGold + :itemSalePrice
-            WHERE characterId= :characterId");
+            WHERE characterId = :characterId");
 
             $updatecharacter->execute(array(
             'itemSalePrice' => $itemSalePrice,  
