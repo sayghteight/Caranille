@@ -40,7 +40,7 @@ if ($townRow >= 1)
                 
             </select>
         </div>
-        <center><input type="submit" name="enter" class="btn btn-default form-control" value="Entrer dans la ville"></center>
+        <input type="submit" name="enter" class="btn btn-default form-control" value="Entrer dans la ville">
     </form>
     
     <?php
