@@ -40,11 +40,11 @@ if (isset($_POST['adminTownId'])
 
             <p>Informations de la ville</p>
             <form method="POST" action="editTownEnd.php">
-                Image : <br> <input type="text" name="adminTownPicture" class="form-control" placeholder="Image" value="<?php echo $adminTownPicture; ?>" required>
-                Nom : <br> <input type="text" name="adminTownName" class="form-control" placeholder="Nom" value="<?php echo $adminTownName; ?>" required>
+                Image : <input type="text" name="adminTownPicture" class="form-control" placeholder="Image" value="<?php echo $adminTownPicture; ?>" required>
+                Nom : <input type="text" name="adminTownName" class="form-control" placeholder="Nom" value="<?php echo $adminTownName; ?>" required>
                 Description : <br> <textarea class="form-control" name="adminTownDescription" id="adminTownDescription" rows="3"><?php echo $adminTownDescription; ?></textarea>
-                Prix de l'auberge : <br> <input type="number" name="adminTownPriceInn" class="form-control" placeholder="Prix de l'auberge" value="<?php echo $adminTownPriceInn; ?>" required>
-                Ville disponible au chapitre : <br> <input type="number" name="adminTownChapter" class="form-control" placeholder="Ville disponible au chapitre" value="<?php echo $adminTownChapter; ?>" required>
+                Prix de l'auberge : <input type="number" name="adminTownPriceInn" class="form-control" placeholder="Prix de l'auberge" value="<?php echo $adminTownPriceInn; ?>" required>
+                Ville disponible au chapitre : <input type="number" name="adminTownChapter" class="form-control" placeholder="Ville disponible au chapitre" value="<?php echo $adminTownChapter; ?>" required>
                 <input type="hidden" name="adminTownId" value="<?= $adminTownId ?>">
                 <input name="finalEdit" class="btn btn-default form-control" type="submit" value="Modifier">
             </form>

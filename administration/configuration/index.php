@@ -23,9 +23,9 @@ $configurationQuery->closeCursor();
 
 <p>Configuration du jeu</p>
 <form method="POST" action="editConfiguration.php">
-    Nom du jeu : <br> <input type="text" name="adminGameName" class="form-control" placeholder="Nom du jeu" value="<?php echo $adminGameName; ?>" required>
+    Nom du jeu : <input type="text" name="adminGameName" class="form-control" placeholder="Nom du jeu" value="<?php echo $adminGameName; ?>" required>
     Présentation : <br> <textarea class="form-control" name="adminGamePresentation" id="adminGamePresentation" rows="3" required><?php echo $adminGamePresentation; ?></textarea>
-    PC par niveau : <br> <input type="text" name="adminGameSkillPoint" class="form-control" placeholder="PC par niveau" value="<?php echo $adminGameSkillPoint; ?>" required>
+    PC par niveau : <input type="text" name="adminGameSkillPoint" class="form-control" placeholder="PC par niveau" value="<?php echo $adminGameSkillPoint; ?>" required>
     Jeu ouvert : <br> <select name="adminGameAccess" class="form-control">
     
         <?php

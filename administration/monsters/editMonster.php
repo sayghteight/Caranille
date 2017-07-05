@@ -49,20 +49,20 @@ if (isset($_POST['adminMonsterId'])
 
             <p>Informations du monstre</p>
             <form method="POST" action="editMonsterEnd.php">
-                Image : <br> <input type="text" name="adminMonsterPicture" class="form-control" placeholder="Image" value="<?php echo $adminMonsterPicture; ?>" required>
-                Nom : <br> <input type="text" name="adminMonsterName" class="form-control" placeholder="Nom" value="<?php echo $adminMonsterName; ?>" required>
-                Niveau : <br> <input type="number" name="adminMonsterLevel" class="form-control" placeholder="Niveau" value="<?php echo $adminMonsterLevel; ?>" required>
+                Image : <input type="text" name="adminMonsterPicture" class="form-control" placeholder="Image" value="<?php echo $adminMonsterPicture; ?>" required>
+                Nom : <input type="text" name="adminMonsterName" class="form-control" placeholder="Nom" value="<?php echo $adminMonsterName; ?>" required>
+                Niveau : <input type="number" name="adminMonsterLevel" class="form-control" placeholder="Niveau" value="<?php echo $adminMonsterLevel; ?>" required>
                 Description : <br> <textarea class="form-control" name="adminMonsterDescription" id="adminMonsterDescription" rows="3" required><?php echo $adminMonsterDescription; ?></textarea>
-                HP : <br> <input type="number" name="adminMonsterHp" class="form-control" placeholder="HP" value="<?php echo $adminMonsterHp; ?>" required>
-                MP : <br> <input type="number" name="adminMonsterMp" class="form-control" placeholder="MP" value="<?php echo $adminMonsterMp; ?>" required>
-                Force : <br> <input type="number" name="adminMonsterStrength" class="form-control" placeholder="Force" value="<?php echo $adminMonsterStrength; ?>" required>
-                Magie : <br> <input type="number" name="adminMonsterMagic" class="form-control" placeholder="Magie" value="<?php echo $adminMonsterMagic; ?>" required>
-                Agilité : <br> <input type="number" name="adminMonsterAgility" class="form-control" placeholder="Agilité" value="<?php echo $adminMonsterAgility; ?>" required>
-                Défense : <br> <input type="number" name="adminMonsterDefense" class="form-control" placeholder="Défense" value="<?php echo $adminMonsterDefense; ?>" required>
-                Défense Magique : <br> <input type="number" name="adminMonsterDefenseMagic" class="form-control" placeholder="Défense Magique" value="<?php echo $adminMonsterDefenseMagic; ?>" required>
-                Sagesse : <br> <input type="number" name="adminMonsterWisdom" class="form-control" placeholder="Sagesse" value="<?php echo $adminMonsterWisdom; ?>" required>
-                Experience : <br> <input type="number" name="adminMonsterExperience" class="form-control" placeholder="Expérience" value="<?php echo $adminMonsterExperience; ?>" required>
-                Argent : <br> <input type="number" name="adminMonsterGold" class="form-control" placeholder="Argent" value="<?php echo $adminMonsterGold; ?>" required>
+                HP : <input type="number" name="adminMonsterHp" class="form-control" placeholder="HP" value="<?php echo $adminMonsterHp; ?>" required>
+                MP : <input type="number" name="adminMonsterMp" class="form-control" placeholder="MP" value="<?php echo $adminMonsterMp; ?>" required>
+                Force : <input type="number" name="adminMonsterStrength" class="form-control" placeholder="Force" value="<?php echo $adminMonsterStrength; ?>" required>
+                Magie : <input type="number" name="adminMonsterMagic" class="form-control" placeholder="Magie" value="<?php echo $adminMonsterMagic; ?>" required>
+                Agilité : <input type="number" name="adminMonsterAgility" class="form-control" placeholder="Agilité" value="<?php echo $adminMonsterAgility; ?>" required>
+                Défense : <input type="number" name="adminMonsterDefense" class="form-control" placeholder="Défense" value="<?php echo $adminMonsterDefense; ?>" required>
+                Défense Magique : <input type="number" name="adminMonsterDefenseMagic" class="form-control" placeholder="Défense Magique" value="<?php echo $adminMonsterDefenseMagic; ?>" required>
+                Sagesse : <input type="number" name="adminMonsterWisdom" class="form-control" placeholder="Sagesse" value="<?php echo $adminMonsterWisdom; ?>" required>
+                Experience : <input type="number" name="adminMonsterExperience" class="form-control" placeholder="Expérience" value="<?php echo $adminMonsterExperience; ?>" required>
+                Argent : <input type="number" name="adminMonsterGold" class="form-control" placeholder="Argent" value="<?php echo $adminMonsterGold; ?>" required>
                 <input type="hidden" name="adminMonsterId" value="<?= $adminMonsterId ?>">
                 <input name="finalEdit" class="btn btn-default form-control" type="submit" value="Modifier">
             </form>

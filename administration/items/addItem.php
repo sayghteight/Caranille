@@ -13,13 +13,13 @@ if (isset($_POST['add']))
     
     <p>Informations de l'objets</p>
     <form method="POST" action="addItemEnd.php">
-        Image : <br> <input type="text" name="adminItemPicture" class="form-control" placeholder="Image" required>
-        Nom : <br> <input type="text" name="adminItemName" class="form-control" placeholder="Nom" required>
+        Image : <input type="text" name="adminItemPicture" class="form-control" placeholder="Image" required>
+        Nom : <input type="text" name="adminItemName" class="form-control" placeholder="Nom" required>
         Description : <br> <textarea class="form-control" name="adminItemDescription" id="adminItemDescription" rows="3" required></textarea>
-        HP : <br> <input type="number" name="adminItemHpEffects" class="form-control" placeholder="HP Bonus" required>
-        MP : <br> <input type="number" name="adminItemMpEffect" class="form-control" placeholder="MP Bonus" required>
-        Prix d'achat : <br> <input type="number" name="adminItemPurchasePrice" class="form-control" placeholder="Prix d'achat" required>
-        Prix de vente : <br> <input type="number" name="adminItemSalePrice" class="form-control" placeholder="Prix de vente" required>
+        HP : <input type="number" name="adminItemHpEffects" class="form-control" placeholder="HP Bonus" required>
+        MP : <input type="number" name="adminItemMpEffect" class="form-control" placeholder="MP Bonus" required>
+        Prix d'achat : <input type="number" name="adminItemPurchasePrice" class="form-control" placeholder="Prix d'achat" required>
+        Prix de vente : <input type="number" name="adminItemSalePrice" class="form-control" placeholder="Prix de vente" required>
         <input name="finalAdd" class="btn btn-default form-control" type="submit" value="Ajouter">
     </form>
     

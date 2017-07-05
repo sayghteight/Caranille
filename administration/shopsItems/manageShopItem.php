@@ -97,7 +97,7 @@ if (isset($_POST['adminShopItemShopId'])
                             
                         </select>
                     
-                    Réduction (De 0 à 100%) <br> <input type="number" name="adminShopItemDiscount" class="form-control" placeholder="Réduction (De 0 à 100%)" required>
+                    Réduction (De 0 à 100%) <input type="number" name="adminShopItemDiscount" class="form-control" placeholder="Réduction (De 0 à 100%)" required>
                     <input type="hidden" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
                     <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter l'objet">
                 </form>

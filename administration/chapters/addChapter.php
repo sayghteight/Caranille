@@ -40,7 +40,7 @@ if (isset($_POST['add']))
                 ?>
                 
             </select>
-            Titre : <br> <input type="text" name="adminChapterTitle" class="form-control" placeholder="Titre" required>
+            Titre : <input type="text" name="adminChapterTitle" class="form-control" placeholder="Titre" required>
             Introduction :  <br> <textarea class="form-control" name="adminChapterOpening" id="adminChapterOpening" rows="3" required></textarea>
             Conclusion :  <br> <textarea class="form-control" name="adminChapterEnding" id="adminChapterEnding" rows="3" required></textarea>
             <input name="finalAdd" class="btn btn-default form-control" type="submit" value="Ajouter">
