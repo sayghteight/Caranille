@@ -135,6 +135,7 @@ if (isset($_POST['itemId'])
                 $updateCharacter->closeCursor();
             }
             ?>
+            
             Vous venez de déséquiper l'équipement <?php echo $itemName ?>
 
             <hr>
@@ -142,6 +143,7 @@ if (isset($_POST['itemId'])
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" value="Retour">
             </form>
+            
             <?php
         }
         else

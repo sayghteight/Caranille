@@ -265,25 +265,31 @@ if (isset($_POST['adminAccountId'])
                 {
                     case 0:
                         ?>
+                        
                         <option selected="selected" value="0">Joueur</option>
                         <option value="1">Modérateur</option>
                         <option value="2">Administrateur</option>
+                        
                         <?php
                     break;
 
                     case 1:
                         ?>
+                        
                         <option value="0">Joueur</option>
                         <option selected="selected" value="1">Modérateur</option>
                         <option value="2">Administrateur</option>
+                        
                         <?php
                     break;
 
                     case 2:
                         ?>
+                        
                         <option value="0">Joueur</option>
                         <option value="1">Modérateur</option>";
                         <option selected="selected" value="2">Administrateur</option>
+                        
                         <?php
                     break;
                 }

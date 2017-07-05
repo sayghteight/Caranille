@@ -174,6 +174,7 @@ if (isset($_POST['magic']))
             <form method="POST" action="rewards.php">
                 <input type="submit" name="escape" class="btn btn-default form-control" value="Continuer"><br />
             </form>
+            
             <?php
         }
     
@@ -187,6 +188,7 @@ if (isset($_POST['magic']))
             <form method="POST" action="index.php">
                 <input type="submit" name="magic" class="btn btn-default form-control" value="Continuer"><br>
             </form>
+            
             <?php
         }
     }
@@ -194,6 +196,7 @@ if (isset($_POST['magic']))
     else
     {
         ?>
+        
         Vous n'avez pas assez de MP pour lancer cette attaque
                     
         <hr>
@@ -201,6 +204,7 @@ if (isset($_POST['magic']))
         <form method="POST" action="index.php">
             <input type="submit" name="magic" class="btn btn-default form-control" value="Continuer"><br>
         </form>
+        
         <?php
     }
 }

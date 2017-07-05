@@ -65,12 +65,77 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                         //On récupère le taux d'obtention de l'objet/équipement
                         while ($monsterDrop = $monsterDropQuery->fetch())
                         {
+                            $adminMonsterDropItemVisible = stripslashes($monsterDrop['monsterDropItemVisible']);
                             $adminMonsterDropLuck = stripslashes($monsterDrop['monsterDropLuck']);
+                            $adminMonsterDropLuckVisible = stripslashes($monsterDrop['monsterDropLuckVisible']);
                         }
                         ?>
                         
+                        <h4><?php echo $adminMonsterDropItemName ?></h4><br />
+                        
                         <form method="POST" action="editMonsterDrop.php">
-                            Taux d'obtention (en pourcentage) : <br> <input type="number" name="adminMonsterDropLuck" class="form-control" placeholder="Taux d'obtention (en pourcentage)" value="<?php echo $adminMonsterDropLuck; ?>" required><br /><br />
+                            <div class="form-group row">
+                                <label for="adminMonsterDropItemVisible" class="col-2 col-form-label">Objet visible dans le bestiaire ?</label>
+                                <select class="form-control" id="adminMonsterDropItemVisible" name="adminMonsterDropItemVisible">
+                                
+                                <?php
+                                switch ($adminMonsterDropItemVisible)
+                                {
+                                    case "Yes":
+                                        ?>
+                                        
+                                        <option selected="selected" value="Yes">Oui</option>
+                                        <option value="No">Non</option>
+                                        
+                                        <?php
+                                    break;
+                
+                                    case "No":
+                                        ?>
+                                        
+                                        <option value="Yes">Oui</option>
+                                        <option selected="selected" value="No">Non</option>
+                                        
+                                        <?php
+                                    break;
+                                }
+                                ?>
+                                
+                                </select>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-2 col-form-label">Taux d'obtention (en pourcentage)</label>
+                                <input type="number" name="adminMonsterDropLuck" class="form-control" placeholder="Taux d'obtention (en pourcentage)" value="<?php echo $adminMonsterDropLuck ?>" required>
+                            </div>
+                            <div class="form-group row">
+                                <label for="adminMonsterDropLuckVisible" class="col-2 col-form-label">Taux visible dans le bestiaire ?</label>
+                                <select class="form-control" id="adminMonsterDropLuckVisible" name="adminMonsterDropLuckVisible">
+                                
+                                <?php
+                                switch ($adminMonsterDropLuckVisible)
+                                {
+                                    case "Yes":
+                                        ?>
+                                        
+                                        <option selected="selected" value="Yes">Oui</option>
+                                        <option value="No">Non</option>
+                                        
+                                        <?php
+                                    break;
+                
+                                    case "No":
+                                        ?>
+                                        
+                                        <option value="Yes">Oui</option>
+                                        <option selected="selected" value="No">Non</option>
+                                        
+                                        <?php
+                                    break;
+                                }
+                                ?>
+                                
+                                </select>
+                            </div>
                             <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
                             <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropItemId" value="<?= $adminMonsterDropItemId ?>">
                             <input type="submit" class="btn btn-default form-control" name="finalEdit" value="Mettre à jour">

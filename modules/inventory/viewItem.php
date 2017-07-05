@@ -56,6 +56,7 @@ if (isset($_POST['itemId'])
                     $itemWisdomEffect = stripslashes($itemInventory['itemWisdomEffect']);
                     $itemSalePrice = stripslashes($itemInventory['itemSalePrice']);
                     ?>
+                    
                     <table class="table">
                         <tr>
                             <td>

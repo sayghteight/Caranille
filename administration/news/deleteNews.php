@@ -31,7 +31,6 @@ if (isset($_POST['adminNewsId'])
             {
                 $adminNewstitle = stripslashes($news['newsTitle']);
             }
-
             ?>
             
             <p>ATTENTION</p> 

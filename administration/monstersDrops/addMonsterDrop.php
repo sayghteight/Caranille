@@ -9,7 +9,9 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 //Si les variables $_POST suivantes existent
 if (isset($_POST['adminMonsterDropMonsterId'])
 && isset($_POST['adminMonsterDropItemId'])
+&& isset($_POST['adminMonsterDropItemVisible'])
 && isset($_POST['adminMonsterDropLuck'])
+&& isset($_POST['adminMonsterDropLuckVisible'])
 && isset($_POST['add']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
@@ -22,7 +24,9 @@ if (isset($_POST['adminMonsterDropMonsterId'])
         //On récupère l'id du formulaire précédent
         $adminMonsterDropMonsterId = htmlspecialchars(addslashes($_POST['adminMonsterDropMonsterId']));
         $adminMonsterDropItemId = htmlspecialchars(addslashes($_POST['adminMonsterDropItemId']));
+        $adminMonsterDropItemVisible = htmlspecialchars(addslashes($_POST['adminMonsterDropItemVisible']));
         $adminMonsterDropLuck = htmlspecialchars(addslashes($_POST['adminMonsterDropLuck']));
+        $adminMonsterDropLuckVisible = htmlspecialchars(addslashes($_POST['adminMonsterDropLuckVisible']));
 
         //Si le taux d'obtention est entre 0 et 100 on ajoute l'objet
         if ($adminMonsterDropLuck >= 0 && $adminMonsterDropLuck <= 100)
@@ -60,12 +64,16 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                         '',
                         :adminMonsterDropMonsterId,
                         :adminMonsterDropItemId,
-                        :adminMonsterDropLuck)");
+                        :adminMonsterDropItemVisible,
+                        :adminMonsterDropLuck,
+                        :adminMonsterDropLuckVisible)");
 
                         $addTownMonster->execute([
                         'adminMonsterDropMonsterId' => $adminMonsterDropMonsterId,
                         'adminMonsterDropItemId' => $adminMonsterDropItemId,
-                        'adminMonsterDropLuck' => $adminMonsterDropLuck]);
+                        'adminMonsterDropItemVisible' => $adminMonsterDropItemVisible,
+                        'adminMonsterDropLuck' => $adminMonsterDropLuck,
+                        'adminMonsterDropLuckVisible' => $adminMonsterDropLuckVisible]);
                         $addTownMonster->closeCursor();
                         ?>
 

@@ -19,35 +19,37 @@ $monsterRow = $monsterQueryList->rowCount();
 if ($monsterRow > 0)
 {
     ?>
+    
     <form method="POST" action="selectedMonster.php">
         <div class="form-group row">
             <label for="raceList" class="col-2 col-form-label">Liste des monstres</label>
             <select class="form-control" id="townList" name="battleMonsterId">
-            <?php
-            //On fait une boucle sur tous les résultats
-            while ($monster = $monsterQueryList->fetch())
-            {
-                //on récupère les valeurs de chaque monstres qu'on va ensuite mettre dans le menu déroulant
-                $monsterId = stripslashes($monster['monsterId']); 
-                $monsterName = stripslashes($monster['monsterName']);
-                ?>
-                    <option value="<?php echo $monsterId ?>"><?php echo $monsterName ?></option>
+                
                 <?php
-            }
-            $monsterQueryList->closeCursor();
-            ?>
+                //On fait une boucle sur tous les résultats
+                while ($monster = $monsterQueryList->fetch())
+                {
+                    //on récupère les valeurs de chaque monstres qu'on va ensuite mettre dans le menu déroulant
+                    $monsterId = stripslashes($monster['monsterId']); 
+                    $monsterName = stripslashes($monster['monsterName']);
+                    ?>
+                        <option value="<?php echo $monsterId ?>"><?php echo $monsterName ?></option>
+                    <?php
+                }
+                $monsterQueryList->closeCursor();
+                ?>
+                
             </select>
         </div>
         <input type="submit" name="enter" class="btn btn-default form-control" value="Lancer le combat">
     </form>
+    
     <?php
 }
 //S'il n'y a aucun monstre de disponible on prévient le joueur
 else
 {
-    ?>
-    Il n'y a aucun monstre de disponible.
-    <?php
+    echo "Il n'y a aucun monstre de disponible.";
 }
 
 require_once("../../html/footer.php"); ?>

@@ -44,13 +44,7 @@ if ($monsterBestiaryRow > 0)
 //Si aucun monstre n'a été trouvé
 else
 {
-    ?>
-    
-    Il y a actuellement aucun monstre dans votre bestiaire
-        
-    <hr>
-
-    <?php
+    echo "Il y a actuellement aucun monstre dans votre bestiaire";
 }
 $monsterBestiaryQuery->closeCursor();
 

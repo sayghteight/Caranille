@@ -21,33 +21,35 @@ $equipmentRow = $equipmentQuery->rowCount();
 if ($equipmentRow > 0)
 {
     ?>
+    
     <form method="POST" action="viewEquipment.php">
         <div class="form-group row">
             <label for="equipmentList" class="col-2 col-form-label">Liste des équipements</label>
             <select class="form-control" id="itemId" name="itemId">
-            <?php
-            //on récupère les valeurs de chaque joueurs qu'on va ensuite mettre dans le menu déroulant
-            while ($equipment = $equipmentQuery->fetch())
-            {
-                $equipmentId = stripslashes($equipment['itemId']); 
-                $equipmentName = stripslashes($equipment['itemName']);
-                ?>
-                    <option value="<?php echo $equipmentId ?>"><?php echo $equipmentName ?></option>
+                
                 <?php
-            }
-            ?>
+                //on récupère les valeurs de chaque joueurs qu'on va ensuite mettre dans le menu déroulant
+                while ($equipment = $equipmentQuery->fetch())
+                {
+                    $equipmentId = stripslashes($equipment['itemId']); 
+                    $equipmentName = stripslashes($equipment['itemName']);
+                    ?>
+                        <option value="<?php echo $equipmentId ?>"><?php echo $equipmentName ?></option>
+                    <?php
+                }
+                ?>
+                
             </select>
         </div>
         <center><input type="submit" name="viewEquipment" class="btn btn-default form-control" value="Plus d'information"></center>
     </form>
+    
     <?php
 }
 //Si toutes les variables $_POST n'existent pas
 else
 {
-    ?>
-    Vous ne possédez aucun équipements.
-    <?php
+    echo "Vous ne possédez aucun équipements.";
 }
 $equipmentQuery->closeCursor();
 

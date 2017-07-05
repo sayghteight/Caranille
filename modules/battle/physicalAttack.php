@@ -164,6 +164,7 @@ if (isset($_POST['attack']))
         <form method="POST" action="rewards.php">
             <input type="submit" name="escape" class="btn btn-default form-control" value="Continuer"><br />
         </form>
+        
         <?php
     }
 
@@ -177,6 +178,7 @@ if (isset($_POST['attack']))
         <form method="POST" action="index.php">
             <input type="submit" name="magic" class="btn btn-default form-control" value="Continuer"><br>
         </form>
+        
         <?php
     }
 }

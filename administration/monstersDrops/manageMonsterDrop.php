@@ -43,18 +43,20 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                     <div class="form-group row">
                         <label for="townMonsterMonsterId" class="col-2 col-form-label">Liste des objets/équipements du monstre</label>
                         <select class="form-control" id="adminMonsterDropItemId" name="adminMonsterDropItemId">
-                        <?php
-                        while ($monsterDrop = $monsterDropQuery->fetch())
-                        {
-                            $adminMonsterDropItemId = stripslashes($monsterDrop['itemId']);
-                            $adminMonsterDropItemName = stripslashes($monsterDrop['itemName']);
-                            $adminMonsterDropLuck = stripslashes($monsterDrop['monsterDropLuck']);?>
-                            ?>
-                                <option value="<?php echo $adminMonsterDropItemId ?>"><?php echo "$adminMonsterDropItemName (Obtention: $adminMonsterDropLuck%)"; ?></option>
+                            
                             <?php
-                        }
-                        $monsterDropQuery->closeCursor();
-                        ?>
+                            while ($monsterDrop = $monsterDropQuery->fetch())
+                            {
+                                $adminMonsterDropItemId = stripslashes($monsterDrop['itemId']);
+                                $adminMonsterDropItemName = stripslashes($monsterDrop['itemName']);
+                                $adminMonsterDropLuck = stripslashes($monsterDrop['monsterDropLuck']);?>
+                                ?>
+                                    <option value="<?php echo $adminMonsterDropItemId ?>"><?php echo "$adminMonsterDropItemName (Obtention: $adminMonsterDropLuck%)"; ?></option>
+                                <?php
+                            }
+                            $monsterDropQuery->closeCursor();
+                            ?>
+                            
                         </select>
                     </div>
                     <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
@@ -96,7 +98,24 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                             
                         </select>
                     </div>
-                    Taux d'obtention (en pourcentage) <br> <input type="number" name="adminMonsterDropLuck" class="form-control" placeholder="Taux d'obtention (en pourcentage)" required><br /><br />
+                    <div class="form-group row">
+                        <label for="adminMonsterDropItemVisible" class="col-2 col-form-label">Objet visible dans le bestiaire ?</label>
+                        <select class="form-control" id="adminMonsterDropItemVisible" name="adminMonsterDropItemVisible">                            
+                            <option value="Yes">Oui</option>
+                            <option value="No">Non</option>
+                        </select>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">Taux d'obtention (en pourcentage)</label>
+                        <input type="number" name="adminMonsterDropLuck" class="form-control" placeholder="Taux d'obtention (en pourcentage)" value="0" required>
+                    </div>
+                    <div class="form-group row">
+                        <label for="adminMonsterDropLuckVisible" class="col-2 col-form-label">Taux visible dans le bestiaire ?</label>
+                        <select class="form-control" id="adminMonsterDropLuckVisible" name="adminMonsterDropLuckVisible">
+                            <option value="Yes">Oui</option>
+                            <option value="No">Non</option>
+                        </select>
+                    </div>
                     <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
                     <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter cet objet/équipement">
                 </form>

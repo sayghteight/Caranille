@@ -81,8 +81,8 @@ if (isset($_POST['itemId'])
                     {
                         $equipmentRaceName = "Toutes les classes";
                     }
-        
                     ?>
+                    
                     <table class="table">
                         <tr>
                             <td>
@@ -177,6 +177,7 @@ if (isset($_POST['itemId'])
                             </td>
                             
                             <td>
+                                
                                 <?php
                                 //Si l'équipement n'est pas équippé ont propose au joueur de l'équiper
                                 if ($equipmentEquipped == 0)
@@ -188,26 +189,24 @@ if (isset($_POST['itemId'])
                                         if ($characterLevel >= $equipmentLevelRequired)
                                         {
                                             ?>
+                                            
                                                 <form method="POST" action="equipItem.php">
                                                     <input type="hidden" name="itemId" value="<?php echo $itemId ?>">
                                                     <input type="submit" class="btn btn-default form-control" name="equip" value="Equiper">
                                                 </form> 
+                                                
                                             <?php
                                         }
                                         //Si le niveau du joueur n'est pas supérieur ou égal à celui du niveau requis
                                         else
                                         {
-                                            ?>
-                                            Votre niveau est trop faible pour vous équiper de cet objet
-                                            <?php
+                                            echo "Votre niveau est trop faible pour vous équiper de cet objet";
                                         }
                                     }
                                     //Si la classe de l'objet est incompatible avec celle du joueur
                                     else
                                     {
-                                        ?>
-                                        Votre classe ne vous permet pas de vous équiper de cet équipement
-                                        <?php
+                                         echo "Votre classe ne vous permet pas de vous équiper de cet équipement";
                                     }
                                     
                                 }
@@ -215,14 +214,18 @@ if (isset($_POST['itemId'])
                                 else
                                 {
                                     ?>
+                                    
                                         Cet équipement est actuellement équippé
+                                        
                                         <form method="POST" action="unEquip.php">
                                             <input type="hidden" name="itemId" value="<?php echo $itemId ?>">
                                             <input type="submit" class="btn btn-default form-control" name="unEquip" value="Déséquiper"><br /><br />
                                         </form>
+                                        
                                     <?php
                                 }
                                 ?>
+                                
                                 <form method="POST" action="saleItem.php">
                                     <input type="hidden" name="itemId" value="<?php echo $itemId ?>">
                                     <input type="submit" class="btn btn-default form-control" name="sale" value="Vendre"><br /><br />
@@ -236,6 +239,7 @@ if (isset($_POST['itemId'])
                     <form method="POST" action="equipment.php">
                         <input type="submit" class="btn btn-default form-control" value="Retour">
                     </form>
+                    
                     <?php
                 }
                 $equipmentQuery->closeCursor();

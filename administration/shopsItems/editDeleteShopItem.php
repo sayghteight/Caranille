@@ -69,6 +69,8 @@ if (isset($_POST['adminShopItemShopId'])
                         }
                         ?>
                         
+                        <h4><?php echo $adminShopItemItemName ?></h4><br />
+                        
                         <form method="POST" action="editShopItem.php">
                             Réduction (de 0 à 100%) : <br> <input type="number" name="adminShopItemDiscount" class="form-control" placeholder="Réduction (de 0 à 100%)" value="<?php echo $adminShopItemDiscount; ?>" required><br /><br />
                             <input type="hidden" class="btn btn-default form-control" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">

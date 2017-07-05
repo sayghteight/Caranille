@@ -39,33 +39,35 @@ $itemRow = $itemQuery->rowCount();
 if ($itemRow > 0)
 {
     ?>
+    
     <form method="POST" action="useItem.php">
         <div class="form-group row">
             <select class="form-control" id="itemId" name="itemId">
-            <?php
-            //on récupère les valeurs de chaque joueurs qu'on va ensuite mettre dans le menu déroulant
-            while ($item = $itemQuery->fetch())
-            {
-                $itemId = stripslashes($item['itemId']); 
-                $itemName = stripslashes($item['itemName']);
-                $itemQuantity = stripslashes($item['inventoryQuantity']);
-                ?>
-                    <option value="<?php echo $itemId ?>"><?php echo "$itemName ($itemQuantity disponible)"; ?></option>
+                
                 <?php
-            }
-            $itemQuery->closeCursor();
-            ?>
+                //on récupère les valeurs de chaque joueurs qu'on va ensuite mettre dans le menu déroulant
+                while ($item = $itemQuery->fetch())
+                {
+                    $itemId = stripslashes($item['itemId']); 
+                    $itemName = stripslashes($item['itemName']);
+                    $itemQuantity = stripslashes($item['inventoryQuantity']);
+                    ?>
+                        <option value="<?php echo $itemId ?>"><?php echo "$itemName ($itemQuantity disponible)"; ?></option>
+                    <?php
+                }
+                $itemQuery->closeCursor();
+                ?>
+                
             </select>
         </div>
         <input type="submit" name="useItem" class="btn btn-default form-control" value="Utiliser">
     </form>
+    
     <?php
 }
 else 
 {
-    ?>
-    Vous ne possédez aucun objets.
-    <?php
+    echo "Vous ne possédez aucun objets";
 }
 ?>
 

@@ -35,6 +35,7 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin <= 0)
     <form method="POST" action="../../modules/town/index.php">
         <input type="submit" name="escape" class="btn btn-default form-control" value="Continuer"><br />
     </form>
+    
     <?php
 }
 
@@ -47,6 +48,7 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
 
     //On prévient le joueur qu'il a remporté le combat
     ?>
+    
     <p><?php echo $characterName; ?> remporte le combat !</p>
     Récompenses:<br />
     
@@ -122,7 +124,9 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
                     }
                     $itemQuery->closeCursor();
                     ?>
+                    
                     -1 <?php echo "$opponentDropItemName<br />" ?>
+                    
                     <?php
                 }
             }
@@ -255,6 +259,7 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
     <form method="POST" action="../../modules/town/index.php">
         <input type="submit" name="escape" class="btn btn-default form-control" value="Continuer"><br />
     </form>
+    
     <?php
 }
 

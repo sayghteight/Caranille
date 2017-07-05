@@ -90,6 +90,7 @@ if (isset($_POST['itemId'])
             'characterId' => $characterId));
             $updatecharacter->closeCursor();
             ?>
+            
             Vous venez d'utiliser l'objet <?php echo $itemName ?>.
 
             <hr>
@@ -97,6 +98,7 @@ if (isset($_POST['itemId'])
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" value="Retour">
             </form>
+            
             <?php
         }
         else

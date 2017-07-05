@@ -18,10 +18,25 @@ if (isset($_POST['accountPseudo'])
     //S'il y a un résultat de trouvé c'est que la combinaison pseudo/mot de passe est bonne
     if ($accountRow == 1)
     {
-        //Dans ce cas on boucle pour récupérer le tableau retourné par la base de donnée pour faire la session account
+        //Dans ce cas on boucle pour récupérer le tableau retourné par la base de donnée pour récupérer les informations du compte
         while ($account = $accountQuery->fetch())
         {
+            //On définit une date pour mettre à jour la dernière connexion du compte
+            $date = date('Y-m-d H:i:s');
+            
+            //On créer une session qui ne contiendra que l'id du compte
             $_SESSION['account']['id'] = stripslashes($account['accountId']);
+            $accountId = $_SESSION['account']['id'];
+            
+            //On met la date de connexion à jour
+            $updateAccount = $bdd->prepare("UPDATE car_accounts SET 
+            accountLastConnection = :accountLastConnection
+            WHERE accountId = :accountId");
+            
+            $updateAccount->execute(array(
+            'accountLastConnection' => $date,   
+            'accountId' => $accountId));
+            
             header("Location: ../../index.php");
         }
         $accountQuery->closeCursor();

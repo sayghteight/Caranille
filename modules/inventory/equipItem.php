@@ -168,12 +168,14 @@ if (isset($_POST['itemId'])
                 <form method="POST" action="equipment.php">
                     <input type="submit" class="btn btn-default form-control" value="Retour">
                 </form>
+                
                 <?php
             }
             //Si la classe de l'objet est incompatible avec celle du joueur
             else
             {
                 ?>
+                
                 Votre classe ne vous permet pas de vous équiper de cet équipement";
                 
                 <hr>
@@ -181,6 +183,7 @@ if (isset($_POST['itemId'])
                 <form method="POST" action="equipment.php">
                     <input type="submit" class="btn btn-default form-control" value="Retour">
                 </form>
+                
                 <?php
             }
         }

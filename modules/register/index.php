@@ -21,26 +21,26 @@
         <label for="raceList" class="col-2 col-form-label">Classe</label>
         <select class="form-control" id="raceList" name="characterRaceId">
             
-        <?php
-        //On rempli le menu déroulant avec la liste des classes disponible
-        $raceListQuery = $bdd->query("SELECT * FROM car_races");
-        //On recherche combien il y a de classes disponible
-        $raceList = $raceListQuery->rowCount();
-        //S'il y a au moins une classe de disponible on les affiches dans le menu déroulant
-        if ($raceList >= 1)
-        {
-            //On fait une boucle sur tous les résultats
-            while ($raceList = $raceListQuery->fetch())
+            <?php
+            //On rempli le menu déroulant avec la liste des classes disponible
+            $raceListQuery = $bdd->query("SELECT * FROM car_races");
+            //On recherche combien il y a de classes disponible
+            $raceList = $raceListQuery->rowCount();
+            //S'il y a au moins une classe de disponible on les affiches dans le menu déroulant
+            if ($raceList >= 1)
             {
-                //on récupère les valeurs de chaque classes qu'on va ensuite mettre dans le menu déroulant
-                $raceId = stripslashes($raceList['raceId']); 
-                $raceName = stripslashes($raceList['raceName']);
-                ?>
-                    <option value="<?php echo $raceId ?>"><?php echo $raceName ?></option>
-                <?php
+                //On fait une boucle sur tous les résultats
+                while ($raceList = $raceListQuery->fetch())
+                {
+                    //on récupère les valeurs de chaque classes qu'on va ensuite mettre dans le menu déroulant
+                    $raceId = stripslashes($raceList['raceId']); 
+                    $raceName = stripslashes($raceList['raceName']);
+                    ?>
+                        <option value="<?php echo $raceId ?>"><?php echo $raceName ?></option>
+                    <?php
+                }
             }
-        }
-        ?>
+            ?>
         
         </select>
     </div>

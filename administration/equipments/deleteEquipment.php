@@ -35,7 +35,6 @@ if (isset($_POST['adminItemId'])
                 $adminItemName = stripslashes($item['itemName']);
             }
             $itemQuery->closeCursor();
-
             ?>
             
             <p>ATTENTION</p> 

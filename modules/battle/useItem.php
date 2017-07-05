@@ -219,6 +219,7 @@ if (isset($_POST['itemId'])
                     <form method="POST" action="index.php">
                         <input type="submit" name="magic" class="btn btn-default form-control" value="Continuer"><br>
                     </form>
+                    
                     <?php
                 }
             }

@@ -21,6 +21,7 @@ if (isset($_POST['escape']))
     <form method="POST" action="../../index.php">
         <input type="submit" name="escape" class="btn btn-default form-control" value="Continuer"><br />
     </form>
+    
     <?php
 }
 //Si toutes les variables $_POST n'existent pas

@@ -167,6 +167,7 @@ if (isset($_POST['itemId'])
             'characterId' => $characterId));
             $updatecharacter->closeCursor();
             ?>
+            
             Vous venez de vendre l'objet <?php echo $itemName ?> pour <?php echo $itemSalePrice ?> Pièce(s) d'or
 
             <hr>
@@ -174,6 +175,7 @@ if (isset($_POST['itemId'])
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" value="Retour">
             </form>
+            
             <?php
         }
         else

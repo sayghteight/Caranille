@@ -53,6 +53,7 @@ if (isset($_POST['itemId'])
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>
+            
             <?php
         }
         else

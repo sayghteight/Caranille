@@ -30,12 +30,14 @@ if (isset($_POST['sleep']))
         <form method="POST" action="../../modules/town/index.php">
             <input type="submit" class="btn btn-default form-control" value="Retour">
         </form>
-    <?php
+        
+        <?php
     }
     //Si le personnage n'a pas assez d'argent pour se soigner
     else
     {
         ?>
+        
         Vous n'avez pas assez d'argent
         
         <hr>
@@ -43,6 +45,7 @@ if (isset($_POST['sleep']))
         <form method="POST" action="../../modules/town/index.php">
             <input type="submit" class="btn btn-default form-control" value="Retour">
         </form>
+        
         <?php
     }
 }
