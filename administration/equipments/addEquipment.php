@@ -13,7 +13,7 @@ if (isset($_POST['add']))
     
     <p>Informations de l'équipement</p>
     <form method="POST" action="addEquipmentEnd.php">
-        Classe <br> <select name="adminItemRaceId" class="form-control">
+        Classe <select name="adminItemRaceId" class="form-control">
         <option value="0">Toutes les classes</option>
         
             <?php
@@ -40,7 +40,7 @@ if (isset($_POST['add']))
             
         </select>
         Image : <input type="text" name="adminItemPicture" class="form-control" placeholder="Image" required>
-        Type: <br> <select name="adminItemType" class="form-control">
+        Type: <select name="adminItemType" class="form-control">
             <option value="Armor">Armure</option>
             <option value="Boots">Bottes</option>
             <option value="Gloves">Gants</option>

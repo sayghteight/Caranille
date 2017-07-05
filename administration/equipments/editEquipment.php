@@ -117,7 +117,7 @@ if (isset($_POST['adminItemId'])
                     
                 </select>
                 Image : <input type="mail" name="adminItemPicture" class="form-control" placeholder="Image" value="<?php echo $adminItemPicture; ?>" required>
-                Type <br> <select name="adminItemType" class="form-control">
+                Type <select name="adminItemType" class="form-control">
                     
                     <?php
                     switch ($adminItemType)
