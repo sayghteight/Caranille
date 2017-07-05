@@ -20,7 +20,7 @@ if ($opponentRow > 0)
     ?>
     
     <form method="POST" action="selectedOpponent.php">
-        <div class="form-group row">
+        
             <label for="characterList" class="col-2 col-form-label">Liste des joueurs</label>
             <select class="form-control" id="opponentCharacterId" name="opponentCharacterId">
                 
@@ -38,7 +38,7 @@ if ($opponentRow > 0)
                 ?>
             
             </select>
-        </div>
+        
         <input type="submit" name="enter" class="btn btn-default form-control" value="Lancer le combat">
     </form>
     

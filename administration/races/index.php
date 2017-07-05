@@ -8,7 +8,7 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 ?>
 
 <form method="POST" action="manageRace.php">
-    <div class="form-group row">
+    
         <label for="adminRaceId" class="col-2 col-form-label">Liste des classes</label>
         <select class="form-control" id="adminRaceId" name="adminRaceId">
             
@@ -28,7 +28,7 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
             ?>
             
         </select>
-    </div>
+    
     <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer la classe">
 </form>
 

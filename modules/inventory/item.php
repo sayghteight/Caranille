@@ -19,7 +19,7 @@ if ($itemRow > 0)
     ?>
     
     <form method="POST" action="viewItem.php">
-        <div class="form-group row">
+        
             <label for="equipmentList" class="col-2 col-form-label">Liste des objets</label>
             <select class="form-control" id="itemId" name="itemId">
                 
@@ -37,7 +37,7 @@ if ($itemRow > 0)
                 ?>
                 
             </select>
-        </div>
+        
         <input type="submit" name="viewItem" class="btn btn-default form-control" value="Plus d'information">
     </form>
     

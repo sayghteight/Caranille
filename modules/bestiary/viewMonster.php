@@ -269,7 +269,7 @@ if (isset($_POST['monsterId'])
                                 $monsterDropItemId = stripslashes($monsterDrop['itemId']);
                                 
                                 $monsterDropItemVisible = stripslashes($monsterDrop['monsterDropItemVisible']);
-                                $monsterDropLuckVisible = stripslashes($monsterDrop['monsterDropLuckVisible']);
+                                $monsterDropRateVisible = stripslashes($monsterDrop['monsterDropRateVisible']);
                                 
                                 //Si l'objet est caché
                                 if ($monsterDropItemVisible == "Yes")
@@ -282,16 +282,16 @@ if (isset($_POST['monsterId'])
                                 }
                                 
                                 //Si le taux d'obtention est caché
-                                if ($monsterDropLuckVisible == "Yes")
+                                if ($monsterDropRateVisible == "Yes")
                                 {
-                                    $monsterDropLuck = stripslashes($monsterDrop['monsterDropLuck']);
+                                    $monsterDropRate = stripslashes($monsterDrop['monsterDropRate']);
                                 }
                                 else
                                 {
-                                    $monsterDropLuck = "???";
+                                    $monsterDropRate = "???";
                                 }
                                 
-                                echo "$monsterDropItemName ($monsterDropLuck%)<br />";
+                                echo "$monsterDropItemName ($monsterDropRate%)<br />";
                             }
                         }
                         //Si aucun objet ne peut être obtenu

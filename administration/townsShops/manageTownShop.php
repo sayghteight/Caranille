@@ -40,7 +40,7 @@ if (isset($_POST['adminTownShopTownId'])
                 ?>
                 
                 <form method="POST" action="deleteTownShop.php">
-                    <div class="form-group row">
+                    
                         <label for="townMonsterMonsterId" class="col-2 col-form-label">Magasins présent dans la ville</label>
                         <select class="form-control" id="adminTownShopShopId" name="adminTownShopShopId">
                             
@@ -57,7 +57,7 @@ if (isset($_POST['adminTownShopTownId'])
                             ?>
                             
                         </select>
-                    </div>
+                    
                     <input type="hidden" name="adminTownShopTownId" value="<?= $adminTownShopTownId ?>">
                     <input type="submit" name="delete" class="btn btn-default form-control" value="Retirer le magasin">
                 </form>
@@ -77,7 +77,7 @@ if (isset($_POST['adminTownShopTownId'])
                 ?>
                 
                 <form method="POST" action="addTownShop.php">
-                    <div class="form-group row">
+                    
                         <label for="townMonsterMonsterId" class="col-2 col-form-label">Magasins disponible</label>
                         <select class="form-control" id="adminTownShopShopId" name="adminTownShopShopId">
                             
@@ -93,7 +93,7 @@ if (isset($_POST['adminTownShopTownId'])
                             ?>
                             
                         </select>
-                    </div>
+                    
                     <input type="hidden" name="adminTownShopTownId" value="<?= $adminTownShopTownId ?>">
                     <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter le magasin">
                 </form>

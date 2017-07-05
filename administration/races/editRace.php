@@ -46,17 +46,17 @@ if (isset($_POST['adminRaceId'])
 
             <p>Informations de la classe</p>
             <form method="POST" action="editRaceEnd.php">
-                Image : <br> <input type="text" name="adminRacePicture" class="form-control" placeholder="Nom" value="<?php echo $adminRacePicture; ?>" required autofocus><br /><br />
-                Nom : <br> <input type="text" name="adminRaceName" class="form-control" placeholder="Nom" value="<?php echo $adminRaceName; ?>" required autofocus><br /><br />
-                Description : <br> <textarea class="form-control" name="adminRaceDescription" id="adminRaceDescription" rows="3" required><?php echo $adminRaceDescription; ?></textarea><br /><br />
-                HP par niveau : <br> <input type="number" name="adminRaceHpBonus" class="form-control" placeholder="HP par niveau" value="<?php echo $adminRaceHpBonus; ?>" required autofocus><br /><br />
-                MP par niveau : <br> <input type="number" name="adminRaceMpBonus" class="form-control" placeholder="MP par niveau" value="<?php echo $adminRaceMpBonus; ?>" required autofocus><br /><br />
-                Force par niveau : <br> <input type="number" name="adminRaceStrengthBonus" class="form-control" placeholder="Force par niveau" value="<?php echo $adminRaceStrengthBonus; ?>" required autofocus><br /><br />
-                Magie par niveau : <br> <input type="number" name="adminRaceMagicBonus" class="form-control" placeholder="Magie par niveau" value="<?php echo $adminRaceMagicBonus; ?>" required autofocus><br /><br />
-                Agilité par niveau : <br> <input type="number" name="adminRaceAgilityBonus" class="form-control" placeholder="Agilité par niveau" value="<?php echo $adminRaceAgilityBonus; ?>" required autofocus><br /><br />
-                Défense par niveau : <br> <input type="number" name="adminRaceDefenseBonus" class="form-control" placeholder="Défense par niveau" value="<?php echo $adminRaceDefenseBonus; ?>" required autofocus><br /><br />
-                Défense Magique par niveau : <br> <input type="number" name="adminRaceDefenseMagicBonus" class="form-control" placeholder="Défense Magique par niveau" value="<?php echo $adminRaceDefenseMagicBonus; ?>" required autofocus><br /><br />
-                Sagesse par niveau : <br> <input type="number" name="adminRaceWisdomBonus" class="form-control" placeholder="Sagesse par niveau" value="<?php echo $adminRaceWisdomBonus; ?>" required autofocus><br /><br />
+                Image : <br> <input type="text" name="adminRacePicture" class="form-control" placeholder="Nom" value="<?php echo $adminRacePicture; ?>" required autofocus>
+                Nom : <br> <input type="text" name="adminRaceName" class="form-control" placeholder="Nom" value="<?php echo $adminRaceName; ?>" required autofocus>
+                Description : <br> <textarea class="form-control" name="adminRaceDescription" id="adminRaceDescription" rows="3" required><?php echo $adminRaceDescription; ?></textarea>
+                HP par niveau : <br> <input type="number" name="adminRaceHpBonus" class="form-control" placeholder="HP par niveau" value="<?php echo $adminRaceHpBonus; ?>" required autofocus>
+                MP par niveau : <br> <input type="number" name="adminRaceMpBonus" class="form-control" placeholder="MP par niveau" value="<?php echo $adminRaceMpBonus; ?>" required autofocus>
+                Force par niveau : <br> <input type="number" name="adminRaceStrengthBonus" class="form-control" placeholder="Force par niveau" value="<?php echo $adminRaceStrengthBonus; ?>" required autofocus>
+                Magie par niveau : <br> <input type="number" name="adminRaceMagicBonus" class="form-control" placeholder="Magie par niveau" value="<?php echo $adminRaceMagicBonus; ?>" required autofocus>
+                Agilité par niveau : <br> <input type="number" name="adminRaceAgilityBonus" class="form-control" placeholder="Agilité par niveau" value="<?php echo $adminRaceAgilityBonus; ?>" required autofocus>
+                Défense par niveau : <br> <input type="number" name="adminRaceDefenseBonus" class="form-control" placeholder="Défense par niveau" value="<?php echo $adminRaceDefenseBonus; ?>" required autofocus>
+                Défense Magique par niveau : <br> <input type="number" name="adminRaceDefenseMagicBonus" class="form-control" placeholder="Défense Magique par niveau" value="<?php echo $adminRaceDefenseMagicBonus; ?>" required autofocus>
+                Sagesse par niveau : <br> <input type="number" name="adminRaceWisdomBonus" class="form-control" placeholder="Sagesse par niveau" value="<?php echo $adminRaceWisdomBonus; ?>" required autofocus>
                 <input type="hidden" name="adminRaceId" value="<?= $adminRaceId ?>">
                 <input name="finalEdit" class="btn btn-default form-control" type="submit" value="Modifier">
             </form>

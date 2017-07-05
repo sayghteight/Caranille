@@ -50,12 +50,12 @@ if (isset($_POST['shopId']))
             {
                 ?>
                 <h4><?php echo $shopName; ?></h4><br />
-                <?php echo $shopDescription; ?><br /><br />
+                <?php echo $shopDescription; ?>
 
                 <hr>
 
                 <form method="POST" action="viewItem.php">
-                    <div class="form-group row">
+                    
                         <label for="adminShopItemItemId" class="col-2 col-form-label">Articles en vente</label>
                         <select class="form-control" id="itemId" name="itemId">
                         <?php
@@ -76,7 +76,7 @@ if (isset($_POST['shopId']))
                         }
                         ?>
                         </select>
-                    </div>
+                    
                     <input type="hidden" name="shopId" value="<?= $shopId ?>">
                     <input type="submit" name="view" class="btn btn-default form-control" value="Détail/Achat">
                 </form>

@@ -18,7 +18,7 @@ if ($monsterBestiaryRow > 0)
     ?>
     
     <form method="POST" action="viewMonster.php">
-        <div class="form-group row">
+        
             <label for="equipmentList" class="col-2 col-form-label">Liste des monstres</label>
             <select class="form-control" id="monsterId" name="monsterId">
                 
@@ -35,7 +35,7 @@ if ($monsterBestiaryRow > 0)
                 ?>
                 
             </select>
-        </div>
+        
         <center><input type="submit" name="viewMonster" class="btn btn-default form-control" value="Voir la fiche du monstre"></center>
     </form>
     

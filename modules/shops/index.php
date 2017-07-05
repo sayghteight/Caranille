@@ -20,7 +20,7 @@ if ($shopRow > 0)
 {
     ?>
     <form method="POST" action="selectedShop.php">
-        <div class="form-group row">
+        
             <label for="shopId" class="col-2 col-form-label">Liste des magasins</label>
             <select class="form-control" id="shopId" name="shopId">
             <?php
@@ -37,7 +37,7 @@ if ($shopRow > 0)
             $shopQueryList->closeCursor();
             ?>
             </select>
-        </div>
+        
         <center><input type="submit" name="enter" class="btn btn-default form-control" value="Entrer dans le magasin"></center>
     </form>
     <?php

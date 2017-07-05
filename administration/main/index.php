@@ -7,7 +7,7 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 ?>
 
-Bienvenue sur le panel administration<br /><br />
+Bienvenue sur le panel administration
 
 Ici vous allez pouvoir gérer l'intégralité de votre jeu
 

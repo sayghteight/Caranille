@@ -10,7 +10,7 @@ if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); 
 
 <img src="" alt="">
 <?php echo $townName; ?><br />
-<?php echo $townDescription; ?><br /><br />
+<?php echo $townDescription; ?>
 <a href="../../modules/dungeon/index.php">Donjon</a><br>
 <a href="../../modules/arena/index.php">Arène</a><br>
 <a href="../../modules/inn/index.php">Auberge</a><br>

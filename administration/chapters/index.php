@@ -17,7 +17,7 @@ if ($chapterRow > 0)
     ?>
 
     <form method="POST" action="manageChapter.php">
-        <div class="form-group row">
+        
             <label for="adminChapterId" class="col-2 col-form-label">Liste des chapitres</label>
             <select class="form-control" id="adminChapterId" name="adminChapterId">
                 
@@ -34,7 +34,7 @@ if ($chapterRow > 0)
                 ?>
 
             </select>
-        </div>
+        
         <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer le chapitre">
     </form>
 

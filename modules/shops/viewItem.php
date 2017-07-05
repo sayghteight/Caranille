@@ -205,7 +205,7 @@ if (isset($_POST['shopId'])
                             <form method="POST" action="buyItem.php">
                                 <input type="hidden" class="btn btn-default form-control" name="shopId" value="<?= $shopId ?>">
                                 <input type="hidden" class="btn btn-default form-control" name="itemId" value="<?= $itemId ?>">
-                                <input type="submit" class="btn btn-default form-control" name="buy" value="Acheter"><br /><br />
+                                <input type="submit" class="btn btn-default form-control" name="buy" value="Acheter">
                             </form>
                         </td>
                     </tr>

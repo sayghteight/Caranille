@@ -85,10 +85,10 @@ if (isset($_POST['adminChapterId'])
                     $monsterQuery->closeCursor();
                     ?>
                     
-                </select><br /><br />
-                Titre : <br> <input type="text" name="adminChapterTitle" class="form-control" placeholder="Titre" value="<?php echo $adminChapterTitle; ?>" required><br /><br />
-                Introduction :  <br> <textarea class="form-control" name="adminChapterOpening" id="adminChapterOpening" rows="3" required><?php echo $adminChapterOpening; ?></textarea><br /><br />
-                Conclusion :  <br> <textarea class="form-control" name="adminChapterEnding" id="adminChapterEnding" rows="3" required><?php echo $adminChapterEnding; ?></textarea><br /><br />
+                </select>
+                Titre : <br> <input type="text" name="adminChapterTitle" class="form-control" placeholder="Titre" value="<?php echo $adminChapterTitle; ?>" required>
+                Introduction :  <br> <textarea class="form-control" name="adminChapterOpening" id="adminChapterOpening" rows="3" required><?php echo $adminChapterOpening; ?></textarea>
+                Conclusion :  <br> <textarea class="form-control" name="adminChapterEnding" id="adminChapterEnding" rows="3" required><?php echo $adminChapterEnding; ?></textarea>
                 <input type="hidden" name="adminChapterId" value="<?= $adminChapterId ?>">
                 <input name="finalEdit" class="btn btn-default form-control" type="submit" value="Modifier">
             </form>

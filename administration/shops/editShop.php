@@ -38,9 +38,9 @@ if (isset($_POST['adminShopId'])
 
             <p>Informations du magasin</p>
             <form method="POST" action="editShopEnd.php">
-                Image : <br> <input type="text" name="adminShopPicture" class="form-control" placeholder="Image" value= "<?php echo $adminShopPicture; ?>" required><br /><br />
-                Nom : <br> <input type="text" name="adminShopName" class="form-control" placeholder="Nom" value= "<?php echo $adminShopName; ?>" required><br /><br />
-                Description : <br> <textarea class="form-control" name="adminShopDescription" id="adminShopDescription" rows="3" required><?php echo $adminShopDescription; ?></textarea><br /><br />
+                Image : <br> <input type="text" name="adminShopPicture" class="form-control" placeholder="Image" value= "<?php echo $adminShopPicture; ?>" required>
+                Nom : <br> <input type="text" name="adminShopName" class="form-control" placeholder="Nom" value= "<?php echo $adminShopName; ?>" required>
+                Description : <br> <textarea class="form-control" name="adminShopDescription" id="adminShopDescription" rows="3" required><?php echo $adminShopDescription; ?></textarea>
                 <input type="hidden" name="adminShopId" value="<?= $adminShopId ?>">
                 <input name="finalEdit" class="btn btn-default form-control" type="submit" value="Modifier">
             </form>

@@ -13,9 +13,9 @@ if (isset($_POST['add']))
     
     <p>Informations de la news</p>
     <form method="POST" action="addNewsEnd.php">
-        Image : <br> <input type="text" name="adminNewsPicture" class="form-control" placeholder="Image" required><br /><br />
-        Titre : <br> <input type="text" name="adminNewsTitle" class="form-control" placeholder="Titre" required><br /><br />
-        Message : <br> <textarea class="form-control" name="adminNewsMessage" id="adminNewsMessage" rows="3" required></textarea><br /><br />
+        Image : <br> <input type="text" name="adminNewsPicture" class="form-control" placeholder="Image" required>
+        Titre : <br> <input type="text" name="adminNewsTitle" class="form-control" placeholder="Titre" required>
+        Message : <br> <textarea class="form-control" name="adminNewsMessage" id="adminNewsMessage" rows="3" required></textarea>
         <input name="finalAdd" class="btn btn-default form-control" type="submit" value="Ajouter">
     </form>
     

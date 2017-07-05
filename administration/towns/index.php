@@ -18,7 +18,7 @@ if ($townRow > 0)
     ?>
     
     <form method="POST" action="manageTown.php">
-        <div class="form-group row">
+        
             <label for="equipmentList" class="col-2 col-form-label">Liste des villes</label>
             <select class="form-control" id="adminTownId" name="adminTownId">
                 
@@ -34,7 +34,7 @@ if ($townRow > 0)
                 ?>
             
             </select>
-        </div>
+        
         <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer la ville">
     </form>
     

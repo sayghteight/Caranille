@@ -13,20 +13,20 @@ if (isset($_POST['add']))
     
     <p>Informations du monstre</p>
     <form method="POST" action="addMonsterEnd.php">
-        Image : <br> <input type="text" name="adminMonsterPicture" class="form-control" placeholder="Image" required><br /><br />
-        Nom : <br> <input type="text" name="adminMonsterName" class="form-control" placeholder="Nom" required><br /><br />
-        Niveau : <br> <input type="number" name="adminMonsterLevel" class="form-control" placeholder="Niveau" required><br /><br />
-        Description : <br> <textarea class="form-control" name="adminMonsterDescription" id="adminMonsterDescription" rows="3" required></textarea><br /><br />
-        HP : <br> <input type="number" name="adminMonsterHp" class="form-control" placeholder="HP" required><br /><br />
-        MP : <br> <input type="number" name="adminMonsterMp" class="form-control" placeholder="MP" required><br /><br />
-        Force : <br> <input type="number" name="adminMonsterStrength" class="form-control" placeholder="Force" required><br /><br />
-        Magie : <br> <input type="number" name="adminMonsterMagic" class="form-control" placeholder="Magie" required><br /><br />
-        Agilité : <br> <input type="number" name="adminMonsterAgility" class="form-control" placeholder="Agilité" required><br /><br />
-        Défense : <br> <input type="number" name="adminMonsterDefense" class="form-control" placeholder="Défense" required><br /><br />
-        Défense Magique : <br> <input type="number" name="adminMonsterDefenseMagic" class="form-control" placeholder="Défense Magique" required><br /><br />
-        Sagesse : <br> <input type="number" name="adminMonsterWisdom" class="form-control" placeholder="Sagesse" required><br /><br />
-        Experience : <br> <input type="number" name="adminMonsterExperience" class="form-control" placeholder="Expérience" required><br /><br />
-        Argent : <br> <input type="number" name="adminMonsterGold" class="form-control" placeholder="Argent" required><br /><br />
+        Image : <br> <input type="text" name="adminMonsterPicture" class="form-control" placeholder="Image" required>
+        Nom : <br> <input type="text" name="adminMonsterName" class="form-control" placeholder="Nom" required>
+        Niveau : <br> <input type="number" name="adminMonsterLevel" class="form-control" placeholder="Niveau" required>
+        Description : <br> <textarea class="form-control" name="adminMonsterDescription" id="adminMonsterDescription" rows="3" required></textarea>
+        HP : <br> <input type="number" name="adminMonsterHp" class="form-control" placeholder="HP" required>
+        MP : <br> <input type="number" name="adminMonsterMp" class="form-control" placeholder="MP" required>
+        Force : <br> <input type="number" name="adminMonsterStrength" class="form-control" placeholder="Force" required>
+        Magie : <br> <input type="number" name="adminMonsterMagic" class="form-control" placeholder="Magie" required>
+        Agilité : <br> <input type="number" name="adminMonsterAgility" class="form-control" placeholder="Agilité" required>
+        Défense : <br> <input type="number" name="adminMonsterDefense" class="form-control" placeholder="Défense" required>
+        Défense Magique : <br> <input type="number" name="adminMonsterDefenseMagic" class="form-control" placeholder="Défense Magique" required>
+        Sagesse : <br> <input type="number" name="adminMonsterWisdom" class="form-control" placeholder="Sagesse" required>
+        Experience : <br> <input type="number" name="adminMonsterExperience" class="form-control" placeholder="Expérience" required>
+        Argent : <br> <input type="number" name="adminMonsterGold" class="form-control" placeholder="Argent" required>
         <input type="hidden" name="adminMonsterId" value="<?= $adminMonsterId ?>">
         <input name="finalAdd" class="btn btn-default form-control" type="submit" value="Ajouter">
     </form>

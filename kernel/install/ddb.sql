@@ -214,8 +214,8 @@ CREATE TABLE IF NOT EXISTS `car_monsters_drops`
   `monsterDropMonsterId` int(11) NOT NULL,
   `monsterDropItemId` int(11) NOT NULL,
   `monsterDropItemVisible` varchar(3),
-  `monsterDropLuck` int(11) NOT NULL,
-  `monsterDropLuckVisible` varchar(3)
+  `monsterDropRate` int(11) NOT NULL,
+  `monsterDropRateVisible` varchar(3)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `car_news` 
@@ -323,7 +323,7 @@ INSERT INTO `car_monsters` (`monsterId`, `monsterPicture`, `monsterName`, `monst
 -- Contenu de la table `car_monsters_drops`
 --
 
-INSERT INTO `car_monsters_drops` (`monsterDropID`, `monsterDropMonsterId`, `monsterDropItemId`, `monsterDropItemVisible`, `monsterDropLuck`, `monsterDropLuckVisible`) VALUES
+INSERT INTO `car_monsters_drops` (`monsterDropID`, `monsterDropMonsterId`, `monsterDropItemId`, `monsterDropItemVisible`, `monsterDropRate`, `monsterDropRateVisible`) VALUES
 (1, 1, 1, 'Yes', 50, 'Yes'),
 (5, 2, 2, 'No', 20, 'No');
 

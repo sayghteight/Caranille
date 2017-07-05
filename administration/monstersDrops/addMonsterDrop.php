@@ -10,14 +10,14 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 if (isset($_POST['adminMonsterDropMonsterId'])
 && isset($_POST['adminMonsterDropItemId'])
 && isset($_POST['adminMonsterDropItemVisible'])
-&& isset($_POST['adminMonsterDropLuck'])
-&& isset($_POST['adminMonsterDropLuckVisible'])
+&& isset($_POST['adminMonsterDropRate'])
+&& isset($_POST['adminMonsterDropRateVisible'])
 && isset($_POST['add']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
     if (ctype_digit($_POST['adminMonsterDropMonsterId'])
     && ctype_digit($_POST['adminMonsterDropItemId'])
-    && ctype_digit($_POST['adminMonsterDropLuck'])
+    && ctype_digit($_POST['adminMonsterDropRate'])
     && $_POST['adminMonsterDropMonsterId'] >= 0
     && $_POST['adminMonsterDropItemId'] >= 0)
     {
@@ -25,11 +25,11 @@ if (isset($_POST['adminMonsterDropMonsterId'])
         $adminMonsterDropMonsterId = htmlspecialchars(addslashes($_POST['adminMonsterDropMonsterId']));
         $adminMonsterDropItemId = htmlspecialchars(addslashes($_POST['adminMonsterDropItemId']));
         $adminMonsterDropItemVisible = htmlspecialchars(addslashes($_POST['adminMonsterDropItemVisible']));
-        $adminMonsterDropLuck = htmlspecialchars(addslashes($_POST['adminMonsterDropLuck']));
-        $adminMonsterDropLuckVisible = htmlspecialchars(addslashes($_POST['adminMonsterDropLuckVisible']));
+        $adminMonsterDropRate = htmlspecialchars(addslashes($_POST['adminMonsterDropRate']));
+        $adminMonsterDropRateVisible = htmlspecialchars(addslashes($_POST['adminMonsterDropRateVisible']));
 
         //Si le taux d'obtention est entre 0 et 100 on ajoute l'objet
-        if ($adminMonsterDropLuck >= 0 && $adminMonsterDropLuck <= 100)
+        if ($adminMonsterDropRate >= 0 && $adminMonsterDropRate <= 100)
         {
             //On fait une requête pour vérifier si le monstre choisi existe
             $monsterQuery = $bdd->prepare('SELECT * FROM car_monsters 
@@ -65,15 +65,15 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                         :adminMonsterDropMonsterId,
                         :adminMonsterDropItemId,
                         :adminMonsterDropItemVisible,
-                        :adminMonsterDropLuck,
-                        :adminMonsterDropLuckVisible)");
+                        :adminMonsterDropRate,
+                        :adminMonsterDropRateVisible)");
 
                         $addTownMonster->execute([
                         'adminMonsterDropMonsterId' => $adminMonsterDropMonsterId,
                         'adminMonsterDropItemId' => $adminMonsterDropItemId,
                         'adminMonsterDropItemVisible' => $adminMonsterDropItemVisible,
-                        'adminMonsterDropLuck' => $adminMonsterDropLuck,
-                        'adminMonsterDropLuckVisible' => $adminMonsterDropLuckVisible]);
+                        'adminMonsterDropRate' => $adminMonsterDropRate,
+                        'adminMonsterDropRateVisible' => $adminMonsterDropRateVisible]);
                         $addTownMonster->closeCursor();
                         ?>
 

@@ -7,7 +7,7 @@ if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); 
 ?>
 
 <h1>Points de compétences</h1>
-Votre personnage possède <?php echo $characterSkillPoints; ?> PC (Point de compétences)<br /><br />
+Votre personnage possède <?php echo $characterSkillPoints; ?> PC (Point de compétences)
 <form method="POST" action="addHp.php">
 	<input type="submit" name="addHp" class="btn btn-default form-control" value="+1 HP">
 </form>

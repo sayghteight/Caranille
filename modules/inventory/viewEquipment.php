@@ -219,7 +219,7 @@ if (isset($_POST['itemId'])
                                         
                                         <form method="POST" action="unEquip.php">
                                             <input type="hidden" name="itemId" value="<?php echo $itemId ?>">
-                                            <input type="submit" class="btn btn-default form-control" name="unEquip" value="Déséquiper"><br /><br />
+                                            <input type="submit" class="btn btn-default form-control" name="unEquip" value="Déséquiper">
                                         </form>
                                         
                                     <?php
@@ -228,7 +228,7 @@ if (isset($_POST['itemId'])
                                 
                                 <form method="POST" action="saleItem.php">
                                     <input type="hidden" name="itemId" value="<?php echo $itemId ?>">
-                                    <input type="submit" class="btn btn-default form-control" name="sale" value="Vendre"><br /><br />
+                                    <input type="submit" class="btn btn-default form-control" name="sale" value="Vendre">
                                 </form>
                             </td>
                         </tr>

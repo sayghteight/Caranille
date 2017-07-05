@@ -17,7 +17,7 @@ if ($newsRow > 0)
     ?>
     
     <form method="POST" action="manageNews.php">
-        <div class="form-group row">
+        
             <label for="adminNewsId" class="col-2 col-form-label">Liste des news</label>
             <select class="form-control" id="adminNewsId" name="adminNewsId">
                 
@@ -33,7 +33,7 @@ if ($newsRow > 0)
                 ?>
                 
             </select>
-        </div>
+        
         <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer">
     </form>
     

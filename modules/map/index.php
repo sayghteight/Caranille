@@ -20,7 +20,7 @@ if ($townRow >= 1)
     ?>
     
     <form method="POST" action="chooseTown.php">
-        <div class="form-group row">
+        
             <label for="raceList" class="col-2 col-form-label">Liste des villes disponible</label>
             <select class="form-control" id="townList" name="townId">
                 
@@ -39,7 +39,7 @@ if ($townRow >= 1)
                 ?>
                 
             </select>
-        </div>
+        
         <input type="submit" name="enter" class="btn btn-default form-control" value="Entrer dans la ville">
     </form>
     

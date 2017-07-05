@@ -40,7 +40,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                 ?>
                 
                 <form method="POST" action="editDeleteMonsterDrop.php">
-                    <div class="form-group row">
+                    
                         <label for="townMonsterMonsterId" class="col-2 col-form-label">Liste des objets/équipements du monstre</label>
                         <select class="form-control" id="adminMonsterDropItemId" name="adminMonsterDropItemId">
                             
@@ -49,16 +49,16 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                             {
                                 $adminMonsterDropItemId = stripslashes($monsterDrop['itemId']);
                                 $adminMonsterDropItemName = stripslashes($monsterDrop['itemName']);
-                                $adminMonsterDropLuck = stripslashes($monsterDrop['monsterDropLuck']);?>
+                                $adminMonsterDropRate = stripslashes($monsterDrop['monsterDropRate']);?>
                                 ?>
-                                    <option value="<?php echo $adminMonsterDropItemId ?>"><?php echo "$adminMonsterDropItemName (Obtention: $adminMonsterDropLuck%)"; ?></option>
+                                    <option value="<?php echo $adminMonsterDropItemId ?>"><?php echo "$adminMonsterDropItemName (Obtention: $adminMonsterDropRate%)"; ?></option>
                                 <?php
                             }
                             $monsterDropQuery->closeCursor();
                             ?>
                             
                         </select>
-                    </div>
+                    
                     <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
                     <input type="submit" name="edit" class="btn btn-default form-control" value="Modifier">
                     <input type="submit" name="delete" class="btn btn-default form-control" value="Retirer">
@@ -80,7 +80,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                 ?>
                 
                 <form method="POST" action="addMonsterDrop.php">
-                    <div class="form-group row">
+                    
                         <label for="adminMonsterDropItemId" class="col-2 col-form-label">Objets/équipements existant</label>
                         <select class="form-control" id="adminMonsterDropItemId" name="adminMonsterDropItemId">
                             
@@ -97,25 +97,25 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                             ?>
                             
                         </select>
-                    </div>
-                    <div class="form-group row">
+                    
+                    
                         <label for="adminMonsterDropItemVisible" class="col-2 col-form-label">Objet visible dans le bestiaire ?</label>
                         <select class="form-control" id="adminMonsterDropItemVisible" name="adminMonsterDropItemVisible">                            
                             <option value="Yes">Oui</option>
                             <option value="No">Non</option>
                         </select>
-                    </div>
-                    <div class="form-group row">
+                    
+                    
                         <label for="example-text-input" class="col-2 col-form-label">Taux d'obtention (en pourcentage)</label>
-                        <input type="number" name="adminMonsterDropLuck" class="form-control" placeholder="Taux d'obtention (en pourcentage)" value="0" required>
-                    </div>
-                    <div class="form-group row">
-                        <label for="adminMonsterDropLuckVisible" class="col-2 col-form-label">Taux visible dans le bestiaire ?</label>
-                        <select class="form-control" id="adminMonsterDropLuckVisible" name="adminMonsterDropLuckVisible">
+                        <input type="number" name="adminMonsterDropRate" class="form-control" placeholder="Taux d'obtention (en pourcentage)" value="0" required>
+                    
+                    
+                        <label for="adminMonsterDropRateVisible" class="col-2 col-form-label">Taux visible dans le bestiaire ?</label>
+                        <select class="form-control" id="adminMonsterDropRateVisible" name="adminMonsterDroRateVisible">
                             <option value="Yes">Oui</option>
                             <option value="No">Non</option>
                         </select>
-                    </div>
+                    
                     <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
                     <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter cet objet/équipement">
                 </form>

@@ -66,15 +66,15 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                         while ($monsterDrop = $monsterDropQuery->fetch())
                         {
                             $adminMonsterDropItemVisible = stripslashes($monsterDrop['monsterDropItemVisible']);
-                            $adminMonsterDropLuck = stripslashes($monsterDrop['monsterDropLuck']);
-                            $adminMonsterDropLuckVisible = stripslashes($monsterDrop['monsterDropLuckVisible']);
+                            $adminMonsterDropRate = stripslashes($monsterDrop['monsterDropRate']);
+                            $adminMonsterDropRateVisible = stripslashes($monsterDrop['monsterDropRateVisible']);
                         }
                         ?>
                         
                         <h4><?php echo $adminMonsterDropItemName ?></h4><br />
                         
                         <form method="POST" action="editMonsterDrop.php">
-                            <div class="form-group row">
+                            
                                 <label for="adminMonsterDropItemVisible" class="col-2 col-form-label">Objet visible dans le bestiaire ?</label>
                                 <select class="form-control" id="adminMonsterDropItemVisible" name="adminMonsterDropItemVisible">
                                 
@@ -102,17 +102,17 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                                 ?>
                                 
                                 </select>
-                            </div>
-                            <div class="form-group row">
+                            
+                            
                                 <label for="example-text-input" class="col-2 col-form-label">Taux d'obtention (en pourcentage)</label>
-                                <input type="number" name="adminMonsterDropLuck" class="form-control" placeholder="Taux d'obtention (en pourcentage)" value="<?php echo $adminMonsterDropLuck ?>" required>
-                            </div>
-                            <div class="form-group row">
-                                <label for="adminMonsterDropLuckVisible" class="col-2 col-form-label">Taux visible dans le bestiaire ?</label>
-                                <select class="form-control" id="adminMonsterDropLuckVisible" name="adminMonsterDropLuckVisible">
+                                <input type="number" name="adminMonsterDropRate" class="form-control" placeholder="Taux d'obtention (en pourcentage)" value="<?php echo $adminMonsterDropRate ?>" required>
+                            
+                            
+                                <label for="adminMonsterDropRateVisible" class="col-2 col-form-label">Taux visible dans le bestiaire ?</label>
+                                <select class="form-control" id="adminMonsterDropRateVisible" name="adminMonsterDropRateVisible">
                                 
                                 <?php
-                                switch ($adminMonsterDropLuckVisible)
+                                switch ($adminMonsterDropRateVisible)
                                 {
                                     case "Yes":
                                         ?>
@@ -135,7 +135,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                                 ?>
                                 
                                 </select>
-                            </div>
+                            
                             <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
                             <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropItemId" value="<?= $adminMonsterDropItemId ?>">
                             <input type="submit" class="btn btn-default form-control" name="finalEdit" value="Mettre à jour">

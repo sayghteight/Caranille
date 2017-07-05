@@ -23,7 +23,7 @@ if ($equipmentRow > 0)
     ?>
     
     <form method="POST" action="viewEquipment.php">
-        <div class="form-group row">
+        
             <label for="equipmentList" class="col-2 col-form-label">Liste des équipements</label>
             <select class="form-control" id="itemId" name="itemId">
                 
@@ -40,7 +40,7 @@ if ($equipmentRow > 0)
                 ?>
                 
             </select>
-        </div>
+        
         <center><input type="submit" name="viewEquipment" class="btn btn-default form-control" value="Plus d'information"></center>
     </form>
     

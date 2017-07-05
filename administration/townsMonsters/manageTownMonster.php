@@ -40,7 +40,7 @@ if (isset($_POST['adminTownMonsterTownId'])
                 ?>
                 
                 <form method="POST" action="deleteTownMonster.php">
-                    <div class="form-group row">
+                    
                         <label for="townMonsterMonsterId" class="col-2 col-form-label">Monstres présent dans la ville</label>
                         <select class="form-control" id="adminTownMonsterMonsterId" name="adminTownMonsterMonsterId">
                             
@@ -57,7 +57,7 @@ if (isset($_POST['adminTownMonsterTownId'])
                             ?>
                             
                         </select>
-                    </div>
+                    
                     <input type="hidden" name="adminTownMonsterTownId" value="<?= $adminTownMonsterTownId ?>">
                     <input type="submit" name="delete" class="btn btn-default form-control" value="Retirer le monstre">
                 </form>
@@ -77,7 +77,7 @@ if (isset($_POST['adminTownMonsterTownId'])
                 ?>
                 
                 <form method="POST" action="addTownMonster.php">
-                    <div class="form-group row">
+                    
                         <label for="townMonsterMonsterId" class="col-2 col-form-label">Monstres disponible</label>
                         <select class="form-control" id="adminTownMonsterMonsterId" name="adminTownMonsterMonsterId">
                             
@@ -94,7 +94,7 @@ if (isset($_POST['adminTownMonsterTownId'])
                             ?>
                             
                         </select>
-                    </div>
+                    
                     <input type="hidden" name="adminTownMonsterTownId" value="<?= $adminTownMonsterTownId ?>">
                     <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter le monstre">
                 </form>

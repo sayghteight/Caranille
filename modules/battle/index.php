@@ -41,7 +41,7 @@ if ($itemRow > 0)
     ?>
     
     <form method="POST" action="useItem.php">
-        <div class="form-group row">
+        
             <select class="form-control" id="itemId" name="itemId">
                 
                 <?php
@@ -59,7 +59,7 @@ if ($itemRow > 0)
                 ?>
                 
             </select>
-        </div>
+        
         <input type="submit" name="useItem" class="btn btn-default form-control" value="Utiliser">
     </form>
     
