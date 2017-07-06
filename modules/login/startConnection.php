@@ -21,23 +21,76 @@ if (isset($_POST['accountPseudo'])
         //Dans ce cas on boucle pour récupérer le tableau retourné par la base de donnée pour récupérer les informations du compte
         while ($account = $accountQuery->fetch())
         {
-            //On définit une date pour mettre à jour la dernière connexion du compte
-            $date = date('Y-m-d H:i:s');
+            //On récupère les informations du compte comme l'id et les accès (joueur, modérateur, administrateur)
+            $accountId = stripslashes($account['accountId']);
+            $accountAccess = stripslashes($account['accountAccess']);
             
-            //On créer une session qui ne contiendra que l'id du compte
-            $_SESSION['account']['id'] = stripslashes($account['accountId']);
-            $accountId = $_SESSION['account']['id'];
+            //On récupère les informations du serveur de jeu
+            $configurationQuery = $bdd->query("SELECT * FROM car_configuration");
             
-            //On met la date de connexion à jour
-            $updateAccount = $bdd->prepare("UPDATE car_accounts SET 
-            accountLastConnection = :accountLastConnection
-            WHERE accountId = :accountId");
+            //On fait une boucle pour récupérer toutes les information
+            while ($configuration = $configurationQuery->fetch())
+            {
+                //On récupère les informations du jeu
+                $gameId = stripslashes($configuration['configurationId']);
+                $gameName = stripslashes($configuration['configurationGameName']);
+                $gamePresentation = stripslashes($configuration['configurationPresentation']);   
+                $gameSkillPoint = stripslashes($configuration['configurationSkillPoint']);
+                $gameAccess = stripslashes($configuration['configurationAccess']);
+            }
+            $configurationQuery->closeCursor();
             
-            $updateAccount->execute(array(
-            'accountLastConnection' => $date,   
-            'accountId' => $accountId));
-            
-            header("Location: ../../index.php");
+            //Si le jeu est ouvert au public
+            if ($gameAccess == "Opened")
+            {
+                //On définit une date pour mettre à jour la dernière connexion du compte
+                $date = date('Y-m-d H:i:s');
+                
+                //On créer une session qui ne contiendra que l'id du compte
+                $_SESSION['account']['id'] = stripslashes($account['accountId']);
+                $accountId = $_SESSION['account']['id'];
+                
+                //On met la date de connexion à jour
+                $updateAccount = $bdd->prepare("UPDATE car_accounts SET 
+                accountLastConnection = :accountLastConnection
+                WHERE accountId = :accountId");
+                
+                $updateAccount->execute(array(
+                'accountLastConnection' => $date,   
+                'accountId' => $accountId));
+                
+                header("Location: ../../index.php");
+            }
+            //Si le jeu est fermé au public
+            else
+            {
+                //Si le joueur est administrateur il peut se connecter
+                if ($accountAccess == 2)
+                {
+                    //On définit une date pour mettre à jour la dernière connexion du compte
+                    $date = date('Y-m-d H:i:s');
+                    
+                    //On créer une session qui ne contiendra que l'id du compte
+                    $_SESSION['account']['id'] = stripslashes($account['accountId']);
+                    $accountId = $_SESSION['account']['id'];
+                    
+                    //On met la date de connexion à jour
+                    $updateAccount = $bdd->prepare("UPDATE car_accounts SET 
+                    accountLastConnection = :accountLastConnection
+                    WHERE accountId = :accountId");
+                    
+                    $updateAccount->execute(array(
+                    'accountLastConnection' => $date,   
+                    'accountId' => $accountId));
+                    
+                    header("Location: ../../index.php");
+                }
+                //Si le joueur n'est pas administrateur on lui refuse l'accès
+                else
+                {
+                    echo "Le jeu est actuellement fermé au publique, merci de revenir plus tard";
+                }
+            }
         }
         $accountQuery->closeCursor();
     }

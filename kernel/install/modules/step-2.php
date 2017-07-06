@@ -34,10 +34,11 @@
     include("../../config.php");
 
     $bdd->query(file_get_contents('../ddb.sql'));
-
     ?>
+    
     Création de la base de donnée terminée...
     <form method="POST" action="step-3.php">
         <input type="submit" class="btn btn-default form-control" name="continuer" value="Continuer">
     </form>
+    
 <?php require_once("../html/footer.php"); ?>
