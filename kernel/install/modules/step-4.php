@@ -117,42 +117,50 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         '0', //characterHpSkillPoints
                         '0', //characterHpParchment
                         '0', //characterHpEquipments
+                        '0', //characterHpGuild
                         '120', //characterHpTotal
                         '10', //characterMpMin
                         '10', //characterMpMax
                         '0', //characterMpSkillPoints
                         '0', //characterMpParchment
                         '0', //characterMpEquipments
+                        '0', //characterMpGuild
                         '10', //characterMpTotal
                         '10', //characterStrength
                         '0', //characterStrengthSkillPoints
                         '0', //characterStrengthParchment
                         '0', //characterStrengthEquipments
+                        '0', //characterStrengthGuild
                         '10', //characterStrengthTotal
                         '10', //characterMagic
                         '0', //characterMagicSkillPoints
                         '0', //characterMagicParchment
                         '0', //characterMagicEquipments
+                        '0', //characterMagicGuild
                         '10', //characterMagicTotal
                         '10', //characterAgility
                         '0', //characterAgilitySkillPoints
                         '0', //characterAgilityParchment
                         '0', //characterAgilityEquipments
+                        '0', //characterAgilityGuild
                         '10', //characterAgilityTotal
                         '10', //characterDefense
                         '0', //characterDefenseSkillPoints
                         '0', //characterDefenseParchment
                         '0', //characterDefenseEquipments
+                        '0', //characterDefenseGuild
                         '10', //characterDefenseTotal
                         '10', //characterDefenseMagic
                         '0', //characterDefenseMagicSkillPoints
                         '0', //characterDefenseMagicParchment
                         '0', //characterDefenseMagicEquipments
+                        '0', //characterDefenseMagicGuild
                         '10', //characterDefenseMagicTotal
                         '0', //characterWisdom
                         '0', //characterWisdomSkillPoints
                         '0', //characterWisdomParchment
                         '0', //characterWisdomEquipments
+                        '0', //characterWisdomGuild
                         '0', //characterWisdomTotal
                         '0', //characterDefeate
                         '0', //characterVictory
@@ -185,18 +193,10 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         '0',
                         '0',
                         '0',
-                        '10',
-                        '10',
-                        '0',
-                        '0',
                         '0',
                         '10',
                         '10',
                         '0',
-                        '0',
-                        '0',
-                        '10',
-                        '10',
                         '0',
                         '0',
                         '0',
@@ -205,12 +205,27 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         '0',
                         '0',
                         '0',
+                        '0',
                         '10',
                         '10',
                         '0',
                         '0',
                         '0',
+                        '0',
                         '10',
+                        '10',
+                        '0',
+                        '0',
+                        '0',
+                        '0',
+                        '10',
+                        '10',
+                        '0',
+                        '0',
+                        '0',
+                        '0',
+                        '10',
+                        '0',
                         '0',
                         '0',
                         '0',
@@ -235,8 +250,15 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         'characterSex' => $characterSex]);
 
                         $addCharacter->closeCursor();
+                        ?>
 
-                        echo "Compte crée";
+                        Votre compte administrateur a bien été crée, vous pouvez commencer à développer votre jeu !
+
+                        <hr>
+
+                        <form method="POST" action="../../index.php">
+                            <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
+                        </form>
                     }
                     //Si la classe choisie n'existe pas
                     else

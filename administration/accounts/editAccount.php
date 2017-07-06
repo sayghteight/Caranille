@@ -54,42 +54,50 @@ if (isset($_POST['adminAccountId'])
                 $adminCharacterHpSkillPoints = stripslashes($character['characterHpSkillPoints']);
                 $adminCharacterHpBonus = stripslashes($character['characterHpBonus']);
                 $adminCharacterHpEquipments = stripslashes($character['characterHpEquipments']);
+                $adminCharacterHpGuild = stripslashes($character['characterHpGuild']);
                 $adminCharacterHpTotal = stripslashes($character['characterHpTotal']);
                 $adminCharacterMpMin = stripslashes($character['characterMpMin']);
                 $adminCharacterMpMax = stripslashes($character['characterMpMax']);
                 $adminCharacterMpSkillPoints = stripslashes($character['characterMpSkillPoints']);
                 $adminCharacterMpBonus = stripslashes($character['characterMpBonus']);
                 $adminCharacterMpEquipments = stripslashes($character['characterMpEquipments']);
+                $adminCharacterMpGuild = stripslashes($character['characterMpGuild']);
                 $adminCharacterMpTotal = stripslashes($character['characterMpTotal']);
                 $adminCharacterStrength = stripslashes($character['characterStrength']);
                 $adminCharacterStrengthSkillPoints = stripslashes($character['characterStrengthSkillPoints']);
                 $adminCharacterStrengthBonus = stripslashes($character['characterStrengthBonus']);
                 $adminCharacterStrengthEquipments = stripslashes($character['characterStrengthEquipments']);
+                $adminCharacterStrengthGuild = stripslashes($character['characterStrengthGuild']);
                 $adminCharacterStrengthTotal = stripslashes($character['characterStrengthTotal']);
                 $adminCharacterMagic = stripslashes($character['characterMagic']);
                 $adminCharacterMagicSkillPoints = stripslashes($character['characterMagicSkillPoints']);
                 $adminCharacterMagicBonus = stripslashes($character['characterMagicBonus']);
                 $adminCharacterMagicEquipments = stripslashes($character['characterMagicEquipments']);
+                $adminCharacterMagicGuild = stripslashes($character['characterMagicGuild']);
                 $adminCharacterMagicTotal = stripslashes($character['characterMagicTotal']);
                 $adminCharacterAgility = stripslashes($character['characterAgility']);
                 $adminCharacterAgilitySkillPoints = stripslashes($character['characterAgilitySkillPoints']);
                 $adminCharacterAgilityBonus = stripslashes($character['characterAgilityBonus']);
                 $adminCharacterAgilityEquipments = stripslashes($character['characterAgilityEquipments']);
+                $adminCharacterAgilityGuild = stripslashes($character['characterAgilityGuild']);
                 $adminCharacterAgilityTotal = stripslashes($character['characterAgilityTotal']);
                 $adminCharacterDefense = stripslashes($character['characterDefense']);
                 $adminCharacterDefenseSkillPoints = stripslashes($character['characterDefenseSkillPoints']);
                 $adminCharacterDefenseBonus = stripslashes($character['characterDefenseBonus']);
                 $adminCharacterDefenseEquipment = stripslashes($character['characterDefenseEquipments']);
+                $adminCharacterDefenseGuild = stripslashes($character['characterDefenseGuild']);
                 $adminCharacterDefenseTotal = stripslashes($character['characterDefenseTotal']);
                 $adminCharacterDefenseMagic = stripslashes($character['characterDefenseMagic']);
                 $adminCharacterDefenseMagicSkillPoints = stripslashes($character['characterDefenseMagicSkillPoints']);
                 $adminCharacterDefenseMagicBonus = stripslashes($character['characterDefenseMagicBonus']);
                 $adminCharacterDefenseMagicEquipments = stripslashes($character['characterDefenseMagicEquipments']);
+                $adminCharacterDefenseMagicGuild = stripslashes($character['characterDefenseMagicGuild']);
                 $adminCharacterDefenseMagicTotal = stripslashes($character['characterDefenseMagicTotal']);
                 $adminCharacterWisdom = stripslashes($character['characterWisdom']);
                 $adminCharacterWisdomSkillPoints = stripslashes($character['characterWisdomSkillPoints']);
                 $adminCharacterWisdomBonus = stripslashes($character['characterWisdomBonus']);
                 $adminCharacterWisdomEquipments = stripslashes($character['characterWisdomEquipments']);
+                $adminCharacterWisdomGuild = stripslashes($character['characterWisdomGuild']);
                 $adminCharacterWisdomTotal = stripslashes($character['characterWisdomTotal']);
                 $adminCharacterDefeate = stripslashes($character['characterDefeate']);
                 $adminCharacterVictory = stripslashes($character['characterVictory']);
@@ -317,42 +325,50 @@ if (isset($_POST['adminAccountId'])
             HP points de compétences: <?php echo $adminCharacterHpSkillPoints; ?><br />
             HP bonus: <?php echo $adminCharacterHpBonus; ?><br />
             HP équipement: <?php echo $adminCharacterHpEquipments; ?><br />
+            HP bonus guilde : <?php echo $adminCharacterHpGuild; ?><br />
             HP total: <?php echo $adminCharacterHpTotal; ?><br />
             MP actuel: <?php echo $adminCharacterMpMin; ?><br />
             MP maximum: <?php echo $adminCharacterMpMax; ?><br />
             MP points de compétences: <?php echo $adminCharacterMpSkillPoints; ?><br />
             MP bonus: <?php echo $adminCharacterMpBonus; ?><br />
             MP équipements: <?php echo $adminCharacterMpEquipments; ?><br />
+            MP bonus guilde : <?php echo $adminCharacterMpGuild; ?><br />
             MP total: <?php echo $adminCharacterMpTotal; ?><br />
             Force actuelle: <?php echo $adminCharacterStrength; ?><br />
             Force points de compétences: <?php echo $adminCharacterStrengthSkillPoints; ?><br />
             Force bonus: <?php echo $adminCharacterStrengthBonus; ?><br />
-            Force points de compétences: <?php echo $adminCharacterStrengthEquipments; ?><br />
+            Force équipement: <?php echo $adminCharacterStrengthEquipments; ?><br />
+            Force bonus guilde : <?php echo $adminCharacterStrengthGuild; ?><br />
             Force Total: <?php echo $adminCharacterStrengthTotal; ?><br />
             Magie actuelle: <?php echo $adminCharacterMagic; ?><br />
             Magie points de compétences: <?php echo $adminCharacterMagicSkillPoints; ?><br />
             Magie bonus: <?php echo $adminCharacterMagicBonus; ?><br />
             Magie équipement: <?php echo $adminCharacterMagicEquipments; ?><br />
+            Magie bonus guilde : <?php echo $adminCharacterMagicGuild; ?><br />
             Magie Total: <?php echo $adminCharacterMagicTotal; ?><br />
             Agilité actuelle: <?php echo $adminCharacterAgility; ?><br />
             Agilité points de compétences: <?php echo $adminCharacterAgilitySkillPoints; ?><br />
             Agilité bonus: <?php echo $adminCharacterAgilityBonus; ?><br />
             Agilité équipement: <?php echo $adminCharacterAgilityEquipments; ?><br />
+            Agilité bonus guilde : <?php echo $adminCharacterAgilityGuild; ?><br />
             Agilité Total: <?php echo $adminCharacterAgilityTotal; ?><br />
             Défense actuelle: <?php echo $adminCharacterDefense; ?><br />
             Défense points de compétences: <?php echo $adminCharacterDefenseSkillPoints; ?><br />
             Défense bonus: <?php echo $adminCharacterDefenseBonus; ?><br />
             Défense équipment: <?php echo $adminCharacterDefenseEquipment; ?><br />
+            Défense bonus guilde : <?php echo $adminCharacterDefenseGuild; ?><br />
             Défense Total: <?php echo $adminCharacterDefenseTotal; ?><br />
             Défense magique actuelle: <?php echo $adminCharacterDefenseMagic; ?><br />
             Défense magique points de compétences: <?php echo $adminCharacterDefenseMagicSkillPoints; ?><br />
             Défense magique bonus: <?php echo $adminCharacterDefenseMagicBonus; ?><br />
-            Défense équipement: <?php echo $adminCharacterDefenseMagicEquipments; ?><br />
+            Défense magique équipement: <?php echo $adminCharacterDefenseMagicEquipments; ?><br />
+            Défense magique bonus guilde : <?php echo $adminCharacterDefenseMagicGuild; ?><br />
             Défense magique Total: <?php echo $adminCharacterDefenseMagicTotal; ?><br />
             Sagesse actuelle: <?php echo $adminCharacterWisdom; ?><br />
             Sagesse points de compétences: <?php echo $adminCharacterWisdomSkillPoints; ?><br />
             Sagesse bonus: <?php echo $adminCharacterWisdomBonus; ?><br />
             Sagesse équipement: <?php echo $adminCharacterWisdomEquipments; ?><br />
+            Sagesse bonus guilde : <?php echo $adminCharacterWisdomGuild; ?><br />
             Sagesse Total: <?php echo $adminCharacterWisdomTotal; ?><br />
             Défaite: <?php echo $adminCharacterDefeate; ?><br />
             Victoire: <?php echo $adminCharacterVictory; ?><br />
