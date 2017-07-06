@@ -187,6 +187,7 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         '0',
                         '0',
                         '0',
+                        '0',
                         '120',
                         '10',
                         '10',
@@ -257,8 +258,10 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         <hr>
 
                         <form method="POST" action="../../index.php">
-                            <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
+                            <input type="submit" class="btn btn-default form-control" name="back" value="Commencer">
                         </form>
+
+                        <?php
                     }
                     //Si la classe choisie n'existe pas
                     else
