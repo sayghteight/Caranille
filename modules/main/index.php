@@ -10,11 +10,13 @@ if ($newsRow > 0)
     //Pour chaque news trouvées on l'affiche
     while ($news = $newsQuery->fetch()) 
     {
-        $dateFr = strftime('%d-%m-%Y',strtotime($news['newsDate']));
         ?>
-        <h4><?php echo stripslashes($news['newsTitle']); ?> (Par <?php echo stripslashes($news['newsAccountPseudo']); ?> le <?php echo stripslashes($dateFr); ?>)</h4>
-        <?php echo stripslashes(nl2br($news['newsMessage'])); ?>
+        
+        <h4><?php echo stripslashes($news['newsTitle']); ?> (le <?php echo strftime('%d-%m-%Y',strtotime($news['newsDate'])); ?> par <?php echo stripslashes($news['newsAccountPseudo']); ?>)</h4>
+        <?php echo stripslashes(nl2br($news['newsMessage'])); ?><br /><br />
+        
         <hr>
+        
         <?php
     }
     $newsQuery->closeCursor();
