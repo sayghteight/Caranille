@@ -8,6 +8,8 @@ if ($characterTownId == 0) { exit(header("Location: ../../modules/map/index.php"
 if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); }
 ?>
 
+<p><img src="<?php echo $townPicture; ?>" height="100" width="100"></p>
+
 Bienvenue à l'auberge, ici vous allez pouvoir vous reposer pour <?php echo $townPriceInn; ?> pièce(s) d'or
 
 <hr>

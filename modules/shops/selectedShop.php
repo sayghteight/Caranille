@@ -49,34 +49,36 @@ if (isset($_POST['shopId']))
             if ($townShopRow > 0) 
             {
                 ?>
+                
+                <p><img src="<?php echo $shopPicture; ?>" height="100" width="100"></p>
+                
                 <h4><?php echo $shopName; ?></h4><br />
                 <?php echo $shopDescription; ?>
 
                 <hr>
 
                 <form method="POST" action="viewItem.php">
+                    Articles en vente : <select name="itemId" class="form-control">
                     
-                        <label for="adminShopItemItemId" class="col-2 col-form-label">Articles en vente</label>
-                        <select class="form-control" id="itemId" name="itemId">
-                        <?php
-                        while ($townShop = $townShopQuery->fetch())
-                        {
-                            $itemId = stripslashes($townShop['itemId']);
-                            $itemName = stripslashes($townShop['itemName']);
-                            $itemPurchasePrice = stripslashes($townShop['itemPurchasePrice']);
-                            $itemDiscount = stripslashes($townShop['shopItemDiscount']);
+                    <?php
+                    while ($townShop = $townShopQuery->fetch())
+                    {
+                        $itemId = stripslashes($townShop['itemId']);
+                        $itemName = stripslashes($townShop['itemName']);
+                        $itemPurchasePrice = stripslashes($townShop['itemPurchasePrice']);
+                        $itemDiscount = stripslashes($townShop['shopItemDiscount']);
 
-                            //On calcule la réduction de l'objet/équipement
-                            $discount = $itemPurchasePrice * $itemDiscount / 100;
-                            //On applique la réduction
-                            $itemPurchasePrice = $itemPurchasePrice - $discount?>
-                            ?>
-                                <option value="<?php echo $itemId ?>"><?php echo "$itemName ($itemPurchasePrice Pièce d'or)"; ?></option>
-                            <?php
-                        }
+                        //On calcule la réduction de l'objet/équipement
+                        $discount = $itemPurchasePrice * $itemDiscount / 100;
+                        //On applique la réduction
+                        $itemPurchasePrice = $itemPurchasePrice - $discount?>
                         ?>
-                        </select>
+                            <option value="<?php echo $itemId ?>"><?php echo "$itemName ($itemPurchasePrice Pièce d'or)"; ?></option>
+                        <?php
+                    }
+                    ?>
                     
+                    </select>
                     <input type="hidden" name="shopId" value="<?= $shopId ?>">
                     <input type="submit" name="view" class="btn btn-default form-control" value="Détail/Achat">
                 </form>

@@ -12,6 +12,8 @@ if ($newsRow > 0)
     {
         ?>
         
+        <p><img src="<?php echo stripslashes($news['newsPicture']); ?>" height="100" width="100"></p>
+        
         <h4><?php echo stripslashes($news['newsTitle']); ?> (le <?php echo strftime('%d-%m-%Y',strtotime($news['newsDate'])); ?> par <?php echo stripslashes($news['newsAccountPseudo']); ?>)</h4>
         <?php echo stripslashes(nl2br($news['newsMessage'])); ?><br /><br />
         

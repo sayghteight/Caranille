@@ -41,6 +41,7 @@ if (isset($_POST['itemId'])
                 while ($itemInventory = $itemInventoryQuery->fetch())
                 {
                     $itemId = stripslashes($itemInventory['itemId']);
+                    $itemPicture = stripslashes($itemInventory['itemPicture']);
                     $itemType = stripslashes($itemInventory['itemType']);
                     $itemLevelRequired = stripslashes($itemInventory['itemLevelRequired']);
                     $itemName = stripslashes($itemInventory['itemName']);
@@ -56,6 +57,8 @@ if (isset($_POST['itemId'])
                     $itemWisdomEffect = stripslashes($itemInventory['itemWisdomEffect']);
                     $itemSalePrice = stripslashes($itemInventory['itemSalePrice']);
                     ?>
+
+                    <p><img src="<?php echo $itemPicture; ?>" height="100" width="100"></p>
                     
                     <table class="table">
                         <tr>

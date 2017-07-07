@@ -12,6 +12,7 @@ while ($character = $characterQuery->fetch())
     $characterId = stripslashes($character['characterId']);
     $characterAccountId = stripslashes($character['characterAccountId']);
     $characterRaceId = stripslashes($character['characterRaceId']);
+    $characterPicture = stripslashes($character['characterPicture']);
     $characterName = stripslashes($character['characterName']);
     $characterLevel = stripslashes($character['characterLevel']);
     $characterSex = stripslashes($character['characterSex']);

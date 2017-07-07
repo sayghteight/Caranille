@@ -9,6 +9,8 @@ while ($race = $raceQuery->fetch())
 {
     ?>
     
+    <p><img src="<?php echo stripslashes($race['racePicture']); ?>" height="100" width="100"></p>
+    
      <table class="table">
             <tr>
                 <td>

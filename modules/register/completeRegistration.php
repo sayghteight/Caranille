@@ -186,7 +186,7 @@ if (isset($_POST['accountPseudo'])
                         '',
                         :accountId,
                         :characterRaceId,
-                        'http://localhost/character.png',
+                        '../../img/empty.png',
                         :characterName,
                         '1',
                         :characterSex,

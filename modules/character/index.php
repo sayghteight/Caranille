@@ -6,6 +6,8 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); }
 ?>
 
+<p><img src="<?php echo $characterPicture; ?>" height="100" width="100"></p>
+
 <?php echo $characterName; ?><br />
 Classe: <?php echo $characterRaceName; ?><br />
 

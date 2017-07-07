@@ -46,6 +46,7 @@ if (isset($_POST['itemId'])
                 {
                     $equipmentId = stripslashes($equipmentInventory['itemId']);
                     $equipmentRaceId = stripslashes($equipmentInventory['itemRaceId']);
+                    $equipmentPicture = stripslashes($equipmentInventory['itemPicture']);
                     $equipmentType = stripslashes($equipmentInventory['itemType']);
                     $equipmentLevel = stripslashes($equipmentInventory['itemLevel']);
                     $equipmentLevelRequired = stripslashes($equipmentInventory['itemLevelRequired']);
@@ -82,6 +83,8 @@ if (isset($_POST['itemId'])
                         $equipmentRaceName = "Toutes les classes";
                     }
                     ?>
+                    
+                    <p><img src="<?php echo $equipmentPicture; ?>" height="100" width="100"></p>
                     
                     <table class="table">
                         <tr>

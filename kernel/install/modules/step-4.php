@@ -178,7 +178,7 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         '',
                         :accountId,
                         :characterRaceId,
-                        'http://localhost/character.png',
+                        '../../img/empty.png',
                         :characterName,
                         '1',
                         :characterSex,

@@ -36,6 +36,7 @@ if ($battleRow == 1)
         while ($opponent = $opponentQuery->fetch())
         {
             $opponentId = stripslashes($opponent['monsterId']);
+            $opponentPicture = stripslashes($opponent['monsterPicture']);
             $opponentName = stripslashes($opponent['monsterName']);
             $opponentLevel = stripslashes($opponent['monsterLevel']);
             $opponentHp = stripslashes($opponent['monsterHp']);
@@ -63,6 +64,7 @@ if ($battleRow == 1)
         while ($opponent = $opponentQuery->fetch())
         {
             $opponentId = stripslashes($opponent['characterId']);
+            $opponentPicture = "http://localhost/opponent.png";
             $opponentName = stripslashes($opponent['characterName']);
             $opponentLevel = stripslashes($opponent['characterLevel']);
             $opponentHp = stripslashes($opponent['characterHpTotal']);

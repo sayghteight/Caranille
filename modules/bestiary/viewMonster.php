@@ -42,6 +42,7 @@ if (isset($_POST['monsterId'])
             while ($monster = $monsterQuery->fetch())
             {
                 $monsterId = stripslashes($monster['monsterId']);
+                $monsterPicture = stripslashes($monster['monsterPicture']);
                 $monsterName = stripslashes($monster['monsterName']);
                 $monsterDescription = stripslashes($monster['monsterDescription']);
                 $monsterLevel = stripslashes($monster['monsterLevel']);
@@ -57,6 +58,8 @@ if (isset($_POST['monsterId'])
                 $monsterExperience = stripslashes($monster['monsterExperience']);
             }
             ?>
+            
+            <p><img src="<?php echo $monsterPicture; ?>" height="100" width="100"></p>
             
             <table class="table">
                 <tr>
