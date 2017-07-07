@@ -6,12 +6,18 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); }
 ?>
 
-Pseudo: <?php echo $accountPseudo; ?><br />
+<?php echo $accountPseudo; ?><br />
 
 <hr>
 
 Dernière connexion : <?php echo strftime('%d-%m-%Y - %H:%M:%S',strtotime($accountLastConnection)); ?><br />
 Dernière action : <?php echo strftime('%d-%m-%Y - %H:%M:%S',strtotime($accountLastAction)); ?><br />
 Accès : <?php echo $accountAccess; ?><br />
+
+<hr>
+
+<form method="POST" action="changePassword.php">
+    <input type="submit" name="changePassword" class="btn btn-default form-control" value="Changer mot de passe"><br>
+</form>
 
 <?php require_once("../../html/footer.php"); ?>
