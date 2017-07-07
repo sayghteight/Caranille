@@ -9,30 +9,36 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 //Si l'utilisateur à cliqué sur le bouton finalEdit
 if (isset($_POST['adminGameName'])
 && isset($_POST['adminGamePresentation'])
+&& isset($_POST['adminGameExperience'])
 && isset($_POST['adminGameSkillPoint'])
 && isset($_POST['adminGameAccess'])
 && isset($_POST['edit']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
-    if (ctype_digit($_POST['adminGameSkillPoint'])
+    if (ctype_digit($_POST['adminGameExperience'])
+    && ctype_digit($_POST['adminGameSkillPoint'])
+    && $_POST['adminGameExperience'] > 0
     && $_POST['adminGameSkillPoint'] >= 0)
     {
         //On récupère les informations du formulaire
         $adminGameName = htmlspecialchars(addslashes($_POST['adminGameName']));
         $adminGamePresentation = htmlspecialchars(addslashes($_POST['adminGamePresentation']));
+        $adminGameExperience = htmlspecialchars(addslashes($_POST['adminGameExperience']));
         $adminGameSkillPoint = htmlspecialchars(addslashes($_POST['adminGameSkillPoint']));
         $adminGameAccess = htmlspecialchars(addslashes($_POST['adminGameAccess']));
         
-        //On met à jour l'objet dans la base de donnée
+        //On met à jour la configuration dans la base de donnée
         $updateConfiguration = $bdd->prepare('UPDATE car_configuration
         SET configurationGameName = :adminGameName,
         configurationPresentation = :adminGamePresentation,
+        configurationExperience = :adminGameExperience,
         configurationSkillPoint = :adminGameSkillPoint,
         configurationAccess = :adminGameAccess');
 
         $updateConfiguration->execute([
         'adminGameName' => $adminGameName,
         'adminGamePresentation' => $adminGamePresentation,
+        'adminGameExperience' => $adminGameExperience,
         'adminGameSkillPoint' => $adminGameSkillPoint,
         'adminGameAccess' => $adminGameAccess]);
         $updateConfiguration->closeCursor();

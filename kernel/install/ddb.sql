@@ -164,6 +164,7 @@ CREATE TABLE IF NOT EXISTS `car_configuration`
   `configurationId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `configurationGameName` varchar(30) NOT NULL,
   `configurationPresentation` text NOT NULL,
+  `configurationExperience` int(11) NOT NULL,
   `configurationSkillPoint` int(11) NOT NULL,
   `configurationAccess` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -303,8 +304,8 @@ INSERT INTO `car_chapters` (`chapterId`, `chapterMonsterId`, `chapterTitle`, `ch
 -- Contenu de la table `car_configuration`
 --
 
-INSERT INTO `car_configuration` (`configurationId`, `configurationGameName`, `configurationPresentation`, `configurationSkillPoint`, `configurationAccess`) VALUES
-(1, 'Caranille', 'MMORPG Officiel de Caranille', 4, 'Opened');
+INSERT INTO `car_configuration` (`configurationId`, `configurationGameName`, `configurationPresentation`, `configurationExperience`, `configurationSkillPoint`, `configurationAccess`) VALUES
+(1, 'Caranille', 'MMORPG Officiel de Caranille', 500, 4, 'Opened');
 
 --
 -- Contenu de la table `car_items`

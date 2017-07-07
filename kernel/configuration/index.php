@@ -8,7 +8,8 @@ while ($configuration = $configurationQuery->fetch())
     //On récupère les informations du jeu
     $gameId = stripslashes($configuration['configurationId']);
     $gameName = stripslashes($configuration['configurationGameName']);
-    $gamePresentation = stripslashes($configuration['configurationPresentation']);   
+    $gamePresentation = stripslashes($configuration['configurationPresentation']);  
+    $gameExperience = stripslashes($configuration['configurationExperience']);
     $gameSkillPoint = stripslashes($configuration['configurationSkillPoint']);
     $gameAccess = stripslashes($configuration['configurationAccess']);
 }

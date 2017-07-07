@@ -19,27 +19,24 @@ if ($townRow >= 1)
 {
     ?>
     
-    <form method="POST" action="chooseTown.php">
-        
-            <label for="raceList" class="col-2 col-form-label">Liste des villes disponible</label>
-            <select class="form-control" id="townList" name="townId">
-                
-                <?php
-                //On fait une boucle sur tous les résultats
-                while ($townList = $townQuery->fetch())
-                {
-                    //on récupère les valeurs de chaque villes qu'on va ensuite mettre dans le menu déroulant
-                    $townId = stripslashes($townList['townId']); 
-                    $townName = stripslashes($townList['townName']);
-                    ?>
-                        <option value="<?php echo $townId ?>"><?php echo $townName ?></option>
-                    <?php
-                }
-                $townQuery->closeCursor();
+    <form method="POST" action="chooseTown.php"><div class="form-group">
+        Liste des villes disponible <select name="townId" class="form-control">
+            
+            <?php
+            //On fait une boucle sur tous les résultats
+            while ($townList = $townQuery->fetch())
+            {
+                //on récupère les valeurs de chaque villes qu'on va ensuite mettre dans le menu déroulant
+                $townId = stripslashes($townList['townId']); 
+                $townName = stripslashes($townList['townName']);
                 ?>
-                
-            </select>
-        
+                    <option value="<?php echo $townId ?>"><?php echo $townName ?></option>
+                <?php
+            }
+            $townQuery->closeCursor();
+            ?>
+            
+        </select>
         <input type="submit" name="enter" class="btn btn-default form-control" value="Entrer dans la ville">
     </form>
     

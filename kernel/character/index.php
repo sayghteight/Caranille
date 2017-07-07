@@ -98,9 +98,6 @@ while ($race = $raceQuery->fetch())
 }
 $raceQuery->closeCursor();
 
-//Base d'experience multiple du niveau pour obtenir le montant d'experience nécessaire pour la monté d'un niveau
-$levelBaseExperience = 500;
-
 //Valeurs des statistiques qui seront ajouté à la monté d'un niveau
 $hPByLevel = $raceHpBonus;
 $mPByLevel = $raceMpBonus;
@@ -113,8 +110,8 @@ $wisdomByLevel = $raceWisdomBonus;
 
 //Valeur des points de compétences obtenu à la monté d'un niveau ($gameSkillPoint = kernel/configuration/index.php)
 $skillPointsByLevel = $gameSkillPoint;
-$experienceLevel = $characterLevel * $levelBaseExperience;
-$experienceRemaining = $characterLevel * $levelBaseExperience - $characterExperience;
+$experienceLevel = $characterLevel * $gameExperience;
+$experienceRemaining = $characterLevel * $gameExperience - $characterExperience;
 
 //Si le personnage à suffisament d'experience pour la monté d'un niveau
 if ($characterExperience >= $experienceLevel)
