@@ -88,7 +88,7 @@ if (isset($_POST['accountPseudo'])
                 //Si le joueur n'est pas administrateur on lui refuse l'accès
                 else
                 {
-                    echo "Le jeu est actuellement fermé au publique, merci de revenir plus tard";
+                    echo "Une maintenance est actuellement en cours, merci de réessayer plus tard.";
                 }
             }
         }
