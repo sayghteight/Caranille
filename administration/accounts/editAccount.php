@@ -40,6 +40,7 @@ if (isset($_POST['adminAccountId'])
             $characterQuery = $bdd->prepare("SELECT * FROM car_characters
             WHERE characterAccountId = ?");
             $characterQuery->execute([$adminAccountId]);
+            
             while ($character = $characterQuery->fetch())
             {
                 //On récupère les informations du personnage

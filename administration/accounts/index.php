@@ -8,10 +8,8 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 ?>
 
 <form method="POST" action="manageAccount.php">
-    
-        <label for="equipmentList" class="col-2 col-form-label">Liste des joueurs</label>
-        <select class="form-control" id="adminAccountId" name="adminAccountId">
-            
+    Liste des joueurs <select name="adminAccountId" class="form-control">
+        
         <?php
         //On fait une recherche dans la base de donnée de tous les comptes et personnages
         $accountQuery = $bdd->query("SELECT * FROM car_accounts, car_characters
@@ -28,9 +26,8 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
         }
         $accountQuery->closeCursor();
         ?>
-        
-        </select>
     
+    </select>
     <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer le compte">
 </form>
 

@@ -14,6 +14,7 @@ require_once("../../kernel/battle/index.php");
 //On vérifie si le personnage est actuellement dans une ville. Si c'est le cas on récupère toutes les informations de la ville
 require_once("../../kernel/town/index.php");
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -71,6 +72,13 @@ require_once("../../kernel/town/index.php");
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Communication<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="../../administration/news/index.php">News</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Offrir<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="../../administration/offerExperience/index.php">Expérience</a></li>
+                                <li><a href="../../administration/offerGold/index.php">Pièce(s) d'or</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
