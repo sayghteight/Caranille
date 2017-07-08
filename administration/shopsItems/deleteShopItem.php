@@ -21,7 +21,7 @@ if (isset($_POST['adminShopItemShopId'])
         $adminShopItemShopId = htmlspecialchars(addslashes($_POST['adminShopItemShopId']));
         $adminShopItemItemId = htmlspecialchars(addslashes($_POST['adminShopItemItemId']));
 
-        //On fait une requête pour vérifier si le magasin choisi existe
+        //On fait une requête pour vérifier si le magasin choisit existe
         $shopQuery = $bdd->prepare('SELECT * FROM car_shops 
         WHERE shopId = ?');
         $shopQuery->execute([$adminShopItemShopId]);
@@ -30,7 +30,7 @@ if (isset($_POST['adminShopItemShopId'])
         //Si le magasin existe
         if ($shopRow == 1) 
         {
-            //On fait une requête pour vérifier si l'objet choisi existe
+            //On fait une requête pour vérifier si l'objet choisit existe
             $itemQuery = $bdd->prepare('SELECT * FROM car_items 
             WHERE itemId = ?');
             $itemQuery->execute([$adminShopItemItemId]);

@@ -17,7 +17,7 @@ if (isset($_POST['adminShopId'])
         //On récupère l'id du formulaire précédent
         $adminShopId = htmlspecialchars(addslashes($_POST['adminShopId']));
 
-        //On fait une requête pour vérifier si le magasin choisi existe
+        //On fait une requête pour vérifier si le magasin choisit existe
         $shopQuery = $bdd->prepare('SELECT * FROM car_shops 
         WHERE shopId = ?');
         $shopQuery->execute([$adminShopId]);

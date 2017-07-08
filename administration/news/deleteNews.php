@@ -26,14 +26,18 @@ if (isset($_POST['adminNewsId'])
         //Si la news existe
         if ($newsRow == 1) 
         {
-            //On récupère l'information de la news
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($news = $newsQuery->fetch())
             {
+                $adminNewsPicture = stripslashes($news['newsPicture']);
                 $adminNewstitle = stripslashes($news['newsTitle']);
             }
             ?>
+
+            <p><img src="<?php echo $adminNewsPicture; ?>" height="100" width="100"></p>
             
-            <p>ATTENTION</p> 
+            <p>ATTENTION</p>
+
             Vous êtes sur le point de retirer la news <em><?php echo $adminNewstitle ?></em><br />
             confirmez-vous ?
 

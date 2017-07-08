@@ -30,7 +30,7 @@ if (isset($_POST['adminTownShopTownId'])
         //Si la ville existe
         if ($townRow == 1) 
         {
-            //On fait une requête pour vérifier si le magasin choisi existe
+            //On fait une requête pour vérifier si le magasin choisit existe
             $shopQuery = $bdd->prepare('SELECT * FROM car_shops 
             WHERE shopId = ?');
             $shopQuery->execute([$adminTownShopShopId]);

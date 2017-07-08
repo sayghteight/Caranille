@@ -17,7 +17,7 @@ if (isset($_POST['adminMonsterId'])
         //On récupère l'id du formulaire précédent
         $adminMonsterId = htmlspecialchars(addslashes($_POST['adminMonsterId']));
 
-        //On fait une requête pour vérifier si le monstre choisi existe
+        //On fait une requête pour vérifier si le monstre choisit existe
         $monsterQuery = $bdd->prepare('SELECT * FROM car_monsters 
         WHERE monsterId = ?');
         $monsterQuery->execute([$adminMonsterId]);
@@ -31,12 +31,13 @@ if (isset($_POST['adminMonsterId'])
             WHERE monsterId = ?");
             $monsterQuery->execute([$adminMonsterId]);
             
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($monster = $monsterQuery->fetch())
             {
+                //On récupère le nom du monstre
                 $adminMonsterName = stripslashes($monster['monsterName']);
             }
             $monsterQuery->closeCursor();
-
             ?>
             
             Que souhaitez-vous faire du monstre <em><?php echo $adminMonsterName ?></em> ?

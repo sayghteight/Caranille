@@ -19,25 +19,24 @@ if ($itemRow > 0)
     ?>
     
     <form method="POST" action="viewItem.php">
-        
-            <label for="equipmentList" class="col-2 col-form-label">Liste des objets</label>
-            <select class="form-control" id="itemId" name="itemId">
+        Liste des objets : <select name="itemId" class="form-control">
                 
-                <?php
-                //on récupère les valeurs de chaque joueurs qu'on va ensuite mettre dans le menu déroulant
-                while ($item = $itemQuery->fetch())
-                {
-                    $itemId = stripslashes($item['itemId']); 
-                    $itemName = stripslashes($item['itemName']);
-                    ?>
-                        <option value="<?php echo $itemId ?>"><?php echo $itemName ?></option>
-                    <?php
-                }
-                $itemQuery->closeCursor();
+            <?php
+            //on récupère les valeurs de chaque joueurs qu'on va ensuite mettre dans le menu déroulant
+            while ($item = $itemQuery->fetch())
+            {
+                $itemId = stripslashes($item['itemId']); 
+                $itemName = stripslashes($item['itemName']);
                 ?>
+
+                    <option value="<?php echo $itemId ?>"><?php echo $itemName ?></option>
+                    
+                <?php
+            }
+            $itemQuery->closeCursor();
+            ?>
                 
-            </select>
-        
+        </select>
         <input type="submit" name="viewItem" class="btn btn-default form-control" value="Plus d'information">
     </form>
     

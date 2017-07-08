@@ -47,10 +47,10 @@ if (isset($_POST['townId'])
             echo "La ville choisie est invalide";
         }
     }
-    //Si la ville choisi n'est pas un nombre
+    //Si la ville choisit n'est pas un nombre
     else
     {
-         echo "La ville choisi est invalide";
+         echo "La ville choisit est invalide";
     }
 }
 //Si toutes les variables $_POST n'existent pas

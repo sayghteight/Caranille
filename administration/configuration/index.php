@@ -5,10 +5,11 @@ require_once("../html/header.php");
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
-        
+
+//On fait une requête dans la base de donnée pour récupérer les informations du jeu
 $configurationQuery = $bdd->query("SELECT * FROM car_configuration");
 
-//On fait une boucle pour récupérer toutes les information
+//On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
 while ($configuration = $configurationQuery->fetch())
 {
     //On récupère les informations du jeu
@@ -35,15 +36,19 @@ $configurationQuery->closeCursor();
         {
             case "Opened":
                 ?>
-                <option selected="selected" value="Opened">Ouvert</option>
-                <option value="Closed">Fermé</option>
+
+                    <option selected="selected" value="Opened">Ouvert</option>
+                    <option value="Closed">Fermé</option>
+
                 <?php
             break;
     
             case "Closed":
                 ?>
-                <option value="Opened">Ouvert</option>
-                <option selected="selected" value="Closed">Fermé</option>
+
+                    <option value="Opened">Ouvert</option>
+                    <option selected="selected" value="Closed">Fermé</option>
+
                 <?php
             break;
         }

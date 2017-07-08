@@ -17,7 +17,7 @@ if (isset($_POST['adminRaceId'])
         //On récupère l'id du formulaire précédent
         $adminRaceId = htmlspecialchars(addslashes($_POST['adminRaceId']));
 
-        //On fait une requête pour vérifier si la race choisi existe
+        //On fait une requête pour vérifier si la race choisit existe
         $raceQuery = $bdd->prepare('SELECT * FROM car_races 
         WHERE raceId = ?');
         $raceQuery->execute([$adminRaceId]);
@@ -26,9 +26,10 @@ if (isset($_POST['adminRaceId'])
         //Si la race existe
         if ($raceRow == 1) 
         {
-            //On récupère les informations de la race
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($race = $raceQuery->fetch())
             {
+                $adminRacePicture = stripslashes($race['racePicture']);
                 $adminRaceName = stripslashes($race['raceName']);
             }
             $raceQuery->closeCursor();
@@ -43,8 +44,11 @@ if (isset($_POST['adminRaceId'])
             if ($characterRaceRow == 0)
             {
                 ?>
+
+                <p><img src="<?php echo $adminRacePicture; ?>" height="100" width="100"></p>
                 
-                <p>ATTENTION</p> 
+                <p>ATTENTION</p>
+
                 Vous êtes sur le point de supprimer la classe <em><?php echo $adminRaceName ?></em><br />
                 confirmez-vous la suppression ?
     

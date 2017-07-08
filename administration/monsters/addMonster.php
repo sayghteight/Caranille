@@ -12,6 +12,7 @@ if (isset($_POST['add']))
     ?>
     
     <p>Informations du monstre</p>
+    
     <form method="POST" action="addMonsterEnd.php">
         Image : <input type="text" name="adminMonsterPicture" class="form-control" placeholder="Image" required>
         Nom : <input type="text" name="adminMonsterName" class="form-control" placeholder="Nom" required>

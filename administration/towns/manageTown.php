@@ -17,7 +17,7 @@ if (isset($_POST['adminTownId'])
         //On récupère l'id du formulaire précédent
         $adminTownId = htmlspecialchars(addslashes($_POST['adminTownId']));
 
-        //On fait une requête pour vérifier si l'objet choisi existe
+        //On fait une requête pour vérifier si l'objet choisit existe
         $townQuery = $bdd->prepare('SELECT * FROM car_towns 
         WHERE townId = ?');
         $townQuery->execute([$adminTownId]);

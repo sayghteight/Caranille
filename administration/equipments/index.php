@@ -23,24 +23,24 @@ if ($equipmentRow > 0)
     ?>
     
     <form method="POST" action="manageEquipment.php">
-        
-            <label for="equipmentList" class="col-2 col-form-label">Liste des équipements</label>
-            <select class="form-control" id="adminItemId" name="adminItemId">
+        Liste des équipements : <select name="adminItemId" class="form-control">
                 
-                <?php
-                while ($equipment = $equipmentQuery->fetch())
-                {
-                    $adminItemId = stripslashes($equipment['itemId']);
-                    $adminItemName = stripslashes($equipment['itemName']);?>
-                    ?>
-                        <option value="<?php echo $adminItemId ?>"><?php echo "$adminItemName"; ?></option>
-                    <?php
-                }
-                $equipmentQuery->closeCursor();
+            <?php
+            //On fait une boucle sur tous les résultats
+            while ($equipment = $equipmentQuery->fetch())
+            {
+                $adminItemId = stripslashes($equipment['itemId']);
+                $adminItemName = stripslashes($equipment['itemName']);
                 ?>
+
+                    <option value="<?php echo $adminItemId ?>"><?php echo "$adminItemName"; ?></option>
+
+                <?php
+            }
+            $equipmentQuery->closeCursor();
+            ?>
             
-            </select>
-        
+        </select>
         <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer l'équipement">
     </form>
     

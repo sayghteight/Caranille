@@ -12,12 +12,13 @@ if (isset($_POST['add']))
     ?>
     
     <p>Informations de la ville</p>
+
     <form method="POST" action="addTownEnd.php">
-        Image : <input type="mail" name="adminTownPicture" class="form-control" placeholder="Image" required>
+        Image : <input type="text" name="adminTownPicture" class="form-control" placeholder="Image" required>
         Nom : <input type="text" name="adminTownName" class="form-control" placeholder="Nom" required>
         Description : <br> <textarea class="form-control" name="adminTownDescription" id="adminTownDescription" rows="3"></textarea>
-        Prix de l'auberge : <input type="text" name="adminTownPriceInn" class="form-control" placeholder="HP Bonus" required>
-        Ville disponible au chapitre : <input type="text" name="adminTownChapter" class="form-control" placeholder="MP Bonus" required>
+        Prix de l'auberge : <input type="number" name="adminTownPriceInn" class="form-control" placeholder="HP Bonus" required>
+        Ville disponible au chapitre : <input type="number" name="adminTownChapter" class="form-control" placeholder="MP Bonus" required>
         <input name="finalAdd" class="btn btn-default form-control" type="submit" value="Ajouter">
     </form>
     

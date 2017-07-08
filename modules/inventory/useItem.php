@@ -61,10 +61,10 @@ if (isset($_POST['itemId'])
             echo "Erreur: Impossible d'utiliser un objet que vous ne possédez pas.";
         }
     }
-    //Si l'objet choisi n'est pas un nombre
+    //Si l'objet choisit n'est pas un nombre
     else
     {
-         echo "L'objet choisi est invalide";
+         echo "L'objet choisit est invalide";
     }
 }
 //Si toutes les variables $_POST n'existent pas

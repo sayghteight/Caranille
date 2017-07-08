@@ -323,10 +323,10 @@ if (isset($_POST['monsterId'])
         }
         $monsterBestiaryQuery->closeCursor();
     }
-    //Si le monstre choisi n'est pas un nombre
+    //Si le monstre choisit n'est pas un nombre
     else
     {
-         echo "Le monstre choisi est invalide";
+         echo "Le monstre choisit est invalide";
     }
 }
 //Si toutes les variables $_POST n'existent pas

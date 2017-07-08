@@ -18,23 +18,23 @@ if ($townRow > 0)
     ?>
     
     <form method="POST" action="manageTown.php">
-        
-            <label for="equipmentList" class="col-2 col-form-label">Liste des villes</label>
-            <select class="form-control" id="adminTownId" name="adminTownId">
-                
-                <?php
-                while ($town = $townQuery->fetch())
-                {
-                    $adminTownId = stripslashes($town['townId']);
-                    $adminTownName = stripslashes($town['townName']);?>
-                    ?>
-                        <option value="<?php echo $adminTownId ?>"><?php echo "$adminTownName"; ?></option>
-                    <?php
-                }
+        Liste des villes : <select name="adminTownId" class="form-control">
+
+            <?php
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+            while ($town = $townQuery->fetch())
+            {
+                $adminTownId = stripslashes($town['townId']);
+                $adminTownName = stripslashes($town['townName']);
                 ?>
-            
-            </select>
+
+                    <option value="<?php echo $adminTownId ?>"><?php echo "$adminTownName"; ?></option>
+
+                <?php
+            }
+            ?>
         
+        </select>
         <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer la ville">
     </form>
     

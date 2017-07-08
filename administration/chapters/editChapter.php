@@ -17,7 +17,7 @@ if (isset($_POST['adminChapterId'])
         //On récupère l'id du formulaire précédent
         $adminChapterId = htmlspecialchars(addslashes($_POST['adminChapterId']));
 
-        //On fait une requête pour vérifier si le chapitre choisi existe
+        //On fait une requête pour vérifier si le chapitre choisit existe
         $chapterQuery = $bdd->prepare('SELECT * FROM car_chapters 
         WHERE chapterId = ?');
         $chapterQuery->execute([$adminChapterId]);
@@ -53,8 +53,7 @@ if (isset($_POST['adminChapterId'])
 
             <p>Informations du chapitre</p>
             <form method="POST" action="editChapterEnd.php">
-                Monstre du chapitre <br> 
-                <select name="adminChapterMonsterId" class="form-control">
+                Monstre du chapitre <select name="adminChapterMonsterId" class="form-control">
                     <option selected="selected" value="<?php echo $adminMonsterId ?>"><?php echo $adminMonsterName ?>
                     
                     <?php
@@ -77,7 +76,7 @@ if (isset($_POST['adminChapterId'])
                             $adminMonsterName = stripslashes($monster['monsterName']);
                             ?>
                             
-                            <option value="<?php echo $adminMonsterId ?>"><?php echo $adminMonsterName ?></option>
+                                <option value="<?php echo $adminMonsterId ?>"><?php echo $adminMonsterName ?></option>
 
                             <?php
                         }

@@ -193,10 +193,10 @@ if (isset($_POST['itemId'])
             echo "Erreur: Vous ne possedez pas cet équipement";
         }
     }
-    //Si l'équipement choisi n'est pas un nombre
+    //Si l'équipement choisit n'est pas un nombre
     else
     {
-         echo "L'équipment choisi est invalide";
+         echo "L'équipment choisit est invalide";
     }
 }
 //Si toutes les variables $_POST n'existent pas

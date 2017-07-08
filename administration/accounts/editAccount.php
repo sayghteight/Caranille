@@ -17,7 +17,7 @@ if (isset($_POST['adminAccountId'])
         //On récupère l'id du formulaire précédent
         $adminAccountId = htmlspecialchars(addslashes($_POST['adminAccountId']));
 
-        //On fait une requête pour vérifier si le compte choisi existe
+        //On fait une requête pour vérifier si le compte choisit existe
         $accountQuery = $bdd->prepare('SELECT * FROM car_accounts 
         WHERE accountId = ?');
         $accountQuery->execute([$adminAccountId]);
@@ -26,7 +26,7 @@ if (isset($_POST['adminAccountId'])
         //Si le compte existe
         if ($account == 1) 
         {
-            //On récupères les informations du compte pour le formulaire ci-dessous
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($account = $accountQuery->fetch())
             {
                 //On récupère les informations du compte
@@ -41,12 +41,14 @@ if (isset($_POST['adminAccountId'])
             WHERE characterAccountId = ?");
             $characterQuery->execute([$adminAccountId]);
             
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($character = $characterQuery->fetch())
             {
                 //On récupère les informations du personnage
                 $adminCharacterId = stripslashes($character['characterId']);
                 $adminCharacterAccountId = stripslashes($character['characterAccountId']);
                 $adminCharacterRaceId = stripslashes($character['characterRaceId']);
+                $adminCharacterPicture = stripslashes($character['characterPicture']);
                 $adminCharacterName = stripslashes($character['characterName']);
                 $adminCharacterLevel = stripslashes($character['characterLevel']);
                 $adminCharacterSex = stripslashes($character['characterSex']);
@@ -117,9 +119,10 @@ if (isset($_POST['adminAccountId'])
             $raceQuery = $bdd->prepare("SELECT * FROM car_races
             WHERE raceId = ?");
             $raceQuery->execute([$adminCharacterRaceId]);
+
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($race = $raceQuery->fetch())
             {
-                //On récupère le nom de la classe
                 $adminRaceName = stripslashes($race['raceName']);
             }
             $raceQuery->closeCursor();
@@ -131,9 +134,10 @@ if (isset($_POST['adminAccountId'])
                 $townQuery = $bdd->prepare("SELECT * FROM car_towns
                 WHERE townId = ?");
                 $townQuery->execute([$adminCharacterTownId]);
+
+                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                 while ($town = $townQuery->fetch())
                 {
-                    //On récupère le nom de la ville
                     $adminTownName = stripslashes($town['townName']);
                 }
                 $townQuery->closeCursor();
@@ -141,7 +145,6 @@ if (isset($_POST['adminAccountId'])
             //Si adminCharacterTownId à un Id à zéro c'est que le joueur est sur la carte du monde
             else
             {
-                //On affiche Carte du monde
                 $adminTownName = "Carte du monde";
             }
 
@@ -152,7 +155,7 @@ if (isset($_POST['adminAccountId'])
             AND inventoryCharacterId = ?");
             $equipmentEquipedQuery->execute([$adminCharacterId]);
 
-            //On fait une boucle sur les résultats et on vérifie à chaque fois de quel type d'équipement il s'agit
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations et on vérifi le type d'équipement
             while ($equipment = $equipmentEquipedQuery->fetch())
             {
                 switch ($equipment['itemType'])
@@ -264,6 +267,7 @@ if (isset($_POST['adminAccountId'])
             ?>
 
             <p>Informations du compte</p>
+            
             <form method="POST" action="editAccountEnd.php">
                 Pseudo : <input type="text" name="adminAccountPseudo" class="form-control" placeholder="Pseudo" value="<?php echo $adminAccountPseudo; ?>" required autofocus>
                 Email : <input type="mail" name="adminAccountEmail" class="form-control" placeholder="Email" value="<?php echo $adminAccountEmail; ?>" required>
@@ -311,7 +315,10 @@ if (isset($_POST['adminAccountId'])
 
             <hr>
 
+            <p><img src="<?php echo $adminCharacterPicture; ?>" height="100" width="100"></p>
+
             <p>Informations du personnage</p>
+            
             Classe : <?php echo $adminRaceName; ?><br />
             Nom du personnage : <?php echo $adminCharacterName; ?><br />
             Niveau du personnage : <?php echo $adminCharacterLevel; ?><br />

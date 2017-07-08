@@ -17,7 +17,7 @@ if (isset($_POST['adminItemId'])
         //On récupère l'id du formulaire précédent
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
         
-        //On fait une requête pour vérifier si l'équipement choisi existe
+        //On fait une requête pour vérifier si l'équipement choisit existe
         $itemQuery = $bdd->prepare('SELECT * FROM car_items 
         WHERE itemId = ?');
         $itemQuery->execute([$adminItemId]);
@@ -37,7 +37,7 @@ if (isset($_POST['adminItemId'])
             //Si des joueurs en sont équippé
             if ($itemRow > 0) 
             {
-                //On va mettre leur compte à jour
+                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                 while ($item = $itemQuery->fetch())
                 {   
                     //On récupère l'id du personnage
@@ -77,7 +77,7 @@ if (isset($_POST['adminItemId'])
                     AND inventoryCharacterId = ?");
                     $equipmentEquipedQuery->execute([$adminItemId, $adminCharacterId]);
 
-                    //On fait une boucle sur les résultats et on additionne les bonus de tous les équipements actuellement équipé
+                    ////On fait une boucle sur le ou les résultats obtenu pour récupérer les informations et on additionne les bonus de tous les équipements actuellement équipé
                     while ($equipment = $equipmentEquipedQuery->fetch())
                     {
                         $hpBonus = $hpBonus + stripslashes($equipment['itemHpEffect']);

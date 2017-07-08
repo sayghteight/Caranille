@@ -30,16 +30,16 @@ if (isset($_POST['adminTownMonsterTownId'])
         //Si la ville existe
         if ($townRow == 1) 
         {
-            //On fait une requête pour vérifier si le monstre choisi existe
+            //On fait une requête pour vérifier si le monstre choisit existe
             $monsterQuery = $bdd->prepare('SELECT * FROM car_monsters 
             WHERE monsterId = ?');
             $monsterQuery->execute([$adminTownMonsterMonsterId]);
             $monsterRow = $monsterQuery->rowCount();
 
-            //Si l'équipement existe
+            //Si le monstre choisit  exite
             if ($monsterRow == 1) 
             {
-                //On fait une requête pour vérifier si le monstre choisi existe bien dans la ville
+                //On fait une requête pour vérifier si le monstre choisit  existe bien dans la ville
                 $monsterQuery = $bdd->prepare('SELECT * FROM car_towns_monsters 
                 WHERE townMonsterTownId = ?
                 AND townMonsterMonsterId = ?');

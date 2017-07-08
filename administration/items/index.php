@@ -19,24 +19,24 @@ if ($itemRow > 0)
     ?>
     
     <form method="POST" action="manageItem.php">
-        
-            <label for="equipmentList" class="col-2 col-form-label">Liste des objets</label>
-            <select class="form-control" id="adminItemId" name="adminItemId">
+        Liste des objets : <select name="adminItemId" class="form-control">
                 
-                <?php
-                while ($item = $itemQuery->fetch())
-                {
-                    $adminItemId = stripslashes($item['itemId']);
-                    $adminItemName = stripslashes($item['itemName']);?>
-                    ?>
-                        <option value="<?php echo $adminItemId ?>"><?php echo "$adminItemName"; ?></option>
-                    <?php
-                }
-                $itemQuery->closeCursor();
+            <?php
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+            while ($item = $itemQuery->fetch())
+            {
+                $adminItemId = stripslashes($item['itemId']);
+                $adminItemName = stripslashes($item['itemName']);
                 ?>
+
+                    <option value="<?php echo $adminItemId ?>"><?php echo "$adminItemName"; ?></option>
+                    
+                <?php
+            }
+            $itemQuery->closeCursor();
+            ?>
                 
-            </select>
-        
+        </select>
         <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer l'objet">
     </form>
     

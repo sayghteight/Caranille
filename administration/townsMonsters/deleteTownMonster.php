@@ -30,12 +30,13 @@ if (isset($_POST['adminTownMonsterTownId'])
         //Si la ville existe
         if ($townRow == 1) 
         {
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($town = $townQuery->fetch())
             {
                 $adminTownMonsterTownName = stripslashes($town['townName']);
             }
     
-            //On fait une requête pour vérifier si le monstre choisi existe
+            //On fait une requête pour vérifier si le monstre choisit existe
             $monsterQuery = $bdd->prepare('SELECT * FROM car_monsters 
             WHERE monsterId = ?');
             $monsterQuery->execute([$adminTownMonsterMonsterId]);
@@ -44,12 +45,13 @@ if (isset($_POST['adminTownMonsterTownId'])
             //Si le monstre existe
             if ($monsterRow == 1) 
             {
+                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                 while ($monster = $monsterQuery->fetch())
                 {
                     $adminTownMonsterMonsterName = stripslashes($monster['monsterName']);
                 }
 
-                //On fait une requête pour vérifier si le monstre choisi existe bien dans la ville
+                //On fait une requête pour vérifier si le monstre choisit existe bien dans la ville
                 $monsterTownQuery = $bdd->prepare('SELECT * FROM car_towns_monsters 
                 WHERE townMonsterTownId = ?
                 AND townMonsterMonsterId = ?');
@@ -62,6 +64,7 @@ if (isset($_POST['adminTownMonsterTownId'])
                     ?>
                     
                     <p>ATTENTION</p> 
+                    
                     Vous êtes sur le point de retirer le monstre <em><?php echo $adminTownMonsterMonsterName ?></em> de la ville <em><?php echo $adminTownMonsterTownName ?></em><br />
                     confirmez-vous ?
 

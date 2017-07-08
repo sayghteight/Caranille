@@ -17,7 +17,7 @@ if (isset($_POST['adminTownId'])
         //On récupère l'id du formulaire précédent
         $adminTownId = htmlspecialchars(addslashes($_POST['adminTownId']));
 
-        //On fait une requête pour vérifier si la ville choisi existe
+        //On fait une requête pour vérifier si la ville choisit existe
         $townQuery = $bdd->prepare('SELECT * FROM car_towns 
         WHERE townId = ?');
         $townQuery->execute([$adminTownId]);
@@ -26,10 +26,9 @@ if (isset($_POST['adminTownId'])
         //Si la ville existe
         if ($townRow == 1) 
         {
-            //On fait une recherche dans la base de donnée de la ville
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($town = $townQuery->fetch())
             {
-                //On récupère les informations de la ville
                 $adminTownPicture = stripslashes($town['townPicture']);
                 $adminTownName = stripslashes($town['townName']);
                 $adminTownDescription = stripslashes($town['townDescription']);
@@ -38,7 +37,10 @@ if (isset($_POST['adminTownId'])
             }
             ?>
 
+            <p><img src="<?php echo $adminTownPicture; ?>" height="100" width="100"></p>
+
             <p>Informations de la ville</p>
+            
             <form method="POST" action="editTownEnd.php">
                 Image : <input type="text" name="adminTownPicture" class="form-control" placeholder="Image" value="<?php echo $adminTownPicture; ?>" required>
                 Nom : <input type="text" name="adminTownName" class="form-control" placeholder="Nom" value="<?php echo $adminTownName; ?>" required>

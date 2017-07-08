@@ -17,7 +17,7 @@ if (isset($_POST['adminRaceId'])
         //On récupère l'id de la race
         $adminRaceId = htmlspecialchars(addslashes($_POST['adminRaceId']));
 
-        //On fait une requête pour vérifier si le compte choisi existe
+        //On fait une requête pour vérifier si le compte choisit existe
         $raceQuery = $bdd->prepare('SELECT * FROM car_races 
         WHERE raceId = ?');
         $raceQuery->execute([$adminRaceId]);
@@ -26,12 +26,11 @@ if (isset($_POST['adminRaceId'])
         //Si la race existe
         if ($raceRow == 1) 
         {
-            //On Récupère le nom de la race
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($race = $raceQuery->fetch())
             {
                 $adminRaceName = stripslashes($race['raceName']);
             }
-
             ?>
             
             Que souhaitez-vous faire de la classe <em><?php echo $adminRaceName ?></em> ?

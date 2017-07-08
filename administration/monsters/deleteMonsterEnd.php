@@ -17,7 +17,7 @@ if (isset($_POST['adminMonsterId'])
         //On récupère l'id du formulaire précédent
         $adminMonsterId = htmlspecialchars(addslashes($_POST['adminMonsterId']));
 
-        //On fait une requête pour vérifier si le monstre choisi existe
+        //On fait une requête pour vérifier si le monstre choisit existe
         $monsterQuery = $bdd->prepare('SELECT * FROM car_monsters 
         WHERE monsterId = ?');
         $monsterQuery->execute([$adminMonsterId]);
@@ -78,6 +78,7 @@ if (isset($_POST['adminMonsterId'])
                 ?>
                 
                 Impossible de supprimer ce monstre car il est attribué à un chapitre.
+                
                 <form method="POST" action="manageMonster.php">
                     <input type="hidden" name="adminMonsterId" value="<?= $adminMonsterId ?>">
                     <input type="submit" class="btn btn-default form-control" name="manage" value="Retour">

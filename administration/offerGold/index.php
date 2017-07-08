@@ -16,12 +16,15 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
         $characterQuery = $bdd->query("SELECT * FROM car_characters
         ORDER by characterName");
         
+        //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
         while ($character = $characterQuery->fetch())
         {
             $adminCharacterId = stripslashes($character['characterId']);
             $adminCharacterName =  stripslashes($character['characterName']); ?>
             ?>
+
                 <option value="<?php echo $adminCharacterId ?>"><?php echo "$adminCharacterName"; ?></option>
+
             <?php
         }
         $characterQuery->closeCursor();

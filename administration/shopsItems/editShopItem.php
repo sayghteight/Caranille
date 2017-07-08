@@ -27,7 +27,7 @@ if (isset($_POST['adminShopItemShopId'])
         //Si la réduction est entre 0 et 100 on ajoute l'objet
         if ($adminShopItemDiscount >= 0 && $adminShopItemDiscount <= 100)
         {
-            //On fait une requête pour vérifier si le magasin choisi existe
+            //On fait une requête pour vérifier si le magasin choisit existe
             $shopQuery = $bdd->prepare('SELECT * FROM car_shops 
             WHERE shopId = ?');
             $shopQuery->execute([$adminShopItemShopId]);
@@ -36,7 +36,7 @@ if (isset($_POST['adminShopItemShopId'])
             //Si le magasin existe
             if ($shopRow == 1) 
             {
-                //On fait une requête pour vérifier si l'objet choisi existe
+                //On fait une requête pour vérifier si l'objet choisit existe
                 $itemQuery = $bdd->prepare('SELECT * FROM car_items 
                 WHERE itemId = ?');
                 $itemQuery->execute([$adminShopItemItemId]);
@@ -80,10 +80,10 @@ if (isset($_POST['adminShopItemShopId'])
                     //Si l'objet est déjà dans ce magasin
                     else
                     {
-                        //Si le joueur a essayé de mettre un objet qui est déjà dans ce magasin on lui donne la possibilité de revenir en arrière
                         ?>
                         
                         Erreur: Cet objet est déjà dans ce magasin
+
                         <form method="POST" action="manageShopItem.php">
                             <input type="hidden" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
                             <input type="submit" class="btn btn-default form-control" name="manage" value="Retour">
@@ -113,6 +113,7 @@ if (isset($_POST['adminShopItemShopId'])
             ?>
             
             Erreur: Le taux d'obtention doit être de 0 à 100
+            
             <form method="POST" action="manageShopItem.php">
                 <input type="hidden" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
                 <input type="submit" class="btn btn-default form-control" name="manage" value="Continuer">

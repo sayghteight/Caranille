@@ -17,7 +17,7 @@ if (isset($_POST['adminItemId'])
         //On récupère l'id du formulaire précédent
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
 
-        //On fait une requête pour vérifier si l'objet choisi existe
+        //On fait une requête pour vérifier si l'objet choisit existe
         $itemQuery = $bdd->prepare('SELECT * FROM car_items 
         WHERE itemId = ?');
         $itemQuery->execute([$adminItemId]);
@@ -26,7 +26,7 @@ if (isset($_POST['adminItemId'])
         //Si l'objet existe
         if ($itemRow == 1) 
         {
-            //On fait une recherche dans la base de donnée de tous les objets
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($item = $itemQuery->fetch())
             {
                 $adminItemName = stripslashes($item['itemName']);

@@ -27,7 +27,7 @@ if (isset($_POST['adminCharacterId'])
             $characterQuery = $bdd->query("SELECT * FROM car_characters
             ORDER by characterName");
             
-            //On fait une boucle sur chaque personnage
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($character = $characterQuery->fetch())
             {
                 //On récupère l'id et le nom du personnage
@@ -72,9 +72,9 @@ if (isset($_POST['adminCharacterId'])
             //Si le personnage existe
             if ($characterRow == 1)
             {
+                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                 while ($character = $characterQuery->fetch())
                 {
-                    //On récupère les informations du personnage
                     $adminCharacterName = stripslashes($character['characterName']);
                 }
                 

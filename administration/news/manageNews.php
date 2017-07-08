@@ -26,7 +26,7 @@ if (isset($_POST['adminNewsId'])
         //Si la news existe
         if ($newsRow == 1) 
         {
-            //On fait une recherche dans la base de donnée de toutes les news
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($news = $newsQuery->fetch())
             {
                 $adminNewsTitle = stripslashes($news['newsTitle']);

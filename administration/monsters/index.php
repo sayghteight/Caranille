@@ -17,24 +17,24 @@ if ($monsterRow > 0)
 {
     ?>
     <form method="POST" action="manageMonster.php">
-        
-            <label for="equipmentList" class="col-2 col-form-label">Liste des monstres</label>
-            <select class="form-control" id="adminMonsterId" name="adminMonsterId">
-                
-                <?php
-                while ($monster = $monsterQuery->fetch())
-                {
-                    $adminMonsterId = stripslashes($monster['monsterId']);
-                    $adminMonsterName = stripslashes($monster['monsterName']);?>
-                    ?>
-                        <option value="<?php echo $adminMonsterId ?>"><?php echo "$adminMonsterName"; ?></option>
-                    <?php
-                }
-                $monsterQuery->closeCursor();
+        Liste des monstres : <select name="adminMonsterId" class="form-control">
+            
+            <?php
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+            while ($monster = $monsterQuery->fetch())
+            {
+                $adminMonsterId = stripslashes($monster['monsterId']);
+                $adminMonsterName = stripslashes($monster['monsterName']);
                 ?>
-                
-            </select>
-        
+
+                    <option value="<?php echo $adminMonsterId ?>"><?php echo "$adminMonsterName"; ?></option>
+                    
+                <?php
+            }
+            $monsterQuery->closeCursor();
+            ?>
+            
+        </select>
         <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer le monstre">
     </form>
     

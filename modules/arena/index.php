@@ -20,25 +20,24 @@ if ($opponentRow > 0)
     ?>
     
     <form method="POST" action="selectedOpponent.php">
-        
-            <label for="characterList" class="col-2 col-form-label">Liste des joueurs</label>
-            <select class="form-control" id="opponentCharacterId" name="opponentCharacterId">
+        Liste des joueurs : <select name="opponentCharacterId" class="form-control">
                 
-                <?php
-                //On fait une boucle sur tous les résultats
-                while ($opponent = $opponentQuery->fetch())
-                {
-                    //on récupère les valeurs de chaque joueurs qu'on va ensuite mettre dans le menu déroulant
-                    $characterId = stripslashes($opponent['characterId']); 
-                    $characterName = stripslashes($opponent['characterName']);
-                    ?>
-                        <option value="<?php echo $characterId ?>"><?php echo $characterName ?></option>
-                    <?php
-                }
+            <?php
+            //On fait une boucle sur tous les résultats
+            while ($opponent = $opponentQuery->fetch())
+            {
+                //on récupère les valeurs de chaque joueurs qu'on va ensuite mettre dans le menu déroulant
+                $characterId = stripslashes($opponent['characterId']); 
+                $characterName = stripslashes($opponent['characterName']);
                 ?>
+
+                    <option value="<?php echo $characterId ?>"><?php echo $characterName ?></option>
+                    
+                <?php
+            }
+            ?>
             
-            </select>
-        
+        </select>
         <input type="submit" name="enter" class="btn btn-default form-control" value="Lancer le combat">
     </form>
     

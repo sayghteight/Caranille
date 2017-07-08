@@ -26,7 +26,7 @@ if (isset($_POST['adminNewsId'])
         //Si la news existe
         if ($newsRow == 1) 
         {
-            //On fait une boucle pour récupérer toutes les informations
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($news = $newsQuery->fetch())
             {
                 //On récupère les informations de la news
@@ -37,7 +37,10 @@ if (isset($_POST['adminNewsId'])
             }
             ?>
 
+            <p><img src="<?php echo $adminNewsPicture; ?>" height="100" width="100"></p>
+
             <p>Informations de la news</p>
+
             <form method="POST" action="editNewsEnd.php">
                 Image : <input type="text" name="adminNewsPicture" class="form-control" placeholder="Image" value="<?php echo $adminNewsPicture ?>" required>
                 Titre : <input type="text" name="adminNewsTitle" class="form-control" placeholder="Titre" value="<?php echo $adminNewsTitle ?>"required>
