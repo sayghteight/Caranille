@@ -35,7 +35,7 @@ if (isset($_POST['adminTownShopTownId'])
                 $adminTownShopTownName = stripslashes($town['townName']);
             }
     
-            //On fait une requête pour vérifier si le magasin choisi existe
+            //On fait une requête pour vérifier si le magasin choisit existe
             $shopQuery = $bdd->prepare('SELECT * FROM car_shops 
             WHERE shopId = ?');
             $shopQuery->execute([$adminTownShopShopId]);
@@ -61,7 +61,8 @@ if (isset($_POST['adminTownShopTownId'])
                 {
                     ?>
                     
-                    <p>ATTENTION</p> 
+                    <p>ATTENTION</p>
+                    
                     Vous êtes sur le point de retirer le magasin <em><?php echo $adminTownShopShopName ?></em> de la ville <em><?php echo $adminTownShopTownName ?></em><br />
                     confirmez-vous ?
 

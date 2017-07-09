@@ -17,7 +17,7 @@ if (isset($_POST['adminTownMonsterTownId'])
         //On récupère l'id du formulaire précédent
         $adminTownMonsterTownId = htmlspecialchars(addslashes($_POST['adminTownMonsterTownId']));
 
-        //On fait une requête pour vérifier si la ville choisi existe
+        //On fait une requête pour vérifier si la ville choisit existe
         $townQuery = $bdd->prepare('SELECT * FROM car_towns 
         WHERE townId = ?');
         $townQuery->execute([$adminTownMonsterTownId]);
@@ -40,24 +40,24 @@ if (isset($_POST['adminTownMonsterTownId'])
                 ?>
                 
                 <form method="POST" action="deleteTownMonster.php">
-                    
-                        <label for="townMonsterMonsterId" class="col-2 col-form-label">Monstres présent dans la ville</label>
-                        <select class="form-control" id="adminTownMonsterMonsterId" name="adminTownMonsterMonsterId">
+                    Monstres présent dans la ville : <select name="adminTownMonsterMonsterId" class="form-control">
                             
-                            <?php
-                            while ($townMonster = $townMonsterQuery->fetch())
-                            {
-                                $adminTownMonsterMonsterId = stripslashes($townMonster['monsterId']);
-                                $adminTownMonsterMonsterName = stripslashes($townMonster['monsterName']);?>
-                                ?>
-                                    <option value="<?php echo $adminTownMonsterMonsterId ?>"><?php echo "$adminTownMonsterMonsterName"; ?></option>
-                                <?php
-                            }
-                            $townMonsterQuery->closeCursor();
+                        <?php
+                        //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+                        while ($townMonster = $townMonsterQuery->fetch())
+                        {
+                            $adminTownMonsterMonsterId = stripslashes($townMonster['monsterId']);
+                            $adminTownMonsterMonsterName = stripslashes($townMonster['monsterName']);
                             ?>
-                            
-                        </select>
-                    
+
+                                <option value="<?php echo $adminTownMonsterMonsterId ?>"><?php echo "$adminTownMonsterMonsterName"; ?></option>
+
+                            <?php
+                        }
+                        $townMonsterQuery->closeCursor();
+                        ?>
+                        
+                    </select>
                     <input type="hidden" name="adminTownMonsterTownId" value="<?= $adminTownMonsterTownId ?>">
                     <input type="submit" name="delete" class="btn btn-default form-control" value="Retirer le monstre">
                 </form>
@@ -77,24 +77,24 @@ if (isset($_POST['adminTownMonsterTownId'])
                 ?>
                 
                 <form method="POST" action="addTownMonster.php">
-                    
-                        <label for="townMonsterMonsterId" class="col-2 col-form-label">Monstres disponible</label>
-                        <select class="form-control" id="adminTownMonsterMonsterId" name="adminTownMonsterMonsterId">
+                    Monstres disponible : <select name="adminTownMonsterMonsterId" class="form-control">
                             
-                            <?php
-                            while ($monster = $monsterQuery->fetch())
-                            {
-                                $adminTownMonsterMonsterId = stripslashes($monster['monsterId']);
-                                $adminTownMonsterMonsterName = stripslashes($monster['monsterName']);?>
-                                ?>
-                                    <option value="<?php echo $adminTownMonsterMonsterId ?>"><?php echo "$adminTownMonsterMonsterName"; ?></option>
-                                <?php
-                            }
-                            $monsterQuery->closeCursor();
+                        <?php
+                        //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+                        while ($monster = $monsterQuery->fetch())
+                        {
+                            $adminTownMonsterMonsterId = stripslashes($monster['monsterId']);
+                            $adminTownMonsterMonsterName = stripslashes($monster['monsterName']);
                             ?>
-                            
-                        </select>
-                    
+
+                                <option value="<?php echo $adminTownMonsterMonsterId ?>"><?php echo "$adminTownMonsterMonsterName"; ?></option>
+
+                            <?php
+                        }
+                        $monsterQuery->closeCursor();
+                        ?>
+                        
+                    </select>
                     <input type="hidden" name="adminTownMonsterTownId" value="<?= $adminTownMonsterTownId ?>">
                     <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter le monstre">
                 </form>

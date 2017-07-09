@@ -17,7 +17,7 @@ if (isset($_POST['adminShopId'])
         //On récupère l'id du formulaire précédent
         $adminShopId = htmlspecialchars(addslashes($_POST['adminShopId']));
 
-        //On fait une requête pour vérifier si le magasin choisi existe
+        //On fait une requête pour vérifier si le magasin choisit existe
         $shopQuery = $bdd->prepare('SELECT * FROM car_shops 
         WHERE shopId = ?');
         $shopQuery->execute([$adminShopId]);
@@ -26,17 +26,19 @@ if (isset($_POST['adminShopId'])
         //Si le magasin existe
         if ($shopRow == 1) 
         {
-            //On fait une boucle pour récupérer toutes les information
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($shop = $shopQuery->fetch())
             {
-                //On récupère les informations du magasin
                 $adminShopPicture = stripslashes($shop['shopPicture']);
                 $adminShopName = stripslashes($shop['shopName']);
                 $adminShopDescription = stripslashes($shop['shopDescription']);
             }
             ?>
 
+            <p><img src="<?php echo $adminShopPicture; ?>" height="100" width="100"></p>
+
             <p>Informations du magasin</p>
+
             <form method="POST" action="editShopEnd.php">
                 Image : <input type="text" name="adminShopPicture" class="form-control" placeholder="Image" value= "<?php echo $adminShopPicture; ?>" required>
                 Nom : <input type="text" name="adminShopName" class="form-control" placeholder="Nom" value= "<?php echo $adminShopName; ?>" required>

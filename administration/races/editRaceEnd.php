@@ -99,7 +99,7 @@ if (isset($_POST['adminRaceId'])
             WHERE characterRaceId = ?');
             $characterRaceQuery->execute([$adminRaceId]);
     
-            //Pour chaque joueurs qui a cette classe
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($characterRace = $characterRaceQuery->fetch())
             {
                 //On définit les statistiques d'un personnage de niveau 1
@@ -163,7 +163,6 @@ if (isset($_POST['adminRaceId'])
                 $updateCharacter->execute(['characterId' => $characterId]);
                 $updateCharacter->closeCursor();
             }
-            
             ?>
 
             La classe a bien été mise à jour

@@ -12,6 +12,7 @@ if (isset($_POST['add']))
     ?>
     
     <p>Informations de la news</p>
+    
     <form method="POST" action="addNewsEnd.php">
         Image : <input type="text" name="adminNewsPicture" class="form-control" placeholder="Image" required>
         Titre : <input type="text" name="adminNewsTitle" class="form-control" placeholder="Titre" required>

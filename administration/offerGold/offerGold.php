@@ -57,14 +57,15 @@ if (isset($_POST['adminCharacterId'])
             //Si le personnage existe
             if ($characterRow == 1)
             {
+                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                 while ($character = $characterQuery->fetch())
                 {
-                    //On récupère les informations du personnage
                     $adminCharacterName = stripslashes($character['characterName']);
                 }
                 ?>
                 
-                <p>ATTENTION</p> 
+                <p>ATTENTION</p>
+
                 Vous êtes sur le point d'offrir <em><?php echo $adminOfferGold ?></em> pièce(s) d'or à <em><?php echo $adminCharacterName ?></em><br />
                 confirmez-vous ?
     

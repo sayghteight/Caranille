@@ -21,9 +21,9 @@ if (isset($_POST['add']))
         ?>
         
         <p>Informations du chapitre</p>
+        
         <form method="POST" action="addChapterEnd.php">
-            Monstre du chapitre <br> 
-            <select name="adminChapterMonsterId" class="form-control">
+            Monstre du chapitre <select name="adminChapterMonsterId" class="form-control">
                 
                 <?php
                 //On fait une boucle sur tous les résultats
@@ -33,7 +33,9 @@ if (isset($_POST['add']))
                     $adminMonsterId = stripslashes($monster['monsterId']); 
                     $adminMonsterName = stripslashes($monster['monsterName']);
                     ?>
-                    <option value="<?php echo $adminMonsterId ?>"><?php echo $adminMonsterName ?></option>
+
+                        <option value="<?php echo $adminMonsterId ?>"><?php echo $adminMonsterName ?></option>
+
                     <?php
                 }
                 $monsterQuery->closeCursor();

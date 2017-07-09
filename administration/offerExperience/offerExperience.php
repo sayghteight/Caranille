@@ -26,6 +26,7 @@ if (isset($_POST['adminCharacterId'])
             ?>
             
             <p>ATTENTION</p> 
+
             Vous êtes sur le point d'offrir <em><?php echo $adminOfferExperience ?></em> point(s) d'expérience à <em>tous les joueurs</em><br />
             confirmez-vous  ?
 
@@ -57,14 +58,15 @@ if (isset($_POST['adminCharacterId'])
             //Si le personnage existe
             if ($characterRow == 1)
             {
+                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                 while ($character = $characterQuery->fetch())
                 {
-                    //On récupère les informations du personnage
                     $adminCharacterName = stripslashes($character['characterName']);
                 }
                 ?>
                 
-                <p>ATTENTION</p> 
+                <p>ATTENTION</p>
+
                 Vous êtes sur le point d'offrir <em><?php echo $adminOfferExperience ?></em> point(s) d'expérience à <em><?php echo $adminCharacterName ?></em><br />
                 confirmez-vous ?
     

@@ -17,7 +17,7 @@ if (isset($_POST['adminShopItemShopId'])
         //On récupère l'id du formulaire précédent
         $adminShopItemShopId = htmlspecialchars(addslashes($_POST['adminShopItemShopId']));
 
-        //On fait une requête pour vérifier si le magasin choisi existe
+        //On fait une requête pour vérifier si le magasin choisit existe
         $shopQuery = $bdd->prepare('SELECT * FROM car_towns 
         WHERE townId = ?');
         $shopQuery->execute([$adminShopItemShopId]);
@@ -39,25 +39,26 @@ if (isset($_POST['adminShopItemShopId'])
             if ($townShopRow > 0) 
             {
                 ?>
-                
+
                 <form method="POST" action="editDeleteShopItem.php">
-                    
-                        <label for="adminShopItemItemId" class="col-2 col-form-label">Articles en vente</label>
-                        <select class="form-control" id="adminShopItemItemId" name="adminShopItemItemId">
-                            
-                            <?php
-                            while ($townShop = $townShopQuery->fetch())
-                            {
-                                $adminShopItemItemId = stripslashes($townShop['itemId']);
-                                $adminShopItemItemName = stripslashes($townShop['itemName']);
-                                $adminShopItemDiscount = stripslashes($townShop['shopItemDiscount']);?>
-                                ?>
-                                    <option value="<?php echo $adminShopItemItemId ?>"><?php echo "$adminShopItemItemName (Réduction: $adminShopItemDiscount%)"; ?></option>
-                                <?php
-                            }
+                    Articles en vente : <select name="adminShopItemItemId" class="form-control">
+                        
+                        <?php
+                        //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+                        while ($townShop = $townShopQuery->fetch())
+                        {
+                            $adminShopItemItemId = stripslashes($townShop['itemId']);
+                            $adminShopItemItemName = stripslashes($townShop['itemName']);
+                            $adminShopItemDiscount = stripslashes($townShop['shopItemDiscount']);
                             ?>
-                            
-                        </select>
+
+                                <option value="<?php echo $adminShopItemItemId ?>"><?php echo "$adminShopItemItemName (Réduction: $adminShopItemDiscount%)"; ?></option>
+
+                            <?php
+                        }
+                        ?>
+                        
+                    </select>
                     
                     <input type="hidden" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
                     <input type="submit" name="edit" class="btn btn-default form-control" value="Modifier la réduction">
@@ -80,23 +81,23 @@ if (isset($_POST['adminShopItemShopId'])
                 ?>
                 
                 <form method="POST" action="addShopItem.php">
-                    
-                        <label for="adminShopItemItemId" class="col-2 col-form-label">Articles existant</label>
-                        <select class="form-control" id="adminShopItemItemId" name="adminShopItemItemId">
+                    Articles existant : <select name="adminShopItemItemId" class="form-control">
                             
-                            <?php
-                            while ($item = $itemQuery->fetch())
-                            {
-                                $adminShopItemItemId = stripslashes($item['itemId']);
-                                $adminShopItemItemName = stripslashes($item['itemName']);?>
-                                ?>
-                                    <option value="<?php echo $adminShopItemItemId ?>"><?php echo "$adminShopItemItemName"; ?></option>
-                                <?php
-                            }
+                        <?php
+                        //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+                        while ($item = $itemQuery->fetch())
+                        {
+                            $adminShopItemItemId = stripslashes($item['itemId']);
+                            $adminShopItemItemName = stripslashes($item['itemName']);
                             ?>
-                            
-                        </select>
-                    
+
+                                <option value="<?php echo $adminShopItemItemId ?>"><?php echo "$adminShopItemItemName"; ?></option>
+
+                            <?php
+                        }
+                        ?>
+                        
+                    </select>
                     Réduction (De 0 à 100%) <input type="number" name="adminShopItemDiscount" class="form-control" placeholder="Réduction (De 0 à 100%)" required>
                     <input type="hidden" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
                     <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter l'objet">

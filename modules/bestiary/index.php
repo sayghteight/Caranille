@@ -18,24 +18,23 @@ if ($monsterBestiaryRow > 0)
     ?>
     
     <form method="POST" action="viewMonster.php">
-        
-            <label for="equipmentList" class="col-2 col-form-label">Liste des monstres</label>
-            <select class="form-control" id="monsterId" name="monsterId">
+        Liste des monstres : <select name="monsterId" class="form-control">
                 
-                <?php
-                //on récupère les valeurs de chaque monstres qu'on va ensuite mettre dans le menu déroulant
-                while ($monsterBestiary = $monsterBestiaryQuery->fetch())
-                {
-                    $monsterId = stripslashes($monsterBestiary['monsterId']); 
-                    $monsterName = stripslashes($monsterBestiary['monsterName']);
-                    ?>
-                        <option value="<?php echo $monsterId ?>"><?php echo $monsterName ?></option>
-                    <?php
-                }
+            <?php
+            //on récupère les valeurs de chaque monstres qu'on va ensuite mettre dans le menu déroulant
+            while ($monsterBestiary = $monsterBestiaryQuery->fetch())
+            {
+                $monsterId = stripslashes($monsterBestiary['monsterId']); 
+                $monsterName = stripslashes($monsterBestiary['monsterName']);
                 ?>
+
+                    <option value="<?php echo $monsterId ?>"><?php echo $monsterName ?></option>
+                    
+                <?php
+            }
+            ?>
                 
-            </select>
-        
+        </select>
         <center><input type="submit" name="viewMonster" class="btn btn-default form-control" value="Voir la fiche du monstre"></center>
     </form>
     

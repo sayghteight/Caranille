@@ -17,7 +17,7 @@ if (isset($_POST['adminRaceId'])
         //On récupère l'id du formulaire précédent
         $adminRaceId = htmlspecialchars(addslashes($_POST['adminRaceId']));
 
-        //On fait une requête pour vérifier si la race choisi existe
+        //On fait une requête pour vérifier si la race choisit existe
         $raceQuery = $bdd->prepare('SELECT * FROM car_races 
         WHERE raceId = ?');
         $raceQuery->execute([$adminRaceId]);
@@ -26,7 +26,7 @@ if (isset($_POST['adminRaceId'])
         //Si la race existe
         if ($raceRow == 1) 
         {
-            //On récupère les informations de la race
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($race = $raceQuery->fetch())
             {
                 $adminRaceName = stripslashes($race['raceName']);
@@ -53,7 +53,7 @@ if (isset($_POST['adminRaceId'])
                 WHERE itemRaceId = ?');
                 $itemQuery->execute([$adminRaceId]);
 
-                //On récupère les informations de la race
+                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                 while ($item = $itemQuery->fetch())
                 {
                     $adminItemId = stripslashes($item['itemId']);

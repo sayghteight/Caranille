@@ -7,7 +7,6 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //on récupère les valeurs de chaque magasin qu'on va ensuite mettre dans le menu déroulant
-//On fait une recherche dans la base de donnée de tous les magasins
 $shopQuery = $bdd->query("SELECT * FROM car_shops
 ORDER by shopName");
 $shopRow = $shopQuery->rowCount();
@@ -18,23 +17,23 @@ if ($shopRow > 0)
     ?>
     
     <form method="POST" action="manageShop.php">
-        
-            <label for="equipmentList" class="col-2 col-form-label">Liste des magasins</label>
-            <select class="form-control" id="adminShopId" name="adminShopId">
-                
-                <?php
-                while ($shop = $shopQuery->fetch())
-                {
-                    $adminShopId = stripslashes($shop['shopId']);
-                    $adminShopName = stripslashes($shop['shopName']);?>
-                    ?>
-                        <option value="<?php echo $adminShopId ?>"><?php echo "$adminShopName"; ?></option>
-                    <?php
-                }
+        Liste des magasins : <select name="adminShopId" class="form-control">
+            
+            <?php
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+            while ($shop = $shopQuery->fetch())
+            {
+                $adminShopId = stripslashes($shop['shopId']);
+                $adminShopName = stripslashes($shop['shopName']);
                 ?>
-                
-            </select>
-        
+
+                    <option value="<?php echo $adminShopId ?>"><?php echo "$adminShopName"; ?></option>
+                    
+                <?php
+            }
+            ?>
+            
+        </select>
         <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer le magasin">
     </form>
     

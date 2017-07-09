@@ -17,24 +17,24 @@ if ($chapterRow > 0)
     ?>
 
     <form method="POST" action="manageChapter.php">
-        
-            <label for="adminChapterId" class="col-2 col-form-label">Liste des chapitres</label>
-            <select class="form-control" id="adminChapterId" name="adminChapterId">
+        Liste des chapitres : <select name="adminChapterId" class="form-control">
                 
-                <?php
-                while ($chapter = $chapterQuery->fetch())
-                {
-                    $adminChapterId = stripslashes($chapter['chapterId']);
-                    $adminChapterTitle = stripslashes($chapter['chapterTitle']);
-                    ?>
-                        <option value="<?php echo $adminChapterId ?>"><?php echo "Chapitre $adminChapterId - $adminChapterTitle"; ?></option>
-                    <?php
-                }
-                $chapterQuery->closeCursor();
+            <?php
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+            while ($chapter = $chapterQuery->fetch())
+            {
+                $adminChapterId = stripslashes($chapter['chapterId']);
+                $adminChapterTitle = stripslashes($chapter['chapterTitle']);
                 ?>
 
-            </select>
-        
+                    <option value="<?php echo $adminChapterId ?>"><?php echo "Chapitre $adminChapterId - $adminChapterTitle"; ?></option>
+
+                <?php
+            }
+            $chapterQuery->closeCursor();
+            ?>
+
+        </select>
         <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer le chapitre">
     </form>
 

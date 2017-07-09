@@ -31,7 +31,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
         //Si le taux d'obtention est entre 0 et 100 on ajoute l'objet
         if ($adminMonsterDropRate >= 0 && $adminMonsterDropRate <= 100)
         {
-            //On fait une requête pour vérifier si le monstre choisi existe
+            //On fait une requête pour vérifier si le monstre choisit existe
             $monsterQuery = $bdd->prepare('SELECT * FROM car_monsters 
             WHERE monsterId = ?');
             $monsterQuery->execute([$adminMonsterDropMonsterId]);
@@ -40,7 +40,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
             //Si le monstre existe
             if ($monsterRow == 1) 
             {
-                //On fait une requête pour vérifier si l'objet choisi existe
+                //On fait une requête pour vérifier si l'objet choisit existe
                 $itemQuery = $bdd->prepare('SELECT * FROM car_items 
                 WHERE itemId = ?');
                 $itemQuery->execute([$adminMonsterDropItemId]);
@@ -91,10 +91,10 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                     //Si l'objet est déjà sur le monstre est déjà dans cette ville
                     else
                     {
-                        //Si le joueur a essayé de mettre un objet qui est déjà sur le monstre on lui donne la possibilité de revenir en arrière
                         ?>
                         
                         Erreur: Cet objet est déjà sur ce monstre
+
                         <form method="POST" action="manageMonsterDrop.php">
                             <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
                             <input type="submit" class="btn btn-default form-control" name="manage" value="Retour">

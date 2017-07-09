@@ -265,7 +265,7 @@ if (isset($_POST['accountPseudo'])
                     //Si la classe choisie n'existe pas
                     else
                     {
-                        echo "La classe choisi n'existe pas";
+                        echo "La classe choisit n'existe pas";
                     }
                 }
                 //Si le nom du personnage a déjà été utilisé
@@ -286,10 +286,10 @@ if (isset($_POST['accountPseudo'])
             echo "Les deux mots de passe ne sont pas identiques";
         }
     }
-    //Si la classe choisi n'est pas un nombre
+    //Si la classe choisit n'est pas un nombre
     else
     {
-         echo "La classe choisi est invalide";
+         echo "La classe choisit est invalide";
     }
 }
 //Si toutes les variables $_POST n'existent pas

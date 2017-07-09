@@ -47,7 +47,7 @@ if (isset($_POST['adminNewsId'])
             $updateNews->closeCursor();
             ?>
 
-            La news a bien été mit à jour
+            La news a bien été mise à jour
 
             <hr>
                 

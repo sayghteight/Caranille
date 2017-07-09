@@ -30,7 +30,7 @@ if (isset($_POST['adminTownMonsterTownId'])
         //Si la ville existe
         if ($townRow == 1) 
         {
-            //On fait une requête pour vérifier si le monstre choisi existe
+            //On fait une requête pour vérifier si le monstre choisit existe
             $monsterQuery = $bdd->prepare('SELECT * FROM car_monsters 
             WHERE monsterId = ?');
             $monsterQuery->execute([$adminTownMonsterMonsterId]);
@@ -79,6 +79,7 @@ if (isset($_POST['adminTownMonsterTownId'])
                     ?>
                     
                     Erreur: Ce monstre est déjà dans cette ville
+                    
                     <form method="POST" action="manageTownMonster.php">
                         <input type="hidden" name="adminTownMonsterTownId" value="<?= $adminTownMonsterTownId ?>">
                         <input type="submit" class="btn btn-default form-control" name="manage" value="Retour">

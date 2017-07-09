@@ -17,7 +17,7 @@ if (isset($_POST['adminRaceId'])
         //On récupère l'id de la race
         $adminRaceId = htmlspecialchars(addslashes($_POST['adminRaceId']));
 
-        //On fait une requête pour vérifier si le compte choisi existe
+        //On fait une requête pour vérifier si le compte choisit existe
         $raceQuery = $bdd->prepare('SELECT * FROM car_races 
         WHERE raceId = ?');
         $raceQuery->execute([$adminRaceId]);
@@ -44,7 +44,10 @@ if (isset($_POST['adminRaceId'])
             }
             ?>
 
+            <p><img src="<?php echo $adminRacePicture; ?>" height="100" width="100"></p>
+
             <p>Informations de la classe</p>
+
             <form method="POST" action="editRaceEnd.php">
                 Image : <input type="text" name="adminRacePicture" class="form-control" placeholder="Nom" value="<?php echo $adminRacePicture; ?>" required autofocus>
                 Nom : <input type="text" name="adminRaceName" class="form-control" placeholder="Nom" value="<?php echo $adminRaceName; ?>" required autofocus>

@@ -17,7 +17,7 @@ if (isset($_POST['adminItemId'])
         //On récupère l'id du formulaire précédent
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
 
-        //On fait une requête pour vérifier si l'objet choisi existe
+        //On fait une requête pour vérifier si l'objet choisit existe
         $itemQuery = $bdd->prepare('SELECT * FROM car_items 
         WHERE itemId = ?');
         $itemQuery->execute([$adminItemId]);
@@ -30,14 +30,20 @@ if (isset($_POST['adminItemId'])
             $itemQuery = $bdd->prepare("SELECT * FROM car_items
             WHERE itemId = ?");
             $itemQuery->execute([$adminItemId]);
+
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($item = $itemQuery->fetch())
             {
+                $adminItemPicture = stripslashes($item['itemPicture']);
                 $adminItemName = stripslashes($item['itemName']);
             }
             $itemQuery->closeCursor();
             ?>
+
+            <p><img src="<?php echo $adminItemPicture; ?>" height="100" width="100"></p>
             
-            <p>ATTENTION</p> 
+            <p>ATTENTION</p>
+            
             Vous êtes sur le point de supprimer l'équipement <em><?php echo $adminItemName ?></em><br />
             confirmez-vous la suppression ?
 

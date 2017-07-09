@@ -23,24 +23,23 @@ if ($equipmentRow > 0)
     ?>
     
     <form method="POST" action="viewEquipment.php">
-        
-            <label for="equipmentList" class="col-2 col-form-label">Liste des équipements</label>
-            <select class="form-control" id="itemId" name="itemId">
+        Liste des équipements : <select name="itemId" class="form-control">
                 
-                <?php
-                //on récupère les valeurs de chaque joueurs qu'on va ensuite mettre dans le menu déroulant
-                while ($equipment = $equipmentQuery->fetch())
-                {
-                    $equipmentId = stripslashes($equipment['itemId']); 
-                    $equipmentName = stripslashes($equipment['itemName']);
-                    ?>
-                        <option value="<?php echo $equipmentId ?>"><?php echo $equipmentName ?></option>
-                    <?php
-                }
+            <?php
+            //on récupère les valeurs de chaque joueurs qu'on va ensuite mettre dans le menu déroulant
+            while ($equipment = $equipmentQuery->fetch())
+            {
+                $equipmentId = stripslashes($equipment['itemId']); 
+                $equipmentName = stripslashes($equipment['itemName']);
                 ?>
+
+                    <option value="<?php echo $equipmentId ?>"><?php echo $equipmentName ?></option>
+                    
+                <?php
+            }
+            ?>
                 
-            </select>
-        
+        </select>
         <center><input type="submit" name="viewEquipment" class="btn btn-default form-control" value="Plus d'information"></center>
     </form>
     

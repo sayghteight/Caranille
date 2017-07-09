@@ -5,32 +5,34 @@ require_once("../html/header.php");
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
+
+//On fait une requête dans la base de donnée pour récupérer toutes les classes
+$raceQuery = $bdd->query("SELECT * FROM car_races");
 ?>
 
 <form method="POST" action="manageRace.php">
-    
-        <label for="adminRaceId" class="col-2 col-form-label">Liste des classes</label>
-        <select class="form-control" id="adminRaceId" name="adminRaceId">
-            
-            <?php
-            //on récupère les valeurs de chaque race qu'on va ensuite mettre dans le menu déroulant
-            //On fait une recherche dans la base de donnée de toutes les races
-            $raceQuery = $bdd->query("SELECT * FROM car_races");
-            while ($race = $raceQuery->fetch())
-            {
-                $adminRaceId = stripslashes($race['raceId']);
-                $adminRaceName = stripslashes($race['raceName']);
-                ?>
-                    <option value="<?php echo $adminRaceId ?>"><?php echo "$adminRaceName"; ?></option>
-                <?php
-            }
-            $raceQuery->closeCursor();
+    Liste des classes : <select name="adminRaceId" class="form-control">
+
+        <?php        
+        //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+        while ($race = $raceQuery->fetch())
+        {
+            $adminRaceId = stripslashes($race['raceId']);
+            $adminRaceName = stripslashes($race['raceName']);
             ?>
-            
-        </select>
-    
+
+                <option value="<?php echo $adminRaceId ?>"><?php echo "$adminRaceName"; ?></option>
+
+            <?php
+        }
+        $raceQuery->closeCursor();
+        ?>
+        
+    </select>
     <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer la classe">
 </form>
+
+<hr>
 
 <form method="POST" action="addRace.php">
     <input type="submit" class="btn btn-default form-control" name="add" value="Créer une classe">

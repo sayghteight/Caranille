@@ -21,7 +21,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
         $adminMonsterDropMonsterId = htmlspecialchars(addslashes($_POST['adminMonsterDropMonsterId']));
         $adminMonsterDropItemId = htmlspecialchars(addslashes($_POST['adminMonsterDropItemId']));
 
-        //On fait une requête pour vérifier si le monstre choisi existe
+        //On fait une requête pour vérifier si le monstre choisit existe
         $monsterQuery = $bdd->prepare('SELECT * FROM car_monsters 
         WHERE monsterId = ?');
         $monsterQuery->execute([$adminMonsterDropMonsterId]);
@@ -30,7 +30,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
         //Si le monstre existe
         if ($monsterRow == 1) 
         {
-            //On fait une requête pour vérifier si l'objet choisi existe
+            //On fait une requête pour vérifier si l'objet choisit existe
             $itemQuery = $bdd->prepare('SELECT * FROM car_items 
             WHERE itemId = ?');
             $itemQuery->execute([$adminMonsterDropItemId]);
@@ -49,7 +49,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                 //Si cet objet est sur le monstre
                 if ($monsterDropRow == 1) 
                 {
-                    //On supprime les objets et équippement du monstre
+                    //On supprime les objets et équippements du monstre
                     $monsterDropDeleteQuery = $bdd->prepare("DELETE FROM car_monsters_drops
                     WHERE monsterDropItemID = ?");
                     $monsterDropDeleteQuery->execute([$adminMonsterDropItemId]);

@@ -183,10 +183,10 @@ if (isset($_POST['itemId'])
             echo "Erreur: Impossible de vendre un objet/équipement que vous ne possédez pas.";
         }
     }
-    //Si l'objet choisi n'est pas un nombre
+    //Si l'objet choisit n'est pas un nombre
     else
     {
-         echo "L'équipment choisi est invalide";
+         echo "L'équipment choisit est invalide";
     }
 }
 //Si toutes les variables $_POST n'existent pas

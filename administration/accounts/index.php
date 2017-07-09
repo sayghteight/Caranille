@@ -15,13 +15,17 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
         $accountQuery = $bdd->query("SELECT * FROM car_accounts, car_characters
         WHERE accountId = characterAccountId
         ORDER by characterName");
+
+        //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
         while ($account = $accountQuery->fetch())
         {
             $adminAccountId = stripslashes($account['accountId']);
             $adminAccountPseudo = stripslashes($account['accountPseudo']);
             $adminAccountCharacterName =  stripslashes($account['characterName']); ?>
             ?>
+
                 <option value="<?php echo $adminAccountId ?>"><?php echo "$adminAccountCharacterName ($adminAccountPseudo)"; ?></option>
+                
             <?php
         }
         $accountQuery->closeCursor();

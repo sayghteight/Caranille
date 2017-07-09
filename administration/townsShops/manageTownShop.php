@@ -17,7 +17,7 @@ if (isset($_POST['adminTownShopTownId'])
         //On récupère l'id du formulaire précédent
         $adminTownShopTownId = htmlspecialchars(addslashes($_POST['adminTownShopTownId']));
 
-        //On fait une requête pour vérifier si la ville choisi existe
+        //On fait une requête pour vérifier si la ville choisit existe
         $townQuery = $bdd->prepare('SELECT * FROM car_towns 
         WHERE townId = ?');
         $townQuery->execute([$adminTownShopTownId]);
@@ -40,24 +40,24 @@ if (isset($_POST['adminTownShopTownId'])
                 ?>
                 
                 <form method="POST" action="deleteTownShop.php">
-                    
-                        <label for="townMonsterMonsterId" class="col-2 col-form-label">Magasins présent dans la ville</label>
-                        <select class="form-control" id="adminTownShopShopId" name="adminTownShopShopId">
+                    Magasins présent dans la ville : <select name="adminTownShopShopId" class="form-control">
                             
-                            <?php
-                            while ($townShop = $townShopQuery->fetch())
-                            {
-                                $adminTownShopShopId = stripslashes($townShop['shopId']);
-                                $adminTownShopShopName = stripslashes($townShop['shopName']);?>
-                                ?>
-                                    <option value="<?php echo $adminTownShopShopId ?>"><?php echo "$adminTownShopShopName"; ?></option>
-                                <?php
-                            }
-                            $townShopQuery->closeCursor();
+                        <?php
+                        //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+                        while ($townShop = $townShopQuery->fetch())
+                        {
+                            $adminTownShopShopId = stripslashes($townShop['shopId']);
+                            $adminTownShopShopName = stripslashes($townShop['shopName']);
                             ?>
-                            
-                        </select>
-                    
+
+                                <option value="<?php echo $adminTownShopShopId ?>"><?php echo "$adminTownShopShopName"; ?></option>
+
+                            <?php
+                        }
+                        $townShopQuery->closeCursor();
+                        ?>
+                        
+                    </select>
                     <input type="hidden" name="adminTownShopTownId" value="<?= $adminTownShopTownId ?>">
                     <input type="submit" name="delete" class="btn btn-default form-control" value="Retirer le magasin">
                 </form>
@@ -77,17 +77,18 @@ if (isset($_POST['adminTownShopTownId'])
                 ?>
                 
                 <form method="POST" action="addTownShop.php">
-                    
-                        <label for="townMonsterMonsterId" class="col-2 col-form-label">Magasins disponible</label>
-                        <select class="form-control" id="adminTownShopShopId" name="adminTownShopShopId">
+                    Magasins disponible : <select name="adminTownShopShopId" class="form-control">
                             
                             <?php
+                            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                             while ($shop = $shopQuery->fetch())
                             {
                                 $adminTownShopShopId = stripslashes($shop['shopId']);
-                                $adminTownShopShopName = stripslashes($shop['shopName']);?>
+                                $adminTownShopShopName = stripslashes($shop['shopName']);
                                 ?>
+
                                     <option value="<?php echo $adminTownShopShopId ?>"><?php echo "$adminTownShopShopName"; ?></option>
+
                                 <?php
                             }
                             ?>

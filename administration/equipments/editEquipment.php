@@ -17,7 +17,7 @@ if (isset($_POST['adminItemId'])
         //On récupère l'id du formulaire précédent
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
 
-        //On fait une requête pour vérifier si l'équipement choisi existe
+        //On fait une requête pour vérifier si l'équipement choisit existe
         $itemQuery = $bdd->prepare('SELECT * FROM car_items 
         WHERE itemId = ?');
         $itemQuery->execute([$adminItemId]);
@@ -63,9 +63,11 @@ if (isset($_POST['adminItemId'])
             ?>
 
             <p>Informations de l'équipement</p>
+
+            <p><img src="<?php echo $adminItemPicture; ?>" height="100" width="100"></p>
+
             <form method="POST" action="editEquipmentEnd.php">
-                Classe <br> 
-                <select name="adminItemRaceId" class="form-control">
+                Classe <select name="adminItemRaceId" class="form-control">
                     
                     <?php
                     //Si l'équipement a une classe attribuée on la met par défaut dans le select
@@ -79,7 +81,9 @@ if (isset($_POST['adminItemId'])
                     else
                     {
                         ?>
-                        <option selected="selected" value="0">Toutes les classes</option>
+
+                            <option selected="selected" value="0">Toutes les classes</option>
+
                         <?php
                     }
 
@@ -93,14 +97,16 @@ if (isset($_POST['adminItemId'])
                     //S'il y a au moins une classe de disponible on les affiches dans le menu déroulant
                     if ($raceList >= 1)
                     {
-                        //On fait une boucle sur tous les résultats
+                        //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                         while ($raceList = $raceListQuery->fetch())
                         {
                             //on récupère les valeurs de chaque classes qu'on va ensuite mettre dans le menu déroulant
                             $raceId = stripslashes($raceList['raceId']); 
                             $raceName = stripslashes($raceList['raceName']);
                             ?>
-                            <option value="<?php echo $raceId ?>"><?php echo $raceName ?></option>
+
+                                <option value="<?php echo $raceId ?>"><?php echo $raceName ?></option>
+
                             <?php
                         }
                     }
@@ -110,7 +116,9 @@ if (isset($_POST['adminItemId'])
                     if (isset($adminRaceId))
                     {
                         ?>
-                        <option value="0">Toutes les classes</option>
+
+                            <option value="0">Toutes les classes</option>
+
                         <?php
                     }
                     ?>
@@ -126,12 +134,12 @@ if (isset($_POST['adminItemId'])
                         case "Armor":
                             ?>
                             
-                            <option selected="selected" value="Armor">Armure</option>
-                            <option value="Boots">Bottes</option>
-                            <option value="Gloves">Gants</option>
-                            <option value="Helmet">Casque</option>
-                            <option value="Weapon">Arme</option>
-                            
+                                <option selected="selected" value="Armor">Armure</option>
+                                <option value="Boots">Bottes</option>
+                                <option value="Gloves">Gants</option>
+                                <option value="Helmet">Casque</option>
+                                <option value="Weapon">Arme</option>
+                                
                             <?php
                         break;
     
@@ -139,11 +147,11 @@ if (isset($_POST['adminItemId'])
                         case "Boots":
                             ?>
                             
-                            <option value="Armor">Armure</option>
-                            <option selected="selected" value="Boots">Bottes</option>
-                            <option value="Gloves">Gants</option>
-                            <option value="Helmet">Casque</option>
-                            <option value="Weapon">Arme</option>
+                                <option value="Armor">Armure</option>
+                                <option selected="selected" value="Boots">Bottes</option>
+                                <option value="Gloves">Gants</option>
+                                <option value="Helmet">Casque</option>
+                                <option value="Weapon">Arme</option>
                             
                             <?php
                         break;
@@ -152,11 +160,11 @@ if (isset($_POST['adminItemId'])
                         case "Gloves":
                             ?>
                             
-                            <option value="Armor">Armure</option>
-                            <option value="Boots">Bottes</option>
-                            <option selected="selected" value="Gloves">Gants</option>
-                            <option value="Helmet">Casque</option>
-                            <option value="Weapon">Arme</option>
+                                <option value="Armor">Armure</option>
+                                <option value="Boots">Bottes</option>
+                                <option selected="selected" value="Gloves">Gants</option>
+                                <option value="Helmet">Casque</option>
+                                <option value="Weapon">Arme</option>
                             
                             <?php
                         break;
@@ -165,11 +173,11 @@ if (isset($_POST['adminItemId'])
                         case "Helmet":
                             ?>
                             
-                            <option value="Armor">Armure</option>
-                            <option value="Boots">Bottes</option>
-                            <option value="Gloves">Gants</option>
-                            <option selected="selected" value="Helmet">Casque</option>
-                            <option value="Weapon">Arme</option>
+                                <option value="Armor">Armure</option>
+                                <option value="Boots">Bottes</option>
+                                <option value="Gloves">Gants</option>
+                                <option selected="selected" value="Helmet">Casque</option>
+                                <option value="Weapon">Arme</option>
                             
                             <?php
                         break;
@@ -178,11 +186,11 @@ if (isset($_POST['adminItemId'])
                         case "Weapon":
                             ?>
                             
-                            <option value="Armor">Armure</option>
-                            <option value="Boots">Bottes</option>
-                            <option value="Gloves">Gants</option>
-                            <option value="Helmet">Casque</option>
-                            <option selected="selected" value="Weapon">Arme</option>
+                                <option value="Armor">Armure</option>
+                                <option value="Boots">Bottes</option>
+                                <option value="Gloves">Gants</option>
+                                <option value="Helmet">Casque</option>
+                                <option selected="selected" value="Weapon">Arme</option>
                             
                             <?php
                         break;
@@ -194,16 +202,16 @@ if (isset($_POST['adminItemId'])
                 Niveau requis : <input type="text" name="adminItemLevelRequired" class="form-control" placeholder="Niveau requis" value="<?php echo $adminItemLevelRequired; ?>" required>
                 Nom : <input type="text" name="adminItemName" class="form-control" placeholder="Nom" value="<?php echo $adminItemName; ?>" required>
                 Description : <br> <textarea class="form-control"name="adminItemDescription" id="adminItemDescription" rows="3" required><?php echo $adminItemDescription; ?></textarea>
-                HP Bonus : <input type="text" name="adminItemHpEffects" class="form-control" placeholder="HP Bonus" value="<?php echo $adminItemHpEffects; ?>" required>
-                MP Bonus : <input type="text" name="adminItemMpEffect" class="form-control" placeholder="MP Bonus" value="<?php echo $adminItemMpEffect; ?>" required>
-                Force Bonus : <input type="text" name="adminItemStrengthEffect" class="form-control" placeholder="Force Bonus" value="<?php echo $adminItemStrengthEffect; ?>" required>
-                Magie Bonus : <input type="text" name="adminItemMagicEffect" class="form-control" placeholder="Magie Bonus" value="<?php echo $adminItemMagicEffect; ?>" required>
-                Agilité Bonus : <input type="text" name="adminItemAgilityEffect" class="form-control" placeholder="Agilité Bonus" value="<?php echo $adminItemAgilityEffect; ?>" required>
-                Défense Bonus : <input type="text" name="adminItemDefenseEffect" class="form-control" placeholder="Défense Bonus" value="<?php echo $adminItemDefenseEffect; ?>" required>
-                Défense Magique Bonus : <input type="text" name="adminItemDefenseMagicEffect" class="form-control" placeholder="Défense Magique Bonus" value="<?php echo $adminItemDefenseMagicEffect; ?>" required>
-                Sagesse Bonus : <input type="text" name="adminItemWisdomEffect" class="form-control" placeholder="Sagesse Bonus" value="<?php echo $adminItemWisdomEffect; ?>" required>
-                Prix d'achat : <input type="text" name="adminItemPurchasePrice" class="form-control" placeholder="Prix d'achat" value="<?php echo $adminItemPurchasePrice; ?>" required>
-                Prix de vente : <input type="text" name="adminItemSalePrice" class="form-control" placeholder="Prix de vente" value="<?php echo $adminItemSalePrice; ?>" required>
+                HP Bonus : <input type="number" name="adminItemHpEffects" class="form-control" placeholder="HP Bonus" value="<?php echo $adminItemHpEffects; ?>" required>
+                MP Bonus : <input type="number" name="adminItemMpEffect" class="form-control" placeholder="MP Bonus" value="<?php echo $adminItemMpEffect; ?>" required>
+                Force Bonus : <input type="number" name="adminItemStrengthEffect" class="form-control" placeholder="Force Bonus" value="<?php echo $adminItemStrengthEffect; ?>" required>
+                Magie Bonus : <input type="number" name="adminItemMagicEffect" class="form-control" placeholder="Magie Bonus" value="<?php echo $adminItemMagicEffect; ?>" required>
+                Agilité Bonus : <input type="number" name="adminItemAgilityEffect" class="form-control" placeholder="Agilité Bonus" value="<?php echo $adminItemAgilityEffect; ?>" required>
+                Défense Bonus : <input type="number" name="adminItemDefenseEffect" class="form-control" placeholder="Défense Bonus" value="<?php echo $adminItemDefenseEffect; ?>" required>
+                Défense Magique Bonus : <input type="number" name="adminItemDefenseMagicEffect" class="form-control" placeholder="Défense Magique Bonus" value="<?php echo $adminItemDefenseMagicEffect; ?>" required>
+                Sagesse Bonus : <input type="number" name="adminItemWisdomEffect" class="form-control" placeholder="Sagesse Bonus" value="<?php echo $adminItemWisdomEffect; ?>" required>
+                Prix d'achat : <input type="number" name="adminItemPurchasePrice" class="form-control" placeholder="Prix d'achat" value="<?php echo $adminItemPurchasePrice; ?>" required>
+                Prix de vente : <input type="number" name="adminItemSalePrice" class="form-control" placeholder="Prix de vente" value="<?php echo $adminItemSalePrice; ?>" required>
                 <input type="hidden" name="adminItemId" value="<?= $adminItemId ?>">
                 <input name="finalEdit" class="btn btn-default form-control" type="submit" value="Modifier">
             </form>

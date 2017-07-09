@@ -20,24 +20,25 @@ if ($shopRow > 0)
 {
     ?>
     <form method="POST" action="selectedShop.php">
-        
-            <label for="shopId" class="col-2 col-form-label">Liste des magasins</label>
-            <select class="form-control" id="shopId" name="shopId">
-            <?php
-            //On fait une boucle sur tous les résultats
-            while ($shop = $shopQueryList->fetch())
-            {
-                //on récupère les valeurs de chaque magasins qu'on va ensuite mettre dans le menu déroulant
-                $shopId = stripslashes($shop['shopId']); 
-                $shopName = stripslashes($shop['shopName']);
-                ?>
-                    <option value="<?php echo $shopId ?>"><?php echo $shopName ?></option>
-                <?php
-            }
-            $shopQueryList->closeCursor();
+        Liste des magasins : <select name="shopId" class="form-control">
+
+        <?php
+        //On fait une boucle sur tous les résultats
+        while ($shop = $shopQueryList->fetch())
+        {
+            //on récupère les valeurs de chaque magasins qu'on va ensuite mettre dans le menu déroulant
+            $shopId = stripslashes($shop['shopId']); 
+            $shopName = stripslashes($shop['shopName']);
             ?>
-            </select>
-        
+
+                <option value="<?php echo $shopId ?>"><?php echo $shopName ?></option>
+                
+            <?php
+        }
+        $shopQueryList->closeCursor();
+        ?>
+
+        </select>
         <center><input type="submit" name="enter" class="btn btn-default form-control" value="Entrer dans le magasin"></center>
     </form>
     <?php

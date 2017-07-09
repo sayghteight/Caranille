@@ -20,7 +20,7 @@ if (isset($_POST['adminShopItemShopId'])
         $adminShopItemShopId = htmlspecialchars(addslashes($_POST['adminShopItemShopId']));
         $adminShopItemItemId = htmlspecialchars(addslashes($_POST['adminShopItemItemId']));
 
-        //On fait une requête pour vérifier si le magasin choisi existe
+        //On fait une requête pour vérifier si le magasin choisit existe
         $shopQuery = $bdd->prepare('SELECT * FROM car_shops 
         WHERE shopId = ?');
         $shopQuery->execute([$adminShopItemShopId]);
@@ -29,13 +29,13 @@ if (isset($_POST['adminShopItemShopId'])
         //Si le magasin existe
         if ($shopRow == 1) 
         {
-            //On récupère les informations du magasin
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($shop = $shopQuery->fetch())
             {
                 $adminShopItemShopName = stripslashes($shop['shopName']);
             }
 
-            //On fait une requête pour vérifier si l'objet choisi existe
+            //On fait une requête pour vérifier si l'objet choisit existe
             $itemQuery = $bdd->prepare('SELECT * FROM car_items 
             WHERE itemId = ?');
             $itemQuery->execute([$adminShopItemItemId]);
@@ -44,6 +44,7 @@ if (isset($_POST['adminShopItemShopId'])
             //Si l'objet existe
             if ($itemRow == 1) 
             {
+                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                 while ($item = $itemQuery->fetch())
                 {
                     $adminShopItemItemName = stripslashes($item['itemName']);
@@ -85,7 +86,8 @@ if (isset($_POST['adminShopItemShopId'])
                     {
                         ?>
                         
-                        <p>ATTENTION</p> 
+                        <p>ATTENTION</p>
+
                         Vous êtes sur le point de retirer l'article <em><?php echo $adminShopItemItemName ?></em> du magasin <em><?php echo $adminShopItemShopName ?></em><br />
                         confirmez-vous ?
 

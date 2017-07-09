@@ -16,24 +16,24 @@ if ($newsRow > 0)
 {
     ?>
     
-    <form method="POST" action="manageNews.php">
-        
-            <label for="adminNewsId" class="col-2 col-form-label">Liste des news</label>
-            <select class="form-control" id="adminNewsId" name="adminNewsId">
-                
-                <?php
-                while ($news = $newsQuery->fetch())
-                {
-                    $adminNewsId = stripslashes($news['newsId']);
-                    $adminNewsTitle = stripslashes($news['newsTitle']);?>
-                    ?>
-                        <option value="<?php echo $adminNewsId ?>"><?php echo "$adminNewsTitle"; ?></option>
-                    <?php
-                }
+    <form method="POST" action="manageNews.php">.
+        Liste des news : <select name="adminNewsId" class="form-control">
+            
+            <?php
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+            while ($news = $newsQuery->fetch())
+            {
+                $adminNewsId = stripslashes($news['newsId']);
+                $adminNewsTitle = stripslashes($news['newsTitle']);
                 ?>
-                
-            </select>
-        
+
+                    <option value="<?php echo $adminNewsId ?>"><?php echo "$adminNewsTitle"; ?></option>
+                    
+                <?php
+            }
+            ?>
+            
+        </select>
         <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer">
     </form>
     

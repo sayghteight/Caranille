@@ -12,6 +12,7 @@ if (isset($_POST['add']))
     ?>
     
     <p>Informations de l'équipement</p>
+
     <form method="POST" action="addEquipmentEnd.php">
         Classe <select name="adminItemRaceId" class="form-control">
         <option value="0">Toutes les classes</option>
@@ -24,14 +25,16 @@ if (isset($_POST['add']))
             //S'il y a au moins une classe de disponible on les affiches dans le menu déroulant
             if ($raceList >= 1)
             {
-                //On fait une boucle sur tous les résultats
+                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                 while ($raceList = $raceListQuery->fetch())
                 {
                     //on récupère les valeurs de chaque classes qu'on va ensuite mettre dans le menu déroulant
                     $raceId = stripslashes($raceList['raceId']); 
                     $raceName = stripslashes($raceList['raceName']);
                     ?>
+
                         <option value="<?php echo $raceId ?>"><?php echo $raceName ?></option>
+
                     <?php
                 }
             }
@@ -40,7 +43,7 @@ if (isset($_POST['add']))
             
         </select>
         Image : <input type="text" name="adminItemPicture" class="form-control" placeholder="Image" required>
-        Type: <select name="adminItemType" class="form-control">
+        Type : <select name="adminItemType" class="form-control">
             <option value="Armor">Armure</option>
             <option value="Boots">Bottes</option>
             <option value="Gloves">Gants</option>

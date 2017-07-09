@@ -20,7 +20,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
         $adminMonsterDropMonsterId = htmlspecialchars(addslashes($_POST['adminMonsterDropMonsterId']));
         $adminMonsterDropItemId = htmlspecialchars(addslashes($_POST['adminMonsterDropItemId']));
 
-        //On fait une requête pour vérifier si le monstre choisi existe
+        //On fait une requête pour vérifier si le monstre choisit existe
         $monsterQuery = $bdd->prepare('SELECT * FROM car_monsters 
         WHERE monsterId = ?');
         $monsterQuery->execute([$adminMonsterDropMonsterId]);
@@ -29,13 +29,13 @@ if (isset($_POST['adminMonsterDropMonsterId'])
         //Si le monstre existe
         if ($monsterRow == 1) 
         {
-            //On récupère les informations du monstre
+            //On fait une boucle sur tous les résultats
             while ($monster = $monsterQuery->fetch())
             {
                 $adminMonsterDropMonsterName = stripslashes($monster['monsterName']);
             }
 
-            //On fait une requête pour vérifier si l'objet choisi existe
+            //On fait une requête pour vérifier si l'objet choisit existe
             $itemQuery = $bdd->prepare('SELECT * FROM car_items 
             WHERE itemId = ?');
             $itemQuery->execute([$adminMonsterDropItemId]);
@@ -44,6 +44,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
             //Si l'objet existe
             if ($itemRow == 1) 
             {
+                //On fait une boucle sur tous les résultats
                 while ($item = $itemQuery->fetch())
                 {
                     $adminMonsterDropItemName = stripslashes($item['itemName']);
@@ -62,7 +63,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                     //Si l'utilisateur à cliqué sur le bouton edit
                     if (isset($_POST['edit']))
                     {
-                        //On récupère le taux d'obtention de l'objet/équipement
+                        //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                         while ($monsterDrop = $monsterDropQuery->fetch())
                         {
                             $adminMonsterDropItemVisible = stripslashes($monsterDrop['monsterDropItemVisible']);
@@ -74,10 +75,8 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                         <h4><?php echo $adminMonsterDropItemName ?></h4><br />
                         
                         <form method="POST" action="editMonsterDrop.php">
+                            Objet visible dans le bestiaire ? : <select name="adminMonsterDropItemVisible" class="form-control">
                             
-                                <label for="adminMonsterDropItemVisible" class="col-2 col-form-label">Objet visible dans le bestiaire ?</label>
-                                <select class="form-control" id="adminMonsterDropItemVisible" name="adminMonsterDropItemVisible">
-                                
                                 <?php
                                 switch ($adminMonsterDropItemVisible)
                                 {
@@ -100,17 +99,11 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                                     break;
                                 }
                                 ?>
-                                
-                                </select>
                             
+                            </select>
+                            Taux d'obtention (en pourcentage) : <input type="number" name="adminMonsterDropRate" class="form-control" placeholder="Taux d'obtention (en pourcentage)" value="<?php echo $adminMonsterDropRate ?>" required>
+                            Taux visible dans le bestiaire ? : <select name="adminMonsterDropRateVisible" class="form-control">
                             
-                                <label for="example-text-input" class="col-2 col-form-label">Taux d'obtention (en pourcentage)</label>
-                                <input type="number" name="adminMonsterDropRate" class="form-control" placeholder="Taux d'obtention (en pourcentage)" value="<?php echo $adminMonsterDropRate ?>" required>
-                            
-                            
-                                <label for="adminMonsterDropRateVisible" class="col-2 col-form-label">Taux visible dans le bestiaire ?</label>
-                                <select class="form-control" id="adminMonsterDropRateVisible" name="adminMonsterDropRateVisible">
-                                
                                 <?php
                                 switch ($adminMonsterDropRateVisible)
                                 {
@@ -133,9 +126,8 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                                     break;
                                 }
                                 ?>
-                                
-                                </select>
                             
+                            </select>
                             <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
                             <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropItemId" value="<?= $adminMonsterDropItemId ?>">
                             <input type="submit" class="btn btn-default form-control" name="finalEdit" value="Mettre à jour">
@@ -148,7 +140,8 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                     {
                         ?>
                         
-                        <p>ATTENTION</p> 
+                        <p>ATTENTION</p>
+                        
                         Vous êtes sur le point de retirer l'objet <em><?php echo $adminMonsterDropItemName ?></em> du monstre <em><?php echo $adminMonsterDropMonsterName ?></em><br />
                         confirmez-vous ?
 

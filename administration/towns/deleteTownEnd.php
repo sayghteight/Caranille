@@ -17,7 +17,7 @@ if (isset($_POST['adminTownId'])
         //On récupère l'id du formulaire précédent
         $adminTownId = htmlspecialchars(addslashes($_POST['adminTownId']));
 
-        //On fait une requête pour vérifier si la ville choisi existe
+        //On fait une requête pour vérifier si la ville choisit existe
         $townQuery = $bdd->prepare('SELECT * FROM car_towns
         WHERE townId = ?');
         $townQuery->execute([$adminTownId]);
@@ -49,14 +49,12 @@ if (isset($_POST['adminTownId'])
             WHERE characterTownId = ?');
             $characterTownQuery->execute([$adminTownId]);
 
-            //Pour chaque joueur trouvé
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($characterTown = $characterTownQuery->fetch())
             {
                 $adminCharacterId = stripslashes($characterTown['characterId']);
                 $adminCharacterName = stripslashes($characterTown['characterName']);
-                
-                echo "Le joueur $adminCharacterName était dans cette ville et a été téléporté à la carte du monde<br />";
-                
+
                 //On met à jour les personnages
                 $updateCharacter = $bdd->prepare("UPDATE car_characters SET
                 characterTownId = 0
@@ -65,6 +63,11 @@ if (isset($_POST['adminTownId'])
                 $updateCharacter->execute(array(
                 'adminCharacterId' => $adminCharacterId));
                 $updateCharacter->closeCursor();
+                ?>
+                
+                Le joueur $adminCharacterName était dans cette ville et a été téléporté à la carte du monde<br />
+                
+                <?php
             }
             ?>
 

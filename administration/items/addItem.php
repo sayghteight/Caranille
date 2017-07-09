@@ -12,6 +12,7 @@ if (isset($_POST['add']))
     ?>
     
     <p>Informations de l'objets</p>
+    
     <form method="POST" action="addItemEnd.php">
         Image : <input type="text" name="adminItemPicture" class="form-control" placeholder="Image" required>
         Nom : <input type="text" name="adminItemName" class="form-control" placeholder="Nom" required>

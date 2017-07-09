@@ -17,7 +17,7 @@ if (isset($_POST['adminTownId'])
         //On récupère l'id du formulaire précédent
         $adminTownId = htmlspecialchars(addslashes($_POST['adminTownId']));
 
-        //On fait une requête pour vérifier si la ville choisi existe
+        //On fait une requête pour vérifier si la ville choisit existe
         $townQuery = $bdd->prepare('SELECT * FROM car_towns 
         WHERE townId = ?');
         $townQuery->execute([$adminTownId]);
@@ -26,15 +26,19 @@ if (isset($_POST['adminTownId'])
         //Si la ville existe
         if ($townRow == 1) 
         {
-            //On fait une recherche dans la base de donnée de tous les comptes
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($town = $townQuery->fetch())
             {
+                $adminTownPicture = stripslashes($town['townPicture']);
                 $adminTownName = stripslashes($town['townName']);
             }
             $townQuery->closeCursor();
             ?>
+
+            <p><img src="<?php echo $adminTownPicture; ?>" height="100" width="100"></p>
             
             <p>ATTENTION</p> 
+            
             Vous êtes sur le point de supprimer la ville <em><?php echo $adminTownName ?></em><br />
             confirmez-vous la suppression ?
 

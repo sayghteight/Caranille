@@ -17,7 +17,7 @@ if (isset($_POST['adminItemId'])
         //On récupère l'id du formulaire précédent
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
 
-        //On fait une requête pour vérifier si l'objet choisi existe
+        //On fait une requête pour vérifier si l'objet choisit existe
         $itemQuery = $bdd->prepare('SELECT * FROM car_items 
         WHERE itemId = ?');
         $itemQuery->execute([$adminItemId]);
@@ -26,7 +26,7 @@ if (isset($_POST['adminItemId'])
         //Si l'objet existe
         if ($itemRow == 1) 
         {
-            //On fait une boucle pour récupérer toutes les informations
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($item = $itemQuery->fetch())
             {
                 //On récupère les informations de l'objet
@@ -41,15 +41,18 @@ if (isset($_POST['adminItemId'])
             }
             ?>
 
+            <p><img src="<?php echo $adminItemPicture; ?>" height="100" width="100"></p>
+
             <p>Informations de l'objet</p>
+            
             <form method="POST" action="editItemEnd.php">
                 Image : <input type="mail" name="adminItemPicture" class="form-control" placeholder="Image" value="<?php echo $adminItemPicture; ?>" required>
                 Nom : <input type="text" name="adminItemName" class="form-control" placeholder="Nom" value="<?php echo $adminItemName; ?>" required>
                 Description : <br> <textarea class="form-control" name="adminItemDescription" id="adminItemDescription" rows="3" required><?php echo $adminItemDescription; ?></textarea>
-                HP : <input type="mail" name="adminItemHpEffects" class="form-control" placeholder="HP Bonus" value="<?php echo $adminItemHpEffects; ?>" required>
-                MP : <input type="mail" name="adminItemMpEffect" class="form-control" placeholder="MP Bonus" value="<?php echo $adminItemMpEffect; ?>" required>
-                Prix d'achat : <input type="mail" name="adminItemPurchasePrice" class="form-control" placeholder="Prix d'achat" value="<?php echo $adminItemPurchasePrice; ?>" required>
-                Prix de vente : <input type="mail" name="adminItemSalePrice" class="form-control" placeholder="Prix de vente" value="<?php echo $adminItemSalePrice; ?>" required>
+                HP : <input type="number" name="adminItemHpEffects" class="form-control" placeholder="HP Bonus" value="<?php echo $adminItemHpEffects; ?>" required>
+                MP : <input type="number" name="adminItemMpEffect" class="form-control" placeholder="MP Bonus" value="<?php echo $adminItemMpEffect; ?>" required>
+                Prix d'achat : <input type="number" name="adminItemPurchasePrice" class="form-control" placeholder="Prix d'achat" value="<?php echo $adminItemPurchasePrice; ?>" required>
+                Prix de vente : <input type="number" name="adminItemSalePrice" class="form-control" placeholder="Prix de vente" value="<?php echo $adminItemSalePrice; ?>" required>
                 <input type="hidden" name="adminItemId" value="<?= $adminItemId ?>">
                 <input name="finalEdit" class="btn btn-default form-control" type="submit" value="Modifier">
             </form>

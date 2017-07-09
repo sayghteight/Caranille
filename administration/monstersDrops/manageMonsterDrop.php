@@ -17,7 +17,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
         //On récupère l'id du formulaire précédent
         $adminMonsterDropMonsterId = htmlspecialchars(addslashes($_POST['adminMonsterDropMonsterId']));
 
-        //On fait une requête pour vérifier si le monstre choisi existe
+        //On fait une requête pour vérifier si le monstre choisit existe
         $monsterQuery = $bdd->prepare('SELECT * FROM car_monsters 
         WHERE monsterId = ?');
         $monsterQuery->execute([$adminMonsterDropMonsterId]);
@@ -40,25 +40,25 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                 ?>
                 
                 <form method="POST" action="editDeleteMonsterDrop.php">
-                    
-                        <label for="townMonsterMonsterId" class="col-2 col-form-label">Liste des objets/équipements du monstre</label>
-                        <select class="form-control" id="adminMonsterDropItemId" name="adminMonsterDropItemId">
-                            
-                            <?php
-                            while ($monsterDrop = $monsterDropQuery->fetch())
-                            {
-                                $adminMonsterDropItemId = stripslashes($monsterDrop['itemId']);
-                                $adminMonsterDropItemName = stripslashes($monsterDrop['itemName']);
-                                $adminMonsterDropRate = stripslashes($monsterDrop['monsterDropRate']);?>
-                                ?>
-                                    <option value="<?php echo $adminMonsterDropItemId ?>"><?php echo "$adminMonsterDropItemName (Obtention: $adminMonsterDropRate%)"; ?></option>
-                                <?php
-                            }
-                            $monsterDropQuery->closeCursor();
-                            ?>
-                            
-                        </select>
-                    
+                    Liste des objets/équipements du monstre : <select name="adminMonsterDropItemId" class="form-control">
+                        
+                    <?php
+                    //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+                    while ($monsterDrop = $monsterDropQuery->fetch())
+                    {
+                        $adminMonsterDropItemId = stripslashes($monsterDrop['itemId']);
+                        $adminMonsterDropItemName = stripslashes($monsterDrop['itemName']);
+                        $adminMonsterDropRate = stripslashes($monsterDrop['monsterDropRate']);
+                        ?>
+
+                            <option value="<?php echo $adminMonsterDropItemId ?>"><?php echo "$adminMonsterDropItemName (Obtention: $adminMonsterDropRate%)"; ?></option>
+
+                        <?php
+                    }
+                    $monsterDropQuery->closeCursor();
+                    ?>
+                        
+                    </select>
                     <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
                     <input type="submit" name="edit" class="btn btn-default form-control" value="Modifier">
                     <input type="submit" name="delete" class="btn btn-default form-control" value="Retirer">
@@ -80,42 +80,32 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                 ?>
                 
                 <form method="POST" action="addMonsterDrop.php">
-                    
-                        <label for="adminMonsterDropItemId" class="col-2 col-form-label">Objets/équipements existant</label>
-                        <select class="form-control" id="adminMonsterDropItemId" name="adminMonsterDropItemId">
+                    Objets/équipements existant : <select name="adminMonsterDropItemId" class="form-control">
                             
-                            <?php
-                            while ($item = $itemQuery->fetch())
-                            {
-                                $adminMonsterDropItemId = stripslashes($item['itemId']);
-                                $adminMonsterDropItemName = stripslashes($item['itemName']);?>
-                                ?>
-                                    <option value="<?php echo $adminMonsterDropItemId ?>"><?php echo "$adminMonsterDropItemName"; ?></option>
-                                <?php
-                            }
-                            $itemQuery->closeCursor();
+                        <?php
+                        while ($item = $itemQuery->fetch())
+                        {
+                            $adminMonsterDropItemId = stripslashes($item['itemId']);
+                            $adminMonsterDropItemName = stripslashes($item['itemName']);
                             ?>
+
+                                <option value="<?php echo $adminMonsterDropItemId ?>"><?php echo "$adminMonsterDropItemName"; ?></option>
+                                
+                            <?php
+                        }
+                        $itemQuery->closeCursor();
+                        ?>
                             
-                        </select>
-                    
-                    
-                        <label for="adminMonsterDropItemVisible" class="col-2 col-form-label">Objet visible dans le bestiaire ?</label>
-                        <select class="form-control" id="adminMonsterDropItemVisible" name="adminMonsterDropItemVisible">                            
-                            <option value="Yes">Oui</option>
-                            <option value="No">Non</option>
-                        </select>
-                    
-                    
-                        <label for="example-text-input" class="col-2 col-form-label">Taux d'obtention (en pourcentage)</label>
-                        <input type="number" name="adminMonsterDropRate" class="form-control" placeholder="Taux d'obtention (en pourcentage)" value="0" required>
-                    
-                    
-                        <label for="adminMonsterDropRateVisible" class="col-2 col-form-label">Taux visible dans le bestiaire ?</label>
-                        <select class="form-control" id="adminMonsterDropRateVisible" name="adminMonsterDroRateVisible">
-                            <option value="Yes">Oui</option>
-                            <option value="No">Non</option>
-                        </select>
-                    
+                    </select>
+                    Objet visible dans le bestiaire ? : <select name="adminMonsterDropItemVisible" class="form-control">                        
+                        <option value="Yes">Oui</option>
+                        <option value="No">Non</option>
+                    </select>
+                    Taux d'obtention (en pourcentage) : <input type="number" name="adminMonsterDropRate" class="form-control" placeholder="Taux d'obtention (en pourcentage)" required>
+                    Taux visible dans le bestiaire ? : <select name="adminMonsterDropRateVisible" class="form-control">
+                        <option value="Yes">Oui</option>
+                        <option value="No">Non</option>
+                    </select>
                     <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
                     <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter cet objet/équipement">
                 </form>

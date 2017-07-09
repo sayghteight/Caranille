@@ -17,7 +17,7 @@ if (isset($_POST['adminAccountId'])
         //On récupère l'id du compte
         $adminAccountId = htmlspecialchars(addslashes($_POST['adminAccountId']));
 
-        //On fait une requête pour vérifier si le compte choisi existe
+        //On fait une requête pour vérifier si le compte choisit existe
         $accountQuery = $bdd->prepare('SELECT * FROM car_accounts 
         WHERE accountId = ?');
         $accountQuery->execute([$adminAccountId]);
@@ -26,7 +26,7 @@ if (isset($_POST['adminAccountId'])
         //Si le compte existe
         if ($account == 1) 
         {
-            //On récupère son pseudo
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($account = $accountQuery->fetch())
             {
                 $adminAccountPseudo = stripslashes($account['accountPseudo']);
@@ -34,6 +34,7 @@ if (isset($_POST['adminAccountId'])
             ?>
             
             <p>ATTENTION</p> 
+
             Vous êtes sur le point de supprimer le compte <em><?php echo $adminAccountPseudo ?></em><br />
             confirmez-vous la suppression ?
 
