@@ -14,7 +14,7 @@ if (isset($_POST['battleMonsterId']))
     if (ctype_digit($_POST['battleMonsterId'])
     && $_POST['battleMonsterId'] >= 1)
     {
-        //On récupère l'id du monstre
+        //On récupère l'id du formulaire précédent
         $opponentId = htmlspecialchars(addslashes($_POST['battleMonsterId']));
 
         //On fait une requête pour vérifier si le monstre est bien disponible dans la ville du joueur
@@ -31,7 +31,7 @@ if (isset($_POST['battleMonsterId']))
         {
             while ($opponent = $opponentQuery->fetch())
             {
-                //On récupère les HP et MP du monstre
+                //On récupère les informations du monstre
                 $opponentHp = $opponent['monsterHp'];
                 $opponentMp = $opponent['monsterMp'];
             }

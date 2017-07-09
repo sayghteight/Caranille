@@ -75,7 +75,6 @@ if (isset($_POST['adminTownMonsterTownId'])
                 //Si le monstre est déjà dans cette ville
                 else
                 {
-                    //Si le joueur a essayé de mettre un monstre qui est déjà dans la ville on lui donne la possibilité de revenir en arrière
                     ?>
                     
                     Erreur: Ce monstre est déjà dans cette ville
@@ -92,14 +91,14 @@ if (isset($_POST['adminTownMonsterTownId'])
             //Si le monstre existe pas
             else
             {
-                echo "Erreur: Monstre indisponible";
+                echo "Erreur: Ce monstre n'existe pas";
             }
             $monsterQuery->closeCursor();
         }
         //Si la ville existe pas
         else
         {
-            echo "Erreur: Ville indisponible";
+            echo "Erreur: Cette ville n'existe pas";
         }
         $townQuery->closeCursor();
     }

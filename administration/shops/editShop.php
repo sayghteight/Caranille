@@ -29,6 +29,7 @@ if (isset($_POST['adminShopId'])
             //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($shop = $shopQuery->fetch())
             {
+                //On récupère les informations du magasin
                 $adminShopPicture = stripslashes($shop['shopPicture']);
                 $adminShopName = stripslashes($shop['shopName']);
                 $adminShopDescription = stripslashes($shop['shopDescription']);
@@ -58,7 +59,7 @@ if (isset($_POST['adminShopId'])
         //Si le magasin n'exite pas
         else
         {
-            echo "Erreur: Magasin indisponible";
+            echo "Erreur: Ce magasin n'existe pas";
         }
         $shopQuery->closeCursor();
     }

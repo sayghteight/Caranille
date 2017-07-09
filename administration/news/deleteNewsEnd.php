@@ -46,7 +46,7 @@ if (isset($_POST['adminNewsId'])
         //Si la news n'exite pas
         else
         {
-            echo "Erreur: News indisponible";
+            echo "Erreur: Cette news n'existe pas";
         }
         $newsQuery->closeCursor();
     }

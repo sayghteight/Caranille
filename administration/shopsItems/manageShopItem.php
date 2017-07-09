@@ -47,19 +47,17 @@ if (isset($_POST['adminShopItemShopId'])
                         //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                         while ($townShop = $townShopQuery->fetch())
                         {
+                            //On récupère les informations des objets
                             $adminShopItemItemId = stripslashes($townShop['itemId']);
                             $adminShopItemItemName = stripslashes($townShop['itemName']);
                             $adminShopItemDiscount = stripslashes($townShop['shopItemDiscount']);
                             ?>
-
-                                <option value="<?php echo $adminShopItemItemId ?>"><?php echo "$adminShopItemItemName (Réduction: $adminShopItemDiscount%)"; ?></option>
-
+                            <option value="<?php echo $adminShopItemItemId ?>"><?php echo "$adminShopItemItemName (Réduction: $adminShopItemDiscount%)"; ?></option>
                             <?php
                         }
                         ?>
                         
                     </select>
-                    
                     <input type="hidden" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
                     <input type="submit" name="edit" class="btn btn-default form-control" value="Modifier la réduction">
                     <input type="submit" name="delete" class="btn btn-default form-control" value="Retirer l'objet">
@@ -87,12 +85,11 @@ if (isset($_POST['adminShopItemShopId'])
                         //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                         while ($item = $itemQuery->fetch())
                         {
+                            //On récupère les informations des objets
                             $adminShopItemItemId = stripslashes($item['itemId']);
                             $adminShopItemItemName = stripslashes($item['itemName']);
                             ?>
-
-                                <option value="<?php echo $adminShopItemItemId ?>"><?php echo "$adminShopItemItemName"; ?></option>
-
+                            <option value="<?php echo $adminShopItemItemId ?>"><?php echo "$adminShopItemItemName"; ?></option>
                             <?php
                         }
                         ?>

@@ -41,9 +41,10 @@ if (isset($_POST['itemId'])
             //Si le personnage possède cet objet
             if ($equipmentInventoryRow == 1) 
             {
-                //On fait une boucle sur les résultats et on vérifie à chaque fois de quel type d'équipement il s'agit
+                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                 while ($equipmentInventory = $equipmentInventoryQuery->fetch())
                 {
+                    //On récupère les informations de l'équippement
                     $equipmentId = stripslashes($equipmentInventory['itemId']);
                     $equipmentRaceId = stripslashes($equipmentInventory['itemRaceId']);
                     $equipmentPicture = stripslashes($equipmentInventory['itemPicture']);
@@ -73,7 +74,7 @@ if (isset($_POST['itemId'])
                         $raceQuery->execute([$equipmentRaceId]);
                         while ($race = $raceQuery->fetch())
                         {
-                            //On récupère le nom de la classe
+                            //On récupère les informations de la classe
                             $equipmentRaceName = stripslashes($race['raceName']);
                         }
                         $raceQuery->closeCursor();
@@ -193,10 +194,10 @@ if (isset($_POST['itemId'])
                                         {
                                             ?>
                                             
-                                                <form method="POST" action="equipItem.php">
-                                                    <input type="hidden" name="itemId" value="<?php echo $itemId ?>">
-                                                    <input type="submit" class="btn btn-default form-control" name="equip" value="Equiper">
-                                                </form> 
+                                            <form method="POST" action="equipItem.php">
+                                                <input type="hidden" name="itemId" value="<?php echo $itemId ?>">
+                                                <input type="submit" class="btn btn-default form-control" name="equip" value="Equiper">
+                                            </form> 
                                                 
                                             <?php
                                         }
@@ -218,12 +219,12 @@ if (isset($_POST['itemId'])
                                 {
                                     ?>
                                     
-                                        Cet équipement est actuellement équippé
-                                        
-                                        <form method="POST" action="unEquip.php">
-                                            <input type="hidden" name="itemId" value="<?php echo $itemId ?>">
-                                            <input type="submit" class="btn btn-default form-control" name="unEquip" value="Déséquiper">
-                                        </form>
+                                    Cet équipement est actuellement équippé
+                                    
+                                    <form method="POST" action="unEquip.php">
+                                        <input type="hidden" name="itemId" value="<?php echo $itemId ?>">
+                                        <input type="submit" class="btn btn-default form-control" name="unEquip" value="Déséquiper">
+                                    </form>
                                         
                                     <?php
                                 }
@@ -256,7 +257,7 @@ if (isset($_POST['itemId'])
         //Si l'équipement n'existe pas
         else
         {
-            echo "Erreur: Equippement indisponible";
+            echo "Erreur: Cet équippement n'existe pas";
         }
         $equipmentInventoryRow->closeCursor();
     }

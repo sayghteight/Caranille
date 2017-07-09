@@ -75,7 +75,6 @@ if (isset($_POST['adminTownShopTownId'])
                 //Si le magasin est déjà dans cette ville
                 else
                 {
-                    //Si le joueur a essayé de mettre un magasin qui est déjà dans la ville on lui donne la possibilité de revenir en arrière
                     ?>
                     
                     Erreur: Ce magasin est déjà dans cette ville
@@ -92,14 +91,14 @@ if (isset($_POST['adminTownShopTownId'])
             //Si le magasin existe pas
             else
             {
-                echo "Erreur: Magasin indisponible";
+                echo "Erreur: Ce magasin n'existe pas";
             }
             $townShopQuery->closeCursor();
         }
         //Si la ville existe pas
         else
         {
-            echo "Erreur: Ville indisponible";
+            echo "Erreur: Cette ville n'existe pas";
         }
         $shopQuery->closeCursor();
     }

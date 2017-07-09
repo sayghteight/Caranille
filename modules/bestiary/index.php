@@ -24,12 +24,11 @@ if ($monsterBestiaryRow > 0)
             //on récupère les valeurs de chaque monstres qu'on va ensuite mettre dans le menu déroulant
             while ($monsterBestiary = $monsterBestiaryQuery->fetch())
             {
+                //On récupère les informations du monstre
                 $monsterId = stripslashes($monsterBestiary['monsterId']); 
                 $monsterName = stripslashes($monsterBestiary['monsterName']);
                 ?>
-
-                    <option value="<?php echo $monsterId ?>"><?php echo $monsterName ?></option>
-                    
+                <option value="<?php echo $monsterId ?>"><?php echo $monsterName ?></option>
                 <?php
             }
             ?>

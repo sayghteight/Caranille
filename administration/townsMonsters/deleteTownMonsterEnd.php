@@ -77,14 +77,14 @@ if (isset($_POST['adminTownMonsterTownId'])
             //Si le monstre existe pas
             else
             {
-                echo "Erreur: Monstre indisponible";
+                echo "Erreur: Ce monstre n'existe pas";
             }
             $monsterQuery->closeCursor();
         }
         //Si la ville existe pas
         else
         {
-            echo "Erreur: Ville indisponible";
+            echo "Erreur: Cette ville n'existe pas";
         }
         $townQuery->closeCursor();
     }

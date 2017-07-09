@@ -46,12 +46,11 @@ if (isset($_POST['adminTownMonsterTownId'])
                         //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                         while ($townMonster = $townMonsterQuery->fetch())
                         {
+                            //On récupère les informations du monstre
                             $adminTownMonsterMonsterId = stripslashes($townMonster['monsterId']);
                             $adminTownMonsterMonsterName = stripslashes($townMonster['monsterName']);
                             ?>
-
-                                <option value="<?php echo $adminTownMonsterMonsterId ?>"><?php echo "$adminTownMonsterMonsterName"; ?></option>
-
+                            <option value="<?php echo $adminTownMonsterMonsterId ?>"><?php echo "$adminTownMonsterMonsterName"; ?></option>
                             <?php
                         }
                         $townMonsterQuery->closeCursor();
@@ -83,12 +82,11 @@ if (isset($_POST['adminTownMonsterTownId'])
                         //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                         while ($monster = $monsterQuery->fetch())
                         {
+                            //On récupère les informations du monstre
                             $adminTownMonsterMonsterId = stripslashes($monster['monsterId']);
                             $adminTownMonsterMonsterName = stripslashes($monster['monsterName']);
                             ?>
-
-                                <option value="<?php echo $adminTownMonsterMonsterId ?>"><?php echo "$adminTownMonsterMonsterName"; ?></option>
-
+                            <option value="<?php echo $adminTownMonsterMonsterId ?>"><?php echo "$adminTownMonsterMonsterName"; ?></option>
                             <?php
                         }
                         $monsterQuery->closeCursor();

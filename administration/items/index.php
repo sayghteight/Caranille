@@ -17,29 +17,24 @@ $itemRow = $itemQuery->rowCount();
 if ($itemRow > 0) 
 {
     ?>
-    
     <form method="POST" action="manageItem.php">
         Liste des objets : <select name="adminItemId" class="form-control">
-                
             <?php
             //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($item = $itemQuery->fetch())
             {
+                //On récupère les informations de l'objet
                 $adminItemId = stripslashes($item['itemId']);
                 $adminItemName = stripslashes($item['itemName']);
                 ?>
-
-                    <option value="<?php echo $adminItemId ?>"><?php echo "$adminItemName"; ?></option>
-                    
+                <option value="<?php echo $adminItemId ?>"><?php echo "$adminItemName"; ?></option>
                 <?php
             }
             $itemQuery->closeCursor();
             ?>
-                
         </select>
         <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer l'objet">
     </form>
-    
     <?php
 }
 //S'il n'y a actuellement aucun objet on prévient le joueur

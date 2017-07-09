@@ -29,6 +29,7 @@ if (isset($_POST['adminChapterId'])
             //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($chapter = $chapterQuery->fetch())
             {
+                //On récupère les informations du chapitre
                 $adminChapterId = stripslashes($chapter['chapterId']);
                 $adminChapterNumber = stripslashes($chapter['chapterNumber']);
                 $adminChapterTitle = stripslashes($chapter['chapterTitle']);

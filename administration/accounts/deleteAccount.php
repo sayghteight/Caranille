@@ -14,7 +14,7 @@ if (isset($_POST['adminAccountId'])
     if (ctype_digit($_POST['adminAccountId'])
     && $_POST['adminAccountId'] >= 1)
     {
-        //On récupère l'id du compte
+        //On récupère l'id du formulaire précédent
         $adminAccountId = htmlspecialchars(addslashes($_POST['adminAccountId']));
 
         //On fait une requête pour vérifier si le compte choisit existe
@@ -29,6 +29,7 @@ if (isset($_POST['adminAccountId'])
             //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($account = $accountQuery->fetch())
             {
+                //On récupère les informations du compte
                 $adminAccountPseudo = stripslashes($account['accountPseudo']);
             }
             ?>

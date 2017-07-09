@@ -26,6 +26,7 @@ if (isset($_POST['adminItemId'])
         //Si l'équipement existe
         if ($itemRow == 1) 
         {
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($item = $itemQuery->fetch())
             {
                 //On récupère les informations de l'équipement
@@ -55,7 +56,7 @@ if (isset($_POST['adminItemId'])
             $raceQuery->execute([$adminItemRaceId]);
             while ($race = $raceQuery->fetch())
             {
-                //On récupère le nom de la classe
+                //On récupère les informations de la classe
                 $adminRaceId = stripslashes($race['raceId']);
                 $adminRaceName = stripslashes($race['raceName']);
             }
@@ -70,11 +71,13 @@ if (isset($_POST['adminItemId'])
                 Classe <select name="adminItemRaceId" class="form-control">
                     
                     <?php
-                    //Si l'équipement a une classe attribuée on la met par défaut dans le select
+                    //Si l'équipement a une classe attribuée on l'affiche par défaut
                     if (isset($adminRaceId))
                     {
                         ?>
-                        <option selected="selected" value="<?php echo $adminRaceId ?>"><?php echo $adminRaceName ?></option>
+                        
+                            <option selected="selected" value="<?php echo $adminRaceId ?>"><?php echo $adminRaceName ?></option>
+                        
                         <?php
                     }
                     //Si l'équipement n'a pas de classe attribuée c'est qu'il est disponible pour toutes les classes
@@ -100,7 +103,7 @@ if (isset($_POST['adminItemId'])
                         //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                         while ($raceList = $raceListQuery->fetch())
                         {
-                            //on récupère les valeurs de chaque classes qu'on va ensuite mettre dans le menu déroulant
+                            //On récupère les informations de la classe
                             $raceId = stripslashes($raceList['raceId']); 
                             $raceName = stripslashes($raceList['raceName']);
                             ?>
@@ -226,7 +229,7 @@ if (isset($_POST['adminItemId'])
         //Si l'équipement n'exite pas
         else
         {
-            echo "Erreur: Equipement indisponible";
+            echo "Erreur: Cet équipement n'existe pas";
         }
         $itemQuery->closeCursor();
     }

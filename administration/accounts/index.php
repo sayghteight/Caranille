@@ -23,9 +23,7 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
             $adminAccountPseudo = stripslashes($account['accountPseudo']);
             $adminAccountCharacterName =  stripslashes($account['characterName']); ?>
             ?>
-
-                <option value="<?php echo $adminAccountId ?>"><?php echo "$adminAccountCharacterName ($adminAccountPseudo)"; ?></option>
-                
+            <option value="<?php echo $adminAccountId ?>"><?php echo "$adminAccountCharacterName ($adminAccountPseudo)"; ?></option>
             <?php
         }
         $accountQuery->closeCursor();

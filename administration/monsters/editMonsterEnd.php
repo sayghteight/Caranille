@@ -129,7 +129,7 @@ if (isset($_POST['adminMonsterId'])
         //Si le monstre n'exite pas
         else
         {
-            echo "Erreur: Monstre indisponible";
+            echo "Erreur: Ce monstre n'existe pas";
         }
         $monsterQuery->closeCursor();
     }

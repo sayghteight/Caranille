@@ -27,13 +27,11 @@ if ($monsterRow > 0)
             //On fait une boucle sur tous les résultats
             while ($monster = $monsterQueryList->fetch())
             {
-                //on récupère les valeurs de chaque monstres qu'on va ensuite mettre dans le menu déroulant
+                //On récupère les informations du monstre
                 $monsterId = stripslashes($monster['monsterId']); 
                 $monsterName = stripslashes($monster['monsterName']);
                 ?>
-
-                    <option value="<?php echo $monsterId ?>"><?php echo $monsterName ?></option>
-                    
+                <option value="<?php echo $monsterId ?>"><?php echo $monsterName ?></option>
                 <?php
             }
             $monsterQueryList->closeCursor();

@@ -64,6 +64,7 @@ if (isset($_POST['oldPassword'])
         ?>
         
         Les deux mots de passe ne sont pas identiques
+        
         <hr>
         
         <form method="POST" action="index.php">

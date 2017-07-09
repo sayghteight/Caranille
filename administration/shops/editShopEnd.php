@@ -60,7 +60,7 @@ if (isset($_POST['adminShopId'])
         //Si le magasin n'exite pas
         else
         {
-            echo "Erreur: Magasin indisponible";
+            echo "Erreur: Ce magasin n'existe pas";
         }
         $shopQuery->closeCursor();
     }

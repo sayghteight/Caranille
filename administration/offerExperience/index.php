@@ -22,9 +22,7 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
             $adminCharacterId = stripslashes($character['characterId']);
             $adminCharacterName =  stripslashes($character['characterName']);
             ?>
-
-                <option value="<?php echo $adminCharacterId ?>"><?php echo "$adminCharacterName"; ?></option>
-
+            <option value="<?php echo $adminCharacterId ?>"><?php echo "$adminCharacterName"; ?></option>
             <?php
         }
         $characterQuery->closeCursor();
@@ -32,7 +30,7 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
     
     </select>
     Expérience à offrir : <input type="number" name="adminOfferExperience" class="form-control" placeholder="Experience" required>
-    <input type="submit" name="manage" class="btn btn-default form-control" value="Offrir">
+    <input type="submit" name="manage" class="btn btn-default form-control" value="Offrir de l'expérience">
 </form>
 
 <?php require_once("../html/footer.php");

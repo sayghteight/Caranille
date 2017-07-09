@@ -66,7 +66,7 @@ if (isset($_POST['adminChapterId'])
         //Si le chapitre n'exite pas
         else
         {
-            echo "Erreur: Chapitre indisponible";
+            echo "Erreur: Ce chapitre est indisponible";
         }
         $chapterQuery->closeCursor();
     }

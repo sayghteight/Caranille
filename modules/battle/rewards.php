@@ -59,7 +59,7 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
     || $battleType == "Story")
     {
         ?>
-        
+
         -<?php echo $opponentExperience; ?> point(s) d'experience<br />
         -<?php echo $opponentGold; ?> pièce(s) d'or<br />
         
@@ -76,9 +76,10 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
         //S'il existe un ou plusieurs objet pour ce monstre
         if ($opponentDropRow > 0) 
         {
-            //On va tester si le joueur l'obtient
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($opponentDrop = $opponentDropQuery->fetch())
             {
+                //On récupère les informations de l'objet
                 $opponentDropItemId = stripslashes($opponentDrop['itemId']);
                 $opponentDropItemName = stripslashes($opponentDrop['itemName']);
                 $opponentDropRate = stripslashes($opponentDrop['monsterDropRate']);
@@ -150,9 +151,10 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
             //Si le chapitre du joueur existe
             if ($chapterRow == 1)
             {
-                //On récupère la fin du chapitre pour l'afficher au joueur
+                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             	while ($chapter = $chapterQuery->fetch())
             	{
+            	    //On récupère les informations du chapitre
             		$chapterEnding = stripslashes(nl2br($chapter['chapterEnding']));
             	}
             	$chapterQuery->closeCursor();
@@ -196,9 +198,10 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
         //Si le monstre est déjà dans le bestiaire du joueur
         if ($bestiaryRow > 0)
         {
-            //On récupère l'id du bestiaire
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
         	while ($bestiary = $bestiaryQuery->fetch())
         	{
+        	    //On récupère les informations du bestiaire
         		$bestiaryId = stripslashes($bestiary['bestiaryId']);
         	}
 
@@ -266,7 +269,6 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
 //Si le joueur a moins ou a zéro HP et que le monstre à plus de 0 HP
 if ($characterHpMin <= 0 && $battleOpponentHpRemaining > 0)
 {
-    //On prévient le joueur qu'il a perdu
     ?>
     
     <p><?php echo $opponentName; ?> remporte le combat !</p>

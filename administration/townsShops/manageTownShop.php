@@ -46,12 +46,11 @@ if (isset($_POST['adminTownShopTownId'])
                         //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                         while ($townShop = $townShopQuery->fetch())
                         {
+                            //On récupère les informations du magasin
                             $adminTownShopShopId = stripslashes($townShop['shopId']);
                             $adminTownShopShopName = stripslashes($townShop['shopName']);
                             ?>
-
-                                <option value="<?php echo $adminTownShopShopId ?>"><?php echo "$adminTownShopShopName"; ?></option>
-
+                            <option value="<?php echo $adminTownShopShopId ?>"><?php echo "$adminTownShopShopName"; ?></option>
                             <?php
                         }
                         $townShopQuery->closeCursor();
@@ -83,12 +82,11 @@ if (isset($_POST['adminTownShopTownId'])
                             //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                             while ($shop = $shopQuery->fetch())
                             {
+                                //On récupère les informations du magasin
                                 $adminTownShopShopId = stripslashes($shop['shopId']);
                                 $adminTownShopShopName = stripslashes($shop['shopName']);
                                 ?>
-
-                                    <option value="<?php echo $adminTownShopShopId ?>"><?php echo "$adminTownShopShopName"; ?></option>
-
+                                <option value="<?php echo $adminTownShopShopId ?>"><?php echo "$adminTownShopShopName"; ?></option>
                                 <?php
                             }
                             ?>

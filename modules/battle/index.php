@@ -49,14 +49,15 @@ if ($itemRow > 0)
             <select class="form-control" id="itemId" name="itemId">
                 
                 <?php
-                //on récupère les valeurs de chaque joueurs qu'on va ensuite mettre dans le menu déroulant
+                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                 while ($item = $itemQuery->fetch())
                 {
+                    //On récupère les informations de l'objet
                     $itemId = stripslashes($item['itemId']); 
                     $itemName = stripslashes($item['itemName']);
                     $itemQuantity = stripslashes($item['inventoryQuantity']);
                     ?>
-                        <option value="<?php echo $itemId ?>"><?php echo "$itemName ($itemQuantity disponible)"; ?></option>
+                    <option value="<?php echo $itemId ?>"><?php echo "$itemName ($itemQuantity disponible)"; ?></option>
                     <?php
                 }
                 $itemQuery->closeCursor();

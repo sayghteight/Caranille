@@ -4,7 +4,7 @@
 $raceQuery = $bdd->query('SELECT * FROM car_races');
 $raceRow = $raceQuery->rowCount();
 
-//Pour chaque races trouvées on l'affiche
+//On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
 while ($race = $raceQuery->fetch()) 
 {
     ?>

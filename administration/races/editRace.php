@@ -14,7 +14,7 @@ if (isset($_POST['adminRaceId'])
     if (ctype_digit($_POST['adminRaceId'])
     && $_POST['adminRaceId'] >= 1)
     {
-        //On récupère l'id de la race
+        //On récupère l'id du formulaire précédent
         $adminRaceId = htmlspecialchars(addslashes($_POST['adminRaceId']));
 
         //On fait une requête pour vérifier si le compte choisit existe
@@ -23,13 +23,13 @@ if (isset($_POST['adminRaceId'])
         $raceQuery->execute([$adminRaceId]);
         $raceRow = $raceQuery->rowCount();
 
-        //Si la race existe
+        //Si la classe existe
         if ($raceRow == 1) 
         {
-            //On récupères les informations de la race pour le formulaire ci-dessous
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($race = $raceQuery->fetch())
             {
-                //On récupère les informations du compte
+                //On récupère les informations de la classe
                 $adminRacePicture = stripslashes($race['racePicture']);
                 $adminRaceName = stripslashes($race['raceName']);
                 $adminRaceDescription = stripslashes($race['raceDescription']);
@@ -72,7 +72,7 @@ if (isset($_POST['adminRaceId'])
             
             <?php
         }
-        //Si la race n'existe pas
+        //Si la classe n'existe pas
         else
         {
             echo "Erreur: Cette classe n'existe pas";

@@ -72,7 +72,7 @@ if (isset($_POST['adminTownId'])
         //Si la ville n'exite pas
         else
         {
-            echo "Erreur: Ville indisponible";
+            echo "Erreur: Cette ville n'existe pas";
         }
         $townQuery->closeCursor();
     }

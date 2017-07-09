@@ -27,9 +27,10 @@ if (isset($_POST['itemId'])
         //Si le personne possède cet objet
         if ($itemRow == 1) 
         {
-            //On récupère les informations de l'objet
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($item = $itemQuery->fetch())
             {
+                //On récupère les informations de l'objet
                 $inventoryId = stripslashes($item['inventoryId']);
                 $itemQuantity = stripslashes($item['inventoryQuantity']);
                 $itemName = stripslashes($item['itemName']);
@@ -86,6 +87,7 @@ if (isset($_POST['itemId'])
                 //On fait une boucle sur les résultats et on additionne les bonus de tous les équipements équipé
                 while ($equipment = $equipmentEquipedQuery->fetch())
                 {
+                    //On récupère les informations de l'équippement
                     $hpBonus = $hpBonus + stripslashes($equipment['itemHpEffect']);
                     $mpBonus = $mpBonus + stripslashes($equipment['itemMpEffect']);
                     $strengthBonus = $strengthBonus + stripslashes($equipment['itemStrengthEffect']);

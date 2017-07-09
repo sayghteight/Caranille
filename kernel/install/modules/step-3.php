@@ -21,11 +21,11 @@ include("../../config.php");
             //On fait une boucle sur tous les résultats
             while ($raceList = $raceListQuery->fetch())
             {
-                //on récupère les valeurs de chaque classes qu'on va ensuite mettre dans le menu déroulant
+                //On récupère les informations de la classe
                 $raceId = stripslashes($raceList['raceId']); 
                 $raceName = stripslashes($raceList['raceName']);
                 ?>
-                    <option value="<?php echo $raceId ?>"><?php echo $raceName ?></option>
+                <option value="<?php echo $raceId ?>"><?php echo $raceName ?></option>
                 <?php
             }
         }

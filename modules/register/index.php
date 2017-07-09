@@ -15,14 +15,14 @@
         //S'il y a au moins une classe de disponible on les affiches dans le menu déroulant
         if ($raceList >= 1)
         {
-            //On fait une boucle sur tous les résultats
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($raceList = $raceListQuery->fetch())
             {
                 //on récupère les valeurs de chaque classes qu'on va ensuite mettre dans le menu déroulant
                 $raceId = stripslashes($raceList['raceId']); 
                 $raceName = stripslashes($raceList['raceName']);
                 ?>
-                    <option value="<?php echo $raceId ?>"><?php echo $raceName ?></option>
+                <option value="<?php echo $raceId ?>"><?php echo $raceName ?></option>
                 <?php
             }
         }

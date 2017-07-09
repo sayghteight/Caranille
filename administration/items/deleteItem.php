@@ -26,7 +26,7 @@ if (isset($_POST['adminItemId'])
         //Si l'objet existe
         if ($itemRow == 1) 
         {
-            //On fait une recherche dans la base de donnée de tous les comptes
+            //On fait une recherche dans la base de donnée de tous les objets
             $itemQuery = $bdd->prepare("SELECT * FROM car_items
             WHERE itemId = ?");
             $itemQuery->execute([$adminItemId]);
@@ -34,6 +34,7 @@ if (isset($_POST['adminItemId'])
             //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($item = $itemQuery->fetch())
             {
+                ///On récupère les informations de l'objet
                 $adminItemPicture = stripslashes($item['itemPicture']);
                 $adminItemName = stripslashes($item['itemName']);
             }
@@ -65,7 +66,7 @@ if (isset($_POST['adminItemId'])
         //Si l'objet n'exite pas
         else
         {
-            echo "Erreur: Objet indisponible";
+            echo "Erreur: Cet objet n'existe pas";
         }
         $itemQuery->closeCursor();
     }

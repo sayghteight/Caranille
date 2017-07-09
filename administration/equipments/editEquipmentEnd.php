@@ -68,7 +68,9 @@ if (isset($_POST['adminItemId'])
         //Si l'équipement existe
         if ($itemRow == 1) 
         {
+            //On récupère l'id du formulaire précédent
             $adminItemRaceId = htmlspecialchars(addslashes($_POST['adminItemRaceId']));
+            
             //Si la classe choisit est supérieur à zéro c'est que l'équipement est dedié à une classe
             if ($adminItemRaceId > 0)
             {
@@ -150,7 +152,7 @@ if (isset($_POST['adminItemId'])
                 'adminItemId' => $adminItemId]);
                 $updateItems->closeCursor();
 
-                //On cherche à savoir quel joueur à cet équipement et S'il en est équippé pour appliquer la mise à jour
+                //On cherche à savoir quel sont les joueurs qui ont cet équipement pour leur modifier les bonus de cet équippement
                 $itemQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
                 WHERE itemId = inventoryItemId
                 AND inventoryEquipped = 1
@@ -164,7 +166,7 @@ if (isset($_POST['adminItemId'])
                     //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                     while ($item = $itemQuery->fetch())
                     {   
-                        //On récupère l'id du personnage
+                        //On récupère les informations du personnage
                         $adminCharacterId = stripslashes($item['inventoryCharacterId']);
 
                         //On remet les stats du joueurs à zéro pour recalculer ensuite le bonus de tous les équipements équippé
@@ -237,7 +239,7 @@ if (isset($_POST['adminItemId'])
                         'adminCharacterId' => $adminCharacterId));
                         $updateCharacter->closeCursor();
 
-                        //On va maintenant finir par actualiser tous le personnage
+                        //On actualise le personnage
                         $updateCharacter = $bdd->prepare('UPDATE car_characters
                         SET characterHpTotal = characterHpMax + characterHpSkillPoints + characterHpBonus + characterHpEquipments + characterHpGuild,
                         characterMpTotal = characterMpMax + characterMpSkillPoints + characterMpBonus + characterMpEquipments + characterMpGuild,

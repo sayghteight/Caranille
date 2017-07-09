@@ -59,7 +59,7 @@ if (isset($_POST['add']))
     //S'il n'y a aucun monstre dans le jeu
     else
     {
-        echo "Impossible de créer un chapitre si votre jeu ne possède aucun monstre";
+        echo "Erreur: Impossible de créer un chapitre si votre jeu ne possède aucun monstre";
     }
 }
 //Si l'utilisateur n'a pas cliqué sur le bouton edit

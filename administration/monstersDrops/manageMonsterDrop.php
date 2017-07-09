@@ -46,13 +46,12 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                     //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                     while ($monsterDrop = $monsterDropQuery->fetch())
                     {
+                        //On récupère les informations des objets du monstre
                         $adminMonsterDropItemId = stripslashes($monsterDrop['itemId']);
                         $adminMonsterDropItemName = stripslashes($monsterDrop['itemName']);
                         $adminMonsterDropRate = stripslashes($monsterDrop['monsterDropRate']);
                         ?>
-
-                            <option value="<?php echo $adminMonsterDropItemId ?>"><?php echo "$adminMonsterDropItemName (Obtention: $adminMonsterDropRate%)"; ?></option>
-
+                        <option value="<?php echo $adminMonsterDropItemId ?>"><?php echo "$adminMonsterDropItemName (Obtention: $adminMonsterDropRate%)"; ?></option>
                         <?php
                     }
                     $monsterDropQuery->closeCursor();
@@ -85,12 +84,11 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                         <?php
                         while ($item = $itemQuery->fetch())
                         {
+                            //On récupère les informations des objets
                             $adminMonsterDropItemId = stripslashes($item['itemId']);
                             $adminMonsterDropItemName = stripslashes($item['itemName']);
                             ?>
-
-                                <option value="<?php echo $adminMonsterDropItemId ?>"><?php echo "$adminMonsterDropItemName"; ?></option>
-                                
+                            <option value="<?php echo $adminMonsterDropItemId ?>"><?php echo "$adminMonsterDropItemName"; ?></option>
                             <?php
                         }
                         $itemQuery->closeCursor();
@@ -126,10 +124,10 @@ if (isset($_POST['adminMonsterDropMonsterId'])
             
             <?php
         }
-        //Si l'objet n'exite pas
+        //Si le monstre n'exite pas
         else
         {
-            echo "Erreur: Objet indisponible";
+           echo "Erreur: Ce monstre n'existe pas";
         }
     }
     //Si tous les champs numérique ne contiennent pas un nombre

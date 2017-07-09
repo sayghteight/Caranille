@@ -27,9 +27,7 @@ if ($townRow > 0)
                 $adminTownId = stripslashes($town['townId']);
                 $adminTownName = stripslashes($town['townName']);
                 ?>
-
-                    <option value="<?php echo $adminTownId ?>"><?php echo "$adminTownName"; ?></option>
-
+                <option value="<?php echo $adminTownId ?>"><?php echo $adminTownName; ?></option>
                 <?php
             }
             ?>

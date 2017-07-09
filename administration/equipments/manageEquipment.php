@@ -34,10 +34,10 @@ if (isset($_POST['adminItemId'])
             //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($item = $itemQuery->fetch())
             {
+                //On récupère les informations de l'équipement
                 $adminItemName = stripslashes($item['itemName']);
             }
             $itemQuery->closeCursor();
-
             ?>
             
             Que souhaitez-vous faire de l'équipement <em><?php echo $adminItemName ?></em> ?
@@ -64,7 +64,7 @@ if (isset($_POST['adminItemId'])
         //Si l'équipement n'exite pas
         else
         {
-            echo "Erreur: Equippement indisponible";
+            echo "Erreur: Cet équipement n'existe pas";
         }
         $itemQuery->closeCursor();
     }

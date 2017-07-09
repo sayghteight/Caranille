@@ -29,6 +29,7 @@ if (isset($_POST['adminTownId'])
             //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($town = $townQuery->fetch())
             {
+                //On récupère les informations de la ville
                 $adminTownPicture = stripslashes($town['townPicture']);
                 $adminTownName = stripslashes($town['townName']);
                 $adminTownDescription = stripslashes($town['townDescription']);
@@ -62,7 +63,7 @@ if (isset($_POST['adminTownId'])
         //Si la ville n'exite pas
         else
         {
-            echo "Erreur: Ville indisponible";
+            echo "Erreur: Cette ville n'existe pas";
         }
         $townQuery->closeCursor();
     }

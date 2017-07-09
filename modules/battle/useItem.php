@@ -36,9 +36,10 @@ if (isset($_POST['itemId'])
             //Si le personne possède cet objet
             if ($itemRow == 1) 
             {
-                //On récupère les informations de l'objet
+                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                 while ($item = $itemQuery->fetch())
                 {
+                    //On récupère les informations de l'objet
                     $inventoryId = stripslashes($item['inventoryId']);
                     $itemId = stripslashes($item['itemId']);
                     $itemName = stripslashes($item['itemName']);

@@ -66,6 +66,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                         //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                         while ($monsterDrop = $monsterDropQuery->fetch())
                         {
+                            //On récupère les informations des objets du monstre
                             $adminMonsterDropItemVisible = stripslashes($monsterDrop['monsterDropItemVisible']);
                             $adminMonsterDropRate = stripslashes($monsterDrop['monsterDropRate']);
                             $adminMonsterDropRateVisible = stripslashes($monsterDrop['monsterDropRateVisible']);
@@ -184,7 +185,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
         //Si le monstre existe pas
         else
         {
-            echo "Erreur: Monstre indisponible";
+            echo "Erreur: Ce monstre n'existe pas";
         }
         $monsterQuery->closeCursor();
     }

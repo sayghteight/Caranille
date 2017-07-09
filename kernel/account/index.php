@@ -9,6 +9,7 @@ $accountQuery->execute([$accountId]);
 //On fait une boucle pour récupérer les résultats
 while ($account = $accountQuery->fetch())
 {
+    //On récupère les informations du compte
     $accountId = stripslashes($account['accountId']);
     $accountPseudo = stripslashes($account['accountPseudo']);
     $accountEmail = stripslashes($account['accountEmail']);

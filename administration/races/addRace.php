@@ -12,6 +12,7 @@ if (isset($_POST['add']))
     ?>
     
     <p>Informations de la classe</p>
+    
     <form method="POST" action="addRaceEnd.php">
         Image : <input type="text" name="adminRacePicture" class="form-control" placeholder="Nom" required autofocus>
         Nom : <input type="text" name="adminRaceName" class="form-control" placeholder="Nom" required autofocus>

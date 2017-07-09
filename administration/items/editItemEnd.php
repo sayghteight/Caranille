@@ -84,7 +84,7 @@ if (isset($_POST['adminItemId'])
         //Si l'objet n'exite pas
         else
         {
-            echo "Erreur: Objet indisponible";
+            echo "Erreur: Cet objet n'existe pas";
         }
         $itemQuery->closeCursor();
     }

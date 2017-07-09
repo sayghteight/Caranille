@@ -34,7 +34,7 @@ if (isset($_POST['adminMonsterId'])
             //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($monster = $monsterQuery->fetch())
             {
-                //On récupère le nom du monstre
+                //On récupère les informations du monstre
                 $adminMonsterName = stripslashes($monster['monsterName']);
             }
             $monsterQuery->closeCursor();
@@ -68,7 +68,7 @@ if (isset($_POST['adminMonsterId'])
         //Si le monstre n'exite pas
         else
         {
-            echo "Erreur: Monstre indisponible";
+            echo "Erreur: Ce monstre n'existe pas";
         }
         $monsterQuery->closeCursor();
     }

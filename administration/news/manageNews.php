@@ -29,6 +29,7 @@ if (isset($_POST['adminNewsId'])
             //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($news = $newsQuery->fetch())
             {
+                //On récupère les informations de la news
                 $adminNewsTitle = stripslashes($news['newsTitle']);
             }
             ?>

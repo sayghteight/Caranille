@@ -22,9 +22,7 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
             $adminCharacterId = stripslashes($character['characterId']);
             $adminCharacterName =  stripslashes($character['characterName']); ?>
             ?>
-
-                <option value="<?php echo $adminCharacterId ?>"><?php echo "$adminCharacterName"; ?></option>
-
+            <option value="<?php echo $adminCharacterId ?>"><?php echo "$adminCharacterName"; ?></option>
             <?php
         }
         $characterQuery->closeCursor();
@@ -32,7 +30,7 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
     
     </select>
     Pièces d'or à offrir : <input type="number" name="adminOfferGold" class="form-control" placeholder="Pièces d'or" required>
-    <input type="submit" name="manage" class="btn btn-default form-control" value="Offrir">
+    <input type="submit" name="manage" class="btn btn-default form-control" value="Offrir de l'argent">
 </form>
 
 <?php require_once("../html/footer.php");

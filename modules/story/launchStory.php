@@ -29,9 +29,10 @@ if (isset($_POST['continue']))
         //Si le monstre existe
         if ($opponentRow == 1) 
         {
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($opponent = $opponentQuery->fetch())
             {
-                //On récupère les HP et MP du monstre
+                //On récupère les informations du monstre
                 $opponentId = $opponent['monsterId'];
                 $opponentHp = $opponent['monsterHp'];
                 $opponentMp = $opponent['monsterMp'];
@@ -60,7 +61,7 @@ if (isset($_POST['continue']))
         //Si le monstre n'exite pas
         else
         {
-            echo "Erreur: Monstre indisponible";
+            echo "Erreur: Ce monstre n'existe pas";
         }
     }
     //Si le chapitre n'exite pas

@@ -25,12 +25,11 @@ if ($itemRow > 0)
             //on récupère les valeurs de chaque joueurs qu'on va ensuite mettre dans le menu déroulant
             while ($item = $itemQuery->fetch())
             {
+                //On récupère les informations de l'objet
                 $itemId = stripslashes($item['itemId']); 
                 $itemName = stripslashes($item['itemName']);
                 ?>
-
-                    <option value="<?php echo $itemId ?>"><?php echo $itemName ?></option>
-                    
+                <option value="<?php echo $itemId ?>"><?php echo $itemName ?></option>
                 <?php
             }
             $itemQuery->closeCursor();

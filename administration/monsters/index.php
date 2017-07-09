@@ -26,9 +26,7 @@ if ($monsterRow > 0)
                 $adminMonsterId = stripslashes($monster['monsterId']);
                 $adminMonsterName = stripslashes($monster['monsterName']);
                 ?>
-
-                    <option value="<?php echo $adminMonsterId ?>"><?php echo "$adminMonsterName"; ?></option>
-                    
+                <option value="<?php echo $adminMonsterId ?>"><?php echo "$adminMonsterName"; ?></option>
                 <?php
             }
             $monsterQuery->closeCursor();

@@ -6,7 +6,6 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//On récupère les valeurs de chaque équipements qu'on va ensuite mettre dans le menu déroulant
 //On fait une recherche dans la base de donnée de tous les équipements
 $equipmentQuery = $bdd->query("SELECT * FROM car_items
 WHERE (itemType = 'Armor' 
@@ -26,9 +25,10 @@ if ($equipmentRow > 0)
         Liste des équipements : <select name="adminItemId" class="form-control">
                 
             <?php
-            //On fait une boucle sur tous les résultats
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($equipment = $equipmentQuery->fetch())
             {
+                //On récupère les informations de l'équipement
                 $adminItemId = stripslashes($equipment['itemId']);
                 $adminItemName = stripslashes($equipment['itemName']);
                 ?>

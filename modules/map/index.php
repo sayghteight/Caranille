@@ -23,14 +23,14 @@ if ($townRow >= 1)
         Liste des villes disponible <select name="townId" class="form-control">
             
             <?php
-            //On fait une boucle sur tous les résultats
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($townList = $townQuery->fetch())
             {
                 //on récupère les valeurs de chaque villes qu'on va ensuite mettre dans le menu déroulant
                 $townId = stripslashes($townList['townId']); 
                 $townName = stripslashes($townList['townName']);
                 ?>
-                    <option value="<?php echo $townId ?>"><?php echo $townName ?></option>
+                <option value="<?php echo $townId ?>"><?php echo $townName ?></option>
                 <?php
             }
             $townQuery->closeCursor();

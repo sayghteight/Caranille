@@ -16,7 +16,7 @@ if (isset($_POST['shopId'])
     && $_POST['shopId'] >= 1
     && $_POST['itemId'] >= 1)
     {
-        //On récupère l'id de l'objet ou équipement
+        //On récupère l'id du formulaire précédent
         $shopId = htmlspecialchars(addslashes($_POST['shopId']));
         $itemId = htmlspecialchars(addslashes($_POST['itemId']));
 
@@ -38,9 +38,10 @@ if (isset($_POST['shopId'])
             //Si l'objet existe
             if ($itemRow == 1) 
             {
-                //On récupère les informations de l'objet
+                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                 while ($item = $itemQuery->fetch())
                 {
+                    //On récupère les informations de l'objet
                     $itemRaceId = stripslashes($item['itemRaceId']);
                     $itemType = stripslashes($item['itemType']);
                     $itemLevel = stripslashes($item['itemLevel']);
@@ -88,13 +89,16 @@ if (isset($_POST['shopId'])
                 //On récupère le taux de réduction de l'objet/équipement
                 while ($shopItem = $shopItemQuery->fetch())
                 {
+                    //On récupère les informations du magasin
                     $itemDiscount = stripslashes($shopItem['shopItemDiscount']);
                 }
 
                 $discount = $itemPurchasePrice * $itemDiscount / 100;
                 $itemPurchasePrice = $itemPurchasePrice - $discount; 
                 ?>
+                
                 <table class="table">
+                    
                     <?php
                     //S'il s'agit d'un équipement on affiche la race de celui-ci ainsi que son niveu requis
                     if ($itemType != "Item")
@@ -217,19 +221,20 @@ if (isset($_POST['shopId'])
                     <input type="hidden" class="btn btn-default form-control" name="shopId" value="<?= $shopId ?>">         
                     <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
                 </form>
+                
                 <?php
             }
-            //Si l'objet n'exite pas
+            //Si l'article n'exite pas
             else
             {
-                echo "Erreur: Article indisponible";
+                echo "Erreur: Cet article n'existe pas";
             }
             $itemQuery->closeCursor();
         }
         //Si le magasin n'exite pas
         else
         {
-            echo "Erreur: Magasin indisponible";
+            echo "Erreur: Ce magasin n'existe pas";
         }
         $shopQuery->closeCursor();
     }

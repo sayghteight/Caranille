@@ -9,6 +9,7 @@ $characterQuery->execute([$accountId]);
 //On fait une boucle sur les résultats
 while ($character = $characterQuery->fetch())
 {
+    //On récupère les informations du personnage
     $characterId = stripslashes($character['characterId']);
     $characterAccountId = stripslashes($character['characterAccountId']);
     $characterRaceId = stripslashes($character['characterRaceId']);
@@ -87,6 +88,7 @@ $raceQuery->execute([$characterRaceId]);
 //On récupère les augmentations de statistique lié à la classe
 while ($race = $raceQuery->fetch())
 {
+    //On récupère les informations de la classe
     $characterRaceName = stripslashes($race['raceName']);
     $raceHpBonus = stripslashes($race['raceHpBonus']);
     $raceMpBonus = stripslashes($race['raceMpBonus']);

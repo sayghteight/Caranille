@@ -45,6 +45,7 @@ if (isset($_POST['adminChapterId'])
             //On fait une boucle pour récupérer toutes les information
             while ($monster = $monsterQuery->fetch())
             {
+                //On récupère les informations du monstre
                 $adminMonsterId = stripslashes($monster['monsterId']);
                 $adminMonsterName = stripslashes($monster['monsterName']);
             }
@@ -52,6 +53,7 @@ if (isset($_POST['adminChapterId'])
             ?>
 
             <p>Informations du chapitre</p>
+            
             <form method="POST" action="editChapterEnd.php">
                 Monstre du chapitre <select name="adminChapterMonsterId" class="form-control">
                     <option selected="selected" value="<?php echo $adminMonsterId ?>"><?php echo $adminMonsterName ?>
@@ -71,7 +73,7 @@ if (isset($_POST['adminChapterId'])
                         //On fait une boucle sur tous les résultats
                         while ($monster = $monsterQuery->fetch())
                         {
-                            //on récupère les valeurs de chaque classes qu'on va ensuite mettre dans le menu déroulant
+                            //On récupère les informations du monstre
                             $adminMonsterId = stripslashes($monster['monsterId']); 
                             $adminMonsterName = stripslashes($monster['monsterName']);
                             ?>

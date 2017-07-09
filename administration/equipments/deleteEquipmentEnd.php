@@ -26,7 +26,7 @@ if (isset($_POST['adminItemId'])
         //Si l'équipement existe
         if ($itemRow == 1) 
         {
-            //Avant de supprimer l'équipement On cherche à savoir quel joueur a cet équipement et S'il en est équippé pour appliquer la mise à jour
+            //On cherche à savoir quel sont les joueurs qui ont cet équipement pour leur retirer les bonus de cet équippement
             $itemQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
             WHERE itemId = inventoryItemId
             AND inventoryEquipped = 1
@@ -40,7 +40,7 @@ if (isset($_POST['adminItemId'])
                 //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                 while ($item = $itemQuery->fetch())
                 {   
-                    //On récupère l'id du personnage
+                    //On récupère les informations du personnage
                     $adminCharacterId = stripslashes($item['inventoryCharacterId']);
 
                     //On remet les stats du joueurs à zéro pour recalculer ensuite le bonus de tous les équipements équippé
@@ -77,9 +77,10 @@ if (isset($_POST['adminItemId'])
                     AND inventoryCharacterId = ?");
                     $equipmentEquipedQuery->execute([$adminItemId, $adminCharacterId]);
 
-                    ////On fait une boucle sur le ou les résultats obtenu pour récupérer les informations et on additionne les bonus de tous les équipements actuellement équipé
+                    //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations et on additionne les bonus de tous les équipements actuellement équipé
                     while ($equipment = $equipmentEquipedQuery->fetch())
                     {
+                        //On récupère les informations de l'équippement
                         $hpBonus = $hpBonus + stripslashes($equipment['itemHpEffect']);
                         $mpBonus = $mpBonus + stripslashes($equipment['itemMpEffect']);
                         $strengthBonus = $strengthBonus + stripslashes($equipment['itemStrengthEffect']);
@@ -114,7 +115,7 @@ if (isset($_POST['adminItemId'])
                     'adminCharacterId' => $adminCharacterId));
                     $updateCharacter->closeCursor();
 
-                    //On va maintenant finir par actualiser tous le personnage
+                    //On actualise le personnage
                     $updateCharacter = $bdd->prepare('UPDATE car_characters
                     SET characterHpTotal = characterHpMax + characterHpSkillPoints + characterHpBonus + characterHpEquipments + characterHpGuild,
                     characterMpTotal = characterMpMax + characterMpSkillPoints + characterMpBonus + characterMpEquipments + characterMpGuild,
@@ -162,7 +163,7 @@ if (isset($_POST['adminItemId'])
         //Si l'équipement n'exite pas
         else
         {
-            echo "Erreur: Equipement indisponible";
+            echo "Erreur: Cet équippement n'existe pas";
         }
         $itemQuery->closeCursor();
     }

@@ -44,7 +44,7 @@ if (isset($_POST['adminAccountId'])
             //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($character = $characterQuery->fetch())
             {
-                //On récupère les informations du personnage
+                //On récupère toutes les informations du personnage
                 $adminCharacterId = stripslashes($character['characterId']);
                 $adminCharacterAccountId = stripslashes($character['characterAccountId']);
                 $adminCharacterRaceId = stripslashes($character['characterRaceId']);
@@ -123,6 +123,7 @@ if (isset($_POST['adminAccountId'])
             //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($race = $raceQuery->fetch())
             {
+                //On récupère le nom de la classe du personnage
                 $adminRaceName = stripslashes($race['raceName']);
             }
             $raceQuery->closeCursor();
@@ -138,6 +139,7 @@ if (isset($_POST['adminAccountId'])
                 //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                 while ($town = $townQuery->fetch())
                 {
+                    //On récupère le nom de la ville où se situe le personnage
                     $adminTownName = stripslashes($town['townName']);
                 }
                 $townQuery->closeCursor();
@@ -145,6 +147,7 @@ if (isset($_POST['adminAccountId'])
             //Si adminCharacterTownId à un Id à zéro c'est que le joueur est sur la carte du monde
             else
             {
+                //On met Carte du monde comme nom de ville au personnage
                 $adminTownName = "Carte du monde";
             }
 
@@ -155,7 +158,7 @@ if (isset($_POST['adminAccountId'])
             AND inventoryCharacterId = ?");
             $equipmentEquipedQuery->execute([$adminCharacterId]);
 
-            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations et on vérifi le type d'équipement
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations et on vérifit le type d'équipement
             while ($equipment = $equipmentEquipedQuery->fetch())
             {
                 switch ($equipment['itemType'])

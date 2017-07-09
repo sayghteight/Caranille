@@ -26,9 +26,7 @@ if ($shopRow > 0)
                 $adminShopId = stripslashes($shop['shopId']);
                 $adminShopName = stripslashes($shop['shopName']);
                 ?>
-
-                    <option value="<?php echo $adminShopId ?>"><?php echo "$adminShopName"; ?></option>
-                    
+                <option value="<?php echo $adminShopId ?>"><?php echo "$adminShopName"; ?></option>
                 <?php
             }
             ?>

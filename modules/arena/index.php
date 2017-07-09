@@ -26,13 +26,11 @@ if ($opponentRow > 0)
             //On fait une boucle sur tous les résultats
             while ($opponent = $opponentQuery->fetch())
             {
-                //on récupère les valeurs de chaque joueurs qu'on va ensuite mettre dans le menu déroulant
+                //On récupère les informations du personnage
                 $characterId = stripslashes($opponent['characterId']); 
                 $characterName = stripslashes($opponent['characterName']);
                 ?>
-
-                    <option value="<?php echo $characterId ?>"><?php echo $characterName ?></option>
-                    
+                <option value="<?php echo $characterId ?>"><?php echo $characterName ?></option>
                 <?php
             }
             ?>
@@ -46,11 +44,7 @@ if ($opponentRow > 0)
 //Si aucun joueur n'a été trouvé
 else
 {
-    ?>
-    
-    Il n'y a aucun autre joueur.
-    
-    <?php
+    echo "Il n'y a aucun autre joueur.";
 }
 $opponentQuery->closeCursor();
 

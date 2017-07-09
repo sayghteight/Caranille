@@ -34,6 +34,7 @@ if (isset($_POST['adminMonsterId'])
             //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($monster = $monsterQuery->fetch())
             {
+                //On récupère les informations du monstre
                 $adminMonsterPicture = stripslashes($monster['monsterPicture']);
                 $adminMonsterName = stripslashes($monster['monsterName']);
             }
@@ -45,6 +46,7 @@ if (isset($_POST['adminMonsterId'])
             $monsterChapterQuery->execute([$adminMonsterId]);
             //On recherche combien il y a de monstres disponible
             $monsterChapterRow = $monsterChapterQuery->rowCount();
+            
             $monsterChapterQuery->closeCursor();
             
             //Si ce monstre n'est pas attribué à un chapitre
@@ -92,7 +94,7 @@ if (isset($_POST['adminMonsterId'])
         //Si le monstre n'exite pas
         else
         {
-            echo "Erreur: Monstre indisponible";
+            echo "Erreur: Ce monstre n'existe pas";
         }
         $monsterQuery->closeCursor();
     }

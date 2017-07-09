@@ -37,9 +37,10 @@ if (isset($_POST['itemId'])
             //Si le personnage possède cet objet
             if ($itemInventoryRow == 1) 
             {
-                //On fait une boucle sur les résultats et on vérifie à chaque fois de quel type d'équipement il s'agit
+                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                 while ($itemInventory = $itemInventoryQuery->fetch())
                 {
+                    //On récupère les informations de l'objet
                     $itemId = stripslashes($itemInventory['itemId']);
                     $itemPicture = stripslashes($itemInventory['itemPicture']);
                     $itemType = stripslashes($itemInventory['itemType']);
@@ -151,6 +152,7 @@ if (isset($_POST['itemId'])
                     <form method="POST" action="index.php">
                         <input type="submit" class="btn btn-default form-control" value="Retour">
                     </form>
+                    
                     <?php
                 }
                 $itemInventoryQuery->closeCursor();
@@ -164,7 +166,7 @@ if (isset($_POST['itemId'])
         //Si l'objet n'exite pas
         else
         {
-            echo "Erreur: Objet indisponible";
+            echo "Erreur: Cet objet n'existe pas";
         }
         $itemQuery->closeCursor();
     }

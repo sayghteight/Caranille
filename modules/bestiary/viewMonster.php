@@ -30,6 +30,7 @@ if (isset($_POST['monsterId'])
             //On récupère le nombre de fois que ce monstre a été vaincu
             while ($monsterBestiary = $monsterBestiaryQuery->fetch())
             {
+                //On récupère les informations du monstre
                 $monsterDefeateQuantity = stripslashes($monsterBestiary['bestiaryMonsterQuantity']);
             }
             
@@ -41,6 +42,7 @@ if (isset($_POST['monsterId'])
             
             while ($monster = $monsterQuery->fetch())
             {
+                //On récupère les informations du monstre
                 $monsterId = stripslashes($monster['monsterId']);
                 $monsterPicture = stripslashes($monster['monsterPicture']);
                 $monsterName = stripslashes($monster['monsterName']);

@@ -23,24 +23,23 @@ if ($shopRow > 0)
         Liste des magasins : <select name="shopId" class="form-control">
 
         <?php
-        //On fait une boucle sur tous les résultats
+        //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
         while ($shop = $shopQueryList->fetch())
         {
             //on récupère les valeurs de chaque magasins qu'on va ensuite mettre dans le menu déroulant
             $shopId = stripslashes($shop['shopId']); 
             $shopName = stripslashes($shop['shopName']);
             ?>
-
-                <option value="<?php echo $shopId ?>"><?php echo $shopName ?></option>
-                
+            <option value="<?php echo $shopId ?>"><?php echo $shopName ?></option>
             <?php
         }
         $shopQueryList->closeCursor();
         ?>
 
         </select>
-        <center><input type="submit" name="enter" class="btn btn-default form-control" value="Entrer dans le magasin"></center>
+        <input type="submit" name="enter" class="btn btn-default form-control" value="Entrer dans le magasin">
     </form>
+    
     <?php
 }
 //S'il n'y a aucun magasin de disponible on prévient le joueur

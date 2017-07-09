@@ -30,6 +30,7 @@ if (isset($_POST['itemId'])
             //On récupère les informations de l'équipement
             while ($item = $itemQuery->fetch())
             {
+                //On récupère les informations de l'équippement
                 $inventoryId = stripslashes($item['inventoryId']);
                 $itemRaceId = stripslashes($item['itemRaceId']);
                 $itemType = stripslashes($item['itemType']);
@@ -53,7 +54,7 @@ if (isset($_POST['itemId'])
                 {
                     while ($equipment = $equipmentQuery->fetch())
                     {
-                        //On récupère l'id de l'inventaire dans lequel il est pour la futur requête
+                        //On récupère les informations de l'inventaire
                         $inventoryId = stripslashes($equipment['inventoryId']);
 
                         //On rend l'objet non équippé
@@ -112,6 +113,7 @@ if (isset($_POST['itemId'])
                 //On fait une boucle sur les résultats et on additionne les bonus de tous les équipements actuellement équipé
                 while ($equipment = $equipmentEquipedQuery->fetch())
                 {
+                    //On récupère les informations de l'équippement
                     $hpBonus = $hpBonus + stripslashes($equipment['itemHpEffect']);
                     $mpBonus = $mpBonus + stripslashes($equipment['itemMpEffect']);
                     $strengthBonus = $strengthBonus + stripslashes($equipment['itemStrengthEffect']);

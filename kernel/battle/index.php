@@ -13,7 +13,7 @@ if ($battleRow == 1)
     //On récupères les informations du combat (Id du combat, Id du monstre, Hp et Mp restant au monstre)
     while ($battle = $battleQuery->fetch())
     {
-        //On récupère les variables importante pour la gestion du combat
+        //On récupère les informations du combat
         $battleId = $battle['battleId'];
         $battleOpponentId = $battle['battleOpponentId'];
         $battleType = $battle['battleType'];
@@ -35,6 +35,7 @@ if ($battleRow == 1)
         //On fait une boucle pour récupérer les résultats
         while ($opponent = $opponentQuery->fetch())
         {
+            //On récupère les informations de l'opposant
             $opponentId = stripslashes($opponent['monsterId']);
             $opponentPicture = stripslashes($opponent['monsterPicture']);
             $opponentName = stripslashes($opponent['monsterName']);
@@ -63,6 +64,7 @@ if ($battleRow == 1)
         //On fait une boucle pour récupérer les résultats
         while ($opponent = $opponentQuery->fetch())
         {
+            //On récupère les informations de l'opposant
             $opponentId = stripslashes($opponent['characterId']);
             $opponentPicture = stripslashes($opponent['characterPicture']);
             $opponentName = stripslashes($opponent['characterName']);

@@ -22,13 +22,14 @@ if (isset($_POST['add']))
             $raceListQuery = $bdd->query("SELECT * FROM car_races");
             //On recherche combien il y a de classes disponible
             $raceList = $raceListQuery->rowCount();
+            
             //S'il y a au moins une classe de disponible on les affiches dans le menu déroulant
             if ($raceList >= 1)
             {
                 //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                 while ($raceList = $raceListQuery->fetch())
                 {
-                    //on récupère les valeurs de chaque classes qu'on va ensuite mettre dans le menu déroulant
+                    //On récupère les informations de la classe
                     $raceId = stripslashes($raceList['raceId']); 
                     $raceName = stripslashes($raceList['raceName']);
                     ?>

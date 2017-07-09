@@ -12,6 +12,7 @@ if ($characterTownId >= 1)
     //On fait une boucle sur les résultats
     while ($town = $townQuery->fetch())
     {
+        //On récupère les informations de la ville
         $townId = stripslashes($town['townId']);
         $townPicture = stripslashes($town['townPicture']);
         $townName = stripslashes($town['townName']);

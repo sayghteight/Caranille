@@ -52,6 +52,7 @@ if (isset($_POST['adminTownId'])
             //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($characterTown = $characterTownQuery->fetch())
             {
+                //On récupère les informations des personnages
                 $adminCharacterId = stripslashes($characterTown['characterId']);
                 $adminCharacterName = stripslashes($characterTown['characterName']);
 
@@ -65,7 +66,7 @@ if (isset($_POST['adminTownId'])
                 $updateCharacter->closeCursor();
                 ?>
                 
-                Le joueur $adminCharacterName était dans cette ville et a été téléporté à la carte du monde<br />
+                Le joueur <?php echo $adminCharacterName; ?> était dans cette ville et a été téléporté à la carte du monde<br />
                 
                 <?php
             }
@@ -84,7 +85,7 @@ if (isset($_POST['adminTownId'])
         //Si la ville n'exite pas
         else
         {
-            echo "Erreur: Ville indisponible";
+            echo "Erreur: Cette ville n'existe pas";
         }
         $townQuery->closeCursor();
     }

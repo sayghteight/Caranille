@@ -23,12 +23,11 @@ if ($newsRow > 0)
             //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($news = $newsQuery->fetch())
             {
+                //On récupère les informations de la news
                 $adminNewsId = stripslashes($news['newsId']);
                 $adminNewsTitle = stripslashes($news['newsTitle']);
                 ?>
-
-                    <option value="<?php echo $adminNewsId ?>"><?php echo "$adminNewsTitle"; ?></option>
-                    
+                <option value="<?php echo $adminNewsId ?>"><?php echo "$adminNewsTitle"; ?></option>
                 <?php
             }
             ?>

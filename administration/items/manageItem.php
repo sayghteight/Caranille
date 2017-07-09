@@ -29,10 +29,10 @@ if (isset($_POST['adminItemId'])
             //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($item = $itemQuery->fetch())
             {
+                //On récupère les informations de l'objet
                 $adminItemName = stripslashes($item['itemName']);
             }
             $itemQuery->closeCursor();
-
             ?>
             
             Que souhaitez-vous faire de l'objet <em><?php echo $adminItemName ?></em> ?

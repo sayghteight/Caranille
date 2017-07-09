@@ -16,7 +16,7 @@ if (isset($_POST['shopId'])
     && $_POST['shopId'] >= 1
     && $_POST['itemId'] >= 1)
     {
-        //On récupère l'id de l'objet ou équipement
+        //On récupère l'id du formulaire précédent
         $shopId = htmlspecialchars(addslashes($_POST['shopId']));
         $itemId = htmlspecialchars(addslashes($_POST['itemId']));
 
@@ -38,9 +38,10 @@ if (isset($_POST['shopId'])
             //Si l'objet existe
             if ($itemRow == 1) 
             {
-                //On récupère les informations de l'objet
+                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                 while ($item = $itemQuery->fetch())
                 {
+                    //On récupère les informations de l'objet
                     $itemName = stripslashes($item['itemName']);
                     $itemPurchasePrice = stripslashes($item['itemPurchasePrice']);
                 }
@@ -52,9 +53,10 @@ if (isset($_POST['shopId'])
                 $shopItemQuery->execute([$shopId, $itemId]);
                 $shopItemRow = $shopItemQuery->rowCount();
 
-                //On récupère le taux de réduction de l'objet/équipement
+                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                 while ($shopItem = $shopItemQuery->fetch())
                 {
+                    //On récupère les informations du magasin
                     $itemDiscount = stripslashes($shopItem['shopItemDiscount']);
                 }
 
@@ -75,9 +77,10 @@ if (isset($_POST['shopId'])
                     //Si le personne possède cet objet
                     if ($itemRow == 1) 
                     {
-                        //On récupère les informations de l'inventaire
+                        //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                         while ($item = $itemQuery->fetch())
                         {
+                            //On récupère les informations de l'inventaire
                             $inventoryId = stripslashes($item['inventoryId']);
                             $itemQuantity = stripslashes($item['inventoryQuantity']);
                             $inventoryEquipped = stripslashes($item['inventoryEquipped']);
@@ -117,6 +120,7 @@ if (isset($_POST['shopId'])
                     'characterId' => $characterId));
                     $updatecharacter->closeCursor();
                     ?>
+                    
                     Vous venez d'acheter l'article <?php echo $itemName ?> pour <?php echo $itemPurchasePrice ?> Pièce(s) d'or
 
                     <hr>
@@ -124,11 +128,13 @@ if (isset($_POST['shopId'])
                     <form method="POST" action="index.php">
                         <input type="submit" class="btn btn-default form-control" value="Retour">
                     </form>
+                    
                     <?php
                 }
                 else
                 {
                     ?>
+                    
                     Vous n'avez pas assez d'argent
 
                     <hr>
@@ -136,20 +142,21 @@ if (isset($_POST['shopId'])
                     <form method="POST" action="index.php">
                         <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
                     </form>
+                    
                     <?php
                 }
             }
-            //Si l'objet n'exite pas
+            //Si l'article n'exite pas
             else
             {
-                echo "Erreur: Article indisponible";
+                echo "Erreur: Cet article n'existe pas";
             }
             $itemQuery->closeCursor();
         }
         //Si le magasin n'exite pas
         else
         {
-            echo "Erreur: Magasin indisponible";
+            echo "Erreur: Ce magasin n'existe pas";
         }
         $shopQuery->closeCursor();
     }

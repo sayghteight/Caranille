@@ -14,8 +14,10 @@ $chapterRow = $chapterQuery->rowCount();
 //Si le chapitre du joueur existe
 if ($chapterRow == 1)
 {
+	//On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
 	while ($chapter = $chapterQuery->fetch())
 	{
+		//On récupère les informations du chapitre
 		$chapterId = stripslashes($chapter['chapterId']);
 		$chapterTitle = stripslashes($chapter['chapterTitle']);
 		$chapterOpening = stripslashes(nl2br($chapter['chapterOpening']));
@@ -23,6 +25,7 @@ if ($chapterRow == 1)
 	}
 	$chapterQuery->closeCursor();
 	?>
+	
 	Chapitre <?php echo $chapterId; ?> - <?php echo $chapterTitle; ?>
 	
 	<hr>
@@ -34,6 +37,7 @@ if ($chapterRow == 1)
     <form method="POST" action="launchStory.php">
         <input type="submit" class="btn btn-default form-control" name="continue" value="Continuer">
     </form>
+    
 	<?php
 }
 else 

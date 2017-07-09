@@ -77,16 +77,16 @@ if (isset($_POST['adminTownShopTownId'])
             //Si le magasin existe pas
             else
             {
-                echo "Erreur: Magasin indisponible";
+                echo "Erreur: Ce magasin n'existe pas";
             }
-            $shopQuery->closeCursor();
+            $townShopQuery->closeCursor();
         }
         //Si la ville existe pas
         else
         {
-            echo "Erreur: Ville indisponible";
+            echo "Erreur: Cette ville n'existe pas";
         }
-        $townQuery->closeCursor();
+        $shopQuery->closeCursor();
     }
     //Si tous les champs numérique ne contiennent pas un nombre
     else

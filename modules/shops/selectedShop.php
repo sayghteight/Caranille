@@ -14,7 +14,7 @@ if (isset($_POST['shopId']))
     if (ctype_digit($_POST['shopId'])
     && $_POST['shopId'] >= 1)
     {
-        //On récupère l'id du magasin
+        //On récupère l'id du formulaire précédent
         $shopId = htmlspecialchars(addslashes($_POST['shopId']));
 
         //On fait une requête pour vérifier si le magasin est bien disponible dans la ville du joueur
@@ -28,9 +28,10 @@ if (isset($_POST['shopId']))
         //Si plusieurs magasins ont été trouvé
         if ($shopRow > 0)
         {
-            //On récupère les informations du magasin
+           //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($shop = $shopQueryList->fetch())
             {
+                //On récupère les informations du magasin
                 $shopPicture = stripslashes($shop['shopPicture']);
                 $shopName = stripslashes($shop['shopName']);
                 $shopDescription = stripslashes($shop['shopDescription']);
@@ -61,8 +62,10 @@ if (isset($_POST['shopId']))
                     Articles en vente : <select name="itemId" class="form-control">
                     
                     <?php
+                    //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                     while ($townShop = $townShopQuery->fetch())
                     {
+                        //On récupère les informations de l'objet
                         $itemId = stripslashes($townShop['itemId']);
                         $itemName = stripslashes($townShop['itemName']);
                         $itemPurchasePrice = stripslashes($townShop['itemPurchasePrice']);
@@ -73,7 +76,7 @@ if (isset($_POST['shopId']))
                         //On applique la réduction
                         $itemPurchasePrice = $itemPurchasePrice - $discount?>
                         ?>
-                            <option value="<?php echo $itemId ?>"><?php echo "$itemName ($itemPurchasePrice Pièce d'or)"; ?></option>
+                        <option value="<?php echo $itemId ?>"><?php echo "$itemName ($itemPurchasePrice Pièce d'or)"; ?></option>
                         <?php
                     }
                     ?>
@@ -82,6 +85,7 @@ if (isset($_POST['shopId']))
                     <input type="hidden" name="shopId" value="<?= $shopId ?>">
                     <input type="submit" name="view" class="btn btn-default form-control" value="Détail/Achat">
                 </form>
+                
                 <?php
             }
             else
@@ -92,8 +96,9 @@ if (isset($_POST['shopId']))
         //Si le magasin n'exite pas
         else
         {
-            echo "Erreur: Magasin indisponible";
+            echo "Erreur: Ce magasin n'existe pas";
         }
+        $shopQuery->closeCursor();
     }
     //Si le magasin n'est pas un nombre
     else

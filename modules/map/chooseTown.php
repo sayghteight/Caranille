@@ -15,7 +15,7 @@ if (isset($_POST['townId'])
     if (ctype_digit($_POST['townId'])
     && $_POST['townId'] >= 1)
     {
-        //On récupère les valeurs du formulaire dans une variable
+        //On récupère l'id du formulaire précédent
         $townId = htmlspecialchars(addslashes($_POST['townId']));
 
         //On fait une requête pour vérifier si le joueur peut accèder à la ville choisie

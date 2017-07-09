@@ -23,12 +23,13 @@ if (isset($_POST['adminRaceId'])
         $raceQuery->execute([$adminRaceId]);
         $raceRow = $raceQuery->rowCount();
 
-        //Si la race existe
+        //Si la classe existe
         if ($raceRow == 1) 
         {
             //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($race = $raceQuery->fetch())
             {
+                //On récupère les informations de la classe
                 $adminRacePicture = stripslashes($race['racePicture']);
                 $adminRaceName = stripslashes($race['raceName']);
             }
@@ -86,7 +87,7 @@ if (isset($_POST['adminRaceId'])
         //Si la classe n'existe pas
         else
         {
-            echo "Erreur: Classe indisponible";
+            echo "Erreur: Cette classe n'existe pas";
         }
         $raceQuery->closeCursor();
     }

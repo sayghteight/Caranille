@@ -26,9 +26,10 @@ if (isset($_POST['adminAccountId'])
         //Si le compte existe
         if ($account == 1) 
         {
-            //On récupère le pseudo du compte
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($account = $accountQuery->fetch())
             {
+                //On récupère le pseudo du compte
                 $adminAccountPseudo = stripslashes($account['accountPseudo']);
             }
             ?>

@@ -29,6 +29,7 @@ if (isset($_POST['adminNewsId'])
             //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($news = $newsQuery->fetch())
             {
+                //On récupère les informations de la news
                 $adminNewsPicture = stripslashes($news['newsPicture']);
                 $adminNewstitle = stripslashes($news['newsTitle']);
             }
@@ -59,7 +60,7 @@ if (isset($_POST['adminNewsId'])
         //Si la news n'exite pas
         else
         {
-            echo "Erreur: News indisponible";
+            echo "Erreur: Cette news n'existe pas";
         }
         $newsQuery->closeCursor();
     }

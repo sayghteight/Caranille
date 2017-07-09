@@ -7,7 +7,7 @@ $newsRow = $newsQuery->rowCount();
 //S'il existe des news on les affiche
 if ($newsRow > 0)
 {
-    //Pour chaque news trouvées on l'affiche
+    //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
     while ($news = $newsQuery->fetch()) 
     {
         ?>
