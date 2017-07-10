@@ -92,13 +92,14 @@ if (isset($_POST['shopId']))
             {
                 echo "Il n'y a rien en vente";
             }
+            $townShopQuery->closeCursor();
         }
         //Si le magasin n'exite pas
         else
         {
             echo "Erreur: Ce magasin n'existe pas";
         }
-        $shopQuery->closeCursor();
+        $shopQueryList->closeCursor();
     }
     //Si le magasin n'est pas un nombre
     else
