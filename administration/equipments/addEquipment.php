@@ -43,7 +43,7 @@ if (isset($_POST['add']))
             ?>
             
         </select>
-        Image : <input type="text" name="adminItemPicture" class="form-control" placeholder="Image" required>
+        Image : <input type="text" name="adminItemPicture" class="form-control" placeholder="Image" value="../../img/empty.png" required>
         Type : <select name="adminItemType" class="form-control">
             <option value="Armor">Armure</option>
             <option value="Boots">Bottes</option>

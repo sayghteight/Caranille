@@ -14,17 +14,17 @@ if (isset($_POST['add']))
     <p>Informations de la classe</p>
     
     <form method="POST" action="addRaceEnd.php">
-        Image : <input type="text" name="adminRacePicture" class="form-control" placeholder="Nom" required autofocus>
-        Nom : <input type="text" name="adminRaceName" class="form-control" placeholder="Nom" required autofocus>
+        Image : <input type="text" name="adminRacePicture" class="form-control" placeholder="Nom" value="../../img/empty.png" required>
+        Nom : <input type="text" name="adminRaceName" class="form-control" placeholder="Nom" required>
         Description : <br> <textarea class="form-control" name="adminRaceDescription" id="adminRaceDescription" rows="3" required></textarea>
-        HP par niveau : <input type="number" name="adminRaceHpBonus" class="form-control" placeholder="HP par niveau" required autofocus>
-        MP par niveau : <input type="number" name="adminRaceMpBonus" class="form-control" placeholder="MP par niveau" required autofocus>
-        Force par niveau : <input type="number" name="adminRaceStrengthBonus" class="form-control" placeholder="Force par niveau" required autofocus>
-        Magie par niveau : <input type="number" name="adminRaceMagicBonus" class="form-control" placeholder="Magie par niveau" required autofocus>
-        Agilité par niveau : <input type="number" name="adminRaceAgilityBonus" class="form-control" placeholder="Agilité par niveau" required autofocus>
-        Défense par niveau : <input type="number" name="adminRaceDefenseBonus" class="form-control" placeholder="Défense par niveau" required autofocus>
-        Défense Magique par niveau : <input type="number" name="adminRaceDefenseMagicBonus" class="form-control" placeholder="Défense Magique par niveau" required autofocus>
-        Sagesse par niveau : <input type="number" name="adminRaceWisdomBonus" class="form-control" placeholder="Sagesse par niveau" required autofocus>
+        HP par niveau : <input type="number" name="adminRaceHpBonus" class="form-control" placeholder="HP par niveau" required>
+        MP par niveau : <input type="number" name="adminRaceMpBonus" class="form-control" placeholder="MP par niveau" required>
+        Force par niveau : <input type="number" name="adminRaceStrengthBonus" class="form-control" placeholder="Force par niveau" required>
+        Magie par niveau : <input type="number" name="adminRaceMagicBonus" class="form-control" placeholder="Magie par niveau" required>
+        Agilité par niveau : <input type="number" name="adminRaceAgilityBonus" class="form-control" placeholder="Agilité par niveau" required>
+        Défense par niveau : <input type="number" name="adminRaceDefenseBonus" class="form-control" placeholder="Défense par niveau" required>
+        Défense Magique par niveau : <input type="number" name="adminRaceDefenseMagicBonus" class="form-control" placeholder="Défense Magique par niveau" required>
+        Sagesse par niveau : <input type="number" name="adminRaceWisdomBonus" class="form-control" placeholder="Sagesse par niveau" required>
         <input name="finalAdd" class="btn btn-default form-control" type="submit" value="Ajouter">
     </form>
     

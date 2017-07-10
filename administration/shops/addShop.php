@@ -14,7 +14,7 @@ if (isset($_POST['add']))
     <p>Informations du magasin</p>
     
     <form method="POST" action="addShopEnd.php">
-        Image : <input type="text" name="adminShopPicture" class="form-control" placeholder="Image" required>
+        Image : <input type="text" name="adminShopPicture" class="form-control" placeholder="Image" value="../../img/empty.png" required>
         Nom : <input type="text" name="adminShopName" class="form-control" placeholder="Nom" required>
         Description : <br> <textarea class="form-control" name="adminShopDescription" id="adminShopDescription" rows="3" required></textarea>
         <input name="finalAdd" class="btn btn-default form-control" type="submit" value="Ajouter">

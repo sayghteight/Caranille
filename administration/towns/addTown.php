@@ -14,7 +14,7 @@ if (isset($_POST['add']))
     <p>Informations de la ville</p>
 
     <form method="POST" action="addTownEnd.php">
-        Image : <input type="text" name="adminTownPicture" class="form-control" placeholder="Image" required>
+        Image : <input type="text" name="adminTownPicture" class="form-control" placeholder="Image" value="../../img/empty.png" required>
         Nom : <input type="text" name="adminTownName" class="form-control" placeholder="Nom" required>
         Description : <br> <textarea class="form-control" name="adminTownDescription" id="adminTownDescription" rows="3"></textarea>
         Prix de l'auberge : <input type="number" name="adminTownPriceInn" class="form-control" placeholder="HP Bonus" required>

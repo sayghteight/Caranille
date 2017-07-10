@@ -272,7 +272,7 @@ if (isset($_POST['adminAccountId'])
             <p>Informations du compte</p>
             
             <form method="POST" action="editAccountEnd.php">
-                Pseudo : <input type="text" name="adminAccountPseudo" class="form-control" placeholder="Pseudo" value="<?php echo $adminAccountPseudo; ?>" required autofocus>
+                Pseudo : <input type="text" name="adminAccountPseudo" class="form-control" placeholder="Pseudo" value="<?php echo $adminAccountPseudo; ?>" required>
                 Email : <input type="mail" name="adminAccountEmail" class="form-control" placeholder="Email" value="<?php echo $adminAccountEmail; ?>" required>
                 Accès : <select name="adminAccountAccess" class="form-control">
 
