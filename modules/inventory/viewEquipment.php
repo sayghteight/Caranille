@@ -85,7 +85,7 @@ if (isset($_POST['itemId'])
                     }
                     ?>
                     
-                    <p><img src="<?php echo $equipmentPicture; ?>" height="100" width="100"></p>
+                    <p><img src="<?php echo $equipmentPicture ?>" height="100" width="100"></p>
                     
                     <table class="table">
                         <tr>
@@ -154,13 +154,13 @@ if (isset($_POST['itemId'])
                             </td>
                             
                             <td>
-                                <?php echo '+' .$equipmentHpEffect. ' HP'; ?><br />
-                                <?php echo '+' .$equipmentMpEffect. ' MP'; ?><br />
-                                <?php echo '+' .$equipmentStrengthEffect. ' Force'; ?><br />
-                                <?php echo '+' .$equipmentMagicEffect. ' Magie'; ?><br />
-                                <?php echo '+' .$equipmentAgilityEffect. ' Agilité'; ?><br />
-                                <?php echo '+' .$equipmentDefenseEffect. ' Défense'; ?><br />
-                                <?php echo '+' .$equipmentDefenseMagicEffect. ' Défense magique'; ?><br />
+                                <?php echo '+' .$equipmentHpEffect. ' HP' ?><br />
+                                <?php echo '+' .$equipmentMpEffect. ' MP' ?><br />
+                                <?php echo '+' .$equipmentStrengthEffect. ' Force' ?><br />
+                                <?php echo '+' .$equipmentMagicEffect. ' Magie' ?><br />
+                                <?php echo '+' .$equipmentAgilityEffect. ' Agilité' ?><br />
+                                <?php echo '+' .$equipmentDefenseEffect. ' Défense' ?><br />
+                                <?php echo '+' .$equipmentDefenseMagicEffect. ' Défense magique' ?><br />
                                 <?php echo '+' .$equipmentWisdomEffect. ' Sagesse'; ?>
                             </td>
                         </tr>
@@ -259,7 +259,7 @@ if (isset($_POST['itemId'])
         {
             echo "Erreur: Cet équippement n'existe pas";
         }
-        $equipmentInventoryRow->closeCursor();
+        $equipmentQuery->closeCursor();
     }
     //Si l'équipement choisit n'est pas un nombre
     else

@@ -18,8 +18,8 @@ if (isset($_POST['adminShopItemShopId'])
         $adminShopItemShopId = htmlspecialchars(addslashes($_POST['adminShopItemShopId']));
 
         //On fait une requête pour vérifier si le magasin choisit existe
-        $shopQuery = $bdd->prepare('SELECT * FROM car_towns 
-        WHERE townId = ?');
+        $shopQuery = $bdd->prepare('SELECT * FROM car_shops 
+        WHERE shopId = ?');
         $shopQuery->execute([$adminShopItemShopId]);
         $shopRow = $shopQuery->rowCount();
 
@@ -95,7 +95,7 @@ if (isset($_POST['adminShopItemShopId'])
                         ?>
                         
                     </select>
-                    Réduction (De 0 à 100%) <input type="number" name="adminShopItemDiscount" class="form-control" placeholder="Réduction (De 0 à 100%)" required>
+                    Réduction (De 0 à 100%) <input type="number" name="adminShopItemDiscount" class="form-control" placeholder="Réduction (De 0 à 100%)" value="0" required>
                     <input type="hidden" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
                     <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter l'objet">
                 </form>
@@ -120,7 +120,7 @@ if (isset($_POST['adminShopItemShopId'])
         //Si le magasin n'exite pas
         else
         {
-            echo "Erreur: Magasin indisponible";
+            echo "Erreur: Ce magasin n'existe pas";
         }
         $shopQuery->closeCursor();
     }

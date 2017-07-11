@@ -167,13 +167,13 @@ if (isset($_POST['shopId'])
                             if ($itemType != "Item")
                             {
                                 ?>
-                                <?php echo '+' .$itemHpEffect. ' HP'; ?><br />
-                                <?php echo '+' .$itemMpEffect. ' MP'; ?><br />
-                                <?php echo '+' .$itemStrengthEffect. ' Force'; ?><br />
-                                <?php echo '+' .$itemMagicEffect. ' Magie'; ?><br />
-                                <?php echo '+' .$itemAgilityEffect. ' Agilité'; ?><br />
-                                <?php echo '+' .$itemDefenseEffect. ' Défense'; ?><br />
-                                <?php echo '+' .$itemDefenseMagicEffect. ' Défense magique'; ?><br />
+                                <?php echo '+' .$itemHpEffect. ' HP' ?><br />
+                                <?php echo '+' .$itemMpEffect. ' MP' ?><br />
+                                <?php echo '+' .$itemStrengthEffect. ' Force' ?><br />
+                                <?php echo '+' .$itemMagicEffect. ' Magie' ?><br />
+                                <?php echo '+' .$itemAgilityEffect. ' Agilité' ?><br />
+                                <?php echo '+' .$itemDefenseEffect. ' Défense' ?><br />
+                                <?php echo '+' .$itemDefenseMagicEffect. ' Défense magique' ?><br />
                                 <?php echo '+' .$itemWisdomEffect. ' Sagesse'; ?>
                                 
                                 <?php
@@ -182,8 +182,8 @@ if (isset($_POST['shopId'])
                             else
                             {
                                 ?>
-                                <?php echo '+' .$itemHpEffect. ' HP'; ?><br />
-                                <?php echo '+' .$itemMpEffect. ' MP'; ?><br />
+                                <?php echo '+' .$itemHpEffect. ' HP' ?><br />
+                                <?php echo '+' .$itemMpEffect. ' MP' ?><br />
                                 <?php
                             }
                             ?>                            

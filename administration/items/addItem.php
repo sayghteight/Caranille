@@ -17,10 +17,10 @@ if (isset($_POST['add']))
         Image : <input type="text" name="adminItemPicture" class="form-control" placeholder="Image" value="../../img/empty.png" required>
         Nom : <input type="text" name="adminItemName" class="form-control" placeholder="Nom" required>
         Description : <br> <textarea class="form-control" name="adminItemDescription" id="adminItemDescription" rows="3" required></textarea>
-        HP : <input type="number" name="adminItemHpEffects" class="form-control" placeholder="HP Bonus" required>
-        MP : <input type="number" name="adminItemMpEffect" class="form-control" placeholder="MP Bonus" required>
-        Prix d'achat : <input type="number" name="adminItemPurchasePrice" class="form-control" placeholder="Prix d'achat" required>
-        Prix de vente : <input type="number" name="adminItemSalePrice" class="form-control" placeholder="Prix de vente" required>
+        HP : <input type="number" name="adminItemHpEffects" class="form-control" placeholder="HP Bonus" value="0" required>
+        MP : <input type="number" name="adminItemMpEffect" class="form-control" placeholder="MP Bonus" value="0" required>
+        Prix d'achat : <input type="number" name="adminItemPurchasePrice" class="form-control" placeholder="Prix d'achat" value="0" required>
+        Prix de vente : <input type="number" name="adminItemSalePrice" class="form-control" placeholder="Prix de vente" value="0" required>
         <input name="finalAdd" class="btn btn-default form-control" type="submit" value="Ajouter">
     </form>
     

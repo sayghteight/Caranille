@@ -37,7 +37,7 @@ if (isset($_POST['adminNewsId'])
             }
             ?>
 
-            <p><img src="<?php echo $adminNewsPicture; ?>" height="100" width="100"></p>
+            <p><img src="<?php echo $adminNewsPicture ?>" height="100" width="100"></p>
 
             <p>Informations de la news</p>
 

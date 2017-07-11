@@ -26,8 +26,8 @@ if (isset($_POST['adminCharacterId'])
             ?>
             
             <p>ATTENTION</p> 
-            Vous êtes sur le point d'offrir <em><?php echo $adminOfferGold ?></em> pièce(s) d'or à <em>tous les joueurs</em><br />
-            confirmez-vous  ?
+            Vous êtes sur le point d'offrir <em><?php echo $adminOfferGold ?></em> pièce(s) d'or à <em>tous les joueurs</em>.<br />
+            Confirmez-vous  ?
 
             <hr>
                 
@@ -66,8 +66,8 @@ if (isset($_POST['adminCharacterId'])
                 
                 <p>ATTENTION</p>
 
-                Vous êtes sur le point d'offrir <em><?php echo $adminOfferGold ?></em> pièce(s) d'or à <em><?php echo $adminCharacterName ?></em><br />
-                confirmez-vous ?
+                Vous êtes sur le point d'offrir <em><?php echo $adminOfferGold ?></em> pièce(s) d'or à <em><?php echo $adminCharacterName ?></em>.<br />
+                Confirmez-vous ?
     
                 <hr>
                     

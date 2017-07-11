@@ -59,7 +59,7 @@ if (isset($_POST['itemId'])
                     $itemSalePrice = stripslashes($itemInventory['itemSalePrice']);
                     ?>
 
-                    <p><img src="<?php echo $itemPicture; ?>" height="100" width="100"></p>
+                    <p><img src="<?php echo $itemPicture ?>" height="100" width="100"></p>
                     
                     <table class="table">
                         <tr>
@@ -108,13 +108,13 @@ if (isset($_POST['itemId'])
                             </td>
                             
                             <td>
-                                <?php echo '+' .$itemHpEffect. ' HP'; ?><br />
-                                <?php echo '+' .$itemMpEffect. ' MP'; ?><br />
-                                <?php echo '+' .$itemStrengthEffect. ' Force'; ?><br />
-                                <?php echo '+' .$itemMagicEffect. ' Magie'; ?><br />
-                                <?php echo '+' .$itemAgilityEffect. ' Agilité'; ?><br />
-                                <?php echo '+' .$itemDefenseEffect. ' Défense'; ?><br />
-                                <?php echo '+' .$itemDefenseMagicEffect. ' Défense magique'; ?><br />
+                                <?php echo '+' .$itemHpEffect. ' HP' ?><br />
+                                <?php echo '+' .$itemMpEffect. ' MP' ?><br />
+                                <?php echo '+' .$itemStrengthEffect. ' Force' ?><br />
+                                <?php echo '+' .$itemMagicEffect. ' Magie' ?><br />
+                                <?php echo '+' .$itemAgilityEffect. ' Agilité' ?><br />
+                                <?php echo '+' .$itemDefenseEffect. ' Défense' ?><br />
+                                <?php echo '+' .$itemDefenseMagicEffect. ' Défense magique' ?><br />
                                 <?php echo '+' .$itemWisdomEffect. ' Sagesse'; ?>
                             </td>
                         </tr>

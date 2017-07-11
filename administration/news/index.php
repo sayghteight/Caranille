@@ -33,7 +33,7 @@ if ($newsRow > 0)
             ?>
             
         </select>
-        <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer">
+        <input type="submit" name="manage" class="btn btn-default form-control" value="Gérer la news">
     </form>
     
     <?php
@@ -49,7 +49,7 @@ $newsQuery->closeCursor();
 <hr>
 
 <form method="POST" action="addNews.php">
-    <input type="submit" class="btn btn-default form-control" name="add" value="Publier">
+    <input type="submit" class="btn btn-default form-control" name="add" value="Publier une news">
 </form>
 
 <?php require_once("../html/footer.php");

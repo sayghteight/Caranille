@@ -46,12 +46,12 @@ if (isset($_POST['adminRaceId'])
             {
                 ?>
 
-                <p><img src="<?php echo $adminRacePicture; ?>" height="100" width="100"></p>
+                <p><img src="<?php echo $adminRacePicture ?>" height="100" width="100"></p>
                 
                 <p>ATTENTION</p>
 
-                Vous êtes sur le point de supprimer la classe <em><?php echo $adminRaceName ?></em><br />
-                confirmez-vous la suppression ?
+                Vous êtes sur le point de supprimer la classe <em><?php echo $adminRaceName ?></em>.<br />
+                Confirmez-vous la suppression ?
     
                 <hr>
                     

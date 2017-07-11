@@ -41,12 +41,12 @@ if (isset($_POST['adminItemId'])
             $itemQuery->closeCursor();
             ?>
 
-            <p><img src="<?php echo $adminItemPicture; ?>" height="100" width="100"></p>
+            <p><img src="<?php echo $adminItemPicture ?>" height="100" width="100"></p>
             
             <p>ATTENTION</p>
 
-            Vous êtes sur le point de supprimer l'équipement <em><?php echo $adminItemName ?></em><br />
-            confirmez-vous la suppression ?
+            Vous êtes sur le point de supprimer l'équipement <em><?php echo $adminItemName ?></em>.<br />
+            Confirmez-vous la suppression ?
 
             <hr>
                 

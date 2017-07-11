@@ -9,7 +9,7 @@ while ($race = $raceQuery->fetch())
 {
     ?>
     
-    <p><img src="<?php echo stripslashes($race['racePicture']); ?>" height="100" width="100"></p>
+    <p><img src="<?php echo stripslashes($race['racePicture']) ?>" height="100" width="100"></p>
     
      <table class="table">
             <tr>
@@ -38,13 +38,13 @@ while ($race = $raceQuery->fetch())
                 </td>
                 
                 <td>
-                    <?php echo '+' .stripslashes($race['raceHpBonus']). ' HP'; ?><br />
-                    <?php echo '+' .stripslashes($race['raceMpBonus']). ' MP'; ?><br />
-                    <?php echo '+' .stripslashes($race['raceStrengthBonus']). ' Force'; ?><br />
-                    <?php echo '+' .stripslashes($race['raceMagicBonus']). ' Magie'; ?><br />
-                    <?php echo '+' .stripslashes($race['raceAgilityBonus']). ' Agilité'; ?><br />
-                    <?php echo '+' .stripslashes($race['raceDefenseBonus']). ' Défense'; ?><br />
-                    <?php echo '+' .stripslashes($race['raceDefenseMagicBonus']). ' Défense magique'; ?><br />
+                    <?php echo '+' .stripslashes($race['raceHpBonus']). ' HP' ?><br />
+                    <?php echo '+' .stripslashes($race['raceMpBonus']). ' MP' ?><br />
+                    <?php echo '+' .stripslashes($race['raceStrengthBonus']). ' Force' ?><br />
+                    <?php echo '+' .stripslashes($race['raceMagicBonus']). ' Magie' ?><br />
+                    <?php echo '+' .stripslashes($race['raceAgilityBonus']). ' Agilité' ?><br />
+                    <?php echo '+' .stripslashes($race['raceDefenseBonus']). ' Défense' ?><br />
+                    <?php echo '+' .stripslashes($race['raceDefenseMagicBonus']). ' Défense magique' ?><br />
                     <?php echo '+' .stripslashes($race['raceWidsomBonus']). ' Sagesse'; ?>
                 </td>
             </tr>

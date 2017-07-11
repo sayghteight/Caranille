@@ -26,10 +26,10 @@ $configurationQuery->closeCursor();
 <p>Configuration du jeu</p>
 
 <form method="POST" action="editConfiguration.php">
-    Nom du jeu : <input type="text" name="adminGameName" class="form-control" placeholder="Nom du jeu" value="<?php echo $adminGameName; ?>" required>
+    Nom du jeu : <input type="text" name="adminGameName" class="form-control" placeholder="Nom du jeu" value="<?php echo $adminGameName ?>" required>
     Présentation : <br> <textarea class="form-control" name="adminGamePresentation" id="adminGamePresentation" rows="3" required><?php echo $adminGamePresentation; ?></textarea>
-    Base d'expérience (base d'expérience * niveau actuel = expérience requise pour monter de niveau) : <input type="number" name="adminGameExperience" class="form-control" placeholder="Base expérience" value="<?php echo $adminGameExperience; ?>" required>
-    PC par niveau : <input type="number" name="adminGameSkillPoint" class="form-control" placeholder="PC par niveau" value="<?php echo $adminGameSkillPoint; ?>" required>
+    Base d'expérience (base d'expérience * niveau actuel = expérience requise pour monter de niveau) : <input type="number" name="adminGameExperience" class="form-control" placeholder="Base expérience" value="<?php echo $adminGameExperience ?>" required>
+    PC par niveau : <input type="number" name="adminGameSkillPoint" class="form-control" placeholder="PC par niveau" value="<?php echo $adminGameSkillPoint ?>" required>
     Status du jeu : <select name="adminGameAccess" class="form-control">
     
         <?php

@@ -36,8 +36,8 @@ if (isset($_POST['adminAccountId'])
             
             <p>ATTENTION</p> 
 
-            Vous êtes sur le point de supprimer le compte <em><?php echo $adminAccountPseudo ?></em><br />
-            confirmez-vous la suppression ?
+            Vous êtes sur le point de supprimer le compte <em><?php echo $adminAccountPseudo ?></em>.<br />
+            Confirmez-vous la suppression ?
 
             <hr>
                 

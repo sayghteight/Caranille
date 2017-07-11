@@ -14,7 +14,7 @@ if (isset($_POST['add']))
     <p>Informations de la classe</p>
     
     <form method="POST" action="addRaceEnd.php">
-        Image : <input type="text" name="adminRacePicture" class="form-control" placeholder="Nom" value="../../img/empty.png" required>
+        Image : <input type="text" name="adminRacePicture" class="form-control" placeholder="Nom" value="../../img/empty.png" required autofocus>
         Nom : <input type="text" name="adminRaceName" class="form-control" placeholder="Nom" required>
         Description : <br> <textarea class="form-control" name="adminRaceDescription" id="adminRaceDescription" rows="3" required></textarea>
         HP par niveau : <input type="number" name="adminRaceHpBonus" class="form-control" placeholder="HP par niveau" required>

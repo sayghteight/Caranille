@@ -61,7 +61,7 @@ if (isset($_POST['monsterId'])
             }
             ?>
             
-            <p><img src="<?php echo $monsterPicture; ?>" height="100" width="100"></p>
+            <p><img src="<?php echo $monsterPicture ?>" height="100" width="100"></p>
             
             <table class="table">
                 <tr>

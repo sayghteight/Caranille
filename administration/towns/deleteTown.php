@@ -36,12 +36,12 @@ if (isset($_POST['adminTownId'])
             $townQuery->closeCursor();
             ?>
 
-            <p><img src="<?php echo $adminTownPicture; ?>" height="100" width="100"></p>
+            <p><img src="<?php echo $adminTownPicture ?>" height="100" width="100"></p>
             
             <p>ATTENTION</p> 
             
-            Vous êtes sur le point de supprimer la ville <em><?php echo $adminTownName ?></em><br />
-            confirmez-vous la suppression ?
+            Vous êtes sur le point de supprimer la ville <em><?php echo $adminTownName ?></em>.<br />
+            Confirmez-vous la suppression ?
 
             <hr>
                 

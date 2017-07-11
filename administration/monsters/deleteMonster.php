@@ -54,12 +54,12 @@ if (isset($_POST['adminMonsterId'])
             {
                 ?>
 
-                <p><img src="<?php echo $adminMonsterPicture; ?>" height="100" width="100"></p>
+                <p><img src="<?php echo $adminMonsterPicture ?>" height="100" width="100"></p>
                 
                 <p>ATTENTION</p> 
 
-                Vous êtes sur le point de supprimer le monstre <em><?php echo $adminMonsterName ?></em><br />
-                confirmez-vous la suppression ?
+                Vous êtes sur le point de supprimer le monstre <em><?php echo $adminMonsterName ?></em>.<br />
+                Confirmez-vous la suppression ?
     
                 <hr>
                     

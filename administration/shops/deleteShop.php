@@ -35,12 +35,12 @@ if (isset($_POST['adminShopId'])
             }
             ?>
 
-            <p><img src="<?php echo $adminShopPicture; ?>" height="100" width="100"></p>
+            <p><img src="<?php echo $adminShopPicture ?>" height="100" width="100"></p>
             
             <p>ATTENTION</p>
 
-            Vous êtes sur le point de supprimer le magasin <em><?php echo $adminShopName ?></em><br />.
-            confirmez-vous la suppression ?
+            Vous êtes sur le point de supprimer le magasin <em><?php echo $adminShopName ?></em>.<br />
+            Confirmez-vous la suppression ?
 
             <hr>
                 

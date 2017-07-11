@@ -143,8 +143,8 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                         
                         <p>ATTENTION</p>
                         
-                        Vous êtes sur le point de retirer l'objet <em><?php echo $adminMonsterDropItemName ?></em> du monstre <em><?php echo $adminMonsterDropMonsterName ?></em><br />
-                        confirmez-vous ?
+                        Vous êtes sur le point de retirer l'objet <em><?php echo $adminMonsterDropItemName ?></em> du monstre <em><?php echo $adminMonsterDropMonsterName ?></em>.<br />
+                        Confirmez-vous ?
 
                         <hr>
                             

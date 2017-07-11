@@ -99,7 +99,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                         <option value="Yes">Oui</option>
                         <option value="No">Non</option>
                     </select>
-                    Taux d'obtention (en pourcentage) : <input type="number" name="adminMonsterDropRate" class="form-control" placeholder="Taux d'obtention (en pourcentage)" required>
+                    Taux d'obtention (en pourcentage) : <input type="number" name="adminMonsterDropRate" class="form-control" placeholder="Taux d'obtention (en pourcentage)" value="0" required>
                     Taux visible dans le bestiaire ? : <select name="adminMonsterDropRateVisible" class="form-control">
                         <option value="Yes">Oui</option>
                         <option value="No">Non</option>

@@ -6,7 +6,7 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($battleRow == 0) { exit(header("Location: ../../modules/main/index.php")); }
 ?>
 
-<p><img src="<?php echo $opponentPicture; ?>" height="100" width="100"></p>
+<p><img src="<?php echo $opponentPicture ?>" height="100" width="100"></p>
 
 <?php
 echo "Combat de $characterName contre $opponentName<br />";

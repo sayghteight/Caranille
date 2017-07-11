@@ -6,13 +6,13 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); }
 ?>
 
-<?php echo $accountPseudo; ?><br />
+<?php echo $accountPseudo ?><br />
 
 <hr>
 
-Dernière connexion : <?php echo strftime('%d-%m-%Y - %H:%M:%S',strtotime($accountLastConnection)); ?><br />
-Dernière action : <?php echo strftime('%d-%m-%Y - %H:%M:%S',strtotime($accountLastAction)); ?><br />
-Accès : <?php echo $accountAccess; ?><br />
+Dernière connexion : <?php echo strftime('%d-%m-%Y - %H:%M:%S',strtotime($accountLastConnection)) ?><br />
+Dernière action : <?php echo strftime('%d-%m-%Y - %H:%M:%S',strtotime($accountLastAction)) ?><br />
+Accès : <?php echo $accountAccess ?><br />
 
 <hr>
 

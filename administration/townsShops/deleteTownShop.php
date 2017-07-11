@@ -65,8 +65,8 @@ if (isset($_POST['adminTownShopTownId'])
                     
                     <p>ATTENTION</p>
                     
-                    Vous êtes sur le point de retirer le magasin <em><?php echo $adminTownShopShopName ?></em> de la ville <em><?php echo $adminTownShopTownName ?></em><br />
-                    confirmez-vous ?
+                    Vous êtes sur le point de retirer le magasin <em><?php echo $adminTownShopShopName ?></em> de la ville <em><?php echo $adminTownShopTownName ?></em>.<br />
+                    Confirmez-vous ?
 
                     <hr>
                         

@@ -272,8 +272,8 @@ if (isset($_POST['adminAccountId'])
             <p>Informations du compte</p>
             
             <form method="POST" action="editAccountEnd.php">
-                Pseudo : <input type="text" name="adminAccountPseudo" class="form-control" placeholder="Pseudo" value="<?php echo $adminAccountPseudo; ?>" required>
-                Email : <input type="mail" name="adminAccountEmail" class="form-control" placeholder="Email" value="<?php echo $adminAccountEmail; ?>" required>
+                Pseudo : <input type="text" name="adminAccountPseudo" class="form-control" placeholder="Pseudo" value="<?php echo $adminAccountPseudo ?>" required autofocus>
+                Email : <input type="mail" name="adminAccountEmail" class="form-control" placeholder="Email" value="<?php echo $adminAccountEmail ?>" required>
                 Accès : <select name="adminAccountAccess" class="form-control">
 
                 <?php
@@ -318,79 +318,79 @@ if (isset($_POST['adminAccountId'])
 
             <hr>
 
-            <p><img src="<?php echo $adminCharacterPicture; ?>" height="100" width="100"></p>
+            <p><img src="<?php echo $adminCharacterPicture ?>" height="100" width="100"></p>
 
             <p>Informations du personnage</p>
             
-            Classe : <?php echo $adminRaceName; ?><br />
-            Nom du personnage : <?php echo $adminCharacterName; ?><br />
-            Niveau du personnage : <?php echo $adminCharacterLevel; ?><br />
-            Armure: <?php echo $adminEquipmentArmorName; ?><br />
-            Bottes: <?php echo $adminEquipmentBootsName; ?><br />
-            Gants: <?php echo $adminEquipmentGlovesName; ?><br />
-            Casque: <?php echo $adminEquipmentHelmetName; ?><br />
-            Arme: <?php echo $adminEquipmentWeaponName; ?><br />
-            Sexe du personnage: <?php echo $adminCharacterSexName; ?><br />
-            HP actuel: <?php echo $adminCharacterHpMin; ?><br />
-            HP maximum: <?php echo $adminCharacterHpMax; ?><br />
-            HP points de compétences: <?php echo $adminCharacterHpSkillPoints; ?><br />
-            HP bonus: <?php echo $adminCharacterHpBonus; ?><br />
-            HP équipement: <?php echo $adminCharacterHpEquipments; ?><br />
-            HP bonus guilde : <?php echo $adminCharacterHpGuild; ?><br />
-            HP total: <?php echo $adminCharacterHpTotal; ?><br />
-            MP actuel: <?php echo $adminCharacterMpMin; ?><br />
-            MP maximum: <?php echo $adminCharacterMpMax; ?><br />
-            MP points de compétences: <?php echo $adminCharacterMpSkillPoints; ?><br />
-            MP bonus: <?php echo $adminCharacterMpBonus; ?><br />
-            MP équipements: <?php echo $adminCharacterMpEquipments; ?><br />
-            MP bonus guilde : <?php echo $adminCharacterMpGuild; ?><br />
-            MP total: <?php echo $adminCharacterMpTotal; ?><br />
-            Force actuelle: <?php echo $adminCharacterStrength; ?><br />
-            Force points de compétences: <?php echo $adminCharacterStrengthSkillPoints; ?><br />
-            Force bonus: <?php echo $adminCharacterStrengthBonus; ?><br />
-            Force équipement: <?php echo $adminCharacterStrengthEquipments; ?><br />
-            Force bonus guilde : <?php echo $adminCharacterStrengthGuild; ?><br />
-            Force Total: <?php echo $adminCharacterStrengthTotal; ?><br />
-            Magie actuelle: <?php echo $adminCharacterMagic; ?><br />
-            Magie points de compétences: <?php echo $adminCharacterMagicSkillPoints; ?><br />
-            Magie bonus: <?php echo $adminCharacterMagicBonus; ?><br />
-            Magie équipement: <?php echo $adminCharacterMagicEquipments; ?><br />
-            Magie bonus guilde : <?php echo $adminCharacterMagicGuild; ?><br />
-            Magie Total: <?php echo $adminCharacterMagicTotal; ?><br />
-            Agilité actuelle: <?php echo $adminCharacterAgility; ?><br />
-            Agilité points de compétences: <?php echo $adminCharacterAgilitySkillPoints; ?><br />
-            Agilité bonus: <?php echo $adminCharacterAgilityBonus; ?><br />
-            Agilité équipement: <?php echo $adminCharacterAgilityEquipments; ?><br />
-            Agilité bonus guilde : <?php echo $adminCharacterAgilityGuild; ?><br />
-            Agilité Total: <?php echo $adminCharacterAgilityTotal; ?><br />
-            Défense actuelle: <?php echo $adminCharacterDefense; ?><br />
-            Défense points de compétences: <?php echo $adminCharacterDefenseSkillPoints; ?><br />
-            Défense bonus: <?php echo $adminCharacterDefenseBonus; ?><br />
-            Défense équipment: <?php echo $adminCharacterDefenseEquipment; ?><br />
-            Défense bonus guilde : <?php echo $adminCharacterDefenseGuild; ?><br />
-            Défense Total: <?php echo $adminCharacterDefenseTotal; ?><br />
-            Défense magique actuelle: <?php echo $adminCharacterDefenseMagic; ?><br />
-            Défense magique points de compétences: <?php echo $adminCharacterDefenseMagicSkillPoints; ?><br />
-            Défense magique bonus: <?php echo $adminCharacterDefenseMagicBonus; ?><br />
-            Défense magique équipement: <?php echo $adminCharacterDefenseMagicEquipments; ?><br />
-            Défense magique bonus guilde : <?php echo $adminCharacterDefenseMagicGuild; ?><br />
-            Défense magique Total: <?php echo $adminCharacterDefenseMagicTotal; ?><br />
-            Sagesse actuelle: <?php echo $adminCharacterWisdom; ?><br />
-            Sagesse points de compétences: <?php echo $adminCharacterWisdomSkillPoints; ?><br />
-            Sagesse bonus: <?php echo $adminCharacterWisdomBonus; ?><br />
-            Sagesse équipement: <?php echo $adminCharacterWisdomEquipments; ?><br />
-            Sagesse bonus guilde : <?php echo $adminCharacterWisdomGuild; ?><br />
-            Sagesse Total: <?php echo $adminCharacterWisdomTotal; ?><br />
-            Défaite: <?php echo $adminCharacterDefeate; ?><br />
-            Victoire: <?php echo $adminCharacterVictory; ?><br />
-            Experience: <?php echo $adminCharacterExperience; ?><br />
-            Experience total: <?php echo $adminCharacterExperienceTotal; ?><br />
-            Points de compétence: <?php echo $adminCharacterSkillPoints; ?><br />
-            Argent: <?php echo $adminCharacterGold; ?><br />
-            Ville: <?php echo $adminTownName; ?><br />
-            Chapitre: <?php echo $adminCharacterChapter; ?><br />
-            En combat: <?php echo $adminCharacterOnBattleName; ?><br />
-            Activé: <?php echo $adminCharacterEnable; ?><br />
+            Classe : <?php echo $adminRaceName ?><br />
+            Nom du personnage : <?php echo $adminCharacterName ?><br />
+            Niveau du personnage : <?php echo $adminCharacterLevel ?><br />
+            Armure: <?php echo $adminEquipmentArmorName ?><br />
+            Bottes: <?php echo $adminEquipmentBootsName ?><br />
+            Gants: <?php echo $adminEquipmentGlovesName ?><br />
+            Casque: <?php echo $adminEquipmentHelmetName ?><br />
+            Arme: <?php echo $adminEquipmentWeaponName ?><br />
+            Sexe du personnage: <?php echo $adminCharacterSexName ?><br />
+            HP actuel: <?php echo $adminCharacterHpMin ?><br />
+            HP maximum: <?php echo $adminCharacterHpMax ?><br />
+            HP points de compétences: <?php echo $adminCharacterHpSkillPoints ?><br />
+            HP bonus: <?php echo $adminCharacterHpBonus ?><br />
+            HP équipement: <?php echo $adminCharacterHpEquipments ?><br />
+            HP bonus guilde : <?php echo $adminCharacterHpGuild ?><br />
+            HP total: <?php echo $adminCharacterHpTotal ?><br />
+            MP actuel: <?php echo $adminCharacterMpMin ?><br />
+            MP maximum: <?php echo $adminCharacterMpMax ?><br />
+            MP points de compétences: <?php echo $adminCharacterMpSkillPoints ?><br />
+            MP bonus: <?php echo $adminCharacterMpBonus ?><br />
+            MP équipements: <?php echo $adminCharacterMpEquipments ?><br />
+            MP bonus guilde : <?php echo $adminCharacterMpGuild ?><br />
+            MP total: <?php echo $adminCharacterMpTotal ?><br />
+            Force actuelle: <?php echo $adminCharacterStrength ?><br />
+            Force points de compétences: <?php echo $adminCharacterStrengthSkillPoints ?><br />
+            Force bonus: <?php echo $adminCharacterStrengthBonus ?><br />
+            Force équipement: <?php echo $adminCharacterStrengthEquipments ?><br />
+            Force bonus guilde : <?php echo $adminCharacterStrengthGuild ?><br />
+            Force Total: <?php echo $adminCharacterStrengthTotal ?><br />
+            Magie actuelle: <?php echo $adminCharacterMagic ?><br />
+            Magie points de compétences: <?php echo $adminCharacterMagicSkillPoints ?><br />
+            Magie bonus: <?php echo $adminCharacterMagicBonus ?><br />
+            Magie équipement: <?php echo $adminCharacterMagicEquipments ?><br />
+            Magie bonus guilde : <?php echo $adminCharacterMagicGuild ?><br />
+            Magie Total: <?php echo $adminCharacterMagicTotal ?><br />
+            Agilité actuelle: <?php echo $adminCharacterAgility ?><br />
+            Agilité points de compétences: <?php echo $adminCharacterAgilitySkillPoints ?><br />
+            Agilité bonus: <?php echo $adminCharacterAgilityBonus ?><br />
+            Agilité équipement: <?php echo $adminCharacterAgilityEquipments ?><br />
+            Agilité bonus guilde : <?php echo $adminCharacterAgilityGuild ?><br />
+            Agilité Total: <?php echo $adminCharacterAgilityTotal ?><br />
+            Défense actuelle: <?php echo $adminCharacterDefense ?><br />
+            Défense points de compétences: <?php echo $adminCharacterDefenseSkillPoints ?><br />
+            Défense bonus: <?php echo $adminCharacterDefenseBonus ?><br />
+            Défense équipment: <?php echo $adminCharacterDefenseEquipment ?><br />
+            Défense bonus guilde : <?php echo $adminCharacterDefenseGuild ?><br />
+            Défense Total: <?php echo $adminCharacterDefenseTotal ?><br />
+            Défense magique actuelle: <?php echo $adminCharacterDefenseMagic ?><br />
+            Défense magique points de compétences: <?php echo $adminCharacterDefenseMagicSkillPoints ?><br />
+            Défense magique bonus: <?php echo $adminCharacterDefenseMagicBonus ?><br />
+            Défense magique équipement: <?php echo $adminCharacterDefenseMagicEquipments ?><br />
+            Défense magique bonus guilde : <?php echo $adminCharacterDefenseMagicGuild ?><br />
+            Défense magique Total: <?php echo $adminCharacterDefenseMagicTotal ?><br />
+            Sagesse actuelle: <?php echo $adminCharacterWisdom ?><br />
+            Sagesse points de compétences: <?php echo $adminCharacterWisdomSkillPoints ?><br />
+            Sagesse bonus: <?php echo $adminCharacterWisdomBonus ?><br />
+            Sagesse équipement: <?php echo $adminCharacterWisdomEquipments ?><br />
+            Sagesse bonus guilde : <?php echo $adminCharacterWisdomGuild ?><br />
+            Sagesse Total: <?php echo $adminCharacterWisdomTotal ?><br />
+            Défaite: <?php echo $adminCharacterDefeate ?><br />
+            Victoire: <?php echo $adminCharacterVictory ?><br />
+            Experience: <?php echo $adminCharacterExperience ?><br />
+            Experience total: <?php echo $adminCharacterExperienceTotal ?><br />
+            Points de compétence: <?php echo $adminCharacterSkillPoints ?><br />
+            Argent: <?php echo $adminCharacterGold ?><br />
+            Ville: <?php echo $adminTownName ?><br />
+            Chapitre: <?php echo $adminCharacterChapter ?><br />
+            En combat: <?php echo $adminCharacterOnBattleName ?><br />
+            Activé: <?php echo $adminCharacterEnable ?><br />
 
             <hr>
 

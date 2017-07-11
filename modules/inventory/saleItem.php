@@ -41,7 +41,7 @@ if (isset($_POST['itemId'])
             ?>
 
             <p>ATTENTION</p> 
-            Vous êtes sur le point de vendre l'objet/équipement <em><?php echo $itemName ?> pour <?php echo $itemSalePrice ?> Pièce(s) d'or.</em><br />
+            Vous êtes sur le point de vendre l'objet/équipement <em><?php echo $itemName ?> pour <?php echo $itemSalePrice ?> Pièce(s) d'or.</em>.<br />
             Confirmez-vous la vente ?
 
             <form method="POST" action="saleItemEnd.php">

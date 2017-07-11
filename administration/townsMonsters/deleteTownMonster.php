@@ -65,8 +65,8 @@ if (isset($_POST['adminTownMonsterTownId'])
                     
                     <p>ATTENTION</p> 
                     
-                    Vous êtes sur le point de retirer le monstre <em><?php echo $adminTownMonsterMonsterName ?></em> de la ville <em><?php echo $adminTownMonsterTownName ?></em><br />
-                    confirmez-vous ?
+                    Vous êtes sur le point de retirer le monstre <em><?php echo $adminTownMonsterMonsterName ?></em> de la ville <em><?php echo $adminTownMonsterTownName ?></em>.<br />
+                    Confirmez-vous ?
 
                     <hr>
                         

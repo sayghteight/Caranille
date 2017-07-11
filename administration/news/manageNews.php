@@ -40,11 +40,11 @@ if (isset($_POST['adminNewsId'])
                 
             <form method="POST" action="editNews.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminNewsId" value="<?= $adminNewsId ?>">
-                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier">
+                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier la news">
             </form>
             <form method="POST" action="deleteNews.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminNewsId" value="<?= $adminNewsId ?>">
-                <input type="submit" class="btn btn-default form-control" name="delete" value="Retirer">
+                <input type="submit" class="btn btn-default form-control" name="delete" value="Retirer la news">
             </form>
             
             <hr>

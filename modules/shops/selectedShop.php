@@ -51,7 +51,7 @@ if (isset($_POST['shopId']))
             {
                 ?>
                 
-                <p><img src="<?php echo $shopPicture; ?>" height="100" width="100"></p>
+                <p><img src="<?php echo $shopPicture ?>" height="100" width="100"></p>
                 
                 <h4><?php echo $shopName; ?></h4><br />
                 <?php echo $shopDescription; ?>
