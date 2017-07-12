@@ -110,7 +110,7 @@ if (isset($_POST['shopId'])
                             </td>
                         
                             <td>
-                                <?php echo $itemRaceName; ?>
+                                <?php echo $itemRaceName ?>
                             </td>
                         </tr>
 
@@ -120,7 +120,7 @@ if (isset($_POST['shopId'])
                             </td>
 
                             <td>
-                                <?php echo $itemLevel; ?>
+                                <?php echo $itemLevel ?>
                             </td>
                         </tr>
 
@@ -130,7 +130,7 @@ if (isset($_POST['shopId'])
                             </td>
                             
                             <td>
-                                <?php echo $itemLevelRequired; ?>
+                                <?php echo $itemLevelRequired ?>
                             </td>
                         </tr>
                         <?php
@@ -142,7 +142,7 @@ if (isset($_POST['shopId'])
                         </td>
                         
                         <td>
-                            <?php echo $itemName; ?>
+                            <?php echo $itemName ?>
                         </td>
                     </tr>
                         
@@ -152,7 +152,7 @@ if (isset($_POST['shopId'])
                         </td>
                         
                         <td>
-                            <?php echo nl2br($itemDescription); ?>
+                            <?php echo nl2br($itemDescription) ?>
                         </td>
                     </tr>
                         
@@ -167,6 +167,7 @@ if (isset($_POST['shopId'])
                             if ($itemType != "Item")
                             {
                                 ?>
+                                
                                 <?php echo '+' .$itemHpEffect. ' HP' ?><br />
                                 <?php echo '+' .$itemMpEffect. ' MP' ?><br />
                                 <?php echo '+' .$itemStrengthEffect. ' Force' ?><br />
@@ -182,8 +183,10 @@ if (isset($_POST['shopId'])
                             else
                             {
                                 ?>
+                                
                                 <?php echo '+' .$itemHpEffect. ' HP' ?><br />
                                 <?php echo '+' .$itemMpEffect. ' MP' ?><br />
+                                
                                 <?php
                             }
                             ?>                            
@@ -192,11 +195,11 @@ if (isset($_POST['shopId'])
                         
                     <tr>
                         <td>
-                            Prix de vente
+                            Prix d'achat
                         </td>
                         
                         <td>
-                            <?php echo $itemSalePrice; ?>
+                            <?php echo $itemPurchasePrice ?>
                         </td>
                     </tr>
                         
