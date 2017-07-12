@@ -93,6 +93,7 @@ if (isset($_POST['shopId'])
                     $itemDiscount = stripslashes($shopItem['shopItemDiscount']);
                 }
 
+                //On calcule le prix final de l'obet par rapport à la réduction
                 $discount = $itemPurchasePrice * $itemDiscount / 100;
                 $itemPurchasePrice = $itemPurchasePrice - $discount; 
                 ?>
