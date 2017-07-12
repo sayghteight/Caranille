@@ -66,7 +66,7 @@ if (isset($_POST['shopId'])
 
                 <p>ATTENTION</p> 
                 
-                Vous êtes sur le point d'acheter l'article <em><?php echo $itemName ?> pour <?php echo $itemPurchasePrice ?> Pièce(s) d'or.</em>.<br />
+                Vous êtes sur le point d'acheter l'article <em><?php echo $itemName ?> pour <?php echo $itemPurchasePrice ?> Pièce(s) d'or</em>.<br />
                 Confirmez-vous l'achat ?
                 
 
