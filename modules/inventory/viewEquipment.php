@@ -79,6 +79,7 @@ if (isset($_POST['itemId'])
                         }
                         $raceQuery->closeCursor();
                     }
+                    //Si la race de l'équipement est égal à 0 c'est qu'il est disponible pour toutes les classes
                     else
                     {
                         $equipmentRaceName = "Toutes les classes";
