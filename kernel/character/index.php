@@ -113,11 +113,16 @@ $wisdomByLevel = $raceWisdomBonus;
 
 //Valeur des points de compétences obtenu à la monté d'un niveau ($gameSkillPoint = kernel/configuration/index.php)
 $skillPointsByLevel = $gameSkillPoint;
-$experienceLevel = $characterLevel * $gameExperience;
-$experienceRemaining = $characterLevel * $gameExperience - $characterExperience;
 
-//Si le personnage à suffisament d'experience pour la monté d'un niveau
-if ($characterExperience >= $experienceLevel)
+//On calcul l'expérience nécessaire pour monter de niveau
+$experienceLevel = $characterLevel * $gameExperience;
+//On calcul combien d'experience il reste au joueur pour monter de niveau
+$experienceRemaining = $characterLevel * $gameExperience - $characterExperience;
+//On créer une variable qui va s'incrémenter à chaque niveau obtenu pour savoir combien de niveau le joueur gagne en une fois
+$levelUpNumber = 0;
+
+//Tant que le personnage à suffisament d'experience pour la monté d'un niveau
+while ($characterExperience >= $experienceLevel)
 {
     $characterHpMin = $characterHpMin + $hPByLevel;
     $characterHpMax = $characterHpMax + $hPByLevel;
@@ -140,7 +145,11 @@ if ($characterExperience >= $experienceLevel)
     $characterExperience = $characterExperience - $experienceLevel;
     $characterSkillPoints = $characterSkillPoints + $skillPointsByLevel;
     $characterLevel = $characterLevel + 1;
-    echo "<script>alert(\"Votre personnage vient de gagner un niveau !\");</script>";
+    
+    //On recalcul l'expérience nécessaire pour monter de niveau
+    $experienceLevel = $characterLevel * $gameExperience;
+    //On calcul combien de niveau ont été gagné
+    $levelUpNumber++;
 
     //On met le personnage à jour
     $updateCharacter = $bdd->prepare("UPDATE car_characters SET
@@ -193,5 +202,15 @@ if ($characterExperience >= $experienceLevel)
     'characterSkillPoints' => $characterSkillPoints, 
     'characterId' => $characterId));
     $updateCharacter->closeCursor();
+}
+
+//Si le personnage a gagné un niveau
+if ($levelUpNumber > 0)
+{
+    ?>
+    
+    <script>alert("Votre personnage vient de gagner <?php echo $levelUpNumber ?> niveau(x) !")</script>
+    
+    <?php
 }
 ?>

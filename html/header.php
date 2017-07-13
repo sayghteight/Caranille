@@ -6,11 +6,11 @@ session_start();
 $timeStart = microtime(true);
 //On inclue le fichier de configuration qui contient les paramètre de connexion SQL ainsi que la création d'un objet $bdd pour les requêtes SQL
 require_once("../../kernel/config.php");
+//On récupère les informations de configuration du jeu
+require_once("../../kernel/configuration/index.php");
 //Si le joueur est connecté on va récupérer toutes les informations du joueur (Compte, Personnage, Combat en cours...)
 if (isset($_SESSION['account']['id']))
 {
-    //On récupère les informations de configuration du jeu
-    require_once("../../kernel/configuration/index.php");
     //On récupère toutes les informations du compte
     require_once("../../kernel/account/index.php");
     //On récupère toutes les informations du personnage grâce au compte
@@ -23,6 +23,7 @@ if (isset($_SESSION['account']['id']))
     require_once("../../kernel/town/index.php");
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -33,7 +34,7 @@ if (isset($_SESSION['account']['id']))
         <meta name="author" content="">
         <link rel="icon" href="../../favicon.ico">
 
-        <title>Caranille</title>
+        <title><?php echo $gameName ?></title>
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/navbar-fixed-top.css" rel="stylesheet">
     </head>
@@ -49,7 +50,7 @@ if (isset($_SESSION['account']['id']))
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="../../modules/main/index.php">Caranille</a>
+                    <a class="navbar-brand" href="../../modules/main/index.php"><?php echo $gameName ?></a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -106,7 +107,6 @@ if (isset($_SESSION['account']['id']))
                                     <li><a href="../../modules/story/index.php">Continuer l'aventure</a></li>
                                 </ul>
                             </li>
-                            
                             <?php
                         }
                         ?>
@@ -151,7 +151,7 @@ if (isset($_SESSION['account']['id']))
                                 else
                                 {
                                     ?>
-                                    
+                        
                                         <li><a href="../../modules/login/index.php">Connexion</a></li>
                                         <li><a href="../../modules/register/index.php">Inscription</a></li>
                                         

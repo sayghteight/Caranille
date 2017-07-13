@@ -4,31 +4,34 @@
 if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //S'il y a actuellement un combat on redirige le joueur vers le module battle
 if ($battleRow == 0) { exit(header("Location: ../../modules/main/index.php")); }
+
+//On calcul les MP nécessaire au lancement d'une attaque magique
+$mpNeed = $characterLevel * 2;
 ?>
 
 <p><img src="<?php echo $opponentPicture ?>" height="100" width="100"></p>
 
-<?php
-echo "Combat de $characterName contre $opponentName<br />";
-echo "HP de $characterName: $characterHpMin/$characterHpTotal<br />";
-echo "MP de $characterName: $characterMpMin/$characterMpTotal";
+Combat de <?php echo $characterName ?> contre <?php echo $opponentName ?><br />
 
-$mpNeed = $characterLevel * 2;
-?>
-            
+HP de <?php echo $characterName ?>: <?php echo "$characterHpMin/$characterHpTotal" ?><br />
+MP de <?php echo $characterName ?>: <?php echo "$characterMpMin/$characterMpTotal" ?><br /><br />
+
+HP de <?php echo $opponentName ?>: <?php echo "$battleOpponentHpRemaining/$opponentHp" ?><br />
+MP de <?php echo $opponentName ?>: <?php echo "$battleOpponentMpRemaining/$opponentMp" ?><br /><br />
+
 <hr>
 
 <form method="POST" action="physicalAttack.php">
     <input type="submit" name="attack" class="btn btn-default form-control" value="Attaque physique"><br>
 </form>
 
-<hr >
+<hr>
     
 <form method="POST" action="magicAttack.php">
     <input type="submit" name="magic" class="btn btn-default form-control" value="Attaque magique (<?php echo $mpNeed; ?> MP)"><br>
 </form>
 
-<hr >
+<hr>
 
 <?php
 //On cherche tous les objets que possède le joueur pour les utiliser en combat
