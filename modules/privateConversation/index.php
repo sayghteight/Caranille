@@ -62,8 +62,9 @@ if ($privateConversationRow > 0)
                 //On fait une requête pour vérifier le nombre de message non lu
                 $privateConversationNumberQuery = $bdd->prepare("SELECT * FROM car_private_conversation_message
                 WHERE privateConversationMessagePrivateConversationId = ?
+                AND privateConversationMessageCharacterId != ?
                 AND privateConversationMessageRead = 'No'");
-                $privateConversationNumberQuery->execute([$privateConversationId]);
+                $privateConversationNumberQuery->execute([$privateConversationId, $characterId]);
                 $privateConversationNumberRow = $privateConversationNumberQuery->rowCount();
                 ?>
                 <option value="<?php echo $privateConversationId ?>"><?php echo "$privateConversationCharacterName ($privateConversationNumberRow nouveau(x) message)" ?></option>

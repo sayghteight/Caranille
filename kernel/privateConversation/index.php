@@ -6,7 +6,8 @@ $privateConversationNumberQuery = $bdd->prepare("SELECT * FROM car_private_conve
 WHERE privateConversationMessagePrivateConversationId = privateConversationId
 AND (privateConversationCharacterOneId = ?
 OR privateConversationCharacterTwoId = ?)
+AND privateConversationMessageCharacterId != ?
 AND privateConversationMessageRead = 'No'");
-$privateConversationNumberQuery->execute([$characterId, $characterId]);
+$privateConversationNumberQuery->execute([$characterId, $characterId, $characterId]);
 $privateConversationNumberRow = $privateConversationNumberQuery->rowCount();
 ?>

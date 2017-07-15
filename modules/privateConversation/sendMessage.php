@@ -39,7 +39,7 @@ if (isset($_POST['privateConversationId'])
             :characterId,
             :date,
             :privateConversationMessage,
-            'Yes')");
+            'No')");
         
             $addMessage->execute([
             'privateConversationId' => $privateConversationId,
