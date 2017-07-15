@@ -21,10 +21,10 @@ if (isset($_POST['adminAccountId'])
         $accountQuery = $bdd->prepare('SELECT * FROM car_accounts 
         WHERE accountId = ?');
         $accountQuery->execute([$adminAccountId]);
-        $account = $accountQuery->rowCount();
+        $accountRow = $accountQuery->rowCount();
 
         //Si le compte existe
-        if ($account == 1) 
+        if ($accountRow == 1) 
         {
             //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($account = $accountQuery->fetch())

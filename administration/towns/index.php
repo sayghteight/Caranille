@@ -6,7 +6,6 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 //Si le joueur n'a pas les droits administrateurs (Accès 2) on le redirige vers l'accueil
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
-//on récupère les valeurs de chaque ville qu'on va ensuite mettre dans le menu déroulant
 //On fait une recherche dans la base de donnée de toutes les villes
 $townQuery = $bdd->query("SELECT * FROM car_towns
 ORDER by townName");

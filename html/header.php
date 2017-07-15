@@ -76,7 +76,6 @@ if (isset($_SESSION['account']['id']))
                                     <li><a href="../../modules/character/index.php">Fiche complète</a></li>
                                     <li><a href="../../modules/skillPoints/index.php">Points de compétences</a></li>
                                     <li><a href="../../modules/inventory/index.php">Inventaire</a></li>
-                                    <li><a href="../../modules/bestiary/index.php">Bestiaire</a></li>
                                 </ul>
                             </li>
                             
@@ -105,8 +104,18 @@ if (isset($_SESSION['account']['id']))
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Aventure<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="../../modules/story/index.php">Continuer l'aventure</a></li>
+                                    <li><a href="../../modules/bestiary/index.php">Bestiaire</a></li>
                                 </ul>
                             </li>
+                            
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Communauté<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="../../modules/chat/index.php">Chat</a></li>
+                                    <li><a href="../../modules/privateConversation/index.php">Messagerie privée</a></li>
+                                </ul>
+                            </li>
+                            
                             <?php
                         }
                         ?>
