@@ -79,27 +79,42 @@ $characterQuery = $bdd->prepare("SELECT * FROM car_characters
 WHERE characterId != ?
 ORDER by characterName");
 $characterQuery->execute([$characterId]);
-?>
+$characterRow = $characterQuery->rowCount();
 
-<form method="POST" action="launchConversation.php">
-    Liste de vos conversations <select name="privateConversationCharacterId" class="form-control">
-        
-        <?php
-        //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
-        while ($character = $characterQuery->fetch())
-        {
-            $privateConversationCharacterId = stripslashes($character['characterId']);
-            $privateConversationCharacterName = stripslashes($character['characterName']);
-            ?>
-            <option value="<?php echo $privateConversationCharacterId ?>"><?php echo "$privateConversationCharacterName"; ?></option>
-            <?php
-        }
-        $characterQuery->closeCursor();
-        ?>
+//Si il y a au moins un autre joueur on affiche le menu
+
+if ($characterRow > 0)
+{
     
-    </select>
-    <input type="submit" name="launchConversation" class="btn btn-default form-control" value="Démarrer une conversation">
-</form>
+    ?>
+    
+    <form method="POST" action="launchConversation.php">
+        Liste des joueurs <select name="privateConversationCharacterId" class="form-control">
+            
+            <?php
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+            while ($character = $characterQuery->fetch())
+            {
+                $privateConversationCharacterId = stripslashes($character['characterId']);
+                $privateConversationCharacterName = stripslashes($character['characterName']);
+                ?>
+                <option value="<?php echo $privateConversationCharacterId ?>"><?php echo "$privateConversationCharacterName"; ?></option>
+                <?php
+            }
+            $characterQuery->closeCursor();
+            ?>
+        
+        </select>
+        <input type="submit" name="launchConversation" class="btn btn-default form-control" value="Démarrer une conversation">
+    </form>
+    
+    <?php
+}
+else
+{
+    echo "Il n'y a actuellement aucun autre joueur";
+}
+?>
 
 <hr>
 
