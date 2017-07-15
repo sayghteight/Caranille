@@ -7,7 +7,7 @@ if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); 
 
 //Si les variables $_POST suivantes existent
 if (isset($_POST['privateConversationId'])
-&& isset($_POST['showConversation']))
+&& isset($_POST['showAllConversation']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
     if (ctype_digit($_POST['privateConversationId'])
@@ -67,14 +67,13 @@ if (isset($_POST['privateConversationId'])
             }
             ?>
             
-            <p>Conversation avec <?php echo $privateConversationCharacterName ?> (20 derniers messages)</p>
-            
+            <p>Conversation avec <?php echo $privateConversationCharacterName ?> (Tous les messages)</p>
+
             <?php
             
             //On fait une recherche dans la base de donnée des 20 derniers message de la conversation
             $privateConversationMessageQuery = $bdd->prepare('SELECT * FROM car_private_conversation_message
-            WHERE privateConversationMessagePrivateConversationId = ?
-            LIMIT 0, 20');
+            WHERE privateConversationMessagePrivateConversationId = ?');
             $privateConversationMessageQuery->execute([$privateConversationId]);
             $privateConversationMessageRow = $privateConversationMessageQuery->rowCount();
             
@@ -140,17 +139,9 @@ if (isset($_POST['privateConversationId'])
             }
             ?>
             
-            <hr>
-            
-            <form method="POST" action="sendMessage.php">
-                Message : <input type="text" name="privateConversationMessage" class="form-control" placeholder="Message" required>
+            <form method="POST" action="showConversation.php">
                 <input type="hidden" name="privateConversationId" value="<?php echo $privateConversationId ?>">
-                <input type="submit" class="btn btn-default form-control" name="sendMessage" value="Envoyer">
-            </form>
-            
-            <form method="POST" action="showAllConversation.php">
-                <input type="hidden" name="privateConversationId" value="<?php echo $privateConversationId ?>">
-                <input type="submit" class="btn btn-default form-control" name="showAllConversation" value="Afficher toute la conversation">
+                <input type="submit" class="btn btn-default form-control" name="showConversation" value="Retour">
             </form>
             
             <?php

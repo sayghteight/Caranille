@@ -16,6 +16,8 @@ if ($chatRow > 0)
 {
     ?>
     
+    <p>Affichage des 20 derniers messages</p>
+    
     <table class="table">
         
         <tr>
@@ -104,8 +106,14 @@ if ($chatRow > 0)
     <input type="text" class="form-control" placeholder="message" name="chatMessage" required>
     <input type="submit" class="btn btn-default form-control" name="sendMessage" value="Envoyer le message">
 </form>
+
+<hr>
+
 <form method="POST" action="index.php">
     <input type="submit" class="btn btn-default form-control" name="refreshChat" value="Actualiser le chat">
+</form>
+<form method="POST" action="showAllMessages.php">
+    <input type="submit" class="btn btn-default form-control" name="showAllMessages" value="Afficher tous les messages">
 </form>
  
 <?php
