@@ -103,9 +103,24 @@ if (isset($_POST['privateConversationId'])
                 //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                 while ($privateConversationMessage = $privateConversationMessageQuery->fetch())
                 {
+                    $privateConversationMessageId = stripslashes($privateConversationMessage['privateConversationMessageId']);
                     $privateConversationMessageCharacterId = stripslashes($privateConversationMessage['privateConversationMessageCharacterId']);
                     $privateConversationMessageDateTime = stripslashes($privateConversationMessage['privateConversationMessageDateTime']);
-                    $privateConversationMessage = stripslashes($privateConversationMessage['privateConversationMessage']);
+                    $privateConversationMessageMessage = stripslashes($privateConversationMessage['privateConversationMessage']);
+                    $privateConversationMessageRead = stripslashes($privateConversationMessage['privateConversationMessageRead']);
+                    
+                    //Si le message est non lu
+                    if ($privateConversationMessageRead == "No")
+                    {
+                        //On peut enfin le mettre lu car il vient de s'afficher
+                        $updatePrivateConversationMessage = $bdd->prepare("UPDATE car_private_conversation_message
+                        SET privateConversationMessageRead = 'Yes'
+                        WHERE privateConversationMessageId = :privateConversationMessageId");
+            
+                        $updatePrivateConversationMessage->execute([
+                        'privateConversationMessageId' => $privateConversationMessageId]);
+                        $updatePrivateConversationMessage->closeCursor();
+                    }
                     
                     //Si l'id de la personne qui a posté le message et celui du personnage sinon il s'agira de l'autre personnage
                     if ($privateConversationMessageCharacterId == $characterId)
@@ -125,7 +140,7 @@ if (isset($_POST['privateConversationId'])
                         </td>
                         
                         <td>
-                            <?php echo $privateConversationMessage ?>
+                            <?php echo $privateConversationMessageMessage ?>
                         </td>
                         
                     </tr>

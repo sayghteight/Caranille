@@ -19,6 +19,8 @@ if (isset($_SESSION['account']['id']))
     require_once("../../kernel/battle/index.php");
     //On récupère toutes les informations des équipements équipé au personnage
     require_once("../../kernel/equipment/index.php");
+    //On vérifie le nombre de message de conversation privée non lu
+    require_once("../../kernel/privateConversation/index.php");
     //On vérifie si le personnage est actuellement dans une ville. Si c'est le cas on récupère toutes les informations de la ville
     require_once("../../kernel/town/index.php");
 }
@@ -79,31 +81,30 @@ if (isset($_SESSION['account']['id']))
                                 </ul>
                             </li>
                             
-                            <?php
-                            //Si characterTownId est supérieur ou égal à un le joueur est dans une ville. On met le raccourcit vers la ville
-                            if($characterTownId >= 1)
-                            {
-                                ?>
-                                
-                                    <li><a href="../../modules/town/index.php">Retourner en ville</a></li>
-                                    
-                                <?php
-                            }
-                            //Si characterTownId n'est pas supérieur ou égal à un le joueur est dans aucune ville. On met le raccourcit vers la carte du monde
-                            else
-                            {
-                                ?>
-                                
-                                    <li><a href="../../modules/map/index.php">Carte du monde</a></li>
-                                    
-                                <?php
-                            }
-                            ?>
-                            
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Aventure<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="../../modules/story/index.php">Continuer l'aventure</a></li>
+                                    <?php
+                                    //Si characterTownId est supérieur ou égal à un le joueur est dans une ville. On met le raccourcit vers la ville
+                                    if($characterTownId >= 1)
+                                    {
+                                        ?>
+                                        
+                                            <li><a href="../../modules/town/index.php">Retourner en ville</a></li>
+                                            
+                                        <?php
+                                    }
+                                    //Si characterTownId n'est pas supérieur ou égal à un le joueur est dans aucune ville. On met le raccourcit vers la carte du monde
+                                    else
+                                    {
+                                        ?>
+                                        
+                                            <li><a href="../../modules/map/index.php">Carte du monde</a></li>
+                                            
+                                        <?php
+                                    }
+                                    ?>
                                     <li><a href="../../modules/bestiary/index.php">Bestiaire</a></li>
                                 </ul>
                             </li>
@@ -112,7 +113,7 @@ if (isset($_SESSION['account']['id']))
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Communauté<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="../../modules/chat/index.php">Chat</a></li>
-                                    <li><a href="../../modules/privateConversation/index.php">Messagerie privée</a></li>
+                                    <li><a href="../../modules/privateConversation/index.php">Messagerie privée (<?php echo $privateConversationNumberRow ?>)</a></li>
                                 </ul>
                             </li>
                             
