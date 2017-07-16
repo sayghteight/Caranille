@@ -29,8 +29,9 @@ if ($townRow >= 1)
                 //on récupère les valeurs de chaque villes qu'on va ensuite mettre dans le menu déroulant
                 $townId = stripslashes($townList['townId']); 
                 $townName = stripslashes($townList['townName']);
+                $townChapter = stripslashes($townList['townChapter']);
                 ?>
-                <option value="<?php echo $townId ?>"><?php echo $townName ?></option>
+                <option value="<?php echo $townId ?>"><?php echo "$townName (chapitre $townChapter)" ?></option>
                 <?php
             }
             $townQuery->closeCursor();
