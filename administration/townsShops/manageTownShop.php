@@ -30,7 +30,8 @@ if (isset($_POST['adminTownShopTownId'])
             $townShopQuery = $bdd->prepare("SELECT * FROM car_shops, car_towns, car_towns_shops
             WHERE townShopShopId = shopId
             AND townShopTownId = townId
-            AND townId = ?");
+            AND townId = ?
+			ORDER BY shopName");
             $townShopQuery->execute([$adminTownShopTownId]);
             $townShopRow = $townShopQuery->rowCount();
 
@@ -68,7 +69,8 @@ if (isset($_POST['adminTownShopTownId'])
             $townShopQuery->closeCursor();
 
             //On fait une requête pour afficher la liste des magasins du jeu
-            $shopQuery = $bdd->query("SELECT * FROM car_shops");
+            $shopQuery = $bdd->query("SELECT * FROM car_shops
+			ORDER BY shopName");
             $shopRow = $shopQuery->rowCount();
             //S'il existe un ou plusieurs magasin on affiche le menu déroulant pour proposer au joueur d'en ajouter
             if ($shopRow > 0) 

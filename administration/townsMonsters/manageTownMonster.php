@@ -30,7 +30,8 @@ if (isset($_POST['adminTownMonsterTownId'])
             $townMonsterQuery = $bdd->prepare("SELECT * FROM car_monsters, car_towns, car_towns_monsters
             WHERE townMonsterMonsterId = monsterId
             AND townMonsterTownId = townId
-            AND townId = ?");
+            AND townId = ?
+			ORDER BY monsterName");
             $townMonsterQuery->execute([$adminTownMonsterTownId]);
             $townMonsterRow = $townMonsterQuery->rowCount();
 
@@ -68,7 +69,8 @@ if (isset($_POST['adminTownMonsterTownId'])
             $townMonsterQuery->closeCursor();
 
             //On fait une requête pour afficher la liste des monstres du jeu
-            $monsterQuery = $bdd->query("SELECT * FROM car_monsters");
+            $monsterQuery = $bdd->query("SELECT * FROM car_monsters
+			ORDER BY monsterName");
             $monsterRow = $monsterQuery->rowCount();
             //S'il existe un ou plusieurs monstres on affiche le menu déroulant pour proposer au joueur d'en ajouter
             if ($monsterRow > 0) 

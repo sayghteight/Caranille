@@ -8,7 +8,8 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //on récupère les valeurs de chaque news qu'on va ensuite mettre dans le menu déroulant
 //On fait une recherche dans la base de donnée de toutes les news
-$newsQuery = $bdd->query("SELECT * FROM car_news");
+$newsQuery = $bdd->query("SELECT * FROM car_news
+ORDER BY newsId");
 $newsRow = $newsQuery->rowCount();
 
 //S'il existe une ou plusieurs news on affiche le menu déroulant
