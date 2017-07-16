@@ -16,7 +16,7 @@ if ($characterTownId >= 1)
         $townId = stripslashes($town['townId']);
         $townPicture = stripslashes($town['townPicture']);
         $townName = stripslashes($town['townName']);
-        $townDescription = stripslashes($town['townDescription']);
+        $townDescription = stripslashes(nl2br($town['townDescription']));
         $townPriceInn = stripslashes($town['townPriceInn']);
     }
     $townQuery->closeCursor();
