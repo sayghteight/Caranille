@@ -50,7 +50,9 @@ if (isset($_POST['privateConversationId'])
                     //On récupère les informations du personnage
                     $privateConversationCharacterName = stripslashes($character['characterName']);
                 }
+                $characterQuery->closeCursor();
             }
+            //Si la seconde personne de la conversation est le joueur on cherche à savoir qui est l'autre personne
             else
             {
                 //On fait une requête pour vérifier la liste des conversations dans la base de données
@@ -64,13 +66,13 @@ if (isset($_POST['privateConversationId'])
                     //On récupère les informations du personnage
                     $privateConversationCharacterName = stripslashes($character['characterName']);
                 }
+                $characterQuery->closeCursor();
             }
             ?>
             
             <p>Conversation avec <?php echo $privateConversationCharacterName ?> (20 derniers messages)</p>
             
             <?php
-            
             //On fait une recherche dans la base de donnée des 20 derniers message de la conversation
             $privateConversationMessageQuery = $bdd->prepare('SELECT * FROM car_private_conversation_message
             WHERE privateConversationMessagePrivateConversationId = ?
@@ -78,80 +80,83 @@ if (isset($_POST['privateConversationId'])
             $privateConversationMessageQuery->execute([$privateConversationId]);
             $privateConversationMessageRow = $privateConversationMessageQuery->rowCount();
             
-            //Si il y a déjà eu au moins un message
+            //Si il y a déjà eu au moins un message on construit le tableau
             if ($privateConversationMessageRow > 0)
             {
                 ?>
                                     
                 <table class="table">
     
-                <tr>
-                    <td>
-                        Date/Heure
-                    </td>
-                    
-                    <td>
-                        Pseudo
-                    </td>
-                    
-                    <td>
-                        Message
-                    </td>
-                </tr>
-                
-                <?php
-                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
-                while ($privateConversationMessage = $privateConversationMessageQuery->fetch())
-                {
-                    $privateConversationMessageId = stripslashes($privateConversationMessage['privateConversationMessageId']);
-                    $privateConversationMessageCharacterId = stripslashes($privateConversationMessage['privateConversationMessageCharacterId']);
-                    $privateConversationMessageDateTime = stripslashes($privateConversationMessage['privateConversationMessageDateTime']);
-                    $privateConversationMessageMessage = stripslashes($privateConversationMessage['privateConversationMessage']);
-                    $privateConversationMessageRead = stripslashes($privateConversationMessage['privateConversationMessageRead']);
-                    
-                    //On vérifie si l'auteur du message est l'autre joueur
-                    if ($privateConversationMessageCharacterId != $characterId)
-                    {
-                        //Si le message provient de l'autre joueur on vérifie si il est non lu
-                        if ($privateConversationMessageRead == "No")
-                        {
-                            //On peut enfin le mettre lu car on vient de le lire
-                            $updatePrivateConversationMessage = $bdd->prepare("UPDATE car_private_conversation_message
-                            SET privateConversationMessageRead = 'Yes'
-                            WHERE privateConversationMessageId = :privateConversationMessageId");
-                
-                            $updatePrivateConversationMessage->execute([
-                            'privateConversationMessageId' => $privateConversationMessageId]);
-                            $updatePrivateConversationMessage->closeCursor();
-                        }
-                    }
-                    
-                    //Si l'id de la personne qui a posté le message et celui du personnage sinon il s'agira de l'autre personnage
-                    if ($privateConversationMessageCharacterId == $characterId)
-                    {
-                        $privateConversationCharacterName = $characterName;
-                    }
-                    ?>
-                    
                     <tr>
-                        
                         <td>
-                            <?php echo strftime('%d-%m-%Y - %H:%M:%S',strtotime($privateConversationMessageDateTime)) ?> 
+                            Date/Heure
                         </td>
                         
                         <td>
-                            <?php echo $privateConversationCharacterName ?>
+                            Pseudo
                         </td>
                         
                         <td>
-                            <?php echo $privateConversationMessageMessage ?>
+                            Message
                         </td>
-                        
                     </tr>
+                
+                    <?php
+                    //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+                    while ($privateConversationMessage = $privateConversationMessageQuery->fetch())
+                    {
+                        //On récupère les informations du message de la discution
+                        $privateConversationMessageId = stripslashes($privateConversationMessage['privateConversationMessageId']);
+                        $privateConversationMessageCharacterId = stripslashes($privateConversationMessage['privateConversationMessageCharacterId']);
+                        $privateConversationMessageDateTime = stripslashes($privateConversationMessage['privateConversationMessageDateTime']);
+                        $privateConversationMessageMessage = stripslashes($privateConversationMessage['privateConversationMessage']);
+                        $privateConversationMessageRead = stripslashes($privateConversationMessage['privateConversationMessageRead']);
+                        
+                        //On vérifie si l'auteur du message est l'autre joueur
+                        if ($privateConversationMessageCharacterId != $characterId)
+                        {
+                            //Si le message provient de l'autre joueur on vérifie si il est non lu
+                            if ($privateConversationMessageRead == "No")
+                            {
+                                //On peut enfin le mettre lu car on vient de le lire
+                                $updatePrivateConversationMessage = $bdd->prepare("UPDATE car_private_conversation_message
+                                SET privateConversationMessageRead = 'Yes'
+                                WHERE privateConversationMessageId = :privateConversationMessageId");
                     
-                <?php
-                }
-                ?>
+                                $updatePrivateConversationMessage->execute([
+                                'privateConversationMessageId' => $privateConversationMessageId]);
+                                $updatePrivateConversationMessage->closeCursor();
+                            }
+                        }
+                        
+                        //Si $privateConversationMessageCharacterId == $characterId c'est nous qui avons envoyé le message
+                        if ($privateConversationMessageCharacterId == $characterId)
+                        {
+                            //On définit notre pseudo dans l'expéditeur du message
+                            $privateConversationCharacterName = $characterName;
+                        }
+                        ?>
+                        
+                        <tr>
+                            
+                            <td>
+                                <?php echo strftime('%d-%m-%Y - %H:%M:%S',strtotime($privateConversationMessageDateTime)) ?> 
+                            </td>
+                            
+                            <td>
+                                <?php echo $privateConversationCharacterName ?>
+                            </td>
+                            
+                            <td>
+                                <?php echo $privateConversationMessageMessage ?>
+                            </td>
+                            
+                        </tr>
+                        
+                    <?php
+                    }
+                    $privateConversationMessageQuery->closeCursor();
+                    ?>
                 
                 </table>
                 
@@ -179,7 +184,7 @@ if (isset($_POST['privateConversationId'])
         {
             echo "Erreur: Cette conversation n'existe pas ou vous n'en faite pas parti";
         }
-        $accountQuery->closeCursor();
+        $privateConversationQuery->closeCursor();
     }
     //Si tous les champs numérique ne contiennent pas un nombre
     else

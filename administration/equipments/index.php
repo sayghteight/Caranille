@@ -13,7 +13,7 @@ OR itemType = 'Boots'
 OR itemType = 'Gloves' 
 OR itemType = 'Helmet' 
 OR itemType = 'Weapon')
-ORDER by itemType");
+ORDER by itemName");
 $equipmentRow = $equipmentQuery->rowCount();
 
 //S'il existe un ou plusieurs équipements on affiche le menu déroulant

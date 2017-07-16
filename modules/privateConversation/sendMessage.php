@@ -66,7 +66,7 @@ if (isset($_POST['privateConversationId'])
         {
             echo "Erreur: Cette conversation n'existe pas ou vous n'en faite pas parti";
         }
-        $accountQuery->closeCursor();
+        $privateConversationQuery->closeCursor();
     }
     //Si tous les champs numérique ne contiennent pas un nombre
     else

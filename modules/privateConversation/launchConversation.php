@@ -26,23 +26,16 @@ if (isset($_POST['privateConversationCharacterId'])
         if ($characterRow == 1) 
         {
             //On vérifie si il n'y a pas déjà une conversation avec ce joueur
-            
-            //On vérifie en prenant en compte que nous somme le conversationCharacterOneId
-            $privateConversationOneQuery = $bdd->prepare("SELECT * FROM car_private_conversation
-            WHERE privateConversationCharacterOneId = ?
-            AND privateConversationCharacterTwoId = ?");
-            $privateConversationOneQuery->execute([$characterId, $privateConversationCharacterId]);
-            $privateConversationOneRow = $privateConversationOneQuery->rowCount();
-            
-            //On vérifie en prenant en compte que nous somme le conversationCharacterTwoId
-            $privateConversationTwoQuery = $bdd->prepare("SELECT * FROM car_private_conversation
-            WHERE privateConversationCharacterOneId = ?
-            AND privateConversationCharacterTwoId = ?");
-            $privateConversationTwoQuery->execute([$privateConversationCharacterId, $characterId]);
-            $privateConversationTwoRow = $privateConversationTwoQuery->rowCount();
+            $privateConversationQuery = $bdd->prepare("SELECT * FROM car_private_conversation
+            WHERE (privateConversationCharacterOneId = ?
+            AND privateConversationCharacterTwoId = ?
+            OR privateConversationCharacterOneId = ?
+            AND privateConversationCharacterTwoId = ?)");
+            $privateConversationQuery->execute([$characterId, $privateConversationCharacterId, $privateConversationCharacterId, $characterId]);
+            $privateConversationRow = $privateConversationQuery->rowCount();
             
             //Si aucune conversation n'existe
-            if ($privateConversationOneRow == 0 && $privateConversationTwoRow == 0)
+            if ($privateConversationRow == 0)
             {
                 //On crée la conversation
                 $addPrivateConversation = $bdd->prepare("INSERT INTO car_private_conversation VALUES(
@@ -80,13 +73,14 @@ if (isset($_POST['privateConversationCharacterId'])
                 <?php
                 
             }
+            $privateConversationQuery->closeCursor();
         }
         //Si le personnage n'existe pas
         else
         {
             echo "Erreur: Ce personnage n'existe pas";
         }
-        $accountQuery->closeCursor();
+        $characterQuery->closeCursor();
         
     }
     //Si tous les champs numérique ne contiennent pas un nombre

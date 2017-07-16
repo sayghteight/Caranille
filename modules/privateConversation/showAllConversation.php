@@ -50,7 +50,9 @@ if (isset($_POST['privateConversationId'])
                     //On récupère les informations du personnage
                     $privateConversationCharacterName = stripslashes($character['characterName']);
                 }
+                $characterQuery->closeCursor();
             }
+            //Si la seconde personne de la conversation est le joueur on cherche à savoir qui est l'autre personne
             else
             {
                 //On fait une requête pour vérifier la liste des conversations dans la base de données
@@ -64,13 +66,13 @@ if (isset($_POST['privateConversationId'])
                     //On récupère les informations du personnage
                     $privateConversationCharacterName = stripslashes($character['characterName']);
                 }
+                $characterQuery->closeCursor();
             }
             ?>
             
             <p>Conversation avec <?php echo $privateConversationCharacterName ?> (Tous les messages)</p>
 
             <?php
-            
             //On fait une recherche dans la base de donnée des 20 derniers message de la conversation
             $privateConversationMessageQuery = $bdd->prepare('SELECT * FROM car_private_conversation_message
             WHERE privateConversationMessagePrivateConversationId = ?');
@@ -84,59 +86,61 @@ if (isset($_POST['privateConversationId'])
                                     
                 <table class="table">
     
-                <tr>
-                    <td>
-                        Date/Heure
-                    </td>
-                    
-                    <td>
-                        Pseudo
-                    </td>
-                    
-                    <td>
-                        Message
-                    </td>
-                </tr>
-                
-                <?php
-                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
-                while ($privateConversationMessage = $privateConversationMessageQuery->fetch())
-                {
-                    $privateConversationMessageCharacterId = stripslashes($privateConversationMessage['privateConversationMessageCharacterId']);
-                    $privateConversationMessageDateTime = stripslashes($privateConversationMessage['privateConversationMessageDateTime']);
-                    $privateConversationMessage = stripslashes($privateConversationMessage['privateConversationMessage']);
-                    
-                    //Si l'id de la personne qui a posté le message et celui du personnage sinon il s'agira de l'autre personnage
-                    if ($privateConversationMessageCharacterId == $characterId)
-                    {
-                        $privateConversationCharacterName = $characterName;
-                    }
-                    ?>
-                    
                     <tr>
-                        
                         <td>
-                            <?php echo strftime('%d-%m-%Y - %H:%M:%S',strtotime($privateConversationMessageDateTime)) ?> 
+                            Date/Heure
                         </td>
                         
                         <td>
-                            <?php echo $privateConversationCharacterName ?>
+                            Pseudo
                         </td>
                         
                         <td>
-                            <?php echo $privateConversationMessage ?>
+                            Message
                         </td>
-                        
                     </tr>
                     
-                <?php
-                }
-                ?>
+                    <?php
+                    //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+                    while ($privateConversationMessage = $privateConversationMessageQuery->fetch())
+                    {
+                        //On récupère les informations du message de la discution
+                        $privateConversationMessageCharacterId = stripslashes($privateConversationMessage['privateConversationMessageCharacterId']);
+                        $privateConversationMessageDateTime = stripslashes($privateConversationMessage['privateConversationMessageDateTime']);
+                        $privateConversationMessage = stripslashes($privateConversationMessage['privateConversationMessage']);
+                        
+                        //Si l'id de la personne qui a posté le message et celui du personnage sinon il s'agira de l'autre personnage
+                        if ($privateConversationMessageCharacterId == $characterId)
+                        {
+                            $privateConversationCharacterName = $characterName;
+                        }
+                        ?>
+                        
+                        <tr>
+                            
+                            <td>
+                                <?php echo strftime('%d-%m-%Y - %H:%M:%S',strtotime($privateConversationMessageDateTime)) ?> 
+                            </td>
+                            
+                            <td>
+                                <?php echo $privateConversationCharacterName ?>
+                            </td>
+                            
+                            <td>
+                                <?php echo $privateConversationMessage ?>
+                            </td>
+                            
+                        </tr>
+                        
+                    <?php
+                    }
+                    ?>
                 
                 </table>
                 
                 <?php
             }
+            $privateConversationMessageQuery->closeCursor();
             ?>
             
             <form method="POST" action="showConversation.php">
@@ -151,7 +155,7 @@ if (isset($_POST['privateConversationId'])
         {
             echo "Erreur: Cette conversation n'existe pas ou vous n'en faite pas parti";
         }
-        $accountQuery->closeCursor();
+        $privateConversationQuery->closeCursor();
     }
     //Si tous les champs numérique ne contiennent pas un nombre
     else

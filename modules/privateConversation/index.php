@@ -43,7 +43,9 @@ if ($privateConversationRow > 0)
                         //On récupère les informations du personnage
                         $privateConversationCharacterName = stripslashes($character['characterName']);
                     }
+                    $characterQuery->closeCursor();
                 }
+                //Si la seconde personne de la conversation est le joueur on cherche à savoir qui est l'autre personne
                 else
                 {
                     //On fait une requête pour vérifier la liste des conversations dans la base de données
@@ -57,6 +59,7 @@ if ($privateConversationRow > 0)
                         //On récupère les informations du personnage
                         $privateConversationCharacterName = stripslashes($character['characterName']);
                     }
+                    $characterQuery->closeCursor();
                 }
                 
                 //On fait une requête pour vérifier le nombre de message non lu
@@ -89,8 +92,7 @@ ORDER by characterName");
 $characterQuery->execute([$characterId]);
 $characterRow = $characterQuery->rowCount();
 
-//Si il y a au moins un autre joueur on affiche le menu
-
+//S'il y a au moins un autre joueur on affiche le menu
 if ($characterRow > 0)
 {
     
@@ -103,13 +105,13 @@ if ($characterRow > 0)
             //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($character = $characterQuery->fetch())
             {
+                //On récupère les informations du personnage
                 $privateConversationCharacterId = stripslashes($character['characterId']);
                 $privateConversationCharacterName = stripslashes($character['characterName']);
                 ?>
                 <option value="<?php echo $privateConversationCharacterId ?>"><?php echo "$privateConversationCharacterName"; ?></option>
                 <?php
             }
-            $characterQuery->closeCursor();
             ?>
         
         </select>
@@ -118,18 +120,18 @@ if ($characterRow > 0)
     
     <?php
 }
+//Si il y a aucun autre joueur
 else
 {
     echo "Il n'y a actuellement aucun autre joueur";
 }
+$characterQuery->closeCursor();
 ?>
 
 <hr>
 
-<form method="POST" action="index.php">
+<form method="POST" action="../../index.php">
     <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
 </form>
 
-<?php
-
-require_once("../../html/footer.php"); ?>
+<?php require_once("../../html/footer.php"); ?>
