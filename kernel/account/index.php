@@ -24,6 +24,7 @@ $accountQuery->closeCursor();
 
 $accountLastAction = $date = date('Y-m-d H:i:s');
 
+//On met à jour la dernière action du compte dans la base de donnée
 $updateAccount = $bdd->prepare("UPDATE car_accounts SET 
 accountLastAction = :accountLastAction
 WHERE accountId = :accountId");

@@ -1,5 +1,4 @@
-<?php
-require_once("../../kernel/config.php");
+<?php require_once("../../kernel/config.php");
 
 //On fait une requête pour vérifier S'il y a un combat en cours
 $battleQuery = $bdd->prepare("SELECT * FROM car_battles
@@ -14,11 +13,11 @@ if ($battleRow == 1)
     while ($battle = $battleQuery->fetch())
     {
         //On récupère les informations du combat
-        $battleId = $battle['battleId'];
-        $battleOpponentId = $battle['battleOpponentId'];
-        $battleType = $battle['battleType'];
-        $battleOpponentHpRemaining = $battle['battleOpponentHpRemaining'];
-        $battleOpponentMpRemaining = $battle['battleOpponentMpRemaining'];
+        $battleId = stripslashes($battle['battleId']);
+        $battleOpponentId = stripslashes($battle['battleOpponentId']);
+        $battleType = stripslashes($battle['battleType']);
+        $battleOpponentHpRemaining = stripslashes($battle['battleOpponentHpRemaining']);
+        $battleOpponentMpRemaining = stripslashes($battle['battleOpponentMpRemaining']);
     }
     $battleQuery->closeCursor();
     
