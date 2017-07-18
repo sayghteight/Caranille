@@ -11,20 +11,32 @@ if (isset($_POST['adminGameName'])
 && isset($_POST['adminGamePresentation'])
 && isset($_POST['adminGameExperience'])
 && isset($_POST['adminGameSkillPoint'])
+&& isset($_POST['adminGameExperienceBonus'])
+&& isset($_POST['adminGameGoldBonus'])
+&& isset($_POST['adminGameDropBonus'])
 && isset($_POST['adminGameAccess'])
 && isset($_POST['edit']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
     if (ctype_digit($_POST['adminGameExperience'])
     && ctype_digit($_POST['adminGameSkillPoint'])
+    && ctype_digit($_POST['adminGameExperienceBonus'])
+    && ctype_digit($_POST['adminGameGoldBonus'])
+    && ctype_digit($_POST['adminGameDropBonus'])
     && $_POST['adminGameExperience'] > 0
-    && $_POST['adminGameSkillPoint'] >= 0)
+    && $_POST['adminGameSkillPoint'] >= 0
+    && $_POST['adminGameExperienceBonus'] >= 0
+    && $_POST['adminGameGoldBonus'] >= 0
+    && $_POST['adminGameDropBonus'] >= 0)
     {
         //On récupère les informations du formulaire
         $adminGameName = htmlspecialchars(addslashes($_POST['adminGameName']));
         $adminGamePresentation = htmlspecialchars(addslashes($_POST['adminGamePresentation']));
         $adminGameExperience = htmlspecialchars(addslashes($_POST['adminGameExperience']));
         $adminGameSkillPoint = htmlspecialchars(addslashes($_POST['adminGameSkillPoint']));
+        $adminGameExperienceBonus = htmlspecialchars(addslashes($_POST['adminGameExperienceBonus']));
+        $adminGameGoldBonus = htmlspecialchars(addslashes($_POST['adminGameGoldBonus']));
+        $adminGameDropBonus = htmlspecialchars(addslashes($_POST['adminGameDropBonus']));
         $adminGameAccess = htmlspecialchars(addslashes($_POST['adminGameAccess']));
         
         //On met à jour la configuration dans la base de donnée
@@ -33,6 +45,9 @@ if (isset($_POST['adminGameName'])
         configurationPresentation = :adminGamePresentation,
         configurationExperience = :adminGameExperience,
         configurationSkillPoint = :adminGameSkillPoint,
+        configurationExperienceBonus = :adminGameExperienceBonus,
+        configurationGoldBonus = :adminGameGoldBonus,
+        configurationDropBonus = :adminGameDropBonus,
         configurationAccess = :adminGameAccess');
 
         $updateConfiguration->execute([
@@ -40,6 +55,9 @@ if (isset($_POST['adminGameName'])
         'adminGamePresentation' => $adminGamePresentation,
         'adminGameExperience' => $adminGameExperience,
         'adminGameSkillPoint' => $adminGameSkillPoint,
+        'adminGameExperienceBonus' => $adminGameExperienceBonus,
+        'adminGameGoldBonus' => $adminGameGoldBonus,
+        'adminGameDropBonus' => $adminGameDropBonus,
         'adminGameAccess' => $adminGameAccess]);
         $updateConfiguration->closeCursor();
         ?>

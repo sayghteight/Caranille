@@ -19,6 +19,8 @@ if (isset($_SESSION['account']['id']))
     require_once("../../kernel/battle/index.php");
     //On récupère toutes les informations des équipements équipé au personnage
     require_once("../../kernel/equipment/index.php");
+    //On vérifie le nombre d'offre dans le marché
+    require_once("../../kernel/market/index.php");
     //On vérifie le nombre de message de conversation privée non lu
     require_once("../../kernel/privateConversation/index.php");
     //On vérifie si le personnage est actuellement dans une ville. Si c'est le cas on récupère toutes les informations de la ville
@@ -114,6 +116,7 @@ if (isset($_SESSION['account']['id']))
                                 <ul class="dropdown-menu">
                                     <li><a href="../../modules/chat/index.php">Chat</a></li>
                                     <li><a href="../../modules/privateConversation/index.php">Messagerie privée (<?php echo $privateConversationNumberRow ?>)</a></li>
+                                    <li><a href="../../modules/market/index.php">Le marché (<?php echo $marketOfferQuantityRow ?>)</a></li>
                                 </ul>
                             </li>
                             

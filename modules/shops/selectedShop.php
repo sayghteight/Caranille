@@ -101,10 +101,10 @@ if (isset($_POST['shopId']))
         }
         $shopQueryList->closeCursor();
     }
-    //Si le magasin n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-        echo "Erreur: Magasin invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si toutes les variables $_POST n'existent pas

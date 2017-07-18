@@ -67,7 +67,7 @@ if (isset($_POST['shopId'])
 
                 <p>ATTENTION</p> 
                 
-                Vous êtes sur le point d'acheter l'article <em><?php echo $itemName ?> pour <?php echo $itemPurchasePrice ?> Pièce(s) d'or</em>.<br />
+                Vous êtes sur le point d'acheter l'article <em><?php echo $itemName ?></em> pour <em><?php echo $itemPurchasePrice ?> Pièce(s) d'or</em>.<br />
                 Confirmez-vous l'achat ?
                 
 
@@ -99,10 +99,10 @@ if (isset($_POST['shopId'])
         }
         $shopQuery->closeCursor();
     }
-    //Si l'objet choisit n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-         echo "L'équipment choisit est invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si toutes les variables $_POST n'existent pas

@@ -43,9 +43,15 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin <= 0)
 if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
 {
     //On calcule l'expérience bonus que le joueur va recevoir en fonction de sa sagesse
-    $experienceBonus = $monsterExperience * $characterWisdomTotal;
-    $monsterExperience = $monsterExperience + $experienceBonus;
+    $wisdomBonus = round($opponentExperience * $characterWisdomTotal / 100);
+    //On calcul le bonus d'expérience
+    $experienceBonus = round($opponentExperience * $gameExperienceBonus / 100);
+    $opponentExperience = $opponentExperience + $wisdomBonus + $experienceBonus;
 
+    //On calcul le bonus d'argent
+    $opponentGoldBonus = round($opponentGold * $gameGoldBonus / 100);
+    $opponentGold = $opponentGold + $opponentGoldBonus;
+    
     //On prévient le joueur qu'il a remporté le combat
     ?>
     
@@ -83,6 +89,9 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
                 $opponentDropItemId = stripslashes($opponentDrop['itemId']);
                 $opponentDropItemName = stripslashes($opponentDrop['itemName']);
                 $opponentDropRate = stripslashes($opponentDrop['monsterDropRate']);
+
+                //On ajoute le bonus de drop du jeu
+                $opponentDropRate = $opponentDropRate + $gameDropBonus;
     
                 //On génère un nombre entre 0 et 101 (Pour que 100 puisse aussi être choisi)
                 $numberRandom = mt_rand(0, 101);
@@ -299,7 +308,7 @@ if ($characterHpMin <= 0 && $battleOpponentHpRemaining > 0)
 }
 
 //Si le monstre et le joueur ont plus de zéro HP le joueur n'a pas a être ici
-if ($battleMonsterHpRemaining > 0 && $characterHpMin > 0 )
+if ($battleOpponentHpRemaining > 0 && $characterHpMin > 0 )
 {
     header("Location: index.php");
 }

@@ -8,33 +8,33 @@ if ($characterTownId == 0) { exit(header("Location: ../../modules/map/index.php"
 if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); }
 
 //On fait une jointure entre les 3 tables car_shops, car_towns, car_towns_shops pour récupérer les magasin lié à la ville
-$shopQueryList = $bdd->prepare("SELECT * FROM car_shops, car_towns, car_towns_shops
+$shopQuery = $bdd->prepare("SELECT * FROM car_shops, car_towns, car_towns_shops
 WHERE townShopShopId = shopId
 AND townShopTownId = townId
 AND townId = ?");
-$shopQueryList->execute([$townId]);
-$shopRow = $shopQueryList->rowCount();
+$shopQuery->execute([$townId]);
+$shopRow = $shopQuery->rowCount();
 
 //Si plusieurs magasins ont été trouvé
 if ($shopRow > 0)
 {
     ?>
+
     <form method="POST" action="selectedShop.php">
         Liste des magasins : <select name="shopId" class="form-control">
 
-        <?php
-        //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
-        while ($shop = $shopQueryList->fetch())
-        {
-            //on récupère les valeurs de chaque magasins qu'on va ensuite mettre dans le menu déroulant
-            $shopId = stripslashes($shop['shopId']); 
-            $shopName = stripslashes($shop['shopName']);
-            ?>
-            <option value="<?php echo $shopId ?>"><?php echo $shopName ?></option>
             <?php
-        }
-        $shopQueryList->closeCursor();
-        ?>
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+            while ($shop = $shopQueryList->fetch())
+            {
+                //On récupère les informations du magasin
+                $shopId = stripslashes($shop['shopId']); 
+                $shopName = stripslashes($shop['shopName']);
+                ?>
+                <option value="<?php echo $shopId ?>"><?php echo $shopName ?></option>
+                <?php
+            }
+            ?>
 
         </select>
         <input type="submit" name="enter" class="btn btn-default form-control" value="Entrer dans le magasin">
@@ -45,9 +45,8 @@ if ($shopRow > 0)
 //S'il n'y a aucun magasin de disponible on prévient le joueur
 else
 {
-    ?>
-    Il n'y a aucun magasin de disponible.
-    <?php
+    echo "Il n'y a aucun magasin de disponible.";
 }
+$shopQuery->closeCursor();
 
 require_once("../../html/footer.php"); ?>

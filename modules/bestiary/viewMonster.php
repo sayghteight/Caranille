@@ -252,7 +252,7 @@ if (isset($_POST['monsterId'])
                 
                 <tr>
                     <td>
-                        Objets (Taux)
+                        Objets (%)
                     </td>
                     
                     <td>

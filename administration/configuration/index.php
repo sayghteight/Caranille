@@ -18,6 +18,9 @@ while ($configuration = $configurationQuery->fetch())
     $adminGamePresentation = stripslashes($configuration['configurationPresentation']);   
     $adminGameExperience = stripslashes($configuration['configurationExperience']);
     $adminGameSkillPoint = stripslashes($configuration['configurationSkillPoint']);
+    $adminGameExperienceBonus = stripslashes($configuration['configurationExperienceBonus']);
+    $adminGameGoldBonus = stripslashes($configuration['configurationGoldBonus']);
+    $adminGameDropBonus = stripslashes($configuration['configurationDropBonus']);
     $adminGameAccess = stripslashes($configuration['configurationAccess']);
 }
 $configurationQuery->closeCursor();
@@ -30,6 +33,9 @@ $configurationQuery->closeCursor();
     Présentation : <br> <textarea class="form-control" name="adminGamePresentation" id="adminGamePresentation" rows="3" required><?php echo $adminGamePresentation; ?></textarea>
     Base d'expérience (base d'expérience * niveau actuel = expérience requise pour monter de niveau) : <input type="number" name="adminGameExperience" class="form-control" placeholder="Base expérience" value="<?php echo $adminGameExperience ?>" required>
     PC par niveau : <input type="number" name="adminGameSkillPoint" class="form-control" placeholder="PC par niveau" value="<?php echo $adminGameSkillPoint ?>" required>
+    Expérience bonus (%) : <input type="number" name="adminGameExperienceBonus" class="form-control" placeholder="Expérience bonus (%)" value="<?php echo $adminGameExperienceBonus ?>" required>
+    Argent bonus (%) : <input type="number" name="adminGameGoldBonus" class="form-control" placeholder="Argent bonus (%)" value="<?php echo $adminGameGoldBonus ?>" required>
+    Taux d'obtention bonus (%) : <input type="number" name="adminGameDropBonus" class="form-control" placeholder="Taux d'obtention bonus (%)" value="<?php echo $adminGameDropBonus ?>" required>
     Status du jeu : <select name="adminGameAccess" class="form-control">
     
         <?php

@@ -174,6 +174,9 @@ CREATE TABLE IF NOT EXISTS `car_configuration`
   `configurationPresentation` text NOT NULL,
   `configurationExperience` int(11) NOT NULL,
   `configurationSkillPoint` int(11) NOT NULL,
+  `configurationExperienceBonus` int(11) NOT NULL,
+  `configurationGoldBonus` int(11) NOT NULL,
+  `configurationDropBonus` int(11) NOT NULL,
   `configurationAccess` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -205,6 +208,13 @@ CREATE TABLE IF NOT EXISTS `car_items` (
   `itemWisdomEffect` int(11) NOT NULL,
   `itemPurchasePrice` int(11) NOT NULL,
   `itemSalePrice` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `car_market` (
+  `marketId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `marketCharacterId` int(11) NOT NULL,
+  `marketItemId` int(11) NOT NULL,
+  `marketSalePrice` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `car_monsters` (
@@ -329,8 +339,8 @@ INSERT INTO `car_chapters` (`chapterId`, `chapterMonsterId`, `chapterTitle`, `ch
 -- Contenu de la table `car_configuration`
 --
 
-INSERT INTO `car_configuration` (`configurationId`, `configurationGameName`, `configurationPresentation`, `configurationExperience`, `configurationSkillPoint`, `configurationAccess`) VALUES
-(1, 'Caranille', 'MMORPG Officiel de Caranille', 500, 4, 'Opened');
+INSERT INTO `car_configuration` (`configurationId`, `configurationGameName`, `configurationPresentation`, `configurationExperience`, `configurationSkillPoint`, `configurationExperienceBonus`, `configurationGoldBonus`, `configurationDropBonus`, `configurationAccess`) VALUES
+(1, 'Caranille', 'MMORPG Officiel de Caranille', 500, 4, 0, 0, 0, 'Opened');
 
 --
 -- Contenu de la table `car_items`

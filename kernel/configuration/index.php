@@ -11,6 +11,9 @@ while ($configuration = $configurationQuery->fetch())
     $gamePresentation = stripslashes($configuration['configurationPresentation']);  
     $gameExperience = stripslashes($configuration['configurationExperience']);
     $gameSkillPoint = stripslashes($configuration['configurationSkillPoint']);
+    $gameExperienceBonus = stripslashes($configuration['configurationExperienceBonus']);
+    $gameGoldBonus = stripslashes($configuration['configurationGoldBonus']);
+    $gameDropBonus = stripslashes($configuration['configurationDropBonus']);
     $gameAccess = stripslashes($configuration['configurationAccess']);
 }
 $configurationQuery->closeCursor();
