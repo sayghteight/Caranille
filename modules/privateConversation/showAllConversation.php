@@ -145,9 +145,14 @@ if (isset($_POST['privateConversationId'])
             
             <form method="POST" action="showConversation.php">
                 <input type="hidden" name="privateConversationId" value="<?php echo $privateConversationId ?>">
-                <input type="submit" class="btn btn-default form-control" name="showConversation" value="Retour">
+                <input type="submit" class="btn btn-default form-control" name="showConversation" value="Retour à la conversation">
             </form>
             
+            <hr>
+
+            <form method="POST" action="index.php">
+                <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
+            </form>
             <?php
         }
         //Si la conversation n'exite pas ou que le joueur n'y a pas accès

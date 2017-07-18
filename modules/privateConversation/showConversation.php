@@ -176,6 +176,12 @@ if (isset($_POST['privateConversationId'])
                 <input type="hidden" name="privateConversationId" value="<?php echo $privateConversationId ?>">
                 <input type="submit" class="btn btn-default form-control" name="showAllConversation" value="Afficher toute la conversation">
             </form>
+
+            <hr>
+
+            <form method="POST" action="index.php">
+                 <input type="submit" class="btn btn-default form-control" name="showConversation" value="Retour">
+            </form>
             
             <?php
         }
