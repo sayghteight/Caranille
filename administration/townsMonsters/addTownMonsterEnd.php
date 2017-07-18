@@ -9,7 +9,7 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 //Si les variables $_POST suivantes existent
 if (isset($_POST['adminTownMonsterTownId'])
 && isset($_POST['adminTownMonsterMonsterId'])
-&& isset($_POST['add']))
+&& isset($_POST['finalAdd']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
     if (ctype_digit($_POST['adminTownMonsterTownId'])
@@ -30,15 +30,6 @@ if (isset($_POST['adminTownMonsterTownId'])
         //Si la ville existe
         if ($townRow == 1) 
         {
-            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
-            while ($town = $townQuery->fetch())
-            {
-                //On récupère les informations de la ville
-                $adminTownMonsterTownPicture = stripslashes($town['townPicture']);
-                $adminTownMonsterTownName = stripslashes($town['townName']);
-            }
-            $townQuery->closeCursor();
-
             //On fait une requête pour vérifier si le monstre choisit existe
             $monsterQuery = $bdd->prepare('SELECT * FROM car_monsters 
             WHERE monsterId = ?');
@@ -48,15 +39,6 @@ if (isset($_POST['adminTownMonsterTownId'])
             //Si le monstre existe
             if ($monsterRow == 1) 
             {
-                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
-                while ($monster = $monsterQuery->fetch())
-                {
-                    //On récupère les informations du monstre
-                    $adminTownMonsterMonsterPicture = stripslashes($monster['monsterPicture']);
-                    $adminTownMonsterMonsterName = stripslashes($monster['monsterName']);
-                }
-                $monsterQuery->closeCursor();
-
                 //On fait une requête pour vérifier si le monstre n'est pas déjà dans cette ville
                 $townMonsterQuery = $bdd->prepare('SELECT * FROM car_towns_monsters 
                 WHERE townMonsterTownId = ?
@@ -67,25 +49,25 @@ if (isset($_POST['adminTownMonsterTownId'])
                 //Si le monstre n'est pas dans la ville
                 if ($townMonsterRow == 0) 
                 {
-                    ?>
-            
-                    <p>ATTENTION</p> 
+                    //On ajoute le monstre dans la ville la base de donnée
+                    $addTownMonster = $bdd->prepare("INSERT INTO car_towns_monsters VALUES(
+                    '',
+                    :townMonsterTownId,
+                    :townMonsterMonsterId)");
 
-                    Vous êtes sur le point d'ajouter le monstre <em><?php echo $adminTownMonsterMonsterName ?></em> dans la ville <em><?php echo $adminTownMonsterTownName ?></em>.<br />
-                    Confirmez-vous l'ajout ?
+                    $addTownMonster->execute([
+                    'townMonsterTownId' => $adminTownMonsterTownId,
+                    'townMonsterMonsterId' => $adminTownMonsterMonsterId]);
+                    $addTownMonster->closeCursor();
+                    ?>
+
+                    Le monstre a bien été ajouté à la ville
 
                     <hr>
                         
-                    <form method="POST" action="addTownMonsterEnd.php">
-                        <input type="hidden" class="btn btn-default form-control" name="adminTownMonsterTownId" value="<?= $adminTownMonsterTownId ?>">
-                        <input type="hidden" class="btn btn-default form-control" name="adminTownMonsterMonsterId" value="<?= $adminTownMonsterMonsterId ?>">
-                        <input type="submit" class="btn btn-default form-control" name="finalAdd" value="Je confirme">
-                    </form>
-                    
-                    <hr>
-
-                    <form method="POST" action="index.php">
-                        <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
+                    <form method="POST" action="manageTownMonster.php">
+                        <input type="hidden" name="adminTownMonsterTownId" value="<?= $adminTownMonsterTownId ?>">
+                        <input type="submit" class="btn btn-default form-control" name="manage" value="Continuer">
                     </form>
                     
                     <?php

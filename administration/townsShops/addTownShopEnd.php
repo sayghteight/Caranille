@@ -9,7 +9,7 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 //Si les variables $_POST suivantes existent
 if (isset($_POST['adminTownShopTownId'])
 && isset($_POST['adminTownShopShopId'])
-&& isset($_POST['add']))
+&& isset($_POST['finalAdd']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
     if (ctype_digit($_POST['adminTownShopTownId'])
@@ -30,15 +30,6 @@ if (isset($_POST['adminTownShopTownId'])
         //Si la ville existe
         if ($townRow == 1) 
         {
-            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
-            while ($town = $townQuery->fetch())
-            {
-                //On récupère les informations de la ville
-                $adminTownShopTownPicture = stripslashes($town['townPicture']);
-                $adminTownShopTownName = stripslashes($town['townName']);
-            }
-            $townQuery->closeCursor();
-
             //On fait une requête pour vérifier si le magasin choisit existe
             $shopQuery = $bdd->prepare('SELECT * FROM car_shops 
             WHERE shopId = ?');
@@ -48,14 +39,6 @@ if (isset($_POST['adminTownShopTownId'])
             //Si le magasin existe
             if ($shopRow == 1) 
             {
-                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
-                while ($shop = $shopQuery->fetch())
-                {
-                    //On récupère les informations du magasin
-                    $adminTownShopShopPicture = stripslashes($shop['shopPicture']);
-                    $adminTownShopShopName = stripslashes($shop['shopName']);
-                }
-
                 //On fait une requête pour vérifier si le magasin n'est pas déjà dans cette ville
                 $townShopQuery = $bdd->prepare('SELECT * FROM car_towns_shops 
                 WHERE townShopTownId = ?
@@ -66,25 +49,25 @@ if (isset($_POST['adminTownShopTownId'])
                 //Si le magasin n'est pas dans la ville
                 if ($townShopRow == 0) 
                 {
-                    ?>
-            
-                    <p>ATTENTION</p> 
+                    //On ajoute le magasin dans la ville dans la base de donnée
+                    $addTownShop = $bdd->prepare("INSERT INTO car_towns_shops VALUES(
+                    '',
+                    :adminTownShopTownId,
+                    :adminTownShopShopId)");
 
-                    Vous êtes sur le point d'ajouter le magasin <em><?php echo $adminTownShopShopName ?></em> dans la ville <em><?php echo $adminTownShopTownName ?></em>.<br />
-                    Confirmez-vous l'ajout ?
+                    $addTownShop->execute([
+                    'adminTownShopTownId' => $adminTownShopTownId,
+                    'adminTownShopShopId' => $adminTownShopShopId]);
+                    $addTownShop->closeCursor();
+                    ?>
+
+                    Le magasin a bien été ajouté à la ville
 
                     <hr>
                         
-                    <form method="POST" action="addTownShopEnd.php">
-                        <input type="hidden" class="btn btn-default form-control" name="adminTownShopTownId" value="<?= $adminTownShopTownId ?>">
-                        <input type="hidden" class="btn btn-default form-control" name="adminTownShopShopId" value="<?= $adminTownShopShopId ?>">
-                        <input type="submit" class="btn btn-default form-control" name="finalAdd" value="Je confirme">
-                    </form>
-                    
-                    <hr>
-
-                    <form method="POST" action="index.php">
-                        <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
+                    <form method="POST" action="manageTownShop.php">
+                        <input type="hidden" name="adminTownShopTownId" value="<?= $adminTownShopTownId ?>">
+                        <input type="submit" class="btn btn-default form-control" name="manage" value="Continuer">
                     </form>
                     
                     <?php

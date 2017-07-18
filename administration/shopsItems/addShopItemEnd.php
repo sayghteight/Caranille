@@ -10,7 +10,7 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 if (isset($_POST['adminShopItemShopId'])
 && isset($_POST['adminShopItemItemId'])
 && isset($_POST['adminShopItemDiscount'])
-&& isset($_POST['add']))
+&& isset($_POST['finalAdd']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
     if (ctype_digit($_POST['adminShopItemShopId'])
@@ -36,14 +36,6 @@ if (isset($_POST['adminShopItemShopId'])
             //Si le magasin existe
             if ($shopRow == 1) 
             {
-                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
-                while ($shop = $shopQuery->fetch())
-                {
-                    //On récupère les informations du magasin
-                    $adminShopItemShopPicture = stripslashes($shop['shopPicture']);
-                    $adminShopItemShopName = stripslashes($shop['shopName']);
-                }
-
                 //On fait une requête pour vérifier si l'objet choisit existe
                 $itemQuery = $bdd->prepare('SELECT * FROM car_items 
                 WHERE itemId = ?');
@@ -53,15 +45,6 @@ if (isset($_POST['adminShopItemShopId'])
                 //Si l'objet existe
                 if ($itemRow == 1) 
                 {
-                    //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
-                    while ($item = $itemQuery->fetch())
-                    {
-                        ///On récupère les informations de l'objet
-                        $adminShopItemItemPicture = stripslashes($item['itemPicture']);
-                        $adminShopItemItemName = stripslashes($item['itemName']);
-                    }
-                    $itemQuery->closeCursor();
-            
                     //On fait une requête pour vérifier si le monstre n'est pas déjà dans cette ville
                     $shopItemQuery = $bdd->prepare('SELECT * FROM car_shops_items
                     WHERE shopItemShopId = ?
@@ -72,26 +55,27 @@ if (isset($_POST['adminShopItemShopId'])
                     //Si l'objet n'est pas dans ce magasin
                     if ($shopItemRow == 0) 
                     {
-                        ?>
-            
-                        <p>ATTENTION</p> 
+                        //On met à jour le magasin dans la base de donnée
+                        $addShopItem = $bdd->prepare("INSERT INTO car_shops_items VALUES(
+                        '',
+                        :adminShopItemShopId,
+                        :adminShopItemItemId,
+                        :adminShopItemDiscount)");
 
-                        Vous êtes sur le point d'ajouter l'article <em><?php echo $adminShopItemItemName ?></em> dans le magasin <em><?php echo $adminShopItemShopName ?></em>.<br />
-                        Confirmez-vous l'ajout ?
+                        $addShopItem->execute([
+                        'adminShopItemShopId' => $adminShopItemShopId,
+                        'adminShopItemItemId' => $adminShopItemItemId,
+                        'adminShopItemDiscount' => $adminShopItemDiscount]);
+                        $addShopItem->closeCursor();
+                        ?>
+
+                        L'article a bien été ajouté au magasin
 
                         <hr>
                             
-                        <form method="POST" action="addShopItemEnd.php">
-                            <input type="hidden" class="btn btn-default form-control" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
-                            <input type="hidden" class="btn btn-default form-control" name="adminShopItemItemId" value="<?= $adminShopItemItemId ?>">
-                            <input type="hidden" class="btn btn-default form-control" name="adminShopItemDiscount" value="<?= $adminShopItemDiscount ?>">
-                            <input type="submit" class="btn btn-default form-control" name="finalAdd" value="Je confirme">
-                        </form>
-                        
-                        <hr>
-
-                        <form method="POST" action="index.php">
-                            <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
+                        <form method="POST" action="manageShopItem.php">
+                            <input type="hidden" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
+                            <input type="submit" class="btn btn-default form-control" name="manage" value="Continuer">
                         </form>
                         
                         <?php

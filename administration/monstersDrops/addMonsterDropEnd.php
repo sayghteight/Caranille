@@ -12,7 +12,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
 && isset($_POST['adminMonsterDropItemVisible'])
 && isset($_POST['adminMonsterDropRate'])
 && isset($_POST['adminMonsterDropRateVisible'])
-&& isset($_POST['add']))
+&& isset($_POST['finalAdd']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
     if (ctype_digit($_POST['adminMonsterDropMonsterId'])
@@ -40,15 +40,6 @@ if (isset($_POST['adminMonsterDropMonsterId'])
             //Si le monstre existe
             if ($monsterRow == 1) 
             {
-                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
-                while ($monster = $monsterQuery->fetch())
-                {
-                    //On récupère les informations du monstre
-                    $adminMonsterDropMonsterPicture = stripslashes($monster['monsterPicture']);
-                    $adminMonsterDropMonsterName = stripslashes($monster['monsterName']);
-                }
-                $monsterQuery->closeCursor();
-
                 //On fait une requête pour vérifier si l'objet choisit existe
                 $itemQuery = $bdd->prepare('SELECT * FROM car_items 
                 WHERE itemId = ?');
@@ -58,15 +49,6 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                 //Si l'objet existe
                 if ($itemRow == 1) 
                 {
-                    //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
-                    while ($item = $itemQuery->fetch())
-                    {
-                        ///On récupère les informations de l'objet
-                        $adminMonsterDropItemPicture = stripslashes($item['itemPicture']);
-                        $adminMonsterDropItemName = stripslashes($item['itemName']);
-                    }
-                    $itemQuery->closeCursor();
-
                     //On fait une requête pour vérifier si l'objet n'est pas déjà sur ce monstre
                     $monsterDropQuery = $bdd->prepare('SELECT * FROM car_monsters_drops 
                     WHERE monsterDropMonsterID = ?
@@ -77,30 +59,33 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                     //Si cet objet n'est pas sur le monstre
                     if ($monsterDropRow == 0) 
                     {
-                        ?>
-            
-                        <p>ATTENTION</p> 
+                        //On met à jour le monstre dans la base de donnée
+                        $addTownMonster = $bdd->prepare("INSERT INTO car_monsters_drops VALUES(
+                        '',
+                        :adminMonsterDropMonsterId,
+                        :adminMonsterDropItemId,
+                        :adminMonsterDropItemVisible,
+                        :adminMonsterDropRate,
+                        :adminMonsterDropRateVisible)");
 
-                        Vous êtes sur le point d'ajouter l'objet <em><?php echo $adminMonsterDropItemName ?></em> sur le monstre <em><?php echo $adminMonsterDropMonsterName ?></em>.<br />
-                        Confirmez-vous l'ajout ?
+                        $addTownMonster->execute([
+                        'adminMonsterDropMonsterId' => $adminMonsterDropMonsterId,
+                        'adminMonsterDropItemId' => $adminMonsterDropItemId,
+                        'adminMonsterDropItemVisible' => $adminMonsterDropItemVisible,
+                        'adminMonsterDropRate' => $adminMonsterDropRate,
+                        'adminMonsterDropRateVisible' => $adminMonsterDropRateVisible]);
+                        $addTownMonster->closeCursor();
+                        ?>
+
+                        L'objet/équipement a bien été ajouté au monstre
 
                         <hr>
                             
-                        <form method="POST" action="addMonsterDropEnd.php">
-                            <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
-                            <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropItemId" value="<?= $adminMonsterDropItemId ?>">
-                            <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropItemVisible" value="<?= $adminMonsterDropItemVisible ?>">
-                            <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropRate" value="<?= $adminMonsterDropRate ?>">
-                            <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropRateVisible" value="<?= $adminMonsterDropRateVisible ?>">
-                            <input type="submit" class="btn btn-default form-control" name="finalAdd" value="Je confirme">
+                        <form method="POST" action="manageMonsterDrop.php">
+                            <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
+                            <input type="submit" class="btn btn-default form-control" name="manage" value="Continuer">
                         </form>
                         
-                        <hr>
-
-                        <form method="POST" action="index.php">
-                            <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
-                        </form>
-
                         <?php
                     }
                     //Si l'objet est déjà sur le monstre est déjà dans cette ville
