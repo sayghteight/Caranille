@@ -58,6 +58,8 @@ if (isset($_POST['marketId'])
             Vous êtes sur le point d'acheter l'article <em><?php echo $marketItemName ?></em> vendu par <em><?php echo $marketCharacterName ?></em> pour <em><?php echo $marketSalePrice ?> Pièce(s) d'or</em>.<br />
             Confirmez-vous l'achat ?
 
+            <hr>
+
             <form method="POST" action="buyOfferEnd.php">
                 <input type="hidden" class="btn btn-default form-control" name="marketId" value="<?= $marketId ?>">
                 <input type="submit" class="btn btn-default form-control" name="finalBuy" value="Je confirme">

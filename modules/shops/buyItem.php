@@ -70,7 +70,8 @@ if (isset($_POST['shopId'])
                 Vous êtes sur le point d'acheter l'article <em><?php echo $itemName ?></em> pour <em><?php echo $itemPurchasePrice ?> Pièce(s) d'or</em>.<br />
                 Confirmez-vous l'achat ?
                 
-
+                <hr>
+                
                 <form method="POST" action="buyItemEnd.php">
                     <input type="hidden" class="btn btn-default form-control" name="shopId" value="<?= $shopId ?>">
                     <input type="hidden" class="btn btn-default form-control" name="itemId" value="<?= $itemId ?>">

@@ -55,6 +55,8 @@ if (isset($_POST['marketItemId'])
                 Une fois l'offre mise en ligne vous ne pourrez plus modifier le prix de vente ni annuler l'offre<br />
                 Confirmez-vous la mise en ligne ?
 
+                <hr>
+
                 <form method="POST" action="addOfferEnd.php">
                     <input type="hidden" class="btn btn-default form-control" name="marketItemId" value="<?= $marketItemId ?>">
                     <input type="hidden" class="btn btn-default form-control" name="marketSalePrice" value="<?= $marketSalePrice ?>">
