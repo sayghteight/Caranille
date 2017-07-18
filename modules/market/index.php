@@ -7,13 +7,16 @@ if ($characterTownId == 0) { exit(header("Location: ../../modules/map/index.php"
 //S'il y a actuellement un combat on redirige le joueur vers le module battle
 if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); }
 
-//Si il y a au moins une offre en cours
-if ($marketOfferQuantityRow > 0)
-{
-    //On fait une requête pour récupérer tous les objets du jeu
-    $marketQuery = $bdd->query("SELECT * FROM car_items
-    ORDER BY itemName");
+//On fait une requête pour récupérer tous les objets du jeu qui ont une ou plusieurs offre en cours
+$marketQuery = $bdd->query("SELECT * FROM car_items
+WHERE (SELECT COUNT(*) FROM car_market
+WHERE marketItemId = itemId) > 0
+ORDER BY itemName");
+$marketRow = $marketQuery->rowCount();
 
+//Si il y a au moins une offre de disponible
+if ($marketRow > 0)
+{
     ?>
     <form method="POST" action="viewAllOffers.php">
         Liste des offres : <select name="itemId" class="form-control">
@@ -22,7 +25,7 @@ if ($marketOfferQuantityRow > 0)
             //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($market = $marketQuery->fetch())
             {
-                //on récupère les valeurs de chaque objets
+                //On récupère les valeurs de chaque objets
                 $itemId = stripslashes($market['itemId']);
 
                 //On fait un requête pour savoir combien d'offres il y a sur cet objet
@@ -47,7 +50,7 @@ if ($marketOfferQuantityRow > 0)
         </select>
         <input type="submit" name="viewAllOffers" class="btn btn-default form-control" value="Afficher les offres">
     </form>
-    
+
     <?php
 }
 //S'il n'y a aucune offre de disponible on prévient le joueur

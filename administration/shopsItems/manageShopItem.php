@@ -69,9 +69,13 @@ if (isset($_POST['adminShopItemShopId'])
             }
             $townShopQuery->closeCursor();
 
-            //On fait une requête pour afficher la liste des objets du jeu
-            $itemQuery = $bdd->query("SELECT * FROM car_items
+            //On fait une requête pour afficher la liste des objets du jeu qui ne sont pas dans le magasin
+            $itemQuery = $bdd->prepare("SELECT * FROM car_items
+            WHERE (SELECT COUNT(*) FROM car_shops_items
+            WHERE shopItemShopId = ?
+            AND shopItemItemId = itemId) = 0
             ORDER BY itemName");
+            $itemQuery->execute([$adminShopItemShopId]);
             $itemRow = $itemQuery->rowCount();
             //S'il existe un ou plusieurs objets on affiche le menu déroulant pour proposer au joueur d'en ajouter
             if ($itemRow > 0) 

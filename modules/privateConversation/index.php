@@ -85,11 +85,16 @@ if ($privateConversationRow > 0)
 }
 $privateConversationQuery->closeCursor();
 
-//On fait une recherche dans la base de donnée de tous les comptes et personnages
+//On fait une recherche dans la base de donnée de tous les personnage avec qui on a pas de conversation
 $characterQuery = $bdd->prepare("SELECT * FROM car_characters
 WHERE characterId != ?
+AND (SELECT COUNT(*) FROM car_private_conversation
+WHERE privateConversationCharacterOneId = ?
+AND privateConversationCharacterTwoId = characterId
+OR privateConversationCharacterOneId = ?
+AND privateConversationCharacterTwoId) = 0
 ORDER by characterName");
-$characterQuery->execute([$characterId]);
+$characterQuery->execute([$characterId, $characterId, $characterId]);
 $characterRow = $characterQuery->rowCount();
 
 //S'il y a au moins un autre joueur on affiche le menu

@@ -69,9 +69,13 @@ if (isset($_POST['adminMonsterDropMonsterId'])
             }
             $monsterQuery->closeCursor();
 
-            //On recherche la liste des objets et équipements du jeu
-            $itemQuery = $bdd->query("SELECT * FROM car_items
+            //On recherche la liste des objets et équipements du jeu qui ne sont pas attribué à ce monstre
+            $itemQuery = $bdd->prepare("SELECT * FROM car_items
+            WHERE (SELECT COUNT(*) FROM car_monsters_drops
+            WHERE monsterDropMonsterId = ?
+            AND monsterDropItemId = itemId) = 0
             ORDER BY itemName");
+            $itemQuery->execute([$adminMonsterDropMonsterId]);
             $itemRow = $itemQuery->rowCount();
             //S'il existe un ou plusieurs monstres on affiche le menu déroulant pour proposer au joueur d'en ajouter
             if ($itemRow > 0) 
