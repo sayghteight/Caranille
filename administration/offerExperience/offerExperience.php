@@ -33,8 +33,8 @@ if (isset($_POST['adminCharacterId'])
             <hr>
                 
             <form method="POST" action="offerExperienceEnd.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminCharacterId" value="<?= $adminCharacterId ?>">
-                <input type="hidden" class="btn btn-default form-control" name="adminOfferExperience" value="<?= $adminOfferExperience ?>">
+                <input type="hidden" class="btn btn-default form-control" name="adminCharacterId" value="<?php echo $adminCharacterId ?>">
+                <input type="hidden" class="btn btn-default form-control" name="adminOfferExperience" value="<?php echo $adminOfferExperience ?>">
                 <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme">
             </form>
             
@@ -73,8 +73,8 @@ if (isset($_POST['adminCharacterId'])
                 <hr>
                     
                 <form method="POST" action="offerExperienceEnd.php">
-                    <input type="hidden" class="btn btn-default form-control" name="adminCharacterId" value="<?= $adminCharacterId ?>">
-                    <input type="hidden" class="btn btn-default form-control" name="adminOfferExperience" value="<?= $adminOfferExperience ?>">
+                    <input type="hidden" class="btn btn-default form-control" name="adminCharacterId" value="<?php echo $adminCharacterId ?>">
+                    <input type="hidden" class="btn btn-default form-control" name="adminOfferExperience" value="<?php echo $adminOfferExperience ?>">
                     <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme">
                 </form>
                 

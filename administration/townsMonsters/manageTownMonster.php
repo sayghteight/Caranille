@@ -58,7 +58,7 @@ if (isset($_POST['adminTownMonsterTownId'])
                         ?>
                         
                     </select>
-                    <input type="hidden" name="adminTownMonsterTownId" value="<?= $adminTownMonsterTownId ?>">
+                    <input type="hidden" name="adminTownMonsterTownId" value="<?php echo $adminTownMonsterTownId ?>">
                     <input type="submit" name="delete" class="btn btn-default form-control" value="Retirer le monstre">
                 </form>
                 
@@ -99,7 +99,7 @@ if (isset($_POST['adminTownMonsterTownId'])
                         ?>
                         
                     </select>
-                    <input type="hidden" name="adminTownMonsterTownId" value="<?= $adminTownMonsterTownId ?>">
+                    <input type="hidden" name="adminTownMonsterTownId" value="<?php echo $adminTownMonsterTownId ?>">
                     <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter le monstre">
                 </form>
                 

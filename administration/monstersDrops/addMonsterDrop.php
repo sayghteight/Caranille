@@ -87,11 +87,11 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                         <hr>
                             
                         <form method="POST" action="addMonsterDropEnd.php">
-                            <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
-                            <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropItemId" value="<?= $adminMonsterDropItemId ?>">
-                            <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropItemVisible" value="<?= $adminMonsterDropItemVisible ?>">
-                            <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropRate" value="<?= $adminMonsterDropRate ?>">
-                            <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropRateVisible" value="<?= $adminMonsterDropRateVisible ?>">
+                            <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropMonsterId" value="<?php echo $adminMonsterDropMonsterId ?>">
+                            <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropItemId" value="<?php echo $adminMonsterDropItemId ?>">
+                            <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropItemVisible" value="<?php echo $adminMonsterDropItemVisible ?>">
+                            <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropRate" value="<?php echo $adminMonsterDropRate ?>">
+                            <input type="hidden" class="btn btn-default form-control" name="adminMonsterDropRateVisible" value="<?php echo $adminMonsterDropRateVisible ?>">
                             <input type="submit" class="btn btn-default form-control" name="finalAdd" value="Je confirme">
                         </form>
                         
@@ -111,7 +111,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                         Erreur: Cet objet est déjà sur ce monstre
 
                         <form method="POST" action="manageMonsterDrop.php">
-                            <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
+                            <input type="hidden" name="adminMonsterDropMonsterId" value="<?php echo $adminMonsterDropMonsterId ?>">
                             <input type="submit" class="btn btn-default form-control" name="manage" value="Retour">
                         </form>
                         
@@ -140,7 +140,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
             
             Erreur: Le taux d'obtention doit être entre 0 et 100%
             <form method="POST" action="manageMonsterDrop.php">
-                <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
+                <input type="hidden" name="adminMonsterDropMonsterId" value="<?php echo $adminMonsterDropMonsterId ?>">
                 <input type="submit" class="btn btn-default form-control" name="manage" value="Continuer">
             </form>
             

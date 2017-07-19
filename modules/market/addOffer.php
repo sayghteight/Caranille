@@ -58,8 +58,8 @@ if (isset($_POST['marketItemId'])
                 <hr>
 
                 <form method="POST" action="addOfferEnd.php">
-                    <input type="hidden" class="btn btn-default form-control" name="marketItemId" value="<?= $marketItemId ?>">
-                    <input type="hidden" class="btn btn-default form-control" name="marketSalePrice" value="<?= $marketSalePrice ?>">
+                    <input type="hidden" class="btn btn-default form-control" name="marketItemId" value="<?php echo $marketItemId ?>">
+                    <input type="hidden" class="btn btn-default form-control" name="marketSalePrice" value="<?php echo $marketSalePrice ?>">
                     <input type="submit" class="btn btn-default form-control" name="addOfferEnd" value="Je confirme">
                 </form>
 

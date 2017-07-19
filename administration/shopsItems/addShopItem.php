@@ -82,9 +82,9 @@ if (isset($_POST['adminShopItemShopId'])
                         <hr>
                             
                         <form method="POST" action="addShopItemEnd.php">
-                            <input type="hidden" class="btn btn-default form-control" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
-                            <input type="hidden" class="btn btn-default form-control" name="adminShopItemItemId" value="<?= $adminShopItemItemId ?>">
-                            <input type="hidden" class="btn btn-default form-control" name="adminShopItemDiscount" value="<?= $adminShopItemDiscount ?>">
+                            <input type="hidden" class="btn btn-default form-control" name="adminShopItemShopId" value="<?php echo $adminShopItemShopId ?>">
+                            <input type="hidden" class="btn btn-default form-control" name="adminShopItemItemId" value="<?php echo $adminShopItemItemId ?>">
+                            <input type="hidden" class="btn btn-default form-control" name="adminShopItemDiscount" value="<?php echo $adminShopItemDiscount ?>">
                             <input type="submit" class="btn btn-default form-control" name="finalAdd" value="Je confirme">
                         </form>
                         
@@ -104,7 +104,7 @@ if (isset($_POST['adminShopItemShopId'])
                         Erreur: Cet objet est déjà dans ce magasin
 
                         <form method="POST" action="manageShopItem.php">
-                            <input type="hidden" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
+                            <input type="hidden" name="adminShopItemShopId" value="<?php echo $adminShopItemShopId ?>">
                             <input type="submit" class="btn btn-default form-control" name="manage" value="Retour">
                         </form>
                         
@@ -134,7 +134,7 @@ if (isset($_POST['adminShopItemShopId'])
             Erreur: Le taux de réduction doit être de 0 à 100
             
             <form method="POST" action="manageShopItem.php">
-                <input type="hidden" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
+                <input type="hidden" name="adminShopItemShopId" value="<?php echo $adminShopItemShopId ?>">
                 <input type="submit" class="btn btn-default form-control" name="manage" value="Continuer">
             </form>
             

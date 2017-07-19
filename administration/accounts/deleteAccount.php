@@ -42,7 +42,7 @@ if (isset($_POST['adminAccountId'])
             <hr>
                 
             <form method="POST" action="deleteAccountEnd.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminAccountId" value="<?= $adminAccountId ?>">
+                <input type="hidden" class="btn btn-default form-control" name="adminAccountId" value="<?php echo $adminAccountId ?>">
                 <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme la suppression">
             </form>
             

@@ -39,11 +39,11 @@ if (isset($_POST['adminRaceId'])
             <hr>
                 
             <form method="POST" action="editRace.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminRaceId" value="<?= $adminRaceId ?>">
+                <input type="hidden" class="btn btn-default form-control" name="adminRaceId" value="<?php echo $adminRaceId ?>">
                 <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier la classe">
             </form>
             <form method="POST" action="deleteRace.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminRaceId" value="<?= $adminRaceId ?>">
+                <input type="hidden" class="btn btn-default form-control" name="adminRaceId" value="<?php echo $adminRaceId ?>">
                 <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer la classe">
             </form>
 

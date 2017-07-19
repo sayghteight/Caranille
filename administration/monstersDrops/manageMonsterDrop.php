@@ -58,7 +58,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                     ?>
                         
                     </select>
-                    <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
+                    <input type="hidden" name="adminMonsterDropMonsterId" value="<?php echo $adminMonsterDropMonsterId ?>">
                     <input type="submit" name="edit" class="btn btn-default form-control" value="Modifier">
                     <input type="submit" name="delete" class="btn btn-default form-control" value="Retirer">
                 </form>
@@ -108,7 +108,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                         <option value="Yes">Oui</option>
                         <option value="No">Non</option>
                     </select>
-                    <input type="hidden" name="adminMonsterDropMonsterId" value="<?= $adminMonsterDropMonsterId ?>">
+                    <input type="hidden" name="adminMonsterDropMonsterId" value="<?php echo $adminMonsterDropMonsterId ?>">
                     <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter cet objet/équipement">
                 </form>
                 

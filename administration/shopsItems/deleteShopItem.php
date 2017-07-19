@@ -61,7 +61,7 @@ if (isset($_POST['adminShopItemShopId'])
                     <hr>
                         
                     <form method="POST" action="manageShopItem.php">
-                        <input type="hidden" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
+                        <input type="hidden" name="adminShopItemShopId" value="<?php echo $adminShopItemShopId ?>">
                         <input type="submit" class="btn btn-default form-control" name="manage" value="Continuer">
                     </form>
                     

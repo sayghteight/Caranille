@@ -76,8 +76,8 @@ if (isset($_POST['adminTownShopTownId'])
                     <hr>
                         
                     <form method="POST" action="addTownShopEnd.php">
-                        <input type="hidden" class="btn btn-default form-control" name="adminTownShopTownId" value="<?= $adminTownShopTownId ?>">
-                        <input type="hidden" class="btn btn-default form-control" name="adminTownShopShopId" value="<?= $adminTownShopShopId ?>">
+                        <input type="hidden" class="btn btn-default form-control" name="adminTownShopTownId" value="<?php echo $adminTownShopTownId ?>">
+                        <input type="hidden" class="btn btn-default form-control" name="adminTownShopShopId" value="<?php echo $adminTownShopShopId ?>">
                         <input type="submit" class="btn btn-default form-control" name="finalAdd" value="Je confirme">
                     </form>
                     
@@ -97,7 +97,7 @@ if (isset($_POST['adminTownShopTownId'])
                     Erreur: Ce magasin est déjà dans cette ville
                     
                     <form method="POST" action="manageTownShop.php">
-                        <input type="hidden" name="adminTownShopTownId" value="<?= $adminTownShopTownId ?>">
+                        <input type="hidden" name="adminTownShopTownId" value="<?php echo $adminTownShopTownId ?>">
                         <input type="submit" class="btn btn-default form-control" name="manage" value="Retour">
                     </form>
                     

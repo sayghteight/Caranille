@@ -32,8 +32,8 @@ if (isset($_POST['adminCharacterId'])
             <hr>
                 
             <form method="POST" action="offerGoldEnd.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminCharacterId" value="<?= $adminCharacterId ?>">
-                <input type="hidden" class="btn btn-default form-control" name="adminOfferGold" value="<?= $adminOfferGold ?>">
+                <input type="hidden" class="btn btn-default form-control" name="adminCharacterId" value="<?php echo $adminCharacterId ?>">
+                <input type="hidden" class="btn btn-default form-control" name="adminOfferGold" value="<?php echo $adminOfferGold ?>">
                 <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme">
             </form>
             
@@ -72,8 +72,8 @@ if (isset($_POST['adminCharacterId'])
                 <hr>
                     
                 <form method="POST" action="offerGoldEnd.php">
-                    <input type="hidden" class="btn btn-default form-control" name="adminCharacterId" value="<?= $adminCharacterId ?>">
-                    <input type="hidden" class="btn btn-default form-control" name="adminOfferGold" value="<?= $adminOfferGold ?>">
+                    <input type="hidden" class="btn btn-default form-control" name="adminCharacterId" value="<?php echo $adminCharacterId ?>">
+                    <input type="hidden" class="btn btn-default form-control" name="adminOfferGold" value="<?php echo $adminOfferGold ?>">
                     <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme">
                 </form>
                 

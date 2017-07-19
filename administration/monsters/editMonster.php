@@ -67,7 +67,7 @@ if (isset($_POST['adminMonsterId'])
                 Sagesse : <input type="number" name="adminMonsterWisdom" class="form-control" placeholder="Sagesse" value="<?php echo $adminMonsterWisdom ?>" required>
                 Experience : <input type="number" name="adminMonsterExperience" class="form-control" placeholder="Expérience" value="<?php echo $adminMonsterExperience ?>" required>
                 Argent : <input type="number" name="adminMonsterGold" class="form-control" placeholder="Argent" value="<?php echo $adminMonsterGold ?>" required>
-                <input type="hidden" name="adminMonsterId" value="<?= $adminMonsterId ?>">
+                <input type="hidden" name="adminMonsterId" value="<?php echo $adminMonsterId ?>">
                 <input name="finalEdit" class="btn btn-default form-control" type="submit" value="Modifier">
             </form>
 

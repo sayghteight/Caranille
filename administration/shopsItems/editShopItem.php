@@ -71,7 +71,7 @@ if (isset($_POST['adminShopItemShopId'])
                         <hr>
                             
                         <form method="POST" action="manageShopItem.php">
-                            <input type="hidden" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
+                            <input type="hidden" name="adminShopItemShopId" value="<?php echo $adminShopItemShopId ?>">
                             <input type="submit" class="btn btn-default form-control" name="manage" value="Continuer">
                         </form>
                         
@@ -85,7 +85,7 @@ if (isset($_POST['adminShopItemShopId'])
                         Erreur: Cet objet est déjà dans ce magasin
 
                         <form method="POST" action="manageShopItem.php">
-                            <input type="hidden" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
+                            <input type="hidden" name="adminShopItemShopId" value="<?php echo $adminShopItemShopId ?>">
                             <input type="submit" class="btn btn-default form-control" name="manage" value="Retour">
                         </form>
                         
@@ -115,7 +115,7 @@ if (isset($_POST['adminShopItemShopId'])
             Erreur: Le taux d'obtention doit être de 0 à 100
             
             <form method="POST" action="manageShopItem.php">
-                <input type="hidden" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
+                <input type="hidden" name="adminShopItemShopId" value="<?php echo $adminShopItemShopId ?>">
                 <input type="submit" class="btn btn-default form-control" name="manage" value="Continuer">
             </form>
             

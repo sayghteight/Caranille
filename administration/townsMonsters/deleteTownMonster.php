@@ -71,8 +71,8 @@ if (isset($_POST['adminTownMonsterTownId'])
                     <hr>
                         
                     <form method="POST" action="deleteTownMonsterEnd.php">
-                        <input type="hidden" class="btn btn-default form-control" name="adminTownMonsterTownId" value="<?= $adminTownMonsterTownId ?>">
-                        <input type="hidden" class="btn btn-default form-control" name="adminTownMonsterMonsterId" value="<?= $adminTownMonsterMonsterId ?>">
+                        <input type="hidden" class="btn btn-default form-control" name="adminTownMonsterTownId" value="<?php echo $adminTownMonsterTownId ?>">
+                        <input type="hidden" class="btn btn-default form-control" name="adminTownMonsterMonsterId" value="<?php echo $adminTownMonsterMonsterId ?>">
                         <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme">
                     </form>
             

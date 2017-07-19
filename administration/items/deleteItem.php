@@ -51,7 +51,7 @@ if (isset($_POST['adminItemId'])
             <hr>
                 
             <form method="POST" action="deleteItemEnd.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?= $adminItemId ?>">
+                <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?php echo $adminItemId ?>">
                 <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme la suppression">
             </form>
     

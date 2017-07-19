@@ -76,7 +76,7 @@ if ($itemRow > 0)
     ?>
     
     <form method="POST" action="addOffer.php">
-        Liste de vos objets/équippement: <select name="marketItemId" class="form-control">
+        Liste de vos objets/équippement : <select name="marketItemId" class="form-control">
                 
             <?php
             //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations

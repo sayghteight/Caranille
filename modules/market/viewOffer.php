@@ -188,7 +188,7 @@ if (isset($_POST['marketId'])
                     
                     <td>
                         <form method="POST" action="buyOffer.php">
-                            <input type="hidden" class="btn btn-default form-control" name="marketId" value="<?= $marketId ?>">
+                            <input type="hidden" class="btn btn-default form-control" name="marketId" value="<?php echo $marketId ?>">
                             <input type="submit" class="btn btn-default form-control" name="buyOffer" value="Acheter">
                         </form>
                     </td>

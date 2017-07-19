@@ -74,8 +74,8 @@ if (isset($_POST['adminShopItemShopId'])
                         
                         <form method="POST" action="editShopItem.php">
                             Réduction (de 0 à 100%) : <input type="number" name="adminShopItemDiscount" class="form-control" placeholder="Réduction (de 0 à 100%)" value="<?php echo $adminShopItemDiscount ?>" required>
-                            <input type="hidden" class="btn btn-default form-control" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
-                            <input type="hidden" class="btn btn-default form-control" name="adminShopItemItemId" value="<?= $adminShopItemItemId ?>">
+                            <input type="hidden" class="btn btn-default form-control" name="adminShopItemShopId" value="<?php echo $adminShopItemShopId ?>">
+                            <input type="hidden" class="btn btn-default form-control" name="adminShopItemItemId" value="<?php echo $adminShopItemItemId ?>">
                             <input type="submit" class="btn btn-default form-control" name="finalEdit" value="Mettre à jour">
                         </form>
                         
@@ -94,8 +94,8 @@ if (isset($_POST['adminShopItemShopId'])
                         <hr>
                             
                         <form method="POST" action="deleteShopItem.php">
-                            <input type="hidden" class="btn btn-default form-control" name="adminShopItemShopId" value="<?= $adminShopItemShopId ?>">
-                            <input type="hidden" class="btn btn-default form-control" name="adminShopItemItemId" value="<?= $adminShopItemItemId ?>">
+                            <input type="hidden" class="btn btn-default form-control" name="adminShopItemShopId" value="<?php echo $adminShopItemShopId ?>">
+                            <input type="hidden" class="btn btn-default form-control" name="adminShopItemItemId" value="<?php echo $adminShopItemItemId ?>">
                             <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme">
                         </form>
                 

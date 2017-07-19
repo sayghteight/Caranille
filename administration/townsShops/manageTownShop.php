@@ -58,7 +58,7 @@ if (isset($_POST['adminTownShopTownId'])
                         ?>
                         
                     </select>
-                    <input type="hidden" name="adminTownShopTownId" value="<?= $adminTownShopTownId ?>">
+                    <input type="hidden" name="adminTownShopTownId" value="<?php echo $adminTownShopTownId ?>">
                     <input type="submit" name="delete" class="btn btn-default form-control" value="Retirer le magasin">
                 </form>
                 
@@ -99,7 +99,7 @@ if (isset($_POST['adminTownShopTownId'])
                             
                         </select>
                     
-                    <input type="hidden" name="adminTownShopTownId" value="<?= $adminTownShopTownId ?>">
+                    <input type="hidden" name="adminTownShopTownId" value="<?php echo $adminTownShopTownId ?>">
                     <input type="submit" name="add" class="btn btn-default form-control" value="Ajouter le magasin">
                 </form>
                 

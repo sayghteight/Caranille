@@ -13,11 +13,11 @@ $mpNeed = $characterLevel * 2;
 
 Combat de <?php echo $characterName ?> contre <?php echo $opponentName ?><br />
 
-HP de <?php echo $characterName ?>: <?php echo "$characterHpMin/$characterHpTotal" ?><br />
-MP de <?php echo $characterName ?>: <?php echo "$characterMpMin/$characterMpTotal" ?><br /><br />
+HP de <?php echo $characterName ?> : <?php echo "$characterHpMin/$characterHpTotal" ?><br />
+MP de <?php echo $characterName ?> : <?php echo "$characterMpMin/$characterMpTotal" ?><br /><br />
 
-HP de <?php echo $opponentName ?>: <?php echo "$battleOpponentHpRemaining/$opponentHp" ?><br />
-MP de <?php echo $opponentName ?>: <?php echo "$battleOpponentMpRemaining/$opponentMp" ?><br /><br />
+HP de <?php echo $opponentName ?> : <?php echo "$battleOpponentHpRemaining/$opponentHp" ?><br />
+MP de <?php echo $opponentName ?> : <?php echo "$battleOpponentMpRemaining/$opponentMp" ?><br /><br />
 
 <hr>
 

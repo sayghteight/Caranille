@@ -90,7 +90,7 @@ if (isset($_POST['adminChapterId'])
                 Titre : <input type="text" name="adminChapterTitle" class="form-control" placeholder="Titre" value="<?php echo $adminChapterTitle ?>" required>
                 Introduction :  <br> <textarea class="form-control" name="adminChapterOpening" id="adminChapterOpening" rows="3" required><?php echo $adminChapterOpening; ?></textarea>
                 Conclusion :  <br> <textarea class="form-control" name="adminChapterEnding" id="adminChapterEnding" rows="3" required><?php echo $adminChapterEnding; ?></textarea>
-                <input type="hidden" name="adminChapterId" value="<?= $adminChapterId ?>">
+                <input type="hidden" name="adminChapterId" value="<?php echo $adminChapterId ?>">
                 <input name="finalEdit" class="btn btn-default form-control" type="submit" value="Modifier">
             </form>
             

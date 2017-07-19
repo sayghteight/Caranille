@@ -73,8 +73,8 @@ if (isset($_POST['shopId'])
                 <hr>
                 
                 <form method="POST" action="buyItemEnd.php">
-                    <input type="hidden" class="btn btn-default form-control" name="shopId" value="<?= $shopId ?>">
-                    <input type="hidden" class="btn btn-default form-control" name="itemId" value="<?= $itemId ?>">
+                    <input type="hidden" class="btn btn-default form-control" name="shopId" value="<?php echo $shopId ?>">
+                    <input type="hidden" class="btn btn-default form-control" name="itemId" value="<?php echo $itemId ?>">
                     <input type="submit" class="btn btn-default form-control" name="finalBuy" value="Je confirme">
                 </form>
     

@@ -42,7 +42,7 @@ if (isset($_POST['adminChapterId'])
             <hr>
                 
             <form method="POST" action="editChapter.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminChapterId" value="<?= $adminChapterId ?>">
+                <input type="hidden" class="btn btn-default form-control" name="adminChapterId" value="<?php echo $adminChapterId ?>">
                 <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier le chapitre">
             </form>
             

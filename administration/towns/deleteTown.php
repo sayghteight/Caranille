@@ -46,7 +46,7 @@ if (isset($_POST['adminTownId'])
             <hr>
                 
             <form method="POST" action="deleteTownEnd.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminTownId" value="<?= $adminTownId ?>">
+                <input type="hidden" class="btn btn-default form-control" name="adminTownId" value="<?php echo $adminTownId ?>">
                 <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme la suppression">
             </form>
     

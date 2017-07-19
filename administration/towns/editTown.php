@@ -48,7 +48,7 @@ if (isset($_POST['adminTownId'])
                 Description : <br> <textarea class="form-control" name="adminTownDescription" id="adminTownDescription" rows="3"><?php echo $adminTownDescription; ?></textarea>
                 Prix de l'auberge : <input type="number" name="adminTownPriceInn" class="form-control" placeholder="Prix de l'auberge" value="<?php echo $adminTownPriceInn ?>" required>
                 Ville disponible au chapitre : <input type="number" name="adminTownChapter" class="form-control" placeholder="Ville disponible au chapitre" value="<?php echo $adminTownChapter ?>" required>
-                <input type="hidden" name="adminTownId" value="<?= $adminTownId ?>">
+                <input type="hidden" name="adminTownId" value="<?php echo $adminTownId ?>">
                 <input name="finalEdit" class="btn btn-default form-control" type="submit" value="Modifier">
             </form>
             

@@ -61,7 +61,7 @@ if (isset($_POST['marketId'])
             <hr>
 
             <form method="POST" action="buyOfferEnd.php">
-                <input type="hidden" class="btn btn-default form-control" name="marketId" value="<?= $marketId ?>">
+                <input type="hidden" class="btn btn-default form-control" name="marketId" value="<?php echo $marketId ?>">
                 <input type="submit" class="btn btn-default form-control" name="finalBuy" value="Je confirme">
             </form>
 

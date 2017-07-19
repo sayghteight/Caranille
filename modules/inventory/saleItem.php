@@ -45,7 +45,7 @@ if (isset($_POST['itemId'])
             Confirmez-vous la vente ?
 
             <form method="POST" action="saleItemEnd.php">
-                <input type="hidden" class="btn btn-default form-control" name="itemId" value="<?= $itemId ?>">
+                <input type="hidden" class="btn btn-default form-control" name="itemId" value="<?php echo $itemId ?>">
                 <input type="submit" class="btn btn-default form-control" name="finalSale" value="Je confirme">
             </form>
 

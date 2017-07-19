@@ -61,7 +61,7 @@ if (isset($_POST['adminTownShopTownId'])
                     <hr>
                         
                     <form method="POST" action="manageTownShop.php">
-                        <input type="hidden" name="adminTownShopTownId" value="<?= $adminTownShopTownId ?>">
+                        <input type="hidden" name="adminTownShopTownId" value="<?php echo $adminTownShopTownId ?>">
                         <input type="submit" class="btn btn-default form-control" name="manage" value="Continuer">
                     </form>
                     

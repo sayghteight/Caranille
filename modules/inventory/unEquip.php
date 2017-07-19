@@ -45,7 +45,7 @@ if (isset($_POST['itemId'])
             Confirmez-vous ?
 
             <form method="POST" action="unEquipEnd.php">
-                <input type="hidden" class="btn btn-default form-control" name="itemId" value="<?= $itemId ?>">
+                <input type="hidden" class="btn btn-default form-control" name="itemId" value="<?php echo $itemId ?>">
                 <input type="submit" class="btn btn-default form-control" name="finalUnEquip" value="Je confirme">
             </form>
 

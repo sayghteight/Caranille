@@ -80,7 +80,7 @@ if (isset($_POST['adminMonsterId'])
                 Impossible de supprimer ce monstre car il est attribué à un chapitre.
                 
                 <form method="POST" action="manageMonster.php">
-                    <input type="hidden" name="adminMonsterId" value="<?= $adminMonsterId ?>">
+                    <input type="hidden" name="adminMonsterId" value="<?php echo $adminMonsterId ?>">
                     <input type="submit" class="btn btn-default form-control" name="manage" value="Retour">
                 </form>
                 

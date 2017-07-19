@@ -56,7 +56,7 @@ if (isset($_POST['adminRaceId'])
                 <hr>
                     
                 <form method="POST" action="deleteRaceEnd.php">
-                    <input type="hidden" class="btn btn-default form-control" name="adminRaceId" value="<?= $adminRaceId ?>">
+                    <input type="hidden" class="btn btn-default form-control" name="adminRaceId" value="<?php echo $adminRaceId ?>">
                     <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme la suppression">
                 </form>
                 

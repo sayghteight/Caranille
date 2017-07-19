@@ -32,7 +32,7 @@ include("../../config.php");
         ?>
     
     </select>
-    Sexe: <select name="characterSex" class="form-control">
+    Sexe : <select name="characterSex" class="form-control">
         <option value="1">Homme</option>
         <option value="0">Femme</option>
     </select>

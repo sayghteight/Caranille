@@ -45,7 +45,7 @@ if (isset($_POST['adminNewsId'])
             <hr>
                 
             <form method="POST" action="deleteNewsEnd.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminNewsId" value="<?= $adminNewsId ?>">
+                <input type="hidden" class="btn btn-default form-control" name="adminNewsId" value="<?php echo $adminNewsId ?>">
                 <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme">
             </form>
     

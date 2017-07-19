@@ -66,7 +66,7 @@ if (isset($_POST['adminTownMonsterTownId'])
                     <hr>
                         
                     <form method="POST" action="manageTownMonster.php">
-                        <input type="hidden" name="adminTownMonsterTownId" value="<?= $adminTownMonsterTownId ?>">
+                        <input type="hidden" name="adminTownMonsterTownId" value="<?php echo $adminTownMonsterTownId ?>">
                         <input type="submit" class="btn btn-default form-control" name="manage" value="Continuer">
                     </form>
                     
@@ -80,7 +80,7 @@ if (isset($_POST['adminTownMonsterTownId'])
                     Erreur: Ce monstre est déjà dans cette ville
                     
                     <form method="POST" action="manageTownMonster.php">
-                        <input type="hidden" name="adminTownMonsterTownId" value="<?= $adminTownMonsterTownId ?>">
+                        <input type="hidden" name="adminTownMonsterTownId" value="<?php echo $adminTownMonsterTownId ?>">
                         <input type="submit" class="btn btn-default form-control" name="manage" value="Retour">
                     </form>
                     

@@ -60,7 +60,7 @@ if (isset($_POST['adminRaceId'])
                 Défense par niveau : <input type="number" name="adminRaceDefenseBonus" class="form-control" placeholder="Défense par niveau" value="<?php echo $adminRaceDefenseBonus ?>" required autofocus>
                 Défense Magique par niveau : <input type="number" name="adminRaceDefenseMagicBonus" class="form-control" placeholder="Défense Magique par niveau" value="<?php echo $adminRaceDefenseMagicBonus ?>" required autofocus>
                 Sagesse par niveau : <input type="number" name="adminRaceWisdomBonus" class="form-control" placeholder="Sagesse par niveau" value="<?php echo $adminRaceWisdomBonus ?>" required autofocus>
-                <input type="hidden" name="adminRaceId" value="<?= $adminRaceId ?>">
+                <input type="hidden" name="adminRaceId" value="<?php echo $adminRaceId ?>">
                 <input name="finalEdit" class="btn btn-default form-control" type="submit" value="Modifier">
             </form>
             

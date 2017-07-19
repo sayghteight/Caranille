@@ -28,7 +28,7 @@ if (isset($_POST['add']))
         Sagesse : <input type="number" name="adminMonsterWisdom" class="form-control" placeholder="Sagesse" value="0" required>
         Experience : <input type="number" name="adminMonsterExperience" class="form-control" placeholder="Expérience" value="0" required>
         Argent : <input type="number" name="adminMonsterGold" class="form-control" placeholder="Argent" value="0" required>
-        <input type="hidden" name="adminMonsterId" value="<?= $adminMonsterId ?>">
+        <input type="hidden" name="adminMonsterId" value="<?php echo $adminMonsterId ?>">
         <input name="finalAdd" class="btn btn-default form-control" type="submit" value="Ajouter">
     </form>
     

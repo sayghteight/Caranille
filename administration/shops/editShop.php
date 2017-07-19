@@ -44,7 +44,7 @@ if (isset($_POST['adminShopId'])
                 Image : <input type="text" name="adminShopPicture" class="form-control" placeholder="Image" value= "<?php echo $adminShopPicture ?>" required>
                 Nom : <input type="text" name="adminShopName" class="form-control" placeholder="Nom" value= "<?php echo $adminShopName ?>" required>
                 Description : <br> <textarea class="form-control" name="adminShopDescription" id="adminShopDescription" rows="3" required><?php echo $adminShopDescription; ?></textarea>
-                <input type="hidden" name="adminShopId" value="<?= $adminShopId ?>">
+                <input type="hidden" name="adminShopId" value="<?php echo $adminShopId ?>">
                 <input name="finalEdit" class="btn btn-default form-control" type="submit" value="Modifier">
             </form>
             
