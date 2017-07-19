@@ -76,7 +76,7 @@ if ($itemRow > 0)
     ?>
     
     <form method="POST" action="addOffer.php">
-        Liste de vos objets/équippement : <select name="marketItemId" class="form-control">
+        Liste de vos objets/équippement: <select name="marketItemId" class="form-control">
                 
             <?php
             //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
@@ -85,8 +85,9 @@ if ($itemRow > 0)
                 //On récupère les informations des objets
                 $marketItemId = stripslashes($item['itemId']);
                 $marketItemName = stripslashes($item['itemName']);
+                $marketItemQuantity = stripslashes($item['inventoryQuantity']);
                 ?>
-                <option value="<?php echo $marketItemId ?>"><?php echo "$marketItemName"; ?></option>
+                <option value="<?php echo $marketItemId ?>"><?php echo "$marketItemName (Quantité: $marketItemQuantity)"; ?></option>
                 <?php
             }
             ?>

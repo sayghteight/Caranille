@@ -28,8 +28,9 @@ if ($itemRow > 0)
                 //On récupère les informations de l'objet
                 $itemId = stripslashes($item['itemId']); 
                 $itemName = stripslashes($item['itemName']);
+                $itemQuantity = stripslashes($item['inventoryQuantity']);
                 ?>
-                <option value="<?php echo $itemId ?>"><?php echo $itemName ?></option>
+                <option value="<?php echo $itemId ?>"><?php echo "$itemName (Quantité: $itemQuantity)" ?></option>
                 <?php
             }
             $itemQuery->closeCursor();

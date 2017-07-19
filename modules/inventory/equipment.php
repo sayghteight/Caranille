@@ -32,8 +32,9 @@ if ($equipmentRow > 0)
                 //On récupère les informations de l'équippement
                 $equipmentId = stripslashes($equipment['itemId']); 
                 $equipmentName = stripslashes($equipment['itemName']);
+                $equipmentQuantity = stripslashes($equipment['inventoryQuantity']);
                 ?>
-                <option value="<?php echo $equipmentId ?>"><?php echo $equipmentName ?></option>
+                <option value="<?php echo $equipmentId ?>"><?php echo "$equipmentName (Quantité: $equipmentQuantity)" ?></option>
                 <?php
             }
             ?>
