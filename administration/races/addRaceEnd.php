@@ -82,7 +82,7 @@ if (isset($_POST['adminRacePicture'])
         $addRace->closeCursor();
         ?>
         
-        La race a bien été crée
+        La classe a bien été crée
 
         <hr>
             

@@ -18,7 +18,7 @@ if (isset($_POST['escape']))
         
     <hr>
 
-    <form method="POST" action="../../index.php">
+    <form method="POST" action="../../modules/town/index.php">
         <input type="submit" name="escape" class="btn btn-default form-control" value="Continuer"><br />
     </form>
     

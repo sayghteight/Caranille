@@ -25,7 +25,7 @@ if ($shopRow > 0)
 
             <?php
             //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
-            while ($shop = $shopQueryList->fetch())
+            while ($shop = $shopQuery->fetch())
             {
                 //On récupère les informations du magasin
                 $shopId = stripslashes($shop['shopId']); 

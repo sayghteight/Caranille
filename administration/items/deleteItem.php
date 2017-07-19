@@ -45,7 +45,7 @@ if (isset($_POST['adminItemId'])
             
             <p>ATTENTION</p>
             
-            Vous êtes sur le point de supprimer l'équipement <em><?php echo $adminItemName ?></em>.<br />
+            Vous êtes sur le point de supprimer l'objet <em><?php echo $adminItemName ?></em>.<br />
             Confirmez-vous la suppression ?
 
             <hr>

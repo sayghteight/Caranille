@@ -7,6 +7,8 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 ?>
 
+<p>Offrir de l'argent</p>
+
 <form method="POST" action="offerGold.php">
     Liste des personnages <select name="adminCharacterId" class="form-control">
         <option value="0">Tous les joueurs</option>

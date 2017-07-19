@@ -45,7 +45,7 @@ if (isset($_POST['adminCharacterId'])
                 $updateCharacter->closeCursor();
                 ?>
                 
-                Vous venez d'offrir <em><?php echo $adminOfferGold ?></em> point(s) d'experience au joueur <em><?php echo $adminCharacterName ?></em>.<br />
+                Vous venez d'offrir <em><?php echo $adminOfferGold ?></em> pièce(s) d'or au joueur <em><?php echo $adminCharacterName ?></em>.<br />
                 
                 <?php
             }
@@ -89,7 +89,7 @@ if (isset($_POST['adminCharacterId'])
                 $updateCharacter->closeCursor();
                 ?>
                 
-                Vous venez d'offrir <em><?php echo $adminOfferGold ?></em> point(s) d'experience au joueur <em><?php echo $adminCharacterName ?></em>
+                Vous venez d'offrir <em><?php echo $adminOfferGold ?></em> pièce(s) d'or au joueur <em><?php echo $adminCharacterName ?></em>
                 
                 <hr>
     

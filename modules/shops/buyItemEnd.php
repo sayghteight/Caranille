@@ -121,7 +121,7 @@ if (isset($_POST['shopId'])
                     $updatecharacter->closeCursor();
                     ?>
                     
-                    Vous venez d'acheter l'article <?php echo $itemName ?> pour <?php echo $itemPurchasePrice ?> Pièce(s) d'or
+                    Vous venez d'acheter l'article <?php echo $itemName ?> pour <?php echo $itemPurchasePrice ?> Pièce(s) d'or.
 
                     <hr>
 
@@ -135,7 +135,7 @@ if (isset($_POST['shopId'])
                 {
                     ?>
                     
-                    Vous n'avez pas assez d'argent
+                    Vous n'avez pas assez d'argent.
 
                     <hr>
 
