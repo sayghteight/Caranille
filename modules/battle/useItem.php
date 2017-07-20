@@ -82,17 +82,17 @@ if (isset($_POST['itemId'])
                 $characterMpMin = $characterMpMin  + $itemMpEffect;
                 
                 //Si les HP Minimum sont supérieur au HP Maximum
-                if ($characterHpMin > $characterHpMax)
+                if ($characterHpMin > $characterHpTotal)
                 {
                     //Si c'est le cas $characterHpMin = $characterHpMax
-                    $characterHpMin = $characterHpMax;
+                    $characterHpMin = $characterHpTotal;
                 }
                 
                 //Si les MP Minimum sont supérieur au MP Maximum
-                if ($characterMpMin > $characterMpMax)
+                if ($characterMpMin > $characterMpTotal)
                 {
                     //Si c'est le cas $characterMpMin = $characterMpMax
-                    $characterMpMin = $characterMpMax;
+                    $characterMpMin = $characterMpTotal;
                 }
             
                 //Si l'adversaire à plus de puissance physique ou autant que de magique il fera une attaque physique
@@ -154,6 +154,8 @@ if (isset($_POST['itemId'])
                 //On met à jour la vie du joueur et de l'adversaire
                 $battleOpponentHpRemaining = $battleOpponentHpRemaining - $totalDamagesCharacter;
                 $characterHpMin = $characterHpMin - $totalDamagesOpponent;
+
+                echo $characterHpMin;
             
                 //On met le personnage à jour dans la base de donnée
                 $updateCharacter = $bdd->prepare("UPDATE car_characters
