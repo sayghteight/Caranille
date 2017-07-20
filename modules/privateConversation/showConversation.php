@@ -21,7 +21,9 @@ if (isset($_POST['privateConversationId'])
         WHERE (privateConversationCharacterOneId = ?
         OR privateConversationCharacterTwoId = ?)
         AND privateConversationId = ?");
+
         $privateConversationQuery->execute([$characterId, $characterId, $privateConversationId]);
+        
         $privateConversationRow = $privateConversationQuery->rowCount();
 
         //Si la conversation existe
@@ -42,6 +44,7 @@ if (isset($_POST['privateConversationId'])
                 //On fait une requête pour vérifier la liste des conversations dans la base de données
                 $characterQuery = $bdd->prepare("SELECT * FROM car_characters
                 WHERE characterId = ?");
+
                 $characterQuery->execute([$privateConversationCharacterTwoId]);
                 
                 //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
@@ -50,7 +53,7 @@ if (isset($_POST['privateConversationId'])
                     //On récupère les informations du personnage
                     $privateConversationCharacterName = stripslashes($character['characterName']);
                 }
-                $characterQuery->closeCursor();
+                $characterQuery->closeCursor(); 
             }
             //Si la seconde personne de la conversation est le joueur on cherche à savoir qui est l'autre personne
             else
@@ -58,6 +61,7 @@ if (isset($_POST['privateConversationId'])
                 //On fait une requête pour vérifier la liste des conversations dans la base de données
                 $characterQuery = $bdd->prepare("SELECT * FROM car_characters
                 WHERE characterId = ?");
+
                 $characterQuery->execute([$privateConversationCharacterOneId]);
                 
                 //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
@@ -66,7 +70,7 @@ if (isset($_POST['privateConversationId'])
                     //On récupère les informations du personnage
                     $privateConversationCharacterName = stripslashes($character['characterName']);
                 }
-                $characterQuery->closeCursor();
+                $characterQuery->closeCursor();  
             }
             ?>
             
@@ -77,7 +81,9 @@ if (isset($_POST['privateConversationId'])
             $privateConversationMessageQuery = $bdd->prepare('SELECT * FROM car_private_conversation_message
             WHERE privateConversationMessagePrivateConversationId = ?
             LIMIT 0, 20');
+
             $privateConversationMessageQuery->execute([$privateConversationId]);
+
             $privateConversationMessageRow = $privateConversationMessageQuery->rowCount();
             
             //Si il y a déjà eu au moins un message on construit le tableau
@@ -125,6 +131,7 @@ if (isset($_POST['privateConversationId'])
                     
                                 $updatePrivateConversationMessage->execute([
                                 'privateConversationMessageId' => $privateConversationMessageId]);
+                                
                                 $updatePrivateConversationMessage->closeCursor();
                             }
                         }

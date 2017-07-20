@@ -21,7 +21,9 @@ if (isset($_POST['itemId'])
         WHERE itemId = inventoryItemId
         AND inventoryCharacterId = ?
         AND itemId = ?");
+
         $itemQuery->execute([$characterId, $itemId]);
+
         $itemRow = $itemQuery->rowCount();
 
         //Si le personne possède cet équipement
@@ -49,6 +51,7 @@ if (isset($_POST['itemId'])
 
                 $updateInventory->execute(array(
                 'inventoryId' => $inventoryId));
+
                 $updateInventory->closeCursor();
 
                 //On remet les stats du joueurs à zéro pour recalculer ensuite le bonus de tous les équipements équippé
@@ -65,6 +68,7 @@ if (isset($_POST['itemId'])
 
                 $updateCharacter->execute(array(
                 'characterId' => $characterId));
+
                 $updateCharacter->closeCursor();
 
                 //Initialisation des variables qui vont contenir les bonus de tous les équipements équippé
@@ -82,6 +86,7 @@ if (isset($_POST['itemId'])
                 WHERE itemId = inventoryItemId
                 AND inventoryEquipped = 1
                 AND inventoryCharacterId = ?");
+
                 $equipmentEquipedQuery->execute([$characterId]);
 
                 //On fait une boucle sur les résultats et on additionne les bonus de tous les équipements équipé
@@ -96,6 +101,7 @@ if (isset($_POST['itemId'])
                     $defenseMagicBonus = $defenseMagicBonus + stripslashes($equipment['itemDefenseMagicEffect']);
                     $wisdomBonus = $wisdomBonus + stripslashes($equipment['itemWisdomEffect']);
                 }
+                $equipmentEquipedQuery->closeCursor();
 
                 //On ajoute les bonus des stats au joueurs
                 $updateCharacter = $bdd->prepare("UPDATE car_characters SET
@@ -119,6 +125,7 @@ if (isset($_POST['itemId'])
                 'defenseMagicBonus' => $defenseMagicBonus,
                 'wisdomBonus' => $wisdomBonus,
                 'characterId' => $characterId));
+
                 $updateCharacter->closeCursor();
 
                 //On va maintenant finir par actualiser tous le personnage
@@ -132,7 +139,9 @@ if (isset($_POST['itemId'])
                 characterDefenseMagicTotal = characterDefenseMagic + characterDefenseMagicSkillPoints + characterDefenseMagicBonus + characterDefenseMagicEquipments,
                 characterWisdomTotal = characterWisdom + characterWisdomSkillPoints + characterWisdomBonus + characterWisdomEquipments
                 WHERE characterId = :characterId');
+
                 $updateCharacter->execute(['characterId' => $characterId]);
+
                 $updateCharacter->closeCursor();
             }
             ?>
@@ -151,11 +160,12 @@ if (isset($_POST['itemId'])
         {
             echo "Erreur: Impossible déséquiper un équipement que vous ne possédez pas.";
         }
+        $itemQuery->closeCursor(); 
     }
-    //Si l'équipement choisit n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-         echo "L'équipment choisit est invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si toutes les variables $_POST n'existent pas

@@ -21,7 +21,9 @@ if (isset($_POST['itemId'])
         WHERE itemId = inventoryItemId
         AND inventoryCharacterId = ?
         AND itemId = ?");
+
         $itemQuery->execute([$characterId, $itemId]);
+
         $itemRow = $itemQuery->rowCount();
 
         //Si le personne possède cet objet
@@ -37,7 +39,6 @@ if (isset($_POST['itemId'])
                 $itemSalePrice = stripslashes($item['itemSalePrice']);
                 $inventoryEquipped = stripslashes($item['inventoryEquipped']);
             }
-            $itemQuery->closeCursor();
             ?>
 
             <p>ATTENTION</p> 
@@ -61,11 +62,12 @@ if (isset($_POST['itemId'])
         {
             echo "Erreur: Impossible d'utiliser un objet que vous ne possédez pas.";
         }
+        $itemQuery->closeCursor();
     }
-    //Si l'objet choisit n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-         echo "L'objet choisit est invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si toutes les variables $_POST n'existent pas

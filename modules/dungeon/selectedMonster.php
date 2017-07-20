@@ -23,7 +23,9 @@ if (isset($_POST['battleMonsterId']))
         AND townMonsterTownId = townId
         AND monsterId = ?
         AND townId = ?");
+
         $opponentQuery->execute([$opponentId, $townId]);
+
         $opponentRow = $opponentQuery->rowCount();
 
         //Si le monstre existe
@@ -51,6 +53,7 @@ if (isset($_POST['battleMonsterId']))
             'opponentId' => $opponentId,
             'opponentHp' => $opponentHp,
             'opponentMp' => $opponentMp]);
+
             $addBattle->closeCursor();
 
             //On redirige le joueur vers le combat
@@ -62,10 +65,10 @@ if (isset($_POST['battleMonsterId']))
             echo "Erreur: Monstre indisponible";
         }
     }
-    //Si le monstre n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-        echo "Erreur: monstre invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si toutes les variables $_POST n'existent pas

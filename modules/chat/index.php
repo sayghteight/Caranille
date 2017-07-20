@@ -9,6 +9,7 @@ if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); 
 $chatQuery = $bdd->query("SELECT * FROM car_chat, car_characters 
 WHERE chatCharacterId = characterId
 LIMIT 0, 20");
+
 $chatRow = $chatQuery->rowCount();
 
 //Si il y a des messages dans le chat on les affiches
@@ -100,6 +101,7 @@ if ($chatRow > 0)
     
     <?php
 }
+$chatQuery->closeCursor();
 ?>
      
 <form method="POST" action="sendMessage.php">

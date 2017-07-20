@@ -12,6 +12,7 @@ if (isset($_POST['escape']))
     $deleteBattle = $bdd->prepare("DELETE FROM car_battles 
     WHERE battleId = :battleId");
     $deleteBattle->execute(array('battleId' => $battleId));
+    $deleteBattle->closeCursor();
     ?>
     
     Vous avez fuit le combat !

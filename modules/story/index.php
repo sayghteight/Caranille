@@ -8,7 +8,9 @@ if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); 
 //On recherche le chapitre de l'histoire du joueur
 $chapterQuery = $bdd->prepare("SELECT * FROM car_chapters
 WHERE chapterId = ?");
+
 $chapterQuery->execute([$characterChapter]);
+
 $chapterRow = $chapterQuery->rowCount();
 
 //Si le chapitre du joueur existe
@@ -23,7 +25,6 @@ if ($chapterRow == 1)
 		$chapterOpening = stripslashes(nl2br($chapter['chapterOpening']));
 		$chapterEnding = stripslashes(nl2br($chapter['chapterEnding']));
 	}
-	$chapterQuery->closeCursor();
 	?>
 	
 	Chapitre <?php echo $chapterId; ?> - <?php echo $chapterTitle; ?>
@@ -44,6 +45,7 @@ else
 {
 	echo "Il n'y a actuellement aucun nouveau chapitre";
 }
+$chapterQuery->closeCursor();
 ?>
 
 <?php require_once("../../html/footer.php"); ?>

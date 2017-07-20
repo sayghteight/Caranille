@@ -12,6 +12,7 @@ $marketQuery = $bdd->query("SELECT * FROM car_items
 WHERE (SELECT COUNT(*) FROM car_market
 WHERE marketItemId = itemId) > 0
 ORDER BY itemName");
+
 $marketRow = $marketQuery->rowCount();
 
 //Si il y a au moins une offre de disponible
@@ -44,6 +45,7 @@ if ($marketRow > 0)
                     <option value="<?php echo $itemId ?>"><?php echo "$itemName ($marketItemQuantityRow offres)" ?></option>
                     <?php
                 }
+                $marketItemQuantityQuery->closeCursor(); 
             }
             ?>
 
@@ -58,6 +60,7 @@ else
 {
     echo "Il n'y a aucune offre de disponible.";
 }
+$marketQuery->closeCursor();
 ?>
 
 <hr>
@@ -68,8 +71,11 @@ $itemQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory
 WHERE itemId = inventoryItemId
 AND inventoryCharacterId = ?
 ORDER BY itemName");
+
 $itemQuery->execute([$characterId]);
+
 $itemRow = $itemQuery->rowCount();
+
 //S'il existe un ou plusieurs objets on affiche le menu déroulant pour proposer au joueur d'en ajouter
 if ($itemRow > 0) 
 {

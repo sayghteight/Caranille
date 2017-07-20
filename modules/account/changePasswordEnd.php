@@ -25,7 +25,7 @@ if (isset($_POST['oldPassword'])
         AND accountPassword = ?");
         $accountQuery->execute([$accountPseudo, $oldPassword]);
         $accountRow = $accountQuery->rowCount();
-    
+
         //S'il y a un résultat de trouvé c'est que la combinaison pseudo/mot de passe est bonne
         if ($accountRow == 1)
         {
@@ -37,8 +37,8 @@ if (isset($_POST['oldPassword'])
             $updateAccount->execute(array(
             'newPassword' => $newPassword,
             'accountId' => $accountId));
-            
             $updateAccount->closeCursor();
+
             ?>
             
             Le mot de passe a bien été mit à jour

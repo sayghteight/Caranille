@@ -14,7 +14,9 @@ OR itemType = 'Gloves'
 OR itemType = 'Helmet' 
 OR itemType = 'Weapon')
 AND inventoryCharacterId = ?");
+
 $equipmentQuery->execute([$characterId]);
+
 $equipmentRow = $equipmentQuery->rowCount();
 
 //Si un ou plusieurs équipements ont été trouvé

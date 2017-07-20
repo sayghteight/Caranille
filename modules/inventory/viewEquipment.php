@@ -19,7 +19,9 @@ if (isset($_POST['itemId'])
         //On fait une requête pour vérifier si l'équipement choisit existe
         $equipmentQuery = $bdd->prepare('SELECT * FROM car_items 
         WHERE itemId = ?');
+
         $equipmentQuery->execute([$itemId]);
+
         $equipmentRow = $equipmentQuery->rowCount();
 
         //Si l'équipement existe
@@ -35,7 +37,9 @@ if (isset($_POST['itemId'])
             OR itemType = 'Weapon')
             AND inventoryCharacterId = ?
             AND inventoryItemId = ?");
+
             $equipmentInventoryQuery->execute([$characterId, $itemId]);
+
             $equipmentInventoryRow = $equipmentInventoryQuery->rowCount();
             
             //Si le personnage possède cet objet
@@ -71,13 +75,18 @@ if (isset($_POST['itemId'])
                         //On récupère la classe de l'équipement
                         $raceQuery = $bdd->prepare("SELECT * FROM car_races
                         WHERE raceId = ?");
+
                         $raceQuery->execute([$equipmentRaceId]);
+
                         while ($race = $raceQuery->fetch())
                         {
                             //On récupère les informations de la classe
                             $equipmentRaceName = stripslashes($race['raceName']);
                         }
                         $raceQuery->closeCursor();
+                        
+                        
+                        
                     }
                     //Si la race de l'équipement est égal à 0 c'est qu'il est disponible pour toutes les classes
                     else
@@ -213,7 +222,6 @@ if (isset($_POST['itemId'])
                                     {
                                          echo "Votre classe ne vous permet pas de vous équiper de cet équipement";
                                     }
-                                    
                                 }
                                 //Si l'équipement est équippé on prévient le joueur
                                 else
@@ -247,13 +255,13 @@ if (isset($_POST['itemId'])
                     
                     <?php
                 }
-                $equipmentQuery->closeCursor();
             }
             //Si le joueur ne possède pas cet équipement
             else
             {
                 echo "Erreur: Impossible de visualiser un équipement que vous ne possédez pas.";
             }
+            $equipmentInventoryQuery->closeCursor();
         }
         //Si l'équipement n'existe pas
         else
@@ -262,10 +270,10 @@ if (isset($_POST['itemId'])
         }
         $equipmentQuery->closeCursor();
     }
-    //Si l'équipement choisit n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-         echo "L'équipment choisit est invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si toutes les variables $_POST n'existent pas

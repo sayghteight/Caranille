@@ -21,7 +21,9 @@ if (isset($_POST['marketId'])
         WHERE marketCharacterId = characterId
         AND marketItemId = itemId
         AND marketId = ?');
+
         $marketQuery->execute([$marketId]);
+
         $marketRow = $marketQuery->rowCount();
 
         //Si l'offre existe
@@ -58,13 +60,15 @@ if (isset($_POST['marketId'])
                 //On récupère la classe de l'équipement
                 $raceQuery = $bdd->prepare("SELECT * FROM car_races
                 WHERE raceId = ?");
+
                 $raceQuery->execute([$marketItemRaceId]);
+                
                 while ($race = $raceQuery->fetch())
                 {
                     //On récupère le nom de la classe
                     $marketItemRaceName = stripslashes($race['raceName']);
                 }
-                $raceQuery->closeCursor();
+                $raceQuery->closeCursor(); 
             }
             //Si la race de l'équipement est égal à 0 c'est qu'il est disponible pour toutes les classes
             else
@@ -202,7 +206,7 @@ if (isset($_POST['marketId'])
         {
             echo "Erreur: Cette offre n'existe pas";
         }
-        $marketQuery->closeCursor();
+        $marketQuery->closeCursor(); 
     }
     //Si tous les champs numérique ne contiennent pas un nombre
     else

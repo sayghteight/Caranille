@@ -23,7 +23,9 @@ if (isset($_POST['privateConversationId'])
         WHERE (privateConversationCharacterOneId = ?
         OR privateConversationCharacterTwoId = ?)
         AND privateConversationId = ?");
+
         $privateConversationQuery->execute([$characterId, $characterId, $privateConversationId]);
+        
         $privateConversationRow = $privateConversationQuery->rowCount();
 
         //Si la conversation existe
@@ -46,6 +48,7 @@ if (isset($_POST['privateConversationId'])
             'characterId' => $characterId,
             'date' => $date,
             'privateConversationMessage' => $privateConversationMessage,]);
+
             $addMessage->closeCursor();
             ?>
             
@@ -66,7 +69,7 @@ if (isset($_POST['privateConversationId'])
         {
             echo "Erreur: Cette conversation n'existe pas ou vous n'en faite pas parti";
         }
-        $privateConversationQuery->closeCursor();
+        $privateConversationQuery->closeCursor();  
     }
     //Si tous les champs numérique ne contiennent pas un nombre
     else

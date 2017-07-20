@@ -16,7 +16,9 @@ if (isset($_POST['finalAddAgilityEnd']))
         SET characterAgilitySkillPoints = characterAgilitySkillPoints + 1,
         characterSkillPoints = characterSkillPoints -1
         WHERE characterId = :characterId');
+        
         $updateCharacter->execute(['characterId' => $characterId]);
+
         $updateCharacter->closeCursor();
 
         $updateCharacter = $bdd->prepare('UPDATE car_characters
@@ -29,7 +31,9 @@ if (isset($_POST['finalAddAgilityEnd']))
         characterDefenseMagicTotal = characterDefenseMagic + characterDefenseMagicSkillPoints + characterDefenseMagicBonus + characterDefenseMagicEquipments + characterDefenseMagicGuild,
         characterWisdomTotal = characterWisdom + characterWisdomSkillPoints + characterWisdomBonus + characterWisdomEquipments + characterWisdomGuild
         WHERE characterId = :characterId');
+
         $updateCharacter->execute(['characterId' => $characterId]);
+
         $updateCharacter->closeCursor();
         ?>
         

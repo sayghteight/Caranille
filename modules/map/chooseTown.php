@@ -22,9 +22,10 @@ if (isset($_POST['townId'])
         $townQuery = $bdd->prepare('SELECT * FROM car_towns
         WHERE townChapter <= ?
         AND townId = ?');
+
         $townQuery->execute([$characterChapter, $townId]);
+
         $townRow = $townQuery->rowCount();
-        $townQuery->closeCursor();
 
         //Si la ville existe pour le joueur il y entre
         if ($townRow >= 1) 
@@ -46,11 +47,12 @@ if (isset($_POST['townId'])
         {
             echo "La ville choisie est invalide";
         }
+        $townQuery->closeCursor();
     }
-    //Si la ville choisit n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-         echo "La ville choisit est invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si toutes les variables $_POST n'existent pas

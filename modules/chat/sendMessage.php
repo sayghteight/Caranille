@@ -21,13 +21,14 @@ if (isset($_POST['chatMessage'])
     :characterId,
     :date,
     :chatMessage)");
-
+    
     $addMessage->execute([
     'characterId' => $characterId,
     'date' => $date,
     'chatMessage' => $chatMessage]);
-    $addMessage->closeCursor();
     
+    $addMessage->closeCursor();
+
     //On redirige le joueur vers le chat
     header("Location: index.php");
 }

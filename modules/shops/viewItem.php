@@ -23,7 +23,9 @@ if (isset($_POST['shopId'])
         //On fait une requête pour vérifier si le magasin choisit existe
         $shopQuery = $bdd->prepare('SELECT * FROM car_shops 
         WHERE shopId = ?');
+
         $shopQuery->execute([$shopId]);
+
         $shopRow = $shopQuery->rowCount();
 
         //Si le magasin existe
@@ -32,7 +34,9 @@ if (isset($_POST['shopId'])
             //On fait une requête pour vérifier si l'objet choisit existe
             $itemQuery = $bdd->prepare('SELECT * FROM car_items 
             WHERE itemId = ?');
+
             $itemQuery->execute([$itemId]);
+
             $itemRow = $itemQuery->rowCount();
 
             //Si l'objet existe
@@ -59,20 +63,21 @@ if (isset($_POST['shopId'])
                     $itemSalePrice = stripslashes($item['itemSalePrice']);
                     $itemPurchasePrice = stripslashes($item['itemPurchasePrice']);
                 }
-
                 //Si la race de l'équipement est supérieur à 1 c'est qu'il est attitré à une classe
                 if ($itemRaceId >= 1)
                 {
                     //On récupère la classe de l'équipement
                     $raceQuery = $bdd->prepare("SELECT * FROM car_races
                     WHERE raceId = ?");
+
                     $raceQuery->execute([$itemRaceId]);
+                    
                     while ($race = $raceQuery->fetch())
                     {
                         //On récupère le nom de la classe
                         $itemRaceName = stripslashes($race['raceName']);
                     }
-                    $raceQuery->closeCursor();
+                    $raceQuery->closeCursor(); 
                 }
                 //Si la race de l'équipement est égal à 0 c'est qu'il est disponible pour toutes les classes
                 else
@@ -84,7 +89,9 @@ if (isset($_POST['shopId'])
                 $shopItemQuery = $bdd->prepare('SELECT * FROM car_shops_items
                 WHERE shopItemShopId = ?
                 AND shopItemItemId = ?');
+
                 $shopItemQuery->execute([$shopId, $itemId]);
+
                 $shopItemRow = $shopItemQuery->rowCount();
 
                 //On récupère le taux de réduction de l'objet/équipement
@@ -241,7 +248,7 @@ if (isset($_POST['shopId'])
         {
             echo "Erreur: Ce magasin n'existe pas";
         }
-        $shopQuery->closeCursor();
+        $shopQuery->closeCursor(); 
     }
     //Si tous les champs numérique ne contiennent pas un nombre
     else

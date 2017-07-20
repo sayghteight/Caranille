@@ -152,7 +152,6 @@ if (isset($_POST['attack']))
     'battleOpponentHpRemaining' => $battleOpponentHpRemaining,
     'battleId' => $battleId]);
     $updateBattle->closeCursor();
-    
 
     //Si le joueur ou l'adversaire a moins ou a zéro HP on redirige le joueur vers la page des récompenses
     if ($characterHpMin <= 0 || $battleOpponentHpRemaining <= 0)

@@ -12,7 +12,9 @@ $monsterQueryList = $bdd->prepare("SELECT * FROM car_monsters, car_towns, car_to
 WHERE townMonsterMonsterId = monsterId
 AND townMonsterTownId = townId
 AND townId = ?");
+
 $monsterQueryList->execute([$townId]);
+
 $monsterRow = $monsterQueryList->rowCount();
 
 //Si plusieurs monstres ont été trouvé
@@ -34,7 +36,6 @@ if ($monsterRow > 0)
                 <option value="<?php echo $monsterId ?>"><?php echo $monsterName ?></option>
                 <?php
             }
-            $monsterQueryList->closeCursor();
             ?>
                 
         </select>
@@ -48,5 +49,6 @@ else
 {
     echo "Il n'y a aucun monstre de disponible.";
 }
+$monsterQueryList->closeCursor();
 
 require_once("../../html/footer.php"); ?>

@@ -9,7 +9,9 @@ if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); 
 $privateConversationQuery = $bdd->prepare("SELECT * FROM car_private_conversation
 WHERE (privateConversationCharacterOneId = ?
 OR privateConversationCharacterTwoId = ?)");
+
 $privateConversationQuery->execute([$characterId, $characterId]);
+
 $privateConversationRow = $privateConversationQuery->rowCount();
 
 //S'il existe une ou plusieurs conversation dans la messagerie privé
@@ -35,6 +37,7 @@ if ($privateConversationRow > 0)
                     //On fait une requête pour vérifier la liste des conversations dans la base de données
                     $characterQuery = $bdd->prepare("SELECT * FROM car_characters
                     WHERE characterId = ?");
+
                     $characterQuery->execute([$privateConversationCharacterTwoId]);
                     
                     //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
@@ -51,6 +54,7 @@ if ($privateConversationRow > 0)
                     //On fait une requête pour vérifier la liste des conversations dans la base de données
                     $characterQuery = $bdd->prepare("SELECT * FROM car_characters
                     WHERE characterId = ?");
+
                     $characterQuery->execute([$privateConversationCharacterOneId]);
                     
                     //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
@@ -61,7 +65,6 @@ if ($privateConversationRow > 0)
                     }
                     $characterQuery->closeCursor();
                 }
-                
                 //On fait une requête pour vérifier le nombre de message non lu
                 $privateConversationNumberQuery = $bdd->prepare("SELECT * FROM car_private_conversation_message
                 WHERE privateConversationMessagePrivateConversationId = ?
@@ -94,7 +97,9 @@ AND privateConversationCharacterTwoId = characterId
 OR privateConversationCharacterOneId = ?
 AND privateConversationCharacterTwoId) = 0
 ORDER by characterName");
+
 $characterQuery->execute([$characterId, $characterId, $characterId]);
+
 $characterRow = $characterQuery->rowCount();
 
 //S'il y a au moins un autre joueur on affiche le menu

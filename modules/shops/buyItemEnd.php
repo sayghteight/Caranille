@@ -32,7 +32,9 @@ if (isset($_POST['shopId'])
             //On fait une requête pour vérifier si l'objet choisit existe
             $itemQuery = $bdd->prepare('SELECT * FROM car_items 
             WHERE itemId = ?');
+
             $itemQuery->execute([$itemId]);
+
             $itemRow = $itemQuery->rowCount();
 
             //Si l'objet existe
@@ -50,8 +52,8 @@ if (isset($_POST['shopId'])
                 $shopItemQuery = $bdd->prepare('SELECT * FROM car_shops_items
                 WHERE shopItemShopId = ?
                 AND shopItemItemId = ?');
+
                 $shopItemQuery->execute([$shopId, $itemId]);
-                $shopItemRow = $shopItemQuery->rowCount();
 
                 //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                 while ($shopItem = $shopItemQuery->fetch())
@@ -59,6 +61,7 @@ if (isset($_POST['shopId'])
                     //On récupère les informations du magasin
                     $itemDiscount = stripslashes($shopItem['shopItemDiscount']);
                 }
+                $shopItemRow = $shopItemQuery->rowCount();
 
                 $discount = $itemPurchasePrice * $itemDiscount / 100;
                 $itemPurchasePrice = $itemPurchasePrice - $discount;
@@ -71,7 +74,9 @@ if (isset($_POST['shopId'])
                     WHERE itemId = inventoryItemId
                     AND inventoryCharacterId = ?
                     AND itemId = ?");
+
                     $itemQuery->execute([$characterId, $itemId]);
+
                     $itemRow = $itemQuery->rowCount();
 
                     //Si le personne possède cet objet
@@ -85,15 +90,16 @@ if (isset($_POST['shopId'])
                             $itemQuantity = stripslashes($item['inventoryQuantity']);
                             $inventoryEquipped = stripslashes($item['inventoryEquipped']);
                         }
-                        $itemQuery->closeCursor();
 
                         //On met l'inventaire à jour
                         $updateInventory = $bdd->prepare("UPDATE car_inventory SET
                         inventoryQuantity = inventoryQuantity + 1
                         WHERE inventoryId = :inventoryId");
+
                         $updateInventory->execute(array(
                         'inventoryId' => $inventoryId));
-                        $updateInventory->closeCursor();
+
+                        $updateInventory->closeCursor(); 
                     }
                     //Si le joueur ne possède pas encore cet objet/équipement
                     else
@@ -104,12 +110,15 @@ if (isset($_POST['shopId'])
                         :itemId,
                         '1',
                         '0')");
+
                         $addItem->execute([
                         'characterId' => $characterId,
                         'itemId' => $itemId]);
-                        $addItem->closeCursor();
+
+                        $addItem->closeCursor();  
                     }
-                    
+                    $itemQuery->closeCursor();
+
                     //On retire l'argent de la vente au personnage
                     $updatecharacter = $bdd->prepare("UPDATE car_characters SET
                     characterGold = characterGold - :itemPurchasePrice

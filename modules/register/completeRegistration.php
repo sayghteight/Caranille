@@ -267,18 +267,21 @@ if (isset($_POST['accountPseudo'])
                     {
                         echo "La classe choisit n'existe pas";
                     }
+                    $raceQuery->closeCursor();  
                 }
                 //Si le nom du personnage a déjà été utilisé
                 else
                 {
                     echo "Ce nom de personnage est déjà utilisé";
                 }
+                $characterQuery->closeCursor();
             }
             //Si le pseudo est déjà utilisé
             else 
             {
                 echo "Le pseudo est déjà utilisé";
             }
+            $pseudoQuery->closeCursor();   
         }
         //Si les deux mots de passe ne sont pas identique
         else 
@@ -286,10 +289,10 @@ if (isset($_POST['accountPseudo'])
             echo "Les deux mots de passe ne sont pas identiques";
         }
     }
-    //Si la classe choisit n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-         echo "La classe choisit est invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si toutes les variables $_POST n'existent pas

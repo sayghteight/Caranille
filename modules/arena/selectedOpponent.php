@@ -34,8 +34,7 @@ if (isset($_POST['opponentCharacterId']))
                 $opponentHp = stripslashes($opponent['characterHpTotal']);
                 $opponentMp = stripslashes($opponent['characterMpTotal']);
             }
-            $opponentQuery->closeCursor();
-
+            
             //Insertion du combat dans la base de donnée avec les données
             $addBattle = $bdd->prepare("INSERT INTO car_battles VALUES(
             '',
@@ -60,6 +59,7 @@ if (isset($_POST['opponentCharacterId']))
         {
             echo "Erreur: Personnage indisponible";
         }
+        $opponentQuery->closeCursor();
     }
     //Si le personnage n'est pas un nombre
     else

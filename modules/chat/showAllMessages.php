@@ -11,6 +11,7 @@ if (isset($_POST['showAllMessages']))
     //On fait une recherche dans la base de donnée des 20 derniers message du chat
     $chatQuery = $bdd->query("SELECT * FROM car_chat, car_characters 
     WHERE chatCharacterId = characterId");
+    
     $chatRow = $chatQuery->rowCount();
     
     //Si il y a des messages dans le chat on les affiches
@@ -102,6 +103,7 @@ if (isset($_POST['showAllMessages']))
         
         <?php
     }
+    $chatQuery->closeCursor();
     ?>
     
     <form method="POST" action="index.php">

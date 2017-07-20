@@ -63,7 +63,6 @@ if ($itemRow > 0)
                     <option value="<?php echo $itemId ?>"><?php echo "$itemName ($itemQuantity disponible)"; ?></option>
                     <?php
                 }
-                $itemQuery->closeCursor();
                 ?>
                 
             </select>
@@ -77,6 +76,7 @@ else
 {
     echo "Vous ne possédez aucun objets";
 }
+$itemQuery->closeCursor();
 ?>
 
 <hr >

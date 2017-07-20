@@ -21,7 +21,9 @@ if (isset($_POST['itemId'])
         WHERE itemId = inventoryItemId
         AND inventoryCharacterId = ?
         AND itemId = ?");
+
         $itemQuery->execute([$characterId, $itemId]);
+
         $itemRow = $itemQuery->rowCount();
 
         //Si le personne possède cet objet
@@ -37,7 +39,6 @@ if (isset($_POST['itemId'])
                 $itemHpEffect = stripslashes($item['itemHpEffect']);
                 $itemMpEffect = stripslashes($item['itemMpEffect']);
             }
-            $itemQuery->closeCursor();
             
             //On applique les ajouts de l'objet sur les stats du joueur
             $characterHpMin = $characterHpMin + $itemHpEffect;
@@ -64,8 +65,10 @@ if (isset($_POST['itemId'])
                 $updateInventory = $bdd->prepare("UPDATE car_inventory SET
                 inventoryQuantity = inventoryQuantity - 1
                 WHERE inventoryId = :inventoryId");
+
                 $updateInventory->execute(array(
                 'inventoryId' => $inventoryId));
+
                 $updateInventory->closeCursor();
             }
             //Si le joueur ne possède cet objet/équipement que en un seul exemplaire
@@ -74,11 +77,12 @@ if (isset($_POST['itemId'])
                 //On supprime l'objet de l'inventaire
                 $updateInventory = $bdd->prepare("DELETE FROM car_inventory
                 WHERE inventoryId = :inventoryId");
+
                 $updateInventory->execute(array(
                 'inventoryId' => $inventoryId));
+
                 $updateInventory->closeCursor();
             }
-
             //On met le personnage à jour
             $updatecharacter = $bdd->prepare("UPDATE car_characters SET
             characterHpMin = :characterHpMin,
@@ -89,6 +93,7 @@ if (isset($_POST['itemId'])
             'characterHpMin' => $characterHpMin,
             'characterMpMin' => $characterMpMin,  
             'characterId' => $characterId));
+
             $updatecharacter->closeCursor();
             ?>
             
@@ -106,11 +111,12 @@ if (isset($_POST['itemId'])
         {
             echo "Erreur: Impossible d'utiliser un objet que vous ne possédez pas.";
         }
+        $itemQuery->closeCursor(); 
     }
-    //Si l'objet choisit n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-         echo "L'objet choisit est invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si toutes les variables $_POST n'existent pas

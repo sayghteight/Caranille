@@ -31,7 +31,9 @@ if (isset($_POST['itemId'])
             AND itemType = 'Item' 
             AND inventoryCharacterId = ?
             AND inventoryItemId = ?");
+
             $itemInventoryQuery->execute([$characterId, $itemId]);
+
             $itemInventoryRow = $itemInventoryQuery->rowCount();
             
             //Si le personnage possède cet objet
@@ -155,13 +157,13 @@ if (isset($_POST['itemId'])
                     
                     <?php
                 }
-                $itemInventoryQuery->closeCursor();
             }
             //Si le joueur ne possède pas cet objet
             else
             {
                 echo "Erreur: Impossible de visualiser un objet que vous ne possédez pas.";
             }
+            $itemInventoryQuery->closeCursor();
         }
         //Si l'objet n'exite pas
         else
@@ -170,10 +172,10 @@ if (isset($_POST['itemId'])
         }
         $itemQuery->closeCursor();
     }
-    //Si l'objet choisit n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-         echo "L'objet choisit est invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si toutes les variables $_POST n'existent pas

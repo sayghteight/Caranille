@@ -17,6 +17,7 @@ if (isset($_POST['leave']))
 
     $updatecharacter->execute(array(
     'characterId' => $characterId));
+    
     $updatecharacter->closeCursor();
 
     //On redirige le joueur vers la carte du monde

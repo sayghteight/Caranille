@@ -11,7 +11,9 @@ if (isset($_POST['continue']))
     //On vérifie si le chapitre existe
     $chapterQuery = $bdd->prepare("SELECT * FROM car_chapters
     WHERE chapterId = ?");
+
     $chapterQuery->execute([$characterChapter]);
+
     $chapterRow = $chapterQuery->rowCount();
     
     //Si le chapitre existe
@@ -21,7 +23,9 @@ if (isset($_POST['continue']))
         $opponentQuery = $bdd->prepare("SELECT * FROM car_monsters, car_chapters
         WHERE monsterId = chapterMonsterId
         AND chapterId = ?");
+
         $opponentQuery->execute([$characterChapter]);
+
         $opponentRow = $opponentQuery->rowCount();
 
         //Si le monstre existe
@@ -35,7 +39,6 @@ if (isset($_POST['continue']))
                 $opponentHp = $opponent['monsterHp'];
                 $opponentMp = $opponent['monsterMp'];
             }
-            $opponentQuery->closeCursor();
 
             //Insertion du combat dans la base de donnée avec les données
             $addBattle = $bdd->prepare("INSERT INTO car_battles VALUES(
@@ -51,6 +54,7 @@ if (isset($_POST['continue']))
             'opponentId' => $opponentId,
             'opponentHp' => $opponentHp,
             'opponentMp' => $opponentMp]);
+
             $addBattle->closeCursor();
 
             //On redirige le joueur vers le combat du monstre
@@ -66,6 +70,7 @@ if (isset($_POST['continue']))
     {
         echo "Erreur: Le chapitre demandé n'existe pas";
     }
+    $opponentQuery->closeCursor(); 
 }
 //Si toutes les variables $_POST n'existent pas
 else

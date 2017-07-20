@@ -10,7 +10,9 @@ $itemQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory
 WHERE itemId = inventoryItemId
 AND itemType = 'Item'
 AND inventoryCharacterId = ?");
+
 $itemQuery->execute([$characterId]);
+
 $itemRow = $itemQuery->rowCount();
 
 //Si un ou plusieurs objets ont été trouvé
@@ -33,7 +35,6 @@ if ($itemRow > 0)
                 <option value="<?php echo $itemId ?>"><?php echo "$itemName (Quantité: $itemQuantity)" ?></option>
                 <?php
             }
-            $itemQuery->closeCursor();
             ?>
                 
         </select>
@@ -47,5 +48,6 @@ else
 {
     echo "Vous ne possédez aucun objets.";
 }
+$itemQuery->closeCursor();
 
 require_once("../../html/footer.php"); ?>

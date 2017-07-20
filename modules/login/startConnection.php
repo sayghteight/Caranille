@@ -12,7 +12,9 @@ if (isset($_POST['accountPseudo'])
     $accountQuery = $bdd->prepare("SELECT * FROM car_accounts 
     WHERE accountPseudo = ?
     AND accountPassword = ?");
+
     $accountQuery->execute([$accountPseudo, $accountPassword]);
+
     $accountRow = $accountQuery->rowCount();
 
     //S'il y a un résultat de trouvé c'est que la combinaison pseudo/mot de passe est bonne
@@ -24,21 +26,6 @@ if (isset($_POST['accountPseudo'])
             //On récupère les informations du compte comme l'id et les accès (joueur, modérateur, administrateur)
             $accountId = stripslashes($account['accountId']);
             $accountAccess = stripslashes($account['accountAccess']);
-            
-            //On récupère les informations du serveur de jeu
-            $configurationQuery = $bdd->query("SELECT * FROM car_configuration");
-            
-            //On fait une boucle pour récupérer toutes les information
-            while ($configuration = $configurationQuery->fetch())
-            {
-                //On récupère les informations du jeu
-                $gameId = stripslashes($configuration['configurationId']);
-                $gameName = stripslashes($configuration['configurationGameName']);
-                $gamePresentation = stripslashes($configuration['configurationPresentation']);   
-                $gameSkillPoint = stripslashes($configuration['configurationSkillPoint']);
-                $gameAccess = stripslashes($configuration['configurationAccess']);
-            }
-            $configurationQuery->closeCursor();
             
             //Si le jeu est ouvert au public
             if ($gameAccess == "Opened")
@@ -58,6 +45,8 @@ if (isset($_POST['accountPseudo'])
                 $updateAccount->execute(array(
                 'accountLastConnection' => $date,   
                 'accountId' => $accountId));
+
+                $updateAccount->closeCursor();
                 
                 header("Location: ../../index.php");
             }
@@ -82,6 +71,8 @@ if (isset($_POST['accountPseudo'])
                     $updateAccount->execute(array(
                     'accountLastConnection' => $date,   
                     'accountId' => $accountId));
+
+                    $updateAccount->closeCursor();
                     
                     header("Location: ../../index.php");
                 }
@@ -92,13 +83,13 @@ if (isset($_POST['accountPseudo'])
                 }
             }
         }
-        $accountQuery->closeCursor();
     }
     //S'il n'y a aucun résultat de trouvé c'est que la combinaison pseudo/mot de passe est mauvaise
     else
     {
         echo "Mauvais Pseudo/Mot de passe";
     }
+    $accountQuery->closeCursor();
 }
 //Si toutes les variables $_POST n'existent pas
 else

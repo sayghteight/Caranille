@@ -10,8 +10,9 @@
         <?php
         //On rempli le menu déroulant avec la liste des classes disponible
         $raceListQuery = $bdd->query("SELECT * FROM car_races");
-        //On recherche combien il y a de classes disponible
+
         $raceList = $raceListQuery->rowCount();
+        
         //S'il y a au moins une classe de disponible on les affiches dans le menu déroulant
         if ($raceList >= 1)
         {
@@ -26,6 +27,7 @@
                 <?php
             }
         }
+        $raceListQuery->closeCursor();
         ?>
     
     </select>
