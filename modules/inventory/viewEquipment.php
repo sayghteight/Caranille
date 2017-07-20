@@ -19,9 +19,7 @@ if (isset($_POST['itemId'])
         //On fait une requête pour vérifier si l'équipement choisit existe
         $equipmentQuery = $bdd->prepare('SELECT * FROM car_items 
         WHERE itemId = ?');
-
         $equipmentQuery->execute([$itemId]);
-
         $equipmentRow = $equipmentQuery->rowCount();
 
         //Si l'équipement existe
@@ -37,9 +35,7 @@ if (isset($_POST['itemId'])
             OR itemType = 'Weapon')
             AND inventoryCharacterId = ?
             AND inventoryItemId = ?");
-
             $equipmentInventoryQuery->execute([$characterId, $itemId]);
-
             $equipmentInventoryRow = $equipmentInventoryQuery->rowCount();
             
             //Si le personnage possède cet objet
@@ -75,7 +71,6 @@ if (isset($_POST['itemId'])
                         //On récupère la classe de l'équipement
                         $raceQuery = $bdd->prepare("SELECT * FROM car_races
                         WHERE raceId = ?");
-
                         $raceQuery->execute([$equipmentRaceId]);
 
                         while ($race = $raceQuery->fetch())
@@ -84,9 +79,6 @@ if (isset($_POST['itemId'])
                             $equipmentRaceName = stripslashes($race['raceName']);
                         }
                         $raceQuery->closeCursor();
-                        
-                        
-                        
                     }
                     //Si la race de l'équipement est égal à 0 c'est qu'il est disponible pour toutes les classes
                     else

@@ -21,9 +21,7 @@ if (isset($_POST['marketId'])
         WHERE marketCharacterId = characterId
         AND marketItemId = itemId
         AND marketId = ?');
-
         $marketQuery->execute([$marketId]);
-
         $marketRow = $marketQuery->rowCount();
 
         //Si l'offre existe
@@ -60,7 +58,6 @@ if (isset($_POST['marketId'])
                 //On récupère la classe de l'équipement
                 $raceQuery = $bdd->prepare("SELECT * FROM car_races
                 WHERE raceId = ?");
-
                 $raceQuery->execute([$marketItemRaceId]);
                 
                 while ($race = $raceQuery->fetch())

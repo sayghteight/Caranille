@@ -23,9 +23,7 @@ if (isset($_POST['privateConversationId'])
         WHERE (privateConversationCharacterOneId = ?
         OR privateConversationCharacterTwoId = ?)
         AND privateConversationId = ?");
-
         $privateConversationQuery->execute([$characterId, $characterId, $privateConversationId]);
-        
         $privateConversationRow = $privateConversationQuery->rowCount();
 
         //Si la conversation existe
@@ -42,13 +40,11 @@ if (isset($_POST['privateConversationId'])
             :date,
             :privateConversationMessage,
             'No')");
-        
             $addMessage->execute([
             'privateConversationId' => $privateConversationId,
             'characterId' => $characterId,
             'date' => $date,
             'privateConversationMessage' => $privateConversationMessage,]);
-
             $addMessage->closeCursor();
             ?>
             

@@ -12,9 +12,7 @@ $shopQuery = $bdd->prepare("SELECT * FROM car_shops, car_towns, car_towns_shops
 WHERE townShopShopId = shopId
 AND townShopTownId = townId
 AND townId = ?");
-
 $shopQuery->execute([$townId]);
-
 $shopRow = $shopQuery->rowCount();
 
 //Si plusieurs magasins ont été trouvé

@@ -21,9 +21,7 @@ if (isset($_POST['marketId'])
         WHERE marketCharacterId = characterId
         AND marketItemId = itemId
         AND marketId = ?');
-
         $marketQuery->execute([$marketId]);
-
         $marketRow = $marketQuery->rowCount();
 
         //Si l'offre existe
@@ -62,9 +60,7 @@ if (isset($_POST['marketId'])
                 WHERE itemId = inventoryItemId
                 AND inventoryCharacterId = ?
                 AND itemId = ?");
-
                 $itemQuery->execute([$characterId, $marketItemId]);
-
                 $itemRow = $itemQuery->rowCount();
 
                 //Si le personne possède cet objet
@@ -84,10 +80,8 @@ if (isset($_POST['marketId'])
                     $updateInventory = $bdd->prepare("UPDATE car_inventory SET
                     inventoryQuantity = inventoryQuantity + 1
                     WHERE inventoryId = :inventoryId");
-
                     $updateInventory->execute(array(
                     'inventoryId' => $inventoryId));
-
                     $updateInventory->closeCursor();
                 }
                 //Si le joueur ne possède pas encore cet objet/équipement
@@ -99,11 +93,9 @@ if (isset($_POST['marketId'])
                     :marketItemId,
                     '1',
                     '0')");
-
                     $addItem->execute([
                     'characterId' => $characterId,
                     'marketItemId' => $marketItemId]);
-
                     $addItem->closeCursor();
                 }
                 
@@ -111,29 +103,24 @@ if (isset($_POST['marketId'])
                 $updatecharacter = $bdd->prepare("UPDATE car_characters SET
                 characterGold = characterGold + :marketSalePrice
                 WHERE characterId = :marketCharacterId");
-
                 $updatecharacter->execute(array(
                 'marketSalePrice' => $marketSalePrice,  
                 'marketCharacterId' => $marketCharacterId));
-
                 $updatecharacter->closeCursor();
 
                 //On supprime l'offre de vente
                 $marketDeleteQuery = $bdd->prepare("DELETE FROM car_market
                 WHERE marketId = ?");
                 $marketDeleteQuery->execute([$marketId]);
-
                 $marketDeleteQuery->closeCursor();
 
                 //On retire l'argent de la vente au personnage
                 $updatecharacter = $bdd->prepare("UPDATE car_characters SET
                 characterGold = characterGold - :marketSalePrice
                 WHERE characterId = :characterId");
-
                 $updatecharacter->execute(array(
                 'marketSalePrice' => $marketSalePrice,  
                 'characterId' => $characterId));
-
                 $updatecharacter->closeCursor();
                 ?>
                 

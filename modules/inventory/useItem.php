@@ -21,9 +21,7 @@ if (isset($_POST['itemId'])
         WHERE itemId = inventoryItemId
         AND inventoryCharacterId = ?
         AND itemId = ?");
-
         $itemQuery->execute([$characterId, $itemId]);
-
         $itemRow = $itemQuery->rowCount();
 
         //Si le personne possède cet objet

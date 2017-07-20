@@ -12,9 +12,8 @@ if (isset($_POST['clearChat']))
 {
     //On vide le chat de la base de donnée
     $deleteChat = $bdd->query("DELETE FROM car_chat");
-    
     $deleteChat->closeCursor();
-
+    
     //On redirige le joueur vers le chat
     header("Location: index.php");
 }

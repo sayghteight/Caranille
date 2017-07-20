@@ -21,9 +21,7 @@ if (isset($_POST['monsterId'])
         WHERE monsterId = bestiaryMonsterId
         AND bestiaryMonsterId = ?
         AND bestiaryCharacterId = ?");
-
         $monsterBestiaryQuery->execute([$monsterId, $characterId]);
-
         $monsterBestiaryRow = $monsterBestiaryQuery->rowCount();
         
         //Si un ou plusieurs équipements ont été trouvé
@@ -39,9 +37,7 @@ if (isset($_POST['monsterId'])
             //On fait une requête pour vérifier si le monstre entré existe
             $monsterQuery = $bdd->prepare("SELECT * FROM car_monsters
             WHERE monsterId = ?");
-
             $monsterQuery->execute([$monsterId]);
-
             $monsterRow = $monsterQuery->rowCount();
             
             if ($monsterRow == 1)
@@ -222,9 +218,7 @@ if (isset($_POST['monsterId'])
                             $monsterTownQuery = $bdd->prepare("SELECT * FROM car_towns, car_towns_monsters
                             WHERE townMonsterTownId = townId
                             AND townMonsterMonsterId = ?");
-
                             $monsterTownQuery->execute([$monsterId]);
-
                             $monsterTownRow = $monsterTownQuery->rowCount();
                         
                             //S'il existe une ou plusieurs ville pour ce monstre
@@ -271,9 +265,7 @@ if (isset($_POST['monsterId'])
                             $monsterDropQuery = $bdd->prepare("SELECT * FROM car_items, car_monsters_drops
                             WHERE monsterDropItemId = itemId
                             AND monsterDropMonsterId = ?");
-
                             $monsterDropQuery->execute([$monsterId]);
-                            
                             $monsterDropRow = $monsterDropQuery->rowCount();
                         
                             //S'il existe un ou plusieurs objet pour ce monstre

@@ -21,9 +21,7 @@ if (isset($_POST['marketId'])
         WHERE marketCharacterId = characterId
         AND marketItemId = itemId
         AND marketId = ?');
-
         $marketQuery->execute([$marketId]);
-
         $marketRow = $marketQuery->rowCount();
 
         //Si l'offre existe

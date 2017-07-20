@@ -18,11 +18,9 @@ if (isset($_POST['sleep']))
         characterHpMin = characterHpTotal,
         characterMpMin = characterMpTotal
         WHERE characterId = :characterId');
-
         $updateAccount->execute([
         'townPriceInn' => $townPriceInn,
         'characterId' => $characterId]);
-        
         $updateAccount->closeCursor();        
         ?>
         Votre personnage à récupéré toutes ses forces !

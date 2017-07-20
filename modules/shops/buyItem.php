@@ -23,9 +23,7 @@ if (isset($_POST['shopId'])
         //On fait une requête pour vérifier si le magasin choisit existe
         $shopQuery = $bdd->prepare('SELECT * FROM car_shops 
         WHERE shopId = ?');
-
         $shopQuery->execute([$shopId]);
-
         $shopRow = $shopQuery->rowCount();
 
         //Si le magasin existe
@@ -34,9 +32,7 @@ if (isset($_POST['shopId'])
             //On fait une requête pour vérifier si l'objet choisit existe
             $itemQuery = $bdd->prepare('SELECT * FROM car_items 
             WHERE itemId = ?');
-
             $itemQuery->execute([$itemId]);
-
             $itemRow = $itemQuery->rowCount();
 
             //Si l'objet existe
@@ -54,9 +50,7 @@ if (isset($_POST['shopId'])
                 $shopItemQuery = $bdd->prepare('SELECT * FROM car_shops_items
                 WHERE shopItemShopId = ?
                 AND shopItemItemId = ?');
-
                 $shopItemQuery->execute([$shopId, $itemId]);
-
                 $shopItemRow = $shopItemQuery->rowCount();
 
                 //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations

@@ -22,9 +22,7 @@ if (isset($_POST['townId'])
         $townQuery = $bdd->prepare('SELECT * FROM car_towns
         WHERE townChapter <= ?
         AND townId = ?');
-
         $townQuery->execute([$characterChapter, $townId]);
-
         $townRow = $townQuery->rowCount();
 
         //Si la ville existe pour le joueur il y entre
@@ -34,7 +32,6 @@ if (isset($_POST['townId'])
             $updatecharacter = $bdd->prepare("UPDATE car_characters SET
             characterTownId = :characterTownId
             WHERE characterId = :characterId");
-
             $updatecharacter->execute(array(
             'characterTownId' => $townId, 
             'characterId' => $characterId));

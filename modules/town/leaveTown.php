@@ -14,10 +14,8 @@ if (isset($_POST['leave']))
     $updatecharacter = $bdd->prepare("UPDATE car_characters SET
     characterTownId = 0
     WHERE characterId = :characterId");
-
     $updatecharacter->execute(array(
     'characterId' => $characterId));
-    
     $updatecharacter->closeCursor();
 
     //On redirige le joueur vers la carte du monde

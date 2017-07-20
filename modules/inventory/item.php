@@ -10,9 +10,7 @@ $itemQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory
 WHERE itemId = inventoryItemId
 AND itemType = 'Item'
 AND inventoryCharacterId = ?");
-
 $itemQuery->execute([$characterId]);
-
 $itemRow = $itemQuery->rowCount();
 
 //Si un ou plusieurs objets ont été trouvé

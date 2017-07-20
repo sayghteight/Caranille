@@ -28,7 +28,6 @@ $accountLastAction = $date = date('Y-m-d H:i:s');
 $updateAccount = $bdd->prepare("UPDATE car_accounts SET 
 accountLastAction = :accountLastAction
 WHERE accountId = :accountId");
-
 $updateAccount->execute(array(
 'accountLastAction' => $accountLastAction,   
 'accountId' => $accountId));

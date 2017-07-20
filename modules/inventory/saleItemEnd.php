@@ -21,9 +21,7 @@ if (isset($_POST['itemId'])
         WHERE itemId = inventoryItemId
         AND inventoryCharacterId = ?
         AND itemId = ?");
-
         $itemQuery->execute([$characterId, $itemId]);
-
         $itemRow = $itemQuery->rowCount();
 
         //Si le personne possède cet objet
@@ -48,10 +46,8 @@ if (isset($_POST['itemId'])
                 $updateInventory = $bdd->prepare("UPDATE car_inventory SET
                 inventoryQuantity = inventoryQuantity - 1
                 WHERE inventoryId = :inventoryId");
-
                 $updateInventory->execute(array(
                 'inventoryId' => $inventoryId));
-
                 $updateInventory->closeCursor();
             }
             //Si le joueur ne possède cet objet/équipement que en un seul exemplaire
@@ -64,10 +60,8 @@ if (isset($_POST['itemId'])
                     $updateInventory = $bdd->prepare("UPDATE car_inventory SET
                     inventoryEquipped = 0
                     WHERE inventoryId = :inventoryId");
-
                     $updateInventory->execute(array(
                     'inventoryId' => $inventoryId));
-
                     $updateInventory->closeCursor();
 
                     //On remet les stats du joueurs à zéro pour recalculer ensuite le bonus de tous les équipements équippé
@@ -81,7 +75,6 @@ if (isset($_POST['itemId'])
                     characterDefenseMagicEquipments = 0, 
                     characterWisdomEquipments = 0
                     WHERE characterId = :characterId");
-
                     $updateCharacter->execute(array(
                     'characterId' => $characterId));
                     $updateCharacter->closeCursor();
@@ -101,7 +94,6 @@ if (isset($_POST['itemId'])
                     WHERE itemId = inventoryItemId
                     AND inventoryEquipped = 1
                     AND inventoryCharacterId = ?");
-
                     $equipmentEquipedQuery->execute([$characterId]);
 
                     //On fait une boucle sur les résultats et on additionne les bonus de tous les équipements équipé
@@ -130,7 +122,6 @@ if (isset($_POST['itemId'])
                     characterDefenseMagicEquipments = :defenseMagicBonus, 
                     characterWisdomEquipments = :wisdomBonus
                     WHERE characterId = :characterId");
-
                     $updateCharacter->execute(array(
                     'hpBonus' => $hpBonus,
                     'mpBonus' => $mpBonus,
@@ -141,7 +132,6 @@ if (isset($_POST['itemId'])
                     'defenseMagicBonus' => $defenseMagicBonus,
                     'wisdomBonus' => $wisdomBonus,
                     'characterId' => $characterId));
-
                     $updateCharacter->closeCursor();
 
                     //On va maintenant finir par actualiser tous le personnage
@@ -155,18 +145,14 @@ if (isset($_POST['itemId'])
                     characterDefenseMagicTotal = characterDefenseMagic + characterDefenseMagicSkillPoints + characterDefenseMagicBonus + characterDefenseMagicEquipments,
                     characterWisdomTotal = characterWisdom + characterWisdomSkillPoints + characterWisdomBonus + characterWisdomEquipments
                     WHERE characterId = :characterId');
-
                     $updateCharacter->execute(['characterId' => $characterId]);
-
                     $updateCharacter->closeCursor();                    
                 }
                 //On supprime l'objet de l'inventaire
                 $updateInventory = $bdd->prepare("DELETE FROM car_inventory
                 WHERE inventoryId = :inventoryId");
-
                 $updateInventory->execute(array(
                 'inventoryId' => $inventoryId));
-
                 $updateInventory->closeCursor();
             }
 
@@ -174,11 +160,9 @@ if (isset($_POST['itemId'])
             $updatecharacter = $bdd->prepare("UPDATE car_characters SET
             characterGold = characterGold + :itemSalePrice
             WHERE characterId = :characterId");
-
             $updatecharacter->execute(array(
             'itemSalePrice' => $itemSalePrice,  
             'characterId' => $characterId));
-
             $updatecharacter->closeCursor();
             ?>
             

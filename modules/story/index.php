@@ -8,9 +8,7 @@ if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); 
 //On recherche le chapitre de l'histoire du joueur
 $chapterQuery = $bdd->prepare("SELECT * FROM car_chapters
 WHERE chapterId = ?");
-
 $chapterQuery->execute([$characterChapter]);
-
 $chapterRow = $chapterQuery->rowCount();
 
 //Si le chapitre du joueur existe

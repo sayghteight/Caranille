@@ -12,9 +12,7 @@ $monsterQueryList = $bdd->prepare("SELECT * FROM car_monsters, car_towns, car_to
 WHERE townMonsterMonsterId = monsterId
 AND townMonsterTownId = townId
 AND townId = ?");
-
 $monsterQueryList->execute([$townId]);
-
 $monsterRow = $monsterQueryList->rowCount();
 
 //Si plusieurs monstres ont été trouvé

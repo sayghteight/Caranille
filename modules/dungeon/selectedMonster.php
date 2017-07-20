@@ -23,9 +23,7 @@ if (isset($_POST['battleMonsterId']))
         AND townMonsterTownId = townId
         AND monsterId = ?
         AND townId = ?");
-
         $opponentQuery->execute([$opponentId, $townId]);
-
         $opponentRow = $opponentQuery->rowCount();
 
         //Si le monstre existe
@@ -47,13 +45,11 @@ if (isset($_POST['battleMonsterId']))
             'Dungeon',
             :opponentHp,
             :opponentMp)");
-
             $addBattle->execute([
             'characterId' => $characterId,
             'opponentId' => $opponentId,
             'opponentHp' => $opponentHp,
             'opponentMp' => $opponentMp]);
-
             $addBattle->closeCursor();
 
             //On redirige le joueur vers le combat

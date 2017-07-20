@@ -89,7 +89,6 @@ if (isset($_POST['accountPseudo'])
                         :accountLastAction,
                         :accountLastConnection,
                         :accountIp)");
-
                         $addAccount->execute([
                         'accountPseudo' => $accountPseudo,
                         'accountPassword' => $accountPassword,
@@ -251,13 +250,11 @@ if (isset($_POST['accountPseudo'])
                         '0',
                         '1'
                         )");
-
                         $addCharacter->execute([
                         'accountId' => $id,
                         'characterRaceId' => $characterRaceId,
                         'characterName' => $characterName,
                         'characterSex' => $characterSex]);
-
                         $addCharacter->closeCursor();
 
                         echo "Compte crée";

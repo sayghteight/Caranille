@@ -21,9 +21,7 @@ if (isset($_POST['itemId'])
         WHERE itemId = inventoryItemId
         AND inventoryCharacterId = ?
         AND itemId = ?");
-
         $itemQuery->execute([$characterId, $itemId]);
-
         $itemRow = $itemQuery->rowCount();
 
         //Si le personne possède cet objet
@@ -65,10 +63,8 @@ if (isset($_POST['itemId'])
                 $updateInventory = $bdd->prepare("UPDATE car_inventory SET
                 inventoryQuantity = inventoryQuantity - 1
                 WHERE inventoryId = :inventoryId");
-
                 $updateInventory->execute(array(
                 'inventoryId' => $inventoryId));
-
                 $updateInventory->closeCursor();
             }
             //Si le joueur ne possède cet objet/équipement que en un seul exemplaire
@@ -77,10 +73,8 @@ if (isset($_POST['itemId'])
                 //On supprime l'objet de l'inventaire
                 $updateInventory = $bdd->prepare("DELETE FROM car_inventory
                 WHERE inventoryId = :inventoryId");
-
                 $updateInventory->execute(array(
                 'inventoryId' => $inventoryId));
-
                 $updateInventory->closeCursor();
             }
             //On met le personnage à jour
@@ -88,12 +82,10 @@ if (isset($_POST['itemId'])
             characterHpMin = :characterHpMin,
             characterMpMin = :characterMpMin
             WHERE characterId = :characterId");
-
             $updatecharacter->execute(array(
             'characterHpMin' => $characterHpMin,
             'characterMpMin' => $characterMpMin,  
             'characterId' => $characterId));
-
             $updatecharacter->closeCursor();
             ?>
             

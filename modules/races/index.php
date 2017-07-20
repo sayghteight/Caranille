@@ -2,7 +2,6 @@
 
 //On recherche la liste des races dans la base de donnée
 $raceQuery = $bdd->query('SELECT * FROM car_races');
-
 $raceRow = $raceQuery->rowCount();
 
 //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations

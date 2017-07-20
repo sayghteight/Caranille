@@ -12,9 +12,7 @@ if (isset($_POST['accountPseudo'])
     $accountQuery = $bdd->prepare("SELECT * FROM car_accounts 
     WHERE accountPseudo = ?
     AND accountPassword = ?");
-
     $accountQuery->execute([$accountPseudo, $accountPassword]);
-
     $accountRow = $accountQuery->rowCount();
 
     //S'il y a un résultat de trouvé c'est que la combinaison pseudo/mot de passe est bonne
@@ -41,11 +39,9 @@ if (isset($_POST['accountPseudo'])
                 $updateAccount = $bdd->prepare("UPDATE car_accounts SET 
                 accountLastConnection = :accountLastConnection
                 WHERE accountId = :accountId");
-                
                 $updateAccount->execute(array(
                 'accountLastConnection' => $date,   
                 'accountId' => $accountId));
-
                 $updateAccount->closeCursor();
                 
                 header("Location: ../../index.php");
@@ -67,11 +63,9 @@ if (isset($_POST['accountPseudo'])
                     $updateAccount = $bdd->prepare("UPDATE car_accounts SET 
                     accountLastConnection = :accountLastConnection
                     WHERE accountId = :accountId");
-                    
                     $updateAccount->execute(array(
                     'accountLastConnection' => $date,   
                     'accountId' => $accountId));
-
                     $updateAccount->closeCursor();
                     
                     header("Location: ../../index.php");

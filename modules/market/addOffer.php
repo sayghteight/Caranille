@@ -23,9 +23,7 @@ if (isset($_POST['marketItemId'])
         //On fait une requête pour vérifier si l'objet ou équippement choisit existe
         $itemQuery = $bdd->prepare('SELECT * FROM car_items 
         WHERE itemId = ?');
-
         $itemQuery->execute([$marketItemId]);
-
         $itemRow = $itemQuery->rowCount();
 
         //Si l'objet ou équipement existe
@@ -43,9 +41,7 @@ if (isset($_POST['marketItemId'])
             WHERE itemId = inventoryItemId
             AND inventoryCharacterId = ?
             AND itemId = ?");
-
             $inventoryQuery->execute([$characterId, $marketItemId]);
-
             $inventoryRow = $inventoryQuery->rowCount();
 
             //Si l'objet ou équipement est bien dans l'inventaire du joueur

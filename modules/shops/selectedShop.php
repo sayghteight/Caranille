@@ -22,9 +22,7 @@ if (isset($_POST['shopId']))
         WHERE townShopShopId = shopId
         AND townShopTownId = townId
         AND townId = ?");
-
         $shopQueryList->execute([$shopId]);
-
         $shopRow = $shopQueryList->rowCount();
 
         //Si plusieurs magasins ont été trouvé
@@ -45,9 +43,7 @@ if (isset($_POST['shopId']))
             AND shopItemItemId = itemId
             AND shopId = ?
             ORDER BY itemName");
-
             $townShopQuery->execute([$shopId]);
-
             $townShopRow = $townShopQuery->rowCount();
 
             //S'il existe un ou plusieurs objet dans le magasin on affiche le menu déroulant

@@ -48,6 +48,4 @@ else
 }
 $opponentQuery->closeCursor();
 
-
-
 require_once("../../html/footer.php"); ?>

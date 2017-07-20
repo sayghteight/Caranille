@@ -81,9 +81,7 @@ if (isset($_POST['privateConversationId'])
             $privateConversationMessageQuery = $bdd->prepare('SELECT * FROM car_private_conversation_message
             WHERE privateConversationMessagePrivateConversationId = ?
             LIMIT 0, 20');
-
             $privateConversationMessageQuery->execute([$privateConversationId]);
-
             $privateConversationMessageRow = $privateConversationMessageQuery->rowCount();
             
             //Si il y a déjà eu au moins un message on construit le tableau
@@ -128,10 +126,8 @@ if (isset($_POST['privateConversationId'])
                                 $updatePrivateConversationMessage = $bdd->prepare("UPDATE car_private_conversation_message
                                 SET privateConversationMessageRead = 'Yes'
                                 WHERE privateConversationMessageId = :privateConversationMessageId");
-                    
                                 $updatePrivateConversationMessage->execute([
                                 'privateConversationMessageId' => $privateConversationMessageId]);
-                                
                                 $updatePrivateConversationMessage->closeCursor();
                             }
                         }

@@ -33,12 +33,10 @@ if (isset($_POST['oldPassword'])
             $updateAccount = $bdd->prepare('UPDATE car_accounts 
             SET accountPassword = :newPassword
             WHERE accountId = :accountId');
-            
             $updateAccount->execute(array(
             'newPassword' => $newPassword,
             'accountId' => $accountId));
             $updateAccount->closeCursor();
-
             ?>
             
             Le mot de passe a bien été mit à jour
@@ -56,7 +54,6 @@ if (isset($_POST['oldPassword'])
         {
             echo "Mauvais Pseudo/Mot de passe";
         }
-        
     }
     //Si les deux mots de passe ne sont pas identique
     else 

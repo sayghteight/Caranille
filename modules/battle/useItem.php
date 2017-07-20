@@ -19,9 +19,7 @@ if (isset($_POST['itemId'])
         //On fait une requête pour vérifier si l'objet choisit existe
         $itemQuery = $bdd->prepare('SELECT * FROM car_items 
         WHERE itemId = ?');
-
         $itemQuery->execute([$itemId]);
-
         $itemRow = $itemQuery->rowCount();
 
         //Si l'objet existe
@@ -32,9 +30,7 @@ if (isset($_POST['itemId'])
             WHERE itemId = inventoryItemId
             AND inventoryCharacterId = ?
             AND itemId = ?");
-
             $itemQuery->execute([$characterId, $itemId]);
-
             $itemRow = $itemQuery->rowCount();
     
             //Si le personne possède cet objet
@@ -164,12 +160,10 @@ if (isset($_POST['itemId'])
                 SET characterHpMin = :characterHpMin,
                 characterMpMin = :characterMpMin
                 WHERE characterId = :characterId");
-
                 $updateCharacter->execute([
                 'characterHpMin' => $characterHpMin,
                 'characterMpMin' => $characterMpMin,
                 'characterId' => $characterId]);
-
                 $updateCharacter->closeCursor();
                 
                 //Si le joueur possède plusieurs exemplaire de l'objet utilisé
@@ -179,10 +173,8 @@ if (isset($_POST['itemId'])
                     $updateInventory = $bdd->prepare("UPDATE car_inventory SET
                     inventoryQuantity = inventoryQuantity - 1
                     WHERE inventoryId = :inventoryId");
-
                     $updateInventory->execute(array(
                     'inventoryId' => $inventoryId));
-
                     $updateInventory->closeCursor();
                 }
                 //Si le joueur possède l'objet utilisé en un seul exemplaire
@@ -191,10 +183,8 @@ if (isset($_POST['itemId'])
                     //On supprime l'objet de l'inventaire
                     $updateInventory = $bdd->prepare("DELETE FROM car_inventory
                     WHERE inventoryId = :inventoryId");
-
                     $updateInventory->execute(array(
                     'inventoryId' => $inventoryId));
-
                     $updateInventory->closeCursor();
                 }
             
@@ -202,11 +192,9 @@ if (isset($_POST['itemId'])
                 $updateBattle = $bdd->prepare("UPDATE car_battles
                 SET battleOpponentHpRemaining = :battleOpponentHpRemaining
                 WHERE battleId = :battleId");
-
                 $updateBattle->execute([
                 'battleOpponentHpRemaining' => $battleOpponentHpRemaining,
                 'battleId' => $battleId]);
-
                 $updateBattle->closeCursor();
                 
                 //Si le joueur ou l'adversaire a moins ou a zéro HP on redirige le joueur vers la page des récompenses

@@ -9,9 +9,7 @@ if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); 
 $monsterBestiaryQuery = $bdd->prepare("SELECT * FROM car_monsters, car_bestiary 
 WHERE monsterId = bestiaryMonsterId
 AND bestiaryCharacterId = ?");
-
 $monsterBestiaryQuery->execute([$characterId]);
-
 $monsterBestiaryRow = $monsterBestiaryQuery->rowCount();
 
 //Si un ou plusieurs équipements ont été trouvé

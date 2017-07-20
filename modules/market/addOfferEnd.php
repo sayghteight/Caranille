@@ -23,9 +23,7 @@ if (isset($_POST['marketItemId'])
         //On fait une requête pour vérifier si l'objet ou équippement choisit existe
         $itemQuery = $bdd->prepare('SELECT * FROM car_items 
         WHERE itemId = ?');
-
         $itemQuery->execute([$marketItemId]);
-
         $itemRow = $itemQuery->rowCount();
 
         //Si l'objet ou l'équippement existe
@@ -43,9 +41,7 @@ if (isset($_POST['marketItemId'])
             WHERE itemId = inventoryItemId
             AND inventoryCharacterId = ?
             AND itemId = ?");
-
             $inventoryQuery->execute([$characterId, $marketItemId]);
-
             $inventoryRow = $inventoryQuery->rowCount();
 
             //Si l'objet ou équipement est bien dans l'inventaire du joueur
@@ -69,10 +65,8 @@ if (isset($_POST['marketItemId'])
                     $updateInventory = $bdd->prepare("UPDATE car_inventory SET
                     inventoryQuantity = inventoryQuantity - 1
                     WHERE inventoryId = :inventoryId");
-
                     $updateInventory->execute(array(
                     'inventoryId' => $inventoryId));
-
                     $updateInventory->closeCursor();                
                 }
                 //Si le joueur ne possède cet objet/équipement que en un seul exemplaire
@@ -85,10 +79,8 @@ if (isset($_POST['marketItemId'])
                         $updateInventory = $bdd->prepare("UPDATE car_inventory SET
                         inventoryEquipped = 0
                         WHERE inventoryId = :inventoryId");
-
                         $updateInventory->execute(array(
                         'inventoryId' => $inventoryId));
-
                         $updateInventory->closeCursor();
 
                         //On remet les stats du joueurs à zéro pour recalculer ensuite le bonus de tous les équipements équippé
@@ -102,10 +94,8 @@ if (isset($_POST['marketItemId'])
                         characterDefenseMagicEquipments = 0, 
                         characterWisdomEquipments = 0
                         WHERE characterId = :characterId");
-
                         $updateCharacter->execute(array(
                         'characterId' => $characterId));
-
                         $updateCharacter->closeCursor();
 
                         //Initialisation des variables qui vont contenir les bonus de tous les équipements équippé
@@ -151,7 +141,6 @@ if (isset($_POST['marketItemId'])
                         characterDefenseMagicEquipments = :defenseMagicBonus, 
                         characterWisdomEquipments = :wisdomBonus
                         WHERE characterId = :characterId");
-
                         $updateCharacter->execute(array(
                         'hpBonus' => $hpBonus,
                         'mpBonus' => $mpBonus,
@@ -162,7 +151,6 @@ if (isset($_POST['marketItemId'])
                         'defenseMagicBonus' => $defenseMagicBonus,
                         'wisdomBonus' => $wisdomBonus,
                         'characterId' => $characterId));
-
                         $updateCharacter->closeCursor();
 
                         //On va maintenant finir par actualiser tous le personnage
@@ -177,7 +165,6 @@ if (isset($_POST['marketItemId'])
                         characterWisdomTotal = characterWisdom + characterWisdomSkillPoints + characterWisdomBonus + characterWisdomEquipments
                         WHERE characterId = :characterId');
                         $updateCharacter->execute(['characterId' => $characterId]);
-
                         $updateCharacter->closeCursor();
                     }
 
@@ -195,12 +182,10 @@ if (isset($_POST['marketItemId'])
                 :characterId,
                 :marketItemId,
                 :marketSalePrice)");
-
                 $addOffer->execute(array(
                 'characterId' => $characterId,  
                 'marketItemId' => $marketItemId,
                 'marketSalePrice' => $marketSalePrice));
-                
                 $addOffer->closeCursor();
                 ?>
                 

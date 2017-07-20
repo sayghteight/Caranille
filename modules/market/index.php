@@ -71,9 +71,7 @@ $itemQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory
 WHERE itemId = inventoryItemId
 AND inventoryCharacterId = ?
 ORDER BY itemName");
-
 $itemQuery->execute([$characterId]);
-
 $itemRow = $itemQuery->rowCount();
 
 //S'il existe un ou plusieurs objets on affiche le menu déroulant pour proposer au joueur d'en ajouter

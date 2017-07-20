@@ -23,9 +23,7 @@ if (isset($_POST['shopId'])
         //On fait une requête pour vérifier si le magasin choisit existe
         $shopQuery = $bdd->prepare('SELECT * FROM car_shops 
         WHERE shopId = ?');
-
         $shopQuery->execute([$shopId]);
-
         $shopRow = $shopQuery->rowCount();
 
         //Si le magasin existe
@@ -34,9 +32,7 @@ if (isset($_POST['shopId'])
             //On fait une requête pour vérifier si l'objet choisit existe
             $itemQuery = $bdd->prepare('SELECT * FROM car_items 
             WHERE itemId = ?');
-
             $itemQuery->execute([$itemId]);
-
             $itemRow = $itemQuery->rowCount();
 
             //Si l'objet existe
@@ -69,7 +65,6 @@ if (isset($_POST['shopId'])
                     //On récupère la classe de l'équipement
                     $raceQuery = $bdd->prepare("SELECT * FROM car_races
                     WHERE raceId = ?");
-
                     $raceQuery->execute([$itemRaceId]);
                     
                     while ($race = $raceQuery->fetch())
@@ -89,9 +84,7 @@ if (isset($_POST['shopId'])
                 $shopItemQuery = $bdd->prepare('SELECT * FROM car_shops_items
                 WHERE shopItemShopId = ?
                 AND shopItemItemId = ?');
-
                 $shopItemQuery->execute([$shopId, $itemId]);
-
                 $shopItemRow = $shopItemQuery->rowCount();
 
                 //On récupère le taux de réduction de l'objet/équipement
@@ -100,7 +93,7 @@ if (isset($_POST['shopId'])
                     //On récupère les informations du magasin
                     $itemDiscount = stripslashes($shopItem['shopItemDiscount']);
                 }
-
+                
                 //On calcule le prix final de l'obet par rapport à la réduction
                 $discount = $itemPurchasePrice * $itemDiscount / 100;
                 $itemPurchasePrice = $itemPurchasePrice - $discount; 

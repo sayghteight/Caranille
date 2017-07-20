@@ -10,9 +10,7 @@ if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); 
 //On recherche la liste des villes disponible par rapport au chapitre du joueur
 $townQuery = $bdd->prepare('SELECT * FROM car_towns
 WHERE townChapter <= ?');
-
 $townQuery->execute([$characterChapter]);
-
 $townRow = $townQuery->rowCount();
 
 //S'il y a au moins une ville de disponible on affiche le formulaire

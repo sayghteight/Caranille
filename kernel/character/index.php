@@ -176,7 +176,6 @@ while ($characterExperience >= $experienceLevel)
     characterExperienceTotal = :characterExperienceTotal,
     characterSkillPoints = :characterSkillPoints
     WHERE characterId = :characterId");
-
     $updateCharacter->execute(array(
     'characterLevel' => $characterLevel,  
     'characterHpMin' => $characterHpMin, 

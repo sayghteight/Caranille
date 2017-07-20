@@ -31,9 +31,7 @@ if (isset($_POST['itemId'])
             AND itemType = 'Item' 
             AND inventoryCharacterId = ?
             AND inventoryItemId = ?");
-
             $itemInventoryQuery->execute([$characterId, $itemId]);
-
             $itemInventoryRow = $itemInventoryQuery->rowCount();
             
             //Si le personnage possède cet objet

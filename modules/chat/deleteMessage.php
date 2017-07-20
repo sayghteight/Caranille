@@ -21,9 +21,7 @@ if (isset($_POST['chatMessageId'])
         //On fait une requête pour vérifier si le message choisit existe
         $chatQuery = $bdd->prepare('SELECT * FROM car_chat
         WHERE chatMessageId = ?');
-
         $chatQuery->execute([$chatMessageId]);
-
         $chatRow = $chatQuery->rowCount();
 
         //Si le message existe
@@ -32,9 +30,7 @@ if (isset($_POST['chatMessageId'])
             //On vide le chat de la base de donnée
             $deleteChat = $bdd->prepare("DELETE FROM car_chat
             WHERE chatMessageId = ?");
-
             $deleteChat->execute([$chatMessageId]);
-
             $deleteChat->closeCursor();
             
             //On redirige le joueur vers le chat
