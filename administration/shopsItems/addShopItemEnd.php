@@ -61,7 +61,6 @@ if (isset($_POST['adminShopItemShopId'])
                         :adminShopItemShopId,
                         :adminShopItemItemId,
                         :adminShopItemDiscount)");
-
                         $addShopItem->execute([
                         'adminShopItemShopId' => $adminShopItemShopId,
                         'adminShopItemItemId' => $adminShopItemItemId,

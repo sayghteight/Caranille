@@ -46,7 +46,6 @@ if (isset($_POST['adminMonsterId'])
             $monsterChapterQuery->execute([$adminMonsterId]);
             //On recherche combien il y a de monstres disponible
             $monsterChapterRow = $monsterChapterQuery->rowCount();
-            
             $monsterChapterQuery->closeCursor();
             
             //Si ce monstre n'est pas attribué à un chapitre

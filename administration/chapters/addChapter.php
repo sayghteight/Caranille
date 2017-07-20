@@ -12,7 +12,6 @@ if (isset($_POST['add']))
     //On vérifie S'il existe au moins un monstre pour créer le monstre du chapitre (le boss)
     $monsterQuery = $bdd->query("SELECT * FROM car_monsters
     ORDER BY monsterName");
-    //On recherche combien il y a de monstres disponible
     $monsterRow = $monsterQuery->rowCount();
     
     //S'il y a au moins un monstre de disponible on peut créer un chapitre

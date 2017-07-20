@@ -94,7 +94,6 @@ if (isset($_POST['adminItemId'])
                     $raceListQuery = $bdd->prepare("SELECT * FROM car_races
                     WHERE raceId != ?");
                     $raceListQuery->execute([$adminItemRaceId]);
-                    //On recherche combien il y a de classes disponible
                     $raceList = $raceListQuery->rowCount();
                     
                     //S'il y a au moins une classe de disponible on les affiches dans le menu déroulant

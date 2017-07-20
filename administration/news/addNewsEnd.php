@@ -27,7 +27,6 @@ if (isset($_POST['adminNewsPicture'])
     :adminNewsMessage,
     :adminNewsAccountPseudo,
     :adminNewsDate)");
-
     $addNews->execute([
     'adminNewsPicture' => $adminNewsPicture,
     'adminNewsTitle' => $adminNewsTitle,

@@ -63,7 +63,6 @@ if (isset($_POST['adminRaceId'])
                     $updateItems = $bdd->prepare('UPDATE car_items 
                     SET itemRaceId = 0
                     WHERE itemId = :adminItemId');
-    
                     $updateItems->execute([
                     'adminItemId' => $adminItemId]);
                     $updateItems->closeCursor();

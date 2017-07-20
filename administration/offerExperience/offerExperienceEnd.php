@@ -39,7 +39,6 @@ if (isset($_POST['adminCharacterId'])
                 characterExperience = characterExperience + :adminOfferExperience,
                 characterExperienceTotal = characterExperienceTotal + :adminOfferExperience
                 WHERE characterId = :adminCharacterId");
-            
                 $updateCharacter->execute(array(
                 'adminOfferExperience' => $adminOfferExperience,  
                 'adminOfferExperience' => $adminOfferExperience, 
@@ -86,7 +85,6 @@ if (isset($_POST['adminCharacterId'])
                 characterExperience = characterExperience + :adminOfferExperience,
                 characterExperienceTotal = characterExperienceTotal + :adminOfferExperience
                 WHERE characterId = :adminCharacterId");
-            
                 $updateCharacter->execute(array(
                 'adminOfferExperience' => $adminOfferExperience,  
                 'adminOfferExperience' => $adminOfferExperience, 

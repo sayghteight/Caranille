@@ -48,7 +48,6 @@ if (isset($_POST['adminTownId'])
             townPriceInn = :adminTownPriceInn,
             townChapter = :adminTownChapter
             WHERE townId = :adminTownId');
-
             $updateTown->execute([
             'adminTownPicture' => $adminTownPicture,
             'adminTownName' => $adminTownName,

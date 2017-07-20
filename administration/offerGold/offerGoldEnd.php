@@ -38,7 +38,6 @@ if (isset($_POST['adminCharacterId'])
                 $updateCharacter = $bdd->prepare("UPDATE car_characters SET
                 characterGold = characterGold + :adminOfferGold
                 WHERE characterId = :adminCharacterId");
-            
                 $updateCharacter->execute(array(
                 'adminOfferGold' => $adminOfferGold,
                 'adminCharacterId' => $adminCharacterId));
@@ -82,7 +81,6 @@ if (isset($_POST['adminCharacterId'])
                 $updateCharacter = $bdd->prepare("UPDATE car_characters SET
                 characterGold = characterGold + :adminOfferGold
                 WHERE characterId = :adminCharacterId");
-            
                 $updateCharacter->execute(array(
                 'adminOfferGold' => $adminOfferGold,
                 'adminCharacterId' => $adminCharacterId));

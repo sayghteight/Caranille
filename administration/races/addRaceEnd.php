@@ -66,7 +66,6 @@ if (isset($_POST['adminRacePicture'])
         :adminRaceDefenseBonus,
         :adminRaceDefenseMagicBonus,
         :adminRaceWisdomBonus)");
-
         $addRace->execute([
         'adminRacePicture' => $adminRacePicture,
         'adminRaceName' => $adminRaceName,

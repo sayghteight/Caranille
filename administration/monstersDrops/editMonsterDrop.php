@@ -66,7 +66,6 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                         monsterDropRate = :adminMonsterDropRate,
                         monsterDropRateVisible = :adminMonsterDropRateVisible
                         WHERE monsterDropItemID = :adminMonsterDropItemId');
-
                         $updateMonsterDrop->execute([
                         'adminMonsterDropItemVisible' => $adminMonsterDropItemVisible,
                         'adminMonsterDropRate' => $adminMonsterDropRate,

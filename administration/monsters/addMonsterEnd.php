@@ -80,7 +80,6 @@ if (isset($_POST['adminMonsterPicture'])
         :adminMonsterWisdom,
         :adminMonsterExperience,
         :adminMonsterGold)");
-
         $addMonster->execute([
         'adminMonsterPicture' => $adminMonsterPicture,
         'adminMonsterName' => $adminMonsterName,

@@ -96,7 +96,6 @@ if (isset($_POST['adminMonsterId'])
             monsterExperience = :adminMonsterExperience,
             monsterGold = :adminMonsterGold
             WHERE monsterId = :adminMonsterId');
-
             $updateMonster->execute([
             'adminMonsterPicture' => $adminMonsterPicture,
             'adminMonsterName' => $adminMonsterName,

@@ -43,7 +43,6 @@ if (isset($_POST['adminChapterId'])
             chapterOpening = :adminChapterOpening,
             chapterEnding = :adminChapterEnding
             WHERE chapterId = :adminChapterId');
-
             $updateChapter->execute([
             'adminChapterMonsterId' => $adminChapterMonsterId,
             'adminChapterTitle' => $adminChapterTitle,

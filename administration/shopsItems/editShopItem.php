@@ -59,7 +59,6 @@ if (isset($_POST['adminShopItemShopId'])
                         $updateShopItem = $bdd->prepare("UPDATE car_shops_items
                         SET shopItemDiscount = :adminShopItemDiscount
                         WHERE shopItemItemId = :adminShopItemItemId");
-
                         $updateShopItem->execute([
                         'adminShopItemDiscount' => $adminShopItemDiscount,
                         'adminShopItemItemId' => $adminShopItemItemId]);

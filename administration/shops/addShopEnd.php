@@ -23,7 +23,6 @@ if (isset($_POST['adminShopPicture'])
     :adminShopPicture,
     :adminShopName,
     :adminShopDescription)");
-
     $addShop->execute([
     'adminShopPicture' => $adminShopPicture,
     'adminShopName' => $adminShopName,

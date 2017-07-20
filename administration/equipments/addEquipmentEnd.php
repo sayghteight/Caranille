@@ -92,7 +92,6 @@ if (isset($_POST['adminItemRaceId'])
         :adminItemWisdomEffect,
         :adminItemPurchasePrice,
         :adminItemSalePrice)");
-
         $addItem->execute([
         'adminItemRaceId' => $adminItemRaceId,
         'adminItemPicture' => $adminItemPicture,

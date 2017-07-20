@@ -67,7 +67,6 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                         :adminMonsterDropItemVisible,
                         :adminMonsterDropRate,
                         :adminMonsterDropRateVisible)");
-
                         $addTownMonster->execute([
                         'adminMonsterDropMonsterId' => $adminMonsterDropMonsterId,
                         'adminMonsterDropItemId' => $adminMonsterDropItemId,

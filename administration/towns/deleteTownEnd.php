@@ -60,7 +60,6 @@ if (isset($_POST['adminTownId'])
                 $updateCharacter = $bdd->prepare("UPDATE car_characters SET
                 characterTownId = 0
                 WHERE characterId = :adminCharacterId");
-                
                 $updateCharacter->execute(array(
                 'adminCharacterId' => $adminCharacterId));
                 $updateCharacter->closeCursor();

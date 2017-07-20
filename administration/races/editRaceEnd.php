@@ -78,7 +78,6 @@ if (isset($_POST['adminRaceId'])
             raceDefenseMagicBonus = :adminRaceDefenseMagicBonus,
             raceWisdomBonus = :adminRaceWisdomBonus
             WHERE raceId = :adminRaceId');
-
             $updateRace->execute([
             'adminRacePicture' => $adminRacePicture,
             'adminRaceName' => $adminRaceName,
@@ -136,7 +135,6 @@ if (isset($_POST['adminRaceId'])
                 characterDefenseMagic = :adminCharacterDefenseMagic, 
                 characterWisdom = :adminCharacterSagesse
                 WHERE characterId = :adminCharacterId");
-            
                 $updateCharacter->execute(array(
                 'adminCharacterHP' => $adminCharacterHP,  
                 'adminCharacterMP' => $adminCharacterMP, 

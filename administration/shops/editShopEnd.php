@@ -38,7 +38,6 @@ if (isset($_POST['adminShopId'])
             shopName = :adminShopName,
             shopDescription = :adminShopDescription
             WHERE shopId = :adminShopId');
-
             $updateShop->execute([
             'adminShopPicture' => $adminShopPicture,
             'adminShopName' => $adminShopName,

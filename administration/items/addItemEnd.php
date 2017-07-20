@@ -55,7 +55,6 @@ if (isset($_POST['adminItemPicture'])
         '0',
         :adminItemPurchasePrice,
         :adminItemSalePrice)");
-
         $addItem->execute([
         'adminItemPicture' => $adminItemPicture,
         'adminItemName' => $adminItemName,

@@ -130,7 +130,6 @@ if (isset($_POST['adminItemId'])
                 itemPurchasePrice = :adminItemPurchasePrice,
                 itemSalePrice = :adminItemSalePrice
                 WHERE itemId = :adminItemId');
-
                 $updateItems->execute([
                 'adminItemRaceId' => $adminItemRaceId,
                 'adminItemPicture' => $adminItemPicture,
@@ -180,7 +179,6 @@ if (isset($_POST['adminItemId'])
                         characterDefenseMagicEquipments = 0, 
                         characterWisdomEquipments = 0
                         WHERE characterId = :adminCharacterId");
-
                         $updateCharacter->execute(array(
                         'adminCharacterId' => $adminCharacterId));
                         $updateCharacter->closeCursor();
@@ -226,7 +224,6 @@ if (isset($_POST['adminItemId'])
                         characterDefenseMagicEquipments = :defenseMagicBonus, 
                         characterWisdomEquipments = :wisdomBonus
                         WHERE characterId = :adminCharacterId");
-
                         $updateCharacter->execute(array(
                         'hpBonus' => $hpBonus,
                         'mpBonus' => $mpBonus,

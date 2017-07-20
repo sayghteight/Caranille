@@ -35,7 +35,6 @@ if (isset($_POST['adminTownPicture'])
         :adminTownDescription,
         :adminTownPriceInn,
         :adminTownChapter)");
-
         $addTown->execute([
         'adminTownPicture' => $adminTownPicture,
         'adminTownName' => $adminTownName,

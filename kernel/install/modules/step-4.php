@@ -5,8 +5,12 @@ require_once("../../config.php");
 //Si tous les champs ont bien été rempli
 if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['accountPasswordConfirm']) && ($_POST['accountEmail']))
 {
-    //On vérifi si la classe choisit est correct et que le select retourne bien un nombre
-    if(ctype_digit($_POST['characterRaceId']))
+    //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
+    if (ctype_digit($_POST['characterRaceId'])
+    && ctype_digit($_POST['characterSex'])
+    && $_POST['characterRaceId'] >= 1
+    && $_POST['characterSex'] >= 0
+    && $_POST['characterSex'] <= 1)
     {
         //On récupère les valeurs du formulaire dans une variable
         $accountPseudo = htmlspecialchars(addslashes($_POST['accountPseudo']));
@@ -21,34 +25,34 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
         if ($accountPassword == $accountPasswordConfirm) 
         {
             //On fait une requête pour vérifier si le pseudo est déjà utilisé
-            $pseudoListQuery = $bdd->prepare('SELECT * FROM car_accounts 
+            $pseudoQuery = $bdd->prepare('SELECT * FROM car_accounts 
             WHERE accountPseudo= ?');
-            $pseudoListQuery->execute([$accountPseudo]);
-            $pseudoList = $pseudoListQuery->rowCount();
-            $pseudoListQuery->closeCursor();
+            $pseudoQuery->execute([$accountPseudo]);
+            $pseudoRow = $pseudoQuery->rowCount();
+            $pseudoQuery->closeCursor();
 
-            //Si le pseudo existe
-            if ($pseudoList == 0) 
+            //Si le pseudo est disponible
+            if ($pseudoRow == 0) 
             {
                 //On fait une requête pour vérifier si le nom du personnage est déjà utilisé
-                $characterListQuery = $bdd->prepare('SELECT * FROM car_characters 
+                $characterQuery = $bdd->prepare('SELECT * FROM car_characters 
                 WHERE characterName= ?');
-                $characterListQuery->execute([$characterName]);
-                $characterList = $characterListQuery->rowCount();
-                $characterListQuery->closeCursor();
+                $characterQuery->execute([$characterName]);
+                $characterRow = $characterQuery->rowCount();
+                $characterQuery->closeCursor();
 
                 //Si le personnage existe
-                if ($characterList == 0) 
+                if ($characterRow == 0) 
                 {
                     //On fait une requête pour vérifier si le nom du personnage est déjà utilisé
-                    $raceListQuery = $bdd->prepare('SELECT * FROM car_races 
+                    $raceQuery = $bdd->prepare('SELECT * FROM car_races 
                     WHERE raceId = ?');
-                    $raceListQuery->execute([$characterRaceId]);
-                    $raceList = $raceListQuery->rowCount();
-                    $raceListQuery->closeCursor();
+                    $raceQuery->execute([$characterRaceId]);
+                    $raceRow = $raceQuery->rowCount();
+                    $raceQuery->closeCursor();
 
                     //Si la race du personnage existe
-                    if ($raceList >= 1) 
+                    if ($raceRow >= 1) 
                     {
                         //Variables pour la création d'un compte
                         $date = date('Y-m-d H:i:s');
@@ -61,7 +65,7 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         :accountPseudo, //accountPseudo
                         :accountPassword, //accountPassword
                         :accountEmail, //accountEmail
-                        '0', //accountAccess
+                        '2', //accountAccess
                         '0', //accountStatus
                         'None', //accountReason
                         :accountLastAction, //accountLastAction
@@ -81,7 +85,6 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         :accountLastAction,
                         :accountLastConnection,
                         :accountIp)");
-
                         $addAccount->execute([
                         'accountPseudo' => $accountPseudo,
                         'accountPassword' => $accountPassword,
@@ -243,14 +246,13 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         '0',
                         '1'
                         )");
-
                         $addCharacter->execute([
                         'accountId' => $id,
                         'characterRaceId' => $characterRaceId,
                         'characterName' => $characterName,
                         'characterSex' => $characterSex]);
-
                         $addCharacter->closeCursor();
+
                         ?>
 
                         Votre compte administrateur a bien été crée, vous pouvez commencer à développer votre jeu !
@@ -260,7 +262,7 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         <form method="POST" action="../../../index.php">
                             <input type="submit" class="btn btn-default form-control" name="back" value="Commencer">
                         </form>
-
+                        
                         <?php
                     }
                     //Si la classe choisie n'existe pas
@@ -268,18 +270,21 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                     {
                         echo "La classe choisit n'existe pas";
                     }
+                    $raceQuery->closeCursor();  
                 }
                 //Si le nom du personnage a déjà été utilisé
                 else
                 {
                     echo "Ce nom de personnage est déjà utilisé";
                 }
+                $characterQuery->closeCursor();
             }
             //Si le pseudo est déjà utilisé
             else 
             {
                 echo "Le pseudo est déjà utilisé";
             }
+            $pseudoQuery->closeCursor();   
         }
         //Si les deux mots de passe ne sont pas identique
         else 
@@ -287,10 +292,10 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
             echo "Les deux mots de passe ne sont pas identiques";
         }
     }
-    //Si la classe choisit n'est pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
-         echo "La classe choisit est invalide";
+        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
     }
 }
 //Si tous les champs n'ont pas été rmepli

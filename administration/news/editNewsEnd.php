@@ -38,7 +38,6 @@ if (isset($_POST['adminNewsId'])
             newsTitle = :adminNewsTitle,
             newsMessage = :adminNewsMessage
             WHERE newsId = :adminNewsId');
-
             $updateNews->execute([
             'adminNewsPicture' => $adminNewsPicture,
             'adminNewsTitle' => $adminNewsTitle,

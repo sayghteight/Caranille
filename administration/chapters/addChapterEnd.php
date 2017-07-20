@@ -30,7 +30,6 @@ if (isset($_POST['adminChapterMonsterId'])
         :adminChapterTitle,
         :adminChapterOpening,
         :adminChapterEnding)");
-
         $addChapter->execute([
         'adminChapterMonsterId' => $adminChapterMonsterId,
         'adminChapterTitle' => $adminChapterTitle,

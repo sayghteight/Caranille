@@ -64,7 +64,6 @@ if (isset($_POST['adminChapterId'])
                     WHERE monsterId != ?
                     ORDER BY monsterName");
                     $monsterQuery->execute([$adminChapterMonsterId]);
-                    //On recherche combien il y a de monstres disponible
                     $monsterRow = $monsterQuery->rowCount();
                     
                     //S'il y a au moins un monstre de disponible on les affiches dans le menu déroulant
@@ -109,7 +108,7 @@ if (isset($_POST['adminChapterId'])
         }
         $chapterQuery->closeCursor();
     }
-   //Si tous les champs numérique ne contiennent pas un nombre
+    //Si tous les champs numérique ne contiennent pas un nombre
     else
     {
         echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";

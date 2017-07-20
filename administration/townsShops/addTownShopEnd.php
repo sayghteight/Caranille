@@ -54,7 +54,6 @@ if (isset($_POST['adminTownShopTownId'])
                     '',
                     :adminTownShopTownId,
                     :adminTownShopShopId)");
-
                     $addTownShop->execute([
                     'adminTownShopTownId' => $adminTownShopTownId,
                     'adminTownShopShopId' => $adminTownShopShopId]);
