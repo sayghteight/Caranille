@@ -154,8 +154,6 @@ if (isset($_POST['itemId'])
                 //On met à jour la vie du joueur et de l'adversaire
                 $battleOpponentHpRemaining = $battleOpponentHpRemaining - $totalDamagesCharacter;
                 $characterHpMin = $characterHpMin - $totalDamagesOpponent;
-
-                echo $characterHpMin;
             
                 //On met le personnage à jour dans la base de donnée
                 $updateCharacter = $bdd->prepare("UPDATE car_characters
