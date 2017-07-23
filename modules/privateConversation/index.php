@@ -92,8 +92,8 @@ WHERE characterId != ?
 AND (SELECT COUNT(*) FROM car_private_conversation
 WHERE privateConversationCharacterOneId = ?
 AND privateConversationCharacterTwoId = characterId
-OR privateConversationCharacterOneId = ?
-AND privateConversationCharacterTwoId) = 0
+OR privateConversationCharacterOneId = characterId
+AND privateConversationCharacterTwoId = ?) = 0
 ORDER by characterName");
 $characterQuery->execute([$characterId, $characterId, $characterId]);
 $characterRow = $characterQuery->rowCount();
