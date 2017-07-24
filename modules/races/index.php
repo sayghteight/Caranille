@@ -45,7 +45,7 @@ while ($race = $raceQuery->fetch())
                     <?php echo '+' .stripslashes($race['raceAgilityBonus']). ' Agilité' ?><br />
                     <?php echo '+' .stripslashes($race['raceDefenseBonus']). ' Défense' ?><br />
                     <?php echo '+' .stripslashes($race['raceDefenseMagicBonus']). ' Défense magique' ?><br />
-                    <?php echo '+' .stripslashes($race['raceWidsomBonus']). ' Sagesse'; ?>
+                    <?php echo '+' .stripslashes($race['raceWisdomBonus']). ' Sagesse'; ?>
                 </td>
             </tr>
         </table>
