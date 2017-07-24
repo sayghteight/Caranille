@@ -108,14 +108,19 @@ if (isset($_POST['itemId'])
                             </td>
                             
                             <td>
-                                <?php echo '+' .$itemHpEffect. ' HP' ?><br />
-                                <?php echo '+' .$itemMpEffect. ' MP' ?><br />
-                                <?php echo '+' .$itemStrengthEffect. ' Force' ?><br />
-                                <?php echo '+' .$itemMagicEffect. ' Magie' ?><br />
-                                <?php echo '+' .$itemAgilityEffect. ' Agilité' ?><br />
-                                <?php echo '+' .$itemDefenseEffect. ' Défense' ?><br />
-                                <?php echo '+' .$itemDefenseMagicEffect. ' Défense magique' ?><br />
-                                <?php echo '+' .$itemWisdomEffect. ' Sagesse'; ?>
+                                <?php
+                                //Si l'objet augmente les HP on l'affiche
+                                if ($itemHpEffect > 0)
+                                {
+                                    echo "+ $itemHpEffect HP<br />";
+                                }
+                                
+                                //Si l'objet augmente les MP on l'affiche
+                                if ($itemMpEffect > 0)
+                                {
+                                    echo "+ $itemMpEffect MP<br />";
+                                }
+                                ?>
                             </td>
                         </tr>
                             

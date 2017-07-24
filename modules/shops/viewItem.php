@@ -168,28 +168,68 @@ if (isset($_POST['shopId'])
                             //S'il s'agit d'un équipement on affiche toutes les stats concernée
                             if ($itemType != "Item")
                             {
-                                ?>
+                                //Si l'équipement augmente les HP on l'affiche
+                                if ($itemHpEffect > 0)
+                                {
+                                    echo "+ $itemHpEffect HP<br />";
+                                }
                                 
-                                <?php echo '+' .$itemHpEffect. ' HP' ?><br />
-                                <?php echo '+' .$itemMpEffect. ' MP' ?><br />
-                                <?php echo '+' .$itemStrengthEffect. ' Force' ?><br />
-                                <?php echo '+' .$itemMagicEffect. ' Magie' ?><br />
-                                <?php echo '+' .$itemAgilityEffect. ' Agilité' ?><br />
-                                <?php echo '+' .$itemDefenseEffect. ' Défense' ?><br />
-                                <?php echo '+' .$itemDefenseMagicEffect. ' Défense magique' ?><br />
-                                <?php echo '+' .$itemWisdomEffect. ' Sagesse'; ?>
+                                //Si l'équipement augmente les MP on l'affiche
+                                if ($itemMpEffect > 0)
+                                {
+                                    echo "+ $itemMpEffect MP<br />";
+                                }
                                 
-                                <?php
+                                //Si l'équipement augmente la force on l'affiche
+                                if ($itemStrengthEffect > 0)
+                                {
+                                    echo "+ $itemStrengthEffect Force<br />";
+                                }
+                                
+                                //Si l'équipement augmente la magie on l'affiche
+                                if ($itemMagicEffect > 0)
+                                {
+                                    echo "+ $itemMagicEffect Magie<br />";
+                                }
+                                
+                                //Si l'équipement augmente l'agilité on l'affiche
+                                if ($itemAgilityEffect > 0)
+                                {
+                                    echo "+ $itemAgilityEffect Agilité<br />";
+                                }
+                                
+                                //Si l'équipement augmente la défense on l'affiche
+                                if ($itemDefenseEffect > 0)
+                                {
+                                    echo "+ $itemDefenseEffect Défense<br />";
+                                }
+                                
+                                //Si l'équipement augmente la défense magique on l'affiche
+                                if ($itemDefenseMagicEffect > 0)
+                                {
+                                    echo "+ $itemDefenseMagicEffect Défense Magic<br />";
+                                }
+                                
+                                //Si l'équipement augmente la sagesse on l'affiche
+                                if ($itemWisdomEffect > 0)
+                                {
+                                    echo "+ $itemWisdomEffect Sagesse<br />";
+                                }
                             }
                             //S'il s'agit d'un objet on affiche que les stats HP et MP qui sont concernée
                             else
                             {
-                                ?>
+                                //Si l'objet augmente les HP on l'affiche
+                                if ($itemHpEffect > 0)
+                                {
+                                    echo "+ $itemHpEffect HP<br />";
+                                }
                                 
-                                <?php echo '+' .$itemHpEffect. ' HP' ?><br />
-                                <?php echo '+' .$itemMpEffect. ' MP' ?><br />
-                                
-                                <?php
+                                //Si l'objet augmente les MP on l'affiche
+                                if ($itemMpEffect > 0)
+                                {
+                                    echo "+ $itemMpEffect HP<br />";
+                                }
                             }
                             ?>                            
                         </td>

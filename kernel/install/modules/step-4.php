@@ -1,307 +1,45 @@
-<?php
-require_once("../html/header.php");
-require_once("../../config.php");
-
-//Si tous les champs ont bien été rempli
-if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['accountPasswordConfirm']) && ($_POST['accountEmail']))
-{
-    //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
-    if (ctype_digit($_POST['characterRaceId'])
-    && ctype_digit($_POST['characterSex'])
-    && $_POST['characterRaceId'] >= 1
-    && $_POST['characterSex'] >= 0
-    && $_POST['characterSex'] <= 1)
-    {
-        //On récupère les valeurs du formulaire dans une variable
-        $accountPseudo = htmlspecialchars(addslashes($_POST['accountPseudo']));
-        $accountPassword = sha1(htmlspecialchars(addslashes($_POST['accountPassword'])));
-        $accountPasswordConfirm = sha1(htmlspecialchars(addslashes($_POST['accountPasswordConfirm'])));
-        $accountEmail = htmlspecialchars(addslashes($_POST['accountEmail']));
-        $characterRaceId = htmlspecialchars(addslashes($_POST['characterRaceId']));
-        $characterSex = htmlspecialchars(addslashes($_POST['characterSex']));
-        $characterName = htmlspecialchars(addslashes($_POST['characterName']));
-
-        //On vérifie si les deux mots de passes sont identiques
-        if ($accountPassword == $accountPasswordConfirm) 
+<?php 
+require_once("../html/header.php"); 
+include("../../config.php"); 
+?>
+    
+<form method="POST" action="step-4.php">
+    Pseudo : <input type="text" name="accountPseudo" class="form-control" required>
+    Mot de passe : <input type="password" name="accountPassword" class="form-control" required>
+    Confirmez : <input type="password" name="accountPasswordConfirm" class="form-control" required>
+    Email : <input type="email" name="accountEmail" class="form-control" required>
+    Classe <select name="characterRaceId" class="form-control">
+        
+        <?php
+        //On rempli le menu déroulant avec la liste des classes disponible
+        $raceListQuery = $bdd->query("SELECT * FROM car_races");
+        //On recherche combien il y a de classes disponible
+        $raceList = $raceListQuery->rowCount();
+        //S'il y a au moins une classe de disponible on les affiches dans le menu déroulant
+        if ($raceList >= 1)
         {
-            //On fait une requête pour vérifier si le pseudo est déjà utilisé
-            $pseudoQuery = $bdd->prepare('SELECT * FROM car_accounts 
-            WHERE accountPseudo= ?');
-            $pseudoQuery->execute([$accountPseudo]);
-            $pseudoRow = $pseudoQuery->rowCount();
-            $pseudoQuery->closeCursor();
-
-            //Si le pseudo est disponible
-            if ($pseudoRow == 0) 
+            //On fait une boucle sur tous les résultats
+            while ($raceList = $raceListQuery->fetch())
             {
-                //On fait une requête pour vérifier si le nom du personnage est déjà utilisé
-                $characterQuery = $bdd->prepare('SELECT * FROM car_characters 
-                WHERE characterName= ?');
-                $characterQuery->execute([$characterName]);
-                $characterRow = $characterQuery->rowCount();
-                $characterQuery->closeCursor();
-
-                //Si le personnage existe
-                if ($characterRow == 0) 
-                {
-                    //On fait une requête pour vérifier si le nom du personnage est déjà utilisé
-                    $raceQuery = $bdd->prepare('SELECT * FROM car_races 
-                    WHERE raceId = ?');
-                    $raceQuery->execute([$characterRaceId]);
-                    $raceRow = $raceQuery->rowCount();
-                    $raceQuery->closeCursor();
-
-                    //Si la race du personnage existe
-                    if ($raceRow >= 1) 
-                    {
-                        //Variables pour la création d'un compte
-                        $date = date('Y-m-d H:i:s');
-                        $ip = $_SERVER['REMOTE_ADDR'];
-                        $timeStamp = strtotime("now");
-
-                        /*
-                        Add account model
-                        '', //accountId
-                        :accountPseudo, //accountPseudo
-                        :accountPassword, //accountPassword
-                        :accountEmail, //accountEmail
-                        '2', //accountAccess
-                        '0', //accountStatus
-                        'None', //accountReason
-                        :accountLastAction, //accountLastAction
-                        :accountLastConnection, //accountLastConnection
-                        :accountIp, //accountLastIp
-                        */
-
-                        //Insertion du compte dans la base de donnée
-                        $addAccount = $bdd->prepare("INSERT INTO car_accounts VALUES(
-                        '',
-                        :accountPseudo,
-                        :accountPassword,
-                        :accountEmail,
-                        '2',
-                        '0',
-                        'None',
-                        :accountLastAction,
-                        :accountLastConnection,
-                        :accountIp)");
-                        $addAccount->execute([
-                        'accountPseudo' => $accountPseudo,
-                        'accountPassword' => $accountPassword,
-                        'accountEmail' => $accountEmail,
-                        'accountLastAction' => $date,
-                        'accountLastConnection' => $date,
-                        'accountIp' => $ip]);
-                        $addAccount->closeCursor();
-
-                        //Insertion du personnage dans la base de donnée
-                        $accountIdQuery = $bdd->prepare("SELECT * FROM car_accounts 
-                        WHERE accountPseudo = ?");
-                        $accountIdQuery->execute([$accountPseudo]);
-
-                        while ($accountId = $accountIdQuery->fetch())
-                        {
-                            //On Stock l'id du compte
-                            $id = $accountId['accountId'];
-                        }
-                        $accountIdQuery->closeCursor();
-
-                        /*
-                        Add character model
-                        '', //characterId
-                        :accountId, //characterAccountId
-                        '1', //characterRaceId
-                        'http://localhost/character.png', //characterPicture
-                        :characterName, //characterName
-                        '1', //characterLevel
-                        :characterSex, //characterSex
-                        '120', //characterHpMin
-                        '120', //characterHpMax
-                        '0', //characterHpSkillPoints
-                        '0', //characterHpParchment
-                        '0', //characterHpEquipments
-                        '0', //characterHpGuild
-                        '120', //characterHpTotal
-                        '10', //characterMpMin
-                        '10', //characterMpMax
-                        '0', //characterMpSkillPoints
-                        '0', //characterMpParchment
-                        '0', //characterMpEquipments
-                        '0', //characterMpGuild
-                        '10', //characterMpTotal
-                        '10', //characterStrength
-                        '0', //characterStrengthSkillPoints
-                        '0', //characterStrengthParchment
-                        '0', //characterStrengthEquipments
-                        '0', //characterStrengthGuild
-                        '10', //characterStrengthTotal
-                        '10', //characterMagic
-                        '0', //characterMagicSkillPoints
-                        '0', //characterMagicParchment
-                        '0', //characterMagicEquipments
-                        '0', //characterMagicGuild
-                        '10', //characterMagicTotal
-                        '10', //characterAgility
-                        '0', //characterAgilitySkillPoints
-                        '0', //characterAgilityParchment
-                        '0', //characterAgilityEquipments
-                        '0', //characterAgilityGuild
-                        '10', //characterAgilityTotal
-                        '10', //characterDefense
-                        '0', //characterDefenseSkillPoints
-                        '0', //characterDefenseParchment
-                        '0', //characterDefenseEquipments
-                        '0', //characterDefenseGuild
-                        '10', //characterDefenseTotal
-                        '10', //characterDefenseMagic
-                        '0', //characterDefenseMagicSkillPoints
-                        '0', //characterDefenseMagicParchment
-                        '0', //characterDefenseMagicEquipments
-                        '0', //characterDefenseMagicGuild
-                        '10', //characterDefenseMagicTotal
-                        '0', //characterWisdom
-                        '0', //characterWisdomSkillPoints
-                        '0', //characterWisdomParchment
-                        '0', //characterWisdomEquipments
-                        '0', //characterWisdomGuild
-                        '0', //characterWisdomTotal
-                        '0', //characterDefeate
-                        '0', //characterVictory
-                        '0', //characterExperience
-                        '0', //characterExperienceTotal
-                        '0', //characterSkillPoints
-                        '0', //characterGold
-                        '0', //characterTownId
-                        '1', //characterChapter
-                        '0', //characterOnBattle
-                        '1' //characterEnable
-                        */
-
-                        $addCharacter = $bdd->prepare("INSERT INTO car_characters VALUES(
-                        '',
-                        :accountId,
-                        :characterRaceId,
-                        '../../img/empty.png',
-                        :characterName,
-                        '1',
-                        :characterSex,
-                        '120',
-                        '120',
-                        '0',
-                        '0',
-                        '0',
-                        '0',
-                        '120',
-                        '10',
-                        '10',
-                        '0',
-                        '0',
-                        '0',
-                        '0',
-                        '10',
-                        '10',
-                        '0',
-                        '0',
-                        '0',
-                        '0',
-                        '10',
-                        '10',
-                        '0',
-                        '0',
-                        '0',
-                        '0',
-                        '10',
-                        '10',
-                        '0',
-                        '0',
-                        '0',
-                        '0',
-                        '10',
-                        '10',
-                        '0',
-                        '0',
-                        '0',
-                        '0',
-                        '10',
-                        '10',
-                        '0',
-                        '0',
-                        '0',
-                        '0',
-                        '10',
-                        '0',
-                        '0',
-                        '0',
-                        '0',
-                        '0',
-                        '0',
-                        '0',
-                        '0',
-                        '0',
-                        '0',
-                        '0',
-                        '0',
-                        '0',
-                        '1',
-                        '0',
-                        '1'
-                        )");
-                        $addCharacter->execute([
-                        'accountId' => $id,
-                        'characterRaceId' => $characterRaceId,
-                        'characterName' => $characterName,
-                        'characterSex' => $characterSex]);
-                        $addCharacter->closeCursor();
-
-                        ?>
-
-                        Votre compte administrateur a bien été crée, vous pouvez commencer à développer votre jeu !
-
-                        <hr>
-
-                        <form method="POST" action="../../../index.php">
-                            <input type="submit" class="btn btn-default form-control" name="back" value="Commencer">
-                        </form>
-                        
-                        <?php
-                    }
-                    //Si la classe choisie n'existe pas
-                    else
-                    {
-                        echo "La classe choisit n'existe pas";
-                    }
-                    $raceQuery->closeCursor();  
-                }
-                //Si le nom du personnage a déjà été utilisé
-                else
-                {
-                    echo "Ce nom de personnage est déjà utilisé";
-                }
-                $characterQuery->closeCursor();
+                //On récupère les informations de la classe
+                $raceId = stripslashes($raceList['raceId']); 
+                $raceName = stripslashes($raceList['raceName']);
+                ?>
+                <option value="<?php echo $raceId ?>"><?php echo $raceName ?></option>
+                <?php
             }
-            //Si le pseudo est déjà utilisé
-            else 
-            {
-                echo "Le pseudo est déjà utilisé";
-            }
-            $pseudoQuery->closeCursor();   
         }
-        //Si les deux mots de passe ne sont pas identique
-        else 
-        {
-            echo "Les deux mots de passe ne sont pas identiques";
-        }
-    }
-    //Si tous les champs numérique ne contiennent pas un nombre
-    else
-    {
-        echo "Erreur: Les champs de type numérique ne peuvent contenir qu'un nombre entier";
-    }
-}
-//Si tous les champs n'ont pas été rmepli
-else 
-{
-    echo "Tous les champs n'ont pas été rempli";
-}
+        ?>
+    
+    </select>
+    Sexe : <select name="characterSex" class="form-control">
+        <option value="1">Homme</option>
+        <option value="0">Femme</option>
+    </select>
+    Nom du personnage : <input class="form-control" type="text" name="characterName" required>
+    <iframe src="../../../CGU.txt" width="100%" height="100%"></iframe>
+    En vous inscrivant vous acceptez le présent règlement !
+    <input type="submit" name="Register" class="btn btn-default form-control" value="Je créer mon compte">
+</form>
 
-require_once("../html/footer.php"); ?>
+<?php require_once("../html/footer.php"); ?>

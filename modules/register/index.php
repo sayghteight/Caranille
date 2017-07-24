@@ -36,7 +36,7 @@
         <option value="0">Femme</option>
     </select>
     Nom du personnage : <input class="form-control" type="text" name="characterName" required>
-    <iframe src="../../licence.txt" width="100%" height="100%"></iframe>
+    <iframe src="../../CGU.txt" width="100%" height="100%"></iframe>
     En vous inscrivant vous acceptez le présent règlement !
     <input type="submit" name="Register" class="btn btn-default form-control" value="Je créer mon compte">
 </form>

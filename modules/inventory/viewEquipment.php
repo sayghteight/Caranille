@@ -156,14 +156,55 @@ if (isset($_POST['itemId'])
                             </td>
                             
                             <td>
-                                <?php echo '+' .$equipmentHpEffect. ' HP' ?><br />
-                                <?php echo '+' .$equipmentMpEffect. ' MP' ?><br />
-                                <?php echo '+' .$equipmentStrengthEffect. ' Force' ?><br />
-                                <?php echo '+' .$equipmentMagicEffect. ' Magie' ?><br />
-                                <?php echo '+' .$equipmentAgilityEffect. ' Agilité' ?><br />
-                                <?php echo '+' .$equipmentDefenseEffect. ' Défense' ?><br />
-                                <?php echo '+' .$equipmentDefenseMagicEffect. ' Défense magique' ?><br />
-                                <?php echo '+' .$equipmentWisdomEffect. ' Sagesse'; ?>
+                                <?php
+                                //Si l'équipement augmente les HP on l'affiche
+                                if ($itemHpEffect > 0)
+                                {
+                                    echo "+ $itemHpEffect HP<br />";
+                                }
+                                
+                                //Si l'équipement augmente les MP on l'affiche
+                                if ($itemMpEffect > 0)
+                                {
+                                    echo "+ $itemMpEffect MP<br />";
+                                }
+                                
+                                //Si l'équipement augmente la force on l'affiche
+                                if ($itemStrengthEffect > 0)
+                                {
+                                    echo "+ $itemStrengthEffect Force<br />";
+                                }
+                                
+                                //Si l'équipement augmente la magie on l'affiche
+                                if ($itemMagicEffect > 0)
+                                {
+                                    echo "+ $itemMagicEffect Magie<br />";
+                                }
+                                
+                                //Si l'équipement augmente l'agilité on l'affiche
+                                if ($itemAgilityEffect > 0)
+                                {
+                                    echo "+ $itemAgilityEffect Agilité<br />";
+                                }
+                                
+                                //Si l'équipement augmente la défense on l'affiche
+                                if ($itemDefenseEffect > 0)
+                                {
+                                    echo "+ $itemDefenseEffect Défense<br />";
+                                }
+                                
+                                //Si l'équipement augmente la défense magique on l'affiche
+                                if ($itemDefenseMagicEffect > 0)
+                                {
+                                    echo "+ $itemDefenseMagicEffect Défense Magic<br />";
+                                }
+                                
+                                //Si l'équipement augmente la sagesse on l'affiche
+                                if ($itemWisdomEffect > 0)
+                                {
+                                    echo "+ $itemWisdomEffect Sagesse<br />";
+                                }
+                                ?>
                             </td>
                         </tr>
                             

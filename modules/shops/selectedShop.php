@@ -86,6 +86,12 @@ if (isset($_POST['shopId']))
                     <input type="submit" name="view" class="btn btn-default form-control" value="Détail/Achat">
                 </form>
                 
+                <hr>
+
+                <form method="POST" action="index.php">
+                    <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
+                </form>
+                
                 <?php
             }
             else

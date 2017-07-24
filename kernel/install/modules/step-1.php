@@ -1,13 +1,11 @@
 <?php require_once("../html/header.php"); ?>
 
-<p>Afin d'installer Caranille veuillez remplir les informations suivantes</p>
+<p>Avant de procéder à l'installation de Caranille vous devez lire et accepter la licence d'utilisation du logiciel</p>
 
 <form method="POST" action="step-2.php">
-    Nom de la base de donnée : <input type="text" name="databaseName" class="form-control" required>
-    Adresse de la base de donnée : <input type="text" name="databaseHost" class="form-control" required>
-    Nom de l'utilisateur : <input type="text" name="databaseUser"  class="form-control" required>
-    Mot de passe! <input type="password" name="databasePassword" class="form-control">
-    <input type="submit" class="btn btn-default form-control" name="install" value="Continuer">
+    <iframe src="../../../LICENCE.txt" width="100%" height="100%"></iframe>
+    En cliquant sur "Installer le logiciel" vous acceptez la licence d'utilisation !
+    <input type="submit" name="install" class="btn btn-default form-control" value="Installer le logiciel">
 </form>
 
 <?php require_once("../html/footer.php"); ?>
