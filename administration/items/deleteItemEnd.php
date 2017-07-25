@@ -8,7 +8,7 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //Si les variables $_POST suivantes existent
 if (isset($_POST['adminItemId'])
-&& isset($_POST['manage']))
+&& isset($_POST['finalDelete']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
     if (ctype_digit($_POST['adminItemId'])
@@ -17,54 +17,48 @@ if (isset($_POST['adminItemId'])
         //On récupère l'id du formulaire précédent
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
 
-        //On fait une requête pour vérifier si l'équipement choisit existe
+        //On fait une requête pour vérifier si l'objet choisit existe
         $itemQuery = $bdd->prepare('SELECT * FROM car_items 
         WHERE itemId = ?');
         $itemQuery->execute([$adminItemId]);
         $itemRow = $itemQuery->rowCount();
 
-        //Si l'équipement existe
+        //Si l'objet existe
         if ($itemRow == 1) 
         {
-            //On fait une recherche dans la base de donnée de tous les comptes
-            $itemQuery = $bdd->prepare("SELECT * FROM car_items
+            //On supprime l'objet de la base de donnée
+            $itemDeleteQuery = $bdd->prepare("DELETE FROM car_items
             WHERE itemId = ?");
-            $itemQuery->execute([$adminItemId]);
+            $itemDeleteQuery->execute([$adminItemId]);
+            $itemDeleteQuery->closeCursor();
 
-            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
-            while ($item = $itemQuery->fetch())
-            {
-                //On récupère les informations de l'équipement
-                $adminItemName = stripslashes($item['itemName']);
-            }
-            $itemQuery->closeCursor();
-            ?>
+            //On supprime aussi l'objet de l'inventaire dans la base de donnée
+            $inventoryDeleteQuery = $bdd->prepare("DELETE FROM car_inventory
+            WHERE inventoryItemId = ?");
+            $inventoryDeleteQuery->execute([$adminItemId]);
+            $inventoryDeleteQuery->closeCursor();
             
-            Que souhaitez-vous faire de l'équipement <em><?php echo $adminItemName ?></em> ?
+            //On supprime l'objets si il est lié à un monstre
+            $itemDropDeleteQuery = $bdd->prepare("DELETE FROM car_monsters_drops
+            WHERE monsterDropItemID = ?");
+            $itemDropDeleteQuery->execute([$adminItemId]);
+            $itemDropDeleteQuery->closeCursor();
+            ?>
+
+            L'objet a bien été supprimé
 
             <hr>
                 
-            <form method="POST" action="editEquipment.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?php echo $adminItemId ?>">
-                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier l'équipement">
-            </form>
-            <form method="POST" action="deleteEquipment.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?php echo $adminItemId ?>">
-                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer l'équipement">
-            </form>
-
-            <hr>
-
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>
             
             <?php
         }
-        //Si l'équipement n'exite pas
+        //Si l'objet n'exite pas
         else
         {
-            echo "Erreur: Cet équipement n'existe pas";
+            echo "Erreur: Cet objet n'existe pas";
         }
         $itemQuery->closeCursor();
     }

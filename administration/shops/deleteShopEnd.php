@@ -8,7 +8,7 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //Si les variables $_POST suivantes existent
 if (isset($_POST['adminShopId'])
-&& isset($_POST['manage']))
+&& isset($_POST['finalDelete']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
     if (ctype_digit($_POST['adminShopId'])
@@ -23,36 +23,32 @@ if (isset($_POST['adminShopId'])
         $shopQuery->execute([$adminShopId]);
         $shopRow = $shopQuery->rowCount();
 
-        //Si l'objet existe
+        //Si le magasin existe
         if ($shopRow == 1) 
         {
-            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
-            while ($shop = $shopQuery->fetch())
-            {
-                //On récupère les informations du magasin
-                $adminShopName = stripslashes($shop['shopName']);
-            }
-            ?>
+            //On supprime l'objet de la base de donnée
+            $shopDeleteQuery = $bdd->prepare("DELETE FROM car_shops
+            WHERE shopId = ?");
+            $shopDeleteQuery->execute([$adminShopId]);
+            $shopDeleteQuery->closeCursor();
+
+            //On supprime aussi les objets en vente du magasin
+            $shopItemDeleteQuery = $bdd->prepare("DELETE FROM car_shops_items
+            WHERE shopItemShopId = ?");
+            $shopItemDeleteQuery->execute([$adminShopId]);
+            $shopItemDeleteQuery->closeCursor();
             
-            Que souhaitez-vous faire du magasin <em><?php echo $adminShopName ?></em> ?
+            //On supprime aussi ce magasin des villes où il se trouve
+            $townShopDeleteQuery = $bdd->prepare("DELETE FROM car_towns_shops
+            WHERE townShopShopId = ?");
+            $townShopDeleteQuery->execute([$adminShopId]);
+            $townShopDeleteQuery->closeCursor();
+            ?>
+
+            Le magasin a bien été supprimé
 
             <hr>
                 
-            <form method="POST" action="editShop.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminShopId" value="<?php echo $adminShopId ?>">
-                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier le magasin">
-            </form>
-            <form method="POST" action="../shopsItems/manageShopItem.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminShopItemShopId" value="<?php echo $adminShopId ?>">
-                <input type="submit" class="btn btn-default form-control" name="manage" value="Objets/Equippement du magasin">
-            </form>
-            <form method="POST" action="deleteShop.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminShopId" value="<?php echo $adminShopId ?>">
-                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer le magasin">
-            </form>
-            
-            <hr>
-
             <form method="POST" action="index.php">
                 <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>

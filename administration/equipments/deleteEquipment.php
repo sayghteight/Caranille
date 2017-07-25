@@ -8,7 +8,7 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //Si les variables $_POST suivantes existent
 if (isset($_POST['adminItemId'])
-&& isset($_POST['manage']))
+&& isset($_POST['delete']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
     if (ctype_digit($_POST['adminItemId'])
@@ -35,24 +35,26 @@ if (isset($_POST['adminItemId'])
             while ($item = $itemQuery->fetch())
             {
                 //On récupère les informations de l'équipement
+                $adminItemPicture = stripslashes($item['itemPicture']);
                 $adminItemName = stripslashes($item['itemName']);
             }
             $itemQuery->closeCursor();
             ?>
+
+            <p><img src="<?php echo $adminItemPicture ?>" height="100" width="100"></p>
             
-            Que souhaitez-vous faire de l'équipement <em><?php echo $adminItemName ?></em> ?
+            <p>ATTENTION</p>
+
+            Vous êtes sur le point de supprimer l'équipement <em><?php echo $adminItemName ?></em>.<br />
+            Confirmez-vous la suppression ?
 
             <hr>
                 
-            <form method="POST" action="editEquipment.php">
+            <form method="POST" action="deleteEquipmentEnd.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?php echo $adminItemId ?>">
-                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier l'équipement">
+                <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme la suppression">
             </form>
-            <form method="POST" action="deleteEquipment.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?php echo $adminItemId ?>">
-                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer l'équipement">
-            </form>
-
+            
             <hr>
 
             <form method="POST" action="index.php">

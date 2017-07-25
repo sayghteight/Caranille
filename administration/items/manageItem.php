@@ -43,6 +43,10 @@ if (isset($_POST['adminItemId'])
                 <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?php echo $adminItemId ?>">
                 <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier l'objet">
             </form>
+            <form method="POST" action="deleteItem.php">
+                <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?php echo $adminItemId ?>">
+                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer l'objet">
+            </form>
             
             <hr>
 

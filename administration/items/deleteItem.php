@@ -8,7 +8,7 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //Si les variables $_POST suivantes existent
 if (isset($_POST['adminItemId'])
-&& isset($_POST['manage']))
+&& isset($_POST['delete']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
     if (ctype_digit($_POST['adminItemId'])
@@ -17,16 +17,16 @@ if (isset($_POST['adminItemId'])
         //On récupère l'id du formulaire précédent
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
 
-        //On fait une requête pour vérifier si l'équipement choisit existe
+        //On fait une requête pour vérifier si l'objet choisit existe
         $itemQuery = $bdd->prepare('SELECT * FROM car_items 
         WHERE itemId = ?');
         $itemQuery->execute([$adminItemId]);
         $itemRow = $itemQuery->rowCount();
 
-        //Si l'équipement existe
+        //Si l'objet existe
         if ($itemRow == 1) 
         {
-            //On fait une recherche dans la base de donnée de tous les comptes
+            //On fait une recherche dans la base de donnée de tous les objets
             $itemQuery = $bdd->prepare("SELECT * FROM car_items
             WHERE itemId = ?");
             $itemQuery->execute([$adminItemId]);
@@ -34,25 +34,27 @@ if (isset($_POST['adminItemId'])
             //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($item = $itemQuery->fetch())
             {
-                //On récupère les informations de l'équipement
+                ///On récupère les informations de l'objet
+                $adminItemPicture = stripslashes($item['itemPicture']);
                 $adminItemName = stripslashes($item['itemName']);
             }
             $itemQuery->closeCursor();
             ?>
+
+            <p><img src="<?php echo $adminItemPicture ?>" height="100" width="100"></p>
             
-            Que souhaitez-vous faire de l'équipement <em><?php echo $adminItemName ?></em> ?
+            <p>ATTENTION</p>
+            
+            Vous êtes sur le point de supprimer l'objet <em><?php echo $adminItemName ?></em>.<br />
+            Confirmez-vous la suppression ?
 
             <hr>
                 
-            <form method="POST" action="editEquipment.php">
+            <form method="POST" action="deleteItemEnd.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?php echo $adminItemId ?>">
-                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier l'équipement">
+                <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme la suppression">
             </form>
-            <form method="POST" action="deleteEquipment.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminItemId" value="<?php echo $adminItemId ?>">
-                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer l'équipement">
-            </form>
-
+    
             <hr>
 
             <form method="POST" action="index.php">
@@ -61,10 +63,10 @@ if (isset($_POST['adminItemId'])
             
             <?php
         }
-        //Si l'équipement n'exite pas
+        //Si l'objet n'exite pas
         else
         {
-            echo "Erreur: Cet équipement n'existe pas";
+            echo "Erreur: Cet objet n'existe pas";
         }
         $itemQuery->closeCursor();
     }

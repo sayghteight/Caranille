@@ -17,7 +17,7 @@ if ($newsRow > 0)
 {
     ?>
     
-    <form method="POST" action="manageNews.php">
+    <form method="POST" action="manageNews.php">.
         Liste des news : <select name="adminNewsId" class="form-control">
             
             <?php

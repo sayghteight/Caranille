@@ -8,7 +8,7 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //Si les variables $_POST suivantes existent
 if (isset($_POST['adminTownId'])
-&& isset($_POST['manage']))
+&& isset($_POST['delete']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
     if (ctype_digit($_POST['adminTownId'])
@@ -17,7 +17,7 @@ if (isset($_POST['adminTownId'])
         //On récupère l'id du formulaire précédent
         $adminTownId = htmlspecialchars(addslashes($_POST['adminTownId']));
 
-        //On fait une requête pour vérifier si l'objet choisit existe
+        //On fait une requête pour vérifier si la ville choisit existe
         $townQuery = $bdd->prepare('SELECT * FROM car_towns 
         WHERE townId = ?');
         $townQuery->execute([$adminTownId]);
@@ -26,34 +26,30 @@ if (isset($_POST['adminTownId'])
         //Si la ville existe
         if ($townRow == 1) 
         {
-            //On fait une recherche dans la base de donnée de toutes les villes
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
             while ($town = $townQuery->fetch())
             {
+                //On récupère les informations de la ville
+                $adminTownPicture = stripslashes($town['townPicture']);
                 $adminTownName = stripslashes($town['townName']);
             }
+            $townQuery->closeCursor();
             ?>
+
+            <p><img src="<?php echo $adminTownPicture ?>" height="100" width="100"></p>
             
-            Que souhaitez-vous faire de la ville <em><?php echo $adminTownName ?></em> ?
+            <p>ATTENTION</p> 
+            
+            Vous êtes sur le point de supprimer la ville <em><?php echo $adminTownName ?></em>.<br />
+            Confirmez-vous la suppression ?
 
             <hr>
                 
-            <form method="POST" action="editTown.php">
+            <form method="POST" action="deleteTownEnd.php">
                 <input type="hidden" class="btn btn-default form-control" name="adminTownId" value="<?php echo $adminTownId ?>">
-                <input type="submit" class="btn btn-default form-control" name="edit" value="Afficher/Modifier la ville">
+                <input type="submit" class="btn btn-default form-control" name="finalDelete" value="Je confirme la suppression">
             </form>
-            <form method="POST" action="../townsShops/manageTownShop.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminTownShopTownId" value="<?php echo $adminTownId ?>">
-                <input type="submit" class="btn btn-default form-control" name="manage" value="Magasins de la ville">
-            </form>
-            <form method="POST" action="../townsMonsters/manageTownMonster.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminTownMonsterTownId" value="<?php echo $adminTownId ?>">
-                <input type="submit" class="btn btn-default form-control" name="manage" value="Monstres de la ville">
-            </form>
-            <form method="POST" action="deleteTown.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminTownId" value="<?php echo $adminTownId ?>">
-                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer la ville">
-            </form>
-            
+    
             <hr>
 
             <form method="POST" action="index.php">

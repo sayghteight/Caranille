@@ -48,7 +48,6 @@ if (isset($_POST['adminTownId'])
             townPriceInn = :adminTownPriceInn,
             townChapter = :adminTownChapter
             WHERE townId = :adminTownId');
-
             $updateTown->execute([
             'adminTownPicture' => $adminTownPicture,
             'adminTownName' => $adminTownName,
@@ -57,39 +56,6 @@ if (isset($_POST['adminTownId'])
             'adminTownChapter' => $adminTownChapter,
             'adminTownId' => $adminTownId]);
             $updateTown->closeCursor();
-            
-            //On recherche tous les joueurs qui sont dans cette ville et ont les met dans la carte du monde
-            $characterTownQuery = $bdd->prepare('SELECT * FROM car_characters 
-            WHERE characterTownId = ?');
-            $characterTownQuery->execute([$adminTownId]);
-
-            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
-            while ($characterTown = $characterTownQuery->fetch())
-            {
-                //On récupère les informations des personnages
-                $adminCharacterId = stripslashes($characterTown['characterId']);
-                $adminCharacterName = stripslashes($characterTown['characterName']);
-                $adminCharacterChapter = stripslashes($characterTown['characterChapter']);
-                
-                //Si le joueur à un niveau de chapitre supérieur ou égal à celui requis pour être dans la ville on ne fait rien
-                if ($adminCharacterChapter >= $adminTownChapter)
-                {
-                    echo "Le joueur $adminCharacterName est au chapitre $adminCharacterChapter il peut donc rester dans cette ville<br />"; 
-                }
-                else
-                {
-                    echo "Le joueur $adminCharacterName est au chapitre $adminCharacterChapter il ne peut donc pas rester dans cette ville<br />"; 
-                    
-                    //On met à jour les personnages
-                    $updateCharacter = $bdd->prepare("UPDATE car_characters SET
-                    characterTownId = 0
-                    WHERE characterId = :adminCharacterId");
-                    
-                    $updateCharacter->execute(array(
-                    'adminCharacterId' => $adminCharacterId));
-                    $updateCharacter->closeCursor();
-                }
-            }
             ?>
 
             La ville a bien été mit à jour
