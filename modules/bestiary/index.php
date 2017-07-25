@@ -19,7 +19,7 @@ if ($monsterBestiaryRow > 0)
     
     <form method="POST" action="viewMonster.php">
         Liste des monstres : <select name="monsterId" class="form-control">
-                
+
             <?php
             //on récupère les valeurs de chaque monstres qu'on va ensuite mettre dans le menu déroulant
             while ($monsterBestiary = $monsterBestiaryQuery->fetch())
@@ -32,7 +32,7 @@ if ($monsterBestiaryRow > 0)
                 <?php
             }
             ?>
-                
+
         </select>
         <center><input type="submit" name="viewMonster" class="btn btn-default form-control" value="Voir la fiche du monstre"></center>
     </form>
