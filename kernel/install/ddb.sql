@@ -340,4 +340,4 @@ INSERT INTO `car_configuration` (`configurationId`, `configurationGameName`, `co
 --
 
 INSERT INTO `car_races` (`raceId`, `racePicture`, `raceName`, `raceDescription`, `raceHpBonus`, `raceMpBonus`, `raceStrengthBonus`, `raceMagicBonus`, `raceAgilityBonus`, `raceDefenseBonus`, `raceDefenseMagicBonus`, `raceWisdomBonus`) VALUES
-(1, '../../img/empty.png', 'Humain', 'Classe par défaut pouvant être modifiée.', 10, 1, 1, 1, 1, 1, 1, 1);
+(1, '../../img/empty.png', 'Humain', 'Classe par défaut', 10, 1, 1, 1, 1, 1, 1, 1);
