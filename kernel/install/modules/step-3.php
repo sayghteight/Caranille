@@ -37,7 +37,7 @@
     ?>
     
     Création de la base de donnée terminée...
-    <form method="POST" action="step-3.php">
+    <form method="POST" action="step-4.php">
         <input type="submit" class="btn btn-default form-control" name="continuer" value="Continuer">
     </form>
     

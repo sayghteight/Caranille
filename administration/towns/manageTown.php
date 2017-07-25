@@ -49,10 +49,6 @@ if (isset($_POST['adminTownId'])
                 <input type="hidden" class="btn btn-default form-control" name="adminTownMonsterTownId" value="<?php echo $adminTownId ?>">
                 <input type="submit" class="btn btn-default form-control" name="manage" value="Monstres de la ville">
             </form>
-            <form method="POST" action="deleteTown.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminTownId" value="<?php echo $adminTownId ?>">
-                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer la ville">
-            </form>
             
             <hr>
 

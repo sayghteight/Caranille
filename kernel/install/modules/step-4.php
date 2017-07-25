@@ -3,7 +3,7 @@ require_once("../html/header.php");
 include("../../config.php"); 
 ?>
     
-<form method="POST" action="step-4.php">
+<form method="POST" action="step-5.php">
     Pseudo : <input type="text" name="accountPseudo" class="form-control" required>
     Mot de passe : <input type="password" name="accountPassword" class="form-control" required>
     Confirmez : <input type="password" name="accountPasswordConfirm" class="form-control" required>

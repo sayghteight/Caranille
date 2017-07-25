@@ -252,7 +252,6 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         'characterName' => $characterName,
                         'characterSex' => $characterSex]);
                         $addCharacter->closeCursor();
-
                         ?>
 
                         Votre compte administrateur a bien été crée, vous pouvez commencer à développer votre jeu !

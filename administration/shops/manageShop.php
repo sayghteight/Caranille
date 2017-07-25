@@ -46,10 +46,6 @@ if (isset($_POST['adminShopId'])
                 <input type="hidden" class="btn btn-default form-control" name="adminShopItemShopId" value="<?php echo $adminShopId ?>">
                 <input type="submit" class="btn btn-default form-control" name="manage" value="Objets/Equippement du magasin">
             </form>
-            <form method="POST" action="deleteShop.php">
-                <input type="hidden" class="btn btn-default form-control" name="adminShopId" value="<?php echo $adminShopId ?>">
-                <input type="submit" class="btn btn-default form-control" name="delete" value="Supprimer le magasin">
-            </form>
             
             <hr>
 
