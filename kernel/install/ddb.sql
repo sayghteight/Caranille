@@ -98,6 +98,12 @@ CREATE TABLE IF NOT EXISTS `car_characters` (
   `characterWisdomEquipments` int(11) NOT NULL,
   `characterWisdomGuild` int(11) NOT NULL,
   `characterWisdomTotal` int(11) NOT NULL,
+  `characterProspecting` int(11) NOT NULL,
+  `characterProspectingSkillPoints` int(11) NOT NULL,
+  `characterProspectingBonus` int(11) NOT NULL,
+  `characterProspectingEquipments` int(11) NOT NULL,
+  `characterProspectingGuild` int(11) NOT NULL,
+  `characterProspectingTotal` int(11) NOT NULL,
   `characterDefeate` int(11) NOT NULL,
   `characterVictory` int(11) NOT NULL,
   `characterExperience` int(11) NOT NULL,
@@ -194,10 +200,10 @@ CREATE TABLE IF NOT EXISTS `car_items` (
   `itemRaceId` int(11) NOT NULL,
   `itemPicture` text NOT NULL,
   `itemType` varchar(30) NOT NULL,
-  `itemLevel` int(11) NOT NULL,
-  `itemLevelRequired` int(11) NOT NULL,
   `itemName` varchar(30) NOT NULL,
   `itemDescription` text NOT NULL,
+  `itemLevel` int(11) NOT NULL,
+  `itemLevelRequired` int(11) NOT NULL,
   `itemHpEffect` int(11) NOT NULL,
   `itemMpEffect` int(11) NOT NULL,
   `itemStrengthEffect` int(11) NOT NULL,
@@ -206,6 +212,7 @@ CREATE TABLE IF NOT EXISTS `car_items` (
   `itemDefenseEffect` int(11) NOT NULL,
   `itemDefenseMagicEffect` int(11) NOT NULL,
   `itemWisdomEffect` int(11) NOT NULL,
+  `itemProspectingEffect` int(11) NOT NULL,
   `itemPurchasePrice` int(11) NOT NULL,
   `itemSalePrice` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -329,106 +336,15 @@ CREATE TABLE IF NOT EXISTS `car_towns_shops`
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `car_chapters`
---
-
-INSERT INTO `car_chapters` (`chapterId`, `chapterMonsterId`, `chapterTitle`, `chapterOpening`, `chapterEnding`) VALUES
-(1, 2, 'Un étrange dragon', 'Vous êtes actuellement en train de dormir quand tout à coup...\r\n\r\nA secours !!!\r\n\r\nD''énorme cri se font entendre et lorsque vous regardé à l''extérieur vous voyez apparaître la silhouette d''un énorme dragon.\r\n\r\nVotre sang ne fait qu''un tour vous prenez votre arme et vous courrez vers le dragon pour protéger le village.', 'Merci, bravo, félicitation, tels sont les mots que vous pouvez entendre de la part des villageois.\r\n\r\nLe dragon quand a lui servira de repas de fête le soir pour fêter votre victoire.');
-
---
 -- Contenu de la table `car_configuration`
 --
 
 INSERT INTO `car_configuration` (`configurationId`, `configurationGameName`, `configurationPresentation`, `configurationExperience`, `configurationSkillPoint`, `configurationExperienceBonus`, `configurationGoldBonus`, `configurationDropBonus`, `configurationAccess`) VALUES
-(1, 'Caranille', 'MMORPG Officiel de Caranille', 500, 4, 0, 0, 0, 'Opened');
-
---
--- Contenu de la table `car_items`
---
-
-INSERT INTO `car_items` (`itemId`, `itemRaceId`, `itemPicture`, `itemType`, `itemLevel`, `itemLevelRequired`, `itemName`, `itemDescription`, `itemHpEffect`, `itemMpEffect`, `itemStrengthEffect`, `itemMagicEffect`, `itemAgilityEffect`, `itemDefenseEffect`, `itemDefenseMagicEffect`, `itemWisdomEffect`, `itemPurchasePrice`, `itemSalePrice`) VALUES
-(1, 0, '../../img/empty.png', 'Item', 1, 1, 'Potion', 'Cette petite fiole vous rendra 100 HP', 100, 0, 0, 0, 0, 0, 0, 0, 50, 10),
-(2, 0, '../../img/empty.png', 'Item', 1, 1, 'Ether', 'Cette petite fiole vous rendra 10 MP', 0, 10, 0, 0, 0, 0, 0, 0, 50, 10),
-(3, 0, '../../img/empty.png', 'Armor', 1, 1, 'Manteau de laine', 'Ce manteau vous ira a ravir.\r\nCet équipement est disponible pour toutes les classes', 10, 1, 1, 1, 1, 1, 1, 1, 100, 50),
-(4, 0, '../../img/empty.png', 'Boots', 1, 1, 'Botte de laine', 'Ses bottes de laine sont 100% moutons.\r\nCet équipement est disponible pour toutes les classes', 10, 1, 1, 1, 1, 1, 1, 1, 100, 50),
-(5, 0, '../../img/empty.png', 'Gloves', 1, 1, 'Gants de laine', 'Ses gants vous donneront vous protégerons des courants d''air mais juste pour les mains.\r\nCet équipement est disponible pour toutes les classes', 10, 1, 1, 1, 1, 1, 1, 1, 100, 50),
-(6, 0, '../../img/empty.png', 'Helmet', 1, 1, 'Casque de laine', 'Ce casque vous protégera juste de la pluie.\r\nCet équipement est disponible pour toutes les classes', 10, 1, 1, 1, 1, 1, 1, 1, 100, 50),
-(7, 0, '../../img/empty.png', 'Weapon', 1, 1, 'Boule de laine', 'Cette boule de laine pourra être lancée sur vos ennemis en leur occasionnant peu de dégâts.\r\nCet équipement est disponible pour toutes les classes', 10, 1, 1, 1, 1, 1, 1, 1, 100, 50);
-
---
--- Contenu de la table `car_monsters`
---
-
-INSERT INTO `car_monsters` (`monsterId`, `monsterPicture`, `monsterName`, `monsterDescription`, `monsterLevel`, `monsterHp`, `monsterMp`, `monsterStrength`, `monsterMagic`, `monsterAgility`, `monsterDefense`, `monsterDefenseMagic`, `monsterWisdom`, `monsterExperience`, `monsterGold`) VALUES
-(1, '../../img/empty.png', 'Plop', 'Ce monstre se nourrit exclusivement de plante et de feuille tombé à même le sol.\r\nIl y a très longtemps celui-ci était jaune et est devenue vert de part son alimentation...\r\nMais S\\''il est devenu vert de part son alimentation pourquoi était t\\''il jaune ?', 1, 50, 10, 12, 1, 1, 1, 1, 1, 25, 25),
-(2, '../../img/empty.png', 'Dragon', 'Cet énorme dragon peut faire brûler des hectare de forêt en quelques minutes.', 2, 500, 1, 15, 1, 1, 1, 1, 1, 1000, 1000);
-
---
--- Contenu de la table `car_monsters_drops`
---
-
-INSERT INTO `car_monsters_drops` (`monsterDropID`, `monsterDropMonsterId`, `monsterDropItemId`, `monsterDropItemVisible`, `monsterDropRate`, `monsterDropRateVisible`) VALUES
-(1, 1, 1, 'Yes', 50, 'Yes'),
-(5, 2, 2, 'No', 20, 'No');
-
---
--- Contenu de la table `car_news`
---
-
-INSERT INTO `car_news` (`newsId`, `newsPicture`, `newsTitle`, `newsMessage`, `newsAccountPseudo`, `newsDate`) VALUES
-(1, '../../img/empty.png', 'Installation de Caranille', 'Félicitation Caranille est bien installé vous pouvez maintenant vous connecter avec vos identifiants \r\n\r\nBon RPG Making', 'admin', '2017-05-18');
+(1, 'Nom de votre jeu', 'Description de votre jeu', 500, 4, 0, 0, 0, 'Closed');
 
 --
 -- Contenu de la table `car_races`
 --
 
 INSERT INTO `car_races` (`raceId`, `racePicture`, `raceName`, `raceDescription`, `raceHpBonus`, `raceMpBonus`, `raceStrengthBonus`, `raceMagicBonus`, `raceAgilityBonus`, `raceDefenseBonus`, `raceDefenseMagicBonus`, `raceWisdomBonus`) VALUES
-(1, '../../img/empty.png', 'Chevalier', 'Classe de personnage axé sur la force.', 10, 1, 2, 1, 1, 1, 1, 1),
-(2, '../../img/empty.png', 'Mage Noir', 'Classe de personnage axé sur la magie.', 10, 1, 1, 2, 1, 1, 1, 1),
-(3, '../../img/empty.png', 'Ninja', 'Classe de personnage axé sur l''agilité.', 10, 1, 1, 1, 2, 1, 1, 1),
-(4, '../../img/empty.png', 'Guerrier', 'Classe de personnage axé sur la défense.', 10, 1, 1, 1, 1, 2, 1, 1),
-(5, '../../img/empty.png', 'Mage Blanc', 'Classe de personnage axé sur la défense magique.', 10, 1, 1, 1, 1, 1, 2, 1),
-(6, '../../img/empty.png', 'Sage', 'Classe de personnage axé sur la sagesse.', 10, 1, 1, 1, 1, 1, 1, 2);
-
---
--- Contenu de la table `car_shops`
---
-
-INSERT INTO `car_shops` (`shopId`, `shopPicture`, `shopName`, `shopDescription`) VALUES
-(1, '../../img/empty.png', 'LittleShop', 'Le petit magasin de proximité'),
-(2, '../../img/empty.png', 'Au bon filon', 'Petite boutique artisanale qui vend plusieurs équipements');
-
---
--- Contenu de la table `car_shops_items`
---
-
-INSERT INTO `car_shops_items` (`shopItemId`, `shopItemShopId`, `shopItemItemId`, `shopItemDiscount`) VALUES
-(1, '1', '1', 0),
-(2, '1', '2', 0),
-(3, '2', '6', 20),
-(4, '2', '3', 30);
-
---
--- Contenu de la table `car_towns`
---
-
-INSERT INTO `car_towns` (`townId`, `townPicture`, `townName`, `townDescription`, `townPriceInn`, `townChapter`) VALUES
-(1, '../../img/empty.png', 'Indicia', 'Petite ville côtière qui vie exclusivement du commerce de la pêche.', 10, 1),
-(2, '../../img/empty.png', 'Teran', 'Petite ville rural qui vie de l''agriculture', 12, 2);
-
---
--- Contenu de la table `car_towns_monsters`
---
-
-INSERT INTO `car_towns_monsters` (`townMonsterId`, `townMonsterTownId`, `townMonsterMonsterId`) VALUES
-(1, 1, 1),
-(2, 2, 2);
-
---
--- Contenu de la table `car_towns_shops`
---
-
-INSERT INTO `car_towns_shops` (`townShopId`, `townShopTownId`, `townShopShopId`) VALUES
-(1, 1, 1),
-(2, 2, 2),
-(3, 2, 1);
+(1, '../../img/empty.png', 'Humain', 'Classe par défaut', 10, 1, 1, 1, 1, 1, 1, 1);

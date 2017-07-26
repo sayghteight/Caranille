@@ -169,6 +169,12 @@ if (isset($_POST['accountPseudo'])
                         '0', //characterWisdomEquipments
                         '0', //characterWisdomGuild
                         '0', //characterWisdomTotal
+                        '0', //characterProspecting
+                        '0', //characterProspectingSkillPoints
+                        '0', //characterProspectingParchment
+                        '0', //characterProspectingEquipments
+                        '0', //characterProspectingGuild
+                        '0', //characterProspectingTotal
                         '0', //characterDefeate
                         '0', //characterVictory
                         '0', //characterExperience
@@ -233,6 +239,12 @@ if (isset($_POST['accountPseudo'])
                         '0',
                         '0',
                         '10',
+                        '0',
+                        '0',
+                        '0',
+                        '0',
+                        '0',
+                        '0',
                         '0',
                         '0',
                         '0',

@@ -50,6 +50,7 @@ if (isset($_POST['marketId'])
                 $marketItemDefenseEffect = stripslashes($market['itemDefenseEffect']);
                 $marketItemDefenseMagicEffect = stripslashes($market['itemDefenseMagicEffect']);
                 $marketItemWisdomEffect = stripslashes($market['itemWisdomEffect']);
+                $marketItemProspectingEffect = stripslashes($market['itemProspectingEffect']);
             }
 
             //Si la race de l'équipement est supérieur à 1 c'est qu'il est attitré à une classe
@@ -77,6 +78,26 @@ if (isset($_POST['marketId'])
             <p>Offre de <?php echo $marketCharacterName ?></p>
 
             <table class="table">
+
+                <tr>
+                    <td>
+                        Nom
+                    </td>
+                    
+                    <td>
+                        <?php echo $marketItemName ?>
+                    </td>
+                </tr>
+                    
+                <tr>
+                    <td>
+                        Description
+                    </td>
+                    
+                    <td>
+                        <?php echo nl2br($marketItemDescription) ?>
+                    </td>
+                </tr>
                 
                 <?php
                 //S'il s'agit d'un équipement on affiche la race de celui-ci ainsi que son niveu requis
@@ -115,25 +136,6 @@ if (isset($_POST['marketId'])
                     <?php
                 }
                 ?>
-                <tr>
-                    <td>
-                        Nom
-                    </td>
-                    
-                    <td>
-                        <?php echo $marketItemName ?>
-                    </td>
-                </tr>
-                    
-                <tr>
-                    <td>
-                        Description
-                    </td>
-                    
-                    <td>
-                        <?php echo nl2br($marketItemDescription) ?>
-                    </td>
-                </tr>
                     
                 <tr>
                     <td>
@@ -142,33 +144,79 @@ if (isset($_POST['marketId'])
                     
                     <td>
                         <?php
-                        //S'il s'agit d'un équipement on affiche toutes les stats concernée
-                        if ($marketItemType != "Item")
-                        {
-                            ?>
-                            
-                            <?php echo '+' .$marketItemHpEffect. ' HP' ?><br />
-                            <?php echo '+' .$marketItemMpEffect. ' MP' ?><br />
-                            <?php echo '+' .$marketItemStrengthEffect. ' Force' ?><br />
-                            <?php echo '+' .$marketItemMagicEffect. ' Magie' ?><br />
-                            <?php echo '+' .$marketItemAgilityEffect. ' Agilité' ?><br />
-                            <?php echo '+' .$marketItemDefenseEffect. ' Défense' ?><br />
-                            <?php echo '+' .$marketItemDefenseMagicEffect. ' Défense magique' ?><br />
-                            <?php echo '+' .$marketItemWisdomEffect. ' Sagesse'; ?>
-                            
-                            <?php
-                        }
-                        //S'il s'agit d'un objet on affiche que les stats HP et MP qui sont concernée
-                        else
-                        {
-                            ?>
-                            
-                            <?php echo '+' .$marketItemHpEffect. ' HP' ?><br />
-                            <?php echo '+' .$marketItemMpEffect. ' MP' ?><br />
-                            
-                            <?php
-                        }
-                        ?>                            
+                            //S'il s'agit d'un équipement on affiche toutes les stats concernée
+                            if ($marketItemType != "Item")
+                            {
+                                //Si l'équipement augmente les HP on l'affiche
+                                if ($marketItemHpEffect > 0)
+                                {
+                                    echo "+ $marketItemHpEffect HP<br />";
+                                }
+                                
+                                //Si l'équipement augmente les MP on l'affiche
+                                if ($marketItemMpEffect > 0)
+                                {
+                                    echo "+ $marketItemMpEffect MP<br />";
+                                }
+                                
+                                //Si l'équipement augmente la force on l'affiche
+                                if ($marketItemStrengthEffect > 0)
+                                {
+                                    echo "+ $marketItemStrengthEffect Force<br />";
+                                }
+                                
+                                //Si l'équipement augmente la magie on l'affiche
+                                if ($marketItemMagicEffect > 0)
+                                {
+                                    echo "+ $marketItemMagicEffect Magie<br />";
+                                }
+                                
+                                //Si l'équipement augmente l'agilité on l'affiche
+                                if ($marketItemAgilityEffect > 0)
+                                {
+                                    echo "+ $marketItemAgilityEffect Agilité<br />";
+                                }
+                                
+                                //Si l'équipement augmente la défense on l'affiche
+                                if ($marketItemDefenseEffect > 0)
+                                {
+                                    echo "+ $marketItemDefenseEffect Défense<br />";
+                                }
+                                
+                                //Si l'équipement augmente la défense magique on l'affiche
+                                if ($marketItemDefenseMagicEffect > 0)
+                                {
+                                    echo "+ $marketItemDefenseMagicEffect Défense Magic<br />";
+                                }
+                                
+                                //Si l'équipement augmente la sagesse on l'affiche
+                                if ($marketItemWisdomEffect > 0)
+                                {
+                                    echo "+ $marketItemWisdomEffect Sagesse<br />";
+                                }
+                                
+                                //Si l'équipement augmente la prospection on l'affiche
+                                if ($marketItemProspectingEffect > 0)
+                                {
+                                    echo "+ $marketItemProspectingEffect Prospection<br />";
+                                }
+                            }
+                            //S'il s'agit d'un objet on affiche que les stats HP et MP qui sont concernée
+                            else
+                            {
+                                //Si l'objet augmente les HP on l'affiche
+                                if ($marketItemHpEffect > 0)
+                                {
+                                    echo "+ $marketItemHpEffect HP<br />";
+                                }
+                                
+                                //Si l'objet augmente les MP on l'affiche
+                                if ($marketItemMpEffect > 0)
+                                {
+                                    echo "+ $marketItemMpEffect HP<br />";
+                                }
+                            }
+                            ?>                         
                     </td>
                 </tr>
                     

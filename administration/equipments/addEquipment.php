@@ -50,10 +50,10 @@ if (isset($_POST['add']))
             <option value="Helmet">Casque</option>
             <option value="Weapon">Arme</option>
         </select>
-        Niveau : <input type="number" name="adminItemLevel" class="form-control" placeholder="Niveau" value="1" required>
-        Niveau requis : <input type="number" name="adminItemLevelRequired" class="form-control" placeholder="Niveau requis" value="1" required>
         Nom : <input type="text" name="adminItemName" class="form-control" placeholder="Nom" required>
         Description : <br> <textarea class="form-control" name="adminItemDescription" id="adminItemDescription" rows="3" required></textarea>
+        Niveau : <input type="number" name="adminItemLevel" class="form-control" placeholder="Niveau" value="1" required>
+        Niveau requis : <input type="number" name="adminItemLevelRequired" class="form-control" placeholder="Niveau requis" value="1" required>
         HP Bonus : <input type="number" name="adminItemHpEffects" class="form-control" placeholder="HP Bonus" value="0" required>
         MP Bonus : <input type="number" name="adminItemMpEffect" class="form-control" placeholder="MP Bonus" value="0" required>
         Force Bonus : <input type="number" name="adminItemStrengthEffect" class="form-control" placeholder="Force Bonus" value="0" required>
@@ -62,6 +62,7 @@ if (isset($_POST['add']))
         Défense Bonus : <input type="number" name="adminItemDefenseEffect" class="form-control" placeholder="Défense Bonus" value="0" required>
         Défense Magique Bonus : <input type="number" name="adminItemDefenseMagicEffect" class="form-control" placeholder="Défense Magique Bonus" value="0" required>
         Sagesse Bonus : <input type="number" name="adminItemWisdomEffect" class="form-control" placeholder="Sagesse Bonus" value="0" required>
+        Prospection Bonus : <input type="number" name="adminItemProspectingEffect" class="form-control" placeholder="Prospection Bonus" value="0" required>
         Prix d'achat : <input type="number" name="adminItemPurchasePrice" class="form-control" placeholder="Prix d'achat" value="0" required>
         Prix de vente : <input type="number" name="adminItemSalePrice" class="form-control" placeholder="Prix de vente" value="0" required>
         <input name="finalAdd" class="btn btn-default form-control" type="submit" value="Ajouter">

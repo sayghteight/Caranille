@@ -56,6 +56,7 @@ if (isset($_POST['shopId'])
                     $itemDefenseEffect = stripslashes($item['itemDefenseEffect']);
                     $itemDefenseMagicEffect = stripslashes($item['itemDefenseMagicEffect']);
                     $itemWisdomEffect = stripslashes($item['itemWisdomEffect']);
+                    $itemProspectingEffect = stripslashes($item['itemProspectingEffect']);
                     $itemSalePrice = stripslashes($item['itemSalePrice']);
                     $itemPurchasePrice = stripslashes($item['itemPurchasePrice']);
                 }
@@ -101,6 +102,26 @@ if (isset($_POST['shopId'])
                 
                 <table class="table">
                     
+                    <tr>
+                        <td>
+                            Nom
+                        </td>
+                        
+                        <td>
+                            <?php echo $itemName ?>
+                        </td>
+                    </tr>
+                        
+                    <tr>
+                        <td>
+                            Description
+                        </td>
+                        
+                        <td>
+                            <?php echo nl2br($itemDescription) ?>
+                        </td>
+                    </tr>
+                    
                     <?php
                     //S'il s'agit d'un équipement on affiche la race de celui-ci ainsi que son niveu requis
                     if ($itemType != "Item")
@@ -138,25 +159,6 @@ if (isset($_POST['shopId'])
                         <?php
                     }
                     ?>
-                    <tr>
-                        <td>
-                            Nom
-                        </td>
-                        
-                        <td>
-                            <?php echo $itemName ?>
-                        </td>
-                    </tr>
-                        
-                    <tr>
-                        <td>
-                            Description
-                        </td>
-                        
-                        <td>
-                            <?php echo nl2br($itemDescription) ?>
-                        </td>
-                    </tr>
                         
                     <tr>
                         <td>
@@ -214,6 +216,12 @@ if (isset($_POST['shopId'])
                                 if ($itemWisdomEffect > 0)
                                 {
                                     echo "+ $itemWisdomEffect Sagesse<br />";
+                                }
+                                
+                                //Si l'équipement augmente la prospection on l'affiche
+                                if ($itemProspectingEffect > 0)
+                                {
+                                    echo "+ $itemProspectingEffect Prospection<br />";
                                 }
                             }
                             //S'il s'agit d'un objet on affiche que les stats HP et MP qui sont concernée

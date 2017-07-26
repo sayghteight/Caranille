@@ -45,15 +45,21 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
 {
     //On calcule l'expérience bonus que le joueur va recevoir en fonction de sa sagesse
     $wisdomBonus = round($opponentExperience * $characterWisdomTotal / 100);
-    //On calcul le bonus d'expérience
+    //On l'ajoute à l'experience de base du monstre
+    $opponentExperience = $opponentExperience + $wisdomBonus;
+    //On calcul le bonus d'expérience du jeu
     $experienceBonus = round($opponentExperience * $gameExperienceBonus / 100);
-    $opponentExperience = $opponentExperience + $wisdomBonus + $experienceBonus;
+    //On l'ajoute à l'expérience de base du monstre
+    $opponentExperience = $opponentExperience + $experienceBonus;
 
-    //On calcul le bonus d'argent
-    $opponentGoldBonus = round($opponentGold * $gameGoldBonus / 100);
-    $opponentGold = $opponentGold + $opponentGoldBonus;
-    
-    //On prévient le joueur qu'il a remporté le combat
+    //On calcule l'argent bonus que le joueur va recevoir en fonction de sa prospection
+    $prospectingBonus = round($opponentGold * $characterProspectingTotal / 100);
+    //On l'ajoute à l'argent de base du monstre
+    $opponentGold = $opponentGold + $prospectingBonus;
+    //On calcul le bonus d'expérience du jeu
+    $gameGoldBonus = round($opponentGold * $gameGoldBonus / 100);
+    //On l'ajoute à l'argent de base du monstre
+    $opponentGold = $opponentGold + $gameGoldBonus;
     ?>
     
     <p><?php echo $characterName; ?> remporte le combat !</p>
@@ -90,9 +96,15 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
                 $opponentDropItemId = stripslashes($opponentDrop['itemId']);
                 $opponentDropItemName = stripslashes($opponentDrop['itemName']);
                 $opponentDropRate = stripslashes($opponentDrop['monsterDropRate']);
-
+                
+                //On calcul le bonus de drop en fonction de la prospection du joueur
+                $prospectingDropRateBonus = round($characterProspectingTotal * $characterProspectingTotal / 100);
                 //On ajoute le bonus de drop du jeu
-                $opponentDropRate = $opponentDropRate + $gameDropBonus;
+                $opponentDropRate = $opponentDropRate + $prospectingDropRateBonus;
+                //On calcul le bonus de drop
+                $GameDropRateBonus = round($opponentDropRate * $gameDropBonus / 100);
+                //On ajoute le bonus de drop du jeu
+                $opponentDropRate = $opponentDropRate + $GameDropRateBonus;
     
                 //On génère un nombre entre 0 et 101 (Pour que 100 puisse aussi être choisi)
                 $numberRandom = mt_rand(0, 101);

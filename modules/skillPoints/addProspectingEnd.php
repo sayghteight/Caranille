@@ -13,7 +13,7 @@ if (isset($_POST['finalAddWisdom']))
     {
         //On met la stats à jour
         $updateCharacter = $bdd->prepare('UPDATE car_characters 
-        SET characterWisdomSkillPoints = characterWisdomSkillPoints + 1,
+        SET characterProspectingSkillPoints = characterProspectingSkillPoints + 1,
         characterSkillPoints = characterSkillPoints -1
         WHERE characterId = :characterId');
         $updateCharacter->execute(['characterId' => $characterId]);
@@ -34,7 +34,7 @@ if (isset($_POST['finalAddWisdom']))
         $updateCharacter->closeCursor();
         ?>
         
-        Vous venez d'ajouter 1 point en sagesse à votre personnage
+        Vous venez d'ajouter 1 point en prospection à votre personnage
                 
         <hr>
         

@@ -34,10 +34,10 @@ if (isset($_POST['adminItemId'])
                 $adminItemRaceId = stripslashes($item['itemRaceId']);
                 $adminItemPicture = stripslashes($item['itemPicture']);
                 $adminItemType = stripslashes($item['itemType']);
-                $adminItemLevel = stripslashes($item['itemLevel']);
-                $adminItemLevelRequired = stripslashes($item['itemLevelRequired']);
                 $adminItemName = stripslashes($item['itemName']);
                 $adminItemDescription = stripslashes($item['itemDescription']);
+                $adminItemLevel = stripslashes($item['itemLevel']);
+                $adminItemLevelRequired = stripslashes($item['itemLevelRequired']);
                 $adminItemHpEffects = stripslashes($item['itemHpEffect']);
                 $adminItemMpEffect = stripslashes($item['itemMpEffect']);
                 $adminItemStrengthEffect = stripslashes($item['itemStrengthEffect']);
@@ -46,6 +46,7 @@ if (isset($_POST['adminItemId'])
                 $adminItemDefenseEffect = stripslashes($item['itemDefenseEffect']);
                 $adminItemDefenseMagicEffect = stripslashes($item['itemDefenseMagicEffect']);
                 $adminItemWisdomEffect = stripslashes($item['itemWisdomEffect']);
+                $adminItemProspectingEffect = stripslashes($item['itemProspectingEffect']);
                 $adminItemPurchasePrice = stripslashes($item['itemPurchasePrice']);
                 $adminItemSalePrice = stripslashes($item['itemSalePrice']);
             }
@@ -200,10 +201,10 @@ if (isset($_POST['adminItemId'])
                     ?>  
                 
                 </select>
-                Niveau : <input type="text" name="adminItemLevel" class="form-control" placeholder="Email" value="<?php echo $adminItemLevel ?>" required>
-                Niveau requis : <input type="text" name="adminItemLevelRequired" class="form-control" placeholder="Niveau requis" value="<?php echo $adminItemLevelRequired ?>" required>
                 Nom : <input type="text" name="adminItemName" class="form-control" placeholder="Nom" value="<?php echo $adminItemName ?>" required>
                 Description : <br> <textarea class="form-control"name="adminItemDescription" id="adminItemDescription" rows="3" required><?php echo $adminItemDescription; ?></textarea>
+                Niveau : <input type="text" name="adminItemLevel" class="form-control" placeholder="Email" value="<?php echo $adminItemLevel ?>" required>
+                Niveau requis : <input type="text" name="adminItemLevelRequired" class="form-control" placeholder="Niveau requis" value="<?php echo $adminItemLevelRequired ?>" required>
                 HP Bonus : <input type="number" name="adminItemHpEffects" class="form-control" placeholder="HP Bonus" value="<?php echo $adminItemHpEffects ?>" required>
                 MP Bonus : <input type="number" name="adminItemMpEffect" class="form-control" placeholder="MP Bonus" value="<?php echo $adminItemMpEffect ?>" required>
                 Force Bonus : <input type="number" name="adminItemStrengthEffect" class="form-control" placeholder="Force Bonus" value="<?php echo $adminItemStrengthEffect ?>" required>
@@ -212,6 +213,7 @@ if (isset($_POST['adminItemId'])
                 Défense Bonus : <input type="number" name="adminItemDefenseEffect" class="form-control" placeholder="Défense Bonus" value="<?php echo $adminItemDefenseEffect ?>" required>
                 Défense Magique Bonus : <input type="number" name="adminItemDefenseMagicEffect" class="form-control" placeholder="Défense Magique Bonus" value="<?php echo $adminItemDefenseMagicEffect ?>" required>
                 Sagesse Bonus : <input type="number" name="adminItemWisdomEffect" class="form-control" placeholder="Sagesse Bonus" value="<?php echo $adminItemWisdomEffect ?>" required>
+                Prospection Bonus : <input type="number" name="adminItemProspectingEffect" class="form-control" placeholder="Prospection Bonus" value="<?php echo $adminItemProspectingEffect ?>" required>
                 Prix d'achat : <input type="number" name="adminItemPurchasePrice" class="form-control" placeholder="Prix d'achat" value="<?php echo $adminItemPurchasePrice ?>" required>
                 Prix de vente : <input type="number" name="adminItemSalePrice" class="form-control" placeholder="Prix de vente" value="<?php echo $adminItemSalePrice ?>" required>
                 <input type="hidden" name="adminItemId" value="<?php echo $adminItemId ?>">

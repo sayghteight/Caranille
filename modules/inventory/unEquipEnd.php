@@ -59,32 +59,24 @@ if (isset($_POST['itemId'])
                 characterAgilityEquipments = 0, 
                 characterDefenseEquipments = 0, 
                 characterDefenseMagicEquipments = 0, 
-                characterWisdomEquipments = 0
+                characterWisdomEquipments = 0,
+                characterProspectingEquipments = 0
                 WHERE characterId = :characterId");
                 $updateCharacter->execute(array(
                 'characterId' => $characterId));
                 $updateCharacter->closeCursor();
 
-                //Initialisation des variables qui vont contenir les bonus de tous les équipements équippé
-                $hpBonus = 0;
-                $mpBonus = 0;
-                $strengthBonus = 0;
-                $magicBonus = 0;
-                $agilityBonus = 0;
-                $defenseBonus = 0;
-                $defenseMagicBonus = 0;
-                $wisdomBonus = 0;
-
-                //On va maintenant faire une requête sur tous les équipements que possède le joueurs pour rajouter les bonus
+                //On va maintenant faire une requête sur tous les équipements que possède le joueurs et qui sont équippé pour rajouter les bonus
                 $equipmentEquipedQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
                 WHERE itemId = inventoryItemId
                 AND inventoryEquipped = 1
                 AND inventoryCharacterId = ?");
                 $equipmentEquipedQuery->execute([$characterId]);
 
-                //On fait une boucle sur les résultats et on additionne les bonus de tous les équipements équipé
+                //On fait une boucle sur les résultats et on additionne les bonus de tous les équipements actuellement équipé
                 while ($equipment = $equipmentEquipedQuery->fetch())
                 {
+                    //On récupère les informations de l'équippement
                     $hpBonus = $hpBonus + stripslashes($equipment['itemHpEffect']);
                     $mpBonus = $mpBonus + stripslashes($equipment['itemMpEffect']);
                     $strengthBonus = $strengthBonus + stripslashes($equipment['itemStrengthEffect']);
@@ -93,6 +85,7 @@ if (isset($_POST['itemId'])
                     $defenseBonus = $defenseBonus + stripslashes($equipment['itemDefenseEffect']);
                     $defenseMagicBonus = $defenseMagicBonus + stripslashes($equipment['itemDefenseMagicEffect']);
                     $wisdomBonus = $wisdomBonus + stripslashes($equipment['itemWisdomEffect']);
+                    $prospectingBonus = $wisdomBonus + stripslashes($equipment['itemProspectingEffect']);
                 }
                 $equipmentEquipedQuery->closeCursor();
 
@@ -105,7 +98,8 @@ if (isset($_POST['itemId'])
                 characterAgilityEquipments = :agilityBonus, 
                 characterDefenseEquipments = :defenseBonus, 
                 characterDefenseMagicEquipments = :defenseMagicBonus, 
-                characterWisdomEquipments = :wisdomBonus
+                characterWisdomEquipments = :wisdomBonus,
+                characterProspectingEquipments = :prospectingBonus
                 WHERE characterId = :characterId");
                 $updateCharacter->execute(array(
                 'hpBonus' => $hpBonus,
@@ -116,19 +110,21 @@ if (isset($_POST['itemId'])
                 'defenseBonus' => $defenseBonus,
                 'defenseMagicBonus' => $defenseMagicBonus,
                 'wisdomBonus' => $wisdomBonus,
+                'prospectingBonus' => $prospectingBonus,
                 'characterId' => $characterId));
                 $updateCharacter->closeCursor();
 
                 //On va maintenant finir par actualiser tous le personnage
                 $updateCharacter = $bdd->prepare('UPDATE car_characters
-                SET characterHpTotal = characterHpMax + characterHpSkillPoints + characterHpBonus + characterHpEquipments,
-                characterMpTotal = characterMpMax + characterMpSkillPoints + characterMpBonus + characterMpEquipments,
-                characterStrengthTotal = characterStrength + characterStrengthSkillPoints + characterStrengthBonus + characterStrengthEquipments,
-                characterMagicTotal = characterMagic + characterMagicSkillPoints + characterMagicBonus + characterMagicEquipments,
-                characterAgilityTotal = characterAgility + characterAgilitySkillPoints + characterAgilityBonus + characterAgilityEquipments,
-                characterDefenseTotal = characterDefense + characterDefenseSkillPoints + characterDefenseBonus + characterDefenseEquipments,
-                characterDefenseMagicTotal = characterDefenseMagic + characterDefenseMagicSkillPoints + characterDefenseMagicBonus + characterDefenseMagicEquipments,
-                characterWisdomTotal = characterWisdom + characterWisdomSkillPoints + characterWisdomBonus + characterWisdomEquipments
+                SET characterHpTotal = characterHpMax + characterHpSkillPoints + characterHpBonus + characterHpEquipments + characterHpGuild,
+                characterMpTotal = characterMpMax + characterMpSkillPoints + characterMpBonus + characterMpEquipments + characterMpGuild,
+                characterStrengthTotal = characterStrength + characterStrengthSkillPoints + characterStrengthBonus + characterStrengthEquipments + characterStrengthGuild,
+                characterMagicTotal = characterMagic + characterMagicSkillPoints + characterMagicBonus + characterMagicEquipments + characterMagicGuild,
+                characterAgilityTotal = characterAgility + characterAgilitySkillPoints + characterAgilityBonus + characterAgilityEquipments + characterAgilityGuild,
+                characterDefenseTotal = characterDefense + characterDefenseSkillPoints + characterDefenseBonus + characterDefenseEquipments + characterDefenseGuild,
+                characterDefenseMagicTotal = characterDefenseMagic + characterDefenseMagicSkillPoints + characterDefenseMagicBonus + characterDefenseMagicEquipments + characterDefenseMagicGuild,
+                characterWisdomTotal = characterWisdom + characterWisdomSkillPoints + characterWisdomBonus + characterWisdomEquipments + characterWisdomGuild,
+                characterProspectingTotal = characterProspecting + characterProspectingSkillPoints + characterProspectingBonus + characterProspectingEquipments + characterProspectingGuild
                 WHERE characterId = :characterId');
                 $updateCharacter->execute(['characterId' => $characterId]);
                 $updateCharacter->closeCursor();

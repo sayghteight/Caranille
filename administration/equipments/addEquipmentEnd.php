@@ -9,10 +9,10 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 //Si les variables $_POST suivantes existent
 if (isset($_POST['adminItemRaceId'])
 && isset($_POST['adminItemPicture'])
-&& isset($_POST['adminItemLevel'])
-&& isset($_POST['adminItemLevelRequired'])
 && isset($_POST['adminItemName'])
 && isset($_POST['adminItemDescription'])
+&& isset($_POST['adminItemLevel'])
+&& isset($_POST['adminItemLevelRequired'])
 && isset($_POST['adminItemHpEffects'])
 && isset($_POST['adminItemMpEffect'])
 && isset($_POST['adminItemStrengthEffect'])
@@ -21,6 +21,7 @@ if (isset($_POST['adminItemRaceId'])
 && isset($_POST['adminItemDefenseEffect'])
 && isset($_POST['adminItemDefenseMagicEffect'])
 && isset($_POST['adminItemWisdomEffect'])
+&& isset($_POST['adminItemProspectingEffect'])
 && isset($_POST['adminItemPurchasePrice'])
 && isset($_POST['adminItemSalePrice'])
 && isset($_POST['finalAdd']))
@@ -37,6 +38,7 @@ if (isset($_POST['adminItemRaceId'])
     && ctype_digit($_POST['adminItemDefenseEffect'])
     && ctype_digit($_POST['adminItemDefenseMagicEffect'])
     && ctype_digit($_POST['adminItemWisdomEffect'])
+    && ctype_digit($_POST['adminItemProspectingEffect'])
     && ctype_digit($_POST['adminItemPurchasePrice'])
     && ctype_digit($_POST['adminItemSalePrice'])
     && $_POST['adminItemRaceId'] >= 0
@@ -50,6 +52,7 @@ if (isset($_POST['adminItemRaceId'])
     && $_POST['adminItemDefenseEffect'] >= 0
     && $_POST['adminItemDefenseMagicEffect'] >= 0
     && $_POST['adminItemWisdomEffect'] >= 0
+    && $_POST['adminItemProspectingEffect'] >= 0
     && $_POST['adminItemPurchasePrice'] >= 0
     && $_POST['adminItemSalePrice'] >= 0)
     {
@@ -57,10 +60,10 @@ if (isset($_POST['adminItemRaceId'])
         $adminItemRaceId = htmlspecialchars(addslashes($_POST['adminItemRaceId']));
         $adminItemPicture = htmlspecialchars(addslashes($_POST['adminItemPicture']));
         $adminItemType = htmlspecialchars(addslashes($_POST['adminItemType']));
-        $adminItemLevel = htmlspecialchars(addslashes($_POST['adminItemLevel']));
-        $adminItemLevelRequired = htmlspecialchars(addslashes($_POST['adminItemLevelRequired']));
         $adminItemName = htmlspecialchars(addslashes($_POST['adminItemName']));
         $adminItemDescription = htmlspecialchars(addslashes($_POST['adminItemDescription']));
+        $adminItemLevel = htmlspecialchars(addslashes($_POST['adminItemLevel']));
+        $adminItemLevelRequired = htmlspecialchars(addslashes($_POST['adminItemLevelRequired']));
         $adminItemHpEffects = htmlspecialchars(addslashes($_POST['adminItemHpEffects']));
         $adminItemMpEffect = htmlspecialchars(addslashes($_POST['adminItemMpEffect']));
         $adminItemStrengthEffect = htmlspecialchars(addslashes($_POST['adminItemStrengthEffect']));
@@ -69,6 +72,7 @@ if (isset($_POST['adminItemRaceId'])
         $adminItemDefenseEffect = htmlspecialchars(addslashes($_POST['adminItemDefenseEffect']));
         $adminItemDefenseMagicEffect = htmlspecialchars(addslashes($_POST['adminItemDefenseMagicEffect']));
         $adminItemWisdomEffect = htmlspecialchars(addslashes($_POST['adminItemWisdomEffect']));
+        $adminItemProspectingEffect = htmlspecialchars(addslashes($_POST['adminItemProspectingEffect']));
         $adminItemPurchasePrice = htmlspecialchars(addslashes($_POST['adminItemPurchasePrice']));
         $adminItemSalePrice = htmlspecialchars(addslashes($_POST['adminItemSalePrice']));
 
@@ -78,10 +82,10 @@ if (isset($_POST['adminItemRaceId'])
         :adminItemRaceId,
         :adminItemPicture,
         :adminItemType,
-        :adminItemLevel,
-        :adminItemLevelRequired,
         :adminItemName,
         :adminItemDescription,
+        :adminItemLevel,
+        :adminItemLevelRequired,
         :adminItemHpEffects,
         :adminItemMpEffect,
         :adminItemStrengthEffect,
@@ -90,16 +94,17 @@ if (isset($_POST['adminItemRaceId'])
         :adminItemDefenseEffect,
         :adminItemDefenseMagicEffect,
         :adminItemWisdomEffect,
+        :adminItemProspectingEffect,
         :adminItemPurchasePrice,
         :adminItemSalePrice)");
         $addItem->execute([
         'adminItemRaceId' => $adminItemRaceId,
         'adminItemPicture' => $adminItemPicture,
         'adminItemType' => $adminItemType,
-        'adminItemLevel' => $adminItemLevel,
-        'adminItemLevelRequired' => $adminItemLevelRequired,
         'adminItemName' => $adminItemName,
         'adminItemDescription' => $adminItemDescription,
+        'adminItemLevel' => $adminItemLevel,
+        'adminItemLevelRequired' => $adminItemLevelRequired,
         'adminItemHpEffects' => $adminItemHpEffects,
         'adminItemMpEffect' => $adminItemMpEffect,
         'adminItemStrengthEffect' => $adminItemStrengthEffect,
@@ -108,6 +113,7 @@ if (isset($_POST['adminItemRaceId'])
         'adminItemDefenseEffect' => $adminItemDefenseEffect,
         'adminItemDefenseMagicEffect' => $adminItemDefenseMagicEffect,
         'adminItemWisdomEffect' => $adminItemWisdomEffect,
+        'adminItemProspectingEffect' => $adminItemProspectingEffect,
         'adminItemPurchasePrice' => $adminItemPurchasePrice,
         'adminItemSalePrice' => $adminItemSalePrice]);
         $addItem->closeCursor();

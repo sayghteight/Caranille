@@ -68,16 +68,6 @@ if (isset($_POST['monsterId'])
                 <table class="table">
                     <tr>
                         <td>
-                            Numéro
-                        </td>
-                        
-                        <td>
-                            <?php echo $monsterId; ?>
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td>
                             Nom
                         </td>
                         

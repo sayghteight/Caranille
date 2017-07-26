@@ -52,31 +52,22 @@ if (isset($_POST['adminItemId'])
                     characterAgilityEquipments = 0, 
                     characterDefenseEquipments = 0, 
                     characterDefenseMagicEquipments = 0, 
-                    characterWisdomEquipments = 0
+                    characterWisdomEquipments = 0,
+                    characterProspectingEquipments = 0
                     WHERE characterId = :adminCharacterId");
                     $updateCharacter->execute(array(
                     'adminCharacterId' => $adminCharacterId));
                     $updateCharacter->closeCursor();
-
-                    //Initialisation des variables qui vont contenir les bonus de tous les équipements actuellement équippé
-                    $hpBonus = 0;
-                    $mpBonus = 0;
-                    $strengthBonus = 0;
-                    $magicBonus = 0;
-                    $agilityBonus = 0;
-                    $defenseBonus = 0;
-                    $defenseMagicBonus = 0;
-                    $wisdomBonus = 0;
-
-                    //On va maintenant faire une requête sur tous les équipements que possède le joueurs et qui sont équippé pour rajouter les bonus en ignorant celui qu'on va supprimer
+    
+                    //On va maintenant faire une requête sur tous les équipements que possède le joueurs et qui sont équippé pour rajouter les bonus
                     $equipmentEquipedQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
                     WHERE itemId = inventoryItemId
                     AND inventoryEquipped = 1
                     AND inventoryItemId != ?
                     AND inventoryCharacterId = ?");
                     $equipmentEquipedQuery->execute([$adminItemId, $adminCharacterId]);
-
-                    //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations et on additionne les bonus de tous les équipements actuellement équipé
+    
+                    //On fait une boucle sur les résultats et on additionne les bonus de tous les équipements actuellement équipé
                     while ($equipment = $equipmentEquipedQuery->fetch())
                     {
                         //On récupère les informations de l'équippement
@@ -88,8 +79,10 @@ if (isset($_POST['adminItemId'])
                         $defenseBonus = $defenseBonus + stripslashes($equipment['itemDefenseEffect']);
                         $defenseMagicBonus = $defenseMagicBonus + stripslashes($equipment['itemDefenseMagicEffect']);
                         $wisdomBonus = $wisdomBonus + stripslashes($equipment['itemWisdomEffect']);
+                        $prospectingBonus = $wisdomBonus + stripslashes($equipment['itemProspectingEffect']);
                     }
-
+                    $equipmentEquipedQuery->closeCursor();
+    
                     //On ajoute les bonus des stats au joueurs
                     $updateCharacter = $bdd->prepare("UPDATE car_characters SET
                     characterHpEquipments = :hpBonus,
@@ -99,7 +92,8 @@ if (isset($_POST['adminItemId'])
                     characterAgilityEquipments = :agilityBonus, 
                     characterDefenseEquipments = :defenseBonus, 
                     characterDefenseMagicEquipments = :defenseMagicBonus, 
-                    characterWisdomEquipments = :wisdomBonus
+                    characterWisdomEquipments = :wisdomBonus,
+                    characterProspectingEquipments = :prospectingBonus
                     WHERE characterId = :adminCharacterId");
                     $updateCharacter->execute(array(
                     'hpBonus' => $hpBonus,
@@ -110,10 +104,11 @@ if (isset($_POST['adminItemId'])
                     'defenseBonus' => $defenseBonus,
                     'defenseMagicBonus' => $defenseMagicBonus,
                     'wisdomBonus' => $wisdomBonus,
+                    'prospectingBonus' => $prospectingBonus,
                     'adminCharacterId' => $adminCharacterId));
                     $updateCharacter->closeCursor();
-
-                    //On actualise le personnage
+    
+                    //On va maintenant finir par actualiser tous le personnage
                     $updateCharacter = $bdd->prepare('UPDATE car_characters
                     SET characterHpTotal = characterHpMax + characterHpSkillPoints + characterHpBonus + characterHpEquipments + characterHpGuild,
                     characterMpTotal = characterMpMax + characterMpSkillPoints + characterMpBonus + characterMpEquipments + characterMpGuild,
@@ -122,9 +117,10 @@ if (isset($_POST['adminItemId'])
                     characterAgilityTotal = characterAgility + characterAgilitySkillPoints + characterAgilityBonus + characterAgilityEquipments + characterAgilityGuild,
                     characterDefenseTotal = characterDefense + characterDefenseSkillPoints + characterDefenseBonus + characterDefenseEquipments + characterDefenseGuild,
                     characterDefenseMagicTotal = characterDefenseMagic + characterDefenseMagicSkillPoints + characterDefenseMagicBonus + characterDefenseMagicEquipments + characterDefenseMagicGuild,
-                    characterWisdomTotal = characterWisdom + characterWisdomSkillPoints + characterWisdomBonus + characterWisdomEquipments + characterWisdomGuild
-                    WHERE characterId = :characterId');
-                    $updateCharacter->execute(['characterId' => $characterId]);
+                    characterWisdomTotal = characterWisdom + characterWisdomSkillPoints + characterWisdomBonus + characterWisdomEquipments + characterWisdomGuild,
+                    characterProspectingTotal = characterProspecting + characterProspectingSkillPoints + characterProspectingBonus + characterProspectingEquipments + characterProspectingGuild
+                    WHERE characterId = :adminCharacterId');
+                    $updateCharacter->execute(['adminCharacterId' => $adminCharacterId]);
                     $updateCharacter->closeCursor();
                 }
             }

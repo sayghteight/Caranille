@@ -27,6 +27,7 @@ Agilité : <?php echo $characterAgilityTotal ?><br />
 Défense : <?php echo $characterDefenseTotal ?><br />
 Défense Magique : <?php echo $characterDefenseMagicTotal ?><br />
 Sagesse : <?php echo $characterWisdomTotal ?><br />
+Prospection : <?php echo $characterProspectingTotal ?><br />
 Défaite(s) : <?php echo $characterDefeate ?><br />
 Victoire(s) : <?php echo $characterVictory ?><br />
 Expérience : <?php echo "$characterExperience/$experienceLevel" ?><br />

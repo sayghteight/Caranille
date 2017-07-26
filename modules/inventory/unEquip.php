@@ -42,6 +42,8 @@ if (isset($_POST['itemId'])
             <p>ATTENTION</p> 
             Vous êtes sur le point de déséquiper l'équipement <em><?php echo $itemName ?></em>.<br />
             Confirmez-vous ?
+            
+            <hr>
 
             <form method="POST" action="unEquipEnd.php">
                 <input type="hidden" class="btn btn-default form-control" name="itemId" value="<?php echo $itemId ?>">

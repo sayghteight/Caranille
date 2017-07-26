@@ -27,18 +27,6 @@ if (isset($_POST['adminAccountId'])
         //Si le compte existe
         if ($account == 1) 
         {
-            //On récupère l'id du personnage
-            $characterQuery = $bdd->prepare("SELECT * FROM car_characters 
-            WHERE characterAccountId = ?");
-            $characterQuery->execute([$adminAccountId]);
-            
-            //On fait une boucle sur les résultats
-            while ($character = $characterQuery->fetch())
-            {
-                //On récupère les informations du personnage
-                $adminCharacterId = stripslashes($character['characterId']);
-            }
-            
             //On supprime le compte de la base de donnée
             $accountDeleteQuery = $bdd->prepare("DELETE FROM car_accounts
             WHERE accountId = ?");
@@ -54,57 +42,20 @@ if (isset($_POST['adminAccountId'])
             //On supprime les combats de ce personnage de la base de donnée
             $characterBattleDeleteQuery = $bdd->prepare("DELETE FROM car_battles
             WHERE battleCharacterId = ?");
-            $characterBattleDeleteQuery->execute([$adminCharacterId]);
+            $characterBattleDeleteQuery->execute([$adminAccountId]);
             $characterBattleDeleteQuery->closeCursor();
             
             //On supprime l'inventaire de ce personnage de la base de donnée
             $characterInventoryDeleteQuery = $bdd->prepare("DELETE FROM car_inventory
             WHERE inventoryCharacterId = ?");
-            $characterInventoryDeleteQuery->execute([$adminCharacterId]);
+            $characterInventoryDeleteQuery->execute([$adminAccountId]);
             $characterInventoryDeleteQuery->closeCursor();
             
             //On supprime le bestiaire de ce personnage de la base de donnée
             $characterBestiaryDeleteQuery = $bdd->prepare("DELETE FROM car_bestiary
             WHERE bestiaryCharacterId = ?");
-            $characterBestiaryDeleteQuery->execute([$adminCharacterId]);
+            $characterBestiaryDeleteQuery->execute([$adminAccountId]);
             $characterBestiaryDeleteQuery->closeCursor();
-            
-            //On recherche les conversations de ce personnage afin de supprimer les messages de la base de donnée
-            $privateConversationQuery = $bdd->prepare("SELECT * FROM car_private_conversation
-            WHERE (privateConversationCharacterOneId = ?
-            OR privateConversationCharacterTwoId = ?)");
-            $privateConversationQuery->execute([$adminCharacterId, $adminCharacterId]);
-            $privateConversationRow = $privateConversationQuery->rowCount();
-            
-            //S'il existe une ou plusieurs conversation dans la messagerie privé
-            if ($privateConversationRow > 0) 
-            {
-                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
-                while ($privateConversation = $privateConversationQuery->fetch())
-                {
-                    //On récupère les informations de la conversation
-                    $adminPrivateConversationId = stripslashes($privateConversation['privateConversationId']);
-                    
-                    //On supprime les messages des conversations de la base de donnée
-                    $characterConversationMessageDeleteQuery = $bdd->prepare("DELETE FROM car_private_conversation_message
-                    WHERE privateConversationMessagePrivateConversationId = ?");
-                    $characterConversationMessageDeleteQuery->execute([$adminPrivateConversationId]);
-                    $characterConversationMessageDeleteQuery->closeCursor();
-                }
-            }
-            
-            //On supprime ensuite les conversation de la base de donnée
-            $characterConversationDeleteQuery = $bdd->prepare("DELETE FROM car_private_conversation
-            WHERE (privateConversationCharacterOneId = ?
-            OR privateConversationCharacterTwoId = ?)");
-            $characterConversationDeleteQuery->execute([$adminCharacterId, $adminCharacterId]);
-            $characterConversationDeleteQuery->closeCursor();
-            
-            //On supprime les offres du marché du personnage de la base de donnée
-            $characterMarketDeleteQuery = $bdd->prepare("DELETE FROM car_market
-            WHERE marketCharacterId = ?");
-            $characterMarketDeleteQuery->execute([$adminCharacterId]);
-            $characterMarketDeleteQuery->closeCursor();
             ?>
 
             Le compte a bien été supprimé

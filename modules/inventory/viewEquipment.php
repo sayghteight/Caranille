@@ -49,10 +49,10 @@ if (isset($_POST['itemId'])
                     $equipmentRaceId = stripslashes($equipmentInventory['itemRaceId']);
                     $equipmentPicture = stripslashes($equipmentInventory['itemPicture']);
                     $equipmentType = stripslashes($equipmentInventory['itemType']);
-                    $equipmentLevel = stripslashes($equipmentInventory['itemLevel']);
-                    $equipmentLevelRequired = stripslashes($equipmentInventory['itemLevelRequired']);
                     $equipmentName = stripslashes($equipmentInventory['itemName']);
                     $equipmentDescription = stripslashes($equipmentInventory['itemDescription']);
+                    $equipmentLevel = stripslashes($equipmentInventory['itemLevel']);
+                    $equipmentLevelRequired = stripslashes($equipmentInventory['itemLevelRequired']);
                     $equipmentQuantity = stripslashes($equipmentInventory['inventoryQuantity']);
                     $equipmentHpEffect = stripslashes($equipmentInventory['itemHpEffect']);
                     $equipmentMpEffect = stripslashes($equipmentInventory['itemMpEffect']);
@@ -62,6 +62,7 @@ if (isset($_POST['itemId'])
                     $equipmentDefenseEffect = stripslashes($equipmentInventory['itemDefenseEffect']);
                     $equipmentDefenseMagicEffect = stripslashes($equipmentInventory['itemDefenseMagicEffect']);
                     $equipmentWisdomEffect = stripslashes($equipmentInventory['itemWisdomEffect']);
+                    $equipmentProspectingEffect = stripslashes($equipmentInventory['itemProspectingEffect']);
                     $equipmentSalePrice = stripslashes($equipmentInventory['itemSalePrice']);
                     $equipmentEquipped = stripslashes($equipmentInventory['inventoryEquipped']);
         
@@ -90,36 +91,7 @@ if (isset($_POST['itemId'])
                     <p><img src="<?php echo $equipmentPicture ?>" height="100" width="100"></p>
                     
                     <table class="table">
-                        <tr>
-                            <td>
-                                Classe requise
-                            </td>
-                        
-                            <td>
-                                <?php echo $equipmentRaceName; ?>
-                            </td>
-                        </tr>
-        
-                        <tr>
-                            <td>
-                                Niveau de l'objet
-                            </td>
-                            
-                            <td>
-                                <?php echo $equipmentLevel; ?>
-                            </td>
-                        </tr>
-                        
-                        <tr>
-                            <td>
-                                Niveau requis
-                            </td>
-                            
-                            <td>
-                                <?php echo $equipmentLevelRequired; ?>
-                            </td>
-                        </tr>
-                        
+
                         <tr>
                             <td>
                                 Nom
@@ -137,6 +109,36 @@ if (isset($_POST['itemId'])
                             
                             <td>
                                 <?php echo nl2br($equipmentDescription); ?>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                Classe requise
+                            </td>
+                        
+                            <td>
+                                <?php echo $equipmentRaceName; ?>
+                            </td>
+                        </tr>
+                        
+                         <tr>
+                            <td>
+                                Niveau de l'objet
+                            </td>
+                            
+                            <td>
+                                <?php echo $equipmentLevel; ?>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                Niveau requis
+                            </td>
+                            
+                            <td>
+                                <?php echo $equipmentLevelRequired; ?>
                             </td>
                         </tr>
                             
@@ -158,51 +160,57 @@ if (isset($_POST['itemId'])
                             <td>
                                 <?php
                                 //Si l'équipement augmente les HP on l'affiche
-                                if ($itemHpEffect > 0)
+                                if ($equipmentHpEffect > 0)
                                 {
-                                    echo "+ $itemHpEffect HP<br />";
+                                    echo "+ $equipmentHpEffect HP<br />";
                                 }
                                 
                                 //Si l'équipement augmente les MP on l'affiche
-                                if ($itemMpEffect > 0)
+                                if ($equipmentMpEffect > 0)
                                 {
-                                    echo "+ $itemMpEffect MP<br />";
+                                    echo "+ $equipmentMpEffect MP<br />";
                                 }
                                 
                                 //Si l'équipement augmente la force on l'affiche
-                                if ($itemStrengthEffect > 0)
+                                if ($equipmentStrengthEffect > 0)
                                 {
-                                    echo "+ $itemStrengthEffect Force<br />";
+                                    echo "+ $equipmentStrengthEffect Force<br />";
                                 }
                                 
                                 //Si l'équipement augmente la magie on l'affiche
-                                if ($itemMagicEffect > 0)
+                                if ($equipmentMagicEffect > 0)
                                 {
-                                    echo "+ $itemMagicEffect Magie<br />";
+                                    echo "+ $equipmentMagicEffect Magie<br />";
                                 }
                                 
                                 //Si l'équipement augmente l'agilité on l'affiche
-                                if ($itemAgilityEffect > 0)
+                                if ($equipmentAgilityEffect > 0)
                                 {
-                                    echo "+ $itemAgilityEffect Agilité<br />";
+                                    echo "+ $equipmentAgilityEffect Agilité<br />";
                                 }
                                 
                                 //Si l'équipement augmente la défense on l'affiche
-                                if ($itemDefenseEffect > 0)
+                                if ($equipmentDefenseEffect > 0)
                                 {
-                                    echo "+ $itemDefenseEffect Défense<br />";
+                                    echo "+ $equipmentDefenseEffect Défense<br />";
                                 }
                                 
                                 //Si l'équipement augmente la défense magique on l'affiche
-                                if ($itemDefenseMagicEffect > 0)
+                                if ($equipmentDefenseMagicEffect > 0)
                                 {
-                                    echo "+ $itemDefenseMagicEffect Défense Magic<br />";
+                                    echo "+ $equipmentDefenseMagicEffect Défense Magic<br />";
                                 }
                                 
                                 //Si l'équipement augmente la sagesse on l'affiche
-                                if ($itemWisdomEffect > 0)
+                                if ($equipmentWisdomEffect > 0)
                                 {
-                                    echo "+ $itemWisdomEffect Sagesse<br />";
+                                    echo "+ $equipmentWisdomEffect Sagesse<br />";
+                                }
+                                
+                                //Si l'équipement augmente la prospection on l'affiche
+                                if ($equipmentProspectingEffect > 0)
+                                {
+                                    echo "+ $equipmentProspectingEffect Prospection<br />";
                                 }
                                 ?>
                             </td>
@@ -237,7 +245,7 @@ if (isset($_POST['itemId'])
                                         {
                                             ?>
                                             
-                                            <form method="POST" action="equipItem.php">
+                                            <form method="POST" action="equip.php">
                                                 <input type="hidden" name="itemId" value="<?php echo $itemId ?>">
                                                 <input type="submit" class="btn btn-default form-control" name="equip" value="Equiper">
                                             </form> 

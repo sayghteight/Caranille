@@ -10,10 +10,10 @@ if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 if (isset($_POST['adminItemId']) 
 && isset($_POST['adminItemRaceId'])
 && isset($_POST['adminItemPicture'])
-&& isset($_POST['adminItemLevel'])
-&& isset($_POST['adminItemLevelRequired'])
 && isset($_POST['adminItemName'])
 && isset($_POST['adminItemDescription'])
+&& isset($_POST['adminItemLevel'])
+&& isset($_POST['adminItemLevelRequired'])
 && isset($_POST['adminItemHpEffects'])
 && isset($_POST['adminItemMpEffect'])
 && isset($_POST['adminItemStrengthEffect'])
@@ -22,6 +22,7 @@ if (isset($_POST['adminItemId'])
 && isset($_POST['adminItemDefenseEffect'])
 && isset($_POST['adminItemDefenseMagicEffect'])
 && isset($_POST['adminItemWisdomEffect'])
+&& isset($_POST['adminItemProspectingEffect'])
 && isset($_POST['adminItemPurchasePrice'])
 && isset($_POST['adminItemSalePrice'])
 && isset($_POST['finalEdit']))
@@ -40,6 +41,7 @@ if (isset($_POST['adminItemId'])
     && ctype_digit($_POST['adminItemDefenseEffect'])
     && ctype_digit($_POST['adminItemDefenseMagicEffect'])
     && ctype_digit($_POST['adminItemWisdomEffect'])
+    && ctype_digit($_POST['adminItemProspectingEffect'])
     && ctype_digit($_POST['adminItemPurchasePrice'])
     && ctype_digit($_POST['adminItemSalePrice'])
     && $_POST['adminItemRaceId'] >= 0
@@ -53,6 +55,7 @@ if (isset($_POST['adminItemId'])
     && $_POST['adminItemDefenseEffect'] >= 0
     && $_POST['adminItemDefenseMagicEffect'] >= 0
     && $_POST['adminItemWisdomEffect'] >= 0
+    && $_POST['adminItemProspectingEffect'] >= 0
     && $_POST['adminItemPurchasePrice'] >= 0
     && $_POST['adminItemSalePrice'] >= 0)
     {
@@ -95,10 +98,10 @@ if (isset($_POST['adminItemId'])
                 $adminItemRaceId = htmlspecialchars(addslashes($_POST['adminItemRaceId']));
                 $adminItemPicture = htmlspecialchars(addslashes($_POST['adminItemPicture']));
                 $adminItemType = htmlspecialchars(addslashes($_POST['adminItemType']));
-                $adminItemLevel = htmlspecialchars(addslashes($_POST['adminItemLevel']));
-                $adminItemLevelRequired = htmlspecialchars(addslashes($_POST['adminItemLevelRequired']));
                 $adminItemName = htmlspecialchars(addslashes($_POST['adminItemName']));
                 $adminItemDescription = htmlspecialchars(addslashes($_POST['adminItemDescription']));
+                $adminItemLevel = htmlspecialchars(addslashes($_POST['adminItemLevel']));
+                $adminItemLevelRequired = htmlspecialchars(addslashes($_POST['adminItemLevelRequired']));
                 $adminItemHpEffects = htmlspecialchars(addslashes($_POST['adminItemHpEffects']));
                 $adminItemMpEffect = htmlspecialchars(addslashes($_POST['adminItemMpEffect']));
                 $adminItemStrengthEffect = htmlspecialchars(addslashes($_POST['adminItemStrengthEffect']));
@@ -107,6 +110,7 @@ if (isset($_POST['adminItemId'])
                 $adminItemDefenseEffect = htmlspecialchars(addslashes($_POST['adminItemDefenseEffect']));
                 $adminItemDefenseMagicEffect = htmlspecialchars(addslashes($_POST['adminItemDefenseMagicEffect']));
                 $adminItemWisdomEffect = htmlspecialchars(addslashes($_POST['adminItemWisdomEffect']));
+                $adminItemProspectingEffect = htmlspecialchars(addslashes($_POST['adminItemProspectingEffect']));
                 $adminItemPurchasePrice = htmlspecialchars(addslashes($_POST['adminItemPurchasePrice']));
                 $adminItemSalePrice = htmlspecialchars(addslashes($_POST['adminItemSalePrice']));
 
@@ -115,10 +119,10 @@ if (isset($_POST['adminItemId'])
                 SET itemRaceId = :adminItemRaceId, 
                 itemPicture = :adminItemPicture, 
                 itemType = :adminItemType,
-                itemLevel = :adminItemLevel,
-                itemLevelRequired = :adminItemLevelRequired,
                 itemName = :adminItemName,
                 itemDescription = :adminItemDescription,
+                itemLevel = :adminItemLevel,
+                itemLevelRequired = :adminItemLevelRequired,
                 itemHpEffect = :adminItemHpEffects,
                 itemMpEffect = :adminItemMpEffect,
                 itemStrengthEffect = :adminItemStrengthEffect,
@@ -127,6 +131,7 @@ if (isset($_POST['adminItemId'])
                 itemDefenseEffect = :adminItemDefenseEffect,
                 itemDefenseMagicEffect = :adminItemDefenseMagicEffect,
                 itemWisdomEffect = :adminItemWisdomEffect,
+                itemProspectingEffect = :adminItemProspectingEffect,
                 itemPurchasePrice = :adminItemPurchasePrice,
                 itemSalePrice = :adminItemSalePrice
                 WHERE itemId = :adminItemId');
@@ -134,10 +139,10 @@ if (isset($_POST['adminItemId'])
                 'adminItemRaceId' => $adminItemRaceId,
                 'adminItemPicture' => $adminItemPicture,
                 'adminItemType' => $adminItemType,
-                'adminItemLevel' => $adminItemLevel,
-                'adminItemLevelRequired' => $adminItemLevelRequired,
                 'adminItemName' => $adminItemName,
                 'adminItemDescription' => $adminItemDescription,
+                'adminItemLevel' => $adminItemLevel,
+                'adminItemLevelRequired' => $adminItemLevelRequired,
                 'adminItemHpEffects' => $adminItemHpEffects,
                 'adminItemMpEffect' => $adminItemMpEffect,
                 'adminItemStrengthEffect' => $adminItemStrengthEffect,
@@ -146,6 +151,7 @@ if (isset($_POST['adminItemId'])
                 'adminItemDefenseEffect' => $adminItemDefenseEffect,
                 'adminItemDefenseMagicEffect' => $adminItemDefenseMagicEffect,
                 'adminItemWisdomEffect' => $adminItemWisdomEffect,
+                'adminItemProspectingEffect' => $adminItemProspectingEffect,
                 'adminItemPurchasePrice' => $adminItemPurchasePrice,
                 'adminItemSalePrice' => $adminItemSalePrice,
                 'adminItemId' => $adminItemId]);
@@ -167,7 +173,7 @@ if (isset($_POST['adminItemId'])
                     {   
                         //On récupère les informations du personnage
                         $adminCharacterId = stripslashes($item['inventoryCharacterId']);
-
+                        
                         //On remet les stats du joueurs à zéro pour recalculer ensuite le bonus de tous les équipements équippé
                         $updateCharacter = $bdd->prepare("UPDATE car_characters SET
                         characterHpEquipments = 0,
@@ -177,32 +183,24 @@ if (isset($_POST['adminItemId'])
                         characterAgilityEquipments = 0, 
                         characterDefenseEquipments = 0, 
                         characterDefenseMagicEquipments = 0, 
-                        characterWisdomEquipments = 0
+                        characterWisdomEquipments = 0,
+                        characterProspectingEquipments = 0
                         WHERE characterId = :adminCharacterId");
                         $updateCharacter->execute(array(
                         'adminCharacterId' => $adminCharacterId));
                         $updateCharacter->closeCursor();
-
-                        //Initialisation des variables qui vont contenir les bonus de tous les équipements actuellement équippé
-                        $hpBonus = 0;
-                        $mpBonus = 0;
-                        $strengthBonus = 0;
-                        $magicBonus = 0;
-                        $agilityBonus = 0;
-                        $defenseBonus = 0;
-                        $defenseMagicBonus = 0;
-                        $wisdomBonus = 0;
-
-                        //On va maintenant faire une requête sur tous les équipements que possède le joueurs et qui sont équippé pour rajouter les bonus
+        
+                        //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations et on additionne les bonus de tous les équipements actuellement équipé
                         $equipmentEquipedQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
                         WHERE itemId = inventoryItemId
                         AND inventoryEquipped = 1
                         AND inventoryCharacterId = ?");
                         $equipmentEquipedQuery->execute([$adminCharacterId]);
-
-                        ////On fait une boucle sur le ou les résultats obtenu pour récupérer les informations et on additionne les bonus de tous les équipements actuellement équipé
+        
+                        //On fait une boucle sur les résultats et on additionne les bonus de tous les équipements actuellement équipé
                         while ($equipment = $equipmentEquipedQuery->fetch())
                         {
+                            //On récupère les informations de l'équippement
                             $hpBonus = $hpBonus + stripslashes($equipment['itemHpEffect']);
                             $mpBonus = $mpBonus + stripslashes($equipment['itemMpEffect']);
                             $strengthBonus = $strengthBonus + stripslashes($equipment['itemStrengthEffect']);
@@ -211,8 +209,10 @@ if (isset($_POST['adminItemId'])
                             $defenseBonus = $defenseBonus + stripslashes($equipment['itemDefenseEffect']);
                             $defenseMagicBonus = $defenseMagicBonus + stripslashes($equipment['itemDefenseMagicEffect']);
                             $wisdomBonus = $wisdomBonus + stripslashes($equipment['itemWisdomEffect']);
+                            $prospectingBonus = $wisdomBonus + stripslashes($equipment['itemProspectingEffect']);
                         }
-
+                        $equipmentEquipedQuery->closeCursor();
+        
                         //On ajoute les bonus des stats au joueurs
                         $updateCharacter = $bdd->prepare("UPDATE car_characters SET
                         characterHpEquipments = :hpBonus,
@@ -222,7 +222,8 @@ if (isset($_POST['adminItemId'])
                         characterAgilityEquipments = :agilityBonus, 
                         characterDefenseEquipments = :defenseBonus, 
                         characterDefenseMagicEquipments = :defenseMagicBonus, 
-                        characterWisdomEquipments = :wisdomBonus
+                        characterWisdomEquipments = :wisdomBonus,
+                        characterProspectingEquipments = :prospectingBonus
                         WHERE characterId = :adminCharacterId");
                         $updateCharacter->execute(array(
                         'hpBonus' => $hpBonus,
@@ -233,10 +234,11 @@ if (isset($_POST['adminItemId'])
                         'defenseBonus' => $defenseBonus,
                         'defenseMagicBonus' => $defenseMagicBonus,
                         'wisdomBonus' => $wisdomBonus,
+                        'prospectingBonus' => $prospectingBonus,
                         'adminCharacterId' => $adminCharacterId));
                         $updateCharacter->closeCursor();
-
-                        //On actualise le personnage
+        
+                        //On va maintenant finir par actualiser tous le personnage
                         $updateCharacter = $bdd->prepare('UPDATE car_characters
                         SET characterHpTotal = characterHpMax + characterHpSkillPoints + characterHpBonus + characterHpEquipments + characterHpGuild,
                         characterMpTotal = characterMpMax + characterMpSkillPoints + characterMpBonus + characterMpEquipments + characterMpGuild,
@@ -245,9 +247,10 @@ if (isset($_POST['adminItemId'])
                         characterAgilityTotal = characterAgility + characterAgilitySkillPoints + characterAgilityBonus + characterAgilityEquipments + characterAgilityGuild,
                         characterDefenseTotal = characterDefense + characterDefenseSkillPoints + characterDefenseBonus + characterDefenseEquipments + characterDefenseGuild,
                         characterDefenseMagicTotal = characterDefenseMagic + characterDefenseMagicSkillPoints + characterDefenseMagicBonus + characterDefenseMagicEquipments + characterDefenseMagicGuild,
-                        characterWisdomTotal = characterWisdom + characterWisdomSkillPoints + characterWisdomBonus + characterWisdomEquipments + characterWisdomGuild
-                        WHERE characterId = :characterId');
-                        $updateCharacter->execute(['characterId' => $characterId]);
+                        characterWisdomTotal = characterWisdom + characterWisdomSkillPoints + characterWisdomBonus + characterWisdomEquipments + characterWisdomGuild,
+                        characterProspectingTotal = characterProspecting + characterProspectingSkillPoints + characterProspectingBonus + characterProspectingEquipments + characterProspectingGuild
+                        WHERE characterId = :adminCharacterId');
+                        $updateCharacter->execute(['adminCharacterId' => $adminCharacterId]);
                         $updateCharacter->closeCursor();
                     }
                 }
@@ -289,3 +292,39 @@ else
 }
 
 require_once("../html/footer.php");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

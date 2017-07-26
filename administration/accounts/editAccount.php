@@ -100,6 +100,12 @@ if (isset($_POST['adminAccountId'])
                 $adminCharacterWisdomSkillPoints = stripslashes($character['characterWisdomSkillPoints']);
                 $adminCharacterWisdomBonus = stripslashes($character['characterWisdomBonus']);
                 $adminCharacterWisdomEquipments = stripslashes($character['characterWisdomEquipments']);
+                $adminCharacterProspecting = stripslashes($character['characterProspecting']);
+                $adminCharacterProspectingSkillPoints = stripslashes($character['characterProspectingSkillPoints']);
+                $adminCharacterProspectingBonus = stripslashes($character['characterProspectingBonus']);
+                $adminCharacterProspectingEquipments = stripslashes($character['characterProspectingEquipments']);
+                $adminCharacterProspectingGuild = stripslashes($character['characterProspectingGuild']);
+                $adminCharacterProspectingTotal = stripslashes($character['characterProspectingTotal']);
                 $adminCharacterWisdomGuild = stripslashes($character['characterWisdomGuild']);
                 $adminCharacterWisdomTotal = stripslashes($character['characterWisdomTotal']);
                 $adminCharacterDefeate = stripslashes($character['characterDefeate']);
@@ -381,6 +387,12 @@ if (isset($_POST['adminAccountId'])
             Sagesse équipement : <?php echo $adminCharacterWisdomEquipments ?><br />
             Sagesse bonus guilde : <?php echo $adminCharacterWisdomGuild ?><br />
             Sagesse Total : <?php echo $adminCharacterWisdomTotal ?><br />
+            Prospection actuelle : <?php echo $adminCharacterProspecting ?><br />
+            Prospection points de compétences : <?php echo $adminCharacterProspectingSkillPoints ?><br />
+            Prospection bonus : <?php echo $adminCharacterProspectingBonus ?><br />
+            Prospection équipement : <?php echo $adminCharacterProspectingEquipments ?><br />
+            Prospection bonus guilde : <?php echo $adminCharacterProspectingGuild ?><br />
+            Prospection Total : <?php echo $adminCharacterProspectingTotal ?><br />
             Défaite : <?php echo $adminCharacterDefeate ?><br />
             Victoire : <?php echo $adminCharacterVictory ?><br />
             Experience : <?php echo $adminCharacterExperience ?><br />

@@ -165,6 +165,12 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         '0', //characterWisdomEquipments
                         '0', //characterWisdomGuild
                         '0', //characterWisdomTotal
+                        '0', //characterProspecting
+                        '0', //characterProspectingSkillPoints
+                        '0', //characterProspectingParchment
+                        '0', //characterProspectingEquipments
+                        '0', //characterProspectingGuild
+                        '0', //characterProspectingTotal
                         '0', //characterDefeate
                         '0', //characterVictory
                         '0', //characterExperience
@@ -242,6 +248,12 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         '0',
                         '0',
                         '0',
+                        '0',
+                        '0',
+                        '0',
+                        '0',
+                        '0',
+                        '0',
                         '1',
                         '0',
                         '1'
@@ -252,7 +264,6 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         'characterName' => $characterName,
                         'characterSex' => $characterSex]);
                         $addCharacter->closeCursor();
-
                         ?>
 
                         Votre compte administrateur a bien été crée, vous pouvez commencer à développer votre jeu !

@@ -32,5 +32,8 @@ Votre personnage possède <?php echo $characterSkillPoints; ?> PC (Point de comp
 <form method="POST" action="addWisdom.php">
 	<input type="submit" name="addWisdom" class="btn btn-default form-control" value="+1 en sagesse">
 </form>
+<form method="POST" action="addProspecting.php">
+	<input type="submit" name="addWisdom" class="btn btn-default form-control" value="+1 en prospection">
+</form>
 
 <?php require_once("../../html/footer.php"); ?>

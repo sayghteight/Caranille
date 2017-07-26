@@ -44,7 +44,6 @@ if (isset($_POST['itemId'])
                     $itemId = stripslashes($itemInventory['itemId']);
                     $itemPicture = stripslashes($itemInventory['itemPicture']);
                     $itemType = stripslashes($itemInventory['itemType']);
-                    $itemLevelRequired = stripslashes($itemInventory['itemLevelRequired']);
                     $itemName = stripslashes($itemInventory['itemName']);
                     $itemDescription = stripslashes($itemInventory['itemDescription']);
                     $itemQuantity = stripslashes($itemInventory['inventoryQuantity']);
@@ -62,16 +61,7 @@ if (isset($_POST['itemId'])
                     <p><img src="<?php echo $itemPicture ?>" height="100" width="100"></p>
                     
                     <table class="table">
-                        <tr>
-                            <td>
-                                Niveau requis
-                            </td>
-                            
-                            <td>
-                                <?php echo $itemLevelRequired; ?>
-                            </td>
-                        </tr>
-        
+                        
                         <tr>
                             <td>
                                 Nom
