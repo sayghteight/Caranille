@@ -3,7 +3,7 @@
 
 <?php echo $gameName; ?>
 
-<hr >
+<hr>
 
 <?php echo $gamePresentation; ?>
 
