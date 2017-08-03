@@ -47,7 +47,9 @@ if (isset($_POST['adminAccountId'])
                 //On récupère toutes les informations du personnage
                 $adminCharacterId = stripslashes($character['characterId']);
                 $adminCharacterAccountId = stripslashes($character['characterAccountId']);
+                $adminCharacterGuildId = stripslashes($character['characterGuildId']);
                 $adminCharacterRaceId = stripslashes($character['characterRaceId']);
+                $adminCharacterTownId = stripslashes($character['characterTownId']);
                 $adminCharacterPicture = stripslashes($character['characterPicture']);
                 $adminCharacterName = stripslashes($character['characterName']);
                 $adminCharacterLevel = stripslashes($character['characterLevel']);
@@ -114,7 +116,6 @@ if (isset($_POST['adminAccountId'])
                 $adminCharacterExperienceTotal = stripslashes($character['characterExperienceTotal']);
                 $adminCharacterSkillPoints = stripslashes($character['characterSkillPoints']);
                 $adminCharacterGold = stripslashes($character['characterGold']);
-                $adminCharacterTownId = stripslashes($character['characterTownId']);
                 $adminCharacterChapter = stripslashes($character['characterChapter']);
                 $adminCharacterOnBattle = stripslashes($character['characterOnBattle']);
                 $adminCharacterEnable = stripslashes($character['characterEnable']);

@@ -12,7 +12,9 @@ while ($character = $characterQuery->fetch())
     //On récupère les informations du personnage
     $characterId = stripslashes($character['characterId']);
     $characterAccountId = stripslashes($character['characterAccountId']);
+    $characterGuildId = stripslashes($character['characterGuildId']);
     $characterRaceId = stripslashes($character['characterRaceId']);
+    $characterTownId = stripslashes($character['characterTownId']);
     $characterPicture = stripslashes($character['characterPicture']);
     $characterName = stripslashes($character['characterName']);
     $characterLevel = stripslashes($character['characterLevel']);
@@ -79,7 +81,6 @@ while ($character = $characterQuery->fetch())
     $characterExperienceTotal = stripslashes($character['characterExperienceTotal']);
     $characterSkillPoints = stripslashes($character['characterSkillPoints']);
     $characterGold = stripslashes($character['characterGold']);
-    $characterTownId = stripslashes($character['characterTownId']);
     $characterChapter = stripslashes($character['characterChapter']);
     $characterOnBattle = stripslashes($character['characterOnBattle']);
     $characterEnable = stripslashes($character['characterEnable']);

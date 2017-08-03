@@ -111,6 +111,7 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         '', //characterId
                         :accountId, //characterAccountId
                         '1', //characterRaceId
+                        '0', //characterTownId
                         'http://localhost/character.png', //characterPicture
                         :characterName, //characterName
                         '1', //characterLevel
@@ -177,7 +178,6 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         '0', //characterExperienceTotal
                         '0', //characterSkillPoints
                         '0', //characterGold
-                        '0', //characterTownId
                         '1', //characterChapter
                         '0', //characterOnBattle
                         '1' //characterEnable
@@ -187,6 +187,7 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         '',
                         :accountId,
                         :characterRaceId,
+                        '0',
                         '../../img/empty.png',
                         :characterName,
                         '1',
@@ -235,7 +236,6 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         '0',
                         '0',
                         '10',
-                        '0',
                         '0',
                         '0',
                         '0',

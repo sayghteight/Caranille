@@ -43,7 +43,9 @@ CREATE TABLE IF NOT EXISTS `car_chapters`
 CREATE TABLE IF NOT EXISTS `car_characters` (
   `characterId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `characterAccountId` int(11) NOT NULL,
+  `characterGuildId` int(11) NOT NULL,
   `characterRaceId` int(11) NOT NULL,
+  `characterTownId` int(11) NOT NULL,
   `characterPicture` varchar(50) NOT NULL,
   `characterName` varchar(30) NOT NULL,
   `characterLevel` int(11) NOT NULL,
@@ -110,7 +112,6 @@ CREATE TABLE IF NOT EXISTS `car_characters` (
   `characterExperienceTotal` int(11) NOT NULL,
   `characterSkillPoints` int(11) NOT NULL,
   `characterGold` int(11) NOT NULL,
-  `characterTownId` int(11) NOT NULL,
   `characterChapter` int(11) NOT NULL,
   `characterOnBattle` int(11) NOT NULL,
   `characterEnable` int(11) NOT NULL
