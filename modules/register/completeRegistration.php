@@ -114,7 +114,8 @@ if (isset($_POST['accountPseudo'])
                         Add character model
                         '', //characterId
                         :accountId, //characterAccountId
-                        '1', //characterRaceId
+                        '0', //characterGuildId
+                        :characterRaceId, //characterRaceId
                         '0', //characterTownId
                         'http://localhost/character.png', //characterPicture
                         :characterName, //characterName
@@ -190,6 +191,7 @@ if (isset($_POST['accountPseudo'])
                         $addCharacter = $bdd->prepare("INSERT INTO car_characters VALUES(
                         '',
                         :accountId,
+                        '0',
                         :characterRaceId,
                         '0',
                         '../../img/empty.png',
