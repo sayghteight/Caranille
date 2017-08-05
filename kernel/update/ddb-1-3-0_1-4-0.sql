@@ -4,7 +4,7 @@ ALTER TABLE  `car_characters`
 ADD  `characterGuildId` INT( 11 ) NOT NULL AFTER  `characterAccountId`,
 ADD  `characterTownId` INT( 11 ) NOT NULL AFTER  `characterRaceId`;
 
-ALTER TABLE `car_items` DROP `itemType`;» ?
+ALTER TABLE `car_items` DROP `itemType`;
 
 ALTER TABLE  `car_items` 
 ADD  `itemItemTypeId` INT( 11 ) NOT NULL AFTER  `itemId`;
