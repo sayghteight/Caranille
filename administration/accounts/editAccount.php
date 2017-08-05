@@ -159,8 +159,9 @@ if (isset($_POST['adminAccountId'])
             }
 
             //On récupère les équipements équippé du personnage pour les afficher dans le menu d'information du personnage
-            $equipmentEquipedQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
-            WHERE itemId = inventoryItemId
+            $equipmentEquipedQuery = $bdd->prepare("SELECT * FROM car_items, car_items_types, car_inventory 
+            WHERE itemItemTypeId = itemTypeId
+            AND itemId = inventoryItemId
             AND inventoryEquipped = 1
             AND inventoryCharacterId = ?");
             $equipmentEquipedQuery->execute([$adminCharacterId]);
@@ -168,7 +169,7 @@ if (isset($_POST['adminAccountId'])
             //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations et on vérifit le type d'équipement
             while ($equipment = $equipmentEquipedQuery->fetch())
             {
-                switch ($equipment['itemType'])
+                switch ($equipment['itemTypeName'])
                 {
                     //S'il s'agit d'une armure
                     case "Armor":
@@ -332,11 +333,11 @@ if (isset($_POST['adminAccountId'])
             Classe : <?php echo $adminRaceName ?><br />
             Nom du personnage : <?php echo $adminCharacterName ?><br />
             Niveau du personnage : <?php echo $adminCharacterLevel ?><br />
-            Armure : <?php echo $adminEquipmentArmorName ?><br />
-            Bottes : <?php echo $adminEquipmentBootsName ?><br />
-            Gants : <?php echo $adminEquipmentGlovesName ?><br />
-            Casque : <?php echo $adminEquipmentHelmetName ?><br />
-            Arme : <?php echo $adminEquipmentWeaponName ?><br />
+            <?php echo $itemArmorNameShow ?> : <?php echo $adminEquipmentArmorName ?><br />
+            <?php echo $itemBootsNameShow ?> : <?php echo $adminEquipmentBootsName ?><br />
+            <?php echo $itemGlovesNameShow ?> : <?php echo $adminEquipmentGlovesName ?><br />
+            <?php echo $itemHelmetNameShow ?> : <?php echo $adminEquipmentHelmetName ?><br />
+            <?php echo $itemWeaponNameShow ?> : <?php echo $adminEquipmentWeaponName ?><br />
             Sexe du personnage : <?php echo $adminCharacterSexName ?><br />
             HP actuel : <?php echo $adminCharacterHpMin ?><br />
             HP maximum : <?php echo $adminCharacterHpMax ?><br />
