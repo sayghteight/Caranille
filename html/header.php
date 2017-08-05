@@ -19,6 +19,8 @@ if (isset($_SESSION['account']['id']))
     require_once("../../kernel/battle/index.php");
     //On récupère toutes les informations des équipements équipé au personnage
     require_once("../../kernel/equipment/index.php");
+    //On récupère toutes les informations des type d'équipement
+    require_once("../../kernel/equipmentType/index.php");
     //On vérifie le nombre d'offre dans le marché
     require_once("../../kernel/market/index.php");
     //On vérifie le nombre de message de conversation privée non lu

@@ -30,8 +30,9 @@ if (isset($_POST['shopId'])
         if ($shopRow == 1) 
         {
             //On fait une requête pour vérifier si l'objet choisit existe
-            $itemQuery = $bdd->prepare('SELECT * FROM car_items 
-            WHERE itemId = ?');
+            $itemQuery = $bdd->prepare('SELECT * FROM car_items, car_items_types
+            WHERE itemItemTypeId = itemTypeId
+            AND itemId = ?');
             $itemQuery->execute([$itemId]);
             $itemRow = $itemQuery->rowCount();
 
@@ -43,7 +44,8 @@ if (isset($_POST['shopId'])
                 {
                     //On récupère les informations de l'objet
                     $itemRaceId = stripslashes($item['itemRaceId']);
-                    $itemType = stripslashes($item['itemType']);
+                    $itemTypeName = stripslashes($item['itemTypeName']);
+                    $itemTypeNameShow = stripslashes($item['itemTypeNameShow']);
                     $itemLevel = stripslashes($item['itemLevel']);
                     $itemLevelRequired = stripslashes($item['itemLevelRequired']);
                     $itemName = stripslashes($item['itemName']);
@@ -104,6 +106,16 @@ if (isset($_POST['shopId'])
                     
                     <tr>
                         <td>
+                            Type
+                        </td>
+                        
+                        <td>
+                            <?php echo $itemTypeNameShow; ?>
+                        </td>
+                    </tr>
+                        
+                    <tr>
+                        <td>
                             Nom
                         </td>
                         
@@ -124,7 +136,7 @@ if (isset($_POST['shopId'])
                     
                     <?php
                     //S'il s'agit d'un équipement on affiche la race de celui-ci ainsi que son niveu requis
-                    if ($itemType != "Item")
+                    if ($itemTypeName != "Item")
                     {
                         ?>
                         <tr>
@@ -168,7 +180,7 @@ if (isset($_POST['shopId'])
                         <td>
                             <?php
                             //S'il s'agit d'un équipement on affiche toutes les stats concernée
-                            if ($itemType != "Item")
+                            if ($itemTypeName != "Item")
                             {
                                 //Si l'équipement augmente les HP on l'affiche
                                 if ($itemHpEffect > 0)

@@ -6,9 +6,10 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); }
 
 //On fait une requête pour vérifier tous les objets qui sont dans l'inventaire du joueur
-$itemQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
-WHERE itemId = inventoryItemId
-AND itemType = 'Item'
+$itemQuery = $bdd->prepare("SELECT * FROM  car_items, car_items_types, car_inventory 
+WHERE itemItemTypeId = itemTypeId
+AND itemId = inventoryItemId
+AND itemTypeName = 'Item'
 AND inventoryCharacterId = ?");
 $itemQuery->execute([$characterId]);
 $itemRow = $itemQuery->rowCount();

@@ -26,9 +26,11 @@ if (isset($_POST['itemId'])
         if ($itemRow == 1) 
         {
             //On fait une requête pour avoir la liste des objets du personnage
-            $itemInventoryQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
-            WHERE itemId = inventoryItemId
-            AND itemType = 'Item' 
+            $itemInventoryQuery = $bdd->prepare("SELECT * FROM  car_items, car_items_types, car_items_types, car_inventory 
+            WHERE WHERE itemItemTypeId = itemTypeId
+            AND itemItemTypeId = itemTypeId
+            AND itemId = inventoryItemId
+            AND itemTypeName = 'Item' 
             AND inventoryCharacterId = ?
             AND inventoryItemId = ?");
             $itemInventoryQuery->execute([$characterId, $itemId]);
@@ -42,8 +44,9 @@ if (isset($_POST['itemId'])
                 {
                     //On récupère les informations de l'objet
                     $itemId = stripslashes($itemInventory['itemId']);
+                    $itemTypeName = stripslashes($equipmentInventory['itemTypeName']);
+                    $itemTypeNameShow = stripslashes($equipmentInventory['itemTypeNameShow']);
                     $itemPicture = stripslashes($itemInventory['itemPicture']);
-                    $itemType = stripslashes($itemInventory['itemType']);
                     $itemName = stripslashes($itemInventory['itemName']);
                     $itemDescription = stripslashes($itemInventory['itemDescription']);
                     $itemQuantity = stripslashes($itemInventory['inventoryQuantity']);
@@ -61,6 +64,16 @@ if (isset($_POST['itemId'])
                     <p><img src="<?php echo $itemPicture ?>" height="100" width="100"></p>
                     
                     <table class="table">
+                        
+                        <tr>
+                            <td>
+                                Type
+                            </td>
+                            
+                            <td>
+                                <?php echo $itemTypeNameShow; ?>
+                            </td>
+                        </tr>
                         
                         <tr>
                             <td>

@@ -32,9 +32,7 @@ if (isset($_POST['add']))
                     $raceId = stripslashes($raceList['raceId']); 
                     $raceName = stripslashes($raceList['raceName']);
                     ?>
-
-                        <option value="<?php echo $raceId ?>"><?php echo $raceName ?></option>
-
+                    <option value="<?php echo $raceId ?>"><?php echo $raceName ?></option>
                     <?php
                 }
             }
@@ -43,12 +41,28 @@ if (isset($_POST['add']))
             
         </select>
         Image : <input type="text" name="adminItemPicture" class="form-control" placeholder="Image" value="../../img/empty.png" required>
-        Type : <select name="adminItemType" class="form-control">
-            <option value="Armor">Armure</option>
-            <option value="Boots">Bottes</option>
-            <option value="Gloves">Gants</option>
-            <option value="Helmet">Casque</option>
-            <option value="Weapon">Arme</option>
+        Type : <select name="adminItemItemTypeId" class="form-control">
+            
+            <?php
+            //On rempli le menu déroulant avec la liste des classes disponible
+            $itemTypeQuery = $bdd->query("SELECT * FROM car_items_types
+            WHERE itemTypeName != 'Item'
+            AND itemTypeName != 'Parchment'");
+            
+            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+            while ($itemType = $itemTypeQuery->fetch())
+            {
+                //On récupère les informations de la classe
+                $adminItemTypeId = stripslashes($itemType['itemTypeId']);
+                $adminItemTypeName = stripslashes($itemType['itemTypeName']);
+                $adminItemTypeNameShow = stripslashes($itemType['itemTypeNameShow']);
+                ?>
+                <option value="<?php echo $adminItemTypeId ?>"><?php echo $adminItemTypeNameShow ?></option>
+                <?php
+            }
+            $itemTypeQuery->closeCursor();
+            ?>
+            
         </select>
         Nom : <input type="text" name="adminItemName" class="form-control" placeholder="Nom" required>
         Description : <br> <textarea class="form-control" name="adminItemDescription" id="adminItemDescription" rows="3" required></textarea>

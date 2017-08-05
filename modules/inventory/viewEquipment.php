@@ -26,13 +26,14 @@ if (isset($_POST['itemId'])
         if ($equipmentRow == 1) 
         {
             //On fait une requête pour vérifier si le joueur possède bien cet équipement
-            $equipmentInventoryQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
-            WHERE itemId = inventoryItemId
-            AND (itemType = 'Armor' 
-            OR itemType = 'Boots' 
-            OR itemType = 'Gloves' 
-            OR itemType = 'Helmet' 
-            OR itemType = 'Weapon')
+            $equipmentInventoryQuery = $bdd->prepare("SELECT * FROM  car_items, car_items_types, car_inventory 
+            WHERE itemItemTypeId = itemTypeId
+            AND itemId = inventoryItemId
+            AND (itemTypeName = 'Armor' 
+            OR itemTypeName = 'Boots' 
+            OR itemTypeName = 'Gloves' 
+            OR itemTypeName = 'Helmet' 
+            OR itemTypeName = 'Weapon')
             AND inventoryCharacterId = ?
             AND inventoryItemId = ?");
             $equipmentInventoryQuery->execute([$characterId, $itemId]);
@@ -46,9 +47,10 @@ if (isset($_POST['itemId'])
                 {
                     //On récupère les informations de l'équippement
                     $equipmentId = stripslashes($equipmentInventory['itemId']);
+                    $equipmentTypeName = stripslashes($equipmentInventory['itemTypeName']);
+                    $equipmentTypeNameShow = stripslashes($equipmentInventory['itemTypeNameShow']);
                     $equipmentRaceId = stripslashes($equipmentInventory['itemRaceId']);
                     $equipmentPicture = stripslashes($equipmentInventory['itemPicture']);
-                    $equipmentType = stripslashes($equipmentInventory['itemType']);
                     $equipmentName = stripslashes($equipmentInventory['itemName']);
                     $equipmentDescription = stripslashes($equipmentInventory['itemDescription']);
                     $equipmentLevel = stripslashes($equipmentInventory['itemLevel']);
@@ -91,6 +93,15 @@ if (isset($_POST['itemId'])
                     <p><img src="<?php echo $equipmentPicture ?>" height="100" width="100"></p>
                     
                     <table class="table">
+                        
+                        <tr>
+                            <td>
+                                Type
+                            </td>
+                            
+                            <td>
+                                <?php echo $equipmentTypeNameShow; ?>
+                        </td>
 
                         <tr>
                             <td>

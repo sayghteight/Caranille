@@ -187,6 +187,26 @@ CREATE TABLE IF NOT EXISTS `car_configuration`
   `configurationAccess` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `car_guilds` 
+(
+  `guildId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `guildName` varchar(30) NOT NULL,
+  `guildDescription` text NOT NULL,
+  `guildLevel` text NOT NULL,
+  `guildHpBonus` int(11) NOT NULL,
+  `guildMpBonus` int(11) NOT NULL,
+  `guildStrengthBonus` int(11) NOT NULL,
+  `guildMagicBonus` int(11) NOT NULL,
+  `guildAgilityBonus` int(11) NOT NULL,
+  `guildDefenseBonus` int(11) NOT NULL,
+  `guildDefenseMagicBonus` int(11) NOT NULL,
+  `guildWisdomBonus` int(11) NOT NULL,
+  `guildProspectingBonus` int(11) NOT NULL,
+  `guildExperience` int(11) NOT NULL,
+  `guildExperienceTotal` int(11) NOT NULL,
+  `guildCreationDate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `car_inventory` 
 (
   `inventoryId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -198,6 +218,7 @@ CREATE TABLE IF NOT EXISTS `car_inventory`
 
 CREATE TABLE IF NOT EXISTS `car_items` (
   `itemId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `itemItemTypeId` int(11) NOT NULL,
   `itemRaceId` int(11) NOT NULL,
   `itemPicture` text NOT NULL,
   `itemType` varchar(30) NOT NULL,
@@ -216,6 +237,12 @@ CREATE TABLE IF NOT EXISTS `car_items` (
   `itemProspectingEffect` int(11) NOT NULL,
   `itemPurchasePrice` int(11) NOT NULL,
   `itemSalePrice` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `car_items_types` (
+  `itemTypeId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `itemTypeName` varchar(30) NOT NULL,
+  `itemTypeNameShow` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `car_market` (
@@ -342,6 +369,18 @@ CREATE TABLE IF NOT EXISTS `car_towns_shops`
 
 INSERT INTO `car_configuration` (`configurationId`, `configurationGameName`, `configurationPresentation`, `configurationExperience`, `configurationSkillPoint`, `configurationExperienceBonus`, `configurationGoldBonus`, `configurationDropBonus`, `configurationAccess`) VALUES
 (1, 'Nom de votre jeu', 'Description de votre jeu', 500, 4, 0, 0, 0, 'Closed');
+
+--
+-- Contenu de la table `car_items_types`
+--
+INSERT INTO `car_items_types` (`itemTypeId`, `itemTypeName`, `itemTypeNameShow`) VALUES
+(1, 'Armor', 'Armure'),
+(2, 'Boots', 'Bottes'),
+(3, 'Gloves', 'Gants'),
+(4, 'Helmet', 'Casque'),
+(5, 'Weapon', 'Arme'),
+(6, 'Item', 'Objet'),
+(7, 'Parchment', 'Parchemin');
 
 --
 -- Contenu de la table `car_races`

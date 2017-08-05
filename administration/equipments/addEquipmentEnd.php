@@ -7,7 +7,8 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //Si les variables $_POST suivantes existent
-if (isset($_POST['adminItemRaceId'])
+if (isset($_POST['adminItemItemTypeId'])
+&& isset($_POST['adminItemRaceId'])
 && isset($_POST['adminItemPicture'])
 && isset($_POST['adminItemName'])
 && isset($_POST['adminItemDescription'])
@@ -27,7 +28,8 @@ if (isset($_POST['adminItemRaceId'])
 && isset($_POST['finalAdd']))
 {
     //On vérifie si tous les champs numérique contiennent bien un nombre entier positif
-    if (ctype_digit($_POST['adminItemRaceId'])
+    if (ctype_digit($_POST['adminItemItemTypeId'])
+    && ctype_digit($_POST['adminItemRaceId'])
     && ctype_digit($_POST['adminItemLevel'])
     && ctype_digit($_POST['adminItemLevelRequired'])
     && ctype_digit($_POST['adminItemHpEffects'])
@@ -41,6 +43,7 @@ if (isset($_POST['adminItemRaceId'])
     && ctype_digit($_POST['adminItemProspectingEffect'])
     && ctype_digit($_POST['adminItemPurchasePrice'])
     && ctype_digit($_POST['adminItemSalePrice'])
+    && $_POST['adminItemItemTypeId'] >= 0
     && $_POST['adminItemRaceId'] >= 0
     && $_POST['adminItemLevel'] >= 0
     && $_POST['adminItemLevelRequired'] >= 0
@@ -57,77 +60,121 @@ if (isset($_POST['adminItemRaceId'])
     && $_POST['adminItemSalePrice'] >= 0)
     {
         //On récupère les informations du formulaire
+        $adminItemItemTypeId = htmlspecialchars(addslashes($_POST['adminItemItemTypeId']));
         $adminItemRaceId = htmlspecialchars(addslashes($_POST['adminItemRaceId']));
-        $adminItemPicture = htmlspecialchars(addslashes($_POST['adminItemPicture']));
-        $adminItemType = htmlspecialchars(addslashes($_POST['adminItemType']));
-        $adminItemName = htmlspecialchars(addslashes($_POST['adminItemName']));
-        $adminItemDescription = htmlspecialchars(addslashes($_POST['adminItemDescription']));
-        $adminItemLevel = htmlspecialchars(addslashes($_POST['adminItemLevel']));
-        $adminItemLevelRequired = htmlspecialchars(addslashes($_POST['adminItemLevelRequired']));
-        $adminItemHpEffects = htmlspecialchars(addslashes($_POST['adminItemHpEffects']));
-        $adminItemMpEffect = htmlspecialchars(addslashes($_POST['adminItemMpEffect']));
-        $adminItemStrengthEffect = htmlspecialchars(addslashes($_POST['adminItemStrengthEffect']));
-        $adminItemMagicEffect = htmlspecialchars(addslashes($_POST['adminItemMagicEffect']));
-        $adminItemAgilityEffect = htmlspecialchars(addslashes($_POST['adminItemAgilityEffect']));
-        $adminItemDefenseEffect = htmlspecialchars(addslashes($_POST['adminItemDefenseEffect']));
-        $adminItemDefenseMagicEffect = htmlspecialchars(addslashes($_POST['adminItemDefenseMagicEffect']));
-        $adminItemWisdomEffect = htmlspecialchars(addslashes($_POST['adminItemWisdomEffect']));
-        $adminItemProspectingEffect = htmlspecialchars(addslashes($_POST['adminItemProspectingEffect']));
-        $adminItemPurchasePrice = htmlspecialchars(addslashes($_POST['adminItemPurchasePrice']));
-        $adminItemSalePrice = htmlspecialchars(addslashes($_POST['adminItemSalePrice']));
-
-        //On ajoute l'équipement dans la base de donnée
-        $addItem = $bdd->prepare("INSERT INTO car_items VALUES(
-        '',
-        :adminItemRaceId,
-        :adminItemPicture,
-        :adminItemType,
-        :adminItemName,
-        :adminItemDescription,
-        :adminItemLevel,
-        :adminItemLevelRequired,
-        :adminItemHpEffects,
-        :adminItemMpEffect,
-        :adminItemStrengthEffect,
-        :adminItemMagicEffect,
-        :adminItemAgilityEffect,
-        :adminItemDefenseEffect,
-        :adminItemDefenseMagicEffect,
-        :adminItemWisdomEffect,
-        :adminItemProspectingEffect,
-        :adminItemPurchasePrice,
-        :adminItemSalePrice)");
-        $addItem->execute([
-        'adminItemRaceId' => $adminItemRaceId,
-        'adminItemPicture' => $adminItemPicture,
-        'adminItemType' => $adminItemType,
-        'adminItemName' => $adminItemName,
-        'adminItemDescription' => $adminItemDescription,
-        'adminItemLevel' => $adminItemLevel,
-        'adminItemLevelRequired' => $adminItemLevelRequired,
-        'adminItemHpEffects' => $adminItemHpEffects,
-        'adminItemMpEffect' => $adminItemMpEffect,
-        'adminItemStrengthEffect' => $adminItemStrengthEffect,
-        'adminItemMagicEffect' => $adminItemMagicEffect,
-        'adminItemAgilityEffect' => $adminItemAgilityEffect,
-        'adminItemDefenseEffect' => $adminItemDefenseEffect,
-        'adminItemDefenseMagicEffect' => $adminItemDefenseMagicEffect,
-        'adminItemWisdomEffect' => $adminItemWisdomEffect,
-        'adminItemProspectingEffect' => $adminItemProspectingEffect,
-        'adminItemPurchasePrice' => $adminItemPurchasePrice,
-        'adminItemSalePrice' => $adminItemSalePrice]);
-        $addItem->closeCursor();
-        ?>
-
-        L'équipement a bien été crée
-
-        <hr>
-            
-        <form method="POST" action="index.php">
-            <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
-        </form>
         
-        <?php
+        //On fait une requête pour vérifier si le type d'équipement choisit existe
+        $itemTypeQuery = $bdd->prepare('SELECT * FROM car_items_types
+        WHERE itemTypeId = ?');
+        $itemTypeQuery->execute([$adminItemItemTypeId]);
+        $itemTypeRow = $itemTypeQuery->rowCount();
+
+        //Si le type d'équipement existe
+        if ($itemTypeRow == 1) 
+        {
+            //Si la classe choisit est supérieur à zéro c'est que l'équipement est dedié à une classe
+            if ($adminItemRaceId > 0)
+            {
+                //On fait une requête pour vérifier si la classe choisie existe
+                $raceQuery = $bdd->prepare('SELECT * FROM car_races 
+                WHERE raceId = ?');
+                $raceQuery->execute([$adminItemRaceId]);
+                $raceRow = $raceQuery->rowCount();
+            }
+            //Si la classe choisit est égal à zéro c'est qu'il s'agit d'un équipement pour toutes les classes
+            else
+            {
+                //On met $raceRow à 1 pour passer à la suite
+                $raceRow = 1;
+            }
+
+            //Si la classe est disponible ou que la classe est à zéro
+            if ($raceRow == 1) 
+            {
+                //On récupère les informations du formulaire
+                $adminItemItemTypeId = htmlspecialchars(addslashes($_POST['adminItemItemTypeId']));
+                $adminItemRaceId = htmlspecialchars(addslashes($_POST['adminItemRaceId']));
+                $adminItemPicture = htmlspecialchars(addslashes($_POST['adminItemPicture']));
+                $adminItemName = htmlspecialchars(addslashes($_POST['adminItemName']));
+                $adminItemDescription = htmlspecialchars(addslashes($_POST['adminItemDescription']));
+                $adminItemLevel = htmlspecialchars(addslashes($_POST['adminItemLevel']));
+                $adminItemLevelRequired = htmlspecialchars(addslashes($_POST['adminItemLevelRequired']));
+                $adminItemHpEffects = htmlspecialchars(addslashes($_POST['adminItemHpEffects']));
+                $adminItemMpEffect = htmlspecialchars(addslashes($_POST['adminItemMpEffect']));
+                $adminItemStrengthEffect = htmlspecialchars(addslashes($_POST['adminItemStrengthEffect']));
+                $adminItemMagicEffect = htmlspecialchars(addslashes($_POST['adminItemMagicEffect']));
+                $adminItemAgilityEffect = htmlspecialchars(addslashes($_POST['adminItemAgilityEffect']));
+                $adminItemDefenseEffect = htmlspecialchars(addslashes($_POST['adminItemDefenseEffect']));
+                $adminItemDefenseMagicEffect = htmlspecialchars(addslashes($_POST['adminItemDefenseMagicEffect']));
+                $adminItemWisdomEffect = htmlspecialchars(addslashes($_POST['adminItemWisdomEffect']));
+                $adminItemProspectingEffect = htmlspecialchars(addslashes($_POST['adminItemProspectingEffect']));
+                $adminItemPurchasePrice = htmlspecialchars(addslashes($_POST['adminItemPurchasePrice']));
+                $adminItemSalePrice = htmlspecialchars(addslashes($_POST['adminItemSalePrice']));
+        
+                //On ajoute l'équipement dans la base de donnée
+                $addItem = $bdd->prepare("INSERT INTO car_items VALUES(
+                '',
+                :adminItemItemTypeId,
+                :adminItemRaceId,
+                :adminItemPicture,
+                :adminItemName,
+                :adminItemDescription,
+                :adminItemLevel,
+                :adminItemLevelRequired,
+                :adminItemHpEffects,
+                :adminItemMpEffect,
+                :adminItemStrengthEffect,
+                :adminItemMagicEffect,
+                :adminItemAgilityEffect,
+                :adminItemDefenseEffect,
+                :adminItemDefenseMagicEffect,
+                :adminItemWisdomEffect,
+                :adminItemProspectingEffect,
+                :adminItemPurchasePrice,
+                :adminItemSalePrice)");
+                $addItem->execute([
+                'adminItemItemTypeId' => $adminItemItemTypeId,
+                'adminItemRaceId' => $adminItemRaceId,
+                'adminItemPicture' => $adminItemPicture,
+                'adminItemName' => $adminItemName,
+                'adminItemDescription' => $adminItemDescription,
+                'adminItemLevel' => $adminItemLevel,
+                'adminItemLevelRequired' => $adminItemLevelRequired,
+                'adminItemHpEffects' => $adminItemHpEffects,
+                'adminItemMpEffect' => $adminItemMpEffect,
+                'adminItemStrengthEffect' => $adminItemStrengthEffect,
+                'adminItemMagicEffect' => $adminItemMagicEffect,
+                'adminItemAgilityEffect' => $adminItemAgilityEffect,
+                'adminItemDefenseEffect' => $adminItemDefenseEffect,
+                'adminItemDefenseMagicEffect' => $adminItemDefenseMagicEffect,
+                'adminItemWisdomEffect' => $adminItemWisdomEffect,
+                'adminItemProspectingEffect' => $adminItemProspectingEffect,
+                'adminItemPurchasePrice' => $adminItemPurchasePrice,
+                'adminItemSalePrice' => $adminItemSalePrice]);
+                $addItem->closeCursor();
+                ?>
+        
+                L'équipement a bien été crée
+        
+                <hr>
+                    
+                <form method="POST" action="index.php">
+                    <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
+                </form>
+                
+                <?php
+                
+            }
+            //Si la classe choisie n'existe pas
+            else
+            {
+                echo "Erreur: La classe choisie n'existe pas";
+            }
+        }
+        else 
+        {
+            echo "Erreur: Ce type d'objet n'existe pas";
+        }
     }
     //Si tous les champs numérique ne contiennent pas un nombre
     else

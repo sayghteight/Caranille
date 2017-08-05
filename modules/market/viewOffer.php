@@ -17,8 +17,9 @@ if (isset($_POST['marketId'])
         $marketId = htmlspecialchars(addslashes($_POST['marketId']));
 
         //On fait une requête pour vérifier si l'offre choisit existe
-        $marketQuery = $bdd->prepare('SELECT * FROM car_market, car_characters, car_items
-        WHERE marketCharacterId = characterId
+        $marketQuery = $bdd->prepare('SELECT * FROM car_items, car_items_types, car_market, car_characters
+        WHERE itemItemTypeId = itemTypeId
+        AND marketCharacterId = characterId
         AND marketItemId = itemId
         AND marketId = ?');
         $marketQuery->execute([$marketId]);
@@ -32,12 +33,13 @@ if (isset($_POST['marketId'])
             {
                 //On récupère toutes les informations de l'offre
                 $marketId = stripslashes($market['marketId']);
+                $marketTypeName = stripslashes($market['itemTypeName']);
+                $marketTypeNameShow = stripslashes($market['itemTypeNameShow']);
                 $marketCharacterName = stripslashes($market['characterName']);
                 $marketItemId = stripslashes($market['itemId']);
                 $marketItemName = stripslashes($market['itemName']);
                 $marketSalePrice = stripslashes($market['marketSalePrice']);
                 $marketItemRaceId = stripslashes($market['itemRaceId']);
-                $marketItemType = stripslashes($market['itemType']);
                 $marketItemLevel = stripslashes($market['itemLevel']);
                 $marketItemLevelRequired = stripslashes($market['itemLevelRequired']);
                 $marketItemName = stripslashes($market['itemName']);
@@ -81,6 +83,16 @@ if (isset($_POST['marketId'])
 
                 <tr>
                     <td>
+                        Type
+                    </td>
+                    
+                    <td>
+                        <?php echo $marketTypeNameShow; ?>
+                    </td>
+                </tr>
+                    
+                <tr>
+                    <td>
                         Nom
                     </td>
                     
@@ -101,7 +113,7 @@ if (isset($_POST['marketId'])
                 
                 <?php
                 //S'il s'agit d'un équipement on affiche la race de celui-ci ainsi que son niveu requis
-                if ($marketItemType != "Item")
+                if ($marketTypeName != "Item")
                 {
                     ?>
                     <tr>
@@ -145,7 +157,7 @@ if (isset($_POST['marketId'])
                     <td>
                         <?php
                             //S'il s'agit d'un équipement on affiche toutes les stats concernée
-                            if ($marketItemType != "Item")
+                            if ($marketTypeName != "Item")
                             {
                                 //Si l'équipement augmente les HP on l'affiche
                                 if ($marketItemHpEffect > 0)

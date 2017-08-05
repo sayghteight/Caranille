@@ -40,7 +40,7 @@ if (isset($_POST['adminItemPicture'])
         '',
         '0',
         :adminItemPicture,
-        'Item',
+        '6',
         '1',
         '1',
         :adminItemName,

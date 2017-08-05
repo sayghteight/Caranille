@@ -7,12 +7,13 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($accountAccess < 2) { exit(header("Location: ../../index.php")); }
 
 //On fait une recherche dans la base de donnée de tous les équipements
-$equipmentQuery = $bdd->query("SELECT * FROM car_items
-WHERE (itemType = 'Armor' 
-OR itemType = 'Boots' 
-OR itemType = 'Gloves' 
-OR itemType = 'Helmet' 
-OR itemType = 'Weapon')
+$equipmentQuery = $bdd->query("SELECT * FROM car_items, car_items_types
+WHERE itemItemTypeId = itemTypeId
+AND (itemTypeName = 'Armor' 
+OR itemTypeName = 'Boots' 
+OR itemTypeName = 'Gloves' 
+OR itemTypeName = 'Helmet' 
+OR itemTypeName = 'Weapon')
 ORDER by itemName");
 $equipmentRow = $equipmentQuery->rowCount();
 

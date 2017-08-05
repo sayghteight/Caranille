@@ -6,13 +6,14 @@ if (empty($_SESSION)) { exit(header("Location: ../../index.php")); }
 if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); }
 
 //On fait une requête pour avoir la liste des équipements du personnage
-$equipmentQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
-WHERE itemId = inventoryItemId
-AND (itemType = 'Armor' 
-OR itemType = 'Boots' 
-OR itemType = 'Gloves' 
-OR itemType = 'Helmet' 
-OR itemType = 'Weapon')
+$equipmentQuery = $bdd->prepare("SELECT * FROM  car_items, car_items_types, car_inventory 
+WHERE itemItemTypeId = itemTypeId
+AND itemId = inventoryItemId
+AND (itemTypeName = 'Armor' 
+OR itemTypeName = 'Boots' 
+OR itemTypeName = 'Gloves' 
+OR itemTypeName = 'Helmet' 
+OR itemTypeName = 'Weapon')
 AND inventoryCharacterId = ?");
 $equipmentQuery->execute([$characterId]);
 $equipmentRow = $equipmentQuery->rowCount();

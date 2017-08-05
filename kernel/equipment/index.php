@@ -2,8 +2,9 @@
 require_once("../../kernel/config.php");
 
 //On fait une requête pour savoir quel équipement le personnage à d'équipé
-$equipmentEquipedQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
-WHERE itemId = inventoryItemId
+$equipmentEquipedQuery = $bdd->prepare("SELECT * FROM car_items, car_items_types, car_inventory 
+WHERE itemItemTypeId = itemTypeId
+AND itemId = inventoryItemId
 AND inventoryEquipped = 1
 AND inventoryCharacterId = ?");
 $equipmentEquipedQuery->execute([$characterId]);
@@ -11,7 +12,7 @@ $equipmentEquipedQuery->execute([$characterId]);
 //On fait une boucle sur les résultats et on vérifie à chaque fois de quel type d'équipement il s'agit
 while ($equipment = $equipmentEquipedQuery->fetch())
 {
-    switch ($equipment['itemType'])
+    switch ($equipment['itemTypeName'])
     {
         //S'il s'agit d'une armure
         case "Armor":

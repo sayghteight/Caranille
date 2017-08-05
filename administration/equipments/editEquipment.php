@@ -18,8 +18,9 @@ if (isset($_POST['adminItemId'])
         $adminItemId = htmlspecialchars(addslashes($_POST['adminItemId']));
 
         //On fait une requête pour vérifier si l'équipement choisit existe
-        $itemQuery = $bdd->prepare('SELECT * FROM car_items 
-        WHERE itemId = ?');
+        $itemQuery = $bdd->prepare('SELECT * FROM car_items, car_items_types
+        WHERE itemItemTypeId = itemTypeId
+        AND itemId = ?');
         $itemQuery->execute([$adminItemId]);
         $itemRow = $itemQuery->rowCount();
 
@@ -33,7 +34,9 @@ if (isset($_POST['adminItemId'])
                 $adminItemId = stripslashes($item['itemId']);
                 $adminItemRaceId = stripslashes($item['itemRaceId']);
                 $adminItemPicture = stripslashes($item['itemPicture']);
-                $adminItemType = stripslashes($item['itemType']);
+                $adminItemItemTypeId = stripslashes($item['itemItemTypeId']);
+                $adminItemItemTypeName = stripslashes($item['itemTypeName']);
+                $adminItemItemTypeNameShow = stripslashes($item['itemTypeNameShow']);
                 $adminItemName = stripslashes($item['itemName']);
                 $adminItemDescription = stripslashes($item['itemDescription']);
                 $adminItemLevel = stripslashes($item['itemLevel']);
@@ -76,18 +79,14 @@ if (isset($_POST['adminItemId'])
                     if (isset($adminRaceId))
                     {
                         ?>
-                        
-                            <option selected="selected" value="<?php echo $adminRaceId ?>"><?php echo $adminRaceName ?></option>
-                        
+                        <option selected="selected" value="<?php echo $adminRaceId ?>"><?php echo $adminRaceName ?></option>
                         <?php
                     }
                     //Si l'équipement n'a pas de classe attribuée c'est qu'il est disponible pour toutes les classes
                     else
                     {
                         ?>
-
-                            <option selected="selected" value="0">Toutes les classes</option>
-
+                        <option selected="selected" value="0">Toutes les classes</option>
                         <?php
                     }
 
@@ -107,9 +106,7 @@ if (isset($_POST['adminItemId'])
                             $raceId = stripslashes($raceList['raceId']); 
                             $raceName = stripslashes($raceList['raceName']);
                             ?>
-
-                                <option value="<?php echo $raceId ?>"><?php echo $raceName ?></option>
-
+                            <option value="<?php echo $raceId ?>"><?php echo $raceName ?></option>
                             <?php
                         }
                     }
@@ -119,87 +116,38 @@ if (isset($_POST['adminItemId'])
                     if (isset($adminRaceId))
                     {
                         ?>
-
-                            <option value="0">Toutes les classes</option>
-
+                        <option value="0">Toutes les classes</option>
                         <?php
                     }
                     ?>
                     
                 </select>
                 Image : <input type="mail" name="adminItemPicture" class="form-control" placeholder="Image" value="<?php echo $adminItemPicture ?>" required>
-                Type <select name="adminItemType" class="form-control">
+                Type <select name="adminItemItemTypeId" class="form-control">
+                    <option value="<?php echo $adminItemItemTypeId ?>"><?php echo $adminItemItemTypeNameShow ?></option>
                     
                     <?php
-                    switch ($adminItemType)
+                    //On rempli le menu déroulant avec la liste des classes disponible
+                    $itemTypeQuery = $bdd->prepare("SELECT * FROM car_items_types
+                    WHERE itemTypeId != ?
+                    AND itemTypeName != 'Item'
+                    AND itemTypeName != 'Parchment'");
+                    $itemTypeQuery->execute([$adminItemItemTypeId]);
+                    
+                    //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+                    while ($itemType = $itemTypeQuery->fetch())
                     {
-                        //S'il s'agit d'une armure
-                        case "Armor":
-                            ?>
-                            
-                                <option selected="selected" value="Armor">Armure</option>
-                                <option value="Boots">Bottes</option>
-                                <option value="Gloves">Gants</option>
-                                <option value="Helmet">Casque</option>
-                                <option value="Weapon">Arme</option>
-                                
-                            <?php
-                        break;
-    
-                        //S'il s'agit de bottes
-                        case "Boots":
-                            ?>
-                            
-                                <option value="Armor">Armure</option>
-                                <option selected="selected" value="Boots">Bottes</option>
-                                <option value="Gloves">Gants</option>
-                                <option value="Helmet">Casque</option>
-                                <option value="Weapon">Arme</option>
-                            
-                            <?php
-                        break;
-    
-                        //S'il s'agit de gants
-                        case "Gloves":
-                            ?>
-                            
-                                <option value="Armor">Armure</option>
-                                <option value="Boots">Bottes</option>
-                                <option selected="selected" value="Gloves">Gants</option>
-                                <option value="Helmet">Casque</option>
-                                <option value="Weapon">Arme</option>
-                            
-                            <?php
-                        break;
-    
-                        //S'il s'agit d'un casque
-                        case "Helmet":
-                            ?>
-                            
-                                <option value="Armor">Armure</option>
-                                <option value="Boots">Bottes</option>
-                                <option value="Gloves">Gants</option>
-                                <option selected="selected" value="Helmet">Casque</option>
-                                <option value="Weapon">Arme</option>
-                            
-                            <?php
-                        break;
-    
-                        //S'il s'agit d'une arme
-                        case "Weapon":
-                            ?>
-                            
-                                <option value="Armor">Armure</option>
-                                <option value="Boots">Bottes</option>
-                                <option value="Gloves">Gants</option>
-                                <option value="Helmet">Casque</option>
-                                <option selected="selected" value="Weapon">Arme</option>
-                            
-                            <?php
-                        break;
+                        //On récupère les informations de la classe
+                        $adminItemTypeId = stripslashes($itemType['itemTypeId']);
+                        $adminItemTypeName = stripslashes($itemType['itemTypeName']);
+                        $adminItemTypeNameShow = stripslashes($itemType['itemTypeNameShow']);
+                        ?>
+                        <option value="<?php echo $adminItemTypeId ?>"><?php echo $adminItemTypeNameShow ?></option>
+                        <?php
                     }
-                    ?>  
-                
+                    $itemTypeQuery->closeCursor();
+                    ?>
+                    
                 </select>
                 Nom : <input type="text" name="adminItemName" class="form-control" placeholder="Nom" value="<?php echo $adminItemName ?>" required>
                 Description : <br> <textarea class="form-control"name="adminItemDescription" id="adminItemDescription" rows="3" required><?php echo $adminItemDescription; ?></textarea>
