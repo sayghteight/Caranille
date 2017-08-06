@@ -33,7 +33,7 @@ if (isset($_POST['itemId'])
                 //On récupère les informations de l'équippement
                 $inventoryId = stripslashes($item['inventoryId']);
                 $itemRaceId = stripslashes($item['itemRaceId']);
-                $itemType = stripslashes($item['itemType']);
+                $itemItemTypeId = stripslashes($item['itemItemTypeId']);
                 $itemName = stripslashes($item['itemName']);
             }
             $itemQuery->closeCursor();
@@ -41,12 +41,12 @@ if (isset($_POST['itemId'])
             //On vérifie si la classe du joueur lui permet de s'équiper de cet équipement, ou si celui-ci est pour toutes les classes
             if ($characterRaceId == $itemRaceId || $itemRaceId == 0)
             {
-                //On va rendre non équippé tous les équipement de ce type à ce personnage pour éviter d'avoir plusieurs fois le même type d'équipement équippé
+                //On va vérifier si ce type d'équippement est déjà équippé
                 $equipmentQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
                 WHERE itemId = inventoryItemId
-                AND itemType = ? 
+                AND itemItemTypeId = ? 
                 AND inventoryCharacterId = ?");
-                $equipmentQuery->execute([$itemType, $characterId]);
+                $equipmentQuery->execute([$itemItemTypeId, $characterId]);
                 $equipmentRow = $equipmentQuery->rowCount();
 
                 //Si un autre équipement de ce type est déjà équippé on va le rendre non équippé

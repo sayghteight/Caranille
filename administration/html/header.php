@@ -58,7 +58,6 @@ require_once("../../kernel/town/index.php");
                             <ul class="dropdown-menu">
                                 <li><a href="../../administration/equipments/index.php">Equipements</a></li>
                                 <li><a href="../../administration/items/index.php">Objets</a></li>
-                                <li><a href="../../administration/itemsTypes/index.php">Types d'objets</a></li>
                                 <li><a href="../../administration/monsters/index.php">Monstres</a></li>
                                 <li><a href="../../administration/races/index.php">Classes</a></li>
                                 <li><a href="../../administration/shops/index.php">Magasins</a></li>
@@ -85,9 +84,10 @@ require_once("../../kernel/town/index.php");
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Outils<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Configuration<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="../../administration/configuration/index.php">Configuration</a></li>
+                                <li><a href="../../administration/configuration/index.php">Jeu</a></li>
+                                <li><a href="../../administration/itemsTypes/index.php">Types d'objets</a></li>
                             </ul>
                         </li>
                     </ul>

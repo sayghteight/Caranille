@@ -31,14 +31,15 @@ if (isset($_POST['adminItemTypeId'])
             {
                 //On récupère les informations du chapitre
                 $adminItemTypeId = stripslashes($itemType['itemTypeId']);
+                $adminItemTypeName = stripslashes($itemType['itemTypeName']);
                 $adminItemTypeNameShow = stripslashes($itemType['itemTypeNameShow']);
             }
             ?>
 
-            <p>Informations du type d'objet</p>
-            
+            <p>Type d'objet (Anglais): <?php echo $adminItemTypeName ?></p>
+
             <form method="POST" action="editItemTypeEnd.php">
-                Type d'objet : <input type="text" name="adminItemTypeNameShow" class="form-control" placeholder="Titre" value="<?php echo $adminItemTypeNameShow ?>" required>
+                Type d'objet affiché : <input type="text" name="adminItemTypeNameShow" class="form-control" placeholder="Titre" value="<?php echo $adminItemTypeNameShow ?>" required>
                 <input type="hidden" name="adminItemTypeId" value="<?php echo $adminItemTypeId ?>">
                 <input name="finalEdit" class="btn btn-default form-control" type="submit" value="Modifier">
             </form>
