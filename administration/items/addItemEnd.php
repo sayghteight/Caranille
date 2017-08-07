@@ -38,15 +38,16 @@ if (isset($_POST['adminItemPicture'])
         //On ajoute l'objet dans la base de donnée
         $addItem = $bdd->prepare("INSERT INTO car_items VALUES(
         '',
+        '6',
         '0',
         :adminItemPicture,
-        '6',
         '1',
         '1',
         :adminItemName,
         :adminItemDescription,
         :adminItemHpEffects,
         :adminItemMpEffect,
+        '0',
         '0',
         '0',
         '0',
