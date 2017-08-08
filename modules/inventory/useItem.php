@@ -42,6 +42,8 @@ if (isset($_POST['itemId'])
             <p>ATTENTION</p> 
             Vous êtes sur le point d'utiliser l'objet <em><?php echo $itemName ?>.<br />
             Confirmez-vous ?
+            
+            <hr>
 
             <form method="POST" action="useItemEnd.php">
                 <input type="hidden" class="btn btn-default form-control" name="itemId" value="<?php echo $itemId ?>">

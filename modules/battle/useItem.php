@@ -84,14 +84,14 @@ if (isset($_POST['itemId'])
                 //Si les HP Minimum sont supérieur au HP Maximum
                 if ($characterHpMin > $characterHpTotal)
                 {
-                    //Si c'est le cas $characterHpMin = $characterHpMax
+                    //Si c'est le cas $characterHpMin = $characterHpTotal
                     $characterHpMin = $characterHpTotal;
                 }
                 
                 //Si les MP Minimum sont supérieur au MP Maximum
                 if ($characterMpMin > $characterMpTotal)
                 {
-                    //Si c'est le cas $characterMpMin = $characterMpMax
+                    //Si c'est le cas $characterMpMin = $characterMpTotal
                     $characterMpMin = $characterMpTotal;
                 }
             

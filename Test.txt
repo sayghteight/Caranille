@@ -1,0 +1,47 @@
+Version 1.4.2 (08/08/2017)
+
+Administration :
+-accounts -> Ok
+-chapters -> Ok
+-configuration -> Ok
+-equipements -> Ok
+-items -> Ok (Correction bug insertion SQL)
+-itemsType -> Ok
+-monsters -> Ok
+-monsterDrops -> Ok
+-news -> Ok
+-offerExperience -> Ok (Correction faute d'orthographe)
+-offerGold -> Ok
+-races -> Ok
+-shops -> Ok
+-shopsitems -> Ok
+-towns -> Ok
+-townsMonsters -> Ok
+-townsShops -> Ok
+
+Modules :
+-about -> Ok
+-arena -> Ok
+-battle -> Ok
+-bestiary -> Ok
+-character -> Ok
+-chat -> Ok
+-contact -> Ok
+-dungeon -> Ok
+-inn -> Ok
+-inventory -> Ok
+-login -> Ok
+-logout -> Ok
+-main -> Ok
+-map -> Ok
+-market -> Ok
+-presentation -> Ok
+-privateConversation -> Ok
+-races -> Ok
+-register -> Ok
+-shops -> Ok
+-skillPoints -> Ok
+-story -> Ok
+-town -> Ok
+
+Fresh Install -> Ok

@@ -167,7 +167,7 @@ if (isset($_POST['itemId'])
             $updatecharacter->closeCursor();
             ?>
             
-            Vous venez de vendre l'objet <?php echo $itemName ?> pour <?php echo $itemSalePrice ?> Pièce(s) d'or
+            Vous venez de vendre l'objet <?php echo $itemName ?> pour <?php echo $itemSalePrice ?> Pièce(s) d'or.
 
             <hr>
 

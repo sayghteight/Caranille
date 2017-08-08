@@ -8,6 +8,8 @@ if ($battleRow > 0) { exit(header("Location: ../../modules/battle/index.php")); 
 
 Que souhaitez-vous consulter ?<br />
 
+<hr>
+
 <form method="POST" action="item.php">
     <input type="submit" class="btn btn-default form-control" name="edit" value="Mes objets">
 </form>

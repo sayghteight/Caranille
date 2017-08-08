@@ -221,7 +221,6 @@ CREATE TABLE IF NOT EXISTS `car_items` (
   `itemItemTypeId` int(11) NOT NULL,
   `itemRaceId` int(11) NOT NULL,
   `itemPicture` text NOT NULL,
-  `itemType` varchar(30) NOT NULL,
   `itemName` varchar(30) NOT NULL,
   `itemDescription` text NOT NULL,
   `itemLevel` int(11) NOT NULL,

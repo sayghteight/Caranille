@@ -43,17 +43,17 @@ if (isset($_POST['itemId'])
             $characterMpMin = $characterMpMin + $itemMpEffect;
             
             //Si les HP Minimum sont supérieur au HP Maximum
-            if ($characterHpMin > $characterHpMax)
+            if ($characterHpMin > $characterHpTotal)
             {
-                //Si c'est le cas $characterHpMin = $characterHpMax
-                $characterHpMin = $characterHpMax;
+                //Si c'est le cas $characterHpMin = $characterHpTotal
+                $characterHpMin = $characterHpTotal;
             }
             
             //Si les MP Minimum sont supérieur au MP Maximum
-            if ($characterMpMin > $characterMpMax)
+            if ($characterMpMin > $characterMpTotal)
             {
-                //Si c'est le cas $characterMpMin = $characterMpMax
-                $characterMpMin = $characterMpMax;
+                //Si c'est le cas $characterMpMin = $characterMpTotal
+                $characterMpMin = $characterMpTotal;
             }
 
             //Si le joueur possède plusieurs exemplaire de cet objet/équipement

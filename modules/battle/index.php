@@ -35,9 +35,10 @@ MP de <?php echo $opponentName ?> : <?php echo "$battleOpponentMpRemaining/$oppo
 
 <?php
 //On cherche tous les objets que possède le joueur pour les utiliser en combat
-$itemQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
-WHERE itemId = inventoryItemId
-AND itemType = 'Item'
+$itemQuery = $bdd->prepare("SELECT * FROM  car_items, car_items_types, car_inventory 
+WHERE itemItemTypeId = itemTypeId
+AND itemId = inventoryItemId
+AND itemTypeName = 'Item'
 AND inventoryCharacterId = ?");
 $itemQuery->execute([$characterId]);
 $itemRow = $itemQuery->rowCount();

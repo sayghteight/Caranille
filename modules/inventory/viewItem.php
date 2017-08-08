@@ -26,9 +26,8 @@ if (isset($_POST['itemId'])
         if ($itemRow == 1) 
         {
             //On fait une requête pour avoir la liste des objets du personnage
-            $itemInventoryQuery = $bdd->prepare("SELECT * FROM  car_items, car_items_types, car_items_types, car_inventory 
-            WHERE WHERE itemItemTypeId = itemTypeId
-            AND itemItemTypeId = itemTypeId
+            $itemInventoryQuery = $bdd->prepare("SELECT * FROM  car_items, car_items_types, car_inventory 
+            WHERE itemItemTypeId = itemTypeId
             AND itemId = inventoryItemId
             AND itemTypeName = 'Item' 
             AND inventoryCharacterId = ?
