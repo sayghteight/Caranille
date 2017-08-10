@@ -1,3 +1,7 @@
+--
+-- Mise à jour de la base de donnée de Caranille 1.3.0 à 1.4.0
+--
+
 ALTER TABLE  `car_characters` DROP  `characterTownId` ;
 
 ALTER TABLE  `car_characters` 

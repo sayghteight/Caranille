@@ -11,7 +11,7 @@
     fwrite($openSql, "
     <?php
     //Version of Caranille
-    \$version = \"1.4.2\";
+    \$version = \"1.5.0\";
     \$dsn = 'mysql:dbname=$databaseName;host=$databaseHost';
     \$user = '$databaseUser';
     \$password = '$databasePassword';

@@ -32,7 +32,7 @@ if ($privateConversationRow > 0)
                 //Si la première personne de la conversation est le joueur on cherche à savoir qui est l'autre personne
                 if ($privateConversationCharacterOneId == $characterId)
                 {
-                    //On fait une requête pour vérifier la liste des conversations dans la base de données
+                    //On fait une requête pour récupérer le nom du personnage dans la base de donnée
                     $characterQuery = $bdd->prepare("SELECT * FROM car_characters
                     WHERE characterId = ?");
 
@@ -49,7 +49,7 @@ if ($privateConversationRow > 0)
                 //Si la seconde personne de la conversation est le joueur on cherche à savoir qui est l'autre personne
                 else
                 {
-                    //On fait une requête pour vérifier la liste des conversations dans la base de données
+                    //On fait une requête pour récupérer le nom du personnage dans la base de donnée
                     $characterQuery = $bdd->prepare("SELECT * FROM car_characters
                     WHERE characterId = ?");
 
@@ -63,6 +63,7 @@ if ($privateConversationRow > 0)
                     }
                     $characterQuery->closeCursor();
                 }
+                
                 //On fait une requête pour vérifier le nombre de message non lu
                 $privateConversationNumberQuery = $bdd->prepare("SELECT * FROM car_private_conversation_message
                 WHERE privateConversationMessagePrivateConversationId = ?

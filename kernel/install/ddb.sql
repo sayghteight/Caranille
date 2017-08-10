@@ -204,7 +204,25 @@ CREATE TABLE IF NOT EXISTS `car_guilds`
   `guildProspectingBonus` int(11) NOT NULL,
   `guildExperience` int(11) NOT NULL,
   `guildExperienceTotal` int(11) NOT NULL,
+  `guildSkillPoinst` int(11) NOT NULL,
   `guildCreationDate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `car_guilds_members` 
+(
+  `guildMemberId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `guildMemberCharacterId` int(11) NOT NULL,
+  `guildMemberCharacterAccess` text NOT NULL,
+  `guildMemberCharacterExperience` text NOT NULL,
+  `guildMemberCharacterGold` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `car_guilds_requests` 
+(
+  `guildRequestId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `guildRequestGuildId` int(11) NOT NULL,
+  `guildRequestCharacterId` int(11) NOT NULL,
+  `guildRequestMessage` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `car_inventory` 
@@ -360,6 +378,39 @@ CREATE TABLE IF NOT EXISTS `car_towns_shops`
   `townShopId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `townShopTownId` int(10) NOT NULL,
   `townShopShopId` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `car_trades` 
+(
+  `tradeId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `tradeCharacterOneId` int(5) NOT NULL,
+  `tradeCharacterTwoId` int(5) NOT NULL,
+  `tradeMessage` text NOT NULL,
+  `tradeCharacterOneTradeAccepted` varchar(30) NOT NULL,
+  `tradeCharacterTwoTradeAccepted` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `car_trades_items` 
+(
+  `tradeItemId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `tradeItemTradeId` int(5) NOT NULL,
+  `tradeItemItemId` int(5) NOT NULL,
+  `tradeItemItemQuantity` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `car_trades_golds` 
+(
+  `tradeGoldId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `tradeGoldTradeId` int(5) NOT NULL,
+  `tradeGoldQuantity` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `car_trades_requests` 
+(
+  `tradeRequestId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `tradeRequestCharacterOneId` int(5) NOT NULL,
+  `tradeRequestCharacterTwoId` int(5) NOT NULL,
+  `tradeRequestMessage` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
