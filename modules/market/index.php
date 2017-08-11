@@ -63,50 +63,9 @@ $marketQuery->closeCursor();
 
 <hr>
 
-<?php
-//On fait une requête pour vérifier tous les objets et équippement qui sont dans l'inventaire du joueur
-$itemQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
-WHERE itemId = inventoryItemId
-AND inventoryCharacterId = ?
-ORDER BY itemName");
-$itemQuery->execute([$characterId]);
-$itemRow = $itemQuery->rowCount();
-
-//S'il existe un ou plusieurs objets on affiche le menu déroulant pour proposer au joueur d'en ajouter
-if ($itemRow > 0) 
-{
-    ?>
-    
-    <form method="POST" action="addOffer.php">
-        Liste de vos objets/équippement : <select name="marketItemId" class="form-control">
-                
-            <?php
-            //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
-            while ($item = $itemQuery->fetch())
-            {
-                //On récupère les informations des objets
-                $marketItemId = stripslashes($item['itemId']);
-                $marketItemName = stripslashes($item['itemName']);
-                $marketItemQuantity = stripslashes($item['inventoryQuantity']);
-                ?>
-                <option value="<?php echo $marketItemId ?>"><?php echo "$marketItemName (Quantité: $marketItemQuantity)"; ?></option>
-                <?php
-            }
-            ?>
-            
-        </select>
-        Prix de vente:  <input type="number" name="marketSalePrice" class="form-control" placeholder="Prix de vente" value="0" required>
-        <input type="submit" name="addOffer" class="btn btn-default form-control" value="Créer une offre">
-    </form>
-    
-    <?php
-}
-else
-{
-    echo "Vous n'avez actuellement aucun objet pouvant être mit en vente";
-}
-$itemQuery->closeCursor();
-?>
+<form method="POST" action="newOffer.php">
+    <input type="submit" class="btn btn-default form-control" name="newOffer" value="Nouvelle offre">
+</form>
 
 <hr>
 

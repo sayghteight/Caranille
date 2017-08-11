@@ -385,7 +385,7 @@ CREATE TABLE IF NOT EXISTS `car_trades`
   `tradeId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `tradeCharacterOneId` int(5) NOT NULL,
   `tradeCharacterTwoId` int(5) NOT NULL,
-  `tradeMessage` text NOT NULL,
+  `tradeMessage` varchar(30) NOT NULL,
   `tradeCharacterOneTradeAccepted` varchar(30) NOT NULL,
   `tradeCharacterTwoTradeAccepted` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -410,7 +410,7 @@ CREATE TABLE IF NOT EXISTS `car_trades_requests`
   `tradeRequestId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `tradeRequestCharacterOneId` int(5) NOT NULL,
   `tradeRequestCharacterTwoId` int(5) NOT NULL,
-  `tradeRequestMessage` text NOT NULL
+  `tradeRequestMessage` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

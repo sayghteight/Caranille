@@ -118,7 +118,7 @@ if (isset($_SESSION['account']['id']))
                                 <ul class="dropdown-menu">
                                     <li><a href="../../modules/chat/index.php">Chat</a></li>
                                     <li><a href="../../modules/privateConversation/index.php">Messagerie privée (<?php echo $privateConversationNumberRow ?>)</a></li>
-                                    <li><a href="../../modules/trade/index.php">Place des échanges (<?php echo $marketOfferQuantityRow ?>)</a></li>
+                                    <li><a href="../../modules/tradeRequest/index.php">Place des échanges (<?php echo $marketOfferQuantityRow ?>)</a></li>
                                     <li><a href="../../modules/market/index.php">Le marché (<?php echo $marketOfferQuantityRow ?>)</a></li>
                                 </ul>
                             </li>
