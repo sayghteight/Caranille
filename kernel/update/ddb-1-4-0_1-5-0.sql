@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS `car_trades`
   `tradeCharacterOneId` int(5) NOT NULL,
   `tradeCharacterTwoId` int(5) NOT NULL,
   `tradeMessage` varchar(30) NOT NULL,
+  `tradeLastUpdate` datetime NOT NULL,
   `tradeCharacterOneTradeAccepted` varchar(30) NOT NULL,
   `tradeCharacterTwoTradeAccepted` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

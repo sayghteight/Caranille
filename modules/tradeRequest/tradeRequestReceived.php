@@ -25,13 +25,14 @@ if ($tradeRequestRow > 0)
             {
                 //On récupère les valeurs de la demande d'échange
                 $tradeRequestId = stripslashes($tradeRequest['tradeRequestId']);
+                $tradeRequestCharacterOneId = stripslashes($tradeRequest['tradeRequestCharacterOneId']);
                 $tradeRequestCharacterTwoId = stripslashes($tradeRequest['tradeRequestCharacterTwoId']);
                 $tradeRequestMessage = stripslashes($tradeRequest['tradeRequestMessage']);
                 
                 //On fait une requête pour récupérer le nom du personnage dans la base de donnée
                 $characterQuery = $bdd->prepare("SELECT * FROM car_characters
                 WHERE characterId = ?");
-                $characterQuery->execute([$tradeRequestCharacterTwoId]);
+                $characterQuery->execute([$tradeRequestCharacterOneId]);
                 
                 //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                 while ($character = $characterQuery->fetch())
@@ -56,7 +57,17 @@ if ($tradeRequestRow > 0)
 //S'il n'y a aucune offre de disponible on prévient le joueur
 else
 {
-    echo "Il n'y a aucune demande d'échange en attente.";
+    ?>
+    
+    Il n'y a aucune demande d'échange en attente.
+    
+    <hr>
+
+    <form method="POST" action="index.php">
+        <input type="submit" class="btn btn-default form-control" name="manage" value="Retour">
+    </form>
+    
+    <?php
 }
 $tradeRequestQuery->closeCursor();
 ?>

@@ -55,7 +55,17 @@ if ($tradeRequestRow > 0)
 //S'il n'y a aucune offre de disponible on prévient le joueur
 else
 {
-    echo "Il n'y a aucune demande d'échange en attente.";
+    ?>
+    
+    Il n'y a aucune demande d'échange en attente.
+    
+    <hr>
+
+    <form method="POST" action="index.php">
+        <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
+    </form>
+    
+    <?php
 }
 $tradeRequestQuery->closeCursor();
 ?>

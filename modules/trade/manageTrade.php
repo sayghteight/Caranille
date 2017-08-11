@@ -35,6 +35,7 @@ if (isset($_POST['tradeId'])
                 $tradeCharacterOneId = stripslashes($trade['tradeCharacterOneId']);
                 $tradeCharacterTwoId = stripslashes($trade['tradeCharacterTwoId']);
                 $tradeMessage = stripslashes($trade['tradeMessage']);
+                $tradeLastUpdate = stripslashes($trade['tradeLastUpdate']);
             }
             
             //Si la première personne de l'échange est le joueur on cherche à savoir qui est l'autre personnage
@@ -69,10 +70,39 @@ if (isset($_POST['tradeId'])
                     //On récupère les informations du personnage
                     $tradeCharacterName = stripslashes($character['characterName']);
                 }
-                $characterQuery->closeCursor();  
+                $characterQuery->closeCursor();
             }
             
-            echo "Echange entre $characterName et $tradeCharacterName";
+            echo "Echange entre $characterName et $tradeCharacterName (Dernière mise à jour $tradeLastUpdate)";
+            
+            /*
+            Récupérer les objets et l'or de l'autre joueur
+            
+            Les afficher dans un select
+            
+            <hr>
+            
+            Récupérer les objets et l'or du joueur
+            
+            Les afficher dans un select
+            */
+            ?>
+            
+            <form method="POST" action="acceptTrade.php">
+                <input type="submit" class="btn btn-default form-control" name="acceptTrade" value="Accepter l'échange">
+            </form>
+            
+            <form method="POST" action="declineTrade.php">
+                <input type="submit" class="btn btn-default form-control" name="declineTrade" value="Refuser l'échange">
+            </form>
+            
+            <hr>
+            
+            <form method="POST" action="index.php">
+                <input type="submit" class="btn btn-default form-control" name="manage" value="Retour">
+            </form>
+            
+            <?php
         }
     }
     //Si tous les champs numérique ne contiennent pas un nombre
