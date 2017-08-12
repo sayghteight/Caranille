@@ -209,8 +209,9 @@ if (isset($_POST['tradeId'])
             
             <hr>
             
-            <form method="POST" action="addItem.php">
-                <input type="submit" class="btn btn-default form-control" name="acceptTrade" value="Ajouter un objet">
+            <form method="POST" action="addTradeItem.php">
+                <input type="hidden" name="tradeId" value="<?php echo $tradeId ?>">
+                <input type="submit" class="btn btn-default form-control" name="addTradeItem" value="Ajouter un objet">
             </form>
             
             <form method="POST" action="addGold.php">
