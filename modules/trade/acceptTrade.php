@@ -124,7 +124,7 @@ if (isset($_POST['tradeId'])
                                 '0')");
                                 $addItem->execute([
                                 'characterId' => $characterId,
-                                'tradeItemId' => $itemId,
+                                'tradeItemId' => $tradeItemId,
                                 'tradeItemQuantity' => $tradeItemQuantity]);
                                 $addItem->closeCursor();
                             }
@@ -225,7 +225,7 @@ if (isset($_POST['tradeId'])
                                 '0')");
                                 $addItem->execute([
                                 'characterId' => $tradeCharacterTwoId,
-                                'tradeItemId' => $itemId,
+                                'tradeItemId' => $tradeItemId,
                                 'tradeItemQuantity' => $tradeItemQuantity]);
                                 $addItem->closeCursor();
                             }
