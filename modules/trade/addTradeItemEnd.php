@@ -200,6 +200,15 @@ if (isset($_POST['tradeId'])
                         'tradeCharacterId' => $characterId,
                         'tradeItemQuantity' => $tradeItemQuantity));
                         $addTradeItem->closeCursor();
+                        
+                        //On met l'échange à jour
+                        $updateTrade = $bdd->prepare("UPDATE car_trades SET
+                        tradeCharacterOneTradeAccepted = 'No',
+                        tradeCharacterTwoTradeAccepted = 'No'
+                        WHERE tradeId = :tradeId");
+                        $updateTrade->execute(array(
+                        'tradeId' => $tradeId));
+                        $updateTrade->closeCursor(); 
                         ?>
                         
                         L'objet/équippement <?php echo $itemName ?> a bien été ajouté à l'échange en <?php echo $tradeItemQuantity ?> exemplaire(s)

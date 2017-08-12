@@ -99,7 +99,7 @@ if (isset($_POST['tradeId'])
                         while ($tradeItem = $tradeItemQuery->fetch())
                         {
                             //on récupère les valeurs de chaque objets qu'on va ensuite mettre dans le menu déroulant
-                            $tradeItemId = stripslashes($tradeItem['marketId']);
+                            $tradeItemId = stripslashes($tradeItem['itemId']);
                             $tradeItemName = stripslashes($tradeItem['itemName']);
                             $tradeItemQuantity = stripslashes($tradeItem['tradeItemItemQuantity']);
                             ?>
@@ -157,15 +157,15 @@ if (isset($_POST['tradeId'])
             {
                 ?>
             
-                <form>
-                    Liste des objet de <?php echo $characterName ?> : <select name="itemId" class="form-control">
+                <form method="POST" action="removeItem.php">
+                    Liste des objet de <?php echo $characterName ?> : <select name="tradeItemId" class="form-control">
     
                         <?php
                         //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                         while ($tradeItem = $tradeItemQuery->fetch())
                         {
                             //on récupère les valeurs de chaque objets qu'on va ensuite mettre dans le menu déroulant
-                            $tradeItemId = stripslashes($tradeItem['marketId']);
+                            $tradeItemId = stripslashes($tradeItem['itemId']);
                             $tradeItemName = stripslashes($tradeItem['itemName']);
                             $tradeItemQuantity = stripslashes($tradeItem['tradeItemItemQuantity']);
                             ?>
@@ -175,7 +175,8 @@ if (isset($_POST['tradeId'])
                         ?>
     
                     </select>
-                    <input type="submit" name="enter" class="btn btn-default form-control" value="Retirer l'objet">
+                    <input type="hidden" name="tradeId" value="<?php echo $tradeId ?>">
+                    <input type="submit" name="removeItem" class="btn btn-default form-control" value="Retirer l'objet">
                 </form>
                 
                 <?php
@@ -194,7 +195,7 @@ if (isset($_POST['tradeId'])
             $tradeGoldRow = $tradeGoldQuery->rowCount();
     
             //Si l'utilisateur a mit des pièces d'or dans l'échange on récupère combien il a mit
-            if ($tradeItemRow == 1)
+            if ($tradeGoldRow == 1)
             {
                 //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
                 while ($tradeGold = $tradeGoldQuery->fetch())
@@ -215,16 +216,20 @@ if (isset($_POST['tradeId'])
             </form>
             
             <form method="POST" action="addGold.php">
-                <input type="submit" class="btn btn-default form-control" name="acceptTrade" value="Modifier le nombre de pièces d'or">
+                <input type="hidden" name="tradeId" value="<?php echo $tradeId ?>">
+                <input type="submit" class="btn btn-default form-control" name="addGold" value="Modifier le nombre de pièces d'or">
             </form>
             
             <hr>
             
             <form method="POST" action="acceptTrade.php">
+                <input type="hidden" name="tradeDate" value="<?php echo $tradeLastUpdate ?>">
+                <input type="hidden" name="tradeId" value="<?php echo $tradeId ?>">
                 <input type="submit" class="btn btn-default form-control" name="acceptTrade" value="Accepter l'échange">
             </form>
             
             <form method="POST" action="declineTrade.php">
+                <input type="hidden" name="tradeId" value="<?php echo $tradeId ?>">
                 <input type="submit" class="btn btn-default form-control" name="declineTrade" value="Refuser l'échange">
             </form>
             

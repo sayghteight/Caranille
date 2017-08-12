@@ -63,6 +63,8 @@ if (isset($_POST['tradeCharacterId'])
                 
                 Votre demande d'échange a bien été envoyée
                 
+                <hr>
+                
                 <form method="POST" action="index.php">
                     <input type="submit" name="edit" class="btn btn-default form-control" value="Retour">
                 </form>

@@ -397,7 +397,7 @@ CREATE TABLE IF NOT EXISTS `car_trades_items`
   `tradeItemTradeId` int(5) NOT NULL,
   `tradeItemItemId` int(5) NOT NULL,
   `tradeItemCharacterId` int(5) NOT NULL,
-  `tradeItemItemQuantity` varchar(30) NOT NULL
+  `tradeItemItemQuantity` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `car_trades_golds` 

@@ -82,6 +82,5 @@ else
     echo "Il n'y a aucune demande d'échange en attente.";
 }
 $tradeQuery->closeCursor();
-?>
 
-<?php require_once("../../html/footer.php"); ?>
+require_once("../../html/footer.php"); ?>

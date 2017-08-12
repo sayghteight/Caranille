@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `car_trades_items`
   `tradeItemTradeId` int(5) NOT NULL,
   `tradeItemItemId` int(5) NOT NULL,
   `tradeItemCharacterId` int(5) NOT NULL,
-  `tradeItemItemQuantity` varchar(30) NOT NULL
+  `tradeItemItemQuantity` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `car_trades_golds` 
@@ -66,4 +66,12 @@ CREATE TABLE IF NOT EXISTS `car_trades_golds`
   `tradeGoldTradeId` int(5) NOT NULL,
   `tradeGoldCharacterId` int(5) NOT NULL,
   `tradeGoldQuantity` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `car_trades_requests` 
+(
+  `tradeRequestId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `tradeRequestCharacterOneId` int(5) NOT NULL,
+  `tradeRequestCharacterTwoId` int(5) NOT NULL,
+  `tradeRequestMessage` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
