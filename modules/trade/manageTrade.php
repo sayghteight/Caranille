@@ -76,7 +76,7 @@ if (isset($_POST['tradeId'])
             }
             ?>
             
-            <p>Echange entre <?php echo $characterName ?> et <?php echo $tradeCharacterName ?> (Dernière mise à jour <?php echo $tradeLastUpdate ?>)</p>
+            <p><?php echo $tradeCharacterName ?></p>
             
             <?php
             $tradeItemQuery = $bdd->prepare("SELECT * FROM car_trades_items, car_items
@@ -141,6 +141,8 @@ if (isset($_POST['tradeId'])
             Pièces d'or: <?php echo $tradeGoldQuantity ?>
             
             <hr>
+            
+            <p><?php echo $characterName ?></p>
             
             <?php
             $tradeItemQuery = $bdd->prepare("SELECT * FROM car_trades_items, car_items
@@ -212,7 +214,7 @@ if (isset($_POST['tradeId'])
             </form>
             
             <form method="POST" action="addGold.php">
-                <input type="submit" class="btn btn-default form-control" name="acceptTrade" value="Ajouter des pièces d'or">
+                <input type="submit" class="btn btn-default form-control" name="acceptTrade" value="Modifier le nombre de pièces d'or">
             </form>
             
             <hr>
