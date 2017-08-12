@@ -404,7 +404,7 @@ CREATE TABLE IF NOT EXISTS `car_trades_golds`
 (
   `tradeGoldId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `tradeGoldTradeId` int(5) NOT NULL,
-  `tradeItemCharacterId` int(5) NOT NULL,
+  `tradeGoldCharacterId` int(5) NOT NULL,
   `tradeGoldQuantity` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

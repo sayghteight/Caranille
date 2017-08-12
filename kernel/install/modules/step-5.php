@@ -94,15 +94,15 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         'accountIp' => $ip]);
                         $addAccount->closeCursor();
 
-                        //Insertion du personnage dans la base de donnée
-                        $accountIdQuery = $bdd->prepare("SELECT * FROM car_accounts 
+                        //On recherche l'id du personnage
+                        $accountQuery = $bdd->prepare("SELECT * FROM car_accounts 
                         WHERE accountPseudo = ?");
-                        $accountIdQuery->execute([$accountPseudo]);
+                        $accountQuery->execute([$accountPseudo]);
 
-                        while ($accountId = $accountIdQuery->fetch())
+                        while ($account = $accountQuery->fetch())
                         {
                             //On Stock l'id du compte
-                            $id = $accountId['accountId'];
+                            $accountId = $account['accountId'];
                         }
                         $accountIdQuery->closeCursor();
 
@@ -261,7 +261,7 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                         '1'
                         )");
                         $addCharacter->execute([
-                        'accountId' => $id,
+                        'accountId' => $accountId,
                         'characterRaceId' => $characterRaceId,
                         'characterName' => $characterName,
                         'characterSex' => $characterSex]);

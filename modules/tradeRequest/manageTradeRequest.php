@@ -109,6 +109,42 @@ if (isset($_POST['cancelTradeRequest']) || isset($_POST['acceptTradeRequest']) |
                 'tradeLastUpdate' => $date]);
                 $addTrade->closeCursor();
                 
+                //On recherche l'Id de l'échange
+                $tradeQuery = $bdd->prepare("SELECT * FROM car_trades
+                WHERE tradeCharacterOneId = ?
+                AND tradeCharacterTwoId = ?");
+                $tradeQuery->execute([$tradeRequestCharacterOneId, $tradeRequestCharacterTwoId]);
+
+                //On fait une boucle pour récupérer toutes les information
+                while ($trade = $tradeQuery->fetch())
+                {
+                    //On Stock l'id de l'échange
+                    $tradeId = stripslashes($trade['tradeId']);
+                }
+                $tradeQuery->closeCursor();
+                
+                //On ajoute 0 pièces d'or du joueur 1 sur l'échange
+                $addGoldTradeRequest = $bdd->prepare("INSERT INTO car_trades_golds VALUES(
+                '',
+                :tradeId,
+                :tradeCharacterId,
+                '0')");
+                $addGoldTradeRequest->execute([
+                'tradeId' => $tradeId,
+                'tradeCharacterId' => $tradeRequestCharacterOneId]);
+                $addGoldTradeRequest->closeCursor();
+                
+                //On ajoute 0 pièces d'or du joueur 2 sur l'échange
+                $addGoldTradeRequest = $bdd->prepare("INSERT INTO car_trades_golds VALUES(
+                '',
+                :tradeId,
+                :tradeCharacterId,
+                '0')");
+                $addGoldTradeRequest->execute([
+                'tradeId' => $tradeId,
+                'tradeCharacterId' => $tradeRequestCharacterTwoId]);
+                $addGoldTradeRequest->closeCursor();
+                
                 //On supprime la demande d'échange
                 $tradeRequestDeleteQuery = $bdd->prepare("DELETE FROM car_trades_requests
                 WHERE tradeRequestId = ?");

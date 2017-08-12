@@ -51,6 +51,7 @@ if (isset($_POST['tradeId'])
                 while ($character = $characterQuery->fetch())
                 {
                     //On récupère les informations du personnage
+                    $tradeCharacterId = stripslashes($character['characterId']);
                     $tradeCharacterName = stripslashes($character['characterName']);
                 }
                 $characterQuery->closeCursor(); 
@@ -68,25 +69,153 @@ if (isset($_POST['tradeId'])
                 while ($character = $characterQuery->fetch())
                 {
                     //On récupère les informations du personnage
+                    $tradeCharacterId = stripslashes($character['characterId']);
                     $tradeCharacterName = stripslashes($character['characterName']);
                 }
                 $characterQuery->closeCursor();
             }
+            ?>
             
-            echo "Echange entre $characterName et $tradeCharacterName (Dernière mise à jour $tradeLastUpdate)";
+            <p>Echange entre <?php echo $characterName ?> et <?php echo $tradeCharacterName ?> (Dernière mise à jour <?php echo $tradeLastUpdate ?>)</p>
             
-            /*
-            Récupérer les objets et l'or de l'autre joueur
+            <?php
+            $tradeItemQuery = $bdd->prepare("SELECT * FROM car_trades_items, car_items
+            WHERE tradeItemItemId = itemId
+            AND tradeItemCharacterId = ?
+            AND tradeItemTradeId = ?");
+            $tradeItemQuery->execute([$tradeCharacterId, $tradeId]);
+            $tradeItemRow = $tradeItemQuery->rowCount();
+    
+            //Si plusieurs objets ont été trouvée
+            if ($tradeItemRow > 0)
+            {
+                ?>
             
-            Les afficher dans un select
+                <form>
+                    Liste des objet de <?php echo $tradeCharacterName ?> : <select name="itemId" class="form-control">
+    
+                        <?php
+                        //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+                        while ($tradeItem = $tradeItemQuery->fetch())
+                        {
+                            //on récupère les valeurs de chaque objets qu'on va ensuite mettre dans le menu déroulant
+                            $tradeItemId = stripslashes($tradeItem['marketId']);
+                            $tradeItemName = stripslashes($tradeItem['itemName']);
+                            $tradeItemQuantity = stripslashes($tradeItem['tradeItemItemQuantity']);
+                            ?>
+                            <option value="<?php echo $tradeItemId ?>"><?php echo "$tradeItemName ($tradeItemQuantity)" ?></option>
+                            <?php
+                        }
+                        ?>
+    
+                    </select>
+                </form>
+                
+                <?php
+            }
+            else
+            {
+               echo "Il n'y a actuellement aucun objet<br />"; 
+            }
+            $tradeItemQuery->closeCursor();
+            
+            //On fait une requête pour vérifier si le joueur a mit des pièces d'or dans l'échange
+            $tradeGoldQuery = $bdd->prepare("SELECT * FROM car_trades_golds
+            WHERE tradeGoldCharacterId = ?
+            AND tradeGoldTradeId = ?");
+            $tradeGoldQuery->execute([$tradeCharacterId, $tradeId]);
+            $tradeGoldRow = $tradeGoldQuery->rowCount();
+    
+            //Si l'utilisateur a mit des pièces d'or dans l'échange on récupère combien il a mit
+            if ($tradeGoldRow == 1)
+            {
+                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+                while ($tradeGold = $tradeGoldQuery->fetch())
+                {
+                    //on récupère les valeurs de chaque magasins qu'on va ensuite mettre dans le menu déroulant
+                    $tradeGoldQuantity = stripslashes($tradeGold['tradeGoldQuantity']);
+                }
+            }
+            ?>
+            
+            Pièces d'or: <?php echo $tradeGoldQuantity ?>
             
             <hr>
             
-            Récupérer les objets et l'or du joueur
+            <?php
+            $tradeItemQuery = $bdd->prepare("SELECT * FROM car_trades_items, car_items
+            WHERE tradeItemItemId = itemId
+            AND tradeItemCharacterId = ?
+            AND tradeItemTradeId = ?");
+            $tradeItemQuery->execute([$characterId, $tradeId]);
+            $tradeItemRow = $tradeItemQuery->rowCount();
+    
+            //Si plusieurs objets ont été trouvée
+            if ($tradeItemRow > 0)
+            {
+                ?>
             
-            Les afficher dans un select
-            */
+                <form>
+                    Liste des objet de <?php echo $characterName ?> : <select name="itemId" class="form-control">
+    
+                        <?php
+                        //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+                        while ($tradeItem = $tradeItemQuery->fetch())
+                        {
+                            //on récupère les valeurs de chaque objets qu'on va ensuite mettre dans le menu déroulant
+                            $tradeItemId = stripslashes($tradeItem['marketId']);
+                            $tradeItemName = stripslashes($tradeItem['itemName']);
+                            $tradeItemQuantity = stripslashes($tradeItem['tradeItemItemQuantity']);
+                            ?>
+                            <option value="<?php echo $tradeItemId ?>"><?php echo "$tradeItemName ($tradeItemQuantity)" ?></option>
+                            <?php
+                        }
+                        ?>
+    
+                    </select>
+                    <input type="submit" name="enter" class="btn btn-default form-control" value="Retirer l'objet">
+                </form>
+                
+                <?php
+            }
+            else
+            {
+               echo "Il n'y a actuellement aucun objet<br />"; 
+            }
+            $tradeItemQuery->closeCursor();
+            
+            //On fait une requête pour vérifier si le joueur a mit des pièces d'or dans l'échange
+            $tradeGoldQuery = $bdd->prepare("SELECT * FROM car_trades_golds
+            WHERE tradeGoldCharacterId = ?
+            AND tradeGoldTradeId = ?");
+            $tradeGoldQuery->execute([$characterId, $tradeId]);
+            $tradeGoldRow = $tradeGoldQuery->rowCount();
+    
+            //Si l'utilisateur a mit des pièces d'or dans l'échange on récupère combien il a mit
+            if ($tradeItemRow == 1)
+            {
+                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+                while ($tradeGold = $tradeGoldQuery->fetch())
+                {
+                    //on récupère les valeurs de chaque magasins qu'on va ensuite mettre dans le menu déroulant
+                    $tradeGoldQuantity = stripslashes($tradeGold['tradeGoldQuantity']);
+                }
+            }
             ?>
+            
+            Pièces d'or: <?php echo $tradeGoldQuantity ?>
+            
+            <hr>
+            
+            <form method="POST" action="addItem.php">
+                <input type="submit" class="btn btn-default form-control" name="acceptTrade" value="Ajouter un objet">
+            </form>
+            
+            <form method="POST" action="addGold.php">
+                <input type="submit" class="btn btn-default form-control" name="acceptTrade" value="Ajouter des pièces d'or">
+            </form>
+            
+            <hr>
             
             <form method="POST" action="acceptTrade.php">
                 <input type="submit" class="btn btn-default form-control" name="acceptTrade" value="Accepter l'échange">
