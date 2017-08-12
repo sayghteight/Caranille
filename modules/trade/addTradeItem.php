@@ -40,8 +40,8 @@ if (isset($_POST['tradeId'])
             {
                 ?>
         
-                <form method="POST" action="addOffer.php">
-                    Liste de vos objets/équipements : <select name="tradeItemQuantity" class="form-control">
+                <form method="POST" action="addTradeItemEnd.php">
+                    Liste de vos objets/équipements : <select name="tradeItemId" class="form-control">
                             
                         <?php
                         //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
@@ -60,7 +60,8 @@ if (isset($_POST['tradeId'])
                     </select>
                     
                     Quantité:  <input type="number" name="tradeItemQuantity" class="form-control" placeholder="Quantité" value="1" required>
-                    <input type="submit" name="addItem" class="btn btn-default form-control" value="Ajouter cet objet/équipement">
+                    <input type="hidden" name="tradeId" value="<?php echo $tradeId ?>">
+                    <input type="submit" name="addTradeItemEnd" class="btn btn-default form-control" value="Ajouter cet objet/équipement">
                 </form>
                 
                 <?php
