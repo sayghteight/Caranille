@@ -80,7 +80,7 @@ if (isset($_POST['tradeId'])
                     WHERE itemId = inventoryItemId
                     AND inventoryCharacterId = ?
                     AND itemId = ?");
-                    $itemQuery->execute([$characterId, $tradeItemId]);
+                    $itemQuery->execute([$tradeCharacterOneId, $tradeItemId]);
                     $itemRow = $itemQuery->rowCount();
     
                     //Si le personne possède cet objet
@@ -116,16 +116,16 @@ if (isset($_POST['tradeId'])
                         :tradeItemQuantity,
                         '0')");
                         $addItem->execute([
-                        'characterId' => $characterId,
+                        'characterId' => $tradeCharacterOneId,
                         'tradeItemId' => $tradeItemId,
                         'tradeItemQuantity' => $tradeItemQuantity]);
                         $addItem->closeCursor();
                     }
                     
-                    echo "Vous avez reçu l'objet $itemName en $tradeItemQuantity exemplaire(s)<br />";
+                    echo "Vous avez récupéré l'objet $itemName en $tradeItemQuantity exemplaire(s)<br />";
                 }
                 
-                //On fait une requête pour récupérer le montant de l'argent que l'autre joueur à proposé
+                //On fait une requête pour récupérer le montant de l'argent que le joueur à proposé
                 $tradeGoldQuery = $bdd->prepare("SELECT * FROM car_trades_golds
                 WHERE tradeGoldCharacterId = ?
                 AND tradeGoldTradeId = ?");
@@ -149,7 +149,7 @@ if (isset($_POST['tradeId'])
                     'tradeCharacterOneId' => $tradeCharacterOneId));
                     $updateCharacter->closeCursor();
                     
-                    echo "Vous avez reçu $tradeGoldQuantity PO";
+                    echo "Vous avez récupéré $tradeGoldQuantity Pièce(s) d'or<br />";
                 }
                 
                 //On fait la même chose pour l'autre joueur
@@ -291,7 +291,7 @@ if (isset($_POST['tradeId'])
                     WHERE itemId = inventoryItemId
                     AND inventoryCharacterId = ?
                     AND itemId = ?");
-                    $itemQuery->execute([$characterId, $tradeItemId]);
+                    $itemQuery->execute([$tradeCharacterTwoId, $tradeItemId]);
                     $itemRow = $itemQuery->rowCount();
     
                     //Si le personne possède cet objet
@@ -317,7 +317,6 @@ if (isset($_POST['tradeId'])
                         'tradeItemQuantity' => $tradeItemQuantity,
                         'inventoryId' => $inventoryId));
                         $updateInventory->closeCursor();
-                        echo "$tradeItemQuantity";
                     }
                     else
                     {
@@ -328,13 +327,13 @@ if (isset($_POST['tradeId'])
                         :tradeItemQuantity,
                         '0')");
                         $addItem->execute([
-                        'characterId' => $characterId,
+                        'characterId' => $tradeCharacterTwoId,
                         'tradeItemId' => $tradeItemId,
                         'tradeItemQuantity' => $tradeItemQuantity]);
                         $addItem->closeCursor();
                     }
                     
-                    echo "Vous avez reçu l'objet $itemName en $tradeItemQuantity exemplaire(s)<br />";
+                    echo "Vous avez récupéré l'objet $itemName en $tradeItemQuantity exemplaire(s)<br />";
                 }
                 
                 //On fait une requête pour récupérer le montant de l'argent que l'autre joueur à proposé
@@ -361,7 +360,7 @@ if (isset($_POST['tradeId'])
                     'tradeCharacterTwoId' => $tradeCharacterTwoId));
                     $updateCharacter->closeCursor();
                     
-                    echo "Vous avez reçu $tradeGoldQuantity PO<br />";
+                    echo "Vous avez récupéré $tradeGoldQuantity Pièce(s) d'or<br />";
                 }
                 
                 //On fait la même chose dans l'autre sens
@@ -421,7 +420,6 @@ if (isset($_POST['tradeId'])
                         'tradeItemQuantity' => $tradeItemQuantity,
                         'inventoryId' => $inventoryId));
                         $updateInventory->closeCursor();
-                        echo "$tradeItemQuantity";
                     }
                     else
                     {

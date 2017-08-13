@@ -87,7 +87,7 @@ if (isset($_POST['tradeId'])
                             WHERE itemId = inventoryItemId
                             AND inventoryCharacterId = ?
                             AND itemId = ?");
-                            $itemQuery->execute([$characterId, $tradeItemId]);
+                            $itemQuery->execute([$tradeCharacterOneId, $tradeItemId]);
                             $itemRow = $itemQuery->rowCount();
             
                             //Si le personne possède cet objet
@@ -123,7 +123,7 @@ if (isset($_POST['tradeId'])
                                 :tradeItemQuantity,
                                 '0')");
                                 $addItem->execute([
-                                'characterId' => $characterId,
+                                'characterId' => $tradeCharacterOneId,
                                 'tradeItemId' => $tradeItemId,
                                 'tradeItemQuantity' => $tradeItemQuantity]);
                                 $addItem->closeCursor();
@@ -340,7 +340,7 @@ if (isset($_POST['tradeId'])
                             WHERE itemId = inventoryItemId
                             AND inventoryCharacterId = ?
                             AND itemId = ?");
-                            $itemQuery->execute([$characterId, $tradeItemId]);
+                            $itemQuery->execute([$tradeCharacterTwoId, $tradeItemId]);
                             $itemRow = $itemQuery->rowCount();
             
                             //Si le personne possède cet objet
@@ -376,7 +376,7 @@ if (isset($_POST['tradeId'])
                                 :tradeItemQuantity,
                                 '0')");
                                 $addItem->execute([
-                                'characterId' => $characterId,
+                                'characterId' => $tradeCharacterTwoId,
                                 'tradeItemId' => $tradeItemId,
                                 'tradeItemQuantity' => $tradeItemQuantity]);
                                 $addItem->closeCursor();
@@ -406,7 +406,7 @@ if (isset($_POST['tradeId'])
                         WHERE characterId = :tradeCharacterTwoId");
                         $updateCharacter->execute(array(
                         'tradeGoldQuantity' => $tradeGoldQuantity,  
-                        'tradeCharacterTwoId' => $characterId));
+                        'tradeCharacterTwoId' => $tradeCharacterTwoId));
                         $updateCharacter->closeCursor();
                         
                         //On fait la même chose pour l'autre joueur
