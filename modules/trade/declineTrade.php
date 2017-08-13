@@ -64,6 +64,17 @@ if (isset($_POST['tradeId'])
                     $tradeItemId = stripslashes($tradeItem['tradeItemItemId']);
                     $tradeItemQuantity = stripslashes($tradeItem['tradeItemItemQuantity']);
                     
+                    //On fait une requête pour récupérer les informations de l'objet
+                    $itemQuery = $bdd->prepare("SELECT * FROM car_items
+                    WHERE itemId = ?");
+                    $itemQuery->execute([$tradeItemId]);
+                    
+                    //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+                    while ($item = $itemQuery->fetch())
+                    {
+                        $itemName = stripslashes($item['itemName']);
+                    }
+                    
                     //On cherche à savoir si l'objet que le joueur va recevoir appartient déjà au joueur
                     $itemQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
                     WHERE itemId = inventoryItemId
@@ -111,7 +122,7 @@ if (isset($_POST['tradeId'])
                         $addItem->closeCursor();
                     }
                     
-                    echo "Vous avez reçu $itemName<br />";
+                    echo "Vous avez reçu l'objet $itemName en $tradeItemQuantity exemplaire(s)<br />";
                 }
                 
                 //On fait une requête pour récupérer le montant de l'argent que l'autre joueur à proposé
@@ -140,6 +151,105 @@ if (isset($_POST['tradeId'])
                     
                     echo "Vous avez reçu $tradeGoldQuantity PO";
                 }
+                
+                //On fait la même chose pour l'autre joueur
+                
+                //On fait une requête pour récupérer la liste des objets que le joueur à proposé
+                $tradeItemQuery = $bdd->prepare("SELECT * FROM car_trades_items
+                WHERE tradeItemCharacterId = ?
+                AND tradeItemTradeId = ?");
+                $tradeItemQuery->execute([$tradeCharacterTwoId, $tradeId]);
+                $tradeRow = $tradeItemQuery->rowCount();
+                
+                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+                while ($tradeItem = $tradeItemQuery->fetch())
+                {
+                    $tradeItemId = stripslashes($tradeItem['tradeItemItemId']);
+                    $tradeItemQuantity = stripslashes($tradeItem['tradeItemItemQuantity']);
+                    
+                    //On fait une requête pour récupérer les informations de l'objet
+                    $itemQuery = $bdd->prepare("SELECT * FROM car_items
+                    WHERE itemId = ?");
+                    $itemQuery->execute([$tradeItemId]);
+                    
+                    //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+                    while ($item = $itemQuery->fetch())
+                    {
+                        $itemName = stripslashes($item['itemName']);
+                    }
+                    
+                    //On cherche à savoir si l'objet que le joueur va recevoir appartient déjà au joueur
+                    $itemQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
+                    WHERE itemId = inventoryItemId
+                    AND inventoryCharacterId = ?
+                    AND itemId = ?");
+                    $itemQuery->execute([$tradeCharacterTwoId, $tradeItemId]);
+                    $itemRow = $itemQuery->rowCount();
+    
+                    //Si le personne possède cet objet
+                    if ($itemRow == 1) 
+                    {
+                        //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+                        while ($item = $itemQuery->fetch())
+                        {
+                            //On récupère les informations de l'inventaire
+                            $itemId = stripslashes($item['itemId']);
+                            $itemName = stripslashes($item['itemName']);
+                            $inventoryId = stripslashes($item['inventoryId']);
+                            $itemQuantity = stripslashes($item['inventoryQuantity']);
+                            $inventoryEquipped = stripslashes($item['inventoryEquipped']);
+                        }
+                        $itemQuery->closeCursor();
+    
+                        //On met l'inventaire à jour
+                        $updateInventory = $bdd->prepare("UPDATE car_inventory SET
+                        inventoryQuantity = inventoryQuantity + :tradeItemQuantity
+                        WHERE inventoryId = :inventoryId");
+                        $updateInventory->execute(array(
+                        'tradeItemQuantity' => $tradeItemQuantity,
+                        'inventoryId' => $inventoryId));
+                        $updateInventory->closeCursor();
+                    }
+                    else
+                    {
+                        $addItem = $bdd->prepare("INSERT INTO car_inventory VALUES(
+                        '',
+                        :characterId,
+                        :tradeItemId,
+                        :tradeItemQuantity,
+                        '0')");
+                        $addItem->execute([
+                        'characterId' => $tradeCharacterTwoId,
+                        'tradeItemId' => $tradeItemId,
+                        'tradeItemQuantity' => $tradeItemQuantity]);
+                        $addItem->closeCursor();
+                    }
+                }
+                
+                //On fait une requête pour récupérer le montant de l'argent que l'autre joueur à proposé
+                $tradeGoldQuery = $bdd->prepare("SELECT * FROM car_trades_golds
+                WHERE tradeGoldCharacterId = ?
+                AND tradeGoldTradeId = ?");
+                $tradeGoldQuery->execute([$tradeCharacterTwoId, $tradeId]);
+                $tradeGoldRow = $tradeGoldQuery->rowCount();
+                
+                if ($tradeGoldRow == 1)
+                {
+                    //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+                    while ($tradeGold = $tradeGoldQuery->fetch())
+                    {
+                        $tradeGoldQuantity = stripslashes($tradeGold['tradeGoldQuantity']);
+                    }
+                    
+                    //On ajoute l'argent au joueur
+                    $updateCharacter = $bdd->prepare("UPDATE car_characters SET
+                    characterGold = characterGold + :tradeGoldQuantity
+                    WHERE characterId = :tradeCharacterOneId");
+                    $updateCharacter->execute(array(
+                    'tradeGoldQuantity' => $tradeGoldQuantity,  
+                    'tradeCharacterOneId' => $tradeCharacterTwoId));
+                    $updateCharacter->closeCursor();
+                }
             }
             //Si la seconde personne de l'échange est le joueur
             else
@@ -164,6 +274,17 @@ if (isset($_POST['tradeId'])
                 {
                     $tradeItemId = stripslashes($tradeItem['tradeItemItemId']);
                     $tradeItemQuantity = stripslashes($tradeItem['tradeItemItemQuantity']);
+                    
+                    //On fait une requête pour récupérer les informations de l'objet
+                    $itemQuery = $bdd->prepare("SELECT * FROM car_items
+                    WHERE itemId = ?");
+                    $itemQuery->execute([$tradeItemId]);
+                    
+                    //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+                    while ($item = $itemQuery->fetch())
+                    {
+                        $itemName = stripslashes($item['itemName']);
+                    }
                     
                     //On cherche à savoir si l'objet que le joueur va recevoir appartient déjà au joueur
                     $itemQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
@@ -213,7 +334,7 @@ if (isset($_POST['tradeId'])
                         $addItem->closeCursor();
                     }
                     
-                    echo "Vous avez reçu $itemName<br />";
+                    echo "Vous avez reçu l'objet $itemName en $tradeItemQuantity exemplaire(s)<br />";
                 }
                 
                 //On fait une requête pour récupérer le montant de l'argent que l'autre joueur à proposé
@@ -242,8 +363,107 @@ if (isset($_POST['tradeId'])
                     
                     echo "Vous avez reçu $tradeGoldQuantity PO<br />";
                 }
+                
+                //On fait la même chose dans l'autre sens
+                
+                //On fait une requête pour récupérer la liste des objets que l'autre joueur à proposé
+                $tradeItemQuery = $bdd->prepare("SELECT * FROM car_trades_items
+                WHERE tradeItemCharacterId = ?
+                AND tradeItemTradeId = ?");
+                $tradeItemQuery->execute([$tradeCharacterOneId, $tradeId]);
+                $tradeRow = $tradeItemQuery->rowCount();
+                
+                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+                while ($tradeItem = $tradeItemQuery->fetch())
+                {
+                    $tradeItemId = stripslashes($tradeItem['tradeItemItemId']);
+                    $tradeItemQuantity = stripslashes($tradeItem['tradeItemItemQuantity']);
+                    
+                    //On fait une requête pour récupérer les informations de l'objet
+                    $itemQuery = $bdd->prepare("SELECT * FROM car_items
+                    WHERE itemId = ?");
+                    $itemQuery->execute([$tradeItemId]);
+                    
+                    //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+                    while ($item = $itemQuery->fetch())
+                    {
+                        $itemName = stripslashes($item['itemName']);
+                    }
+                    
+                    //On cherche à savoir si l'objet que le joueur va recevoir appartient déjà au joueur
+                    $itemQuery = $bdd->prepare("SELECT * FROM car_items, car_inventory 
+                    WHERE itemId = inventoryItemId
+                    AND inventoryCharacterId = ?
+                    AND itemId = ?");
+                    $itemQuery->execute([$tradeCharacterOneId, $tradeItemId]);
+                    $itemRow = $itemQuery->rowCount();
+    
+                    //Si le personne possède cet objet
+                    if ($itemRow == 1) 
+                    {
+                        //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+                        while ($item = $itemQuery->fetch())
+                        {
+                            //On récupère les informations de l'inventaire
+                            $itemId = stripslashes($item['itemId']);
+                            $itemName = stripslashes($item['itemName']);
+                            $inventoryId = stripslashes($item['inventoryId']);
+                            $itemQuantity = stripslashes($item['inventoryQuantity']);
+                            $inventoryEquipped = stripslashes($item['inventoryEquipped']);
+                        }
+                        $itemQuery->closeCursor();
+    
+                        //On met l'inventaire à jour
+                        $updateInventory = $bdd->prepare("UPDATE car_inventory SET
+                        inventoryQuantity = inventoryQuantity + :tradeItemQuantity
+                        WHERE inventoryId = :inventoryId");
+                        $updateInventory->execute(array(
+                        'tradeItemQuantity' => $tradeItemQuantity,
+                        'inventoryId' => $inventoryId));
+                        $updateInventory->closeCursor();
+                        echo "$tradeItemQuantity";
+                    }
+                    else
+                    {
+                        $addItem = $bdd->prepare("INSERT INTO car_inventory VALUES(
+                        '',
+                        :characterId,
+                        :tradeItemId,
+                        :tradeItemQuantity,
+                        '0')");
+                        $addItem->execute([
+                        'characterId' => $tradeCharacterOneId,
+                        'tradeItemId' => $tradeItemId,
+                        'tradeItemQuantity' => $tradeItemQuantity]);
+                        $addItem->closeCursor();
+                    }
+                }
+                
+                //On fait une requête pour récupérer le montant de l'argent que l'autre joueur à proposé
+                $tradeGoldQuery = $bdd->prepare("SELECT * FROM car_trades_golds
+                WHERE tradeGoldCharacterId = ?
+                AND tradeGoldTradeId = ?");
+                $tradeGoldQuery->execute([$tradeCharacterOneId, $tradeId]);
+                $tradeGoldRow = $tradeGoldQuery->rowCount();
+                
+                if ($tradeGoldRow == 1)
+                {
+                    //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+                    while ($tradeGold = $tradeGoldQuery->fetch())
+                    {
+                        $tradeGoldQuantity = stripslashes($tradeGold['tradeGoldQuantity']);
+                    }
+                    
+                    //On ajoute l'argent au joueur
+                    $updateCharacter = $bdd->prepare("UPDATE car_characters SET
+                    characterGold = characterGold + :tradeGoldQuantity
+                    WHERE characterId = :tradeCharacterTwoId");
+                    $updateCharacter->execute(array(
+                    'tradeGoldQuantity' => $tradeGoldQuantity,  
+                    'tradeCharacterTwoId' => $tradeCharacterOneId));
+                    $updateCharacter->closeCursor();
+                }
             }
-            
             //On supprime l'échange
             $deleteTrade = $bdd->prepare("DELETE FROM car_trades 
             WHERE tradeId = :tradeId");

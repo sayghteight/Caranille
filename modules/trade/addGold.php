@@ -27,8 +27,7 @@ if (isset($_POST['tradeId'])
         //Si cette échange existe et est attribuée au joueur
         if ($tradeRow > 0) 
         {
-            
-            //On fait une requête pour récupérer le montant de l'argent que l'autre joueur à proposé
+            //On fait une requête pour récupérer le montant de l'argent que le joueur à proposé
             $tradeGoldQuery = $bdd->prepare("SELECT * FROM car_trades_golds
             WHERE tradeGoldCharacterId = ?
             AND tradeGoldTradeId = ?");
@@ -40,12 +39,37 @@ if (isset($_POST['tradeId'])
             {
                 $tradeGoldQuantity = stripslashes($tradeGold['tradeGoldQuantity']);
             }
+            
+            //On remet à zéro la somme qu'il y avait dans l'échange
+            $updateGoldTrade = $bdd->prepare("UPDATE car_trades_golds SET
+            tradeGoldQuantity = 0
+            WHERE tradeGoldCharacterId = :characterId
+            AND tradeGoldTradeId = :tradeId");
+            $updateGoldTrade->execute(array(
+            'characterId' => $characterId,
+            'tradeId' => $tradeId));
+            $updateGoldTrade->closeCursor();
+                        
+            //Si le joueur est revenu sur cette page c'est qu'il souhaite modifier l'argent de l'échange, on lui rend donc l'argent qu'il avait mit avant
+            $updateGoldTrade = $bdd->prepare("UPDATE car_characters SET
+            characterGold = characterGold + :tradeGoldQuantity
+            WHERE characterId = :characterId");
+            $updateGoldTrade->execute(array(
+            'tradeGoldQuantity' => $tradeGoldQuantity,
+            'characterId' => $characterId));
+            $updateGoldTrade->closeCursor();
             ?>
             
             <form method="POST" action="addGoldEnd.php">
-                Pièces d'or : <input type="number" name="tradeGold" class="form-control" placeholder="Pièces d'or" value="<?php echo $tradeGoldQuantity ?>" required>
+                Pièces d'or : <input type="number" name="tradeGold" value="0" class="form-control" placeholder="Pièces d'or" required>
                 <input type="hidden" name="tradeId" value="<?php echo $tradeId ?>">
                 <input type="submit" class="btn btn-default form-control" name="addGoldEnd" value="Modifier le nombre de pièces d'or">
+            </form>
+            
+            <hr>
+        
+            <form method="POST" action="index.php">
+                <input type="submit" class="btn btn-default form-control" name="back" value="Retour">
             </form>
             
             <?php

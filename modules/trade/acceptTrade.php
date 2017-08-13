@@ -269,6 +269,8 @@ if (isset($_POST['tradeId'])
                         $deleteTradeGolds->execute(array('tradeId' => $tradeId));
                         $deleteTradeGolds->closeCursor();
                         ?>
+                        
+                        <hr>
                                         
                         L'échange a été terminé, vous avez reçu les objets et l'or proposé
                         
@@ -519,6 +521,8 @@ if (isset($_POST['tradeId'])
                         $deleteTradeGolds->execute(array('tradeId' => $tradeId));
                         $deleteTradeGolds->closeCursor();
                         ?>
+                        
+                        <hr>
                                         
                         L'échange a été terminé, vous avez reçu les objets et l'or proposé
                         

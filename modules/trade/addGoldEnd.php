@@ -51,6 +51,15 @@ if (isset($_POST['tradeId'])
                 $updateTrade->execute(array(
                 'tradeId' => $tradeId));
                 $updateTrade->closeCursor(); 
+                
+                //Si le joueur est revenu sur cette page c'est qu'il souhaite modifier l'argent de l'échange, on lui rend donc l'argent qu'il avait mit avant
+                $updateGoldTrade = $bdd->prepare("UPDATE car_characters SET
+                characterGold = characterGold - :tradeGoldQuantity
+                WHERE characterId = :characterId");
+                $updateGoldTrade->execute(array(
+                'tradeGoldQuantity' => $tradeGold,
+                'characterId' => $characterId));
+                $updateGoldTrade->closeCursor();
                 ?>
                 
                 Vous avez mit <?php echo $tradeGold ?> pièce(s) d'or dans l'échange
