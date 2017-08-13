@@ -108,7 +108,7 @@ if (isset($_POST['accountPseudo'])
                             //On Stock l'id du compte
                             $accountId = $account['accountId'];
                         }
-                        $accountIdQuery->closeCursor();
+                        $accountQuery->closeCursor();
 
                         /*
                         Add character model
@@ -187,7 +187,7 @@ if (isset($_POST['accountPseudo'])
                         '0', //characterOnBattle
                         '1' //characterEnable
                         */
-
+                        
                         $addCharacter = $bdd->prepare("INSERT INTO car_characters VALUES(
                         '',
                         :accountId,
@@ -270,7 +270,7 @@ if (isset($_POST['accountPseudo'])
                         'characterName' => $characterName,
                         'characterSex' => $characterSex]);
                         $addCharacter->closeCursor();
-
+                        
                         echo "Compte crée";
                     }
                     //Si la classe choisie n'existe pas

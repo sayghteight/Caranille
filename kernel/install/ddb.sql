@@ -307,6 +307,15 @@ CREATE TABLE IF NOT EXISTS `car_news`
   `newsDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `car_notifications` 
+(
+  `notificationId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `notificationCharacterId` int(11) NOT NULL,
+  `notificationDateTime` datetime NOT NULL,
+  `notificationMessage` text NOT NULL,
+  `notificationRead` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `car_private_conversation` 
 (
   `privateConversationId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,

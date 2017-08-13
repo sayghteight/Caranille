@@ -104,7 +104,7 @@ if (isset($_POST['accountPseudo']) && ($_POST['accountPassword']) && ($_POST['ac
                             //On Stock l'id du compte
                             $accountId = $account['accountId'];
                         }
-                        $accountIdQuery->closeCursor();
+                        $accountQuery->closeCursor();
 
                         /*
                         Add character model

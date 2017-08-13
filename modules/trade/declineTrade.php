@@ -250,6 +250,22 @@ if (isset($_POST['tradeId'])
                     'tradeCharacterOneId' => $tradeCharacterTwoId));
                     $updateCharacter->closeCursor();
                 }
+                
+                $notificationDate = date('Y-m-d H:i:s');
+                $notificationMessage = "$characterName a refusé l'échange";
+                
+                //On envoi un notification au joueur
+                $addNotification = $bdd->prepare("INSERT INTO car_notifications VALUES(
+                '',
+                :tradeCharacterTwoId,
+                :notificationDate,
+                :notificationMessage,
+                'No')");
+                $addNotification->execute(array(
+                'tradeCharacterTwoId' => $tradeCharacterTwoId,  
+                'notificationDate' => $notificationDate,
+                'notificationMessage' => $notificationMessage));
+                $addNotification->closeCursor();
             }
             //Si la seconde personne de l'échange est le joueur
             else
@@ -352,7 +368,7 @@ if (isset($_POST['tradeId'])
                     }
                     
                     //On ajoute l'argent au joueur
-                     $updateCharacter = $bdd->prepare("UPDATE car_characters SET
+                    $updateCharacter = $bdd->prepare("UPDATE car_characters SET
                     characterGold = characterGold + :tradeGoldQuantity
                     WHERE characterId = :tradeCharacterTwoId");
                     $updateCharacter->execute(array(
@@ -461,6 +477,22 @@ if (isset($_POST['tradeId'])
                     'tradeCharacterTwoId' => $tradeCharacterOneId));
                     $updateCharacter->closeCursor();
                 }
+                
+                $notificationDate = date('Y-m-d H:i:s');
+                $notificationMessage = "$characterName a refusé l'échange";
+                
+                //On envoi un notification au joueur
+                $addNotification = $bdd->prepare("INSERT INTO car_notifications VALUES(
+                '',
+                :tradeCharacterOneId,
+                :notificationDate,
+                :notificationMessage,
+                'No')");
+                $addNotification->execute(array(
+                'tradeCharacterOneId' => $tradeCharacterOneId,  
+                'notificationDate' => $notificationDate,
+                'notificationMessage' => $notificationMessage));
+                $addNotification->closeCursor();
             }
             //On supprime l'échange
             $deleteTrade = $bdd->prepare("DELETE FROM car_trades 

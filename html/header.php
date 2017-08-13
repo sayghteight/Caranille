@@ -23,6 +23,8 @@ if (isset($_SESSION['account']['id']))
     require_once("../../kernel/equipmentType/index.php");
     //On vérifie le nombre d'offre dans le marché
     require_once("../../kernel/market/index.php");
+    //On vérifie le nombre de message de notifications non lue
+    require_once("../../kernel/notification/index.php");
     //On vérifie le nombre de message de conversation privée non lu
     require_once("../../kernel/privateConversation/index.php");
     //On vérifie si le personnage est actuellement dans une ville. Si c'est le cas on récupère toutes les informations de la ville
@@ -129,7 +131,7 @@ if (isset($_SESSION['account']['id']))
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mon compte<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mon compte <?php  if (isset($_SESSION['account']['id'])) { echo "($notificationNumberRow)"; } ?><span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <?php
                                 //Si le joueur est connecté on lui donne la possibilité de se déconnecter
@@ -138,6 +140,7 @@ if (isset($_SESSION['account']['id']))
                                     ?>
                                     
                                     <li><a href="../../modules/account/index.php">Informations</a></li>
+                                    <li><a href="../../modules/notification/index.php">Notifications (<?php echo $notificationNumberRow ?>)</a></li>
                                     
                                     <?php
                                     switch ($accountAccess)

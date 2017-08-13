@@ -59,6 +59,22 @@ if (isset($_POST['tradeCharacterId'])
                 'tradeCharacterId' => $tradeCharacterId,
                 'tradeMessage' => $tradeMessage]);
                 $addTradeRequest->closeCursor();
+                
+                $notificationDate = date('Y-m-d H:i:s');
+                $notificationMessage = "$characterName souaite lancer un échange avec vous !";
+                
+                //On envoi un notification au premier joueur
+                $addNotification = $bdd->prepare("INSERT INTO car_notifications VALUES(
+                '',
+                :tradeCharacterId,
+                :notificationDate,
+                :notificationMessage,
+                'No')");
+                $addNotification->execute(array(
+                'tradeCharacterId' => $tradeCharacterId,  
+                'notificationDate' => $notificationDate,
+                'notificationMessage' => $notificationMessage));
+                $addNotification->closeCursor();
                 ?>
                 
                 Votre demande d'échange a bien été envoyée

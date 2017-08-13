@@ -28,11 +28,37 @@ if (isset($_POST['cancelTradeRequest']) || isset($_POST['acceptTradeRequest']) |
             //Si cette demande existe et est attribuée au joueur
             if ($tradeRequestRow > 0) 
             {
+                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+                while ($tradeRequest = $tradeRequestQuery->fetch())
+                {
+                    //On récupère les valeurs de la demande d'échange
+                    $tradeRequestId = stripslashes($tradeRequest['tradeRequestId']);
+                    $tradeRequestCharacterOneId = stripslashes($tradeRequest['tradeRequestCharacterOneId']);
+                    $tradeRequestCharacterTwoId = stripslashes($tradeRequest['tradeRequestCharacterTwoId']);
+                    $tradeRequestMessage = stripslashes($tradeRequest['tradeRequestMessage']);
+                }
+                
                 //On supprime la demande d'échange
                 $tradeRequestDeleteQuery = $bdd->prepare("DELETE FROM car_trades_requests
                 WHERE tradeRequestId = ?");
                 $tradeRequestDeleteQuery->execute([$tradeRequestId]);
                 $tradeRequestDeleteQuery->closeCursor();
+                
+                $notificationDate = date('Y-m-d H:i:s');
+                $notificationMessage = "$characterName a annulé sa demande d'échange";
+                
+                //On envoi un notification au joueur
+                $addNotification = $bdd->prepare("INSERT INTO car_notifications VALUES(
+                '',
+                :tradeRequestCharacterTwoId,
+                :notificationDate,
+                :notificationMessage,
+                'No')");
+                $addNotification->execute(array(
+                'tradeRequestCharacterTwoId' => $tradeRequestCharacterTwoId,  
+                'notificationDate' => $notificationDate,
+                'notificationMessage' => $notificationMessage));
+                $addNotification->closeCursor();
                 ?>
                 
                 Votre demande d'échange a bien été annulée
@@ -150,6 +176,22 @@ if (isset($_POST['cancelTradeRequest']) || isset($_POST['acceptTradeRequest']) |
                 WHERE tradeRequestId = ?");
                 $tradeRequestDeleteQuery->execute([$tradeRequestId]);
                 $tradeRequestDeleteQuery->closeCursor();
+                
+                $notificationDate = date('Y-m-d H:i:s');
+                $notificationMessage = "$characterName a accepté votre demande d'échange";
+                
+                //On envoi un notification au joueur
+                $addNotification = $bdd->prepare("INSERT INTO car_notifications VALUES(
+                '',
+                :tradeRequestCharacterOneId,
+                :notificationDate,
+                :notificationMessage,
+                'No')");
+                $addNotification->execute(array(
+                'tradeRequestCharacterOneId' => $tradeRequestCharacterOneId,  
+                'notificationDate' => $notificationDate,
+                'notificationMessage' => $notificationMessage));
+                $addNotification->closeCursor();
                 ?>
                 
                 La demande d'échange a bien été acceptée
@@ -197,11 +239,37 @@ if (isset($_POST['cancelTradeRequest']) || isset($_POST['acceptTradeRequest']) |
             //Si cette demande existe et est attribuée au joueur
             if ($tradeRequestRow > 0) 
             {
+                //On fait une boucle sur le ou les résultats obtenu pour récupérer les informations
+                while ($tradeRequest = $tradeRequestQuery->fetch())
+                {
+                    //On récupère les valeurs de la demande d'échange
+                    $tradeRequestId = stripslashes($tradeRequest['tradeRequestId']);
+                    $tradeRequestCharacterOneId = stripslashes($tradeRequest['tradeRequestCharacterOneId']);
+                    $tradeRequestCharacterTwoId = stripslashes($tradeRequest['tradeRequestCharacterTwoId']);
+                    $tradeRequestMessage = stripslashes($tradeRequest['tradeRequestMessage']);
+                }
+                
                 //On supprime la demande d'échange
                 $tradeRequestDeleteQuery = $bdd->prepare("DELETE FROM car_trades_requests
                 WHERE tradeRequestId = ?");
                 $tradeRequestDeleteQuery->execute([$tradeRequestId]);
                 $tradeRequestDeleteQuery->closeCursor();
+                
+                $notificationDate = date('Y-m-d H:i:s');
+                $notificationMessage = "$characterName a refusé votre demande d'échange";
+                
+                //On envoi un notification au joueur
+                $addNotification = $bdd->prepare("INSERT INTO car_notifications VALUES(
+                '',
+                :tradeRequestCharacterOneId,
+                :notificationDate,
+                :notificationMessage,
+                'No')");
+                $addNotification->execute(array(
+                'tradeRequestCharacterOneId' => $tradeRequestCharacterOneId,  
+                'notificationDate' => $notificationDate,
+                'notificationMessage' => $notificationMessage));
+                $addNotification->closeCursor();
                 ?>
                 
                 La demande d'échange a bien été refusée
