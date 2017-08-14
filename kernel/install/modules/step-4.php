@@ -1,7 +1,8 @@
 <?php 
 require_once("../html/header.php"); 
-include("../../config.php"); 
-?>
+include("../../config.php");
+
+$_SESSION['token'] = uniqid(); ?>
     
 <form method="POST" action="step-5.php">
     Pseudo : <input type="text" name="accountPseudo" class="form-control" required>
@@ -39,6 +40,7 @@ include("../../config.php");
     Nom du personnage : <input class="form-control" type="text" name="characterName" required>
     <iframe src="../../../CGU.txt" width="100%" height="100%"></iframe>
     En vous inscrivant vous acceptez le présent règlement !
+    <input type="hidden" name="token" class="btn btn-default form-control" value="<?php echo $_SESSION['token'] ?>">
     <input type="submit" name="Register" class="btn btn-default form-control" value="Je créer mon compte">
 </form>
 
