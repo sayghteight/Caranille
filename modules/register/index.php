@@ -1,6 +1,6 @@
 <?php require_once("../../html/header.php"); 
 
-//On gènère un Tocken
+//On gènère un Token
 $token = uniqid();?>
 
 <form method="POST" action="completeRegistration.php">
