@@ -41,7 +41,7 @@ $token = uniqid();?>
     Nom du personnage : <input class="form-control" type="text" name="characterName" required>
     <iframe src="../../CGU.txt" width="100%" height="100%"></iframe>
     En vous inscrivant vous acceptez le présent règlement !
-    <input type="hidden" name="ticken" class="btn btn-default form-control" value="<?php echo $token ?>">
+    <input type="hidden" name="token" class="btn btn-default form-control" value="<?php echo $token ?>">
     <input type="submit" name="Register" class="btn btn-default form-control" value="Je créer mon compte">
 </form>
 
