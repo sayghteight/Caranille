@@ -39,7 +39,7 @@ if (isset($_POST['privateConversationCharacterId'])
             {
                 //On crée la conversation
                 $addPrivateConversation = $bdd->prepare("INSERT INTO car_private_conversation VALUES(
-                '',
+                NULL,
                 :characterId,
                 :conversationCharacterTwoId)");
                 $addPrivateConversation->execute([

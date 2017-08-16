@@ -57,7 +57,7 @@ if (isset($_POST['adminShopItemShopId'])
                     {
                         //On met à jour le magasin dans la base de donnée
                         $addShopItem = $bdd->prepare("INSERT INTO car_shops_items VALUES(
-                        '',
+                        NULL,
                         :adminShopItemShopId,
                         :adminShopItemItemId,
                         :adminShopItemDiscount)");

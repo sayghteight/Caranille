@@ -25,7 +25,7 @@ if (isset($_POST['adminChapterMonsterId'])
         
         //On ajoute le chapitre dans la base de donnée
         $addChapter = $bdd->prepare("INSERT INTO car_chapters VALUES(
-        '',
+        NULL,
         :adminChapterMonsterId,
         :adminChapterTitle,
         :adminChapterOpening,

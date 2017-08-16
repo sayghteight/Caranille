@@ -34,7 +34,7 @@ if (isset($_POST['privateConversationId'])
             
             //On ajoute le message dans la base de donnée
             $addMessage = $bdd->prepare("INSERT INTO car_private_conversation_message VALUES(
-            '',
+            NULL,
             :privateConversationId,
             :characterId,
             :date,

@@ -113,7 +113,7 @@ if (isset($_POST['adminItemItemTypeId'])
         
                 //On ajoute l'équipement dans la base de donnée
                 $addItem = $bdd->prepare("INSERT INTO car_items VALUES(
-                '',
+                NULL,
                 :adminItemItemTypeId,
                 :adminItemRaceId,
                 :adminItemPicture,

@@ -61,7 +61,7 @@ if (isset($_POST['adminMonsterDropMonsterId'])
                     {
                         //On met à jour le monstre dans la base de donnée
                         $addTownMonster = $bdd->prepare("INSERT INTO car_monsters_drops VALUES(
-                        '',
+                        NULL,
                         :adminMonsterDropMonsterId,
                         :adminMonsterDropItemId,
                         :adminMonsterDropItemVisible,

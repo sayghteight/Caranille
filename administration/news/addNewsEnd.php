@@ -21,7 +21,7 @@ if (isset($_POST['adminNewsPicture'])
 
     //On met à jour l'équipement dans la base de donnée
     $addNews = $bdd->prepare("INSERT INTO car_news VALUES(
-    '',
+    NULL,
     :adminNewsPicture,
     :adminNewsTitle,
     :adminNewsMessage,

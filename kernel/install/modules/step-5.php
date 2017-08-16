@@ -73,7 +73,7 @@ if (isset($_POST['accountPseudo'])
     
                             /*
                             Add account model
-                            '', //accountId
+                            NULL, //accountId
                             :accountPseudo, //accountPseudo
                             :accountPassword, //accountPassword
                             :accountEmail, //accountEmail
@@ -87,7 +87,7 @@ if (isset($_POST['accountPseudo'])
     
                             //Insertion du compte dans la base de donnée
                             $addAccount = $bdd->prepare("INSERT INTO car_accounts VALUES(
-                            '',
+                            NULL,
                             :accountPseudo,
                             :accountPassword,
                             :accountEmail,
@@ -120,7 +120,7 @@ if (isset($_POST['accountPseudo'])
     
                             /*
                             Add character model
-                            '', //characterId
+                            NULL, //characterId
                             :accountId, //characterAccountId
                             '0', //characterGuildId
                             :characterRaceId, //characterRaceId
@@ -197,7 +197,7 @@ if (isset($_POST['accountPseudo'])
                             */
     
                             $addCharacter = $bdd->prepare("INSERT INTO car_characters VALUES(
-                            '',
+                            NULL,
                             :accountId,
                             '0',
                             :characterRaceId,

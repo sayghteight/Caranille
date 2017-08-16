@@ -189,7 +189,7 @@ if (isset($_POST['tradeId'])
                         
                         //On ajoute l'objet dans l'échange
                         $addTradeItem = $bdd->prepare("INSERT INTO car_trades_items VALUES(
-                        '',
+                        NULL,
                         :tradeId,
                         :tradeItemId,
                         :tradeCharacterId,

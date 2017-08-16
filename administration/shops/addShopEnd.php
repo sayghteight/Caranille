@@ -19,7 +19,7 @@ if (isset($_POST['adminShopPicture'])
 
     //On ajoute le magasin dans la base de donnée
     $addShop = $bdd->prepare("INSERT INTO car_shops VALUES(
-    '',
+    NULL,
     :adminShopPicture,
     :adminShopName,
     :adminShopDescription)");

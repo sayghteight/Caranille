@@ -65,7 +65,7 @@ if (isset($_POST['adminMonsterPicture'])
 
         //On ajoute le monstre dans la base de donnée
         $addMonster = $bdd->prepare("INSERT INTO car_monsters VALUES(
-        '',
+        NULL,
         :adminMonsterPicture,
         :adminMonsterName,
         :adminMonsterLevel,

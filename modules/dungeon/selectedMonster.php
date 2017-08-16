@@ -39,7 +39,7 @@ if (isset($_POST['battleMonsterId']))
 
             //Insertion du combat dans la base de donnée avec les données
             $addBattle = $bdd->prepare("INSERT INTO car_battles VALUES(
-            '',
+            NULL,
             :characterId,
             :opponentId,
             'Dungeon',

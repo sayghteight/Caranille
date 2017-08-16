@@ -133,7 +133,7 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
                     {
                         //On ajoute l'objet dans la base de donnée
                         $addItem = $bdd->prepare("INSERT INTO car_inventory VALUES(
-                        '',
+                        NULL,
                         :characterId,
                         :opponentDropItemId,
                         '1',
@@ -244,7 +244,7 @@ if ($battleOpponentHpRemaining <= 0 && $characterHpMin > 0)
             <?php
             //On l'ajoute dans le bestiaire
              $addBestiary = $bdd->prepare("INSERT INTO car_bestiary VALUES(
-            '',
+            NULL,
             :characterId,
             :opponentId,
             '1')");

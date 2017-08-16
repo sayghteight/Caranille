@@ -51,7 +51,7 @@ if (isset($_POST['adminTownMonsterTownId'])
                 {
                     //On ajoute le monstre dans la ville la base de donnée
                     $addTownMonster = $bdd->prepare("INSERT INTO car_towns_monsters VALUES(
-                    '',
+                    NULL,
                     :townMonsterTownId,
                     :townMonsterMonsterId)");
                     $addTownMonster->execute([

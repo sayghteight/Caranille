@@ -50,7 +50,7 @@ if (isset($_POST['tradeCharacterId'])
             {
                 //On crée la demande d'échange
                 $addTradeRequest = $bdd->prepare("INSERT INTO car_trades_requests VALUES(
-                '',
+                NULL,
                 :characterId,
                 :tradeCharacterId,
                 :tradeMessage)");
@@ -65,7 +65,7 @@ if (isset($_POST['tradeCharacterId'])
                 
                 //On envoi un notification au premier joueur
                 $addNotification = $bdd->prepare("INSERT INTO car_notifications VALUES(
-                '',
+                NULL,
                 :tradeCharacterId,
                 :notificationDate,
                 :notificationMessage,

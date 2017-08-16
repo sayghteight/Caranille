@@ -51,7 +51,7 @@ if (isset($_POST['adminTownShopTownId'])
                 {
                     //On ajoute le magasin dans la ville dans la base de donnée
                     $addTownShop = $bdd->prepare("INSERT INTO car_towns_shops VALUES(
-                    '',
+                    NULL,
                     :adminTownShopTownId,
                     :adminTownShopShopId)");
                     $addTownShop->execute([

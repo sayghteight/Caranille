@@ -54,7 +54,7 @@ if (isset($_POST['adminRacePicture'])
         
         //On ajoute la race dans la base de donnée
         $addRace = $bdd->prepare("INSERT INTO car_races VALUES(
-        '',
+        NULL,
         :adminRacePicture,
         :adminRaceName,
         :adminRaceDescription,

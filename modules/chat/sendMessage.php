@@ -17,7 +17,7 @@ if (isset($_POST['chatMessage'])
     
     //On ajoute le message dans la base de donnée
     $addMessage = $bdd->prepare("INSERT INTO car_chat VALUES(
-    '',
+    NULL,
     :characterId,
     :date,
     :chatMessage)");

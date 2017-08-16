@@ -88,7 +88,7 @@ if (isset($_POST['marketId'])
                 else
                 {
                     $addItem = $bdd->prepare("INSERT INTO car_inventory VALUES(
-                    '',
+                    NULL,
                     :characterId,
                     :marketItemId,
                     '1',

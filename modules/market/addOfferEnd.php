@@ -178,7 +178,7 @@ if (isset($_POST['marketItemId'])
 
                 //On crée l'offre dans la base de donnée
                 $addOffer = $bdd->prepare("INSERT INTO car_market VALUES(
-                '',
+                NULL,
                 :characterId,
                 :marketItemId,
                 :marketSalePrice)");

@@ -110,7 +110,7 @@ if (isset($_POST['tradeId'])
                     else
                     {
                         $addItem = $bdd->prepare("INSERT INTO car_inventory VALUES(
-                        '',
+                        NULL,
                         :characterId,
                         :tradeItemId,
                         :tradeItemQuantity,
@@ -213,7 +213,7 @@ if (isset($_POST['tradeId'])
                     else
                     {
                         $addItem = $bdd->prepare("INSERT INTO car_inventory VALUES(
-                        '',
+                        NULL,
                         :characterId,
                         :tradeItemId,
                         :tradeItemQuantity,
@@ -256,7 +256,7 @@ if (isset($_POST['tradeId'])
                 
                 //On envoi un notification au joueur
                 $addNotification = $bdd->prepare("INSERT INTO car_notifications VALUES(
-                '',
+                NULL,
                 :tradeCharacterTwoId,
                 :notificationDate,
                 :notificationMessage,
@@ -337,7 +337,7 @@ if (isset($_POST['tradeId'])
                     else
                     {
                         $addItem = $bdd->prepare("INSERT INTO car_inventory VALUES(
-                        '',
+                        NULL,
                         :characterId,
                         :tradeItemId,
                         :tradeItemQuantity,
@@ -440,7 +440,7 @@ if (isset($_POST['tradeId'])
                     else
                     {
                         $addItem = $bdd->prepare("INSERT INTO car_inventory VALUES(
-                        '',
+                        NULL,
                         :characterId,
                         :tradeItemId,
                         :tradeItemQuantity,
@@ -483,7 +483,7 @@ if (isset($_POST['tradeId'])
                 
                 //On envoi un notification au joueur
                 $addNotification = $bdd->prepare("INSERT INTO car_notifications VALUES(
-                '',
+                NULL,
                 :tradeCharacterOneId,
                 :notificationDate,
                 :notificationMessage,

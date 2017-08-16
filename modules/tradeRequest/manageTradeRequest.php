@@ -49,7 +49,7 @@ if (isset($_POST['cancelTradeRequest']) || isset($_POST['acceptTradeRequest']) |
                 
                 //On envoi un notification au joueur
                 $addNotification = $bdd->prepare("INSERT INTO car_notifications VALUES(
-                '',
+                NULL,
                 :tradeRequestCharacterTwoId,
                 :notificationDate,
                 :notificationMessage,
@@ -121,7 +121,7 @@ if (isset($_POST['cancelTradeRequest']) || isset($_POST['acceptTradeRequest']) |
                 
                 //On ajoute l'échange dans la base de donnée
                 $addTrade = $bdd->prepare("INSERT INTO car_trades VALUES(
-                '',
+                NULL,
                 :tradeRequestCharacterOneId,
                 :tradeRequestCharacterTwoId,
                 :tradeRequestMessage,
@@ -151,7 +151,7 @@ if (isset($_POST['cancelTradeRequest']) || isset($_POST['acceptTradeRequest']) |
                 
                 //On ajoute 0 pièces d'or du joueur 1 sur l'échange
                 $addGoldTradeRequest = $bdd->prepare("INSERT INTO car_trades_golds VALUES(
-                '',
+                NULL,
                 :tradeId,
                 :tradeCharacterId,
                 '0')");
@@ -162,7 +162,7 @@ if (isset($_POST['cancelTradeRequest']) || isset($_POST['acceptTradeRequest']) |
                 
                 //On ajoute 0 pièces d'or du joueur 2 sur l'échange
                 $addGoldTradeRequest = $bdd->prepare("INSERT INTO car_trades_golds VALUES(
-                '',
+                NULL,
                 :tradeId,
                 :tradeCharacterId,
                 '0')");
@@ -182,7 +182,7 @@ if (isset($_POST['cancelTradeRequest']) || isset($_POST['acceptTradeRequest']) |
                 
                 //On envoi un notification au joueur
                 $addNotification = $bdd->prepare("INSERT INTO car_notifications VALUES(
-                '',
+                NULL,
                 :tradeRequestCharacterOneId,
                 :notificationDate,
                 :notificationMessage,
@@ -260,7 +260,7 @@ if (isset($_POST['cancelTradeRequest']) || isset($_POST['acceptTradeRequest']) |
                 
                 //On envoi un notification au joueur
                 $addNotification = $bdd->prepare("INSERT INTO car_notifications VALUES(
-                '',
+                NULL,
                 :tradeRequestCharacterOneId,
                 :notificationDate,
                 :notificationMessage,

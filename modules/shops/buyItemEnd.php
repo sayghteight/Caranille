@@ -96,7 +96,7 @@ if (isset($_POST['shopId'])
                     else
                     {
                         $addItem = $bdd->prepare("INSERT INTO car_inventory VALUES(
-                        '',
+                        NULL,
                         :characterId,
                         :itemId,
                         '1',

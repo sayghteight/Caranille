@@ -29,7 +29,7 @@ if (isset($_POST['adminTownPicture'])
 
         //On ajoute la ville dans la base de donnée
         $addTown = $bdd->prepare("INSERT INTO car_towns VALUES(
-        '',
+        NULL,
         :adminTownPicture,
         :adminTownName,
         :adminTownDescription,
