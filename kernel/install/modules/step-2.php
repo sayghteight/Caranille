@@ -8,6 +8,7 @@
     Nom de l'utilisateur : <input type="text" name="databaseUser"  class="form-control" required>
     Mot de passe : <input type="password" name="databasePassword" class="form-control">
     Port (3306 par défaut) : <input type="number" name="databasePort" value="3306" class="form-control" required>
+    <input type="hidden" name="token" class="btn btn-default form-control" value="<?php echo $_SESSION['token'] ?>">
     <input type="submit" class="btn btn-default form-control" name="install" value="Continuer">
 </form>
 
