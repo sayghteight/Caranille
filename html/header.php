@@ -8,6 +8,12 @@ $timeStart = microtime(true);
 require_once("../../kernel/config.php");
 //On récupère les informations de configuration du jeu
 require_once("../../kernel/configuration/index.php");
+//Si la session $_SESSION['token'] est vide c'est que le joueur à validé un formulaire
+if (empty($_SESSION['token']))
+{
+	//On génère un token qu'on stock dans une session pour sécuriser les formulaires
+	$_SESSION['token'] = uniqid(); 
+}
 //Si le joueur est connecté on va récupérer toutes les informations du joueur (Compte, Personnage, Combat en cours...)
 if (isset($_SESSION['account']['id']))
 {

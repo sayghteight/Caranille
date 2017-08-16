@@ -1,6 +1,4 @@
-<?php require_once("../../html/header.php"); 
-
-$_SESSION['token'] = uniqid(); ?>
+<?php require_once("../../html/header.php"); ?>
 
 <form method="POST" action="completeRegistration.php">
     Pseudo : <input type="text" name="accountPseudo" class="form-control" required>

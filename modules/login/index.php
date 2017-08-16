@@ -1,5 +1,4 @@
-<?php require_once("../../html/header.php"); 
-$_SESSION['token'] = uniqid(); ?>
+<?php require_once("../../html/header.php"); ?>
    
 <form method="POST" action="startConnection.php">
     Pseudo : <input class="form-control" type="text" name="accountPseudo" required>

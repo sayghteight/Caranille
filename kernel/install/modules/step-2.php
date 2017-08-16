@@ -7,6 +7,7 @@
     Adresse de la base de donnée : <input type="text" name="databaseHost" class="form-control" required>
     Nom de l'utilisateur : <input type="text" name="databaseUser"  class="form-control" required>
     Mot de passe : <input type="password" name="databasePassword" class="form-control">
+    Port (3306 par défaut) : <input type="number" name="databasePort" value="3306" class="form-control" required>
     <input type="submit" class="btn btn-default form-control" name="install" value="Continuer">
 </form>
 

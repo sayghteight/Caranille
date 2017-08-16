@@ -1,8 +1,6 @@
 <?php 
 require_once("../html/header.php"); 
-include("../../config.php");
-
-$_SESSION['token'] = uniqid(); ?>
+include("../../config.php"); ?>
     
 <form method="POST" action="step-5.php">
     Pseudo : <input type="text" name="accountPseudo" class="form-control" required>
